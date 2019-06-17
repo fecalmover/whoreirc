@@ -23,7 +23,7 @@ toc::[]
 [[general]]
 == Ogólne
 
-[[weechat_name]]
+[[whoreirc_name]]
 === Skąd się wzięła nazwa "WeeChat"?
 
 "Wee" to akronim rekursywny oznaczającym "Wee Enhanced Environment".
@@ -32,12 +32,12 @@ Stąd kompletna nazwa to "Wee Enhanced Environment for Chat".
 "Wee" oznacza również "bardzo mały" (tak jest jeszcze inne znaczenie, ale nie
 pasuje ono do WeeChat!).
 
-[[why_choose_weechat]]
+[[why_choose_whoreirc]]
 === Dlaczego wybrać WeeChat? X-Chat i Irssi są takie dobre...
 
 Ponieważ WeeChat jest bardzo lekki i posiada innowacyjne funkcje.
 
-Więcej informacji o moliwościach WeeChat można znaleźć tutaj: https://weechat.org/about/features
+Więcej informacji o moliwościach WeeChat można znaleźć tutaj: https://whoreirc.org/about/features
 
 [[compilation_install]]
 == Kompilacja / instalacja
@@ -46,15 +46,15 @@ Więcej informacji o moliwościach WeeChat można znaleźć tutaj: https://weech
 === Słyszałem o wielu GUI dla WeeChat. Jak mogę je skompilować/użyć?
 
 Dostępne są zdalne interfejsy, możesz o nich poczytać na tej stronie:
-https://weechat.org/about/interfaces
+https://whoreirc.org/about/interfaces
 
 [[compile_git]]
 === Nie mogę skompilować WeeChat po sklonowaniu repozytorium git, dlaczego?
 
 Zalecaną metodą kompilacji WeeChat jest użycie
-link:weechat_user.pl.html#compile_with_cmake[CMake].
+link:whoreirc_user.pl.html#compile_with_cmake[CMake].
 
-Jeśli kompilujesz używając link:weechat_user.pl.html#compile_with_autotools[autotools]
+Jeśli kompilujesz używając link:whoreirc_user.pl.html#compile_with_autotools[autotools]
 (nie CMake), upewnij się, że posiadasz najnowszą wersję autoconf i automake.
 
 Innym sposobem jest zainstalowanie "paczki deweloperskiej", która wymaga mniej
@@ -68,24 +68,24 @@ przy aktualizowaniu jak klonowanie z gita.
 Zaleca się użycie https://brew.sh/[Homebrew], pomoc uzyskasz za pomocą komendy:
 
 ----
-brew info weechat
+brew info whoreirc
 ----
 
 Możesz zainstalować WeeChat za pomocą komendy:
 
 ----
-brew install weechat
+brew install whoreirc
 ----
 
 [[lost]]
 === Uruchomiłem WeeChat, ale czuję się zagubiony, co robić?
 
 Dla pomocy wpisz `/help`. Aby uzyskać pomoc dla komendy wpisz `/help komenda`.
-link:weechat_user.pl.html#key_bindings[Keys] i
-link:weechat_user.pl.html#commands_and_options[commands] są opisane w dokumentacji.
+link:whoreirc_user.pl.html#key_bindings[Keys] i
+link:whoreirc_user.pl.html#commands_and_options[commands] są opisane w dokumentacji.
 
 Nowym użytkowniką zaleca się przeczytanie dokumentu
-link:weechat_quickstart.pl.html[Szybki start].
+link:whoreirc_quickstart.pl.html[Szybki start].
 
 [[display]]
 == Wyświetlanie
@@ -96,10 +96,10 @@ link:weechat_quickstart.pl.html[Szybki start].
 Jest to częsty problem powodowany przez wiele rzeczy, przeczytaj uważnie i sprawdź
 *WSZYSTKIE* rozwiązania opisane poniżej:
 
-* sprawdź czy weechat jest zlinkowany z libncursesw (uwaga: wymagane na
-  większości dystrybucji ale nie wszystkich): `ldd /ścieżka/do/weechat`
+* sprawdź czy whoreirc jest zlinkowany z libncursesw (uwaga: wymagane na
+  większości dystrybucji ale nie wszystkich): `ldd /ścieżka/do/whoreirc`
 * sprawdź czy wtyczka "charset" jest załadowana za pomocą komendy `/plugin`
-  (jeśli nie jest, to najprawdopodobniej potrzebujesz pakietu "weechat-plugins")
+  (jeśli nie jest, to najprawdopodobniej potrzebujesz pakietu "whoreirc-plugins")
 * sprawdź wyjście komendy `/charset` (w głównym buforze). Powinieneś zobaczyć
   _ISO-XXXXXX_ lub _UTF-8_ dla kodowania terminala. Jeśli widzisz _ANSI_X3.4-1968_
   lub inne wartości, twoje ustawienie dla locale najprawdopodobniej jest złe. +
@@ -113,7 +113,7 @@ Jest to częsty problem powodowany przez wiele rzeczy, przeczytaj uważnie i spr
 ** jeśli korzystasz ze screena, sprawdź czy jest uruchomiony z trybem UTF-8
    ("`defutf8 on`" w ~/.screenrc lub `screen -U` uruchamiając screena)
 * sprawdź czy opcja
-  link:weechat_user.pl.html#option_weechat.look.eat_newline_glitch[_weechat.look.eat_newline_glitch_]
+  link:whoreirc_user.pl.html#option_whoreirc.look.eat_newline_glitch[_whoreirc.look.eat_newline_glitch_]
   jest wyłączona (ta opcja może powodować błędy wyświetlania)
 
 [NOTE]
@@ -128,10 +128,10 @@ Może to być spowodowane przez błąd libc w funkcji _wcwidth_, który powinien
 naprawiony w glibc 2.22 (może jeszcze nie być dostępny w twojej dystrybucji).
 
 Istnieje sposób na obejście błędu funkcji _wcwidth_:
-https://blog.nytsoi.net/2015/05/04/emoji-support-for-weechat
+https://blog.nytsoi.net/2015/05/04/emoji-support-for-whoreirc
 
 Więcej informacji można znaleźć w zgłoszeniu błędu:
-https://github.com/weechat/weechat/issues/79
+https://github.com/whoreirc/whoreirc/issues/79
 
 [[bars_background]]
 === Paski jak tytuł i status nie są filtrowane, kolor tła zatrzymuje się po tekście, czemu?
@@ -187,7 +187,7 @@ kilku oknach.
 [[buffers_list]]
 === Jak wyświetlić listę z buforami po lewej stronie?
 
-W wersji WeeChat ≥ 1.8, wtyczka link:weechat_user.pl.html#buflist_plugin[buflist]
+W wersji WeeChat ≥ 1.8, wtyczka link:whoreirc_user.pl.html#buflist_plugin[buflist]
 jest domyślnie włączona i załadowana.
 
 W starszych wersjach możesz zainstalować skrypt _buffers.pl_:
@@ -200,13 +200,13 @@ Ograniczenie rozmiaru bufora z listą kanałów (zamień "buflist" na "buffers" 
 używasz skryptu _buffers.pl_):
 
 ----
-/set weechat.bar.buflist.size_max 15
+/set whoreirc.bar.buflist.size_max 15
 ----
 
 Aby przesunąć pasek na spód:
 
 ----
-/set weechat.bar.buflist.position bottom
+/set whoreirc.bar.buflist.position bottom
 ----
 
 Przewijanie paska: jeśli obsługa myszy jest włączona (skrót: kbd:[Alt+m]), możesz
@@ -236,13 +236,13 @@ znalezienia ich kodów wciśnij kbd:[Alt+k] następnie przycisk.
 W celu ograniczenia długości nicków w oknie rozmowy:
 
 ----
-/set weechat.look.prefix_align_max 15
+/set whoreirc.look.prefix_align_max 15
 ----
 
 Żeby usunąć wyrównanie nicków:
 
 ----
-/set weechat.look.prefix_align none
+/set whoreirc.look.prefix_align none
 ----
 
 [[status_hotlist]]
@@ -266,12 +266,12 @@ Kolor bufora/licznika zależy od typu wiadomoci, domyślne kolory:
 * wiadomość: `yellow` / `brown`
 * inne: `default` / `default` (kolor tekstu w terminalu)
 
-Kolory można zmienić za pomocą opcji __weechat.color.status_data_*__
-(bufory) i __weechat.color.status_count_*__ (liczniki). +
-Pozostałe opcje hotlist można zmienić za pomocą opcji __weechat.look.hotlist_*__.
+Kolory można zmienić za pomocą opcji __whoreirc.color.status_data_*__
+(bufory) i __whoreirc.color.status_count_*__ (liczniki). +
+Pozostałe opcje hotlist można zmienić za pomocą opcji __whoreirc.look.hotlist_*__.
 
 Więcej informacji na temat hotlity można znaleźć w
-link:weechat_user.pl.html#screen_layout[Poradniku użytkownika / Układ ekranu].
+link:whoreirc_user.pl.html#screen_layout[Poradniku użytkownika / Układ ekranu].
 
 [[input_bar_size]]
 === Jak używać linii poleceń z więcej niż jednym wierszem?
@@ -283,13 +283,13 @@ następnie opcja _size_max_ ustali maksymalny rozmiar (0 = brak limitu).
 Przykład dynamicznego rozmiaru:
 
 ----
-/set weechat.bar.input.size 0
+/set whoreirc.bar.input.size 0
 ----
 
 Maksymalny rozmiar równy 2:
 
 ----
-/set weechat.bar.input.size_max 2
+/set whoreirc.bar.input.size_max 2
 ----
 
 [[one_input_root_bar]]
@@ -326,7 +326,7 @@ konsole, gnome-terminal, ...). Klawisze to zazwyczaj kbd:[Ctrl] + kbd:[Alt] + za
 Innym rozwiązaniem jest przesunięcie listy nicków na górę lub dół, na przykład:
 
 ----
-/set weechat.bar.nicklist.position top
+/set whoreirc.bar.nicklist.position top
 ----
 
 [[urls]]
@@ -340,19 +340,19 @@ W WeeChat od wersji ≥ 1.0, możesz użyć trybu niesformatowanego wyświetlani
 * przenieść listę nicków na górę:
 
 ----
-/set weechat.bar.nicklist.position top
+/set whoreirc.bar.nicklist.position top
 ----
 
 * wyłączyć wyrównanie dla wieloliniowych słów (WeeChat ≥ 1.7):
 
 ----
-/set weechat.look.align_multiline_words off
+/set whoreirc.look.align_multiline_words off
 ----
 
 * albo dla wszystkich zawiniętych lini:
 
 ----
-/set weechat.look.align_end_of_lines time
+/set whoreirc.look.align_end_of_lines time
 ----
 
 W WeeChat ≥ 0.3.6 można włączyć opcję "eat_newline_glitch", dzięki której znaki
@@ -360,7 +360,7 @@ nowej linii nie są dodawane na końcu każdej wyświetlanej linii (nie zakłóc
 zaznaczania urli):
 
 ----
-/set weechat.look.eat_newline_glitch on
+/set whoreirc.look.eat_newline_glitch on
 ----
 
 [IMPORTANT]
@@ -427,7 +427,7 @@ Dla wersji ≥ 0.3.5, można używać dowolnego numeru koloru w opcjach (opcjona
 można stworzyć alias dla koloru za pomocą komendy `/color`).
 
 Więcej informacji o zarządzaniu kolorami można znaleźć w
-link:weechat_user.pl.html#colors[Poradniku użytkownika / Kolory].
+link:whoreirc_user.pl.html#colors[Poradniku użytkownika / Kolory].
 
 [[search_text]]
 === Jak mogę wyszukać tekst w buforze (jak za pomocą /lastlog w irssi)?
@@ -437,7 +437,7 @@ Domyślny skrót klawiszowy to kbd:[Ctrl+r] (komenda: `/input search_text_here`)
 Poruszanie się między podświetleniami: kbd:[Alt+p] / kbd:[Alt+n].
 
 Więcej informacji o skrótach klawiszowych można znaleźć w
-link:weechat_user.pl.html#key_bindings[Poradniku użytkownika / Domyślne skróty klawiszowe].
+link:whoreirc_user.pl.html#key_bindings[Poradniku użytkownika / Domyślne skróty klawiszowe].
 
 [[terminal_focus]]
 === Jak mogę wykonywać komendy, kiedy terminal stanie się/przestanie być aktywny?
@@ -455,7 +455,7 @@ Musisz włączyć obsługę tego zdarzenia za pomocą specjalnego kodu wysyłane
 Żeby wysłać kod podczas uruchamiania WeeChat:
 
 ----
-/set weechat.startup.command_after_plugins "/print -stdout \033[?1004h\n"
+/set whoreirc.startup.command_after_plugins "/print -stdout \033[?1004h\n"
 ----
 
 Następnie przypisz dwie kombinacje klawiszy dla stanu aktywności (zamień komendy
@@ -481,7 +481,7 @@ właściwie obsługiwana przez inne okna screena.
 Możesz po prostu wyłączyć tą opcję:
 
 ----
-/set weechat.look.paste_bracketed off
+/set whoreirc.look.paste_bracketed off
 ----
 
 [[key_bindings]]
@@ -529,7 +529,7 @@ Można również samemu stworzyć skrót, na przykład:
 ----
 
 Listę domyślnych skrótów klawiszowych można znależć w
-link:weechat_user.pl.html#key_bindings[Poradniku uzytkownika / Domyślne skróty klawiszowe].
+link:whoreirc_user.pl.html#key_bindings[Poradniku uzytkownika / Domyślne skróty klawiszowe].
 
 Aby przesjść do bufora o numerze  ≥ 100, możesz zdefiniować trigger i następnie użyć
 komendy w stylu `/123` żeby przejść do bufora #123:
@@ -615,7 +615,7 @@ Plik CA zostanie wygenerowany korzystając z systemowego keychaina.
 Możez natępnie ustawić ścierzkę do certyfikatów w WeeChat:
 
 ----
-/set weechat.network.gnutls_ca_file "/usr/local/etc/openssl/cert.pem"
+/set whoreirc.network.gnutls_ca_file "/usr/local/etc/openssl/cert.pem"
 ----
 
 Jeśli widzisz błędy gnutls, możesz użyć innej wielkości klucza
@@ -652,16 +652,16 @@ nazwą serwera:
 [[irc_ssl_freenode]]
 === Jak mogę połączyć się z serwerem freenode używając SSL?
 
-Ustaw opcję _weechat.network.gnutls_ca_file_ do pliku z certyfikatami:
+Ustaw opcję _whoreirc.network.gnutls_ca_file_ do pliku z certyfikatami:
 
 ----
-/set weechat.network.gnutls_ca_file "/etc/ssl/certs/ca-certificates.crt"
+/set whoreirc.network.gnutls_ca_file "/etc/ssl/certs/ca-certificates.crt"
 ----
 
 Uwaga: jeśli używasz macOS z openssl zainstalowanym przez homebrew, możesz wykonać:
 
 ----
-/set weechat.network.gnutls_ca_file "/usr/local/etc/openssl/cert.pem"
+/set whoreirc.network.gnutls_ca_file "/usr/local/etc/openssl/cert.pem"
 ----
 
 [NOTE]
@@ -771,7 +771,7 @@ Za pomocą globalnego filtru (ukrywa *wszystkie* wejścia/opuszczenia/wyjścia):
 
 [NOTE]
 +For help: `/help filter`, `/help irc.look.smart_filter` and see
-+link:weechat_user.pl.html#irc_smart_filter_join_part_quit[Poradniku użytkownika / Inteligentne filtry dla wiadomości].
++link:whoreirc_user.pl.html#irc_smart_filter_join_part_quit[Poradniku użytkownika / Inteligentne filtry dla wiadomości].
 
 [[filter_irc_join_channel_messages]]
 === Jak mogę filtrować wyświetlane wiadomości podczas wejścia na kanał IRC?
@@ -857,7 +857,7 @@ W starszych wersjach WeeChat, możesz użyć skryptu jak _beep.pl_ lub _launcher
 Dla _launcher.pl_, należ przeprowadzić konfigurację:
 
 ----
-/set plugins.var.perl.launcher.signal.weechat_highlight "/ścieżka/do/komendy argumenty"
+/set plugins.var.perl.launcher.signal.whoreirc_highlight "/ścieżka/do/komendy argumenty"
 ----
 
 Inne podobne skrypty:
@@ -870,7 +870,7 @@ Inne podobne skrypty:
 === Jak mogę wyłączyć podświetlenia dla konkretnych nicków?
 
 Od wersji WeeChat ≥ 0.3.4 możesz użyć właściwości bufora
-link:weechat_user.en.html#max_hotlist_level_nicks[hotlist_max_level_nicks_add]
+link:whoreirc_user.en.html#max_hotlist_level_nicks[hotlist_max_level_nicks_add]
 maksymalnego poziomu hotlisty dla niektórych nicków dla pojedynzego lub grupy
 buforów (jak serwery IRC).
 
@@ -887,11 +887,11 @@ W celu automatycznego ustawiania tej właściwości należy użyć skryptu _buff
 /script install buffer_autoset.py
 ----
 
-Na przykład w celu wyłączenia powiadomień od "mike" na #weechat w sieci freenode:
+Na przykład w celu wyłączenia powiadomień od "mike" na #whoreirc w sieci freenode:
 on the IRC server freenode:
 
 ----
-/buffer_autoset add irc.freenode.#weechat hotlist_max_level_nicks_add mike:2
+/buffer_autoset add irc.freenode.#whoreirc hotlist_max_level_nicks_add mike:2
 ----
 
 Dla całego serwera freenode:
@@ -918,7 +918,7 @@ Pod  OpenBSD, nazwy wtyczek kończą się ".so.0.0" (".so" dla Linuksa).
 Musisz ustawić:
 
 ----
-/set weechat.plugin.extension ".so.0.0"
+/set whoreirc.plugin.extension ".so.0.0"
 /plugin autoload
 ----
 
@@ -934,12 +934,12 @@ Skrypty nie są kompatybilne z innymi klientami IRC.
 === Komenda "/script update" nie może odczytać skryptów, jak to naprawić?
 
 Najpierw zapoznaj się z zagadnieniami dotyczącymi połączeń SSL znajdującymi się
-w tym dokumencie (zwłaszcza opcji _weechat.network.gnutls_ca_file_).
+w tym dokumencie (zwłaszcza opcji _whoreirc.network.gnutls_ca_file_).
 
 Jeśli to nie pomoże spróuj ręcznie usunąć plik z listą skryptów (z poziomu powłoki):
 
 ----
-$ rm ~/.weechat/script/plugins.xml.gz
+$ rm ~/.whoreirc/script/plugins.xml.gz
 ----
 
 Następnie ponownie zaktualizuj listę sktyptów w WeeChat:
@@ -961,8 +961,8 @@ have to update manually the file yourself to get updates):
 * w powłoce, z zainstalowanym programem curl:
 
 ----
-$ cd ~/.weechat/script
-$ curl -O https://weechat.org/files/plugins.xml.gz
+$ cd ~/.whoreirc/script
+$ curl -O https://whoreirc.org/files/plugins.xml.gz
 ----
 
 [[spell_dictionaries]]
@@ -1010,13 +1010,13 @@ W celu zmniejszenia używanej pamięci możesz zastosować się do poniższych r
   niż starsze wersje)
 * nie ładuj nieużywanych pluginów, np: buflist, fifo, logger, perl, python,
   ruby, lua, tcl, guile, javascript, php, spell, xfer (używana do DCC).
-  Zobacz `/help weechat.plugin.autoload`.
+  Zobacz `/help whoreirc.plugin.autoload`.
 * ładować tylko naprawdę używane skrypty
 * nie ładuj certyfikatów jeśli SSL *NIE* jest używany: ustaw pusty ciąg w opcji
-  _weechat.network.gnutls_ca_file_
-* zmniejsz wartość dla opcji _weechat.history.max_buffer_lines_number_ lub ustaw
-  wartość opcji _weechat.history.max_buffer_lines_minutes_
-* zmniejszyć wartość opcji _weechat.history.max_commands_
+  _whoreirc.network.gnutls_ca_file_
+* zmniejsz wartość dla opcji _whoreirc.history.max_buffer_lines_number_ lub ustaw
+  wartość opcji _whoreirc.history.max_buffer_lines_minutes_
+* zmniejszyć wartość opcji _whoreirc.history.max_commands_
 
 [[cpu_usage]]
 === Jak mogę zmusić WeeChat do zużywania mniejszej mocy CPU?
@@ -1025,7 +1025,7 @@ Możesz skorzystać z tych samych porad jak dla  <<memory_usage,memory>>, oraz t
 
 * schowaj pasek "nicklist": `/bar hide nicklist`
 * usuń wyświetlanie sekund w czasie na pasku statusu:
-  `/set weechat.look.item_time_format "%H:%M"` (domyślna wartość)
+  `/set whoreirc.look.item_time_format "%H:%M"` (domyślna wartość)
 * wyłącz automatyczne sprawdzanie poprawności wpisywanych słów w linii poleceń (o ile je włączyłeś):
   `/set spell.check.real_time off`
 * ustaw zmienną _TZ_ (na przykład: `export TZ="Europe/Warsaw"`), w celu zmniejszenia
@@ -1056,13 +1056,13 @@ Wyłącz odpowiedzi na wszystkie zapytania CTCP:
 Wyładuj i wyłącz automatyczne ładowanie wtyczki "xfer" (używanej przez IRC DCC):
 ----
 /plugin unload xfer
-/set weechat.plugin.autoload "*,!xfer"
+/set whoreirc.plugin.autoload "*,!xfer"
 ----
 
 Zdefiniuj hasło i używaj bezpiecznych danych wszędzie gdzie możesz dla danych wrażliwych
 jak hasła: zobacz `/help secure` oraz `/help` na opcjach
 (czy możesz użyć bezpiecznych danych, jest to zaznaczone w pomocy).
-Zobacz również link:weechat_user.pl.html#secured_data[Poradniku użytkownika / Zabezpieczone dane].
+Zobacz również link:whoreirc_user.pl.html#secured_data[Poradniku użytkownika / Zabezpieczone dane].
 
 Na przykład:
 
@@ -1077,13 +1077,13 @@ Na przykład:
 [[sharing_config_files]]
 === Chcę się podzielić moją konfiguracją WeeChat, które pliki powinienem pokazać, a które nie?
 
-Możesz pokazywać pliki z _~/.weechat/*.conf_ poza plikiem _sec.conf_, który
+Możesz pokazywać pliki z _~/.whoreirc/*.conf_ poza plikiem _sec.conf_, który
 zawiera Twoje hasla zaszywrowane Twoim kluczem.
 
 Niektóre pliki jak _irc.conf_ mogą zawierać wrażliwe dane jak hasła do
 serwerów/kanałów (jeśli nie zostały dodane do _sec.conf_ za pomocą komendy `/secure`).
 
-Przejrzyj link:weechat_user.pl.html#files_and_directories[Poradnik użytkownika / Pliki i foldery],
+Przejrzyj link:whoreirc_user.pl.html#files_and_directories[Poradnik użytkownika / Pliki i foldery],
 gdzie znajdziesz więcej informacji o plikach konfiguracyjnych.
 
 [[development]]
@@ -1092,7 +1092,7 @@ gdzie znajdziesz więcej informacji o plikach konfiguracyjnych.
 [[bug_task_patch]]
 === Jak zgłaszać błędy, prosić o nowe możliwości lub wysyłać patche?
 
-Zobacz: https://weechat.org/about/support
+Zobacz: https://whoreirc.org/about/support
 
 [[gdb_error_threads]]
 === Kiedy uruchamiam WeeChat pod gdb dostaję komunikat o wątkach, co mogę z tym zrobić?
@@ -1100,7 +1100,7 @@ Zobacz: https://weechat.org/about/support
 Podczas uruchamiania WeeChat pod gdb, można spotkać się z takim błędem:
 
 ----
-$ gdb /scieżka/do/weechat
+$ gdb /scieżka/do/whoreirc
 (gdb) run
 [Thread debugging using libthread_db enabled]
 Cannot find new threads: generic error
@@ -1110,14 +1110,14 @@ Cannot find new threads: generic error
 WeeChat na właściwe dla naszego systemu):
 
 ----
-$ LD_PRELOAD=/lib/libpthread.so.0 gdb /ścieżka/do/weechat
+$ LD_PRELOAD=/lib/libpthread.so.0 gdb /ścieżka/do/whoreirc
 (gdb) run
 ----
 
 [[supported_os]]
 === Jaka jest lista platform wspieranych przez WeeChat? Czy będzie przeportowany na inne systemy operacyjne?
 
-Pełną listę można znaleźć na stronie: https://weechat.org/download
+Pełną listę można znaleźć na stronie: https://whoreirc.org/download
 
 Robimy co w naszej mocy, aby WeeChat działał na tylu platformach ile to tylko
 możliwe. Mile widziana jest pomoc w testowaniu dla systemów, których nie mamy.
@@ -1128,10 +1128,10 @@ możliwe. Mile widziana jest pomoc w testowaniu dla systemów, których nie mamy
 Jest wiele zadań do zrobienia (testowanie, kod, dokumentacja, ...)
 
 Skontaktuj się z nami na IRC lub mailowo, szczegóły:
-https://weechat.org/about/support
+https://whoreirc.org/about/support
 
 [[donate]]
 === Czy mogę dać pieniądze albo inne rzeczy deweloperom WeeChat?
 
 Tak możesz dać nam pieniądze, aby wspomóc rozwój.
-Szczegóły na https://weechat.org/donate
+Szczegóły na https://whoreirc.org/donate

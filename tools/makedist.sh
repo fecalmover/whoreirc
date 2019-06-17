@@ -57,8 +57,8 @@ fi
 
 cd "${ROOT_DIR}"
 
-PREFIX="weechat-${VERSION}/"
-FILE="${OUTPATH}/weechat-${VERSION}.tar"
+PREFIX="whoreirc-${VERSION}/"
+FILE="${OUTPATH}/whoreirc-${VERSION}.tar"
 
 echo "Building package ${FILE}.gz"
 git archive --prefix=${PREFIX} ${TREEISH} | gzip -c >${FILE}.gz

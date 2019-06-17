@@ -21,78 +21,78 @@ docdir = $(datadir)/doc/$(PACKAGE)
 
 EXTRA_DIST = CMakeLists.txt \
              docinfo.html \
-             weechat.1.ja.adoc \
-             weechat-headless.1.ja.adoc \
+             whoreirc.1.ja.adoc \
+             whoreirc-headless.1.ja.adoc \
              cmdline_options.ja.adoc \
              cmdline_options_debug.ja.adoc \
-             weechat_user.ja.adoc \
-             weechat_plugin_api.ja.adoc \
-             weechat_scripting.ja.adoc \
-             weechat_faq.ja.adoc \
-             weechat_quickstart.ja.adoc \
-             weechat_tester.ja.adoc \
-             weechat_relay_protocol.ja.adoc \
-             weechat_dev.ja.adoc \
+             whoreirc_user.ja.adoc \
+             whoreirc_plugin_api.ja.adoc \
+             whoreirc_scripting.ja.adoc \
+             whoreirc_faq.ja.adoc \
+             whoreirc_quickstart.ja.adoc \
+             whoreirc_tester.ja.adoc \
+             whoreirc_relay_protocol.ja.adoc \
+             whoreirc_dev.ja.adoc \
              $(wildcard autogen/user/*.adoc) \
              $(wildcard autogen/plugin_api/*.adoc)
 
 if MAN
-  man_targets = weechat.1 \
-                weechat-headless.1
+  man_targets = whoreirc.1 \
+                whoreirc-headless.1
   man_install = install-man
   man_uninstall = uninstall-man
 endif
 if DOC
-  doc_targets = weechat_user.ja.html \
-		weechat_plugin_api.ja.html \
-		weechat_scripting.ja.html \
-		weechat_faq.ja.html \
-		weechat_quickstart.ja.html \
-		weechat_tester.ja.html \
-		weechat_relay_protocol.ja.html \
-		weechat_dev.ja.html
+  doc_targets = whoreirc_user.ja.html \
+		whoreirc_plugin_api.ja.html \
+		whoreirc_scripting.ja.html \
+		whoreirc_faq.ja.html \
+		whoreirc_quickstart.ja.html \
+		whoreirc_tester.ja.html \
+		whoreirc_relay_protocol.ja.html \
+		whoreirc_dev.ja.html
   doc_install = install-doc
   doc_uninstall = uninstall-doc
 endif
 all-local: $(man_targets) $(doc_targets)
 
 # man pages
-weechat.1: weechat.1.ja.adoc cmdline_options.ja.adoc cmdline_options_debug.ja.adoc
-	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o weechat.1 $(abs_top_srcdir)/doc/ja/weechat.1.ja.adoc
-weechat-headless.1: weechat-headless.1.ja.adoc cmdline_options.ja.adoc cmdline_options_debug.ja.adoc
-	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o weechat-headless.1 $(abs_top_srcdir)/doc/ja/weechat-headless.1.ja.adoc
+whoreirc.1: whoreirc.1.ja.adoc cmdline_options.ja.adoc cmdline_options_debug.ja.adoc
+	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o whoreirc.1 $(abs_top_srcdir)/doc/ja/whoreirc.1.ja.adoc
+whoreirc-headless.1: whoreirc-headless.1.ja.adoc cmdline_options.ja.adoc cmdline_options_debug.ja.adoc
+	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o whoreirc-headless.1 $(abs_top_srcdir)/doc/ja/whoreirc-headless.1.ja.adoc
 
 # user's guide
-weechat_user.ja.html: weechat_user.ja.adoc cmdline_options.ja.adoc cmdline_options_debug.ja.adoc $(wildcard autogen/user/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_user.ja.html $(abs_top_srcdir)/doc/ja/weechat_user.ja.adoc
+whoreirc_user.ja.html: whoreirc_user.ja.adoc cmdline_options.ja.adoc cmdline_options_debug.ja.adoc $(wildcard autogen/user/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_user.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_user.ja.adoc
 
 # plugin API reference
-weechat_plugin_api.ja.html: weechat_plugin_api.ja.adoc $(wildcard autogen/plugin_api/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_plugin_api.ja.html $(abs_top_srcdir)/doc/ja/weechat_plugin_api.ja.adoc
+whoreirc_plugin_api.ja.html: whoreirc_plugin_api.ja.adoc $(wildcard autogen/plugin_api/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_plugin_api.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_plugin_api.ja.adoc
 
 # scripting guide
-weechat_scripting.ja.html: weechat_scripting.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_scripting.ja.html $(abs_top_srcdir)/doc/ja/weechat_scripting.ja.adoc
+whoreirc_scripting.ja.html: whoreirc_scripting.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_scripting.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_scripting.ja.adoc
 
 # FAQ
-weechat_faq.ja.html: weechat_faq.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_faq.ja.html $(abs_top_srcdir)/doc/ja/weechat_faq.ja.adoc
+whoreirc_faq.ja.html: whoreirc_faq.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_faq.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_faq.ja.adoc
 
 # quickstart
-weechat_quickstart.ja.html: weechat_quickstart.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_quickstart.ja.html $(abs_top_srcdir)/doc/ja/weechat_quickstart.ja.adoc
+whoreirc_quickstart.ja.html: whoreirc_quickstart.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_quickstart.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_quickstart.ja.adoc
 
 # tester's guide
-weechat_tester.ja.html: weechat_tester.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_tester.ja.html $(abs_top_srcdir)/doc/ja/weechat_tester.ja.adoc
+whoreirc_tester.ja.html: whoreirc_tester.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_tester.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_tester.ja.adoc
 
 # relay protocol
-weechat_relay_protocol.ja.html: weechat_relay_protocol.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_relay_protocol.ja.html $(abs_top_srcdir)/doc/ja/weechat_relay_protocol.ja.adoc
+whoreirc_relay_protocol.ja.html: whoreirc_relay_protocol.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_relay_protocol.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_relay_protocol.ja.adoc
 
 # developer's guide
-weechat_dev.ja.html: weechat_dev.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_dev.ja.html $(abs_top_srcdir)/doc/ja/weechat_dev.ja.adoc
+whoreirc_dev.ja.html: whoreirc_dev.ja.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_dev.ja.html $(abs_top_srcdir)/doc/ja/whoreirc_dev.ja.adoc
 
 # install man/docs
 
@@ -111,8 +111,8 @@ install-doc:
 uninstall-hook: $(man_uninstall) $(doc_uninstall)
 
 uninstall-man:
-	$(RM) $(DESTDIR)$(mandir)/ja/man1/weechat.1
-	$(RM) $(DESTDIR)$(mandir)/ja/man1/weechat-headless.1
+	$(RM) $(DESTDIR)$(mandir)/ja/man1/whoreirc.1
+	$(RM) $(DESTDIR)$(mandir)/ja/man1/whoreirc-headless.1
 	-rmdir $(DESTDIR)$(mandir)/ja/man1
 
 uninstall-doc:
@@ -122,4 +122,4 @@ uninstall-doc:
 # clean
 
 clean-local:
-	-$(RM) weechat.1 weechat-headless.1 weechat_*.html
+	-$(RM) whoreirc.1 whoreirc-headless.1 whoreirc_*.html

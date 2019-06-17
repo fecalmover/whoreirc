@@ -1,4 +1,4 @@
-= weechat(1)
+= whoreirc(1)
 :doctype: manpage
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
@@ -8,16 +8,16 @@
 
 == NAZWA
 
-weechat - rozszerzalny klient rozmów
+whoreirc - rozszerzalny klient rozmów
 
 == SKŁADNIA
 
 [verse]
-*weechat* [-a|--no-connect] [-d|--dir <ścieżka>] [-t|--temp-dir]  [-p|--no-plugin] [-P|--plugins <wtyczki>] [-r|--run-command <komenda>] [-s|--no-script] [--upgrade] [debug-option...] [wtyczka:opcja...]
-*weechat* [-c|--colors]
-*weechat* [-h|--help]
-*weechat* [-l|--license]
-*weechat* [-v|--version]
+*whoreirc* [-a|--no-connect] [-d|--dir <ścieżka>] [-t|--temp-dir]  [-p|--no-plugin] [-P|--plugins <wtyczki>] [-r|--run-command <komenda>] [-s|--no-script] [--upgrade] [debug-option...] [wtyczka:opcja...]
+*whoreirc* [-c|--colors]
+*whoreirc* [-h|--help]
+*whoreirc* [-l|--license]
+*whoreirc* [-v|--version]
 
 == OPIS
 
@@ -45,7 +45,7 @@ include::man_files.pl.adoc[]
 
 == Zobacz również 
 
-*weechat-headless*(1)
+*whoreirc-headless*(1)
 
 == AUTORZY
 
@@ -59,4 +59,4 @@ include::man_copyright.pl.adoc[]
 
 == WSPARCIE / ZGŁASZANIE BŁĘDÓW
 
-W celu uzyskania pomocy, lub zgłoszenia błędu zajrzyj na: https://weechat.org/about/support
+W celu uzyskania pomocy, lub zgłoszenia błędu zajrzyj na: https://whoreirc.org/about/support

@@ -68,18 +68,18 @@ conservato in un deposito GIT.
 [[get_sources]]
 === Ottenere e compilare i sorgenti
 
-Per prima cosa creare una directory, per esempio _weechat-git_:
+Per prima cosa creare una directory, per esempio _whoreirc-git_:
 
 ----
-$ mkdir ~/weechat-git
-$ cd ~/weechat-git
+$ mkdir ~/whoreirc-git
+$ cd ~/whoreirc-git
 ----
 
 Se si ha git installato, si può clonare il deposito git (raccomandato):
 
 ----
-$ git clone https://github.com/weechat/weechat.git
-$ cd weechat
+$ git clone https://github.com/whoreirc/whoreirc.git
+$ cd whoreirc
 ----
 
 [NOTE]
@@ -89,9 +89,9 @@ ultimi aggiornamenti.
 Altrimenti si può scaricare ed estrarre il pacchetto _devel_:
 
 ----
-$ wget https://weechat.org/files/src/weechat-devel.tar.bz2
-$ tar xvjf weechat-devel.tar.bz2
-$ cd weechat-devel
+$ wget https://whoreirc.org/files/src/whoreirc-devel.tar.bz2
+$ tar xvjf whoreirc-devel.tar.bz2
+$ cd whoreirc-devel
 ----
 
 Per compilare i sorgenti, si raccomanda CMake:
@@ -99,7 +99,7 @@ Per compilare i sorgenti, si raccomanda CMake:
 ----
 $ mkdir build
 $ cd build
-$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/weechat-git -DWEECHAT_HOME=~/.weechat-dev -DCMAKE_BUILD_TYPE=Debug
+$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/whoreirc-git -DWEECHAT_HOME=~/.whoreirc-dev -DCMAKE_BUILD_TYPE=Debug
 $ make
 $ make install
 ----
@@ -108,7 +108,7 @@ Se CMake non è installato, è ancora possibile usare gli autotools:
 
 ----
 $ ./autogen.sh
-$ ./configure --prefix=$HOME/weechat-git WEECHAT_HOME=~/.weechat-dev
+$ ./configure --prefix=$HOME/whoreirc-git WEECHAT_HOME=~/.whoreirc-dev
 $ make
 $ make install
 ----
@@ -118,8 +118,8 @@ $ make install
 
 A seconda della distribuzione Linux:
 
-* Debian: https://weechat.org/download/debian
-* Gentoo: https://weechat.org/download
+* Debian: https://whoreirc.org/download/debian
+* Gentoo: https://whoreirc.org/download
 * ArchLinux: PKGBUILD da https://aur.archlinux.org/
 * altro: non lo sappiamo! Eheh.
 
@@ -130,14 +130,14 @@ A seconda della distribuzione Linux:
 Il comando è:
 
 ----
-$ ~/weechat-git/bin/weechat
+$ ~/whoreirc-git/bin/whoreirc
 ----
 
 Se siete ancora svegli dovreste vedere un'interfaccia familiare e vantarvi del
 fatto di avere la versione più nuova possibile di WeeChat. ;)
 
 Se si dovessero verificare strani comportamenti (potrebbe andare in crash
-o far bollire la vostra birra) non esitate ad entrare in _#weechat_ su
+o far bollire la vostra birra) non esitate ad entrare in _#whoreirc_ su
 _chat.freenode.net_ e farcelo sapere.
 
 Se non dovesse andare in crash - ditelo comunque, abbiamo bisogno dei vostri

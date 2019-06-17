@@ -1,4 +1,4 @@
-Document: weechat-faq-en
+Document: whoreirc-faq-en
 Title: WeeChat FAQ (English)
 Author: Sébastien Helleu
 Abstract: This document answers frequently asked questions
@@ -6,5 +6,5 @@ Abstract: This document answers frequently asked questions
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-doc/html/weechat_faq.en.html
-Files: /usr/share/doc/weechat-doc/html/weechat_faq.en.html
+Index: /usr/share/doc/whoreirc-doc/html/whoreirc_faq.en.html
+Files: /usr/share/doc/whoreirc-doc/html/whoreirc_faq.en.html

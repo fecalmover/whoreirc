@@ -1,4 +1,4 @@
-Document: weechat-faq-pl
+Document: whoreirc-faq-pl
 Title: WeeChat FAQ (Polish)
 Author: Sébastien Helleu
 Abstract: This document answers frequently asked questions
@@ -6,5 +6,5 @@ Abstract: This document answers frequently asked questions
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-devel-doc/html/weechat_faq.pl.html
-Files: /usr/share/doc/weechat-devel-doc/html/weechat_faq.pl.html
+Index: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_faq.pl.html
+Files: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_faq.pl.html

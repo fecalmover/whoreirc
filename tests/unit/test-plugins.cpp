@@ -47,7 +47,7 @@ TEST(Plugins, Loaded)
     hdata = hook_hdata_get (NULL, "plugin");
     CHECK(hdata);
 
-    plugins = hdata_get_list (hdata, "weechat_plugins");
+    plugins = hdata_get_list (hdata, "whoreirc_plugins");
     CHECK(plugins);
 
     /* check that all plugins are properly loaded */

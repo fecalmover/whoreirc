@@ -22,7 +22,7 @@ X 用端末エミュレータは rxvt-unicode を推奨します: UTF-8
 シェルから起動するには:
 
 ----
-$ weechat
+$ whoreirc
 ----
 
 [[help]]
@@ -47,7 +47,7 @@ WeeChat はすべてのコマンドにヘルプがあります。ヘルプを見
 ----
 
 (ここで `config` は設定名 (core の場合は
-`weechat` もしくはプラグイン名)、`section`
+`whoreirc` もしくはプラグイン名)、`section`
 はこの設定のセクション、`option` はオプション名)。
 
 [[options]]
@@ -79,7 +79,7 @@ _fset_ プラグインを使えばオプションを簡単に閲覧、変更で�
 WeeChat オプションの表示:
 
 ----
-/fset weechat.*
+/fset whoreirc.*
 ----
 
 IRC オプションの表示:
@@ -364,7 +364,7 @@ WeeChat
 == プラグイン/スクリプト
 
 Debian のようにいくつかのディストリビューションでは、プラグイン用パッケージが独立して用意されています
-(例えば weechat-plugins)。
+(例えば whoreirc-plugins)。
 見つかったプラグインは自動的に読み込まれます
 (プラグインやスクリプトのロード、有効/無効は WeeChat のドキュメントを参照してください)。
 
@@ -379,12 +379,12 @@ WeeChat では多くの外部スクリプト (貢献者の作った)
 より詳しい情報を参照するには `/help script` を使ってください。
 
 スクリプトの一覧を参照するには WeeChat から `/script` を実行するか、以下の URL にアクセスしてください:
-https://weechat.org/scripts
+https://whoreirc.org/scripts
 
 [[more_doc]]
 == 詳しいドキュメント情報
 
 FAQ やその他の質問に関するドキュメントはこちらで参照できます:
-https://weechat.org/doc
+https://whoreirc.org/doc
 
 WeeChat をお楽しみください!

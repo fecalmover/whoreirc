@@ -11,4 +11,4 @@ the Free Software Foundation; either version 3 of the License, or
 
 Please read the COPYING file for more information.
 
-Web: https://weechat.org/
+Web: https://whoreirc.org/

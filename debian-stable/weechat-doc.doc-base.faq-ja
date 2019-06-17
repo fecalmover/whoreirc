@@ -1,4 +1,4 @@
-Document: weechat-faq-ja
+Document: whoreirc-faq-ja
 Title: WeeChat FAQ (Japanese)
 Author: Sébastien Helleu
 Abstract: This document answers frequently asked questions
@@ -6,5 +6,5 @@ Abstract: This document answers frequently asked questions
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-doc/html/weechat_faq.ja.html
-Files: /usr/share/doc/weechat-doc/html/weechat_faq.ja.html
+Index: /usr/share/doc/whoreirc-doc/html/whoreirc_faq.ja.html
+Files: /usr/share/doc/whoreirc-doc/html/whoreirc_faq.ja.html

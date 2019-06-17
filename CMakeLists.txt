@@ -21,7 +21,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-project(weechat C)
+project(whoreirc C)
 
 # CMake options
 set(CMAKE_VERBOSE_MAKEFILE OFF)
@@ -132,10 +132,10 @@ endif()
 
 # option WEECHAT_HOME
 if(NOT DEFINED WEECHAT_HOME OR "${WEECHAT_HOME}" STREQUAL "")
-  set(WEECHAT_HOME "~/.weechat")
+  set(WEECHAT_HOME "~/.whoreirc")
 endif()
 set(WEECHAT_HOME "${WEECHAT_HOME}" CACHE
-  STRING "WeeChat home directory for config, logs, scripts.. (default is \"~/.weechat\")"
+  STRING "WeeChat home directory for config, logs, scripts.. (default is \"~/.whoreirc\")"
   FORCE)
 mark_as_advanced(CLEAR WEECHAT_HOME)
 
@@ -144,7 +144,7 @@ if(NOT DEFINED CA_FILE OR "${CA_FILE}" STREQUAL "")
   set(CA_FILE "/etc/ssl/certs/ca-certificates.crt")
 endif()
 set(CA_FILE "${CA_FILE}" CACHE
-  STRING "File containing the certificate authorities (default is \"/etc/ssl/certs/ca-certificates.crt\"). This is the default value of option \"weechat.network.gnutls_ca_file\"."
+  STRING "File containing the certificate authorities (default is \"/etc/ssl/certs/ca-certificates.crt\"). This is the default value of option \"whoreirc.network.gnutls_ca_file\"."
   FORCE)
 mark_as_advanced(CLEAR CA_FILE)
 
@@ -213,14 +213,14 @@ endif()
 # Check for CURL
 find_package(CURL REQUIRED)
 
-# weechat_gui_common MUST be the first lib in the list
-set(STATIC_LIBS weechat_gui_common)
+# whoreirc_gui_common MUST be the first lib in the list
+set(STATIC_LIBS whoreirc_gui_common)
 
 find_library(DL_LIBRARY
   NAMES dl
   PATHS /lib /usr/lib /usr/libexec /usr/local/lib /usr/local/libexec
 )
-list(APPEND STATIC_LIBS weechat_plugins)
+list(APPEND STATIC_LIBS whoreirc_plugins)
 if(DL_LIBRARY)
   string(REGEX REPLACE "/[^/]*$" "" DL_LIBRARY_PATH "${DL_LIBRARY}")
   set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -L${DL_LIBRARY_PATH}")
@@ -265,11 +265,11 @@ set(prefix "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix "\${prefix}")
 string(REPLACE "${CMAKE_INSTALL_PREFIX}" "\${prefix}" libdir "${LIBDIR}")
 set(includedir "\${prefix}/include")
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/weechat.pc.in ${CMAKE_CURRENT_BINARY_DIR}/weechat.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat.pc DESTINATION ${LIBDIR}/pkgconfig)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/whoreirc.pc.in ${CMAKE_CURRENT_BINARY_DIR}/whoreirc.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc.pc DESTINATION ${LIBDIR}/pkgconfig)
 
 # cygport file (used to build Cygwin packages)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/weechat.cygport.in ${CMAKE_CURRENT_BINARY_DIR}/weechat-${VERSION}-1.cygport @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/whoreirc.cygport.in ${CMAKE_CURRENT_BINARY_DIR}/whoreirc-${VERSION}-1.cygport @ONLY)
 
 # install some files (only on Cygwin)
 if(CYGWIN)
@@ -283,7 +283,7 @@ if(CYGWIN)
 endif()
 
 # icon
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/weechat.png DESTINATION ${SHAREDIR}/icons/hicolor/32x32/apps)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc.png DESTINATION ${SHAREDIR}/icons/hicolor/32x32/apps)
 
 # packages
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fast, light and extensible chat client")
@@ -296,11 +296,11 @@ set(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
 
 # binary package
 set(CPACK_GENERATOR "STGZ;TGZ;TBZ2")
-set(CPACK_PACKAGE_FILE_NAME weechat-binary-${VERSION})
+set(CPACK_PACKAGE_FILE_NAME whoreirc-binary-${VERSION})
 
 # source package
 set(CPACK_SOURCE_GENERATOR "TGZ;TBZ2")
-set(CPACK_SOURCE_PACKAGE_FILE_NAME weechat-${VERSION})
+set(CPACK_SOURCE_PACKAGE_FILE_NAME whoreirc-${VERSION})
 set(CPACK_SOURCE_IGNORE_FILES "/\\\\.git" "/build/" "/m4/"
   "/autom4te\\\\.cache/" "/ABOUT-NLS$" "/config\\\\.guess$" "/config\\\\.h$"
   "/config\\\\.h.in$" "/config\\\\.log$" "/config\\\\.rpath$"
@@ -308,7 +308,7 @@ set(CPACK_SOURCE_IGNORE_FILES "/\\\\.git" "/build/" "/m4/"
   "/install-sh$" "/missing$" "/intl/" "/libtool$" "/\\\\.libs/"
   "/ltmain\\\\.sh$" "/\\\\.deps/" "/html/" "/html1/" "/Makefile$"
   "/Makefile\\\\.in$" "stamp" "/po/.*\\\\.header$" "\\\\.gmo$" "~$" "\\\\.o$"
-  "\\\\.lo$" "\\\\.a$" "\\\\.la$" "\\\\.lai$" "\\\\.Plo$" "/weechat$"
+  "\\\\.lo$" "\\\\.a$" "\\\\.la$" "\\\\.lai$" "\\\\.Plo$" "/whoreirc$"
 )
 
 include(CPack)

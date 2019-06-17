@@ -1,74 +1,74 @@
-$HOME/.weechat/weechat.conf::
+$HOME/.whoreirc/whoreirc.conf::
     WeeChat の主要設定ファイル
 
-$HOME/.weechat/plugins.conf::
+$HOME/.whoreirc/plugins.conf::
     プラグイン設定ファイル
 
-$HOME/.weechat/sec.conf::
+$HOME/.whoreirc/sec.conf::
     保護されたデータを含む設定ファイル
 
-$HOME/.weechat/alias.conf::
+$HOME/.whoreirc/alias.conf::
     _alias_ プラグイン用の設定ファイル
 
-$HOME/.weechat/buflist.conf::
+$HOME/.whoreirc/buflist.conf::
     _buflist_ プラグイン用の設定ファイル
 
-$HOME/.weechat/charset.conf::
+$HOME/.whoreirc/charset.conf::
     _charset_ プラグイン用の設定ファイル
 
-$HOME/.weechat/exec.conf::
+$HOME/.whoreirc/exec.conf::
     _exec_ プラグイン用の設定ファイル
 
-$HOME/.weechat/fifo.conf::
+$HOME/.whoreirc/fifo.conf::
     _fifo_ プラグイン用の設定ファイル
 
-$HOME/.weechat/fset.conf::
+$HOME/.whoreirc/fset.conf::
     _fset_ プラグイン用の設定ファイル
 
-$HOME/.weechat/guile.conf::
+$HOME/.whoreirc/guile.conf::
     _guile_ プラグイン用の設定ファイル
 
-$HOME/.weechat/irc.conf::
+$HOME/.whoreirc/irc.conf::
     _irc_ プラグイン用の設定ファイル
 
-$HOME/.weechat/javascript.conf::
+$HOME/.whoreirc/javascript.conf::
     _javascript_ プラグイン用の設定ファイル
 
-$HOME/.weechat/logger.conf::
+$HOME/.whoreirc/logger.conf::
     _logger_ プラグイン用の設定ファイル
 
-$HOME/.weechat/lua.conf::
+$HOME/.whoreirc/lua.conf::
     _lua_ プラグイン用の設定ファイル
 
-$HOME/.weechat/perl.conf::
+$HOME/.whoreirc/perl.conf::
     _perl_ プラグイン用の設定ファイル
 
-$HOME/.weechat/php.conf::
+$HOME/.whoreirc/php.conf::
     _php_ プラグイン用の設定ファイル
 
-$HOME/.weechat/python.conf::
+$HOME/.whoreirc/python.conf::
     _python_ プラグイン用の設定ファイル
 
-$HOME/.weechat/relay.conf::
+$HOME/.whoreirc/relay.conf::
     _relay_ プラグイン用の設定ファイル
 
-$HOME/.weechat/ruby.conf::
+$HOME/.whoreirc/ruby.conf::
     _ruby_ プラグイン用の設定ファイル
 
-$HOME/.weechat/script.conf::
+$HOME/.whoreirc/script.conf::
     _script_ プラグイン用の設定ファイル
 
-$HOME/.weechat/spell.conf::
+$HOME/.whoreirc/spell.conf::
     _spell_ プラグイン用の設定ファイル
 
-$HOME/.weechat/tcl.conf::
+$HOME/.whoreirc/tcl.conf::
     _tcl_ プラグイン用の設定ファイル
 
-$HOME/.weechat/trigger.conf::
+$HOME/.whoreirc/trigger.conf::
     _trigger_ プラグイン用の設定ファイル
 
-$HOME/.weechat/xfer.conf::
+$HOME/.whoreirc/xfer.conf::
     _xfer_ プラグイン用の設定ファイル
 
-$HOME/.weechat/weechat.log::
+$HOME/.whoreirc/whoreirc.log::
     WeeChat ログファイル

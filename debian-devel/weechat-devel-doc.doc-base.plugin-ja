@@ -1,4 +1,4 @@
-Document: weechat-plugin-ja
+Document: whoreirc-plugin-ja
 Title: WeeChat plugin API reference (Japanese)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create plugins
@@ -6,5 +6,5 @@ Abstract: This document describes the API to create plugins
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-devel-doc/html/weechat_plugin_api.ja.html
-Files: /usr/share/doc/weechat-devel-doc/html/weechat_plugin_api.ja.html
+Index: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_plugin_api.ja.html
+Files: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_plugin_api.ja.html

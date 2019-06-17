@@ -1,6 +1,6 @@
 // TRANSLATION MISSING
 For complete doc on plugin options, please look at plugins documentation in
-https://weechat.org/doc[WeeChat user's guide].
+https://whoreirc.org/doc[WeeChat user's guide].
 
 With irc plugin, you can connect to temporary server with an URL like:
 
@@ -8,7 +8,7 @@ With irc plugin, you can connect to temporary server with an URL like:
 
 To join WeeChat IRC channel support with nick "mynick":
 
-    irc://mynick@chat.freenode.net/#weechat
+    irc://mynick@chat.freenode.net/#whoreirc
 
 IPv6 address can be enclosed in brackets to add a port after address, for
 example:

@@ -17,7 +17,7 @@ Tłumaczenie:
 Ten dokument opisuje klienta rozmów WeeChat, który jest częścią WeeChat.
 
 Najnowsza wersja tego dokumentu znajduje się na tej stronie:
-https://weechat.org/doc
+https://whoreirc.org/doc
 
 
 [[introduction]]
@@ -42,10 +42,10 @@ wspieranych języków skryptowych:
 Prawie wszystkie przykłady umieszczone w tym dokumencie są napisane w Pythonie,
 ale API jest takie same dla wszystkich języków.
 
-[[scripts_in_weechat]]
+[[scripts_in_whoreirc]]
 == Skrypty w WeeChat
 
-[[weechat_architecture]]
+[[whoreirc_architecture]]
 === Architektura WeeChat
 
 WeeChat jest jednowątkowy, dotyczy to również skryptów.
@@ -66,25 +66,25 @@ funkcji API, może to prowadzić to awarii WeeChat. +
 Jeśli coś musi zostać wykonane w tle, można użyć funkcji `hook_process`.
 Zobacz przykład w rozdziale <<hook_process,Wykonanie procesu w tle>> oraz
 dokumentację do funkcji `hook_process` w
-link:weechat_plugin_api.en.html#_hook_process[Opisu API wtyczek WeeChat] (Angielski).
+link:whoreirc_plugin_api.en.html#_hook_process[Opisu API wtyczek WeeChat] (Angielski).
 
 [[languages_specificities]]
 === Specyfika języków
 
 ==== Python
 
-* Należy wykonać `import weechat`
+* Należy wykonać `import whoreirc`
 * Funkcje `+print*+` są nazwane `+prnt*+` w pythonie (ponieważ _print_ jest zastrzeżonym
   słowem kluczowym)
-* Funkcje są wywoływane za pomocą `weechat.xxx(arg1, arg2, ...)`
+* Funkcje są wywoływane za pomocą `whoreirc.xxx(arg1, arg2, ...)`
 
 ==== Perl
 
-* Funkcje są wywoływane za pomocą `weechat::xxx(arg1, arg2, ...);`
+* Funkcje są wywoływane za pomocą `whoreirc::xxx(arg1, arg2, ...);`
 
 ==== Ruby
 
-* Trzeba zdefiniować _weechat_init_ i wywołać _register_ wewnątrz
+* Trzeba zdefiniować _whoreirc_init_ i wywołać _register_ wewnątrz
 * Funkcje są wywoływane za pomocą `Weechat.xxx(arg1, arg2, ...)`
 * W związku z ograniczeniami Ruby (maksymalnie 15 argumentów dla funkcji), funkcja
   `Weechat.config_new_option` otrzymuje callbacki w postaci tablicy 6 ciągów
@@ -98,15 +98,15 @@ Weechat.config_new_option(config, section, "nazwa", "ciąg", "opis opcji", "", 0
 
 ==== Lua
 
-* Funkcje są wywoływane za pomocą `weechat.xxx(arg1, arg2, ...)`
+* Funkcje są wywoływane za pomocą `whoreirc.xxx(arg1, arg2, ...)`
 
 ==== Tcl
 
-* Funkcje są wywoływane za pomocą `weechat::xxx arg1 arg2 ...`
+* Funkcje są wywoływane za pomocą `whoreirc::xxx arg1 arg2 ...`
 
 ==== Guile (Scheme)
 
-* Funkcje są wywoływane za pomocą `(weechat:xxx arg1 arg2 ...)`
+* Funkcje są wywoływane za pomocą `(whoreirc:xxx arg1 arg2 ...)`
 * Następujące funkcje przyjmują pojedynczą listę argumentów (zamiast wielu
   argumentów dla innych funkcji), ponieważ ilość argumentów przekracza ilość
   argumentów dozwolonych w Guile:
@@ -116,11 +116,11 @@ Weechat.config_new_option(config, section, "nazwa", "ciąg", "opis opcji", "", 0
 
 ==== JavaScript
 
-* Funkcje są wywoływane za pomocą `weechat.xxx(arg1, arg2, ...);`
+* Funkcje są wywoływane za pomocą `whoreirc.xxx(arg1, arg2, ...);`
 
 ==== PHP
 
-* Funkcje są wywoływane za pomocą `weechat_xxx(arg1, arg2, ...);`
+* Funkcje są wywoływane za pomocą `whoreirc_xxx(arg1, arg2, ...);`
 
 [[register_function]]
 === Funkcja rejestrująca
@@ -132,7 +132,7 @@ Prototyp:
 
 [source,python]
 ----
-weechat.register(nazwa, autor, wersja, licencja, opis, funkcja_wyłączająca, kodowanie)
+whoreirc.register(nazwa, autor, wersja, licencja, opis, funkcja_wyłączająca, kodowanie)
 ----
 
 Argumenty:
@@ -153,25 +153,25 @@ Przykład dla skryptu w każdym z języków:
 
 [source,python]
 ----
-import weechat
+import whoreirc
 
-weechat.register("test_python", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "")
-weechat.prnt("", "Witaj z pythonowego skryptu!")
+whoreirc.register("test_python", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "")
+whoreirc.prnt("", "Witaj z pythonowego skryptu!")
 ----
 
 * Perl:
 
 [source,perl]
 ----
-weechat::register("test_perl", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "");
-weechat::print("", "Witaj z perlowego skryptu!");
+whoreirc::register("test_perl", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "");
+whoreirc::print("", "Witaj z perlowego skryptu!");
 ----
 
 * Ruby:
 
 [source,ruby]
 ----
-def weechat_init
+def whoreirc_init
   Weechat.register("test_ruby", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "")
   Weechat.print("", "Witaj ze skryptu ruby!")
   return Weechat::WEECHAT_RC_OK
@@ -182,40 +182,40 @@ end
 
 [source,lua]
 ----
-weechat.register("test_lua", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "")
-weechat.print("", "Witaj ze skryptu lua!")
+whoreirc.register("test_lua", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "")
+whoreirc.print("", "Witaj ze skryptu lua!")
 ----
 
 * Tcl:
 
 [source,tcl]
 ----
-weechat::register "test_tcl" "FlashCode" "1.0" "GPL3" "Skrypt testowy" "" ""
-weechat::print "" "Witaj ze skryptu tcl!"
+whoreirc::register "test_tcl" "FlashCode" "1.0" "GPL3" "Skrypt testowy" "" ""
+whoreirc::print "" "Witaj ze skryptu tcl!"
 ----
 
 * Guile (Scheme):
 
 [source,lisp]
 ----
-(weechat:register "test_scheme" "FlashCode" "1.0" "GPL3" "Skrypt testowy" "" "")
-(weechat:print "" "Witaj ze skryptu scheme!")
+(whoreirc:register "test_scheme" "FlashCode" "1.0" "GPL3" "Skrypt testowy" "" "")
+(whoreirc:print "" "Witaj ze skryptu scheme!")
 ----
 
 * JavaScript:
 
 [source,javascript]
 ----
-weechat.register("test_js", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "");
-weechat.print("", "Witaj ze skryptu javascript!");
+whoreirc.register("test_js", "FlashCode", "1.0", "GPL3", "Skrypt testowy", "", "");
+whoreirc.print("", "Witaj ze skryptu javascript!");
 ----
 
 * PHP:
 
 [source,php]
 ----
-weechat_register('test_php', 'FlashCode', '1.0', 'GPL3', 'Skrypt testowy', '', '');
-weechat_print('', 'Witaj ze skryptu PHP!');
+whoreirc_register('test_php', 'FlashCode', '1.0', 'GPL3', 'Skrypt testowy', '', '');
+whoreirc_print('', 'Witaj ze skryptu PHP!');
 ----
 
 [[load_script]]
@@ -253,7 +253,7 @@ Możesz zrobić dowiązanie w katalogu _język/autoload_ jeśli chcesz automatyc
 Na przykład dla Pythona:
 
 ----
-$ cd ~/.weechat/python/autoload
+$ cd ~/.whoreirc/python/autoload
 $ ln -s ../skrypt.py
 ----
 
@@ -265,7 +265,7 @@ dowiązanie w katalogu _autoload_.
 == Różnice pomiędzy API dla C
 
 API skryptów jest prawie takie same jak API dla wtyczek pisanych w C.
-Możesz zajrzeć do link:weechat_plugin_api.en.html[Opisu API wtyczek WeeChat] (Angielski)
+Możesz zajrzeć do link:whoreirc_plugin_api.en.html[Opisu API wtyczek WeeChat] (Angielski)
 po więcej informacji na temat każdej z funkcji API: prototyp, argumenty,
 zwracane wartości, przykłady.
 
@@ -312,7 +312,7 @@ Na przykład, aby wyświetlić dane w rdzennym buforze (główny bufor WeeChat):
 
 [source,python]
 ----
-weechat.prnt("", "hi!")
+whoreirc.prnt("", "hi!")
 ----
 
 [WARNING]
@@ -336,10 +336,10 @@ Przykłady callbacków dla każdego języka:
 [source,python]
 ----
 def timer_cb(data, remaining_calls):
-    weechat.prnt("", "timer! data=%s" % data)
-    return weechat.WEECHAT_RC_OK
+    whoreirc.prnt("", "timer! data=%s" % data)
+    return whoreirc.WEECHAT_RC_OK
 
-weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
+whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
 
 * Perl:
@@ -348,11 +348,11 @@ weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
 sub timer_cb {
     my ($data, $remaining_calls) = @_;
-    weechat::print("", "timer! data=$data");
-    return weechat::WEECHAT_RC_OK;
+    whoreirc::print("", "timer! data=$data");
+    return whoreirc::WEECHAT_RC_OK;
 }
 
-weechat::hook_timer(1000, 0, 1, "timer_cb", "test");
+whoreirc::hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 
 * Ruby:
@@ -372,11 +372,11 @@ Weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
 [source,lua]
 ----
 function timer_cb(data, remaining_calls)
-    weechat.print("", "timer! data="..data)
-    return weechat.WEECHAT_RC_OK
+    whoreirc.print("", "timer! data="..data)
+    return whoreirc.WEECHAT_RC_OK
 end
 
-weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
+whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
 
 * Tcl:
@@ -384,11 +384,11 @@ weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
 [source,tcl]
 ----
 proc timer_cb { data remaining_calls } {
-    weechat::print {} "timer! data=$data"
-    return $::weechat::WEECHAT_RC_OK
+    whoreirc::print {} "timer! data=$data"
+    return $::whoreirc::WEECHAT_RC_OK
 }
 
-weechat::hook_timer 1000 0 1 timer_cb test
+whoreirc::hook_timer 1000 0 1 timer_cb test
 ----
 
 * Guile (Scheme):
@@ -396,11 +396,11 @@ weechat::hook_timer 1000 0 1 timer_cb test
 [source,lisp]
 ----
 (define (timer_cb data remaining_calls)
-  (weechat:print "" (string-append "timer! data=" data))
-  weechat:WEECHAT_RC_OK
+  (whoreirc:print "" (string-append "timer! data=" data))
+  whoreirc:WEECHAT_RC_OK
 )
 
-(weechat:hook_timer 1000 0 1 "timer_cb" "test")
+(whoreirc:hook_timer 1000 0 1 "timer_cb" "test")
 ----
 
 * JavaScript:
@@ -408,11 +408,11 @@ weechat::hook_timer 1000 0 1 timer_cb test
 [source,javascript]
 ----
 function timer_cb(data, remaining_calls) {
-    weechat.print("", "timer! data=" + data);
-    return weechat.WEECHAT_RC_OK;
+    whoreirc.print("", "timer! data=" + data);
+    return whoreirc.WEECHAT_RC_OK;
 }
 
-weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
+whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 
 * PHP:
@@ -420,18 +420,18 @@ weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
 [source,php]
 ----
 $timer_cb = function ($data, $remaining_calls) {
-    weechat_print('', 'timer! data=' . $data);
+    whoreirc_print('', 'timer! data=' . $data);
     return WEECHAT_RC_OK;
 };
 
-weechat_hook_timer(1000, 0, 1, $timer_cb, 'test');
+whoreirc_hook_timer(1000, 0, 1, $timer_cb, 'test');
 ----
 
 [[script_api]]
 == API skryptów
 
 Więcej informacji o funkcjach w API, znajdziesz w
-link:weechat_plugin_api.en.html[Opisu API wtyczek WeeChat] (Angielski).
+link:whoreirc_plugin_api.en.html[Opisu API wtyczek WeeChat] (Angielski).
 
 [[script_api_functions]]
 === Fukcje
@@ -744,7 +744,7 @@ Lista stałych w API skryptów:
 
 Ten rozdział przedstawia część częstych zadań z przykładami.
 Użyto tu tylko część rzeczy dostępnych w API, dokładne informacje można znaleźć
-w link:weechat_plugin_api.en.html[Opisu API wtyczek WeeChat] (Angielski).
+w link:whoreirc_plugin_api.en.html[Opisu API wtyczek WeeChat] (Angielski).
 
 [[buffers]]
 === Bufory
@@ -760,31 +760,31 @@ Przykłady:
 [source,python]
 ----
 # wyświetl "witaj" w głównym buforze
-weechat.prnt("", "witaj")
+whoreirc.prnt("", "witaj")
 
 # wyświetl "witaj" w głównym buforze, ale nie zapisuj tego do pliku z logiem
 # (tylko wersje >= 0.3.3)
-weechat.prnt_date_tags("", 0, "no_log", "witaj")
+whoreirc.prnt_date_tags("", 0, "no_log", "witaj")
 
 # wyświetl "==>" przed wiadomością "witaj" w obecnym buforze
 # (przedrostek i wiadomość muszą być oddzielone znakiem tabulacji)
-weechat.prnt(weechat.current_buffer(), "==>\twitaj")
+whoreirc.prnt(whoreirc.current_buffer(), "==>\twitaj")
 
 # wyświetla wiadomość o błędzie w głównym buforze (z przedrostkiem błąd)
-weechat.prnt("", "%szłe argumenty" % weechat.prefix("błąd"))
+whoreirc.prnt("", "%szłe argumenty" % whoreirc.prefix("błąd"))
 
 # wyświetl wiadomość z kolorem w głównym buforze
-weechat.prnt("", "text %sżółty na niebieskim" % weechat.color("yellow,blue"))
+whoreirc.prnt("", "text %sżółty na niebieskim" % whoreirc.color("yellow,blue"))
 
 # przeszuka bufor i wyświetli wiadomość
-# (pełna nazwa bufora to wtyczka.nazwa, na przykład: "irc.freenode.#weechat")
-buffer = weechat.buffer_search("irc", "freenode.#weechat")
-weechat.prnt(buffer, "wiadomość na kanale #weechat")
+# (pełna nazwa bufora to wtyczka.nazwa, na przykład: "irc.freenode.#whoreirc")
+buffer = whoreirc.buffer_search("irc", "freenode.#whoreirc")
+whoreirc.prnt(buffer, "wiadomość na kanale #whoreirc")
 
 # inne rozwiązanie na znalezienie bufora IRC (lepsze)
 # (zauważ, że serwer i kanał są oddzielone przecinkiem)
-buffer = weechat.info_get("irc_buffer", "freenode,#weechat")
-weechat.prnt(buffer, "wiadomość na kanale #weechat")
+buffer = whoreirc.info_get("irc_buffer", "freenode,#whoreirc")
+whoreirc.prnt(buffer, "wiadomość na kanale #whoreirc")
 ----
 
 [NOTE]
@@ -801,11 +801,11 @@ Przykłady:
 [source,python]
 ----
 # wykona polecenie "/help" w obecnym buforze (wyświetli się w głównym buforze)
-weechat.command("", "/help")
+whoreirc.command("", "/help")
 
-# wyśle "witaj" na kanał #weechat (użytkownicy na kanale zobaczą wiadomość)
-buffer = weechat.info_get("irc_buffer", "freenode,#weechat")
-weechat.command(buffer, "witaj")
+# wyśle "witaj" na kanał #whoreirc (użytkownicy na kanale zobaczą wiadomość)
+buffer = whoreirc.info_get("irc_buffer", "freenode,#whoreirc")
+whoreirc.command(buffer, "witaj")
 ----
 
 [[buffers_new]]
@@ -824,21 +824,21 @@ Przykłady:
 # callback dla danych otrzymanych na wejściu
 def buffer_input_cb(data, buffer, input_data):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return whoreirc.WEECHAT_RC_OK
 
 # callback wywoływany przy zamknięciu bufora
 def buffer_close_cb(data, buffer):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return whoreirc.WEECHAT_RC_OK
 
 # tworzenie bufora
-buffer = weechat.buffer_new("mybuffer", "buffer_input_cb", "", "buffer_close_cb", "")
+buffer = whoreirc.buffer_new("mybuffer", "buffer_input_cb", "", "buffer_close_cb", "")
 
 # ustawianie tytułu
-weechat.buffer_set(buffer, "title", "To jest tytuł mojego buforu.")
+whoreirc.buffer_set(buffer, "title", "To jest tytuł mojego buforu.")
 
 # wyłącza logowanie, przez ustawienie zmiennej lokalnej "no_log" na "1"
-weechat.buffer_set(buffer, "localvar_set_no_log", "1")
+whoreirc.buffer_set(buffer, "localvar_set_no_log", "1")
 ----
 
 [[buffers_properties]]
@@ -850,11 +850,11 @@ Przykłady:
 
 [source,python]
 ----
-buffer = weechat.current_buffer()
+buffer = whoreirc.current_buffer()
 
-number = weechat.buffer_get_integer(buffer, "number")
-name = weechat.buffer_get_string(buffer, "name")
-short_name = weechat.buffer_get_string(buffer, "short_name")
+number = whoreirc.buffer_get_integer(buffer, "number")
+name = whoreirc.buffer_get_string(buffer, "name")
+short_name = whoreirc.buffer_get_string(buffer, "short_name")
 ----
 
 Możliwe jest dodanie, odczytanie lub kasowanie lokalnych zmiennych dla buforów:
@@ -862,13 +862,13 @@ Możliwe jest dodanie, odczytanie lub kasowanie lokalnych zmiennych dla buforów
 [source,python]
 ----
 # dodanie zmiennej lokalnej
-weechat.buffer_set(buffer, "localvar_set_myvar", "my_value")
+whoreirc.buffer_set(buffer, "localvar_set_myvar", "my_value")
 
 # odczyt zmiennej lokalnej
-myvar = weechat.buffer_get_string(buffer, "localvar_myvar")
+myvar = whoreirc.buffer_get_string(buffer, "localvar_myvar")
 
 # kasowanie zmiennej lokalnej
-weechat.buffer_set(buffer, "localvar_del_myvar", "")
+whoreirc.buffer_set(buffer, "localvar_del_myvar", "")
 ----
 
 Aby zobaczyć lokalne zmienne danego bufora, należy wykonać tą komendę w WeeChat:
@@ -892,9 +892,9 @@ Przykład:
 ----
 def my_command_cb(data, buffer, args):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return whoreirc.WEECHAT_RC_OK
 
-hook = weechat.hook_command("myfilter", "opis myfilter",
+hook = whoreirc.hook_command("myfilter", "opis myfilter",
     "[list] | [enable|disable|toggle [name]] | [add name plugin.buffer tags regex] | [del name|-all]",
     "description of arguments...",
     "list"
@@ -925,10 +925,10 @@ Przykład:
 ----
 def timer_cb(data, remaining_calls):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return whoreirc.WEECHAT_RC_OK
 
 # timer wywoływany co minutę, kiedy liczba sekund wynosi 00
-weechat.hook_timer(60 * 1000, 60, 0, "timer_cb", "")
+whoreirc.hook_timer(60 * 1000, 60, 0, "timer_cb", "")
 ----
 
 [[hook_process]]
@@ -951,10 +951,10 @@ def my_process_cb(data, command, rc, out, err):
     if out != "":
         process_output += out
     if int(rc) >= 0:
-        weechat.prnt("", process_output)
-    return weechat.WEECHAT_RC_OK
+        whoreirc.prnt("", process_output)
+    return whoreirc.WEECHAT_RC_OK
 
-weechat.hook_process("/bin/ls -l /etc", 10 * 1000, "my_process_cb", "")
+whoreirc.hook_process("/bin/ls -l /etc", 10 * 1000, "my_process_cb", "")
 ----
 
 [[url_transfer]]
@@ -971,41 +971,41 @@ Przykład transferu URL bez opcji: strona HTML jest otrzymywana jako "out"
 [source,python]
 ----
 # Wyświetla aktualną stabilną wersję WeeChat.
-weechat_version = ""
+whoreirc_version = ""
 
-def weechat_process_cb(data, command, rc, out, err):
-    global weechat_version
+def whoreirc_process_cb(data, command, rc, out, err):
+    global whoreirc_version
     if out != "":
-        weechat_version += out
+        whoreirc_version += out
     if int(rc) >= 0:
-        weechat.prnt("", "Obecna wersja stabilna WeeChat: %s" % weechat_version)
-    return weechat.WEECHAT_RC_OK
+        whoreirc.prnt("", "Obecna wersja stabilna WeeChat: %s" % whoreirc_version)
+    return whoreirc.WEECHAT_RC_OK
 
-weechat.hook_process("url:https://weechat.org/dev/info/stable/",
-                     30 * 1000, "weechat_process_cb", "")
+whoreirc.hook_process("url:https://whoreirc.org/dev/info/stable/",
+                     30 * 1000, "whoreirc_process_cb", "")
 ----
 
 [TIP]
-Wszystkie informacje o WeeChat dostępne są na stronie https://weechat.org/dev/info
+Wszystkie informacje o WeeChat dostępne są na stronie https://whoreirc.org/dev/info
 
 Przykładowy transfer URL z opcją: pobranie najnowszej wersji rozwojowej WeeChat
-do pliku _/tmp/weechat-devel.tar.gz_:
+do pliku _/tmp/whoreirc-devel.tar.gz_:
 
 [source,python]
 ----
 def my_process_cb(data, command, rc, out, err):
     if int(rc) >= 0:
-        weechat.prnt("", "End of transfer (rc=%s)" % rc)
-    return weechat.WEECHAT_RC_OK
+        whoreirc.prnt("", "End of transfer (rc=%s)" % rc)
+    return whoreirc.WEECHAT_RC_OK
 
-weechat.hook_process_hashtable("url:https://weechat.org/files/src/weechat-devel.tar.gz",
-                               {"file_out": "/tmp/weechat-devel.tar.gz"},
+whoreirc.hook_process_hashtable("url:https://whoreirc.org/files/src/whoreirc-devel.tar.gz",
+                               {"file_out": "/tmp/whoreirc-devel.tar.gz"},
                                30 * 1000, "my_process_cb", "")
 ----
 
 Więcej informacji o transferach URL i dostępnych opcjach dla funkcji
 `hook_process` oraz `hook_process_hashtable` można znaleźć w
-link:weechat_plugin_api.en.html#_hook_process[Opisu API wtyczek WeeChat] (Angielski).
+link:whoreirc_plugin_api.en.html#_hook_process[Opisu API wtyczek WeeChat] (Angielski).
 
 [[config_options]]
 === Konfiguracja / opcje
@@ -1026,8 +1026,8 @@ script_options = {
     "opcja3": "wartość3",
 }
 for option, default_value in script_options.items():
-    if not weechat.config_is_set_plugin(option):
-        weechat.config_set_plugin(option, default_value)
+    if not whoreirc.config_is_set_plugin(option):
+        whoreirc.config_set_plugin(option, default_value)
 ----
 
 [[config_options_detect_changes]]
@@ -1047,15 +1047,15 @@ def config_cb(data, option, value):
     """Callback called when a script option is changed."""
     # na przykład, odczyt wszystkich opcji skryptu...
     # ...
-    return weechat.WEECHAT_RC_OK
+    return whoreirc.WEECHAT_RC_OK
 
 # ...
 
-weechat.hook_config("plugins.var.python." + SCRIPT_NAME + ".*", "config_cb", "")
+whoreirc.hook_config("plugins.var.python." + SCRIPT_NAME + ".*", "config_cb", "")
 # dla innych języków, zmień "python" na swój język (perl/ruby/lua/tcl/guile/javascript)
 ----
 
-[[config_options_weechat]]
+[[config_options_whoreirc]]
 ==== Odczyt opcji WeeChat
 
 Funkcja `config_get` zwraca wskaźnik do opcji. Następnie, w zależności od typu opcji,
@@ -1065,20 +1065,20 @@ należy wywołać `config_string`, `config_boolean`, `config_integer` lub
 [source,python]
 ----
 # string
-weechat.prnt("", "wartość opcji weechat.look.item_time_format to: %s"
-                 % (weechat.config_string(weechat.config_get("weechat.look.item_time_format"))))
+whoreirc.prnt("", "wartość opcji whoreirc.look.item_time_format to: %s"
+                 % (whoreirc.config_string(whoreirc.config_get("whoreirc.look.item_time_format"))))
 
 # boolean
-weechat.prnt("", "wartość opcji weechat.look.day_change to: %d"
-                 % (weechat.config_boolean(weechat.config_get("weechat.look.day_change"))))
+whoreirc.prnt("", "wartość opcji whoreirc.look.day_change to: %d"
+                 % (whoreirc.config_boolean(whoreirc.config_get("whoreirc.look.day_change"))))
 
 # integer
-weechat.prnt("", "wartość opcji weechat.look.scroll_page_percent to: %d"
-                 % (weechat.config_integer(weechat.config_get("weechat.look.scroll_page_percent"))))
+whoreirc.prnt("", "wartość opcji whoreirc.look.scroll_page_percent to: %d"
+                 % (whoreirc.config_integer(whoreirc.config_get("whoreirc.look.scroll_page_percent"))))
 
 # color
-weechat.prnt("", "wartość opcji weechat.color.chat_delimiters to: %s"
-                 % (weechat.config_color(weechat.config_get("weechat.color.chat_delimiters"))))
+whoreirc.prnt("", "wartość opcji whoreirc.color.chat_delimiters to: %s"
+                 % (whoreirc.config_color(whoreirc.config_get("whoreirc.color.chat_delimiters"))))
 ----
 
 [[irc]]
@@ -1102,15 +1102,15 @@ def join_cb(data, sygnał, signal_data):
     # sygnał to na przykład: "freenode,irc_in2_join"
     # signal_data to wiadomość IRC, na przykład: ":nick!user@host JOIN :#channel"
     server = signal.split(",")[0]
-    msg = weechat.info_get_hashtable("irc_message_parse", {"message": signal_data})
-    buffer = weechat.info_get("irc_buffer", "%s,%s" % (server, msg["channel"]))
+    msg = whoreirc.info_get_hashtable("irc_message_parse", {"message": signal_data})
+    buffer = whoreirc.info_get("irc_buffer", "%s,%s" % (server, msg["channel"]))
     if buffer:
-        weechat.prnt(buffer, "%s (%s) has joined this channel!" % (msg["nick"], msg["host"]))
-    return weechat.WEECHAT_RC_OK
+        whoreirc.prnt(buffer, "%s (%s) has joined this channel!" % (msg["nick"], msg["host"]))
+    return whoreirc.WEECHAT_RC_OK
 
 # przydatne jest użycie "*" jako serwera, aby złapać wiadomość JOIN na wszystkich
 # serwerach IRC
-weechat.hook_signal("*,irc_in2_join", "join_cb", "")
+whoreirc.hook_signal("*,irc_in2_join", "join_cb", "")
 ----
 
 [[irc_modify_messages]]
@@ -1126,7 +1126,7 @@ def modifier_cb(data, modifier, modifier_data, string):
     # (nie jest to może bardzo przydatne, ale to tylko przykład!)
     return "%s %s" % (string, modifier_data)
 
-weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
+whoreirc.hook_modifier("irc_in_privmsg", "modifier_cb", "")
 ----
 
 [WARNING]
@@ -1142,7 +1142,7 @@ Można przetwarzać wiadomości IRC za pomocą info_hashtable zwanej
 
 Wynik jest tabela hashy z następującymi kluczami
 (przykładowe wartości zostały uzyskane za pomocą wiadomości:
-`@time=2015-06-27T16:40:35.000Z :nick!user@host PRIVMSG #weechat :hello!`):
+`@time=2015-06-27T16:40:35.000Z :nick!user@host PRIVMSG #whoreirc :hello!`):
 
 [width="100%",cols="1,^2,10,8",options="header"]
 |===
@@ -1154,7 +1154,7 @@ Wynik jest tabela hashy z następującymi kluczami
 
 | message_without_tags | ≥ 0.4.0 |
   Wiadomość bez tagów (jeśli nie ma tagów jest to to samo co wiadomość). |
-  `:nick!user@host PRIVMSG #weechat :hello!`
+  `:nick!user@host PRIVMSG #whoreirc :hello!`
 
 | nick | ≥ 0.3.4 |
   Nick żródła. |
@@ -1170,11 +1170,11 @@ Wynik jest tabela hashy z następującymi kluczami
 
 | channel | ≥ 0.3.4 |
   Docelowy kanał. |
-  `#weechat`
+  `#whoreirc`
 
 | arguments | ≥ 0.3.4 |
   Argumenty komendy (zawierają kanał). |
-  `#weechat :hello!`
+  `#whoreirc :hello!`
 
 | text | ≥ 1.3 |
   Tekst (na przykład wiadomość użytkownika). |
@@ -1199,18 +1199,18 @@ Wynik jest tabela hashy z następującymi kluczami
 
 [source,python]
 ----
-dict = weechat.info_get_hashtable(
+dict = whoreirc.info_get_hashtable(
     "irc_message_parse",
-    {"message": "@time=2015-06-27T16:40:35.000Z :nick!user@host PRIVMSG #weechat :hello!"})
+    {"message": "@time=2015-06-27T16:40:35.000Z :nick!user@host PRIVMSG #whoreirc :hello!"})
 
 # dict == {
 #     "tags": "time=2015-06-27T16:40:35.000Z",
-#     "message_without_tags": ":nick!user@host PRIVMSG #weechat :hello!",
+#     "message_without_tags": ":nick!user@host PRIVMSG #whoreirc :hello!",
 #     "nick": "nick",
 #     "host": "nick!user@host",
 #     "command": "PRIVMSG",
-#     "channel": "#weechat",
-#     "arguments": "#weechat :hello!",
+#     "channel": "#whoreirc",
+#     "arguments": "#whoreirc :hello!",
 #     "text": "hello!",
 #     "pos_command": "47",
 #     "pos_arguments": "55",
@@ -1222,7 +1222,7 @@ dict = weechat.info_get_hashtable(
 [[infos]]
 === Informacje
 
-[[infos_weechat_version]]
+[[infos_whoreirc_version]]
 ==== Wersja WeeChat
 
 Najprostszym sposobem na sprawdzenie wersji to pozyskanie "version_number"
@@ -1232,11 +1232,11 @@ Przykład:
 
 [source,python]
 ----
-version = weechat.info_get("version_number", "") or 0
+version = whoreirc.info_get("version_number", "") or 0
 if int(version) >= 0x00030200:
-    weechat.prnt("", "This is WeeChat 0.3.2 or newer")
+    whoreirc.prnt("", "This is WeeChat 0.3.2 or newer")
 else:
-    weechat.prnt("", "This is WeeChat 0.3.1 or older")
+    whoreirc.prnt("", "This is WeeChat 0.3.1 or older")
 ----
 
 [NOTE]
@@ -1248,7 +1248,7 @@ Aby otrzymać ciąg z numerem wersji:
 [source,python]
 ----
 # wyświetli to na przykład "Version 0.3.2"
-weechat.prnt("", "Version %s" % weechat.info_get("version", ""))
+whoreirc.prnt("", "Version %s" % whoreirc.info_get("version", ""))
 ----
 
 [[infos_other]]
@@ -1256,11 +1256,11 @@ weechat.prnt("", "Version %s" % weechat.info_get("version", ""))
 
 [source,python]
 ----
-# katalog domowy WeeChat, na przykład: "/home/xxxx/.weechat"
-weechat.prnt("", "Katalog domowy WeeChat: %s" % weechat.info_get("weechat_dir", ""))
+# katalog domowy WeeChat, na przykład: "/home/xxxx/.whoreirc"
+whoreirc.prnt("", "Katalog domowy WeeChat: %s" % whoreirc.info_get("whoreirc_dir", ""))
 
 # nieaktywność klawiatury
-weechat.prnt("", "Nieaktywny od %s sekund" % weechat.info_get("inactivity", ""))
+whoreirc.prnt("", "Nieaktywny od %s sekund" % whoreirc.info_get("inactivity", ""))
 ----
 
 [[infolists]]
@@ -1276,12 +1276,12 @@ Przykład:
 [source,python]
 ----
 # odczyta infolistę "buffer", aby otrzymać listę buforów
-infolist = weechat.infolist_get("buffer", "", "")
+infolist = whoreirc.infolist_get("buffer", "", "")
 if infolist:
-    while weechat.infolist_next(infolist):
-        name = weechat.infolist_string(infolist, "name")
-        weechat.prnt("", "buffer: %s" % name)
-    weechat.infolist_free(infolist)
+    while whoreirc.infolist_next(infolist):
+        name = whoreirc.infolist_string(infolist, "name")
+        whoreirc.prnt("", "buffer: %s" % name)
+    whoreirc.infolist_free(infolist)
 ----
 
 [IMPORTANT]

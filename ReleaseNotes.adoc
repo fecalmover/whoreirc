@@ -8,12 +8,12 @@
 
 This document lists important changes for each version, that require manual
 actions (the latest formatted version of this document can be found
-https://weechat.org/files/releasenotes/ReleaseNotes-devel.html[here]). +
+https://whoreirc.org/files/releasenotes/ReleaseNotes-devel.html[here]). +
 It is recommended to read it when upgrading to a new stable
 version.
 
 For a complete list of changes, please look at
-https://weechat.org/files/changelog/ChangeLog-devel.html[ChangeLog]
+https://whoreirc.org/files/changelog/ChangeLog-devel.html[ChangeLog]
 (file _ChangeLog.adoc_ in sources).
 
 
@@ -42,18 +42,18 @@ before doing `/upgrade`, in WeeChat:
 
 ----
 /save aspell
-/exec -sh cp ~/.weechat/aspell.conf ~/.weechat/spell.conf
+/exec -sh cp ~/.whoreirc/aspell.conf ~/.whoreirc/spell.conf
 /upgrade
 ----
 
 If you already upgraded WeeChat:
 
 ----
-/exec -sh cp ~/.weechat/aspell.conf ~/.weechat/spell.conf
+/exec -sh cp ~/.whoreirc/aspell.conf ~/.whoreirc/spell.conf
 /reload spell
 ----
 
-Once configuration is OK, you can delete the file _~/.weechat/aspell.conf_.
+Once configuration is OK, you can delete the file _~/.whoreirc/aspell.conf_.
 
 Then you can search if you are using "aspell" in values of options:
 
@@ -102,7 +102,7 @@ beginning of command line. +
 Purpose of this change is to be more flexible: you can choose whether the space
 is added or not (it was always added in previous releases).
 
-The default value of option `weechat.completion.nick_completer` has been changed
+The default value of option `whoreirc.completion.nick_completer` has been changed
 to add the space by default, but the value of option is not changed automatically
 on upgrade.
 
@@ -110,7 +110,7 @@ So you can run this command if you upgraded from an old version
 and want the space still added automatically:
 
 ----
-/set weechat.completion.nick_completer ": "
+/set whoreirc.completion.nick_completer ": "
 ----
 
 [[v2.4_api_base64_functions]]
@@ -140,9 +140,9 @@ No release note.
 [[v2.2_default_hotlist_conditions]]
 === Default conditions for hotlist
 
-The default value for option `weechat.look.hotlist_add_conditions` has been
+The default value for option `whoreirc.look.hotlist_add_conditions` has been
 changed to take care about the number of connected clients on the relay
-with weechat protocol: if at least one client is connected, the buffer is
+with whoreirc protocol: if at least one client is connected, the buffer is
 always added to the hotlist.
 
 The new value contains three conditions, if one of them is true, the buffer
@@ -151,19 +151,19 @@ is added to the hotlist:
 * `${away}`: true if you are away on the server matching the buffer,
 * `${buffer.num_displayed} == 0`: true if the buffer is not displayed in any
   window
-* `${info:relay_client_count,weechat,connected} > 0`: true if at least
-  one client is connected on a weechat relay (new condition).
+* `${info:relay_client_count,whoreirc,connected} > 0`: true if at least
+  one client is connected on a whoreirc relay (new condition).
 
 To use the new default value, you can reset the option with this command:
 
 ----
-/unset weechat.look.hotlist_add_conditions
+/unset whoreirc.look.hotlist_add_conditions
 ----
 
 Or set explicitly the value:
 
 ----
-/set weechat.look.hotlist_add_conditions "${away} || ${buffer.num_displayed} == 0 || ${info:relay_client_count,weechat,connected} > 0"
+/set whoreirc.look.hotlist_add_conditions "${away} || ${buffer.num_displayed} == 0 || ${info:relay_client_count,whoreirc,connected} > 0"
 ----
 
 [[v2.2_default_triggers]]
@@ -215,10 +215,10 @@ In older releases, this message was received:
 [[v2.2_debian_headless_package]]
 === New Debian package for headless version
 
-A new Debian package has been added: _weechat-headless_ which contains the
-binary _weechat-headless_ and its man page.
+A new Debian package has been added: _whoreirc-headless_ which contains the
+binary _whoreirc-headless_ and its man page.
 
-In version 2.1, this binary was in the package _weechat-curses_.
+In version 2.1, this binary was in the package _whoreirc-curses_.
 
 [[v2.1]]
 == Version 2.1 (2018-03-18)
@@ -226,7 +226,7 @@ In version 2.1, this binary was in the package _weechat-curses_.
 [[v2.1_option_name_completion]]
 === Completion for /set and /help commands
 
-A new option weechat.completion.partial_completion_templates has been added to
+A new option whoreirc.completion.partial_completion_templates has been added to
 force partial completion on some templates.  By default, the option name
 completed in `/set` and `/help` commands are now using partial completion.
 
@@ -234,13 +234,13 @@ If you prefer old behavior, you can remove the templates from the new option
 with this command:
 
 ----
-/set weechat.completion.partial_completion_templates ""
+/set whoreirc.completion.partial_completion_templates ""
 ----
 
 For more information about this feature, you can read help with:
 
 ----
-/help weechat.completion.partial_completion_templates
+/help whoreirc.completion.partial_completion_templates
 ----
 
 [[v2.1_script_plugin_check_license]]
@@ -299,33 +299,33 @@ For more information about this feature, you can read help with:
 [[v2.0_debian_packaging]]
 === Split of scripting Debian packages
 
-The Debian packaging has changed (for now only on weechat.org repositories,
+The Debian packaging has changed (for now only on whoreirc.org repositories,
 not in Debian official repositories). +
-The package _weechat-plugins_ has been split into 9 packages:
+The package _whoreirc-plugins_ has been split into 9 packages:
 
-- weechat-plugins (with only the following plugins: aspell, exec, fifo, relay,
+- whoreirc-plugins (with only the following plugins: aspell, exec, fifo, relay,
   script, trigger)
-- weechat-python
-- weechat-perl
-- weechat-ruby
-- weechat-lua
-- weechat-tcl
-- weechat-guile
-- weechat-javascript
-- weechat-php.
+- whoreirc-python
+- whoreirc-perl
+- whoreirc-ruby
+- whoreirc-lua
+- whoreirc-tcl
+- whoreirc-guile
+- whoreirc-javascript
+- whoreirc-php.
 
-If you are using the packages from weechat.org, you will have to install
+If you are using the packages from whoreirc.org, you will have to install
 manually the scripting packages (according to the languages you'll use
 in WeeChat), for example Python/Perl only:
 
 ----
-sudo apt-get install weechat-python weechat-perl
+sudo apt-get install whoreirc-python whoreirc-perl
 ----
 
 For development packages:
 
 ----
-sudo apt-get install weechat-devel-python weechat-devel-perl
+sudo apt-get install whoreirc-devel-python whoreirc-devel-perl
 ----
 
 [[v2.0_buflist_eval]]
@@ -399,16 +399,16 @@ prevent the plugin from loading on next startup:
 ----
 /plugin unload buflist
 /bar del buflist
-/set weechat.plugin.autoload "*,!buflist"
+/set whoreirc.plugin.autoload "*,!buflist"
 ----
 
 [[v1.8_options]]
 === Options
 
 The option _script.scripts.url_force_https_ has been removed because now the
-site weechat.org can only be used with HTTPS. +
+site whoreirc.org can only be used with HTTPS. +
 Both HTTP and HTTPS protocols are allowed in the option _script.scripts.url_.
-For http://weechat.org/ an automatic redirection to https://weechat.org/ will
+For http://whoreirc.org/ an automatic redirection to https://whoreirc.org/ will
 occur, so you should check that the CA certificates are properly installed
 on your machine.
 
@@ -487,14 +487,14 @@ with tags set to NULL for "printf_date" and date set to 0 for "printf_tags").
 
 The nick coloring feature has been moved from irc plugin to core.
 
-Two options have been moved from irc plugin (irc.conf) to core (weechat.conf),
+Two options have been moved from irc plugin (irc.conf) to core (whoreirc.conf),
 and you must set new value if you customized them:
 
-* _irc.look.nick_color_force_ moved to _weechat.look.nick_color_force_
-* _irc.look.nick_color_hash_ moved to _weechat.look.nick_color_hash_
-* _irc.look.nick_color_stop_chars_ moved to _weechat.look.nick_color_stop_chars_
+* _irc.look.nick_color_force_ moved to _whoreirc.look.nick_color_force_
+* _irc.look.nick_color_hash_ moved to _whoreirc.look.nick_color_hash_
+* _irc.look.nick_color_stop_chars_ moved to _whoreirc.look.nick_color_stop_chars_
 
-The default value for option _weechat.look.nick_color_hash_ is now `djb2`
+The default value for option _whoreirc.look.nick_color_hash_ is now `djb2`
 instead of `sum`.
 
 The following info names (used by API function "info_get") are renamed as well:
@@ -555,10 +555,10 @@ only hooks created by this "subplugin" (script).
 The bar item "away" has been moved from irc plugin to core (so that away status
 can be displayed for any plugin, using the buffer local variable "away").
 
-Two options have been moved from irc plugin (irc.conf) to core (weechat.conf):
+Two options have been moved from irc plugin (irc.conf) to core (whoreirc.conf):
 
-* _irc.look.item_away_message_ moved to _weechat.look.item_away_message_
-* _irc.color.item_away_ moved to _weechat.color.item_away_
+* _irc.look.item_away_message_ moved to _whoreirc.look.item_away_message_
+* _irc.color.item_away_ moved to _whoreirc.color.item_away_
 
 [[v1.5_default_triggers]]
 === Default triggers
@@ -650,8 +650,8 @@ If you changed the value of this option, you must set it again after upgrade.
 
 The word chars are now customizable with two options:
 
-* weechat.look.word_chars_highlight
-* weechat.look.word_chars_input
+* whoreirc.look.word_chars_highlight
+* whoreirc.look.word_chars_input
 
 The behavior has changed for command line: now any non-word char is used as
 delimiter for keys to move to previous/next word or delete previous/next word.
@@ -660,7 +660,7 @@ You can restore the old behavior (only use spaces as delimiters) with this
 command:
 
 ----
-/set weechat.look.word_chars_input "!\u00A0,!\x20,*"
+/set whoreirc.look.word_chars_input "!\u00A0,!\x20,*"
 ----
 
 [[v1.1.1]]
@@ -715,14 +715,14 @@ You can restore the default "beep" trigger with the following command:
 [[v1.1_commands_return_code]]
 === Return code of commands
 
-The API function _weechat_command_ now sends the value returned return by
+The API function _whoreirc_command_ now sends the value returned return by
 command callback.
 
 WeeChat does not display any more an error when a command returns
 _WEECHAT_RC_ERROR_. Consequently, all plugins/scripts should display an
 explicit error message before returning _WEECHAT_RC_ERROR_.
 
-For C plugins, two macros have been added in weechat-plugin.h:
+For C plugins, two macros have been added in whoreirc-plugin.h:
 _WEECHAT_COMMAND_MIN_ARGS_ and _WEECHAT_COMMAND_ERROR_.
 
 [[v1.1_inline_commands_completion]]
@@ -738,7 +738,7 @@ like `/dcc send <nick> <path>`).
 To restore the old behavior (no completion of inline commands):
 
 ----
-/set weechat.completion.command_inline off
+/set whoreirc.completion.command_inline off
 ----
 
 [[v1.1_relay_irc_backlog_tags]]
@@ -794,7 +794,7 @@ Bug fix and maintenance release.
 === Channel type not added by default on /join
 
 The channel type is not any more automatically added to a channel name on join
-(for example `/join weechat` will not send `/join #weechat`).
+(for example `/join whoreirc` will not send `/join #whoreirc`).
 
 If you are lazy and want to automatically add the channel type, you can turn on
 the new option:
@@ -841,20 +841,20 @@ You can add it with following command:
 [[v1.0_hotlist_conditions]]
 === Hotlist conditions
 
-A new option _weechat.look.hotlist_add_conditions_ has been added. This option
-replaces the option _weechat.look.hotlist_add_buffer_if_away_, which has been
+A new option _whoreirc.look.hotlist_add_conditions_ has been added. This option
+replaces the option _whoreirc.look.hotlist_add_buffer_if_away_, which has been
 removed.
 
 Default conditions are `${away} || ${buffer.num_displayed} == 0`, which means
 that a buffer is added in hotlist if you are away ("away" local variable is
 set), or if the buffer is not visible on screen (not displayed in any window).
 
-If you have set _weechat.look.hotlist_add_buffer_if_away_ to `off` (to not add
+If you have set _whoreirc.look.hotlist_add_buffer_if_away_ to `off` (to not add
 current buffer in hotlist when you are away), then you must manually change the
 default conditions with the following command:
 
 ----
-/set weechat.look.hotlist_add_conditions "${buffer.num_displayed} == 0"
+/set whoreirc.look.hotlist_add_conditions "${buffer.num_displayed} == 0"
 ----
 
 [[v1.0_trigger_plugin]]
@@ -921,8 +921,8 @@ You can remove the old keys and add the new ones with these commands:
 [[v0.4.3_terminal_title]]
 === Terminal title
 
-The boolean option _weechat.look.set_title_ has been renamed to
-_weechat.look.window_title_ and is now a string.
+The boolean option _whoreirc.look.set_title_ has been renamed to
+_whoreirc.look.window_title_ and is now a string.
 
 The content is evaluated and the default value is `WeeChat ${info:version}`.
 
@@ -940,7 +940,7 @@ The new bar item _buffer_last_number_ displays the highest buffer number
 currently used.
 
 If you want to display last number in the status bar, replace _buffer_count_
-by _buffer_last_number_ in your option _weechat.bar.status.items_.
+by _buffer_last_number_ in your option _whoreirc.bar.status.items_.
 
 [[v0.4.3_bar_item_buffer_zoom]]
 === New bar item buffer_zoom
@@ -949,7 +949,7 @@ A new bar item has been added: _buffer_zoom_.
 The default value for status bar items becomes:
 
 ----
-/set weechat.bar.status.items "[time],[buffer_count],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_zoom+buffer_filter,[lag],[hotlist],completion,scroll"
+/set whoreirc.bar.status.items "[time],[buffer_count],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_zoom+buffer_filter,[lag],[hotlist],completion,scroll"
 ----
 
 [[v0.4.3_irc_messages_channel_join]]
@@ -988,11 +988,11 @@ You should check the value of both options and fix them if needed.
 The day change message is now dynamically displayed, and therefore is not stored
 as a line in buffer any more.
 
-Option _weechat.look.day_change_time_format_ has been split into two options
-_weechat.look.day_change_message_{1date|2dates}_ (color codes are allowed in
+Option _whoreirc.look.day_change_time_format_ has been split into two options
+_whoreirc.look.day_change_message_{1date|2dates}_ (color codes are allowed in
 these options, see `/help eval`).
 
-New color option _weechat.color.chat_day_change_ has been added.
+New color option _whoreirc.color.chat_day_change_ has been added.
 
 After `/upgrade` from an old version, you will see two messages for each day
 change. This is a normal behavior and will not happen again with the next day
@@ -1044,12 +1044,12 @@ evaluated with the function "string_eval_expression", which uses the format
 
 Following options are affected:
 
-* _weechat.look.buffer_time_format_
-* _weechat.look.prefix_action_
-* _weechat.look.prefix_error_
-* _weechat.look.prefix_join_
-* _weechat.look.prefix_network_
-* _weechat.look.prefix_quit_
+* _whoreirc.look.buffer_time_format_
+* _whoreirc.look.prefix_action_
+* _whoreirc.look.prefix_error_
+* _whoreirc.look.prefix_join_
+* _whoreirc.look.prefix_network_
+* _whoreirc.look.prefix_quit_
 
 The options using old format `${xxx}` must be changed with new format
 `${color:xxx}` (where xxx is a color name or number, with optional color
@@ -1058,24 +1058,24 @@ attributes).
 Example:
 
 ----
-/set weechat.look.buffer_time_format "${color:251}%H${color:243}%M${color:238}%S"
+/set whoreirc.look.buffer_time_format "${color:251}%H${color:243}%M${color:238}%S"
 ----
 
 [[v0.4.2_binary_man_page]]
 === Binary and man page
 
-WeeChat binary and man page have been renamed from `weechat-curses` to
-`weechat`.
+WeeChat binary and man page have been renamed from `whoreirc-curses` to
+`whoreirc`.
 
-A symbolic link has been added for binary: `weechat-curses` -> `weechat`
+A symbolic link has been added for binary: `whoreirc-curses` -> `whoreirc`
 (so that the /upgrade from a old version will still work).
 
 If you upgrade from an old version, it is recommended to force the use of the
-new binary name with the command: `/upgrade /path/to/weechat` (replace the path
+new binary name with the command: `/upgrade /path/to/whoreirc` (replace the path
 accordingly).
 
 [NOTE]
-For packagers: you should create the link `weechat-curses` -> `weechat` if it's
+For packagers: you should create the link `whoreirc-curses` -> `whoreirc` if it's
 not automatically created in the package (both CMake and configure are creating
 this link on make install).
 
@@ -1116,27 +1116,27 @@ For more info about content of message, see document _WeeChat Relay Protocol_.
 The nick prefix/suffix (for example: "<" and ">") are now dynamic and used on
 display (not stored any more in the line).
 
-Options moved from irc plugin (irc.conf) to core (weechat.conf):
+Options moved from irc plugin (irc.conf) to core (whoreirc.conf):
 
-* _irc.look.nick_prefix_ moved to _weechat.look.nick_prefix_
-* _irc.look.nick_suffix_ moved to _weechat.look.nick_suffix_
-* _irc.color.nick_prefix_ moved to _weechat.color.chat_nick_prefix_
-* _irc.color.nick_suffix_ moved to _weechat.color.chat_nick_suffix_
+* _irc.look.nick_prefix_ moved to _whoreirc.look.nick_prefix_
+* _irc.look.nick_suffix_ moved to _whoreirc.look.nick_suffix_
+* _irc.color.nick_prefix_ moved to _whoreirc.color.chat_nick_prefix_
+* _irc.color.nick_suffix_ moved to _whoreirc.color.chat_nick_suffix_
 
 Types and default values for these four options remain unchanged.
 
 Two new options to customize the truncature char (by default "`+`"):
 
-* _weechat.look.prefix_align_more_after_ (boolean, _on_ by default)
-* _weechat.look.prefix_buffer_align_more_after_ (boolean, _on_ by default)
+* _whoreirc.look.prefix_align_more_after_ (boolean, _on_ by default)
+* _whoreirc.look.prefix_buffer_align_more_after_ (boolean, _on_ by default)
 
 When these options are enabled (default), the "`+`" is displayed after the
 text, replacing the space that should be displayed there. +
 When turned off, the "`+`" will replace last char of text.
 
 Example for a nicks "FlashCode" and "fc" with different values for options
-_weechat.look.prefix_align_max_, _weechat.look.prefix_align_more_after_,
-_weechat.look.nick_prefix_ and _weechat.look.nick_suffix_:
+_whoreirc.look.prefix_align_max_, _whoreirc.look.prefix_align_more_after_,
+_whoreirc.look.nick_prefix_ and _whoreirc.look.nick_suffix_:
 
 ----
                       # align_max, more_after, prefix/suffix
@@ -1222,14 +1222,14 @@ The old syntax was:
 
 [source,lua]
 ----
-return weechat.WEECHAT_RC_OK()
+return whoreirc.WEECHAT_RC_OK()
 ----
 
 The new syntax is:
 
 [source,lua]
 ----
-return weechat.WEECHAT_RC_OK
+return whoreirc.WEECHAT_RC_OK
 ----
 
 [[v0.4.1_guile_callbacks]]
@@ -1292,11 +1292,11 @@ This version fixes crash when decoding IRC colors in strings.
 [[v0.3.9_options_moved]]
 === Options moved
 
-Options moved from core (weechat.conf) to irc plugin (irc.conf):
+Options moved from core (whoreirc.conf) to irc plugin (irc.conf):
 
-* _weechat.look.nickmode_ moved to _irc.look.nick_mode_ (new type: integer
+* _whoreirc.look.nickmode_ moved to _irc.look.nick_mode_ (new type: integer
    with values: none/prefix/action/both)
-* _weechat.look.nickmode_empty_ moved to _irc.look.nick_mode_empty_
+* _whoreirc.look.nickmode_empty_ moved to _irc.look.nick_mode_empty_
 
 [[v0.3.9_bar_item_buffer_modes]]
 === New bar item buffer_modes
@@ -1308,7 +1308,7 @@ _buffer_modes_ (this is now used by default in status bar items), default value
 for status bar items becomes:
 
 ----
-/set weechat.bar.status.items "[time],[buffer_count],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_filter,[lag],[hotlist],completion,scroll"
+/set whoreirc.bar.status.items "[time],[buffer_count],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_filter,[lag],[hotlist],completion,scroll"
 ----
 
 [[v0.3.9_command_aspell]]
@@ -1332,8 +1332,8 @@ Options renamed in command `/aspell`:
 An horizontal separator has been added between split windows, and two options
 have been added to toggle separators (both are enabled by default):
 
-* _weechat.look.window_separator_horizontal_
-* _weechat.look.window_separator_vertical_
+* _whoreirc.look.window_separator_horizontal_
+* _whoreirc.look.window_separator_vertical_
 
 [[v0.3.9_new_keys]]
 === New keys
@@ -1347,8 +1347,8 @@ to see differences between your current keys and WeeChat default keys.
 [[v0.3.8_options]]
 === Options
 
-Options _weechat.look.prefix_align_more_ and
-_weechat.look.prefix_buffer_align_more_ have been converted from type boolean
+Options _whoreirc.look.prefix_align_more_ and
+_whoreirc.look.prefix_buffer_align_more_ have been converted from type boolean
 to string:
 
 * If the value was on (default), new value is "+" and you can now customize
@@ -1358,13 +1358,13 @@ to string:
 [[v0.3.8_paste_detection]]
 === Paste detection
 
-Option _weechat.look.paste_max_lines_ can now be used with value 0 to detect
+Option _whoreirc.look.paste_max_lines_ can now be used with value 0 to detect
 paste with one line (only if terminal "bracketed paste mode" is enabled when
-option _weechat.look.paste_bracketed_ is on); so now the value -1 is used to
+option _whoreirc.look.paste_bracketed_ is on); so now the value -1 is used to
 disable paste detection: if your value was 0, you should set it to -1:
 
 ----
-/set weechat.look.paste_max_lines -1
+/set whoreirc.look.paste_max_lines -1
 ----
 
 [[v0.3.8_rmodifier]]
@@ -1400,13 +1400,13 @@ new default value:
 /key bind meta-u /window scroll_unread
 ----
 
-Option _weechat.history.max_lines_ has been renamed to
-_weechat.history.max_buffer_lines_number_.
+Option _whoreirc.history.max_lines_ has been renamed to
+_whoreirc.history.max_buffer_lines_number_.
 
 If you changed the value of this option, you must set it again after upgrade.
 
-Option _weechat.plugin.extension_ now supports list of extensions, and new
-default value is ".so,.dll" (with this value, weechat.conf is compatible with
+Option _whoreirc.plugin.extension_ now supports list of extensions, and new
+default value is ".so,.dll" (with this value, whoreirc.conf is compatible with
 Cygwin).
 
 [[v0.3.7_extended_regex]]
@@ -1416,7 +1416,7 @@ Extended regex is used in filters and irc ignore, so some chars that needed
 escape in past do not need any more (for example `[0-9]\+` becomes `[0-9]+`),
 filters and ignore have to be manually fixed.
 
-Option _weechat.look.highlight_regex_ becomes case insensitive by default, to
+Option _whoreirc.look.highlight_regex_ becomes case insensitive by default, to
 make it case sensitive, use "(?-i)" at beginning of string, for example:
 "(?-i)FlashCode|flashy".
 
@@ -1426,8 +1426,8 @@ make it case sensitive, use "(?-i)" at beginning of string, for example:
 [[v0.3.6_options]]
 === Options
 
-Option _weechat.look.hline_char_ has been renamed to
-_weechat.look.separator_horizontal_.
+Option _whoreirc.look.hline_char_ has been renamed to
+_whoreirc.look.separator_horizontal_.
 
 If you changed the value of this option, you must set it again after upgrade.
 
@@ -1436,7 +1436,7 @@ If you changed the value of this option, you must set it again after upgrade.
 
 Bold is not used any more for basic colors (used only if terminal has less than
 16 colors), a new option has been added to force bold if needed:
-_weechat.look.color_basic_force_bold_.
+_whoreirc.look.color_basic_force_bold_.
 
 [[v0.3.5]]
 == Version 0.3.5 (2011-05-15)
@@ -1463,8 +1463,8 @@ Count of messages have been added to hotlist by default, if you want to come
 back to old behavior, do that:
 
 ----
-/set weechat.look.hotlist_count_max 0
-/set weechat.look.hotlist_buffer_separator ","
+/set whoreirc.look.hotlist_count_max 0
+/set whoreirc.look.hotlist_buffer_separator ","
 ----
 
 [[v0.3.5_hotlist_away_current_buffer]]
@@ -1475,7 +1475,7 @@ they are displayed in a window), if you want to come back to old behavior, do
 that:
 
 ----
-/set weechat.look.hotlist_add_buffer_if_away off
+/set whoreirc.look.hotlist_add_buffer_if_away off
 ----
 
 [[v0.3.5_new_keys]]
@@ -1493,8 +1493,8 @@ to see differences between your current keys and WeeChat default keys.
 If you are using `/upgrade` from a previous release:
 
 * Some nick prefixes can be wrong, so it is recommended to do `/allchan names`.
-* Nick colors are defined with a new option _weechat.color.chat_nick_colors_,
-  therefore old options _weechat.color.chat_nick_color1..10_ will be lost when
+* Nick colors are defined with a new option _whoreirc.color.chat_nick_colors_,
+  therefore old options _whoreirc.color.chat_nick_color1..10_ will be lost when
   upgrading.
 * Nick colors in messages displayed will be wrong if you changed some nick
   colors (old default colors will be used).
@@ -1644,8 +1644,8 @@ All users of version 0.2.2 should upgrade to this version.
 [[v0.2.2_charset_plugin]]
 === Charset plugin
 
-For users of any previous version, all your charset settings in weechat.rc will
-be LOST! You should save your weechat.rc to keep your values and set them again
+For users of any previous version, all your charset settings in whoreirc.rc will
+be LOST! You should save your whoreirc.rc to keep your values and set them again
 with new _charset_ plugin.
 
 For ISO users: history of channels may be without accents (after `/upgrade`),
@@ -1703,7 +1703,7 @@ If you upgraded with `/upgrade` in WeeChat, you should `/disconnect` and then
 === Plugins
 
 If you're using plugins, you should remove some old plugins libraries in
-WeeChat system library directory (commonly _/usr/local/lib/weechat/plugins_):
+WeeChat system library directory (commonly _/usr/local/lib/whoreirc/plugins_):
 remove `lib*` files (like `libperl.*`, `libpython.*`, ..) and keep only new
 libraries (`perl.*`, `python.*`, ..).
 
@@ -1743,12 +1743,12 @@ Then launch again WeeChat (or issue `/upgrade`).
 === Configuration files
 
 It is recommended for users of version 0.1.7 (or any older), to replace values
-in setup file (_~/.weechat/weechat.rc_):
+in setup file (_~/.whoreirc/whoreirc.rc_):
 
-* option: log_path: replace _~/.weechat/logs_ by _%h/logs_
-* option: plugins_path: replace _~/.weechat/plugins_ by _%h/plugins_
+* option: log_path: replace _~/.whoreirc/logs_ by _%h/logs_
+* option: plugins_path: replace _~/.whoreirc/plugins_ by _%h/plugins_
 
-The string _%h_ is replaced by WeeChat home (default: _~/.weechat_, may be
+The string _%h_ is replaced by WeeChat home (default: _~/.whoreirc_, may be
 overridden by new command line argument `--dir`).
 
 [[v0.1.8_keys]]

@@ -1,4 +1,4 @@
-Source: weechat
+Source: whoreirc
 Section: net
 Priority: optional
 Maintainer: Emmanuel Bouthenot <kolter@debian.org>
@@ -22,16 +22,16 @@ Build-Depends:
     libgnutls28-dev,
     zlib1g-dev
 Standards-Version: 4.3.0
-Homepage: https://weechat.org/
-Vcs-Git: https://salsa.debian.org/kolter/weechat.git
-Vcs-Browser: https://salsa.debian.org/kolter/weechat
+Homepage: https://whoreirc.org/
+Vcs-Git: https://salsa.debian.org/kolter/whoreirc.git
+Vcs-Browser: https://salsa.debian.org/kolter/whoreirc
 
-Package: weechat
+Package: whoreirc
 Architecture: all
 Depends:
     ${misc:Depends},
-    weechat-curses (>= ${source:Version}) | weechat-headless (>= ${source:Version})
-Suggests: weechat-doc (= ${source:Version})
+    whoreirc-curses (>= ${source:Version}) | whoreirc-headless (>= ${source:Version})
+Suggests: whoreirc-doc (= ${source:Version})
 Description: Fast, light and extensible chat client (metapackage)
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
@@ -52,15 +52,15 @@ Description: Fast, light and extensible chat client (metapackage)
   - highly customizable and extensible
   - and much more!
 
-Package: weechat-curses
+Package: whoreirc-curses
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-core (= ${binary:Version})
+    whoreirc-core (= ${binary:Version})
 Recommends:
-    weechat-plugins (= ${binary:Version})
-Suggests: weechat-doc (= ${source:Version})
+    whoreirc-plugins (= ${binary:Version})
+Suggests: whoreirc-doc (= ${source:Version})
 Description: Fast, light and extensible chat client - console client
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
@@ -83,14 +83,14 @@ Description: Fast, light and extensible chat client - console client
  .
  This package provides the console client (ncurses).
 
-Package: weechat-headless
+Package: whoreirc-headless
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-core (= ${binary:Version})
-Recommends: weechat-plugins (= ${binary:Version})
-Suggests: weechat-doc (= ${source:Version})
+    whoreirc-core (= ${binary:Version})
+Recommends: whoreirc-plugins (= ${binary:Version})
+Suggests: whoreirc-doc (= ${source:Version})
 Description: Fast, light and extensible chat client - headless client
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
@@ -113,31 +113,31 @@ Description: Fast, light and extensible chat client - headless client
  .
  This package provides the headless client.
 
-Package: weechat-core
+Package: whoreirc-core
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends}
-Suggests: weechat-doc (= ${source:Version})
+Suggests: whoreirc-doc (= ${source:Version})
 Description: Fast, light and extensible chat client - core files
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides core plugins and locales files for WeeChat. It
  currently ships the following plugins: alias, buflist, charset, fset, irc,
- logger and xfer. It is useless without weechat-curses or weechat-headless.
+ logger and xfer. It is useless without whoreirc-curses or whoreirc-headless.
 
-Package: weechat-plugins
+Package: whoreirc-plugins
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Recommends:
-    weechat-perl,
-    weechat-python,
-    weechat-ruby
-Suggests: weechat-scripts (>> 20090221-1)
+    whoreirc-perl,
+    whoreirc-python,
+    whoreirc-ruby
+Suggests: whoreirc-scripts (>> 20090221-1)
 Description: Fast, light and extensible chat client - plugins
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
@@ -150,96 +150,96 @@ Description: Fast, light and extensible chat client - plugins
   - Relay (IRC proxy and WeeChat protocol)
   - Trigger
 
-Package: weechat-python
+Package: whoreirc-python
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - Python plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the Python scripting API plugin.
 
-Package: weechat-perl
+Package: whoreirc-perl
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - Perl plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the Perl scripting API plugin.
 
-Package: weechat-ruby
+Package: whoreirc-ruby
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - Ruby plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the Ruby scripting API plugin.
 
-Package: weechat-lua
+Package: whoreirc-lua
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - Lua plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the Lua scripting API plugin.
 
-Package: weechat-tcl
+Package: whoreirc-tcl
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - Tcl plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the Tcl scripting API plugin.
 
-Package: weechat-guile
+Package: whoreirc-guile
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - Guile plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the Guile scripting API plugin.
 
-Package: weechat-javascript
+Package: whoreirc-javascript
 Architecture: amd64 i386 armel armhf mips mipsel hurd-i386 kfreebsd-amd64 kfreebsd-i386
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version})
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version})
 Description: Fast, light and extensible chat client - JavaScript plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
  for many operating systems. Everything can be done with a keyboard.
  .
  This package provides the JavaScript scripting API plugin.
 
-Package: weechat-php
+Package: whoreirc-php
 Architecture: any
 Depends:
     ${misc:Depends},
     ${shlibs:Depends},
-    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version}),
+    whoreirc-curses (= ${binary:Version}) | whoreirc-headless (= ${binary:Version}),
     libphp-embed
 Description: Fast, light and extensible chat client - PHP plugin
  WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
@@ -247,7 +247,7 @@ Description: Fast, light and extensible chat client - PHP plugin
  .
  This package provides the PHP scripting API plugin.
 
-Package: weechat-doc
+Package: whoreirc-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
@@ -257,7 +257,7 @@ Description: Fast, light and extensible chat client - documentation
  .
  This package contains the html documentation for WeeChat.
 
-Package: weechat-dev
+Package: whoreirc-dev
 Section: devel
 Architecture: any
 Depends: ${misc:Depends}

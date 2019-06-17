@@ -1,4 +1,4 @@
-Document: weechat-user-ja
+Document: whoreirc-user-ja
 Title: WeeChat user's guide (Japanese)
 Author: Sébastien Helleu
 Abstract: This manual describes how to use the WeeChat
@@ -6,5 +6,5 @@ Abstract: This manual describes how to use the WeeChat
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-devel-doc/html/weechat_user.ja.html
-Files: /usr/share/doc/weechat-devel-doc/html/weechat_user.ja.html
+Index: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_user.ja.html
+Files: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_user.ja.html

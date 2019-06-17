@@ -1,74 +1,74 @@
-$HOME/.weechat/weechat.conf::
+$HOME/.whoreirc/whoreirc.conf::
     główny plik konfiguracyjny WeeChat
 
-$HOME/.weechat/plugins.conf::
+$HOME/.whoreirc/plugins.conf::
     plik konfiguracyjny wtyczek
 
-$HOME/.weechat/sec.conf::
+$HOME/.whoreirc/sec.conf::
     plik konfiguracyjny z zabezpieczonymi danymi
 
-$HOME/.weechat/alias.conf::
+$HOME/.whoreirc/alias.conf::
     plik konfiguracyjny wtyczki _alias_
 
-$HOME/.weechat/buflist.conf::
+$HOME/.whoreirc/buflist.conf::
     plik konfiguracyjny wtyczki _buflist_
 
-$HOME/.weechat/charset.conf::
+$HOME/.whoreirc/charset.conf::
     plik konfiguracyjny wtyczki _charset_
 
-$HOME/.weechat/exec.conf::
+$HOME/.whoreirc/exec.conf::
     plik konfiguracyjny wtyczki _exec_
 
-$HOME/.weechat/fifo.conf::
+$HOME/.whoreirc/fifo.conf::
     plik konfiguracyjny wtyczki _fifo_
 
-$HOME/.weechat/fset.conf::
+$HOME/.whoreirc/fset.conf::
     plik konfiguracyjny wtyczki _fset_
 
-$HOME/.weechat/guile.conf::
+$HOME/.whoreirc/guile.conf::
     plik konfiguracyjny wtyczki _guile_
 
-$HOME/.weechat/irc.conf::
+$HOME/.whoreirc/irc.conf::
     plik konfiguracyjny wtyczki _irc_
 
-$HOME/.weechat/javascript.conf::
+$HOME/.whoreirc/javascript.conf::
     plik konfiguracyjny wtyczki _javascript_
 
-$HOME/.weechat/logger.conf::
+$HOME/.whoreirc/logger.conf::
     plik konfiguracyjny wtyczki _logger_
 
-$HOME/.weechat/lua.conf::
+$HOME/.whoreirc/lua.conf::
     plik konfiguracyjny wtyczki _lua_
 
-$HOME/.weechat/perl.conf::
+$HOME/.whoreirc/perl.conf::
     plik konfiguracyjny wtyczki _perl_
 
-$HOME/.weechat/php.conf::
+$HOME/.whoreirc/php.conf::
     plik konfiguracyjny wtyczki _php_
 
-$HOME/.weechat/python.conf::
+$HOME/.whoreirc/python.conf::
     plik konfiguracyjny wtyczki _python_
 
-$HOME/.weechat/relay.conf::
+$HOME/.whoreirc/relay.conf::
     plik konfiguracyjny wtyczki _relay_
 
-$HOME/.weechat/ruby.conf::
+$HOME/.whoreirc/ruby.conf::
     plik konfiguracyjny wtyczki _ruby_
 
-$HOME/.weechat/script.conf::
+$HOME/.whoreirc/script.conf::
     plik konfiguracyjny wtyczki _script_
 
-$HOME/.weechat/spell.conf::
+$HOME/.whoreirc/spell.conf::
     plik konfiguracyjny wtyczki _spell_
 
-$HOME/.weechat/tcl.conf::
+$HOME/.whoreirc/tcl.conf::
     plik konfiguracyjny wtyczki _tcl_
 
-$HOME/.weechat/trigger.conf::
+$HOME/.whoreirc/trigger.conf::
     plik konfiguracyjny wtyczki _trigger_
 
-$HOME/.weechat/xfer.conf::
+$HOME/.whoreirc/xfer.conf::
     plik konfiguracyjny wtyczki _xfer_
 
-$HOME/.weechat/weechat.log::
+$HOME/.whoreirc/whoreirc.log::
     plik z logami WeeChat

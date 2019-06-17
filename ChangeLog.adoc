@@ -8,10 +8,10 @@
 
 This document lists all changes for each version
 (the latest formatted version of this document can be found
-https://weechat.org/files/changelog/ChangeLog-devel.html[here]).
+https://whoreirc.org/files/changelog/ChangeLog-devel.html[here]).
 
 For a list of important changes that require manual action, please look at
-https://weechat.org/files/releasenotes/ReleaseNotes-devel.html[release notes]
+https://whoreirc.org/files/releasenotes/ReleaseNotes-devel.html[release notes]
 (file _ReleaseNotes.adoc_ in sources).
 
 
@@ -38,8 +38,8 @@ Bug fixes::
 New features::
 
   * core: use getopt to parse command line arguments
-  * core: add option weechat.look.prefix_same_nick_middle (issue #930, issue #931)
-  * core: add option weechat.look.buffer_time_same (issue #1127)
+  * core: add option whoreirc.look.prefix_same_nick_middle (issue #930, issue #931)
+  * core: add option whoreirc.look.buffer_time_same (issue #1127)
   * core: use seconds by default in /repeat interval, allow unit for the interval
   * core: allow text in addition to a command in command /repeat
   * core: add option "addreplace" in command /filter (issue #1055, issue #1312)
@@ -50,7 +50,7 @@ New features::
   * irc: add bar items "irc_nick", "irc_host" and "irc_nick_host"
   * irc: add variable "host" in server structure
   * relay: add support of UNIX socket (issue #733, issue #1333)
-  * relay: add option relay.weechat.commands (issue #928)
+  * relay: add option relay.whoreirc.commands (issue #928)
   * script: use SHA-512 instead of MD5 for script checksum
   * spell: rename aspell plugin to spell (issue #1299)
   * trigger: add hooks "info" and "info_hashtable"
@@ -69,7 +69,7 @@ Bug fixes::
   * irc: fix update of channels modes with arguments when joining a channel (issue #1324)
   * irc: quote NICK command argument sent to the server (issue #1319)
   * php: fix memory leak in functions string_eval_expression, string_eval_path_home, key_bind, hook_process_hashtable, hook_hsignal_send, info_get_hashtable, hdata_update
-  * relay: fix crash when a weechat relay client reloads the relay plugin with /plugin reload relay (issue #1327)
+  * relay: fix crash when a whoreirc relay client reloads the relay plugin with /plugin reload relay (issue #1327)
   * spell: fix detection of nick followed by the nick completer (issue #1306, issue #1307)
   * trigger: fix split of hook arguments (issue #1322)
 
@@ -79,8 +79,8 @@ Tests::
 
 Build::
 
-  * core: fix value of libdir in file weechat.pc (issue #1341, issue #1342)
-  * core: fix generation of man page weechat-headless with autotools
+  * core: fix value of libdir in file whoreirc.pc (issue #1341, issue #1342)
+  * core: fix generation of man page whoreirc-headless with autotools
   * core: add CMake option "ENABLE_CODE_COVERAGE" to compile with code coverage options (CMake ≥ 3.0 is now required)
   * core: fix compilation on Mac OS (issue #1308)
   * lua: add detection of Lua 5.3 with autotools
@@ -92,7 +92,7 @@ Build::
 
 New features::
 
-  * core: do not automatically add a space when completing "nick:" at the beginning of command line (the space can be added in option weechat.completion.nick_completer)
+  * core: do not automatically add a space when completing "nick:" at the beginning of command line (the space can be added in option whoreirc.completion.nick_completer)
   * core: add default keys kbd:[Ctrl+F11]/kbd:[Ctrl+F12] to scroll up/down one page in nicklist (same action as kbd:[F11]/kbd:[F12])
   * core: add command line option "-t" (or "--temp-dir") to create a temporary WeeChat home (deleted on exit)
   * api: add functions string_base_encode and string_base_decode, remove functions string_encode_base64 and string_decode_base64
@@ -101,7 +101,7 @@ New features::
   * buflist: add variable ${number2}, always set with the indented buffer number
   * exec: add option exec.command.shell to customize the shell used with /exec -sh
   * relay: add support of close frame in websocket connection (issue #1281)
-  * relay: add support of Time-based One-Time Password (TOTP) as second authentication factor in weechat protocol
+  * relay: add support of Time-based One-Time Password (TOTP) as second authentication factor in whoreirc protocol
 
 Bug fixes::
 
@@ -169,7 +169,7 @@ Build::
 
 New features::
 
-  * core: change default value of option weechat.look.hotlist_add_conditions to check connected relay clients via weechat protocol (issue #1206)
+  * core: change default value of option whoreirc.look.hotlist_add_conditions to check connected relay clients via whoreirc protocol (issue #1206)
   * core: add reverse of string in evaluation of expressions with "rev:" (issue #1200)
   * core: send buffer pointer (when possible) in signal "hotlist_changed" (issue #1133)
   * core: add support of list options in curl (issue #826, issue #219)
@@ -193,7 +193,7 @@ Bug fixes::
   * core: count number of chars instead of bytes for suffix in function string_cut
   * core: fix delete of previous/next word (keys kbd:[Ctrl+w] and kbd:[Alt+d]) (issue #1195)
   * core: fix infinite loop in evaluation of strings (issue #1183)
-  * core: change default value of option weechat.look.window_title from "WeeChat ${info:version}" to empty string (issue #1182)
+  * core: change default value of option whoreirc.look.window_title from "WeeChat ${info:version}" to empty string (issue #1182)
   * buflist: fix crash when setting the option buflist.look.signals_refresh with a list of signals
   * fset: fix memory leak when switching the format with kbd:[Ctrl+x]
   * fset: fix truncation of option values when the length is greater than 4096 (issue #1218)
@@ -219,7 +219,7 @@ Bug fixes::
 
 Documentation::
 
-  * core: split man pages weechat and weechat-headless
+  * core: split man pages whoreirc and whoreirc-headless
 
 Tests::
 
@@ -228,7 +228,7 @@ Tests::
 Build::
 
   * core: fix build with CMake and Ninja
-  * debian: add package weechat-headless with the headless binary and its man page
+  * debian: add package whoreirc-headless with the headless binary and its man page
   * javascript: fix compilation of javascript plugin with autotools on some Linux distributions (issue #1208)
   * python: add detection of Python 3.7
 
@@ -237,11 +237,11 @@ Build::
 
 New features::
 
-  * core: add binary weechat-headless to run WeeChat without interface, with optional daemon mode (command line option "--daemon") (issue #1120)
+  * core: add binary whoreirc-headless to run WeeChat without interface, with optional daemon mode (command line option "--daemon") (issue #1120)
   * core: add options "-newbuffer", "-free" and "-switch" in command /print (issue #1113)
   * core: add option "-y" in command /print, add support of buffers with free content
   * core: add option "add" in command /buffer (issue #1113)
-  * core: add option weechat.completion.partial_completion_templates to force partial completion on specific templates
+  * core: add option whoreirc.completion.partial_completion_templates to force partial completion on specific templates
   * api: add hashtable with variables in plugin structure
   * api: add time in info "date" (WeeChat compilation date/time) (issue #1138)
   * irc: add server option "split_msg_max_length"
@@ -281,7 +281,7 @@ New features::
   * core: support loading of plugins from path in environment variable "WEECHAT_EXTRA_LIBDIR" (issue #971, issue #979)
   * core: make value optional in command /buffer set (issue #746, issue #1088)
   * core: allow floating point and hexadecimal numbers in comparison of evaluated values
-  * core: add option weechat.look.save_config_with_fsync (issue #1083)
+  * core: add option whoreirc.look.save_config_with_fsync (issue #1083)
   * api: add support of prefix "quiet:" in function key_unbind to quietly remove keys
   * api: add argument "recurse_subdirs" in function exec_on_files
   * alias: add infolist "alias_default" (list of default aliases)
@@ -363,7 +363,7 @@ Bug fixes::
 
 New features::
 
-  * core: add option weechat.completion.nick_case_sensitive (issue #981)
+  * core: add option whoreirc.completion.nick_case_sensitive (issue #981)
   * core: add wilcard matching operator (`+=*+` and `+!*+`) in evaluation of expressions (issue #611)
   * core: add cut of string in evaluation of expressions with "cut:" (number of chars) and "cutscr:" (number of chars displayed on screen)
   * core: add ternary operator (condition) in evaluation of expressions (`${if:condition?value_if_true:value_if_false}`)
@@ -392,7 +392,7 @@ Bug fixes::
   * irc: fix crash in case of invalid server reply during SASL authentication with dh-blowfish or dh-aes mechanism
   * irc: fix double decoding of IRC colors in messages sent/displayed by commands /msg and /query (issue #943)
   * irc: fix parsing of message 324 (modes) when there is a colon before the modes (issue #913)
-  * relay: check buffer pointer received in "sync" and "desync" commands (weechat protocol) (issue #936)
+  * relay: check buffer pointer received in "sync" and "desync" commands (whoreirc protocol) (issue #936)
   * relay: remove buffer from synchronized buffers when it is closed (fix memory leak)
 
 Build::
@@ -413,8 +413,8 @@ Bug fixes::
 
 New features::
 
-  * core: add option weechat.look.align_multiline_words (issue #411, issue #802)
-  * core: add optional command prefix in completion templates "commands", "plugins_commands" and "weechat_commands"
+  * core: add option whoreirc.look.align_multiline_words (issue #411, issue #802)
+  * core: add optional command prefix in completion templates "commands", "plugins_commands" and "whoreirc_commands"
   * core: add optional arguments in completion template, sent to the callback
   * core: add option "time" in command /debug
   * core, xfer: display more information on fork errors (issue #573)
@@ -443,7 +443,7 @@ Bug fixes::
   * irc: add missing tags on CTCP message sent
   * lua: fix integers returned in Lua >= 5.3 (issue #834)
   * relay: make HTTP headers case-insensitive for WebSocket connections (issue #888)
-  * relay: set status to "authentication failed" and close immediately connection in case of authentication failure in weechat and irc protocols (issue #825)
+  * relay: set status to "authentication failed" and close immediately connection in case of authentication failure in whoreirc and irc protocols (issue #825)
   * script: reload a script after upgrade only if it was loaded, set autoload only if the script was auto-loaded (issue #855)
 
 Build::
@@ -464,7 +464,7 @@ New features::
   * api: remove functions printf_date and printf_tags
   * irc: rename server options "default_msg_{kick|part|quit}" to "msg_{kick|part|quit}", evaluate them
   * relay: add option relay.network.allow_empty_password (issue #735)
-  * relay: allow escape of comma in command "init" (weechat protocol) (issue #730)
+  * relay: allow escape of comma in command "init" (whoreirc protocol) (issue #730)
   * trigger: add support for one-time triggers (issue #399, issue #509)
 
 Bug fixes::
@@ -493,8 +493,8 @@ Build::
 
 New features::
 
-  * core: evaluate content of option "weechat.look.item_time_format" (issue #791)
-  * core: change default value of option weechat.look.nick_color_hash to "djb2"
+  * core: evaluate content of option "whoreirc.look.item_time_format" (issue #791)
+  * core: change default value of option whoreirc.look.nick_color_hash to "djb2"
   * core: move nick coloring from irc plugin to core, move options irc.look.nick_color_force, irc.look.nick_color_hash and irc.look.nick_color_stop_chars to core, add info "nick_color" and "nick_color_name", deprecate info "irc_nick_color" and "irc_color_name" (issue #262)
   * core: move irc bar item "away" to core, move options irc.look.item_away_message and irc.color.item_away to core (issue #692)
   * api: add support of functions in hook_process
@@ -521,7 +521,7 @@ Bug fixes::
   * relay: do not execute any command received in a PRIVMSG message from an irc relay client (issue #699)
   * relay: fix the max number of clients connected on a port, allow value 0 for "no limit" (issue #669)
   * relay: fix decoding of multiple frames in a single websocket message, send PONG on PING received in a websocket frame (issue #675)
-  * relay: fix command "input" received from clients with only spaces in content of message (weechat protocol) (issue #663)
+  * relay: fix command "input" received from clients with only spaces in content of message (whoreirc protocol) (issue #663)
   * script: force refresh of scripts buffer after download of scripts list (issue #693)
   * xfer: fix DCC file received when the terminal is resized (issue #677, issue #680)
 
@@ -535,9 +535,9 @@ Build::
 
 New features::
 
-  * core: add a parent name in options, display inherited values if null in /set output, add option weechat.color.chat_value_null (issue #629)
+  * core: add a parent name in options, display inherited values if null in /set output, add option whoreirc.color.chat_value_null (issue #629)
   * core: add tag "term_warning" in warnings about wrong $TERM on startup
-  * core: add option weechat.look.paste_auto_add_newline (issue #543)
+  * core: add option whoreirc.look.paste_auto_add_newline (issue #543)
   * core: display a more explicit error when a filter fails to be added (issue #522)
   * api: add function string_hex_dump
   * api: add argument "length" in function utf8_is_valid
@@ -594,8 +594,8 @@ New features::
 
   * core: add completion "colors" (issue #481)
   * core: start/stop search in buffer at current scroll position by default, add key kbd:[Ctrl+q] to stop search and reset scroll (issue #76, issue #393)
-  * core: add option weechat.look.key_grab_delay to set the default delay when grabbing a key with kbd:[Alt+k]
-  * core: add option weechat.look.confirm_upgrade (issue #463)
+  * core: add option whoreirc.look.key_grab_delay to set the default delay when grabbing a key with kbd:[Alt+k]
+  * core: add option whoreirc.look.confirm_upgrade (issue #463)
   * core: add signal "signal_sighup"
   * core: allow kbd:[Ctrl+c] to exit WeeChat when the passphrase is asked on startup (issue #452)
   * core: allow pointer as list name in evaluation of hdata (issue #450)
@@ -618,7 +618,7 @@ Bug fixes::
   * core: fix crash if a file descriptor used in hook_fd is too high (> 1024 on Linux/BSD) (issue #465)
   * core: fix display of invalid UTF-8 chars in bars
   * core: fix bar item "scroll" after /buffer clear (issue #448)
-  * core: fix display of time in bare display when option weechat.look.buffer_time_format is set to empty string (issue #441)
+  * core: fix display of time in bare display when option whoreirc.look.buffer_time_format is set to empty string (issue #441)
   * api: add missing function infolist_search_var in script API (issue #484)
   * api: add missing function hook_completion_get_string in script API (issue #484)
   * api: fix type of value returned by functions strcasestr, utf8_prev_char, utf8_next_char, utf8_add_offset and util_get_time_string
@@ -649,9 +649,9 @@ New features::
 
   * core: add signals "signal_sigterm" and "signal_sigquit" (issue #114)
   * core: use environment variable WEECHAT_HOME on startup (issue #391)
-  * core: add options weechat.look.quote_{nick_prefix|nick_suffix|time_format} to customize quoted messages in cursor mode (issue #403)
+  * core: add options whoreirc.look.quote_{nick_prefix|nick_suffix|time_format} to customize quoted messages in cursor mode (issue #403)
   * core: add a welcome message on first WeeChat run (issue #318)
-  * core: add options weechat.look.word_chars_{highlight|input} (issue #55, task #9459)
+  * core: add options whoreirc.look.word_chars_{highlight|input} (issue #55, task #9459)
   * core: remove WeeChat version from config files (issue #407)
   * core: display a warning on startup if the locale can not be set (issue #373)
   * core: allow "*" as plugin name in command /plugin reload to reload all plugins with options
@@ -714,19 +714,19 @@ Bug fixes::
 
 Build::
 
-  * core: fix random error when creating symbolic link weechat-curses on make install with CMake (bug #40313)
+  * core: fix random error when creating symbolic link whoreirc-curses on make install with CMake (bug #40313)
 
 [[v1.1]]
 == Version 1.1 (2015-01-11)
 
 New features::
 
-  * core: add option weechat.completion.command_inline (task #12491)
-  * core: add bar item "mouse_status", new options weechat.look.item_mouse_status and weechat.color.status_mouse (issue #247)
+  * core: add option whoreirc.completion.command_inline (task #12491)
+  * core: add bar item "mouse_status", new options whoreirc.look.item_mouse_status and whoreirc.color.status_mouse (issue #247)
   * core: add signals "mouse_enabled" and "mouse_disabled" (issue #244)
   * core: add hide of chars in string in evaluation of expressions
   * core: add arraylists, improve speed of completions (about 50x faster)
-  * core: allow incomplete commands if unambiguous, new option weechat.look.command_incomplete (task #5419)
+  * core: allow incomplete commands if unambiguous, new option whoreirc.look.command_incomplete (task #5419)
   * core: check bar conditions in root bars and on each update of a bar item
   * core: fully evaluate commands bound to keys in cursor and mouse contexts
   * core: move bar item "scroll" between buffer name and lag in default bar items of status bar
@@ -736,7 +736,7 @@ New features::
   * irc: add option "reorder" in command /server (issue #229)
   * irc: open channel buffers before the JOIN is received from server (autojoin and manual joins), new options irc.look.buffer_open_before_{autojoin|join} (issue #216)
   * irc: add server option "sasl_fail" (continue/reconnect/disconnect if SASL fails) (issue #265, task #12204)
-  * irc: add support for color codes 16-99 in IRC messages (issue #228), add infolist "irc_color_weechat"
+  * irc: add support for color codes 16-99 in IRC messages (issue #228), add infolist "irc_color_whoreirc"
   * irc: add support of "extended-join" capability (issue #143, issue #212)
   * irc: display own nick changes in server buffer (issue #188)
   * irc: disable creation of temporary servers by default with command /connect, new option irc.look.temporary_servers
@@ -756,7 +756,7 @@ Bug fixes::
   * core: fix display bug when scrolling in buffer on a filtered line (issue #240)
   * core: send mouse code only one time to terminal with command /mouse enable|disable|toggle
   * core: fix buffer property "lines_hidden" when merging buffers or when a line is removed from a buffer (issue #226)
-  * core: display time in bare display only if option weechat.look.buffer_time_format is not an empty string
+  * core: display time in bare display only if option whoreirc.look.buffer_time_format is not an empty string
   * core: fix translation of message displayed after /upgrade
   * api: fix truncated process output in hook_process (issue #266)
   * api: fix crash when reading config options with NULL value (issue #238)
@@ -788,11 +788,11 @@ Build::
 
 Bug fixes::
 
-  * core: fix crash on buffer close when option weechat.look.hotlist_remove is set to "merged" (issue #199)
+  * core: fix crash on buffer close when option whoreirc.look.hotlist_remove is set to "merged" (issue #199)
   * core: fix highlight of IRC action messages when option irc.look.nick_mode is set to "action" or "both" (issue #206)
   * core: fix compilation of plugin API functions (macros) when compiler optimizations are enabled (issue #200)
   * core: fix window/buffer pointers used in command /eval
-  * core: fix modifier "weechat_print": discard only one line when several lines are displayed in same message (issue #171)
+  * core: fix modifier "whoreirc_print": discard only one line when several lines are displayed in same message (issue #171)
   * api: fix bug in function hdata_move when absolute value of count is greater than 1
   * aspell: fix crash with command "/aspell addword" if no word is given (issue #164, issue #165)
   * irc: fix display of channel exception list (348) with 6 arguments (date missing)
@@ -819,7 +819,7 @@ Build::
 New features::
 
   * core: display a warning on startup if $TERM does not start with "screen" under Screen/Tmux
-  * core: add option weechat.color.status_nicklist_count (issue #109, issue #110)
+  * core: add option whoreirc.color.status_nicklist_count (issue #109, issue #110)
   * core: add option "env" in command /set (manage environment variables)
   * core: add bar item "buffer_short_name" (task #10882)
   * core: add option "send" in command /input (send text to a buffer)
@@ -829,15 +829,15 @@ New features::
   * core: add non-active merged buffers with activity in hotlist (if another merged buffer is zoomed) (task #12845)
   * core: add text search in buffers with free content (task #13051)
   * core: add buffer property "clear"
-  * core: add option weechat.look.hotlist_add_conditions, remove option weechat.look.hotlist_add_buffer_if_away
-  * core: add option weechat.look.hotlist_remove (issue #99)
+  * core: add option whoreirc.look.hotlist_add_conditions, remove option whoreirc.look.hotlist_add_buffer_if_away
+  * core: add option whoreirc.look.hotlist_remove (issue #99)
   * core: add options "-beep" and "-current" in command /print
-  * core: add bare display mode for easy text selection and click on URLs, new key: kbd:[Alt+l] (`L`), new option "bare" in command /window, new options: weechat.look.bare_display_exit_on_input and weechat.look.bare_display_time_format
+  * core: add bare display mode for easy text selection and click on URLs, new key: kbd:[Alt+l] (`L`), new option "bare" in command /window, new options: whoreirc.look.bare_display_exit_on_input and whoreirc.look.bare_display_time_format
   * core: add signals "key_combo_{default|search|cursor}"
   * core: add terabyte unit for size displayed
-  * core: display a warning in case of inconsistency between the options weechat.look.save_{config|layout}_on_exit
+  * core: display a warning in case of inconsistency between the options whoreirc.look.save_{config|layout}_on_exit
   * core: add option "-mask" in command /unset (issue #112)
-  * core: set option weechat.look.buffer_search_where to prefix_message by default
+  * core: set option whoreirc.look.buffer_search_where to prefix_message by default
   * core: mute all buffers by default in command /mute (replace option -all by -core)
   * api: allow value "-1" for property "hotlist" in function buffer_set (to remove a buffer from hotlist)
   * api: add option "buffer_flush" in function hook_process_hashtable
@@ -899,14 +899,14 @@ Bug fixes::
   * core: close .upgrade files before deleting them after /upgrade
   * core: fix refresh of bar item "buffer_zoom" on buffer switch
   * core: fix reset of attributes in bars when "resetcolor" is used (issue #41)
-  * core: fix alignment of lines in merged buffers when options weechat.look.prefix_align and weechat.look.prefix_buffer_align are set to "none" (issue #43)
+  * core: fix alignment of lines in merged buffers when options whoreirc.look.prefix_align and whoreirc.look.prefix_buffer_align are set to "none" (issue #43)
   * core: quit WeeChat on signal SIGHUP, remove signal "signal_sighup"
   * core: fix add of filter on macOS when regex for message is empty (filter regex ending with "\t")
   * core: check validity of buffer pointer when data is sent to a buffer (command/text from user and API function command)
   * core: fix crash when buffer is closed during execution of multiple commands (issue #27)
   * core: fix compilation on SmartOS (bug #40981, issue #23)
   * core: add missing \0 at the end of stderr buffer in function hook_process
-  * core: fix highlight problem with "(?-i)" and upper case letters in option weechat.look.highlight (issue #24)
+  * core: fix highlight problem with "(?-i)" and upper case letters in option whoreirc.look.highlight (issue #24)
   * core: fix detection of terminated process in function hook_process
   * core: fix "/window scroll -N" on a buffer with free content
   * core: fix recursive calls to function eval_expression
@@ -944,7 +944,7 @@ Bug fixes::
   * python: fix read of return value for callbacks returning an integer in Python 2.x (issue #125)
   * python: fix interpreter used after unload of a script
   * relay: fix memory leak during handshake on websocket
-  * relay: fix memory leak when receiving commands from client (weechat protocol)
+  * relay: fix memory leak when receiving commands from client (whoreirc protocol)
   * relay: fix crash when an IRC "MODE" command is received from client without arguments
   * relay: fix number of bytes sent/received on 32-bit systems
   * relay: fix crash when closing relay buffers (issue #57, issue #78)
@@ -952,7 +952,7 @@ Bug fixes::
   * relay: remove warning on /reload of relay.conf when ports are defined
   * relay: fix client disconnection on empty websocket frames received (PONG)
   * relay: add support of Internet Explorer websocket (issue #73)
-  * relay: fix crash on /upgrade received from a client (weechat protocol)
+  * relay: fix crash on /upgrade received from a client (whoreirc protocol)
   * relay: fix freeze after /upgrade when many disconnected clients still exist
   * relay: fix NULL pointer when reading buffer lines for irc backlog
   * ruby: fix crash when trying to load a directory with /ruby load
@@ -981,11 +981,11 @@ New features::
 
   * core: add signals "signal_sighup" and "signal_sigwinch" (terminal resized)
   * core: add command /print, add support of more escaped chars in command "/input insert"
-  * core: add option weechat.look.tab_width
+  * core: add option whoreirc.look.tab_width
   * core: add completion "plugins_installed"
-  * core: add option weechat.look.window_auto_zoom, disable automatic zoom by default when terminal becomes too small for windows
-  * core: use "+" separator to make a logical "and" between tags in command /filter, option weechat.look.highlight_tags and buffer property "highlight_tags"
-  * core: add options weechat.look.buffer_auto_renumber and weechat.look.buffer_position, add option "renumber" in command /buffer, add bar item "buffer_last_number" (task #12766)
+  * core: add option whoreirc.look.window_auto_zoom, disable automatic zoom by default when terminal becomes too small for windows
+  * core: use "+" separator to make a logical "and" between tags in command /filter, option whoreirc.look.highlight_tags and buffer property "highlight_tags"
+  * core: add options whoreirc.look.buffer_auto_renumber and whoreirc.look.buffer_position, add option "renumber" in command /buffer, add bar item "buffer_last_number" (task #12766)
   * core: add signal "buffer_cleared"
   * core: add buffer property "day_change" to hide messages for the day change in specific buffers
   * core: add option "libs" in command /debug
@@ -993,15 +993,15 @@ New features::
   * core: add bar item "buffer_zoom", add signals "buffer_{zoomed|unzoomed}" (patch #8204)
   * core: add default keys kbd:[Alt+Home] / kbd:[Alt+End] (`meta2-1;3H` / `meta2-1;3F`) and kbd:[Alt+F11] / kbd:[Alt+F12] (`meta2-23;3~` / `meta2-24;3~`) for xterm
   * core: add support of italic text (requires ncurses >= 5.9 patch 20130831)
-  * core: add options to customize default text search in buffers: weechat.look.buffer_search_{case_sensitive|force_default|regex|where}
-  * core: add support of UTF-8 chars in horizontal/vertical separators (options weechat.look.separator_{horizontal|vertical})
+  * core: add options to customize default text search in buffers: whoreirc.look.buffer_search_{case_sensitive|force_default|regex|where}
+  * core: add support of UTF-8 chars in horizontal/vertical separators (options whoreirc.look.separator_{horizontal|vertical})
   * core: add support of logical and/or for argument "tags" in function hook_print
   * core: rename buffer property "highlight_tags" to "highlight_tags_restrict", new behavior for buffer property "highlight_tags" (force highlight on tags), rename option irc.look.highlight_tags to irc.look.highlight_tags_restrict
   * core: rename options save/reset to store/del in command /layout
   * core: replace default key kbd:[Ctrl+c], kbd:[r] by kbd:[Ctrl+c], kbd:[v] for reverse video in messages
   * core: replace default key kbd:[Ctrl+c], kbd:[u] by kbd:[Ctrl+c], kbd:[_] for underlined text in messages
-  * core: rename option weechat.look.set_title to weechat.look.window_title, value is now a string (evaluated)
-  * core: set option weechat.look.paste_bracketed to "on" by default
+  * core: rename option whoreirc.look.set_title to whoreirc.look.window_title, value is now a string (evaluated)
+  * core: set option whoreirc.look.paste_bracketed to "on" by default
   * core: use one date format when day changes from day to day+1
   * api: add function infolist_search_var
   * api: add stdin options in functions hook_process_hashtable and hook_set to send data on stdin of child process, add function hook_set in script API (task #10847, task #13031)
@@ -1024,14 +1024,14 @@ Bug fixes::
 
   * core: fix hotlist problems after apply of a layout (bug #41481)
   * core: fix crash when creating two bars with same name but different case (bug #41418)
-  * core: fix display of read marker when all buffer lines are unread and that option weechat.look.read_marker_always_show is on
+  * core: fix display of read marker when all buffer lines are unread and that option whoreirc.look.read_marker_always_show is on
   * core: fix memory leak in regex matching when evaluating expression
   * core: fix crash in /eval when config option has a NULL value
   * core: fix crash with hdata_update on shared strings, add hdata type "shared_string" (bug #41104)
   * core: fix text emphasis with wide chars on screen like Japanese (patch #8253)
   * core: remove option on /unset of plugin description option (plugins.desc.xxx) (bug #40768)
   * core: fix random crash when closing a buffer
-  * core: fix crash on /buffer close core.weechat
+  * core: fix crash on /buffer close core.whoreirc
   * core: apply color attributes when clearing a window (patch #8236)
   * core: fix truncated text when pasting several long lines (bug #40210)
   * core: create .conf file with default options only if the file does not exist (and not on read error with existing file)
@@ -1072,7 +1072,7 @@ Documentation::
 
 Build::
 
-  * core: fix installation of weechat-plugin.h with autotools (patch #8305)
+  * core: fix installation of whoreirc-plugin.h with autotools (patch #8305)
   * core: fix compilation on Android (bug #41420, patch #8301, bug #41434)
   * lua: fix detection of Lua 5.2 in autotools (patch #8270)
   * ruby: add detection and fix compilation with Ruby 2.0 (patch #8209)
@@ -1082,23 +1082,23 @@ Build::
 
 New features::
 
-  * core: display day change message dynamically (do not store it as a line in buffer), split option weechat.look.day_change_time_format into two options weechat.look.day_change_message_{1date|2dates}, new option weechat.color.chat_day_change (task #12775)
+  * core: display day change message dynamically (do not store it as a line in buffer), split option whoreirc.look.day_change_time_format into two options whoreirc.look.day_change_message_{1date|2dates}, new option whoreirc.color.chat_day_change (task #12775)
   * core: add syntax "@buffer:item" in bar items to force the buffer used when displaying the bar item (task #12717)
   * core: add search of regular expression in buffer, don't reset search type on a new search, select where to search (messages/prefixes), add keys in search context: kbd:[Alt+c] (case (in)sensitive search), kbd:[Tab] (search in messages/prefixes)
-  * core: add text emphasis in messages when searching text in buffer, new options: weechat.look.emphasized_attributes, weechat.color.emphasized, weechat.color.emphasized_bg
+  * core: add text emphasis in messages when searching text in buffer, new options: whoreirc.look.emphasized_attributes, whoreirc.color.emphasized, whoreirc.color.emphasized_bg
   * core: add secured data (encryption of passwords or private data): add new command /secure and new file sec.conf (task #7395)
-  * core: rename binary and man page from "weechat-curses" to "weechat" (task #11027)
+  * core: rename binary and man page from "whoreirc-curses" to "whoreirc" (task #11027)
   * core: add option "-o" in command /color
   * core: add option "scroll_beyond_end" for command /window (task #6745)
-  * core: add options weechat.look.hotlist_prefix and weechat.look.hotlist_suffix (task #12730)
-  * core: add option weechat.look.key_bind_safe
-  * core: add option weechat.network.proxy_curl (task #12651)
+  * core: add options whoreirc.look.hotlist_prefix and whoreirc.look.hotlist_suffix (task #12730)
+  * core: add option whoreirc.look.key_bind_safe
+  * core: add option whoreirc.network.proxy_curl (task #12651)
   * core: add "proxy" infolist and hdata
   * core: add infolist "layout" and hdata "layout", "layout_buffer" and "layout_window"
   * core: reduce memory used by using shared strings for nicklist and lines in buffers
-  * core: change color format for options weechat.look.buffer_time_format and weechat.look.prefix_{action|error|join|network|quit} from `${xxx}` to `${color:xxx}`
+  * core: change color format for options whoreirc.look.buffer_time_format and whoreirc.look.prefix_{action|error|join|network|quit} from `${xxx}` to `${color:xxx}`
   * core: optimize the removal of lines in buffers (a lot faster to clear/close buffers with lot of lines)
-  * core: set options weechat.look.color_inactive_{buffer|window} to "on" by default
+  * core: set options whoreirc.look.color_inactive_{buffer|window} to "on" by default
   * api: return hashtable item pointer in functions hashtable_set and hashtable_set_with_size
   * api: add "callback_free_key" in hashtable
   * api: add support of colors with format `${color:xxx}` in function string_eval_expression and command /eval
@@ -1113,7 +1113,7 @@ New features::
   * irc: add option irc.look.nick_color_hash: hash algorithm to find nick color (patch #8062)
   * logger: add option "flush" in command /logger
   * plugins: remove the demo plugin
-  * relay: add command "ping" in weechat protocol (task #12689)
+  * relay: add command "ping" in whoreirc protocol (task #12689)
   * rmodifier: add option "missing" in command /rmodifier
   * script: add info about things defined by script (like commands, options, ...) in the detailed view of script (/script show)
   * scripts: add hdata with script callback
@@ -1134,7 +1134,7 @@ Bug fixes::
   * core: fix display bugs with some UTF-8 chars that truncates messages displayed (for example U+26C4) (bug #39201)
   * core: remove extra space after empty prefix (when prefix for action, error, join, network or quit is set to empty string) (bug #39218)
   * core: fix random crash on mouse actions (bug #39094)
-  * core: fix line alignment when option weechat.look.buffer_time_format is set to empty string
+  * core: fix line alignment when option whoreirc.look.buffer_time_format is set to empty string
   * api: change type of hashtable key hash to unsigned long
   * api: use pointer for infolist "hook" to return only one hook
   * aspell: fix detection of word start/end when there are apostrophes or minus chars before/after word
@@ -1155,7 +1155,7 @@ Documentation::
 
 Build::
 
-  * core: add CA_FILE option in CMake and configure to setup default value of option weechat.network.gnutls_ca_file (default is "/etc/ssl/certs/ca-certificates.crt") (task #12725)
+  * core: add CA_FILE option in CMake and configure to setup default value of option whoreirc.network.gnutls_ca_file (default is "/etc/ssl/certs/ca-certificates.crt") (task #12725)
   * core: disable build of doc by default, add CMake option ENABLE_MAN to compile man page (off by default)
   * xfer: fix compilation on OpenBSD (bug #39071)
 
@@ -1164,7 +1164,7 @@ Build::
 
 New features::
 
-  * core: make nick prefix/suffix dynamic (not stored in the line): move options irc.look.nick_{prefix|suffix} to weechat.look.nick_{prefix|suffix} and options irc.color.nick_{prefix|suffix} to weechat.color.chat_nick_{prefix|suffix}, add new options weechat.look.prefix_align_more_after, weechat.look.prefix_buffer_align_more_after, logger.file.nick_{prefix|suffix} (bug #37531)
+  * core: make nick prefix/suffix dynamic (not stored in the line): move options irc.look.nick_{prefix|suffix} to whoreirc.look.nick_{prefix|suffix} and options irc.color.nick_{prefix|suffix} to whoreirc.color.chat_nick_{prefix|suffix}, add new options whoreirc.look.prefix_align_more_after, whoreirc.look.prefix_buffer_align_more_after, logger.file.nick_{prefix|suffix} (bug #37531)
   * core: add support of multiple layouts (task #11274)
   * core: add signals nicklist_{group|nick}_removing and hsignals nicklist_{group|nick}_{added|removing|changed}
   * core: add count for groups, nicks, and total in nicklist
@@ -1186,8 +1186,8 @@ New features::
   * irc: rename option irc.network.lag_disconnect to irc.network.lag_reconnect, value is now a number of seconds
   * relay: add message "_nicklist_diff" (differences between old and current nicklist)
   * relay: add support of multiple servers on same port for irc protocol (the client must send the server in the "PASS" command)
-  * relay: add WebSocket server support (RFC 6455) for irc and weechat protocols, new option relay.network.websocket_allowed_origins
-  * relay: add options "buffers" and "upgrade" in commands sync/desync (weechat protocol)
+  * relay: add WebSocket server support (RFC 6455) for irc and whoreirc protocols, new option relay.network.websocket_allowed_origins
+  * relay: add options "buffers" and "upgrade" in commands sync/desync (whoreirc protocol)
   * rmodifier: rename default rmodifier "nickserv" to "command_auth" (with new modifier "irc_command_auth"), add default rmodifier "message_auth" (modifier "irc_message_auth")
   * script: add option script.scripts.autoload, add options "autoload", "noautoload" and "toggleautoload" for command /script, add action "A" (kbd:[Alt+a]) on script buffer (toggle autoload) (task #12393)
   * xfer: add option xfer.file.auto_accept_nicks (patch #7962)
@@ -1199,7 +1199,7 @@ Bug fixes::
   * core: fix refresh of item "completion": clear it after any action that is changing content of command line and after switch of buffer (bug #38214)
   * core: fix structures before buffer data when a buffer is closed
   * core: fix refresh of line after changes with hdata_update (update flag "displayed" according to filters)
-  * core: fix hidden lines for messages without date when option weechat.history.max_buffer_lines_minutes is set (bug #38197)
+  * core: fix hidden lines for messages without date when option whoreirc.history.max_buffer_lines_minutes is set (bug #38197)
   * core: use default hash/comparison callback for keys of type integer/pointer/time in hashtable
   * api: do not display a warning by default when loading a script with a license different from GPL
   * api: fix connection to servers with hook_connect on macOS (bug #38496)
@@ -1227,7 +1227,7 @@ Bug fixes::
   * python: fix crash when loading scripts with Python 3.x (patch #8044)
   * relay: fix uncontrolled format string in redirection of irc commands
   * relay: rename compression "gzip" to "zlib" (compression is zlib, not gzip)
-  * relay: fix commands sync/desync in weechat protocol (bug #38215)
+  * relay: fix commands sync/desync in whoreirc protocol (bug #38215)
   * ruby: fix crash in function hdata_move
   * ruby: fix crash with Ruby 2.0: use one array for the last 6 arguments of function config_new_option (bug #31050)
   * script: create "script" directory on each action, just in case it has been removed (bug #38472)
@@ -1250,7 +1250,7 @@ New features::
 
   * core: add buffer pointer in arguments for signals "input_search", "input_text_changed" and "input_text_cursor_moved"
   * core: add option "diff" in command /set (list options with changed value)
-  * core: add color support in options weechat.look.prefix_{action|error|join|network|quit} (task #9555)
+  * core: add color support in options whoreirc.look.prefix_{action|error|join|network|quit} (task #9555)
   * core: display default values for changed config options in output of /set
   * core: add command /eval, use expression in conditions for bars
   * core: add option "-quit" in command /upgrade (save session and quit without restarting WeeChat, for delayed restoration)
@@ -1291,13 +1291,13 @@ Bug fixes::
   * core: fix refresh of windows after split (fix bug with horizontal separator between windows) (bug #37874)
   * core: fix stuck mouse (bug #36533)
   * core: fix default mouse buttons actions for script buffer (focus the window before executing action)
-  * core: fix scroll of one page down when weechat.look.scroll_page_percent is less than 100 (bug #37875)
+  * core: fix scroll of one page down when whoreirc.look.scroll_page_percent is less than 100 (bug #37875)
   * core: disable paste detection and confirmation if bar item "input_paste" is not used in a visible bar (task #12327)
   * core: use high priority (50000) for commands /command and /input so that an alias will not take precedence over these commands (bug #36353)
   * core: execute command with higher priority when many commands with same name are found with different priorities
   * core: fix display of combining chars (bug #37775)
   * core: fix display of zoomed/merged buffer (with number >= 2) after switching to it (bug #37593)
-  * core: fix display problem when option weechat.look.prefix_same_nick is set (problem with nick displayed in first line of screen) (bug #37556)
+  * core: fix display problem when option whoreirc.look.prefix_same_nick is set (problem with nick displayed in first line of screen) (bug #37556)
   * core: fix wrapping of words with wide chars (the break was made before the correct position)
   * api: do not call shell to execute command in hook_process (fix security problem when a plugin/script gives untrusted command) (bug #37764)
   * alias: give higher priority to aliases (2000) so that they take precedence over an existing command
@@ -1315,7 +1315,7 @@ Bug fixes::
   * irc: remove unneeded server disconnect when server buffer is closed and server is already disconnected
   * perl: fix calls to callbacks during load of script when multiplicity is disabled (bug #38044)
   * relay: fix duplicated messages sent to irc clients (when messages are redirected) (bug #37870)
-  * relay: fix memory leak when adding hdata to a message (weechat protocol)
+  * relay: fix memory leak when adding hdata to a message (whoreirc protocol)
   * relay: fix crash after /upgrade when a client is connected
   * relay: add missing "ssl." in output of /relay listrelay
   * script: fix scroll with mouse when window with script buffer is not the current window (do not force a switch to script buffer in current window)
@@ -1325,7 +1325,7 @@ Bug fixes::
 
 Build::
 
-  * core: add git version in build, display it in "weechat-curses --help" and /version
+  * core: add git version in build, display it in "whoreirc-curses --help" and /version
   * core: stop CMake if gcrypt lib is not found (bug #37671)
   * guile: fix detection of Guile in configure
   * script: fix compilation on macOS
@@ -1352,17 +1352,17 @@ New features::
   * core: add signals for plugins loaded/unloaded
   * core: add default key kbd:[Alt+x] (zoom on merged buffer) (task #11029)
   * core: add mouse bindings kbd:[Ctrl] + wheel up/down to scroll horizontally buffers with free content
-  * core: add option weechat.startup.sys_rlimit to set system resource limits for WeeChat process
+  * core: add option whoreirc.startup.sys_rlimit to set system resource limits for WeeChat process
   * core: add option "swap" in command /buffer (task #11373)
   * core: add hdata "hotlist"
   * core: add support of arrays in hdata variables
   * core: add command line option "-r" (or "--run-command") to run command(s) after startup of WeeChat
   * core: add function hook_set in plugin API, add "subplugin" in hooks (set by script plugins), display subplugin in /help on commands (task #12049)
-  * core: add option weechat.look.jump_smart_back_to_buffer (jump back to initial buffer after reaching end of hotlist, on by default, which is old behavior)
+  * core: add option whoreirc.look.jump_smart_back_to_buffer (jump back to initial buffer after reaching end of hotlist, on by default, which is old behavior)
   * core: add default key kbd:[Alt+s] (toggle aspell)
   * core: add callback "nickcmp" in buffers
-  * core: add horizontal separator between windows, new options weechat.look.window_separator_{horizontal|vertical}
-  * core: add options weechat.look.color_nick_offline and weechat.color.chat_nick_offline{_highlight|_highlight_bg} to use different color for offline nicks in prefix (task #11109)
+  * core: add horizontal separator between windows, new options whoreirc.look.window_separator_{horizontal|vertical}
+  * core: add options whoreirc.look.color_nick_offline and whoreirc.color.chat_nick_offline{_highlight|_highlight_bg} to use different color for offline nicks in prefix (task #11109)
   * api: allow update for some variables of hdata, add new functions hdata_update and hdata_set
   * api: add info "locale" for info_get (locale used to translate messages)
   * api: add new function util_version_number
@@ -1370,10 +1370,10 @@ New features::
   * irc: generate alternate nicks dynamically when all nicks are already in use (task #12209)
   * irc: add bar item "buffer_modes", remove option irc.look.item_channel_modes (task #12022)
   * irc: add option irc.look.ctcp_time_format to customize reply to CTCP TIME (task #12150)
-  * irc: move options from core to irc plugin: weechat.look.nickmode to irc.look.nick_mode (new type: integer with values: none/prefix/action/both) and weechat.look.nickmode_empty to irc.look.nick_mode_empty
+  * irc: move options from core to irc plugin: whoreirc.look.nickmode to irc.look.nick_mode (new type: integer with values: none/prefix/action/both) and whoreirc.look.nickmode_empty to irc.look.nick_mode_empty
   * logger: add tags in backlog lines displayed when opening buffer
   * logger: add messages "Day changed to" in backlog (task #12187)
-  * relay: add support of SSL (for irc and weechat protocols), new option relay.network.ssl_cert_key (task #12044)
+  * relay: add support of SSL (for irc and whoreirc protocols), new option relay.network.ssl_cert_key (task #12044)
   * relay: add option relay.color.client
   * relay: add object type "arr" (array) in WeeChat protocol
   * script: new plugin "script" (script manager, replacing scripts weeget.py and script.pl)
@@ -1412,7 +1412,7 @@ Bug fixes::
   * irc: allow again names beginning with "#" for servers
   * lua: fix crash when unloading a script without pointer to interpreter
   * python: fix crash when unloading a script without pointer to interpreter
-  * relay: fix freeze when writing on relay socket (use non-blocking sockets in relay for irc and weechat protocols) (bug #36655)
+  * relay: fix freeze when writing on relay socket (use non-blocking sockets in relay for irc and whoreirc protocols) (bug #36655)
   * scripts: fix deletion of configuration files when script is unloaded (bug #36977)
   * scripts: fix function unhook_all: delete only callbacks of hooks and add missing call to unhook
   * scripts: ignore call to register (with a warning) if script is already registered
@@ -1437,12 +1437,12 @@ Build::
 
 New features::
 
-  * core: add option weechat.look.prefix_same_nick (hide or change prefix on messages whose nick is the same as previous message) (task #11965)
+  * core: add option whoreirc.look.prefix_same_nick (hide or change prefix on messages whose nick is the same as previous message) (task #11965)
   * core: convert tabs to spaces in text pasted (bug #25028)
   * core: add a connection timeout for child process in hook_connect (bug #35966)
-  * core: add support of terminal "bracketed paste mode", new options weechat.look.paste_bracketed and weechat.look.paste_bracketed_timer_delay (task #11316)
+  * core: add support of terminal "bracketed paste mode", new options whoreirc.look.paste_bracketed and whoreirc.look.paste_bracketed_timer_delay (task #11316)
   * core: support lines of 16 Kb long in configuration files (instead of 1 Kb)
-  * core: convert options weechat.look.prefix_align_more and weechat.look.prefix_buffer_align_more from boolean to string (task #11197)
+  * core: convert options whoreirc.look.prefix_align_more and whoreirc.look.prefix_buffer_align_more from boolean to string (task #11197)
   * core: follow symbolic links when writing configuration files (.conf) (task #11779)
   * api: add list "gui_buffer_last_displayed" in hdata "buffer"
   * irc: add option "fakerecv" in command /server to simulate a received IRC message (not documented, for debug only)
@@ -1509,10 +1509,10 @@ New features::
   * core: add signals "buffer_line_added" and "window_switch"
   * core: add default keys kbd:[Ctrl+Left] / kbd:[Ctrl+Right] (`meta2-1;5D` / `meta2-1;5C`) for gnome-terminal
   * core: add option "hooks" in command /debug
-  * core: add option weechat.look.scroll_bottom_after_switch (if enabled, restore old behavior before fix of bug #25555 in version 0.3.5)
-  * core: add new option weechat.completion.base_word_until_cursor: allow completion in middle of words (enabled by default) (task #9771)
+  * core: add option whoreirc.look.scroll_bottom_after_switch (if enabled, restore old behavior before fix of bug #25555 in version 0.3.5)
+  * core: add new option whoreirc.completion.base_word_until_cursor: allow completion in middle of words (enabled by default) (task #9771)
   * core: add option "jump_last_buffer_displayed" in command /input (key: kbd:[Alt+/]) (task #11553)
-  * core: add option weechat.history.max_buffer_lines_minutes: maximum number of minutes in history per buffer (task #10900), rename option weechat.history.max_lines to weechat.history.max_buffer_lines_number
+  * core: add option whoreirc.history.max_buffer_lines_minutes: maximum number of minutes in history per buffer (task #10900), rename option whoreirc.history.max_lines to whoreirc.history.max_buffer_lines_number
   * core: add optional arguments for command /plugin load/reload/autoload
   * core: use extended regex in filters (task #9497, patch #7616)
   * api: add modifier "input_text_for_buffer" (bug #35317)
@@ -1546,12 +1546,12 @@ Bug fixes::
   * core: fix memory leak in function util_search_full_lib_name
   * core: automatically add newline char after last pasted line (when pasting many lines with confirmation) (task #10703)
   * core: fix bug with layout: assign layout number in buffers when doing /layout save
-  * core: do not auto add space after nick completer if option weechat.completion.nick_add_space is off
+  * core: do not auto add space after nick completer if option whoreirc.completion.nick_add_space is off
   * core: fix signal "buffer_switch": send it only once when switching buffer (bug #31158)
   * core: move option "scroll_unread" from command /input to /window
-  * core: save current mouse state in option weechat.look.mouse (set option when mouse state is changed with command /mouse)
+  * core: save current mouse state in option whoreirc.look.mouse (set option when mouse state is changed with command /mouse)
   * core: apply filters after full reload of configuration files (with /reload) (bug #31182)
-  * core: allow list for option weechat.plugin.extension (makes weechat.conf portable across Un*x and Windows) (task #11479)
+  * core: allow list for option whoreirc.plugin.extension (makes whoreirc.conf portable across Un*x and Windows) (task #11479)
   * core: display error in command /buffer if arguments are wrong (bug #34180)
   * core: fix help on plugin option when config_set_desc_plugin is called to set help on newly created option
   * core: enable background process under Cygwin to connect to servers, fix reconnection problem (bug #34626)
@@ -1579,7 +1579,7 @@ Documentation::
 Build::
 
   * core: add library "pthread" in CMake file for link on OpenBSD
-  * core: add WEECHAT_HOME option in CMake and configure to setup default WeeChat home (default is "~/.weechat") (task #11266)
+  * core: add WEECHAT_HOME option in CMake and configure to setup default WeeChat home (default is "~/.whoreirc") (task #11266)
   * core: fix compilation under OpenBSD 5.0 (lib utf8 not needed any more) (bug #34727)
   * core: fix compilation error with "pid_t" on macOS (bug #34639)
 
@@ -1589,31 +1589,31 @@ Build::
 New features::
 
   * core: add color attribute "|" (keep attributes) and value "resetcolor" for function color in plugin API (used by irc plugin to keep bold/reverse/underlined in message when changing color) (bug #34550)
-  * core: add new option weechat.look.color_basic_force_bold, off by default: bold is used only if terminal has less than 16 colors (patch #7621)
+  * core: add new option whoreirc.look.color_basic_force_bold, off by default: bold is used only if terminal has less than 16 colors (patch #7621)
   * core: add default key kbd:[F5] (`meta2-[E`) for Linux console
-  * core: add "inactive" colors for inactive windows and lines in merged buffers, new options: weechat.look.color_inactive_window, weechat.look.color_inactive_buffer, weechat.look.color_inactive_message, weechat.look.color_inactive_prefix, weechat.look.color_inactive_prefix_buffer, weechat.look.color_inactive_time, weechat.color.chat_inactive_line, weechat.color.chat_inactive_window, weechat.color.chat_prefix_buffer_inactive_line
+  * core: add "inactive" colors for inactive windows and lines in merged buffers, new options: whoreirc.look.color_inactive_window, whoreirc.look.color_inactive_buffer, whoreirc.look.color_inactive_message, whoreirc.look.color_inactive_prefix, whoreirc.look.color_inactive_prefix_buffer, whoreirc.look.color_inactive_time, whoreirc.color.chat_inactive_line, whoreirc.color.chat_inactive_window, whoreirc.color.chat_prefix_buffer_inactive_line
   * core: do automatic zoom on current window when terminal becomes too small for windows
-  * core: add new options weechat.look.bar_more_left/right/up/down
-  * core: add new option weechat.look.item_buffer_filter
+  * core: add new options whoreirc.look.bar_more_left/right/up/down
+  * core: add new option whoreirc.look.item_buffer_filter
   * core: allow name of buffer for command /buffer clear (task #11269)
   * core: add new command /repeat (execute a command several times)
   * core: save and restore layout for buffers and windows on /upgrade
   * core: add option "-all" in command /buffer unmerge
   * core: add number in windows (add optional argument "-window" so some actions for command /window)
   * core: allow buffer name in /buffer close
-  * core: add support of mouse: new command /mouse, new key context "mouse", new options weechat.look.mouse and weechat.look.mouse_timer_delay (task #5435)
+  * core: add support of mouse: new command /mouse, new key context "mouse", new options whoreirc.look.mouse and whoreirc.look.mouse_timer_delay (task #5435)
   * core: add command /cursor (free movement of cursor on screen), with key context "cursor"
   * core: automatic scroll direction in /bar scroll (x/y is now optional)
   * core: add optional delay for key grab (commands /input grab_key and /input grab_key_command, default is 500 milliseconds)
   * core: allow plugin name in command /buffer name
   * core: add context "search" for keys (to define keys used during search in buffer with kbd:[Ctrl+r])
-  * core: add new option weechat.look.separator_vertical, rename option weechat.look.hline_char to weechat.look.separator_horizontal
+  * core: add new option whoreirc.look.separator_vertical, rename option whoreirc.look.hline_char to whoreirc.look.separator_horizontal
   * core: add local variable "highlight_regex" in buffers
   * core: add "hdata" (direct access to WeeChat/plugin data)
-  * core: add option weechat.look.eat_newline_glitch (do not add new line at end of each line displayed)
+  * core: add option whoreirc.look.eat_newline_glitch (do not add new line at end of each line displayed)
   * core: add options "infolists", "hdata" and "tags" for command /debug
   * core: add horizontal scrolling for buffers with free content (command /window scroll_horiz) (task #11112)
-  * core: change default value of option weechat.network.gnutls_ca_file to "/etc/ssl/certs/ca-certificates.crt"
+  * core: change default value of option whoreirc.network.gnutls_ca_file to "/etc/ssl/certs/ca-certificates.crt"
   * api: add info "cursor_mode"
   * api: add new functions key_bind, key_unbind, hook_focus, hdata_new, hdata_new_var, hdata_new_list, hdata_get, hdata_get_var_offset, hdata_get_var_type, hdata_get_var_type_string, hdata_get_var_hdata, hdata_get_var, hdata_get_var_at_offset, hdata_get_list, hdata_move, hdata_integer, hdata_string, hdata_pointer, hdata_time, hdata_get_string
   * irc: allow reason for command /disconnect
@@ -1646,7 +1646,7 @@ Bug fixes::
   * core: fix completion bug when two words for completion are equal but with different case
   * core: fix completion for command arguments when same command exists in many plugins (bug #33753)
   * core: fix freeze when hook_fd is called with a bad file/socket (bug #33619)
-  * core: fix bug with option weechat.look.hotlist_count_max (value+1 was used)
+  * core: fix bug with option whoreirc.look.hotlist_count_max (value+1 was used)
   * api: use arguments for infolist "window" to return only one window by number
   * api: fix bug with function config_set_desc_plugin (use immediately description for option when function is called)
   * scripts: fix crash with scripts not auto-loaded having a buffer opened after /upgrade (input/close callbacks for buffer not set properly)
@@ -1655,7 +1655,7 @@ Bug fixes::
   * irc: add missing messages for whois: 223, 264, 343
   * irc: use high priority queue for sending modes and wallchops messages
   * irc: rename info_hashtable "irc_parse_message" to "irc_message_parse"
-  * irc: use color "default" for any invalid color in option weechat.color.chat_nick_colors
+  * irc: use color "default" for any invalid color in option whoreirc.color.chat_nick_colors
   * irc: send WHO command to check away nicks only if channel was not parted
   * irc: fix crash when malformed IRC message 352 (WHO) is received (bug #33790)
   * irc: fix crash when command "/buffer close" is used in a server command to close server buffer during connection (bug #33763)
@@ -1680,23 +1680,23 @@ Build::
 
 New features::
 
-  * core: add buffer to hotlist if away is set on buffer (even if buffer is displayed), new option weechat.look.hotlist_add_buffer_if_away (task #10948)
+  * core: add buffer to hotlist if away is set on buffer (even if buffer is displayed), new option whoreirc.look.hotlist_add_buffer_if_away (task #10948)
   * core: add option "balance" in command /window (key: kbd:[Alt+w], kbd:[Alt+b])
   * core: add option "swap" in command /window (key: kbd:[Alt+w], kbd:[Alt+s]) (task #11001)
-  * core: add option weechat.look.hotlist_buffer_separator
-  * core: add messages counts in hotlist for each buffer, new options: weechat.look.hotlist_count_max, weechat.look.hotlist_count_min_msg and weechat.color.status_count_{msg|private|highlight|other}
+  * core: add option whoreirc.look.hotlist_buffer_separator
+  * core: add messages counts in hotlist for each buffer, new options: whoreirc.look.hotlist_count_max, whoreirc.look.hotlist_count_min_msg and whoreirc.color.status_count_{msg|private|highlight|other}
   * core: add tag "notify_none" (line with this tag will not update hotlist)
   * core: add optional bar name in command /bar default
-  * core: add new option weechat.look.highlight_tags (force highlight on tags)
+  * core: add new option whoreirc.look.highlight_tags (force highlight on tags)
   * core: allow list of buffers in command /filter (exclusion with prefix "!") (task #10880)
   * core: allow relative size for command /window resize
   * core: add some default keys for gnome-terminal (kbd:[Home] / kbd:[End], kbd:[Ctrl+Up] / kbd:[Ctrl+Down], kbd:[Alt+PgUp] / kbd:[Alt+PgDn])
   * core: add option "memory" in command /debug
-  * core: add option weechat.look.read_marker_string
-  * core: add some chars after cursor when scrolling input line: new option weechat.look.input_cursor_scroll (bug #21391)
+  * core: add option whoreirc.look.read_marker_string
+  * core: add some chars after cursor when scrolling input line: new option whoreirc.look.input_cursor_scroll (bug #21391)
   * core: add color "gray"
   * core: add attributes for colors ("*": bold, "!": reverse, "_": underline)
-  * core: dynamically allocate color pairs (extended colors can be used without being added with command "/color"), auto reset of color pairs with option weechat.look.color_pairs_auto_reset
+  * core: dynamically allocate color pairs (extended colors can be used without being added with command "/color"), auto reset of color pairs with option whoreirc.look.color_pairs_auto_reset
   * core: allow background for nick colors (using ":")
   * core: remember scroll position for all buffers in windows (bug #25555)
   * core: improve display of commands lists in /help (add arguments -list and -listfull) (task #10299)
@@ -1717,11 +1717,11 @@ Bug fixes::
   * core: fix scroll in windows with /window scroll (skip lines "Day changed to")
   * core: recalculate buffer_max_length when buffer short name is changed (patch #7441)
   * core: do not update hotlist during upgrade
-  * core: apply new value of option weechat.look.buffer_notify_default to all opened buffers
+  * core: apply new value of option whoreirc.look.buffer_notify_default to all opened buffers
   * core: prohibit names beginning with "#" for bars, proxies, filters and IRC servers (bug #33020)
   * core: create default bars only if no bar is defined in configuration file
   * core: fix bug with repeat of last completion ("%*"), which failed when many templates are used in completion
-  * core: reload file with certificate authorities when option weechat.network.gnutls_ca_file is changed
+  * core: reload file with certificate authorities when option whoreirc.network.gnutls_ca_file is changed
   * core: rebuild bar content when items are changed in an hidden bar
   * core: fix verification of SSL certificates by calling GnuTLS verify callback (patch #7459, CVE-2011-1428)
   * core: fix crash when using column filling in bars with some empty items (bug #32565)
@@ -1758,15 +1758,15 @@ Build::
 
 New features::
 
-  * core: add 256 colors support, new command /color, new section "palette" in weechat.conf (task #6834)
-  * core: add info "weechat_upgrading", signal "upgrade_ended", display duration of upgrade
-  * core: add new option weechat.look.highlight_regex and function string_has_highlight_regex in plugin API (task #10321)
-  * core: add new option weechat.look.hotlist_unique_numbers (task #10691)
+  * core: add 256 colors support, new command /color, new section "palette" in whoreirc.conf (task #6834)
+  * core: add info "whoreirc_upgrading", signal "upgrade_ended", display duration of upgrade
+  * core: add new option whoreirc.look.highlight_regex and function string_has_highlight_regex in plugin API (task #10321)
+  * core: add new option whoreirc.look.hotlist_unique_numbers (task #10691)
   * core: add property "hotlist_max_level_nicks" in buffers to set max hotlist level for some nicks in buffer
-  * core: add new options weechat.look.input_share and weechat.look.input_share_overwrite (task #9228)
-  * core: add new option weechat.look.prefix_align_min (task #10650)
-  * core: replace the 10 nick color options and number of nick colors by a single option weechat.color.chat_nick_colors (comma separated list of colors)
-  * core: add color support in option weechat.look.buffer_time_format
+  * core: add new options whoreirc.look.input_share and whoreirc.look.input_share_overwrite (task #9228)
+  * core: add new option whoreirc.look.prefix_align_min (task #10650)
+  * core: replace the 10 nick color options and number of nick colors by a single option whoreirc.color.chat_nick_colors (comma separated list of colors)
+  * core: add color support in option whoreirc.look.buffer_time_format
   * api: add priority for hooks (task #10550)
   * api: add new functions: list_search_pos, list_casesearch_pos, hashtable_get_string, hashtable_set_pointer, hook_info_hashtable, info_get_hashtable, hook_hsignal, hook_hsignal_send, hook_completion_get_string, nicklist_group_get_integer, nicklist_group_get_string, nicklist_group_get_pointer, nicklist_group_set, nicklist_nick_get_integer, nicklist_nick_get_string, nicklist_nick_get_pointer, nicklist_nick_set
   * irc: add option "-server" in command /join (task #10837)
@@ -1828,9 +1828,9 @@ New features::
 
   * core: use "!" to reverse a regex in a filter (to keep lines matching regex and hide other lines) (task #10032)
   * core: add keys for undo/redo changes on command line (default: kbd:[Ctrl+pass:none[_]] and kbd:[Alt+pass:none[_]]) (task #9483)
-  * core: add new option weechat.look.align_end_of_lines
-  * core: add new option weechat.look.confirm_quit
-  * core: add new option weechat.color.status_name_ssl (task #10339)
+  * core: add new option whoreirc.look.align_end_of_lines
+  * core: add new option whoreirc.look.confirm_quit
+  * core: add new option whoreirc.color.status_name_ssl (task #10339)
   * core: add hashtables with new functions in plugin API
   * api: add function string_expand_home, fix bug with replacement of home in paths
   * irc: add new option irc.look.nick_color_stop_chars
@@ -1841,7 +1841,7 @@ New features::
   * irc: add new options irc.network.autoreconnect_delay_growing and irc.network.autoreconnect_delay_max (task #10338)
   * irc: add missing commands 346, 347 (channel invite list)
   * irc: improve lag indicator: two colors (counting and finished), update item even when pong has not been received, lag_min_show is now in milliseconds
-  * irc: move options weechat.color.nicklist_prefix to irc plugin
+  * irc: move options whoreirc.color.nicklist_prefix to irc plugin
   * logger: use tag "no_log" to prevent a line from being written in log file
 
 Bug fixes::
@@ -1872,11 +1872,11 @@ New features::
   * core: add new options for command /key: listdefault, listdiff and reset
   * core: add new command /mute
   * core: add command line option "-s" (or "--no-script") to start WeeChat without loading any script
-  * core: improve plugins autoload (option weechat.plugin.autoload): allow to use "*" as wildcard and "!" to prevent a plugin from being autoloaded (task #6361)
+  * core: improve plugins autoload (option whoreirc.plugin.autoload): allow to use "*" as wildcard and "!" to prevent a plugin from being autoloaded (task #6361)
   * core: add option "switch_active_buffer_previous" in command /input (task #10141)
-  * core: add new option weechat.look.time_format to customize default format for date/time displayed (localized date by default), add function util_get_time_string in plugin API (patch #6914)
-  * core: add new option weechat.look.command_chars, add functions string_is_command_char and string_input_for_buffer in plugin and script API
-  * core: add new option weechat.look.read_marker_always_show
+  * core: add new option whoreirc.look.time_format to customize default format for date/time displayed (localized date by default), add function util_get_time_string in plugin API (patch #6914)
+  * core: add new option whoreirc.look.command_chars, add functions string_is_command_char and string_input_for_buffer in plugin and script API
+  * core: add new option whoreirc.look.read_marker_always_show
   * api: add "version_number" for function info_get to get WeeChat version as number
   * api: add "irc_is_nick" for function info_get to check if a string is a valid IRC nick name (patch #7133)
   * api: add functions string_encode_base64 and string_decode_base64, fix bug with base64 encoding
@@ -1899,7 +1899,7 @@ New features::
 
 Bug fixes::
 
-  * core: remove unneeded space after time on each line if option weechat.look.buffer_time_format is set to empty value (bug #28751)
+  * core: remove unneeded space after time on each line if option whoreirc.look.buffer_time_format is set to empty value (bug #28751)
   * core: use arguments for infolist "nicklist" to return only one nick or group
   * core: fix bug with writing of configuration files when disk is full (bug #29331)
   * core: fix infinite loop with /layout apply and bug when applying layout, sometimes many /layout apply were needed (bug #26110)
@@ -1910,7 +1910,7 @@ Bug fixes::
   * api: add missing infos in functions buffer_get_{integer|string} and in buffer infolist
   * api: fix function color in Lua script API
   * api: fix "inactivity" value when no key has been pressed since WeeChat started (bug #28930)
-  * api: return absolute path for info_get of "weechat_dir" (bug #27936)
+  * api: return absolute path for info_get of "whoreirc_dir" (bug #27936)
   * scripts: fix bug with callbacks when loading a script already loaded
   * perl: fix crash when multiplicity is disabled
   * perl: fix crash when callbacks are called during script initialization (bug #29018)
@@ -1976,7 +1976,7 @@ Bug fixes::
   * core: fix bug with script installation on BSD/macOS (patch #6980)
   * core: fix compilation under Cygwin (patch #6916)
   * core: fix plural form in translation files (bug #27430)
-  * core: fix terminal title bug: do not reset it when option weechat.look.set_title is off (bug #27399)
+  * core: fix terminal title bug: do not reset it when option whoreirc.look.set_title is off (bug #27399)
   * core: fix buffer used by some input functions called via plugin API with buffer pointer (bug #28152)
   * alias: fix bug with buffer for execution of alias, when called from plugin API with function command (bug #27697)
   * alias: fix bug with arguments (bug #27440)
@@ -2174,14 +2174,14 @@ Bug fixes::
 
 Build::
 
-  * add CMake for weechat compilation (patch #5943)
+  * add CMake for whoreirc compilation (patch #5943)
 
 [[v0.2.4]]
 == Version 0.2.4 (2007-03-29)
 
 New features::
 
-  * rename log file for DCC chat (now <server>.dcc.<nick>.weechatlog)
+  * rename log file for DCC chat (now <server>.dcc.<nick>.whoreirclog)
   * add current buffer in hotlist when scrolling up in buffer (task #6664)
   * improve password hiding, code cleanup (bug #19229)
   * add new return code in plugin API to force highlight (for message handlers only)
@@ -2345,7 +2345,7 @@ Bug fixes::
   * fix crash when closing DCC/raw buffer if 2 are open (bug #16808)
   * fix crashes with DCC chat remove/purge on DCC view (bug #16775)
   * fix bug with connection to bnc (bug #16760)
-  * command /save now writes plugins options (~/.weechat/plugins.rc)
+  * command /save now writes plugins options (~/.whoreirc/plugins.rc)
   * fix crash with register function in plugin scripts (bug #16701)
   * fix random crash at exit (/quit or /upgrade) with split windows
 
@@ -2385,7 +2385,7 @@ Bug fixes::
 
   * fix /squery command (message sent to server, now OK with more than two arguments)
   * fix /alias command (with an alias name, display content)
-  * add lock for log file (~/.weechat/weechat.log), only one WeeChat process can use this file (bug #16382)
+  * add lock for log file (~/.whoreirc/whoreirc.log), only one WeeChat process can use this file (bug #16382)
   * fix crash with malformed UTF-8 strings
   * fix crash with ncurses color when too many colors defined in ncurses (bug #16556)
   * fix bug with long outgoing IRC messages (> 512 bytes) (bug #16358)
@@ -2423,7 +2423,7 @@ New features::
   * add missing IRC command (487)
   * add inactivity time, available for plugins via get_info("inactivity")
   * add keys kbd:[Alt+Home] / kbd:[Alt+End] to scroll top/bottom, kbd:[Alt+F11] / kbd:[Alt+F12] to scroll nicklist top/bottom
-  * add special names for plugin message handlers: weechat_pv, weechat_highlight, weechat_ctcp, weechat_dcc
+  * add special names for plugin message handlers: whoreirc_pv, whoreirc_highlight, whoreirc_ctcp, whoreirc_dcc
   * add IRC raw data buffer (new key: kbd:[Alt+j], kbd:[Alt+r])
   * add new plugins functions: add_timer_handler, remove_timer_handler, remove_infobar
   * plugin messages handlers now called when message is ignored (by /ignore)
@@ -2594,7 +2594,7 @@ Bug fixes::
   * fix plugins print and prnt functions: now OK for writing on server buffers
   * fix color problem with new libcurses version
   * fix crash when using kbd:[Alt+s] or kbd:[Alt+x] on DCC buffer (kbd:[Alt+d])
-  * fix startup crash when config file (~/.weechat/weechat.rc) is not found
+  * fix startup crash when config file (~/.whoreirc/whoreirc.rc) is not found
 
 Build::
 
@@ -2634,7 +2634,7 @@ New features::
   * add DCC send and DCC chat
   * add /halfop & /dehalfop commands, fix halfop display bug in nicklist
   * add /ban, /unban and /kickban commands
-  * add --irc-commands and --weechat-commands command line options
+  * add --irc-commands and --whoreirc-commands command line options
   * connection to IRC server is now made by child process (non blocking)
   * add support for UnrealIrcd ("~" for chan owner, "&" for chan admin)
   * new key for window switch (now: kbd:[F5] / kbd:[F6] = switch buffer, kbd:[F7] / kbd:[F8] = switch window)
@@ -2855,5 +2855,5 @@ New features::
   * IRC commands: away, ctcp, deop, devoice, invite, join, kick, kill, list, me, mode, msg, names, nick, notice, op, oper, part, ping, pong, quit, quote, topic, version, voice, whois
   * WeeChat commands: clear, help, set (partial)
   * many config options
-  * log file (~/.weechat/weechat.log)
+  * log file (~/.whoreirc/whoreirc.log)
   * nicklist can be moved on top, bottom, left or right of window

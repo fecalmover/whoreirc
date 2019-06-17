@@ -63,19 +63,19 @@ Możesz się zdecydować na własnoręczne zbudowanie (zalecana metoda):
 [[get_sources]]
 === Pobierz i zbuduj źródła
 
-Najpierw stwórz katalog, na przykład _weechat-git_:
+Najpierw stwórz katalog, na przykład _whoreirc-git_:
 
 ----
-$ mkdir ~/weechat-git
-$ cd ~/weechat-git
+$ mkdir ~/whoreirc-git
+$ cd ~/whoreirc-git
 ----
 
 Jeśli masz zainstalowanego gita, po prostu sklonuj repozytorium (zalecana
 metoda):
 
 ----
-$ git clone https://github.com/weechat/weechat.git
-$ cd weechat
+$ git clone https://github.com/whoreirc/whoreirc.git
+$ cd whoreirc
 ----
 
 [NOTE]
@@ -85,9 +85,9 @@ poprawki.
 Oczywiście możesz pobrać paczkę oznaczoną jako _devel_:
 
 ----
-$ wget https://weechat.org/files/src/weechat-devel.tar.bz2
-$ tar xvjf weechat-devel.tar.bz2
-$ cd weechat-devel
+$ wget https://whoreirc.org/files/src/whoreirc-devel.tar.bz2
+$ tar xvjf whoreirc-devel.tar.bz2
+$ cd whoreirc-devel
 ----
 
 Do zbudowania źródeł zaleca się CMake:
@@ -95,7 +95,7 @@ Do zbudowania źródeł zaleca się CMake:
 ----
 $ mkdir build
 $ cd build
-$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/weechat-git -DWEECHAT_HOME=~/.weechat-dev -DCMAKE_BUILD_TYPE=Debug
+$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/whoreirc-git -DWEECHAT_HOME=~/.whoreirc-dev -DCMAKE_BUILD_TYPE=Debug
 $ make
 $ make install
 ----
@@ -104,7 +104,7 @@ Jeśli nie posiadasz CMake, nadal jest możliwe użycie autotools:
 
 ----
 $ ./autogen.sh
-$ ./configure --prefix=$HOME/weechat-git WEECHAT_HOME=~/.weechat-dev
+$ ./configure --prefix=$HOME/whoreirc-git WEECHAT_HOME=~/.whoreirc-dev
 $ make
 $ make install
 ----
@@ -114,8 +114,8 @@ $ make install
 
 W zależności od dystrybucji Linuksa:
 
-* Debian: https://weechat.org/download/debian
-* Gentoo: https://weechat.org/download
+* Debian: https://whoreirc.org/download/debian
+* Gentoo: https://whoreirc.org/download
 * ArchLinux: PKGBUILD z https://aur.archlinux.org/
 * inne: nie mamy pojęcia! Eheh.
 
@@ -126,14 +126,14 @@ W zależności od dystrybucji Linuksa:
 Komenda to:
 
 ----
-$ ~/weechat-git/bin/weechat
+$ ~/whoreirc-git/bin/whoreirc
 ----
 
 Jeśli nadal nie śpisz powinieneś ujrzeć znajomy interfejs i chwalić się
 z posiadania najnowszej możliwej wersji WeeChat. ;)
 
 Teraz jeśli zaobserwujesz dziwne zachowanie (może sprawiać problemy, ulec awarii
-lub zagotować Twoje piwo) nie wahaj się wejść na kanał _#weechat_ na serwerze
+lub zagotować Twoje piwo) nie wahaj się wejść na kanał _#whoreirc_ na serwerze
 _chat.freenode.net_ i nam o tym opowiedzieć.
 
 Jeśli wszystko będzie w porządku - też nam o tym powiedz, potrzebujemy Twojej opinii!

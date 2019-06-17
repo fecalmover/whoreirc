@@ -33,7 +33,7 @@ extern "C"
 #ifndef HAVE_CONFIG_H
 #define HAVE_CONFIG_H
 #endif
-#include "src/core/weechat.h"
+#include "src/core/whoreirc.h"
 #include "src/core/wee-hook.h"
 #include "src/core/wee-input.h"
 #include "src/core/wee-string.h"
@@ -51,11 +51,11 @@ extern "C"
 
 #define LOCALE_TESTS "en_US.UTF-8"
 
-#define WEECHAT_TESTS_HOME "./tmp_weechat_test"
+#define WEECHAT_TESTS_HOME "./tmp_whoreirc_test"
 
 /* lib with tests on plugins when autotools is used to compile */
 #define WEECHAT_TESTS_PLUGINS_LIB_DEFAULT                       \
-    "./tests/.libs/lib_weechat_unit_tests_plugins.so.0.0.0"
+    "./tests/.libs/lib_whoreirc_unit_tests_plugins.so.0.0.0"
 
 /* import tests from libs */
 /* core */
@@ -114,7 +114,7 @@ test_print_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
 
     /* keep only messages displayed on core buffer */
     if (strcmp (gui_buffer_get_string (buffer, "full_name"),
-                "core.weechat") != 0)
+                "core.whoreirc") != 0)
     {
         return WEECHAT_RC_OK;
     }
@@ -172,8 +172,8 @@ run_cmd (const char *command)
 int
 main (int argc, char *argv[])
 {
-    int rc, length, weechat_argc;
-    char *weechat_tests_args, *args, **weechat_argv, *tests_plugins_lib;
+    int rc, length, whoreirc_argc;
+    char *whoreirc_tests_args, *args, **whoreirc_argv, *tests_plugins_lib;
     const char *tests_plugins_lib_default = WEECHAT_TESTS_PLUGINS_LIB_DEFAULT;
     const char *ptr_path;
     void *handle;
@@ -196,10 +196,10 @@ main (int argc, char *argv[])
     util_exec_on_files (WEECHAT_TESTS_HOME, 1, 1, &exec_on_files_cb, NULL);
 
     /* build arguments for WeeChat */
-    weechat_tests_args = getenv ("WEECHAT_TESTS_ARGS");
+    whoreirc_tests_args = getenv ("WEECHAT_TESTS_ARGS");
     length = strlen (argv[0]) +
         64 +  /* --dir ... */
-        ((weechat_tests_args) ? 1 + strlen (weechat_tests_args) : 0) +
+        ((whoreirc_tests_args) ? 1 + strlen (whoreirc_tests_args) : 0) +
         1;
     args = (char *)malloc (length);
     if (!args)
@@ -211,22 +211,22 @@ main (int argc, char *argv[])
               "%s --dir %s%s%s",
               argv[0],
               WEECHAT_TESTS_HOME,
-              (weechat_tests_args) ? " " : "",
-              (weechat_tests_args) ? weechat_tests_args : "");
-    weechat_argv = string_split_shell (args, &weechat_argc);
+              (whoreirc_tests_args) ? " " : "",
+              (whoreirc_tests_args) ? whoreirc_tests_args : "");
+    whoreirc_argv = string_split_shell (args, &whoreirc_argc);
     printf ("WeeChat arguments: \"%s\"\n", args);
 
     /* init WeeChat */
-    weechat_init_gettext ();
-    weechat_init (weechat_argc, weechat_argv, &test_gui_init);
-    if (weechat_argv)
-        string_free_split (weechat_argv);
+    whoreirc_init_gettext ();
+    whoreirc_init (whoreirc_argc, whoreirc_argv, &test_gui_init);
+    if (whoreirc_argv)
+        string_free_split (whoreirc_argv);
     free (args);
 
     ptr_core_buffer = gui_buffer_search_main ();
 
     /* auto-load plugins from WEECHAT_EXTRA_LIBDIR if no plugin were loaded */
-    if (!weechat_plugins)
+    if (!whoreirc_plugins)
     {
         gui_chat_printf (NULL,
                          "Auto-loading plugins from path in "
@@ -259,7 +259,7 @@ main (int argc, char *argv[])
 
     /* end WeeChat */
     gui_chat_mute = GUI_CHAT_MUTE_ALL_BUFFERS;
-    weechat_end (&gui_main_end);
+    whoreirc_end (&gui_main_end);
 
     dlclose (handle);
 

@@ -10,4 +10,4 @@ the Free Software Foundation; either version 3 of the License, or
 
 Pełna licencja znajduje się w pliku COPYING.
 
-Strona www: https://weechat.org/
+Strona www: https://whoreirc.org/

@@ -21,66 +21,66 @@ docdir = $(datadir)/doc/$(PACKAGE)
 
 EXTRA_DIST = CMakeLists.txt \
              docinfo.html \
-             weechat.1.it.adoc \
-             weechat-headless.1.it.adoc \
+             whoreirc.1.it.adoc \
+             whoreirc-headless.1.it.adoc \
              cmdline_options.it.adoc \
              cmdline_options_debug.it.adoc \
-             weechat_user.it.adoc \
-             weechat_plugin_api.it.adoc \
-             weechat_scripting.it.adoc \
-             weechat_faq.it.adoc \
-             weechat_quickstart.it.adoc \
-             weechat_tester.it.adoc \
+             whoreirc_user.it.adoc \
+             whoreirc_plugin_api.it.adoc \
+             whoreirc_scripting.it.adoc \
+             whoreirc_faq.it.adoc \
+             whoreirc_quickstart.it.adoc \
+             whoreirc_tester.it.adoc \
              $(wildcard autogen/user/*.adoc) \
              $(wildcard autogen/plugin_api/*.adoc)
 
 if MAN
-  man_targets = weechat.1 \
-                weechat-headless.1
+  man_targets = whoreirc.1 \
+                whoreirc-headless.1
   man_install = install-man
   man_uninstall = uninstall-man
 endif
 if DOC
-  doc_targets = weechat_user.it.html \
-		weechat_plugin_api.it.html \
-		weechat_scripting.it.html \
-		weechat_faq.it.html \
-		weechat_quickstart.it.html \
-		weechat_tester.it.html
+  doc_targets = whoreirc_user.it.html \
+		whoreirc_plugin_api.it.html \
+		whoreirc_scripting.it.html \
+		whoreirc_faq.it.html \
+		whoreirc_quickstart.it.html \
+		whoreirc_tester.it.html
   doc_install = install-doc
   doc_uninstall = uninstall-doc
 endif
 all-local: $(man_targets) $(doc_targets)
 
 # man pages
-weechat.1: weechat.1.it.adoc cmdline_options.it.adoc cmdline_options_debug.it.adoc
-	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o weechat.1 $(abs_top_srcdir)/doc/it/weechat.1.it.adoc
-weechat-headless.1: weechat-headless.1.it.adoc cmdline_options.it.adoc cmdline_options_debug.it.adoc
-	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o weechat-headless.1 $(abs_top_srcdir)/doc/it/weechat-headless.1.it.adoc
+whoreirc.1: whoreirc.1.it.adoc cmdline_options.it.adoc cmdline_options_debug.it.adoc
+	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o whoreirc.1 $(abs_top_srcdir)/doc/it/whoreirc.1.it.adoc
+whoreirc-headless.1: whoreirc-headless.1.it.adoc cmdline_options.it.adoc cmdline_options_debug.it.adoc
+	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o whoreirc-headless.1 $(abs_top_srcdir)/doc/it/whoreirc-headless.1.it.adoc
 
 # user's guide
-weechat_user.it.html: weechat_user.it.adoc cmdline_options.it.adoc cmdline_options_debug.it.adoc $(wildcard autogen/user/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_user.it.html $(abs_top_srcdir)/doc/it/weechat_user.it.adoc
+whoreirc_user.it.html: whoreirc_user.it.adoc cmdline_options.it.adoc cmdline_options_debug.it.adoc $(wildcard autogen/user/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_user.it.html $(abs_top_srcdir)/doc/it/whoreirc_user.it.adoc
 
 # plugin API reference
-weechat_plugin_api.it.html: weechat_plugin_api.it.adoc $(wildcard autogen/plugin_api/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_plugin_api.it.html $(abs_top_srcdir)/doc/it/weechat_plugin_api.it.adoc
+whoreirc_plugin_api.it.html: whoreirc_plugin_api.it.adoc $(wildcard autogen/plugin_api/*.adoc) $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_plugin_api.it.html $(abs_top_srcdir)/doc/it/whoreirc_plugin_api.it.adoc
 
 # scripting guide
-weechat_scripting.it.html: weechat_scripting.it.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_scripting.it.html $(abs_top_srcdir)/doc/it/weechat_scripting.it.adoc
+whoreirc_scripting.it.html: whoreirc_scripting.it.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_scripting.it.html $(abs_top_srcdir)/doc/it/whoreirc_scripting.it.adoc
 
 # FAQ
-weechat_faq.it.html: weechat_faq.it.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_faq.it.html $(abs_top_srcdir)/doc/it/weechat_faq.it.adoc
+whoreirc_faq.it.html: whoreirc_faq.it.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_faq.it.html $(abs_top_srcdir)/doc/it/whoreirc_faq.it.adoc
 
 # quickstart
-weechat_quickstart.it.html: weechat_quickstart.it.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_quickstart.it.html $(abs_top_srcdir)/doc/it/weechat_quickstart.it.adoc
+whoreirc_quickstart.it.html: whoreirc_quickstart.it.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_quickstart.it.html $(abs_top_srcdir)/doc/it/whoreirc_quickstart.it.adoc
 
 # tester's guide
-weechat_tester.it.html: weechat_tester.it.adoc $(abs_top_srcdir)/doc/docinfo.html
-	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o weechat_tester.it.html $(abs_top_srcdir)/doc/it/weechat_tester.it.adoc
+whoreirc_tester.it.html: whoreirc_tester.it.adoc $(abs_top_srcdir)/doc/docinfo.html
+	$(ASCIIDOCTOR) -a revision="$(VERSION)" -a sectanchors -a source-highlighter=prettify -o whoreirc_tester.it.html $(abs_top_srcdir)/doc/it/whoreirc_tester.it.adoc
 
 # install man/docs
 
@@ -99,8 +99,8 @@ install-doc:
 uninstall-hook: $(man_uninstall) $(doc_uninstall)
 
 uninstall-man:
-	$(RM) $(DESTDIR)$(mandir)/it/man1/weechat.1
-	$(RM) $(DESTDIR)$(mandir)/it/man1/weechat-headless.1
+	$(RM) $(DESTDIR)$(mandir)/it/man1/whoreirc.1
+	$(RM) $(DESTDIR)$(mandir)/it/man1/whoreirc-headless.1
 	-rmdir $(DESTDIR)$(mandir)/it/man1
 
 uninstall-doc:
@@ -110,4 +110,4 @@ uninstall-doc:
 # clean
 
 clean-local:
-	-$(RM) weechat.1 weechat-headless.1 weechat_*.html
+	-$(RM) whoreirc.1 whoreirc-headless.1 whoreirc_*.html

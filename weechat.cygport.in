@@ -32,23 +32,23 @@
 #   2. execute these commands inside your build directory, after running cmake
 #      or configure script (replace X.Y by WeeChat version):
 #
-#      $ cygport weechat-X.Y-1.cygport fetch
-#      $ cygport weechat-X.Y-1.cygport almostall
+#      $ cygport whoreirc-X.Y-1.cygport fetch
+#      $ cygport whoreirc-X.Y-1.cygport almostall
 #
-#      Packages are built in directory: ./weechat-X.Y-1.<arch>/dist/weechat/
+#      Packages are built in directory: ./whoreirc-X.Y-1.<arch>/dist/whoreirc/
 #
 
 inherit cmake
 
-NAME="weechat"
+NAME="whoreirc"
 VERSION=@VERSION@
 RELEASE=1
 
 # Default category (some packages have extra category)
 CATEGORY="Net"
 
-HOMEPAGE="https://weechat.org/"
-SRC_URI="https://weechat.org/files/src/weechat-${VERSION}.tar.bz2"
+HOMEPAGE="https://whoreirc.org/"
+SRC_URI="https://whoreirc.org/files/src/whoreirc-${VERSION}.tar.bz2"
 
 # Build dependencies only
 DEPEND="cmake gettext gettext-devel libgnutls-devel libaspell-devel \
@@ -64,125 +64,125 @@ python2-devel ruby tcl-devel libguile2.0-devel php-devel zlib-devel"
 CYGCMAKE_ARGS="-DCMAKE_INSTALL_PREFIX=/usr -DENABLE_MAN=ON -DENABLE_DOC=ON \
 -DENABLE_JAVASCRIPT=OFF"
 
-PKG_IGNORE="etc/postinstall/weechat.sh"
+PKG_IGNORE="etc/postinstall/whoreirc.sh"
 
 #
 # Build 10 Cygwin packages:
-#   weechat
-#   weechat-python
-#   weechat-perl
-#   weechat-ruby
-#   weechat-lua
-#   weechat-tcl
-#   weechat-guile
-#   weechat-php
-#   weechat-devel
-#   weechat-doc
+#   whoreirc
+#   whoreirc-python
+#   whoreirc-perl
+#   whoreirc-ruby
+#   whoreirc-lua
+#   whoreirc-tcl
+#   whoreirc-guile
+#   whoreirc-php
+#   whoreirc-devel
+#   whoreirc-doc
 #
 PKG_NAMES="${PN} ${PN}-python ${PN}-perl ${PN}-ruby ${PN}-lua ${PN}-tcl \
 ${PN}-guile ${PN}-php ${PN}-devel ${PN}-doc"
 PKG_HINTS="setup python perl ruby lua tcl guile php devel doc"
 
 #
-# Package "weechat": binary, all plugins except scripting languages,
+# Package "whoreirc": binary, all plugins except scripting languages,
 # translations, icon, man pages
 #
-weechat_SUMMARY="Fast, light and extensible chat client"
-weechat_DESCRIPTION="WeeChat (Wee Enhanced Environment for Chat) is a fast, \
+whoreirc_SUMMARY="Fast, light and extensible chat client"
+whoreirc_DESCRIPTION="WeeChat (Wee Enhanced Environment for Chat) is a fast, \
 light and extensible chat client. Everything can be done with a keyboard, \
 it is customizable and extensible with plugins/scripts."
-weechat_CONTENTS="
+whoreirc_CONTENTS="
     usr/bin/
-    usr/lib/weechat/plugins/alias.dll
-    usr/lib/weechat/plugins/buflist.dll
-    usr/lib/weechat/plugins/charset.dll
-    usr/lib/weechat/plugins/exec.dll
-    usr/lib/weechat/plugins/fifo.dll
-    usr/lib/weechat/plugins/fset.dll
-    usr/lib/weechat/plugins/irc.dll
-    usr/lib/weechat/plugins/logger.dll
-    usr/lib/weechat/plugins/relay.dll
-    usr/lib/weechat/plugins/script.dll
-    usr/lib/weechat/plugins/spell.dll
-    usr/lib/weechat/plugins/trigger.dll
-    usr/lib/weechat/plugins/xfer.dll
+    usr/lib/whoreirc/plugins/alias.dll
+    usr/lib/whoreirc/plugins/buflist.dll
+    usr/lib/whoreirc/plugins/charset.dll
+    usr/lib/whoreirc/plugins/exec.dll
+    usr/lib/whoreirc/plugins/fifo.dll
+    usr/lib/whoreirc/plugins/fset.dll
+    usr/lib/whoreirc/plugins/irc.dll
+    usr/lib/whoreirc/plugins/logger.dll
+    usr/lib/whoreirc/plugins/relay.dll
+    usr/lib/whoreirc/plugins/script.dll
+    usr/lib/whoreirc/plugins/spell.dll
+    usr/lib/whoreirc/plugins/trigger.dll
+    usr/lib/whoreirc/plugins/xfer.dll
     usr/share/locale/
     usr/share/icons/
     usr/share/man/
-    usr/share/doc/weechat/AUTHORS.adoc
-    usr/share/doc/weechat/ChangeLog.adoc
-    usr/share/doc/weechat/Contributing.adoc
-    usr/share/doc/weechat/COPYING
-    usr/share/doc/weechat/README.adoc
-    usr/share/doc/weechat/ReleaseNotes.adoc
+    usr/share/doc/whoreirc/AUTHORS.adoc
+    usr/share/doc/whoreirc/ChangeLog.adoc
+    usr/share/doc/whoreirc/Contributing.adoc
+    usr/share/doc/whoreirc/COPYING
+    usr/share/doc/whoreirc/README.adoc
+    usr/share/doc/whoreirc/ReleaseNotes.adoc
 "
 
 #
-# Package "weechat-python": python scripting plugin
+# Package "whoreirc-python": python scripting plugin
 #
-weechat_python_SUMMARY="Python scripting plugin for WeeChat"
-weechat_python_DESCRIPTION="Python scripting plugin for WeeChat"
-weechat_python_CONTENTS="usr/lib/weechat/plugins/python.dll"
-weechat_python_REQUIRES="weechat"
+whoreirc_python_SUMMARY="Python scripting plugin for WeeChat"
+whoreirc_python_DESCRIPTION="Python scripting plugin for WeeChat"
+whoreirc_python_CONTENTS="usr/lib/whoreirc/plugins/python.dll"
+whoreirc_python_REQUIRES="whoreirc"
 
 #
-# Package "weechat-perl": perl scripting plugin
+# Package "whoreirc-perl": perl scripting plugin
 #
-weechat_perl_SUMMARY="Perl scripting plugin for WeeChat"
-weechat_perl_DESCRIPTION="Perl scripting plugin for WeeChat"
-weechat_perl_CONTENTS="usr/lib/weechat/plugins/perl.dll"
-weechat_perl_REQUIRES="weechat"
+whoreirc_perl_SUMMARY="Perl scripting plugin for WeeChat"
+whoreirc_perl_DESCRIPTION="Perl scripting plugin for WeeChat"
+whoreirc_perl_CONTENTS="usr/lib/whoreirc/plugins/perl.dll"
+whoreirc_perl_REQUIRES="whoreirc"
 
 #
-# Package "weechat-ruby": ruby scripting plugin
+# Package "whoreirc-ruby": ruby scripting plugin
 #
-weechat_ruby_SUMMARY="Ruby scripting plugin for WeeChat"
-weechat_ruby_DESCRIPTION="Ruby scripting plugin for WeeChat"
-weechat_ruby_CONTENTS="usr/lib/weechat/plugins/ruby.dll"
-weechat_ruby_REQUIRES="weechat"
+whoreirc_ruby_SUMMARY="Ruby scripting plugin for WeeChat"
+whoreirc_ruby_DESCRIPTION="Ruby scripting plugin for WeeChat"
+whoreirc_ruby_CONTENTS="usr/lib/whoreirc/plugins/ruby.dll"
+whoreirc_ruby_REQUIRES="whoreirc"
 
 #
-# Package "weechat-lua": lua scripting plugin
+# Package "whoreirc-lua": lua scripting plugin
 #
-weechat_lua_SUMMARY="Lua scripting plugin for WeeChat"
-weechat_lua_DESCRIPTION="Lua scripting plugin for WeeChat"
-weechat_lua_CONTENTS="usr/lib/weechat/plugins/lua.dll"
-weechat_lua_REQUIRES="weechat"
+whoreirc_lua_SUMMARY="Lua scripting plugin for WeeChat"
+whoreirc_lua_DESCRIPTION="Lua scripting plugin for WeeChat"
+whoreirc_lua_CONTENTS="usr/lib/whoreirc/plugins/lua.dll"
+whoreirc_lua_REQUIRES="whoreirc"
 
 #
-# Package "weechat-tcl": tcl scripting plugin
+# Package "whoreirc-tcl": tcl scripting plugin
 #
-weechat_tcl_SUMMARY="Tcl scripting plugin for WeeChat"
-weechat_tcl_DESCRIPTION="Tcl scripting plugin for WeeChat"
-weechat_tcl_CONTENTS="usr/lib/weechat/plugins/tcl.dll"
-weechat_tcl_REQUIRES="weechat"
+whoreirc_tcl_SUMMARY="Tcl scripting plugin for WeeChat"
+whoreirc_tcl_DESCRIPTION="Tcl scripting plugin for WeeChat"
+whoreirc_tcl_CONTENTS="usr/lib/whoreirc/plugins/tcl.dll"
+whoreirc_tcl_REQUIRES="whoreirc"
 
 #
-# Package "weechat-guile": guile scripting plugin
+# Package "whoreirc-guile": guile scripting plugin
 #
-weechat_guile_SUMMARY="Guile scripting plugin for WeeChat"
-weechat_guile_DESCRIPTION="Guile scripting plugin for WeeChat"
-weechat_guile_CONTENTS="usr/lib/weechat/plugins/guile.dll"
-weechat_guile_REQUIRES="weechat"
+whoreirc_guile_SUMMARY="Guile scripting plugin for WeeChat"
+whoreirc_guile_DESCRIPTION="Guile scripting plugin for WeeChat"
+whoreirc_guile_CONTENTS="usr/lib/whoreirc/plugins/guile.dll"
+whoreirc_guile_REQUIRES="whoreirc"
 
 #
-# Package "weechat-php": php scripting plugin
+# Package "whoreirc-php": php scripting plugin
 #
-weechat_php_SUMMARY="PHP scripting plugin for WeeChat"
-weechat_php_DESCRIPTION="PHP scripting plugin for WeeChat"
-weechat_php_CONTENTS="usr/lib/weechat/plugins/php.dll"
-weechat_php_REQUIRES="weechat"
+whoreirc_php_SUMMARY="PHP scripting plugin for WeeChat"
+whoreirc_php_DESCRIPTION="PHP scripting plugin for WeeChat"
+whoreirc_php_CONTENTS="usr/lib/whoreirc/plugins/php.dll"
+whoreirc_php_REQUIRES="whoreirc"
 
 #
-# Package "weechat-devel": header to build plugins
+# Package "whoreirc-devel": header to build plugins
 #
-weechat_devel_CATEGORY="Net Devel"
-weechat_devel_SUMMARY="Development files to build WeeChat plugins"
-weechat_devel_CONTENTS="usr/include/ usr/lib/pkgconfig/"
+whoreirc_devel_CATEGORY="Net Devel"
+whoreirc_devel_SUMMARY="Development files to build WeeChat plugins"
+whoreirc_devel_CONTENTS="usr/include/ usr/lib/pkgconfig/"
 
 #
-# Package "weechat-doc": documentation
+# Package "whoreirc-doc": documentation
 #
-weechat_doc_CATEGORY="Net Doc"
-weechat_doc_SUMMARY="Documentation for WeeChat"
-weechat_doc_CONTENTS="usr/share/doc/weechat/*.html"
+whoreirc_doc_CATEGORY="Net Doc"
+whoreirc_doc_SUMMARY="Documentation for WeeChat"
+whoreirc_doc_CONTENTS="usr/share/doc/whoreirc/*.html"

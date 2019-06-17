@@ -1,5 +1,5 @@
 // TRANSLATION MISSING (WHOLE FILE)
-= weechat(1)
+= whoreirc(1)
 :doctype: manpage
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
@@ -10,17 +10,17 @@
 
 == NAME
 
-weechat - the extensible chat client
+whoreirc - the extensible chat client
 
 == SYNOPSIS
 
 // TRANSLATION MISSING
 [verse]
-*weechat* [-a|--no-connect] [-d|--dir <path>] [-t|--temp-dir]  [-p|--no-plugin] [-P|--plugins <plugins>] [-r|--run-command <command>] [-s|--no-script] [--upgrade] [debug-option...] [plugin:option...]
-*weechat* [-c|--colors]
-*weechat* [-h|--help]
-*weechat* [-l|--license]
-*weechat* [-v|--version]
+*whoreirc* [-a|--no-connect] [-d|--dir <path>] [-t|--temp-dir]  [-p|--no-plugin] [-P|--plugins <plugins>] [-r|--run-command <command>] [-s|--no-script] [--upgrade] [debug-option...] [plugin:option...]
+*whoreirc* [-c|--colors]
+*whoreirc* [-h|--help]
+*whoreirc* [-l|--license]
+*whoreirc* [-v|--version]
 
 == DESCRIPTION
 
@@ -52,7 +52,7 @@ include::man_files.it.adoc[]
 // TRANSLATION MISSING
 == SEE ALSO
 
-*weechat-headless*(1)
+*whoreirc-headless*(1)
 
 == AUTHORS
 
@@ -69,4 +69,4 @@ include::man_copyright.it.adoc[]
 == SUPPORT / REPORTING BUGS
 
 // TRANSLATION MISSING
-For help or a bug report: https://weechat.org/about/support
+For help or a bug report: https://whoreirc.org/about/support

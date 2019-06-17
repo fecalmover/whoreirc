@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: weechat
+Upstream-Name: whoreirc
 Upstream-Contact: Sébastien Helleu <flashcode@flashtux.org>
-Source: https://weechat.org/
+Source: https://whoreirc.org/
 
 Files: *
 Copyright: 2003-2019, Sébastien Helleu <flashcode@flashtux.org>
@@ -34,7 +34,7 @@ License: GPL-3+
 Files: src/core/wee-completion.c
        src/core/wee-log.c
        src/core/wee-utf8.c
-       src/core/weechat.h
+       src/core/whoreirc.h
        src/plugins/spell/spell-config.c
        src/plugins/spell/spell-config.h
        src/plugins/spell/spell-speller.c
@@ -53,15 +53,15 @@ License: GPL-3+
 
 Files: src/plugins/spell/spell-bar-item.c
        src/plugins/spell/spell-bar-item.h
-Copyright: 2012, Nils Görs <weechatter@arcor.de>
+Copyright: 2012, Nils Görs <whoreircter@arcor.de>
 License: GPL-3+
 
 Files: src/plugins/spell/spell.c
 Copyright: 2006, Emmanuel Bouthenot <kolter@openics.org>
-           2012, Nils Görs <weechatter@arcor.de>
+           2012, Nils Görs <whoreircter@arcor.de>
 License: GPL-3+
 
-Files: src/plugins/guile/weechat-guile-api.c
+Files: src/plugins/guile/whoreirc-guile-api.c
        src/plugins/irc/irc-server.h
        src/plugins/plugin-script-api.c
        src/plugins/plugin-script-api.h
@@ -78,73 +78,73 @@ Copyright: 2005-2010, Emmanuel Bouthenot <kolter@openics.org>
            2012, Simon Arlott
 License: GPL-3+
 
-Files: src/plugins/javascript/weechat-js-api.cpp
-       src/plugins/javascript/weechat-js-api.h
-       src/plugins/javascript/weechat-js-v8.cpp
-       src/plugins/javascript/weechat-js-v8.h
-       src/plugins/javascript/weechat-js.cpp
-       src/plugins/javascript/weechat-js.h
+Files: src/plugins/javascript/whoreirc-js-api.cpp
+       src/plugins/javascript/whoreirc-js-api.h
+       src/plugins/javascript/whoreirc-js-v8.cpp
+       src/plugins/javascript/whoreirc-js-v8.h
+       src/plugins/javascript/whoreirc-js.cpp
+       src/plugins/javascript/whoreirc-js.h
 Copyright: 2013, Koka El Kiwi <kokakiwi@kokakiwi.net>
 License: GPL-3+
 
-Files: src/plugins/lua/weechat-lua-api.c
+Files: src/plugins/lua/whoreirc-lua-api.c
 Copyright: 2006-2007, Emmanuel Bouthenot <kolter@openics.org>
            2012, Simon Arlott
 License: GPL-3+
 
-Files: src/plugins/lua/weechat-lua-api.h
-       src/plugins/lua/weechat-lua.c
-       src/plugins/lua/weechat-lua.h
+Files: src/plugins/lua/whoreirc-lua-api.h
+       src/plugins/lua/whoreirc-lua.c
+       src/plugins/lua/whoreirc-lua.h
 Copyright: 2006-2007, Emmanuel Bouthenot <kolter@openics.org>
 License: GPL-3+
 
-Files: src/plugins/perl/weechat-perl-api.c
+Files: src/plugins/perl/whoreirc-perl-api.c
 Copyright: 2005-2008, Emmanuel Bouthenot <kolter@openics.org>
            2012, Simon Arlott
 License: GPL-3+
 
-Files: src/plugins/perl/weechat-perl.c
+Files: src/plugins/perl/whoreirc-perl.c
 Copyright: 2005-2008, Emmanuel Bouthenot <kolter@openics.org>
 License: GPL-3+
 
-Files: src/plugins/php/weechat-php-api.c
-       src/plugins/php/weechat-php-api.h
-       src/plugins/php/weechat-php.c
-       src/plugins/php/weechat-php.h
+Files: src/plugins/php/whoreirc-php-api.c
+       src/plugins/php/whoreirc-php-api.h
+       src/plugins/php/whoreirc-php.c
+       src/plugins/php/whoreirc-php.h
 Copyright: 2006-2017, Adam Saponara <as@php.net>
 License: GPL-3-with-openssl-exception
 
-Files: src/plugins/python/weechat-python-api.c
+Files: src/plugins/python/whoreirc-python-api.c
 Copyright: 2005-2007, Emmanuel Bouthenot <kolter@openics.org>
            2012, Simon Arlott
 License: GPL-3+
 
-Files: src/plugins/python/weechat-python-api.h
-       src/plugins/ruby/weechat-ruby-api.h
-       src/plugins/ruby/weechat-ruby.c
-       src/plugins/ruby/weechat-ruby.h
+Files: src/plugins/python/whoreirc-python-api.h
+       src/plugins/ruby/whoreirc-ruby-api.h
+       src/plugins/ruby/whoreirc-ruby.c
+       src/plugins/ruby/whoreirc-ruby.h
 Copyright: 2005-2007, Emmanuel Bouthenot <kolter@openics.org>
 License: GPL-3+
 
-Files: src/plugins/python/weechat-python.c
-       src/plugins/ruby/weechat-ruby-api.c
+Files: src/plugins/python/whoreirc-python.c
+       src/plugins/ruby/whoreirc-ruby-api.c
 Copyright: 2005-2007, Emmanuel Bouthenot <kolter@openics.org>
            2012, Simon Arlott
 License: GPL-3+
 
-Files: src/plugins/python/weechat-python.h
+Files: src/plugins/python/whoreirc-python.h
 Copyright: 2005-2007, Emmanuel Bouthenot <kolter@openics.org>
 License: GPL-3+
 
-Files: src/plugins/tcl/weechat-tcl-api.c
+Files: src/plugins/tcl/whoreirc-tcl-api.c
 Copyright: 2008-2010, Dmitry Kobylin <fnfal@academ.tsc.ru>
            2008, Julien Louis <ptitlouis@sysif.net>
            2012, Simon Arlott
 License: GPL-3+
 
-Files: src/plugins/tcl/weechat-tcl-api.h
-       src/plugins/tcl/weechat-tcl.c
-       src/plugins/tcl/weechat-tcl.h
+Files: src/plugins/tcl/whoreirc-tcl-api.h
+       src/plugins/tcl/whoreirc-tcl.c
+       src/plugins/tcl/whoreirc-tcl.h
 Copyright: 2008-2010, Dmitry Kobylin <fnfal@academ.tsc.ru>
 License: GPL-3+
 

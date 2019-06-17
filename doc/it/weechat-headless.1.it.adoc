@@ -1,5 +1,5 @@
 // TRANSLATION MISSING (WHOLE FILE)
-= weechat-headless(1)
+= whoreirc-headless(1)
 :doctype: manpage
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
@@ -10,17 +10,17 @@
 
 == NAME
 
-weechat-headless - the extensible chat client (headless version)
+whoreirc-headless - the extensible chat client (headless version)
 
 == SYNOPSIS
 
 // TRANSLATION MISSING
 [verse]
-*weechat-headless* [-a|--no-connect] [--daemon] [-d|--dir <path>] [-t|--temp-dir] [-p|--no-plugin] [-P|--plugins <plugins>] [-r|--run-command <command>] [-s|--no-script] [--upgrade] [debug-option...] [plugin:option...]
-*weechat-headless* [-c|--colors]
-*weechat-headless* [-h|--help]
-*weechat-headless* [-l|--license]
-*weechat-headless* [-v|--version]
+*whoreirc-headless* [-a|--no-connect] [--daemon] [-d|--dir <path>] [-t|--temp-dir] [-p|--no-plugin] [-P|--plugins <plugins>] [-r|--run-command <command>] [-s|--no-script] [--upgrade] [debug-option...] [plugin:option...]
+*whoreirc-headless* [-c|--colors]
+*whoreirc-headless* [-h|--help]
+*whoreirc-headless* [-l|--license]
+*whoreirc-headless* [-v|--version]
 
 == DESCRIPTION
 
@@ -30,7 +30,7 @@ libero, veloce e leggero, realizzato per diversi sistemi operativi.
 It is highly customizable and extensible with scripts.
 
 // TRANSLATION MISSING
-The command *weechat-headless* runs WeeChat in a headless mode (no interface).
+The command *whoreirc-headless* runs WeeChat in a headless mode (no interface).
 It can be used for tests or to daemonize WeeChat with the option "--daemon".
 
 == OPTIONS
@@ -56,7 +56,7 @@ include::man_files.it.adoc[]
 // TRANSLATION MISSING
 == SEE ALSO
 
-*weechat*(1)
+*whoreirc*(1)
 
 == AUTHORS
 
@@ -73,4 +73,4 @@ include::man_copyright.it.adoc[]
 == SUPPORT / REPORTING BUGS
 
 // TRANSLATION MISSING
-For help or a bug report: https://weechat.org/about/support
+For help or a bug report: https://whoreirc.org/about/support

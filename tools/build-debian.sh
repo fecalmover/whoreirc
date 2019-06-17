@@ -202,9 +202,9 @@ else
 fi
 
 if [ "${VERSION}" = "devel" ]; then
-    # devel packages: weechat-devel(-xxx)_X.Y-1~dev20150511_arch.deb
+    # devel packages: whoreirc-devel(-xxx)_X.Y-1~dev20150511_arch.deb
     DEB_DIR="debian-devel"
-    DEB_NAME="weechat-devel"
+    DEB_NAME="whoreirc-devel"
     DEB_VERSION="$(${ROOT_DIR}/version.sh devel)-1~dev$(date '+%Y%m%d')"
     if [ "${DEB_REVISION}" != "1" ]; then
         DEB_VERSION="${DEB_VERSION}-${DEB_REVISION}"
@@ -213,9 +213,9 @@ if [ "${VERSION}" = "devel" ]; then
     DCH_URGENCY="low"
     DCH_CHANGELOG="Repository snapshot"
 else
-    # stable packages: weechat-(-xxx)_X.Y-1_arch.deb
+    # stable packages: whoreirc-(-xxx)_X.Y-1_arch.deb
     DEB_DIR="debian-stable"
-    DEB_NAME="weechat"
+    DEB_NAME="whoreirc"
     DEB_VERSION="${VERSION}-${DEB_REVISION}"
     DCH_CREATE=""
     DCH_URGENCY="medium"
@@ -228,7 +228,7 @@ echo "=== Building ${DEB_NAME}-${DEB_VERSION} on ${DISTRO_TYPE}/${DISTRO_NAME} (
 # ================================== BUILD ==================================
 
 # apply patch (if needed, for old distros)
-PATCH_FILE="${ROOT_DIR}/tools/debian/patches/weechat_${DISTRO_TYPE}_${DISTRO_NAME}.patch"
+PATCH_FILE="${ROOT_DIR}/tools/debian/patches/whoreirc_${DISTRO_TYPE}_${DISTRO_NAME}.patch"
 if [ -f "${PATCH_FILE}" ]; then
     echo " - Applying patch ${PATCH_FILE}"
     git apply "${PATCH_FILE}"

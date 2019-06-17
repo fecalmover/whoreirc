@@ -1,4 +1,4 @@
-?package(weechat-curses):needs="text" section="Applications/Network/Communication" \
-		title="weechat" \
-		icon="/usr/share/pixmaps/weechat.xpm" \
-		command="/usr/bin/weechat"
+?package(whoreirc-curses):needs="text" section="Applications/Network/Communication" \
+		title="whoreirc" \
+		icon="/usr/share/pixmaps/whoreirc.xpm" \
+		command="/usr/bin/whoreirc"

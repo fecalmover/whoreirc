@@ -3,39 +3,39 @@
 :lang: en
 
 
-pass:[<p align="center">] image:https://weechat.org/media/images/weechat_logo_large.png[align="center"] pass:[</p>]
+pass:[<p align="center">] image:https://whoreirc.org/media/images/whoreirc_logo_large.png[align="center"] pass:[</p>]
 
-image:https://img.shields.io/badge/diaspora*-follow-blue.svg["Diaspora*", link="https://diasp.eu/u/weechat"]
-image:https://img.shields.io/badge/mastodon-follow-blue.svg["Mastodon", link="https://hostux.social/@weechat"]
+image:https://img.shields.io/badge/diaspora*-follow-blue.svg["Diaspora*", link="https://diasp.eu/u/whoreirc"]
+image:https://img.shields.io/badge/mastodon-follow-blue.svg["Mastodon", link="https://hostux.social/@whoreirc"]
 image:https://img.shields.io/badge/twitter-follow-blue.svg["Twitter", link="https://twitter.com/WeeChatClient"]
-image:https://img.shields.io/badge/devel%20blog-follow-blue.svg["Devel blog", link="https://weechat.org/blog/"]
+image:https://img.shields.io/badge/devel%20blog-follow-blue.svg["Devel blog", link="https://whoreirc.org/blog/"]
 image:https://img.shields.io/badge/slant-recommend-28acad.svg["Slant", link="https://www.slant.co/topics/1323/~best-irc-clients-for-linux"]
-image:https://img.shields.io/badge/help-donate%20%E2%9D%A4-ff69b4.svg["Donate", link="https://weechat.org/donate/"]
+image:https://img.shields.io/badge/help-donate%20%E2%9D%A4-ff69b4.svg["Donate", link="https://whoreirc.org/donate/"]
 
-image:https://travis-ci.org/weechat/weechat.svg?branch=master["Build Status", link="https://travis-ci.org/weechat/weechat"]
-image:https://codecov.io/gh/weechat/weechat/branch/master/graph/badge.svg["Code coverage", link="https://codecov.io/gh/weechat/weechat"]
+image:https://travis-ci.org/whoreirc/whoreirc.svg?branch=master["Build Status", link="https://travis-ci.org/whoreirc/whoreirc"]
+image:https://codecov.io/gh/whoreirc/whoreirc/branch/master/graph/badge.svg["Code coverage", link="https://codecov.io/gh/whoreirc/whoreirc"]
 
 *WeeChat* (Wee Enhanced Environment for Chat) is a free chat client, fast and
 light, designed for many operating systems.
 It is highly customizable and extensible with scripts.
 
-Homepage: https://weechat.org/
+Homepage: https://whoreirc.org/
 
 == Features
 
-* *Modular chat client*: WeeChat has a lightweight core and optional https://weechat.org/files/doc/stable/weechat_user.en.html#plugins[plugins]. All plugins (including https://weechat.org/files/doc/stable/weechat_user.en.html#irc_plugin[IRC]) are independent and can be unloaded.
+* *Modular chat client*: WeeChat has a lightweight core and optional https://whoreirc.org/files/doc/stable/whoreirc_user.en.html#plugins[plugins]. All plugins (including https://whoreirc.org/files/doc/stable/whoreirc_user.en.html#irc_plugin[IRC]) are independent and can be unloaded.
 * *Multi-platform*: WeeChat runs on GNU/Linux, *BSD, GNU/Hurd, Haiku, macOS and Windows (Bash/Ubuntu and Cygwin).
 * *Multi-protocols*: WeeChat is designed to support multiple protocols by plugins, like IRC.
 * *Standards-compliant*: the IRC plugin is compliant with RFCs https://tools.ietf.org/html/rfc1459[1459], https://tools.ietf.org/html/rfc2810[2810], https://tools.ietf.org/html/rfc2811[2811], https://tools.ietf.org/html/rfc2812[2812] and https://tools.ietf.org/html/rfc2813[2813].
 * *Small, fast and very light*: the core is and should stay as light and fast as possible.
-* *Customizable and extensible*: there are a lot of options to customize WeeChat, and it is extensible with C plugins and https://weechat.org/scripts/[scripts] (https://weechat.org/scripts/stable/language/perl/[Perl], https://weechat.org/scripts/stable/language/python/[Python], https://weechat.org/scripts/stable/language/ruby[Ruby], https://weechat.org/scripts/stable/language/lua/[Lua], https://weechat.org/scripts/stable/language/tcl/[Tcl], https://weechat.org/scripts/stable/language/guile/[Scheme], https://weechat.org/scripts/stable/language/javascript/[JavaScript] and https://weechat.org/scripts/stable/language/php/[PHP]).
-* *Fully documented*: there is comprehensive https://weechat.org/doc/[documentation], which is https://weechat.org/files/doc/stable/weechat_dev.en.html#translations[translated] into several languages.
+* *Customizable and extensible*: there are a lot of options to customize WeeChat, and it is extensible with C plugins and https://whoreirc.org/scripts/[scripts] (https://whoreirc.org/scripts/stable/language/perl/[Perl], https://whoreirc.org/scripts/stable/language/python/[Python], https://whoreirc.org/scripts/stable/language/ruby[Ruby], https://whoreirc.org/scripts/stable/language/lua/[Lua], https://whoreirc.org/scripts/stable/language/tcl/[Tcl], https://whoreirc.org/scripts/stable/language/guile/[Scheme], https://whoreirc.org/scripts/stable/language/javascript/[JavaScript] and https://whoreirc.org/scripts/stable/language/php/[PHP]).
+* *Fully documented*: there is comprehensive https://whoreirc.org/doc/[documentation], which is https://whoreirc.org/files/doc/stable/whoreirc_dev.en.html#translations[translated] into several languages.
 * *Developed from scratch*: WeeChat was built from scratch and is not based on any other client.
 * *Free software*: WeeChat is released under https://www.gnu.org/licenses/gpl-3.0.html[GPLv3].
 
-pass:[<p align="center">] image:https://weechat.org/media/images/screenshots/weechat/medium/weechat_2013-04-27_phlux_shadow.png[align="center"] pass:[</p>]
+pass:[<p align="center">] image:https://whoreirc.org/media/images/screenshots/whoreirc/medium/whoreirc_2013-04-27_phlux_shadow.png[align="center"] pass:[</p>]
 
-On WeeChat's website you can find https://weechat.org/about/screenshots/[more screenshots].
+On WeeChat's website you can find https://whoreirc.org/about/screenshots/[more screenshots].
 
 == Install
 
@@ -59,7 +59,7 @@ Following packages are optional:
 * for building tests: C++ compiler, CppUTest
 
 For a complete list of dependencies and versions recommended, please look at
-https://weechat.org/files/doc/devel/weechat_user.en.html#dependencies[user's guide].
+https://whoreirc.org/files/doc/devel/whoreirc_user.en.html#dependencies[user's guide].
 
 === Compile
 
@@ -91,7 +91,7 @@ $ make install
 ----
 
 For more information or installation with autotools, please look at
-https://weechat.org/files/doc/devel/weechat_user.en.html#compile_with_autotools[user's guide].
+https://whoreirc.org/files/doc/devel/whoreirc_user.en.html#compile_with_autotools[user's guide].
 
 === Run tests
 

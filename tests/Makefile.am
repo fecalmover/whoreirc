@@ -19,9 +19,9 @@
 
 AM_CPPFLAGS = -DLOCALEDIR=\"$(datadir)/locale\" $(CPPUTEST_CFLAGS) -I$(abs_top_srcdir)
 
-noinst_LIBRARIES = lib_weechat_unit_tests_core.a
+noinst_LIBRARIES = lib_whoreirc_unit_tests_core.a
 
-lib_weechat_unit_tests_core_a_SOURCES = unit/test-plugins.cpp \
+lib_whoreirc_unit_tests_core_a_SOURCES = unit/test-plugins.cpp \
                                         unit/core/test-core-arraylist.cpp \
                                         unit/core/test-core-eval.cpp \
                                         unit/core/test-core-hashtable.cpp \
@@ -39,15 +39,15 @@ lib_weechat_unit_tests_core_a_SOURCES = unit/test-plugins.cpp \
 
 noinst_PROGRAMS = tests
 
-# Due to circular references, we must link two times with libweechat_core.a
+# Due to circular references, we must link two times with libwhoreirc_core.a
 # (and it must be 2 different path/names to be kept by linker)
-tests_LDADD = ./../src/core/lib_weechat_core.a \
-              ../src/plugins/lib_weechat_plugins.a \
-              ../src/gui/lib_weechat_gui_common.a \
-              ../src/gui/curses/headless/lib_weechat_gui_headless.a \
-              ../src/gui/curses/headless/lib_weechat_ncurses_fake.a \
-              lib_weechat_unit_tests_core.a \
-              ../src/core/lib_weechat_core.a \
+tests_LDADD = ./../src/core/lib_whoreirc_core.a \
+              ../src/plugins/lib_whoreirc_plugins.a \
+              ../src/gui/lib_whoreirc_gui_common.a \
+              ../src/gui/curses/headless/lib_whoreirc_gui_headless.a \
+              ../src/gui/curses/headless/lib_whoreirc_ncurses_fake.a \
+              lib_whoreirc_unit_tests_core.a \
+              ../src/core/lib_whoreirc_core.a \
               $(PLUGINS_LFLAGS) \
               $(GCRYPT_LFLAGS) \
               $(GNUTLS_LFLAGS) \
@@ -59,13 +59,13 @@ tests_LDFLAGS = -rdynamic
 tests_SOURCES = tests.cpp \
                 tests.h
 
-lib_LTLIBRARIES = lib_weechat_unit_tests_plugins.la
+lib_LTLIBRARIES = lib_whoreirc_unit_tests_plugins.la
 
-lib_weechat_unit_tests_plugins_la_SOURCES = unit/plugins/irc/test-irc-color.cpp \
+lib_whoreirc_unit_tests_plugins_la_SOURCES = unit/plugins/irc/test-irc-color.cpp \
                                             unit/plugins/irc/test-irc-config.cpp \
                                             unit/plugins/irc/test-irc-mode.cpp \
                                             unit/plugins/irc/test-irc-protocol.cpp
 
-lib_weechat_unit_tests_plugins_la_LDFLAGS = -module -no-undefined
+lib_whoreirc_unit_tests_plugins_la_LDFLAGS = -module -no-undefined
 
 EXTRA_DIST = CMakeLists.txt

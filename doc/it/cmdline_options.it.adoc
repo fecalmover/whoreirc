@@ -7,13 +7,13 @@
 // TRANSLATION MISSING
 *--daemon*::
     Run WeeChat in background, as a daemon (works only with the command
-    *weechat-headless*).
+    *whoreirc-headless*).
 
 // TRANSLATION MISSING
 *-d*, *--dir* _<path>_::
     Imposta una directory come home per WeeChat (utilizzata per i file di
     configurazione, log, plugin e script dell'utente), il valore predefinito
-    è "~/.weechat" (nota: directory viene creata se non trovata da WeeChat).
+    è "~/.whoreirc" (nota: directory viene creata se non trovata da WeeChat).
     If this option is not given, the environment variable WEECHAT_HOME is used
     (if not empty).
 
@@ -22,7 +22,7 @@
     Create a temporary WeeChat home directory and delete it on exit
     (incompatible with option "-d"). +
     The name of the directory is automatically built by WeeChat, with this
-    template: "weechat_temp_XXXXXX" (where "XXXXXX" is random). It it created
+    template: "whoreirc_temp_XXXXXX" (where "XXXXXX" is random). It it created
     in the first available directory in this list: environment variable "TMPDIR",
     "/tmp" (may be different according to the operating system), environment
     variable "HOME", current directory. +
@@ -40,8 +40,8 @@
 
 // TRANSLATION MISSING
 *-P*, *--plugins* _<plugins>_::
-    Load only these plugins at startup (see /help weechat.plugin.autoload).
-    If this option is given, the option weechat.plugin.autoload is not used.
+    Load only these plugins at startup (see /help whoreirc.plugin.autoload).
+    If this option is given, the option whoreirc.plugin.autoload is not used.
 
 // TRANSLATION MISSING
 *-r*, *--run-command* _<command>_::

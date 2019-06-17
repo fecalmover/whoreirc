@@ -18,39 +18,39 @@
 #
 
 if(ENABLE_MAN)
-  # man page: weechat
+  # man page: whoreirc
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat.1
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -b manpage -o weechat.1 ${CMAKE_CURRENT_SOURCE_DIR}/weechat.1.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc.1
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -b manpage -o whoreirc.1 ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc.1.it.adoc
     DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat.1.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc.1.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options_debug.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/man_plugin_options.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/man_files.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/man_copyright.it.adoc
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat.1 (it)"
+    COMMENT "Building whoreirc.1 (it)"
   )
-  add_custom_target(doc-man-weechat-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat.1)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat.1 DESTINATION ${MANDIR}/it/man1)
+  add_custom_target(doc-man-whoreirc-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc.1)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc.1 DESTINATION ${MANDIR}/it/man1)
 
-  # man page: weechat-headless
+  # man page: whoreirc-headless
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-headless.1
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -b manpage -o weechat-headless.1 ${CMAKE_CURRENT_SOURCE_DIR}/weechat-headless.1.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc-headless.1
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -b manpage -o whoreirc-headless.1 ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc-headless.1.it.adoc
     DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat-headless.1.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc-headless.1.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options_debug.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/man_plugin_options.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/man_files.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/man_copyright.it.adoc
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat-headless.1 (it)"
+    COMMENT "Building whoreirc-headless.1 (it)"
   )
-  add_custom_target(doc-man-weechat-headless-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-headless.1)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-headless.1 DESTINATION ${MANDIR}/it/man1)
+  add_custom_target(doc-man-whoreirc-headless-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc-headless.1)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc-headless.1 DESTINATION ${MANDIR}/it/man1)
 endif()
 
 if(ENABLE_DOC)
@@ -60,84 +60,84 @@ if(ENABLE_DOC)
 
   # user's guide
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat_user.it.html
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o weechat_user.it.html ${CMAKE_CURRENT_SOURCE_DIR}/weechat_user.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_user.it.html
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o whoreirc_user.it.html ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_user.it.adoc
     DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/../docinfo.html
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_user.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_user.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.it.adoc
     ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options_debug.it.adoc
     ${AUTOGEN_USER}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat_user.it.html"
+    COMMENT "Building whoreirc_user.it.html"
   )
-  add_custom_target(doc-user-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat_user.it.html)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat_user.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
+  add_custom_target(doc-user-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_user.it.html)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_user.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
 
   # plugin API reference
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat_plugin_api.it.html
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o weechat_plugin_api.it.html ${CMAKE_CURRENT_SOURCE_DIR}/weechat_plugin_api.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_plugin_api.it.html
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o whoreirc_plugin_api.it.html ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_plugin_api.it.adoc
     DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/../docinfo.html
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_plugin_api.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_plugin_api.it.adoc
     ${AUTOGEN_PLUGIN}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat_plugin_api.it.html"
+    COMMENT "Building whoreirc_plugin_api.it.html"
   )
-  add_custom_target(doc-plugin-api-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat_plugin_api.it.html)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat_plugin_api.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
+  add_custom_target(doc-plugin-api-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_plugin_api.it.html)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_plugin_api.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
 
   # scripting guide
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat_scripting.it.html
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o weechat_scripting.it.html ${CMAKE_CURRENT_SOURCE_DIR}/weechat_scripting.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_scripting.it.html
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o whoreirc_scripting.it.html ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_scripting.it.adoc
     DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/../docinfo.html
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_scripting.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_scripting.it.adoc
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat_scripting.it.html"
+    COMMENT "Building whoreirc_scripting.it.html"
   )
-  add_custom_target(doc-scripting-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat_scripting.it.html)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat_scripting.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
+  add_custom_target(doc-scripting-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_scripting.it.html)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_scripting.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
 
   # FAQ
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat_faq.it.html
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o weechat_faq.it.html ${CMAKE_CURRENT_SOURCE_DIR}/weechat_faq.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_faq.it.html
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o whoreirc_faq.it.html ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_faq.it.adoc
     DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/../docinfo.html
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_faq.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_faq.it.adoc
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat_faq.it.html"
+    COMMENT "Building whoreirc_faq.it.html"
   )
-  add_custom_target(doc-faq-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat_faq.it.html)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat_faq.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
+  add_custom_target(doc-faq-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_faq.it.html)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_faq.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
 
   # quickstart
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat_quickstart.it.html
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o weechat_quickstart.it.html ${CMAKE_CURRENT_SOURCE_DIR}/weechat_quickstart.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_quickstart.it.html
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o whoreirc_quickstart.it.html ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_quickstart.it.adoc
     DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/../docinfo.html
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_quickstart.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_quickstart.it.adoc
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat_quickstart.it.html"
+    COMMENT "Building whoreirc_quickstart.it.html"
   )
-  add_custom_target(doc-quickstart-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat_quickstart.it.html)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat_quickstart.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
+  add_custom_target(doc-quickstart-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_quickstart.it.html)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_quickstart.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
 
   # tester's guide
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat_tester.it.html
-    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o weechat_tester.it.html ${CMAKE_CURRENT_SOURCE_DIR}/weechat_tester.it.adoc
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_tester.it.html
+    COMMAND ${ASCIIDOCTOR_EXECUTABLE} ARGS ${ASCIIDOCTOR_ARGS} -o whoreirc_tester.it.html ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_tester.it.adoc
     DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/../docinfo.html
-    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_tester.it.adoc
+    ${CMAKE_CURRENT_SOURCE_DIR}/whoreirc_tester.it.adoc
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Building weechat_tester.it.html"
+    COMMENT "Building whoreirc_tester.it.html"
   )
-  add_custom_target(doc-tester-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat_tester.it.html)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat_tester.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
+  add_custom_target(doc-tester-it ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_tester.it.html)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whoreirc_tester.it.html DESTINATION ${SHAREDIR}/doc/${PROJECT_NAME})
 
 endif()

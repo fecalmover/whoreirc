@@ -1,4 +1,4 @@
-= weechat-headless(1)
+= whoreirc-headless(1)
 :doctype: manpage
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
@@ -8,16 +8,16 @@
 
 == 名前
 
-weechat-headless - 拡張可能なチャットクライアント (ヘッドレスモード)
+whoreirc-headless - 拡張可能なチャットクライアント (ヘッドレスモード)
 
 == 書式
 
 [verse]
-*weechat-headless* [-a|--no-connect] [--daemon] [-d|--dir <path>] [-t|--temp-dir] [-p|--no-plugin] [-P|--plugins <plugins>] [-r|--run-command <command>] [-s|--no-script] [--upgrade] [debug-option...] [plugin:option...]
-*weechat-headless* [-c|--colors]
-*weechat-headless* [-h|--help]
-*weechat-headless* [-l|--license]
-*weechat-headless* [-v|--version]
+*whoreirc-headless* [-a|--no-connect] [--daemon] [-d|--dir <path>] [-t|--temp-dir] [-p|--no-plugin] [-P|--plugins <plugins>] [-r|--run-command <command>] [-s|--no-script] [--upgrade] [debug-option...] [plugin:option...]
+*whoreirc-headless* [-c|--colors]
+*whoreirc-headless* [-h|--help]
+*whoreirc-headless* [-l|--license]
+*whoreirc-headless* [-v|--version]
 
 == 説明
 
@@ -25,7 +25,7 @@ WeeChat (Wee Enhanced Environment for Chat) はフリーのチャットクライ
 高速で軽量、多くのオペレーティングシステムで動くように設計されています。
 スクリプトを使って高度にカスタマイズと拡張可能です。
 
-*weechat-headless* コマンドを使うことで、WeeChat をヘッドレスモード (インターフェースなし) で実行できます。
+*whoreirc-headless* コマンドを使うことで、WeeChat をヘッドレスモード (インターフェースなし) で実行できます。
 ヘッドレスモードはテストや WeeChat をデーモン化する (オプション "--daemon" を使います) ために使われます。
 
 == オプション
@@ -48,7 +48,7 @@ include::man_files.ja.adoc[]
 
 == 関連項目
 
-*weechat*(1)
+*whoreirc*(1)
 
 == 著者
 
@@ -62,4 +62,4 @@ include::man_copyright.ja.adoc[]
 
 == サポート / バグ報告
 
-手助けを受けたりバグを報告するには: https://weechat.org/about/support
+手助けを受けたりバグを報告するには: https://whoreirc.org/about/support

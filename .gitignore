@@ -46,11 +46,11 @@ po/*quot*
 POTFILES
 remove-potcdate.sed
 Rules-quot
-weechat.pc
-weechat-*.cygport
+whoreirc.pc
+whoreirc-*.cygport
 
 *stamp
 stamp*
 
-src/gui/curses/weechat
-src/gui/curses/weechat-curses
+src/gui/curses/whoreirc
+src/gui/curses/whoreirc-curses

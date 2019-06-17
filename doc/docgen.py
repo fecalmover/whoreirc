@@ -24,13 +24,13 @@ plugins.
 Instructions to build config files yourself in WeeChat directories (replace
 all paths with your path to WeeChat):
     1.  run WeeChat and load this script, with following command:
-          /python load ~/src/weechat/doc/docgen.py
+          /python load ~/src/whoreirc/doc/docgen.py
     2.  change path to build in your doc/ directory:
-          /set plugins.var.python.docgen.path "~/src/weechat/doc"
+          /set plugins.var.python.docgen.path "~/src/whoreirc/doc"
     3.  run docgen command:
           /docgen
 Note: it is recommended to load only this script when building doc.
-Files should be in ~/src/weechat/doc/xx/autogen/ (where xx is language).
+Files should be in ~/src/whoreirc/doc/xx/autogen/ (where xx is language).
 """
 
 from __future__ import print_function
@@ -59,10 +59,10 @@ except ImportError as message:
     IMPORT_OK = False
 
 try:
-    import weechat  # pylint: disable=import-error
+    import whoreirc  # pylint: disable=import-error
 except ImportError:
     print('This script must be run under WeeChat.')
-    print('Get WeeChat now at: https://weechat.org/')
+    print('Get WeeChat now at: https://whoreirc.org/')
     IMPORT_OK = False
 
 # default path where doc files will be written (should be doc/ in sources
@@ -74,7 +74,7 @@ except ImportError:
 #       |-- fr
 #       |   |-- autogen
 #       ...
-DEFAULT_PATH = '~/src/weechat/doc'
+DEFAULT_PATH = '~/src/whoreirc/doc'
 
 # list of locales for which we want to build doc files to include
 LOCALE_LIST = ('en_US', 'fr_FR', 'it_IT', 'de_DE', 'ja_JP', 'pl_PL')
@@ -85,10 +85,10 @@ LOCALE_LIST = ('en_US', 'fr_FR', 'it_IT', 'de_DE', 'ja_JP', 'pl_PL')
 #        "o" = write config options for plugin
 # if plugin is listed without "c", that means plugin has only one command
 # /name (where "name" is name of plugin)
-# Note: we consider core is a plugin called "weechat"
+# Note: we consider core is a plugin called "whoreirc"
 PLUGIN_LIST = {
     'sec': 'o',
-    'weechat': 'co',
+    'whoreirc': 'co',
     'alias': '',
     'buflist': 'co',
     'charset': 'o',
@@ -127,11 +127,11 @@ IGNORE_OPTIONS = (
     r'spell\.dict\..*',
     r'spell\.option\..*',
     r'trigger\.trigger\..*',
-    r'weechat\.palette\..*',
-    r'weechat\.proxy\..*',
-    r'weechat\.bar\..*',
-    r'weechat\.debug\..*',
-    r'weechat\.notify\..*',
+    r'whoreirc\.palette\..*',
+    r'whoreirc\.proxy\..*',
+    r'whoreirc\.bar\..*',
+    r'whoreirc\.debug\..*',
+    r'whoreirc\.notify\..*',
 )
 
 # completions to ignore
@@ -203,17 +203,17 @@ def get_commands():
     command, xxx.
     """
     commands = defaultdict(lambda: defaultdict(defaultdict))
-    infolist = weechat.infolist_get('hook', '', 'command')
-    while weechat.infolist_next(infolist):
-        plugin = weechat.infolist_string(infolist, 'plugin_name') or 'weechat'
+    infolist = whoreirc.infolist_get('hook', '', 'command')
+    while whoreirc.infolist_next(infolist):
+        plugin = whoreirc.infolist_string(infolist, 'plugin_name') or 'whoreirc'
         if plugin in PLUGIN_LIST:
-            command = weechat.infolist_string(infolist, 'command')
+            command = whoreirc.infolist_string(infolist, 'command')
             if command == plugin or 'c' in PLUGIN_LIST[plugin]:
                 for key in ('description', 'args', 'args_description',
                             'completion'):
                     commands[plugin][command][key] = \
-                        weechat.infolist_string(infolist, key)
-    weechat.infolist_free(infolist)
+                        whoreirc.infolist_string(infolist, key)
+    whoreirc.infolist_free(infolist)
     return commands
 
 
@@ -224,22 +224,22 @@ def get_options():
     """
     options = \
         defaultdict(lambda: defaultdict(lambda: defaultdict(defaultdict)))
-    infolist = weechat.infolist_get('option', '', '')
-    while weechat.infolist_next(infolist):
-        full_name = weechat.infolist_string(infolist, 'full_name')
+    infolist = whoreirc.infolist_get('option', '', '')
+    while whoreirc.infolist_next(infolist):
+        full_name = whoreirc.infolist_string(infolist, 'full_name')
         if not re.search('|'.join(IGNORE_OPTIONS), full_name):
-            config = weechat.infolist_string(infolist, 'config_name')
+            config = whoreirc.infolist_string(infolist, 'config_name')
             if config in PLUGIN_LIST and 'o' in PLUGIN_LIST[config]:
-                section = weechat.infolist_string(infolist, 'section_name')
-                option = weechat.infolist_string(infolist, 'option_name')
+                section = whoreirc.infolist_string(infolist, 'section_name')
+                option = whoreirc.infolist_string(infolist, 'option_name')
                 for key in ('type', 'string_values', 'default_value',
                             'description'):
                     options[config][section][option][key] = \
-                        weechat.infolist_string(infolist, key)
+                        whoreirc.infolist_string(infolist, key)
                 for key in ('min', 'max', 'null_value_allowed'):
                     options[config][section][option][key] = \
-                        weechat.infolist_integer(infolist, key)
-    weechat.infolist_free(infolist)
+                        whoreirc.infolist_integer(infolist, key)
+    whoreirc.infolist_free(infolist)
     return options
 
 
@@ -249,14 +249,14 @@ def get_infos():
     name, xxx.
     """
     infos = defaultdict(lambda: defaultdict(defaultdict))
-    infolist = weechat.infolist_get('hook', '', 'info')
-    while weechat.infolist_next(infolist):
-        info_name = weechat.infolist_string(infolist, 'info_name')
-        plugin = weechat.infolist_string(infolist, 'plugin_name') or 'weechat'
+    infolist = whoreirc.infolist_get('hook', '', 'info')
+    while whoreirc.infolist_next(infolist):
+        info_name = whoreirc.infolist_string(infolist, 'info_name')
+        plugin = whoreirc.infolist_string(infolist, 'plugin_name') or 'whoreirc'
         for key in ('description', 'args_description'):
             infos[plugin][info_name][key] = \
-                weechat.infolist_string(infolist, key)
-    weechat.infolist_free(infolist)
+                whoreirc.infolist_string(infolist, key)
+    whoreirc.infolist_free(infolist)
     return infos
 
 
@@ -266,14 +266,14 @@ def get_infos_hashtable():
     plugin, name, xxx.
     """
     infos_hashtable = defaultdict(lambda: defaultdict(defaultdict))
-    infolist = weechat.infolist_get('hook', '', 'info_hashtable')
-    while weechat.infolist_next(infolist):
-        info_name = weechat.infolist_string(infolist, 'info_name')
-        plugin = weechat.infolist_string(infolist, 'plugin_name') or 'weechat'
+    infolist = whoreirc.infolist_get('hook', '', 'info_hashtable')
+    while whoreirc.infolist_next(infolist):
+        info_name = whoreirc.infolist_string(infolist, 'info_name')
+        plugin = whoreirc.infolist_string(infolist, 'plugin_name') or 'whoreirc'
         for key in ('description', 'args_description', 'output_description'):
             infos_hashtable[plugin][info_name][key] = \
-                weechat.infolist_string(infolist, key)
-    weechat.infolist_free(infolist)
+                whoreirc.infolist_string(infolist, key)
+    whoreirc.infolist_free(infolist)
     return infos_hashtable
 
 
@@ -283,14 +283,14 @@ def get_infolists():
     name, xxx.
     """
     infolists = defaultdict(lambda: defaultdict(defaultdict))
-    infolist = weechat.infolist_get('hook', '', 'infolist')
-    while weechat.infolist_next(infolist):
-        infolist_name = weechat.infolist_string(infolist, 'infolist_name')
-        plugin = weechat.infolist_string(infolist, 'plugin_name') or 'weechat'
+    infolist = whoreirc.infolist_get('hook', '', 'infolist')
+    while whoreirc.infolist_next(infolist):
+        infolist_name = whoreirc.infolist_string(infolist, 'infolist_name')
+        plugin = whoreirc.infolist_string(infolist, 'plugin_name') or 'whoreirc'
         for key in ('description', 'pointer_description', 'args_description'):
             infolists[plugin][infolist_name][key] = \
-                weechat.infolist_string(infolist, key)
-    weechat.infolist_free(infolist)
+                whoreirc.infolist_string(infolist, key)
+    whoreirc.infolist_free(infolist)
     return infolists
 
 
@@ -301,40 +301,40 @@ def get_hdata():
     name, xxx.
     """
     hdata = defaultdict(lambda: defaultdict(defaultdict))
-    infolist = weechat.infolist_get('hook', '', 'hdata')
-    while weechat.infolist_next(infolist):
-        hdata_name = weechat.infolist_string(infolist, 'hdata_name')
-        plugin = weechat.infolist_string(infolist, 'plugin_name') or 'weechat'
+    infolist = whoreirc.infolist_get('hook', '', 'hdata')
+    while whoreirc.infolist_next(infolist):
+        hdata_name = whoreirc.infolist_string(infolist, 'hdata_name')
+        plugin = whoreirc.infolist_string(infolist, 'plugin_name') or 'whoreirc'
         hdata[plugin][hdata_name]['description'] = \
-            weechat.infolist_string(infolist, 'description')
+            whoreirc.infolist_string(infolist, 'description')
         variables = ''
         variables_update = ''
         lists = ''
-        ptr_hdata = weechat.hdata_get(hdata_name)
+        ptr_hdata = whoreirc.hdata_get(hdata_name)
         if ptr_hdata:
             hdata2 = []
-            string = weechat.hdata_get_string(ptr_hdata, 'var_keys_values')
+            string = whoreirc.hdata_get_string(ptr_hdata, 'var_keys_values')
             if string:
                 for item in string.split(','):
                     key = item.split(':')[0]
-                    var_offset = weechat.hdata_get_var_offset(ptr_hdata, key)
+                    var_offset = whoreirc.hdata_get_var_offset(ptr_hdata, key)
                     var_array_size = \
-                        weechat.hdata_get_var_array_size_string(ptr_hdata, '',
+                        whoreirc.hdata_get_var_array_size_string(ptr_hdata, '',
                                                                 key)
                     if var_array_size:
                         var_array_size = \
                             ', array_size: "{0}"'.format(var_array_size)
-                    var_hdata = weechat.hdata_get_var_hdata(ptr_hdata, key)
+                    var_hdata = whoreirc.hdata_get_var_hdata(ptr_hdata, key)
                     if var_hdata:
                         var_hdata = ', hdata: "{0}"'.format(var_hdata)
-                    type_string = weechat.hdata_get_var_type_string(ptr_hdata,
+                    type_string = whoreirc.hdata_get_var_type_string(ptr_hdata,
                                                                     key)
                     hdata2.append({
                         'offset': var_offset,
                         'text': '_{0}_ ({1})'.format(key, type_string),
                         'textlong': '_{0}_   ({1}{2}{3})'.format(
                             key, type_string, var_array_size, var_hdata),
-                        'update': weechat.hdata_update(
+                        'update': whoreirc.hdata_update(
                             ptr_hdata, '', {'__update_allowed': key}),
                     })
                 hdata2 = sorted(hdata2, key=itemgetter('offset'))
@@ -342,16 +342,16 @@ def get_hdata():
                     variables += '{0} +\n'.format(item['textlong'])
                     if item['update']:
                         variables_update += '    {0} +\n'.format(item['text'])
-                if weechat.hdata_update(ptr_hdata, '',
+                if whoreirc.hdata_update(ptr_hdata, '',
                                         {'__create_allowed': ''}):
                     variables_update += '    _{hdata_update_create}_ +\n'
-                if weechat.hdata_update(ptr_hdata, '',
+                if whoreirc.hdata_update(ptr_hdata, '',
                                         {'__delete_allowed': ''}):
                     variables_update += '    _{hdata_update_delete}_ +\n'
             hdata[plugin][hdata_name]['vars'] = variables
             hdata[plugin][hdata_name]['vars_update'] = variables_update
 
-            string = weechat.hdata_get_string(ptr_hdata, 'list_keys')
+            string = whoreirc.hdata_get_string(ptr_hdata, 'list_keys')
             if string:
                 list_lists = string.split(',')
                 lists_std = [l for l in list_lists
@@ -361,7 +361,7 @@ def get_hdata():
                 for item in sorted(lists_std) + sorted(lists_last):
                     lists += '_{0}_ +\n'.format(item)
             hdata[plugin][hdata_name]['lists'] = lists
-    weechat.infolist_free(infolist)
+    whoreirc.infolist_free(infolist)
     return hdata
 
 
@@ -371,15 +371,15 @@ def get_completions():
     plugin, item, xxx.
     """
     completions = defaultdict(lambda: defaultdict(defaultdict))
-    infolist = weechat.infolist_get('hook', '', 'completion')
-    while weechat.infolist_next(infolist):
-        completion_item = weechat.infolist_string(infolist, 'completion_item')
+    infolist = whoreirc.infolist_get('hook', '', 'completion')
+    while whoreirc.infolist_next(infolist):
+        completion_item = whoreirc.infolist_string(infolist, 'completion_item')
         if not re.search('|'.join(IGNORE_COMPLETIONS_ITEMS), completion_item):
-            plugin = weechat.infolist_string(infolist, 'plugin_name') or \
-                'weechat'
+            plugin = whoreirc.infolist_string(infolist, 'plugin_name') or \
+                'whoreirc'
             completions[plugin][completion_item]['description'] = \
-                weechat.infolist_string(infolist, 'description')
-    weechat.infolist_free(infolist)
+                whoreirc.infolist_string(infolist, 'description')
+    whoreirc.infolist_free(infolist)
     return completions
 
 
@@ -388,16 +388,16 @@ def get_url_options():
     Get list of URL options as list of dictionaries.
     """
     url_options = []
-    infolist = weechat.infolist_get('url_options', '', '')
-    while weechat.infolist_next(infolist):
+    infolist = whoreirc.infolist_get('url_options', '', '')
+    while whoreirc.infolist_next(infolist):
         url_options.append({
-            'name': weechat.infolist_string(infolist, 'name').lower(),
-            'option': weechat.infolist_integer(infolist, 'option'),
-            'type': weechat.infolist_string(infolist, 'type'),
-            'constants': weechat.infolist_string(
+            'name': whoreirc.infolist_string(infolist, 'name').lower(),
+            'option': whoreirc.infolist_integer(infolist, 'option'),
+            'type': whoreirc.infolist_string(infolist, 'type'),
+            'constants': whoreirc.infolist_string(
                 infolist, 'constants').lower().replace(',', ', ')
         })
-    weechat.infolist_free(infolist)
+    whoreirc.infolist_free(infolist)
     return url_options
 
 
@@ -406,14 +406,14 @@ def get_default_aliases():
     Get list of default aliases as list of dictionaries.
     """
     default_aliases = []
-    infolist = weechat.infolist_get('alias_default', '', '')
-    while weechat.infolist_next(infolist):
+    infolist = whoreirc.infolist_get('alias_default', '', '')
+    while whoreirc.infolist_next(infolist):
         default_aliases.append({
-            'name': '/' + weechat.infolist_string(infolist, 'name'),
-            'command': '/' + weechat.infolist_string(infolist, 'command'),
-            'completion': weechat.infolist_string(infolist, 'completion'),
+            'name': '/' + whoreirc.infolist_string(infolist, 'name'),
+            'command': '/' + whoreirc.infolist_string(infolist, 'command'),
+            'completion': whoreirc.infolist_string(infolist, 'completion'),
         })
-    weechat.infolist_free(infolist)
+    whoreirc.infolist_free(infolist)
     return default_aliases
 
 
@@ -422,14 +422,14 @@ def get_irc_colors():
     Get list of IRC colors as list of dictionaries.
     """
     irc_colors = []
-    infolist = weechat.infolist_get('irc_color_weechat', '', '')
-    while weechat.infolist_next(infolist):
+    infolist = whoreirc.infolist_get('irc_color_whoreirc', '', '')
+    while whoreirc.infolist_next(infolist):
         irc_colors.append({
-            'color_irc': weechat.infolist_string(infolist, 'color_irc'),
-            'color_weechat': weechat.infolist_string(infolist,
-                                                     'color_weechat'),
+            'color_irc': whoreirc.infolist_string(infolist, 'color_irc'),
+            'color_whoreirc': whoreirc.infolist_string(infolist,
+                                                     'color_whoreirc'),
         })
-    weechat.infolist_free(infolist)
+    whoreirc.infolist_free(infolist)
     return irc_colors
 
 
@@ -438,15 +438,15 @@ def get_plugins_priority():
     Get priority of default WeeChat plugins as a dictionary.
     """
     plugins_priority = {}
-    infolist = weechat.infolist_get('plugin', '', '')
-    while weechat.infolist_next(infolist):
-        name = weechat.infolist_string(infolist, 'name')
-        priority = weechat.infolist_integer(infolist, 'priority')
+    infolist = whoreirc.infolist_get('plugin', '', '')
+    while whoreirc.infolist_next(infolist):
+        name = whoreirc.infolist_string(infolist, 'name')
+        priority = whoreirc.infolist_integer(infolist, 'priority')
         if priority in plugins_priority:
             plugins_priority[priority].append(name)
         else:
             plugins_priority[priority] = [name]
-    weechat.infolist_free(infolist)
+    whoreirc.infolist_free(infolist)
     return plugins_priority
 
 
@@ -471,7 +471,7 @@ def docgen_cmd_cb(data, buf, args):
     plugins_priority = get_plugins_priority()
 
     # get path and replace ~ by home if needed
-    path = weechat.config_get_plugin('path')
+    path = whoreirc.config_get_plugin('path')
     if path.startswith('~'):
         path = os.environ['HOME'] + path[1:]
 
@@ -488,16 +488,16 @@ def docgen_cmd_cb(data, buf, args):
             if key != 'total2':
                 num_files[key] = 0
                 num_files_updated[key] = 0
-        trans = gettext.translation('weechat',
-                                    weechat.info_get('weechat_localedir', ''),
+        trans = gettext.translation('whoreirc',
+                                    whoreirc.info_get('whoreirc_localedir', ''),
                                     languages=[locale + '.UTF-8'],
                                     fallback=True)
         trans.install()
         directory = path + '/' + locale[0:2] + '/autogen'
         if not os.path.isdir(directory):
-            weechat.prnt('',
+            whoreirc.prnt('',
                          '{0}docgen error: directory "{1}" does not exist'
-                         ''.format(weechat.prefix('error'), directory))
+                         ''.format(whoreirc.prefix('error'), directory))
             continue
 
         # write commands
@@ -612,7 +612,7 @@ def docgen_cmd_cb(data, buf, args):
         for color in irc_colors:
             doc.write('| {0} | {1}\n'
                       ''.format(escape(color['color_irc']),
-                                escape(color['color_weechat'])))
+                                escape(color['color_whoreirc'])))
         doc.write('|===\n')
         doc.update('irc_colors', num_files, num_files_updated)
 
@@ -748,36 +748,36 @@ def docgen_cmd_cb(data, buf, args):
         doc.update('plugins_priority', num_files, num_files_updated)
 
         # write counters
-        weechat.prnt('',
+        whoreirc.prnt('',
                      'docgen: {0}: {1} files, {2} updated'
                      ''.format(locale,
                                num_files['total1'],
                                num_files_updated['total1']))
-    weechat.prnt('',
+    whoreirc.prnt('',
                  'docgen: total: {0} files, {1} updated'
                  ''.format(num_files['total2'], num_files_updated['total2']))
-    return weechat.WEECHAT_RC_OK
+    return whoreirc.WEECHAT_RC_OK
 
 
 def docgen_completion_cb(data, completion_item, buf, completion):
     """Callback for completion."""
     for locale in LOCALE_LIST:
-        weechat.hook_completion_list_add(completion, locale, 0,
-                                         weechat.WEECHAT_LIST_POS_SORT)
-    return weechat.WEECHAT_RC_OK
+        whoreirc.hook_completion_list_add(completion, locale, 0,
+                                         whoreirc.WEECHAT_LIST_POS_SORT)
+    return whoreirc.WEECHAT_RC_OK
 
 
 if __name__ == '__main__' and IMPORT_OK:
-    if weechat.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION,
+    if whoreirc.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION,
                         SCRIPT_LICENSE, SCRIPT_DESC, '', ''):
-        weechat.hook_command(SCRIPT_COMMAND,
+        whoreirc.hook_command(SCRIPT_COMMAND,
                              'Documentation generator.',
                              '[locales]',
                              'locales: list of locales to build (by default '
                              'build all locales)',
                              '%(docgen_locales)|%*',
                              'docgen_cmd_cb', '')
-        weechat.hook_completion('docgen_locales', 'locales for docgen',
+        whoreirc.hook_completion('docgen_locales', 'locales for docgen',
                                 'docgen_completion_cb', '')
-        if not weechat.config_is_set_plugin('path'):
-            weechat.config_set_plugin('path', DEFAULT_PATH)
+        if not whoreirc.config_is_set_plugin('path'):
+            whoreirc.config_set_plugin('path', DEFAULT_PATH)

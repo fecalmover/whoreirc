@@ -55,7 +55,7 @@
 ....
 
 [NOTE]
-この文書で述べる全てのクライアントは _リレー_ プラグインの _weechat_ プロトコルを使っています。また
+この文書で述べる全てのクライアントは _リレー_ プラグインの _whoreirc_ プロトコルを使っています。また
 _リレー_ プラグインは IRC クライアントからの接続を受け入れることができます、この場合
 _リレー_ プラグインは _IRC プロキシ_ のように振舞います (この文書では説明しません)。
 
@@ -267,7 +267,7 @@ infolist buffer
 引数:
 
 * _buffer_: ポインタ (_0x12345_) またはバッファの完全な名前 (例:
-  _core.weechat_ または _irc.freenode.#weechat_)
+  _core.whoreirc_ または _irc.freenode.#whoreirc_)
 
 例:
 
@@ -275,8 +275,8 @@ infolist buffer
 # 全てのバッファのニックネームリストを要求
 nicklist
 
-# irc.freenode.#weechat のニックネームリストを要求
-nicklist irc.freenode.#weechat
+# irc.freenode.#whoreirc のニックネームリストを要求
+nicklist irc.freenode.#whoreirc
 ----
 
 [[command_input]]
@@ -293,15 +293,15 @@ input <buffer> <data>
 引数:
 
 * _buffer_: ポインタ (_0x12345_) またはバッファの完全な名前 (例:
-  _core.weechat_ または _irc.freenode.#weechat_)
+  _core.whoreirc_ または _irc.freenode.#whoreirc_)
 * _data_: バッファに送信するデータ: `/`
    で始まる場合、バッファ内でコマンドとして実行されます、それ以外の場合、テキストはバッファの入力として送信されます。
 
 例:
 
 ----
-input core.weechat /help filter
-input irc.freenode.#weechat hello!
+input core.whoreirc /help filter
+input irc.freenode.#whoreirc hello!
 ----
 
 [[command_sync]]
@@ -325,7 +325,7 @@ sync [<buffer>[,<buffer>...] <option>[,<option>...]]
 引数:
 
 * _buffer_: ポインタ (_0x12345_) またはバッファの完全な名前 (例:
-  _core.weechat_ または _irc.freenode.#weechat_);
+  _core.whoreirc_ または _irc.freenode.#whoreirc_);
   全てのバッファを指定するには "*" を使ってください
 * _options_: 以下に挙げるキーワード、コンマ区切り ("*" に対するデフォルトは
   _buffers,upgrade,buffer,nicklist_、バッファに対するデフォルトは _buffer,nicklist_):
@@ -353,12 +353,12 @@ sync * buffers,upgrade,buffer,nicklist
 # コアバッファを同期
 sync core.buffer
 
-# #weechat チャンネルを同期、ニックネームリストは受信しない
-sync irc.freenode.#weechat buffer
+# #whoreirc チャンネルを同期、ニックネームリストは受信しない
+sync irc.freenode.#whoreirc buffer
 
-# 一般的なシグナル + #weechat チャンネルに対する全てのシグナルを取得
+# 一般的なシグナル + #whoreirc チャンネルに対する全てのシグナルを取得
 sync * buffers,upgrade
-sync irc.freenode.#weechat
+sync irc.freenode.#whoreirc
 ----
 
 [[command_desync]]
@@ -381,7 +381,7 @@ desync [<buffer>[,<buffer>...] <option>[,<option>...]]
 引数:
 
 * _buffer_: ポインタ (_0x12345_) またはバッファの完全な名前 (例:
-  _core.weechat_ または _irc.freenode.#weechat_);
+  _core.whoreirc_ または _irc.freenode.#whoreirc_);
   全てのバッファを指定するには "*" を使ってください
 * _options_: 以下に挙げるキーワード、コンマ区切り ("*" に対するデフォルトは
   _buffers,upgrade,buffer,nicklist_、バッファに対するデフォルトは _buffer,nicklist_):
@@ -389,8 +389,8 @@ desync [<buffer>[,<buffer>...] <option>[,<option>...]]
 
 [NOTE]
 buffer に "*" を指定した場合、(名前を使って) 同期されている他のバッファは同期状態が保存されます。 +
-このため "sync *"、"sync irc.freenode.#weechat"、"desync *" の順に送信した場合、WeeChat
-は #weechat チャンネルに対するアップデートを送信し続けます
+このため "sync *"、"sync irc.freenode.#whoreirc"、"desync *" の順に送信した場合、WeeChat
+は #whoreirc チャンネルに対するアップデートを送信し続けます
 (アップデートを止めるには、明示してこれを中止しなければいけません)。
 
 例:
@@ -403,11 +403,11 @@ desync
 desync *
 desync * buffers,upgrade,buffer,nicklist
 
-# #weechat チャンネルのニックネームリストの同期を中止 (バッファは同期する)
-desync irc.freenode.#weechat nicklist
+# #whoreirc チャンネルのニックネームリストの同期を中止 (バッファは同期する)
+desync irc.freenode.#whoreirc nicklist
 
-# #weechat チャンネルの同期を中止
-desync irc.freenode.#weechat
+# #whoreirc チャンネルの同期を中止
+desync irc.freenode.#whoreirc
 ----
 
 [[command_test]]
@@ -619,8 +619,8 @@ hdata として送られるデータ:
 |===
 | 名前            | 型        | 説明
 | number          | integer   | バッファ番号 (1 以上)
-| full_name       | string    | 完全な名前 (例: _irc.freenode.#weechat_)
-| short_name      | string    | 短い名前 (例: _#weechat_)
+| full_name       | string    | 完全な名前 (例: _irc.freenode.#whoreirc_)
+| short_name      | string    | 短い名前 (例: _#whoreirc_)
 | nicklist        | integer   | バッファがニックネームリストを持つ場合 1、それ以外は 0
 | title           | string    | バッファのタイトル
 | local_variables | hashtable | ローカル変数
@@ -628,8 +628,8 @@ hdata として送られるデータ:
 | next_buffer     | pointer   | 次のバッファへのポインタ
 |===
 
-例: freenode の _#weechat_ チャンネルに参加、新しいバッファは
-_irc.freenode.#weechat_:
+例: freenode の _#whoreirc_ チャンネルに参加、新しいバッファは
+_irc.freenode.#whoreirc_:
 
 [source,python]
 ----
@@ -641,11 +641,11 @@ hda:
   item 1:
     __path: ['0x35a8a60']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     short_name: None
     nicklist: 0
     title: None
-    local_variables: {'plugin': 'irc', 'name': 'freenode.#weechat'}
+    local_variables: {'plugin': 'irc', 'name': 'freenode.#whoreirc'}
     prev_buffer: '0x34e7400'
     next_buffer: '0x0'
 ----
@@ -662,12 +662,12 @@ hdata として送られるデータ:
 |===
 | 名前        | 型      | 説明
 | number      | integer | バッファ番号 (1 以上)
-| full_name   | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name   | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | prev_buffer | pointer | 前のバッファへのポインタ
 | next_buffer | pointer | 次のバッファへのポインタ
 |===
 
-例: バッファ _irc.freenode.#weechat_ を番号 2 に移動:
+例: バッファ _irc.freenode.#whoreirc_ を番号 2 に移動:
 
 [source,python]
 ----
@@ -678,7 +678,7 @@ hda:
   item 1:
     __path: ['0x34588c0']
     number: 2
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     prev_buffer: '0x347b9f0'
     next_buffer: '0x3471bc0'
 ----
@@ -695,12 +695,12 @@ hdata として送られるデータ:
 |===
 | 名前        | 型      | 説明
 | number      | integer | バッファ番号 (1 以上)
-| full_name   | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name   | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | prev_buffer | pointer | 前のバッファへのポインタ
 | next_buffer | pointer | 次のバッファへのポインタ
 |===
 
-例: バッファ _irc.freenode.#weechat_ をバッファ #2 とマージ:
+例: バッファ _irc.freenode.#whoreirc_ をバッファ #2 とマージ:
 
 [source,python]
 ----
@@ -711,7 +711,7 @@ hda:
   item 1:
     __path: ['0x4db4c00']
     number: 2
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     prev_buffer: '0x4cef9b0'
     next_buffer: '0x0'
 ----
@@ -728,12 +728,12 @@ hdata として送られるデータ:
 |===
 | 名前        | 型      | 説明
 | number      | integer | バッファ番号 (1 以上)
-| full_name   | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name   | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | prev_buffer | pointer | 前のバッファへのポインタ
 | next_buffer | pointer | 次のバッファへのポインタ
 |===
 
-例: バッファ _irc.freenode.#weechat_ をアンマージ:
+例: バッファ _irc.freenode.#whoreirc_ をアンマージ:
 
 [source,python]
 ----
@@ -744,7 +744,7 @@ hda:
   item 1:
     __path: ['0x4db4c00']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     prev_buffer: '0x4cef9b0'
     next_buffer: '0x0'
 ----
@@ -763,12 +763,12 @@ hdata として送られるデータ:
 |===
 | 名前        | 型      | 説明
 | number      | integer | バッファ番号 (1 以上)
-| full_name   | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name   | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | prev_buffer | pointer | 前のバッファへのポインタ
 | next_buffer | pointer | 次のバッファへのポインタ
 |===
 
-例: バッファ _irc.freenode.#weechat_ を隠す:
+例: バッファ _irc.freenode.#whoreirc_ を隠す:
 
 [source,python]
 ----
@@ -779,7 +779,7 @@ hda:
   item 1:
     __path: ['0x4db4c00']
     number: 2
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     prev_buffer: '0x4cef9b0'
     next_buffer: '0x0'
 ----
@@ -798,12 +798,12 @@ hdata として送られるデータ:
 |===
 | 名前        | 型      | 説明
 | number      | integer | バッファ番号 (1 以上)
-| full_name   | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name   | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | prev_buffer | pointer | 前のバッファへのポインタ
 | next_buffer | pointer | 次のバッファへのポインタ
 |===
 
-例: バッファ _irc.freenode.#weechat_ を隠すことを止める:
+例: バッファ _irc.freenode.#whoreirc_ を隠すことを止める:
 
 [source,python]
 ----
@@ -814,7 +814,7 @@ hda:
   item 1:
     __path: ['0x4db4c00']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     prev_buffer: '0x4cef9b0'
     next_buffer: '0x0'
 ----
@@ -831,8 +831,8 @@ hdata として送られるデータ:
 |===
 | 名前            | 型        | 説明
 | number          | integer   | バッファ番号 (1 以上)
-| full_name       | string    | 完全な名前 (例: _irc.freenode.#weechat_)
-| short_name      | string    | 短い名前 (例: _#weechat_)
+| full_name       | string    | 完全な名前 (例: _irc.freenode.#whoreirc_)
+| short_name      | string    | 短い名前 (例: _#whoreirc_)
 | local_variables | hashtable | ローカル変数
 |===
 
@@ -865,11 +865,11 @@ hdata として送られるデータ:
 |===
 | 名前      | 型      | 説明
 | number    | integer | バッファ番号 (1 以上)
-| full_name | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | title     | string  | バッファのタイトル
 |===
 
-例: チャンネル _#weechat_ のトピックを変更:
+例: チャンネル _#whoreirc_ のトピックを変更:
 
 [source,python]
 ----
@@ -880,8 +880,8 @@ hda:
   item 1:
     __path: ['0x4a715d0']
     number: 3
-    full_name: 'irc.freenode.#weechat'
-    title: 'Welcome on #weechat!  https://weechat.org/'
+    full_name: 'irc.freenode.#whoreirc'
+    title: 'Welcome on #whoreirc!  https://whoreirc.org/'
 ----
 
 [[message_buffer_cleared]]
@@ -898,10 +898,10 @@ hdata として送られるデータ:
 |===
 | 名前      | 型      | 説明
 | number    | integer | バッファ番号 (1 以上)
-| full_name | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 |===
 
-例: バッファ _irc.freenode.#weechat_ をクリア:
+例: バッファ _irc.freenode.#whoreirc_ をクリア:
 
 [source,python]
 ----
@@ -912,7 +912,7 @@ hda:
   item 1:
     __path: ['0x4a715d0']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
 ----
 
 [[message_buffer_type_changed]]
@@ -927,7 +927,7 @@ hdata として送られるデータ:
 |===
 | 名前      | 型      | 説明
 | number    | integer | バッファ番号 (1 以上)
-| full_name | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | type      | integer | バッファの種類: 0 = 書式あり (デフォルト)、1 = 自由内容
 |===
 
@@ -959,11 +959,11 @@ hdata として送られるデータ:
 |===
 | 名前            | 型        | 説明
 | number          | integer   | バッファ番号 (1 以上)
-| full_name       | string    | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name       | string    | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | local_variables | hashtable | ローカル変数
 |===
 
-例: _irc.freenode.#weechat_ にローカル変数 _test_ を追加:
+例: _irc.freenode.#whoreirc_ にローカル変数 _test_ を追加:
 
 [source,python]
 ----
@@ -974,10 +974,10 @@ hda:
   item 1:
     __path: ['0x4a73de0']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     local_variables: {'server': 'freenode', 'test': 'value', 'plugin': 'irc',
-                      'type': 'channel', 'channel': '#weechat', 'nick': 'test',
-                      'name': 'freenode.#weechat'}
+                      'type': 'channel', 'channel': '#whoreirc', 'nick': 'test',
+                      'name': 'freenode.#whoreirc'}
 ----
 
 [[message_buffer_localvar_changed]]
@@ -992,11 +992,11 @@ hdata として送られるデータ:
 |===
 | 名前            | 型        | 説明
 | number          | integer   | バッファ番号 (1 以上)
-| full_name       | string    | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name       | string    | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | local_variables | hashtable | ローカル変数
 |===
 
-例: _irc.freenode.#weechat_ に含まれるローカル変数 _test_ を更新:
+例: _irc.freenode.#whoreirc_ に含まれるローカル変数 _test_ を更新:
 
 [source,python]
 ----
@@ -1007,10 +1007,10 @@ hda:
   item 1:
     __path: ['0x4a73de0']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
     local_variables: {'server': 'local', 'test': 'value2', 'plugin': 'irc',
-                      'type': 'channel', 'channel': '#weechat', 'nick': 'test',
-                      'name': 'freenode.#weechat'}
+                      'type': 'channel', 'channel': '#whoreirc', 'nick': 'test',
+                      'name': 'freenode.#whoreirc'}
 ----
 
 [[message_buffer_localvar_removed]]
@@ -1025,11 +1025,11 @@ hdata として送られるデータ:
 |===
 | 名前            | 型        | 説明
 | number          | integer   | バッファ番号 (1 以上)
-| full_name       | string    | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name       | string    | 完全な名前 (例: _irc.freenode.#whoreirc_)
 | local_variables | hashtable | ローカル変数
 |===
 
-例: _irc.freenode.#weechat_ からローカル変数 _test_ を削除:
+例: _irc.freenode.#whoreirc_ からローカル変数 _test_ を削除:
 
 [source,python]
 ----
@@ -1042,7 +1042,7 @@ hda:
     number: 3
     full_name: 'irc.freenode.#prout'
     local_variables: {'server': 'local', 'plugin': 'irc', 'type': 'channel',
-                      'channel': '#weechat', 'nick': 'test', 'name': 'freenode.#weechat'}
+                      'channel': '#whoreirc', 'nick': 'test', 'name': 'freenode.#whoreirc'}
 ----
 
 [[message_buffer_line_added]]
@@ -1066,7 +1066,7 @@ hdata として送られるデータ:
 | message      | string           | メッセージ
 |===
 
-例: バッファ _irc.freenode.#weechat_ でニックネーム _FlashCode_ からの新しいメッセージ _hello!_:
+例: バッファ _irc.freenode.#whoreirc_ でニックネーム _FlashCode_ からの新しいメッセージ _hello!_:
 
 [source,python]
 ----
@@ -1099,10 +1099,10 @@ hdata として送られるデータ:
 |===
 | 名前      | 型      | 説明
 | number    | integer | バッファ番号 (1 以上)
-| full_name | string  | 完全な名前 (例: _irc.freenode.#weechat_)
+| full_name | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 |===
 
-例: WeeChat がバッファ _irc.freenode.#weechat_ を閉じる:
+例: WeeChat がバッファ _irc.freenode.#whoreirc_ を閉じる:
 
 [source,python]
 ----
@@ -1113,7 +1113,7 @@ hda:
   item 1:
     __path: ['0x4a715d0']
     number: 3
-    full_name: 'irc.freenode.#weechat'
+    full_name: 'irc.freenode.#whoreirc'
 ----
 
 [[message_nicklist]]
@@ -1139,7 +1139,7 @@ hdata として送られるデータ:
 | prefix_color | string  | プレフィックスの色 (ニックネーム専用)
 |===
 
-例: バッファ _irc.freenode.#weechat_ のニックネームリスト:
+例: バッファ _irc.freenode.#whoreirc_ のニックネームリスト:
 
 [source,python]
 ----
@@ -1163,7 +1163,7 @@ hda:
     visible: 1
     level: 1
     name: '000|o'
-    color: 'weechat.color.nicklist_group'
+    color: 'whoreirc.color.nicklist_group'
     prefix: None
     prefix_color: None
   item 3:
@@ -1181,7 +1181,7 @@ hda:
     visible: 1
     level: 1
     name: '001|v'
-    color: 'weechat.color.nicklist_group'
+    color: 'whoreirc.color.nicklist_group'
     prefix: None
     prefix_color: None
   item 5:
@@ -1190,7 +1190,7 @@ hda:
     visible: 1
     level: 1
     name: '999|...'
-    color: 'weechat.color.nicklist_group'
+    color: 'whoreirc.color.nicklist_group'
     prefix: None
     prefix_color: None
   item 6:
@@ -1199,7 +1199,7 @@ hda:
     visible: 1
     level: 0
     name: 'test'
-    color: 'weechat.color.chat_nick_self'
+    color: 'whoreirc.color.chat_nick_self'
     prefix: ' '
     prefix_color: ''
 ----
@@ -1254,7 +1254,7 @@ hda:
     visible: 1
     level: 1
     name: '000|o'
-    color: 'weechat.color.nicklist_group'
+    color: 'whoreirc.color.nicklist_group'
     prefix: None
     prefix_color: None
   item 2:
@@ -1274,7 +1274,7 @@ hda:
     visible: 1
     level: 1
     name: '999|...'
-    color: 'weechat.color.nicklist_group'
+    color: 'whoreirc.color.nicklist_group'
     prefix: None
     prefix_color: None
   item 4:
@@ -1547,7 +1547,7 @@ length '1'  '3'  '2'  '1'  '9'  '9'  '3'  '4'  '5'  '6'
 * _values_: 値のリスト (値の数は hdata
   で返されるキーの数)
 
-2 つのバッファ (weechat コアと freenode サーバ) と
+2 つのバッファ (whoreirc コアと freenode サーバ) と
 2 つのキー (_number_ と _full_name_) を持つ hdata の例:
 
 ....
@@ -1562,7 +1562,7 @@ hdata buffer:gui_buffers(*) number,full_name
   h-path          keys              count
 
    ──╥─────────┬───┬──────────────╥─────────┬───┬────────────────────┐
- ... ║ 0x12345 │ 1 │ core.weechat ║ 0x6789a │ 2 │irc.server.freenode │
+ ... ║ 0x12345 │ 1 │ core.whoreirc ║ 0x6789a │ 2 │irc.server.freenode │
    ──╨─────────┴───┴──────────────╨─────────┴───┴────────────────────┘
       └──────────────────────────┘ └────────────────────────────────┘
                buffer 1                        buffer 2
@@ -1706,7 +1706,7 @@ _version_ インフォの例:
 ** _type_: 変数の型 (_int_、_str_、...)
 ** _value_: 変数の値
 
-2 つのバッファ (weechat コアと freenode サーバ) を持つインフォリストの例:
+2 つのバッファ (whoreirc コアと freenode サーバ) を持つインフォリストの例:
 
 ....
 # コマンド

@@ -22,7 +22,7 @@
 # This RPM spec file is designed for SuSE
 #
 
-%define name weechat
+%define name whoreirc
 %define version 2.5
 %define release 1
 
@@ -30,8 +30,8 @@ Name:      %{name}
 Summary:   portable, fast, light and extensible IRC client
 Version:   %{version}
 Release:   %{release}
-Source:    https://weechat.org/files/src/%{name}-%{version}.tar.gz
-URL:       https://weechat.org/
+Source:    https://whoreirc.org/files/src/%{name}-%{version}.tar.gz
+URL:       https://whoreirc.org/
 Group:     Productivity/Networking/IRC
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 Requires:  perl, python, ruby, lua, tcl, guile, libv8, gcrypt, gnutls, ncurses, libcurl
@@ -72,9 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_bindir}/%{name}-curses
 %{_libdir}/%{name}/plugins/*
-%{_libdir}/pkgconfig/weechat.pc
-%{_includedir}/%{name}/weechat-plugin.h
-%{_prefix}/share/icons/hicolor/32x32/apps/weechat.png
+%{_libdir}/pkgconfig/whoreirc.pc
+%{_includedir}/%{name}/whoreirc-plugin.h
+%{_prefix}/share/icons/hicolor/32x32/apps/whoreirc.png
 
 %changelog
 * Thu Jun 06 2019 Sébastien Helleu <flashcode@flashtux.org> 2.5-1

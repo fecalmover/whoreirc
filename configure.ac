@@ -39,8 +39,8 @@ AC_PROG_LN_S
 AM_PROG_LIBTOOL
 
 # Files to generate
-AC_CONFIG_FILES([weechat.pc])
-AC_CONFIG_FILES([weechat-${VERSION}-1.cygport:weechat.cygport.in])
+AC_CONFIG_FILES([whoreirc.pc])
+AC_CONFIG_FILES([whoreirc-${VERSION}-1.cygport:whoreirc.cygport.in])
 
 # Add some flags for some OS
 case "$host_os" in
@@ -131,7 +131,7 @@ AH_VERBATIM([PLUGIN_XFER], [#undef PLUGIN_XFER])
 AH_VERBATIM([TESTS], [#undef TESTS])
 AH_VERBATIM([MAN], [#undef MAN])
 AH_VERBATIM([DOC], [#undef DOC])
-AH_VERBATIM([WEECHAT_HOME], [#define WEECHAT_HOME "~/.weechat"])
+AH_VERBATIM([WEECHAT_HOME], [#define WEECHAT_HOME "~/.whoreirc"])
 AH_VERBATIM([CA_FILE], [#define CA_FILE "/etc/ssl/certs/ca-certificates.crt"])
 
 # Arguments for ./configure
@@ -170,11 +170,11 @@ AC_ARG_ENABLE(tests,        [  --enable-tests          turn on build of tests (d
 AC_ARG_ENABLE(man,          [  --enable-man            turn on build of man page (default=not built)],enable_man=$enableval,enable_man=no)
 AC_ARG_ENABLE(doc,          [  --enable-doc            turn on build of documentation (default=not built)],enable_doc=$enableval,enable_doc=no)
 
-AC_ARG_VAR(WEECHAT_HOME, [WeeChat home directory for config, logs, scripts.. (default is "~/.weechat")])
-AC_ARG_VAR(CA_FILE, [File containing the certificate authorities (default is "/etc/ssl/certs/ca-certificates.crt"). This is the default value of option "weechat.network.gnutls_ca_file".])
+AC_ARG_VAR(WEECHAT_HOME, [WeeChat home directory for config, logs, scripts.. (default is "~/.whoreirc")])
+AC_ARG_VAR(CA_FILE, [File containing the certificate authorities (default is "/etc/ssl/certs/ca-certificates.crt"). This is the default value of option "whoreirc.network.gnutls_ca_file".])
 
 if test "x$WEECHAT_HOME" = "x" ; then
-    WEECHAT_HOME="~/.weechat"
+    WEECHAT_HOME="~/.whoreirc"
 fi
 AC_DEFINE_UNQUOTED(WEECHAT_HOME, "$WEECHAT_HOME")
 
@@ -1321,14 +1321,14 @@ fi
 
 AC_DEFINE_UNQUOTED(PREFIX, "${prefix}")
 
-WEECHAT_LIBDIR=`eval eval echo ${libdir}/weechat`
+WEECHAT_LIBDIR=`eval eval echo ${libdir}/whoreirc`
 AC_DEFINE_UNQUOTED(WEECHAT_LIBDIR, "$WEECHAT_LIBDIR")
 
-WEECHAT_SHAREDIR=`eval eval echo ${datadir}/weechat`
+WEECHAT_SHAREDIR=`eval eval echo ${datadir}/whoreirc`
 AC_DEFINE_UNQUOTED(WEECHAT_SHAREDIR, "$WEECHAT_SHAREDIR")
 
-weechat_libdir=${libdir}/weechat
-AC_SUBST(weechat_libdir)
+whoreirc_libdir=${libdir}/whoreirc
+AC_SUBST(whoreirc_libdir)
 
 COMMON_CFLAGS="-fsigned-char -Wall -Wextra -Werror-implicit-function-declaration"
 AC_MSG_CHECKING([whether we have GNU assembler])

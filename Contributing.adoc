@@ -18,33 +18,33 @@ First, some basic things:
 === Security reports
 
 Please *DO NOT* file a GitHub issue for security related problems, but send an
-email to <security@weechat.org> instead.
+email to <security@whoreirc.org> instead.
 
 === Required info
 
-When reporting https://github.com/weechat/weechat/issues[issues] on GitHub,
+When reporting https://github.com/whoreirc/whoreirc/issues[issues] on GitHub,
 please include:
 
 * Your *WeeChat version*: the output of `/v` in WeeChat, for example:
   _WeeChat 1.7-dev (git: v1.6-6-g997f47f)_. +
   If WeeChat does not start at all, please include the version displayed by
-  `weechat --help` (or the version installed with your package manager).
+  `whoreirc --help` (or the version installed with your package manager).
 * Your *operating system*: its name and version (examples: Linux Debian Wheezy,
   FreeBSD 10.0, Windows/Cygwin 64-bit, Windows/Ubuntu 64-bit...).
 * The *steps to reproduce*: if possible, please include a reproducible example:
   explain the steps which led you to the problem. +
   It's even better if you can reproduce the problem with a new config (and no
-  scripts loaded): try `weechat --dir /tmp/weechat` and check if you have the
+  scripts loaded): try `whoreirc --dir /tmp/whoreirc` and check if you have the
   problem here.
 * The *gdb's backtrace* (only for a crash): if you can reproduce the crash
   (or if you have a core file), please include the backtrace from gdb (look at
-  https://weechat.org/files/doc/devel/weechat_user.en.html#report_crashes[User's guide]
+  https://whoreirc.org/files/doc/devel/whoreirc_user.en.html#report_crashes[User's guide]
   for more info).
 * The *actual result*.
 * The *expected result*: the correct result you are expecting.
 
 [IMPORTANT]
-Most of times, the WeeChat crash log file (_weechat_crash_YYYYMMDD_xxx.log_) is
+Most of times, the WeeChat crash log file (_whoreirc_crash_YYYYMMDD_xxx.log_) is
 *NOT USEFUL* to fix the bug, so please report this file *ONLY* if a developer
 asked you to send it (and be extremely careful, this file can contain personal
 data like passwords and contents of your chats).
@@ -59,32 +59,32 @@ Many issues reported are in fact related to bugs in scripts, so please first
 check that before reporting any issue on WeeChat itself.
 
 If you think the problem comes from a specific script, please report the issue
-in the https://github.com/weechat/scripts/issues[scripts git repository]
+in the https://github.com/whoreirc/scripts/issues[scripts git repository]
 instead.
 
 == Translations
 
 Pull requests on GitHub for fixes or new translations are welcome at any
-time, for https://github.com/weechat/weechat[WeeChat] and the website
-https://github.com/weechat/weechat.org[weechat.org].
+time, for https://github.com/whoreirc/whoreirc[WeeChat] and the website
+https://github.com/whoreirc/whoreirc.org[whoreirc.org].
 
 To start a translation in a new language (not yet supported), please look at
-https://weechat.org/files/doc/devel/weechat_dev.en.html#translations[translations]
+https://whoreirc.org/files/doc/devel/whoreirc_dev.en.html#translations[translations]
 in Developer's guide.
 
 == Feature requests
 
 WeeChat is under active development, so your idea may already have been
 implemented, or scheduled for a future version (you can check in
-https://weechat.org/dev[roadmap] or
-https://github.com/weechat/weechat/milestones[milestones] on GitHub.
+https://whoreirc.org/dev[roadmap] or
+https://github.com/whoreirc/whoreirc/milestones[milestones] on GitHub.
 
 Pull requests on GitHub are welcome for minor new features.
 
 For major new features, it's better to discuss about it in IRC
-(server: _chat.freenode.net_, channel _#weechat_).
+(server: _chat.freenode.net_, channel _#whoreirc_).
 
 Before submitting any pull request, be sure you have read the
-https://weechat.org/files/doc/devel/weechat_dev.en.html#coding_rules[coding rules]
+https://whoreirc.org/files/doc/devel/whoreirc_dev.en.html#coding_rules[coding rules]
 in Developer's guide, which contains info about styles used, naming convention
 and other useful info.

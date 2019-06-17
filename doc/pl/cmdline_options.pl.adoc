@@ -5,19 +5,19 @@
     Wyświetla domślne kolory w terminalu.
 
 *--daemon*::
-    Uruchamia WeeChat w tle jako demona (działa tylko z komendą *weechat-headless*).
+    Uruchamia WeeChat w tle jako demona (działa tylko z komendą *whoreirc-headless*).
 
 *-d*, *--dir* _<ścieżka>_::
     Ustawia ścieżkę jako katalog domowy WeeChat (używany dla plików
     konfiguracyjnych, logów, wtyczek użytkownika i skryptów), domyślna wartość
-    to "~/.weechat" (katalog zostanie utworzony jeśli nie istnieje).
+    to "~/.whoreirc" (katalog zostanie utworzony jeśli nie istnieje).
     Jeśli ta opcja nie zostanie podada, użyta zostanie zawartość zmiennej
     WEECHAT_HOME (jeśli została ustawiona).
 
 *-t*, *--temp-dir*::
     Tworzy tymczasowy katalog dla ustawień WeeChat, który jest kasowany po wyłączeniu
     aplikacji (nie kompatybilne z opcją "-d"). +
-    Nazwa katalogu jest automatyczne tworzona według wzoru: "weechat_temp_XXXXXX" 
+    Nazwa katalogu jest automatyczne tworzona według wzoru: "whoreirc_temp_XXXXXX" 
     (gdzie "XXXXXX" jest losowe). Katalog jest tworzony w pierwszym dostępnym miejscu
     według tej listy: zmienna środowiskowa "TMPDIR", "/tmp" (może być inaczej na 
     niektórych systemach operacyjnych), zmienna środowiskowa "HOME", obecny katalog. +
@@ -34,8 +34,8 @@
     Wyłącza automatyczne ładowanie wtyczek.
 
 *-P*, *--plugins* _<wtyczki>_::
-    Załaduje przy starcie tylko podane wtyczki (zobacz /help weechat.plugin.autoload).
-    Jeśli ta opcja zotanie użyta, opcja weechat.plugin.autoload zostanie zignorowana.
+    Załaduje przy starcie tylko podane wtyczki (zobacz /help whoreirc.plugin.autoload).
+    Jeśli ta opcja zotanie użyta, opcja whoreirc.plugin.autoload zostanie zignorowana.
 
 *-r*, *--run-command* _<komenda>_::
     Uruchamia komende(-y) po uruchomieniu; kilka komend należy oddzielić średnikiem,

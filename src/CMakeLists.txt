@@ -20,7 +20,7 @@
 #
 
 add_subdirectory(core)
-list(APPEND STATIC_LIBS weechat_core)
+list(APPEND STATIC_LIBS whoreirc_core)
 
 add_subdirectory(plugins)
 

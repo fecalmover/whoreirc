@@ -9,4 +9,4 @@ GNU 一般公衆利用許諾契約書 (バージョン 2 か、希望によっ�
 
 より詳しい情報は COPYING ファイルを読んでください。
 
-Web: https://weechat.org/
+Web: https://whoreirc.org/

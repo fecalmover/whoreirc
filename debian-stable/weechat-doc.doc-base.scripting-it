@@ -1,4 +1,4 @@
-Document: weechat-scripting-it
+Document: whoreirc-scripting-it
 Title: WeeChat scripting guide (Italian)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create scripts
@@ -6,5 +6,5 @@ Abstract: This document describes the API to create scripts
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-doc/html/weechat_scripting.it.html
-Files: /usr/share/doc/weechat-doc/html/weechat_scripting.it.html
+Index: /usr/share/doc/whoreirc-doc/html/whoreirc_scripting.it.html
+Files: /usr/share/doc/whoreirc-doc/html/whoreirc_scripting.it.html

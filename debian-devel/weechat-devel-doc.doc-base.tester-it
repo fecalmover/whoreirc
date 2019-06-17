@@ -1,4 +1,4 @@
-Document: weechat-tester-it
+Document: whoreirc-tester-it
 Title: WeeChat tester's guide (Italian)
 Author: Sébastien Helleu
 Abstract: This document describes how to test and report
@@ -6,5 +6,5 @@ Abstract: This document describes how to test and report
 Section: Network/Communication
 
 Format: HTML
-Index: /usr/share/doc/weechat-devel-doc/html/weechat_tester.it.html
-Files: /usr/share/doc/weechat-devel-doc/html/weechat_tester.it.html
+Index: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_tester.it.html
+Files: /usr/share/doc/whoreirc-devel-doc/html/whoreirc_tester.it.html

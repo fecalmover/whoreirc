@@ -45,7 +45,7 @@ find_program(MSGFMT_EXECUTABLE msgfmt)
 
 if(XGETTEXT_EXECUTABLE AND MSGMERGE_EXECUTABLE AND MSGFMT_EXECUTABLE)
 
-  # Create PO template file weechat.pot
+  # Create PO template file whoreirc.pot
   set(SRC_FILES)
   set(POT_DEPENDS)
 
@@ -57,7 +57,7 @@ if(XGETTEXT_EXECUTABLE AND MSGMERGE_EXECUTABLE AND MSGFMT_EXECUTABLE)
   add_custom_command(
     OUTPUT ${POT_FILE_PATH}
     COMMAND ${XGETTEXT_EXECUTABLE}
-    ARGS -o ${POT_FILE_PATH} --add-comments='TRANSLATORS:' --keyword='_' --keyword='weechat_gettext' --keyword='N_' --keyword='NG_:1,2' --keyword='weechat_ngettext:1,2' --no-location --from-code=UTF-8 --directory=${CMAKE_SOURCE_DIR} --package-name='WeeChat' --package-version=${VERSION} --msgid-bugs-address=${BUGS_ADDRESS} --copyright-holder='NAME' ${SRC_FILES}
+    ARGS -o ${POT_FILE_PATH} --add-comments='TRANSLATORS:' --keyword='_' --keyword='whoreirc_gettext' --keyword='N_' --keyword='NG_:1,2' --keyword='whoreirc_ngettext:1,2' --no-location --from-code=UTF-8 --directory=${CMAKE_SOURCE_DIR} --package-name='WeeChat' --package-version=${VERSION} --msgid-bugs-address=${BUGS_ADDRESS} --copyright-holder='NAME' ${SRC_FILES}
     DEPENDS ${POT_DEPENDS}
     COMMENT "Generating ${POT_FILE}"
     )
@@ -92,14 +92,14 @@ if(XGETTEXT_EXECUTABLE AND MSGMERGE_EXECUTABLE AND MSGFMT_EXECUTABLE)
 
   add_custom_target(translations ALL DEPENDS ${GMO_FILES})
 
-  # Update weechat.pot in source directory (if needed)
+  # Update whoreirc.pot in source directory (if needed)
   add_custom_target(
     update-${POT_FILE}
     COMMAND ${MSGMERGE_EXECUTABLE} --quiet --update --backup=none ${CMAKE_CURRENT_SOURCE_DIR}/${POT_FILE} ${POT_FILE_PATH}
     COMMENT "Updating ${POT_FILE}"
     )
 
-  # Update all .po and weechat.pot in source directory (if needed)
+  # Update all .po and whoreirc.pot in source directory (if needed)
   add_custom_target(update-po DEPENDS update-${POT_FILE} ${UPDATE_PO_TARGETS})
 
 endif()

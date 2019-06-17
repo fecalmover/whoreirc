@@ -138,5 +138,5 @@ Alphabetically:
 
 == Contact
 
-See https://weechat.org/files/doc/devel/weechat_user.en.html#support[user's guide]
-or https://weechat.org/about/support
+See https://whoreirc.org/files/doc/devel/whoreirc_user.en.html#support[user's guide]
+or https://whoreirc.org/about/support

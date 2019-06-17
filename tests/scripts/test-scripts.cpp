@@ -29,7 +29,7 @@ extern "C"
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
-#include "src/core/weechat.h"
+#include "src/core/whoreirc.h"
 #include "src/core/wee-string.h"
 #include "src/core/wee-hook.h"
 #include "src/core/wee-util.h"

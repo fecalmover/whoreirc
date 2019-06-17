@@ -42,10 +42,10 @@ script:
     - ./tools/build-debian.sh test-patches
 
 after_success:
-    - weechat --help
-    - weechat-curses --help
-    - weechat --colors
-    - weechat --license
-    - weechat --version
-    - weechat --temp-dir --run-command "/debug dirs;/debug libs" --run-command "/quit"
+    - whoreirc --help
+    - whoreirc-curses --help
+    - whoreirc --colors
+    - whoreirc --license
+    - whoreirc --version
+    - whoreirc --temp-dir --run-command "/debug dirs;/debug libs" --run-command "/quit"
     - if [ "$CODECOVERAGE" = "1" ]; then bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov error"; fi
