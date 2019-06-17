@@ -5,16 +5,6 @@
 
 pass:[<p align="center">] image:https://whoreirc.org/media/images/whoreirc_logo_large.png[align="center"] pass:[</p>]
 
-image:https://img.shields.io/badge/diaspora*-follow-blue.svg["Diaspora*", link="https://diasp.eu/u/whoreirc"]
-image:https://img.shields.io/badge/mastodon-follow-blue.svg["Mastodon", link="https://hostux.social/@whoreirc"]
-image:https://img.shields.io/badge/twitter-follow-blue.svg["Twitter", link="https://twitter.com/WhoreIRCClient"]
-image:https://img.shields.io/badge/devel%20blog-follow-blue.svg["Devel blog", link="https://whoreirc.org/blog/"]
-image:https://img.shields.io/badge/slant-recommend-28acad.svg["Slant", link="https://www.slant.co/topics/1323/~best-irc-clients-for-linux"]
-image:https://img.shields.io/badge/help-donate%20%E2%9D%A4-ff69b4.svg["Donate", link="https://whoreirc.org/donate/"]
-
-image:https://travis-ci.org/whoreirc/whoreirc.svg?branch=master["Build Status", link="https://travis-ci.org/whoreirc/whoreirc"]
-image:https://codecov.io/gh/whoreirc/whoreirc/branch/master/graph/badge.svg["Code coverage", link="https://codecov.io/gh/whoreirc/whoreirc"]
-
 *WhoreIRC* (Whore Enhanced Environment for Chat) is a free chat client, fast and
 light, designed for many operating systems.
 It is highly customizable and extensible with scripts.
