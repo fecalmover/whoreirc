@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -92,9 +92,9 @@ trigger_buffer_set_filter (const char *filter)
             filter,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             NULL);
 }
@@ -134,7 +134,7 @@ trigger_buffer_input_cb (const void *pointer, void *data,
     if (strcmp (input_data, "q") == 0)
     {
         weechat_buffer_close (buffer);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set filters */
@@ -146,7 +146,7 @@ trigger_buffer_input_cb (const void *pointer, void *data,
                                                           "localvar_trigger_filter"));
     trigger_buffer_set_title ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -164,7 +164,7 @@ trigger_buffer_close_cb (const void *pointer, void *data,
 
     trigger_buffer = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

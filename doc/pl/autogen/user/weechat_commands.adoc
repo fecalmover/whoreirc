@@ -808,7 +808,7 @@ Kombinacje klawiszy w bezpiecznym buforze:
   alt+v  przełącza wartości
 
 Jeśli używane jest hasło (dane zaszyfrowane), należy je podać podczas startu WeeChat.
-Jest możliwe ustawienie zmiennej środowiskowej "WEECHAT_PASSPHRASE", aby nie podawać hasła przy uruchomieniu (ta sama zmienna jest używana przez WeeChat podczas wykonywania /upgrade).
+Jest możliwe ustawienie zmiennej środowiskowej "WHOREIRC_PASSPHRASE", aby nie podawać hasła przy uruchomieniu (ta sama zmienna jest używana przez WeeChat podczas wykonywania /upgrade).
 
 Zabezpieczone dane w formacie ${sec.data.xxx} można użyć w:
   - komendzie /eval

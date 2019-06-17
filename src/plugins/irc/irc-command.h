@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_IRC_COMMAND_H
-#define WEECHAT_PLUGIN_IRC_COMMAND_H
+#ifndef WHOREIRC_PLUGIN_IRC_COMMAND_H
+#define WHOREIRC_PLUGIN_IRC_COMMAND_H
 
 struct t_irc_server;
 struct t_irc_channel;
@@ -37,7 +37,7 @@ struct t_irc_channel;
                           "irc buffer (server, channel or private)"),   \
                         weechat_prefix ("error"), IRC_PLUGIN_NAME,      \
                         __command);                                     \
-        return WEECHAT_RC_OK;                                           \
+        return WHOREIRC_RC_OK;                                           \
     }                                                                   \
     if (__check_connection && !ptr_server->is_connected)                \
     {                                                                   \
@@ -46,7 +46,7 @@ struct t_irc_channel;
                           "connected irc server"),                      \
                         weechat_prefix ("error"), IRC_PLUGIN_NAME,      \
                         __command);                                     \
-        return WEECHAT_RC_OK;                                           \
+        return WHOREIRC_RC_OK;                                           \
     }
 
 /* list of supported capabilities (for completion in command /cap) */
@@ -77,4 +77,4 @@ extern void irc_command_quit_server (struct t_irc_server *server,
                                      const char *arguments);
 extern void irc_command_init ();
 
-#endif /* WEECHAT_PLUGIN_IRC_COMMAND_H */
+#endif /* WHOREIRC_PLUGIN_IRC_COMMAND_H */

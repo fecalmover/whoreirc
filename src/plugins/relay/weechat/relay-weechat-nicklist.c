@@ -68,12 +68,12 @@ relay_weechat_nicklist_add_item (struct t_relay_weechat_nicklist *nicklist,
      * check if the last "parent_group" (with diff = '^') of items is the same
      * as this one: if yes, don't add this parent group
      */
-    if ((diff == RELAY_WEECHAT_NICKLIST_DIFF_PARENT)
+    if ((diff == RELAY_WHOREIRC_NICKLIST_DIFF_PARENT)
         && (nicklist->items_count > 0))
     {
         for (i = nicklist->items_count - 1; i >= 0; i--)
         {
-            if (nicklist->items[i].diff == RELAY_WEECHAT_NICKLIST_DIFF_PARENT)
+            if (nicklist->items[i].diff == RELAY_WHOREIRC_NICKLIST_DIFF_PARENT)
             {
                 if (nicklist->items[i].pointer == group)
                     return;

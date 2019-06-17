@@ -1,23 +1,23 @@
 /*
- * wee-command.c - WeeChat core commands
+ * wee-command.c - WhoreIRC core commands
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2005-2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /* this define is needed for strptime() (not on OpenBSD/Sun) */
@@ -192,14 +192,14 @@ COMMAND_CALLBACK(bar)
         || ((argc == 2) && (string_strcasecmp (argv[1], "list") == 0)))
     {
         command_bar_list (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* full list of bars */
     if ((argc == 2) && (string_strcasecmp (argv[1], "listfull") == 0))
     {
         command_bar_list (1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* list of bar items */
@@ -222,7 +222,7 @@ COMMAND_CALLBACK(bar)
         else
             gui_chat_printf (NULL, _("No bar item defined"));
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add a new bar */
@@ -245,7 +245,7 @@ COMMAND_CALLBACK(bar)
                              _("%sNot enough memory (%s)"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              "/bar");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         type = gui_bar_search_type (str_type);
         if (type < 0)
@@ -256,7 +256,7 @@ COMMAND_CALLBACK(bar)
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              str_type, argv[2]);
             free (str_type);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         position = gui_bar_search_position (argv[4]);
         if (position < 0)
@@ -267,7 +267,7 @@ COMMAND_CALLBACK(bar)
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[4], argv[2]);
             free (str_type);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         error = NULL;
         value = strtol (argv[5], &error, 10);
@@ -301,11 +301,11 @@ COMMAND_CALLBACK(bar)
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[5], argv[2]);
             free (str_type);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         free (str_type);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* create default bars */
@@ -327,7 +327,7 @@ COMMAND_CALLBACK(bar)
         }
         else
             gui_bar_create_default ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete a bar */
@@ -349,7 +349,7 @@ COMMAND_CALLBACK(bar)
                                  _("%sError: unknown bar \"%s\""),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                  argv[2]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             name = strdup (ptr_bar->name);
             gui_bar_free (ptr_bar);
@@ -358,7 +358,7 @@ COMMAND_CALLBACK(bar)
                 free (name);
             gui_bar_create_default_input ();
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set a bar property */
@@ -372,7 +372,7 @@ COMMAND_CALLBACK(bar)
                              _("%sError: unknown bar \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (!gui_bar_set (ptr_bar, argv[3], argv_eol[4]))
         {
@@ -381,9 +381,9 @@ COMMAND_CALLBACK(bar)
                                "bar \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3], argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* hide a bar */
@@ -397,11 +397,11 @@ COMMAND_CALLBACK(bar)
                              _("%sError: unknown bar \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (!CONFIG_BOOLEAN(ptr_bar->options[GUI_BAR_OPTION_HIDDEN]))
             gui_bar_set (ptr_bar, "hidden", "1");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* show a bar */
@@ -415,11 +415,11 @@ COMMAND_CALLBACK(bar)
                              _("%sError: unknown bar \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (CONFIG_BOOLEAN(ptr_bar->options[GUI_BAR_OPTION_HIDDEN]))
             gui_bar_set (ptr_bar, "hidden", "0");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* toggle a bar visible/hidden */
@@ -433,11 +433,11 @@ COMMAND_CALLBACK(bar)
                              _("%sError: unknown bar \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         gui_bar_set (ptr_bar, "hidden",
                      CONFIG_BOOLEAN(ptr_bar->options[GUI_BAR_OPTION_HIDDEN]) ? "0" : "1");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll in a bar */
@@ -462,7 +462,7 @@ COMMAND_CALLBACK(bar)
                 gui_chat_printf (NULL,
                                  _("%sError: window not found for \"%s\" command"),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR], "bar");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             if (!gui_bar_scroll (ptr_bar, ptr_window, argv_eol[4]))
             {
@@ -470,10 +470,10 @@ COMMAND_CALLBACK(bar)
                                  _("%sError: unable to scroll bar \"%s\""),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                  argv[2]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -585,7 +585,7 @@ COMMAND_CALLBACK(buffer)
                              (ptr_buffer->hidden) ? _("(hidden)") : "");
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* create a new buffer */
@@ -607,10 +607,10 @@ COMMAND_CALLBACK(buffer)
         if (gui_buffer_is_reserved_name (argv[arg_name]))
         {
             gui_chat_printf (NULL,
-                             _("%sError: name \"%s\" is reserved for WeeChat"),
+                             _("%sError: name \"%s\" is reserved for WhoreIRC"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[arg_name]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         ptr_buffer = gui_buffer_search_by_name (PLUGIN_CORE, argv[arg_name]);
         if (!ptr_buffer)
@@ -621,7 +621,7 @@ COMMAND_CALLBACK(buffer)
         }
         if (ptr_buffer && switch_to_buffer)
             gui_window_switch_to_buffer (gui_current_window, ptr_buffer, 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* clear content of buffer(s) */
@@ -675,7 +675,7 @@ COMMAND_CALLBACK(buffer)
                 gui_buffer_clear (buffer);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* move buffer to another number in the list */
@@ -715,11 +715,11 @@ COMMAND_CALLBACK(buffer)
                 gui_chat_printf (NULL,
                                  _("%sError: incorrect buffer number"),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* swap buffers */
@@ -740,12 +740,12 @@ COMMAND_CALLBACK(buffer)
             gui_chat_printf (NULL,
                              _("%sError: buffer not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         gui_buffer_swap (ptr_buffer->number, ptr_buffer2->number);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* cycle between a list of buffers */
@@ -781,7 +781,7 @@ COMMAND_CALLBACK(buffer)
                      */
                     gui_window_switch_to_buffer (gui_current_window,
                                                  ptr_buffer, 1);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
         }
@@ -793,7 +793,7 @@ COMMAND_CALLBACK(buffer)
                                          ptr_buffer1, 1);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* merge buffer with another buffer in the list */
@@ -807,10 +807,10 @@ COMMAND_CALLBACK(buffer)
             gui_chat_printf (NULL,
                              _("%sError: buffer not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         gui_buffer_merge (buffer, ptr_buffer);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* unmerge buffer */
@@ -822,7 +822,7 @@ COMMAND_CALLBACK(buffer)
             if (string_strcasecmp (argv[2], "-all") == 0)
             {
                 gui_buffer_unmerge_all ();
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             else
             {
@@ -834,7 +834,7 @@ COMMAND_CALLBACK(buffer)
                     gui_chat_printf (NULL,
                                      _("%sError: incorrect buffer number"),
                                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
                 if (!command_buffer_check_number ((int)number))
                     COMMAND_ERROR;
@@ -842,7 +842,7 @@ COMMAND_CALLBACK(buffer)
         }
         gui_buffer_unmerge (buffer, (int)number);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* hide buffer(s) */
@@ -880,7 +880,7 @@ COMMAND_CALLBACK(buffer)
         else
             gui_buffer_hide (buffer);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* unhide buffer(s) */
@@ -918,7 +918,7 @@ COMMAND_CALLBACK(buffer)
         else
             gui_buffer_unhide (buffer);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* renumber buffers */
@@ -930,7 +930,7 @@ COMMAND_CALLBACK(buffer)
                              _("%sError: renumbering is allowed only if option "
                                "weechat.look.buffer_auto_renumber is off"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         for (i = 0; i < 3; i++)
@@ -945,10 +945,10 @@ COMMAND_CALLBACK(buffer)
                     gui_chat_printf (NULL,
                                      _("%sError: incorrect buffer number"),
                                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
                 if ((i == 2) && !command_buffer_check_number ((int)numbers[i]))
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
             }
             else
                 numbers[i] = -1;
@@ -961,7 +961,7 @@ COMMAND_CALLBACK(buffer)
         gui_buffer_renumber ((int)numbers[0], (int)numbers[1],
                              (argc == 2) ? 1 : (int)numbers[2]);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* close buffer */
@@ -1064,7 +1064,7 @@ COMMAND_CALLBACK(buffer)
                      * buffer to close with matching number
                      */
                     gui_chat_printf (NULL,
-                                     _("%sError: WeeChat main buffer can't be "
+                                     _("%sError: WhoreIRC main buffer can't be "
                                        "closed"),
                                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
                 }
@@ -1077,7 +1077,7 @@ COMMAND_CALLBACK(buffer)
 
         arraylist_free (buffers_to_close);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set notify level */
@@ -1091,7 +1091,7 @@ COMMAND_CALLBACK(buffer)
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv_eol[2]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* display local variables on buffer */
@@ -1123,7 +1123,7 @@ COMMAND_CALLBACK(buffer)
             }
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set a property on buffer */
@@ -1145,7 +1145,7 @@ COMMAND_CALLBACK(buffer)
             if (value)
                 free (value);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* get a buffer property */
@@ -1183,7 +1183,7 @@ COMMAND_CALLBACK(buffer)
                              argv[2],
                              gui_buffer_get_pointer (buffer, argv[2]));
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* relative jump '-' */
@@ -1250,10 +1250,10 @@ COMMAND_CALLBACK(buffer)
                 gui_chat_printf (NULL,
                                  _("%sError: incorrect buffer number"),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* relative jump '+' */
@@ -1320,10 +1320,10 @@ COMMAND_CALLBACK(buffer)
                 gui_chat_printf (NULL,
                                  _("%sError: incorrect buffer number"),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* smart jump (jump to previous buffer for current number) */
@@ -1355,9 +1355,9 @@ COMMAND_CALLBACK(buffer)
             gui_chat_printf (NULL,
                              _("%sError: incorrect buffer number"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* jump to buffer by number or name */
@@ -1367,7 +1367,7 @@ COMMAND_CALLBACK(buffer)
     {
         gui_buffer_switch_by_number (gui_current_window,
                                      (int) number);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
     else
     {
@@ -1377,7 +1377,7 @@ COMMAND_CALLBACK(buffer)
         if (ptr_buffer)
         {
             gui_window_switch_to_buffer (gui_current_window, ptr_buffer, 1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -1406,7 +1406,7 @@ COMMAND_CALLBACK(color)
     if (argc == 1)
     {
         gui_color_buffer_open ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* send terminal/colors info to buffer */
@@ -1414,7 +1414,7 @@ COMMAND_CALLBACK(color)
     {
         gui_color_info_term_colors (str_color, sizeof (str_color));
         (void) input_data (buffer, str_color, NULL);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add a color alias */
@@ -1441,7 +1441,7 @@ COMMAND_CALLBACK(color)
                                "between %d and %d)"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2], 0, gui_color_get_term_colors ());
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* check other arguments */
@@ -1474,7 +1474,7 @@ COMMAND_CALLBACK(color)
                   (str_color[0]) ? str_color + 1 : "");
         (void) input_exec_command (buffer, 1, NULL, str_command, NULL);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete a color alias */
@@ -1501,7 +1501,7 @@ COMMAND_CALLBACK(color)
                                "between %d and %d)"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2], 0, gui_color_get_term_colors ());
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* search color */
@@ -1512,7 +1512,7 @@ COMMAND_CALLBACK(color)
                              _("%sColor \"%s\" is not defined in palette"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* delete color alias */
@@ -1521,21 +1521,21 @@ COMMAND_CALLBACK(color)
                   (int)number);
         (void) input_exec_command (buffer, 1, NULL, str_command, NULL);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* reset color pairs */
     if (string_strcasecmp (argv[1], "reset") == 0)
     {
         gui_color_reset_pairs ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    /* switch WeeChat/terminal colors */
+    /* switch WhoreIRC/terminal colors */
     if (string_strcasecmp (argv[1], "switch") == 0)
     {
         gui_color_switch_colors ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* convert terminal color to RGB color */
@@ -1550,7 +1550,7 @@ COMMAND_CALLBACK(color)
                          "%ld -> #%06x",
                          number,
                          gui_color_convert_term_to_rgb (number));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* convert RGB color to terminal color */
@@ -1573,14 +1573,14 @@ COMMAND_CALLBACK(color)
                          "#%06x -> %d",
                          rgb,
                          gui_color_convert_rgb_to_term (rgb, limit));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
 }
 
 /*
- * Callback for command "/command": launches explicit WeeChat or plugin command.
+ * Callback for command "/command": launches explicit WhoreIRC or plugin command.
  */
 
 COMMAND_CALLBACK(command)
@@ -1622,7 +1622,7 @@ COMMAND_CALLBACK(command)
             gui_chat_printf (NULL, _("%sPlugin \"%s\" not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[index_args]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
     if (string_is_command_char (argv_eol[index_args + 1]))
@@ -1643,7 +1643,7 @@ COMMAND_CALLBACK(command)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1662,12 +1662,12 @@ COMMAND_CALLBACK(cursor)
     (void) argv_eol;
 
     if (gui_window_bare_display)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (argc == 1)
     {
         gui_cursor_mode_toggle ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "go") == 0)
@@ -1698,7 +1698,7 @@ COMMAND_CALLBACK(cursor)
             else
                 gui_cursor_move_area (argv[2]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "move") == 0)
@@ -1722,13 +1722,13 @@ COMMAND_CALLBACK(cursor)
             else if (string_strcasecmp (argv[2], "area_right") == 0)
                 gui_cursor_move_area_add_xy (1, 0);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "stop") == 0)
     {
         gui_cursor_mode_stop ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -1766,7 +1766,7 @@ COMMAND_CALLBACK(debug)
                              ptr_plugin->name,
                              ptr_plugin->debug);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "dump") == 0)
@@ -1774,12 +1774,12 @@ COMMAND_CALLBACK(debug)
         if (argc > 2)
             log_printf ("Dump request for plugin: \"%s\"", argv_eol[2]);
         else
-            log_printf ("Dump request for WeeChat core and plugins");
+            log_printf ("Dump request for WhoreIRC core and plugins");
         weechat_log_use_time = 0;
-        (void) hook_signal_send ("debug_dump", WEECHAT_HOOK_SIGNAL_STRING,
+        (void) hook_signal_send ("debug_dump", WHOREIRC_HOOK_SIGNAL_STRING,
                                  (argc > 2) ? argv_eol[2] : NULL);
         weechat_log_use_time = 1;
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "buffer") == 0)
@@ -1788,13 +1788,13 @@ COMMAND_CALLBACK(debug)
         gui_chat_printf (NULL,
                          _("Raw content of buffers has been written in log "
                            "file"));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "color") == 0)
     {
         gui_color_dump ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "cursor") == 0)
@@ -1807,7 +1807,7 @@ COMMAND_CALLBACK(debug)
                      && (string_strcasecmp (argv[2], "verbose") == 0)) ? 2 : 1;
             gui_cursor_debug_set (debug);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "hdata") == 0)
@@ -1816,33 +1816,33 @@ COMMAND_CALLBACK(debug)
             hdata_free_all ();
         else
             debug_hdata ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "hooks") == 0)
     {
         debug_hooks ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "infolists") == 0)
     {
         debug_infolists ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "libs") == 0)
     {
         gui_chat_printf (NULL, "");
         gui_chat_printf (NULL, "Libs:");
-        (void) hook_signal_send ("debug_libs", WEECHAT_HOOK_SIGNAL_STRING, NULL);
-        return WEECHAT_RC_OK;
+        (void) hook_signal_send ("debug_libs", WHOREIRC_HOOK_SIGNAL_STRING, NULL);
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "memory") == 0)
     {
         debug_memory ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "mouse") == 0)
@@ -1855,33 +1855,33 @@ COMMAND_CALLBACK(debug)
                      && (string_strcasecmp (argv[2], "verbose") == 0)) ? 2 : 1;
             gui_mouse_debug_set (debug);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "tags") == 0)
     {
         gui_chat_display_tags ^= 1;
         gui_window_ask_refresh (2);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "term") == 0)
     {
         gui_window_term_display_infos ();
         weechat_term_check ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "windows") == 0)
     {
         debug_windows_tree ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "dirs") == 0)
     {
         debug_directories ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "set") == 0)
@@ -1902,7 +1902,7 @@ COMMAND_CALLBACK(debug)
         else
         {
             /* set debug level for a plugin */
-            if (config_weechat_debug_set (argv[2], argv[3]) != WEECHAT_CONFIG_OPTION_SET_ERROR)
+            if (config_weechat_debug_set (argv[2], argv[3]) != WHOREIRC_CONFIG_OPTION_SET_ERROR)
             {
                 ptr_option = config_weechat_debug_get (argv[2]);
                 if (ptr_option)
@@ -1913,7 +1913,7 @@ COMMAND_CALLBACK(debug)
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "time") == 0)
@@ -1923,7 +1923,7 @@ COMMAND_CALLBACK(debug)
         (void) input_data (buffer, argv_eol[2], NULL);
         gettimeofday (&time_end, NULL);
         debug_display_time_elapsed (&time_start, &time_end, argv_eol[2], 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -1980,8 +1980,8 @@ COMMAND_CALLBACK(eval)
     if (ptr_args)
     {
         pointers = hashtable_new (32,
-                                  WEECHAT_HASHTABLE_STRING,
-                                  WEECHAT_HASHTABLE_POINTER,
+                                  WHOREIRC_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_POINTER,
                                   NULL,
                                   NULL);
         if (pointers)
@@ -1995,8 +1995,8 @@ COMMAND_CALLBACK(eval)
         if (condition)
         {
             options = hashtable_new (32,
-                                     WEECHAT_HASHTABLE_STRING,
-                                     WEECHAT_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
                                      NULL,
                                      NULL);
             if (options)
@@ -2082,7 +2082,7 @@ COMMAND_CALLBACK(eval)
             hashtable_free (options);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2148,7 +2148,7 @@ COMMAND_CALLBACK(filter)
                                        _("No message filter defined"));
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* enable global filtering or a filter */
@@ -2165,7 +2165,7 @@ COMMAND_CALLBACK(filter)
                     gui_filter_buffer (buffer, NULL);
                     (void) hook_signal_send (
                         "buffer_filters_enabled",
-                        WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                        WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
                 }
             }
             else
@@ -2192,7 +2192,7 @@ COMMAND_CALLBACK(filter)
                                                  "found"),
                                                gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                                argv[2]);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
         }
@@ -2206,7 +2206,7 @@ COMMAND_CALLBACK(filter)
                                            _("Message filtering enabled"));
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* disable global filtering or a filter */
@@ -2223,7 +2223,7 @@ COMMAND_CALLBACK(filter)
                     gui_filter_buffer (buffer, NULL);
                     (void) hook_signal_send (
                         "buffer_filters_disabled",
-                        WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                        WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
                 }
             }
             else
@@ -2250,7 +2250,7 @@ COMMAND_CALLBACK(filter)
                                                  "found"),
                                                gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                                argv[2]);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
         }
@@ -2264,7 +2264,7 @@ COMMAND_CALLBACK(filter)
                                            _("Message filtering disabled"));
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* toggle global filtering or a filter on/off */
@@ -2280,7 +2280,7 @@ COMMAND_CALLBACK(filter)
                 (void) hook_signal_send (
                     (buffer->filter) ?
                     "buffer_filters_enabled" : "buffer_filters_disabled",
-                    WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                    WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
             }
             else
             {
@@ -2299,7 +2299,7 @@ COMMAND_CALLBACK(filter)
                                                  "found"),
                                                gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                                argv[2]);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
         }
@@ -2310,7 +2310,7 @@ COMMAND_CALLBACK(filter)
             else
                 gui_filter_global_enable ();
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add (or add/replace) a filter */
@@ -2325,7 +2325,7 @@ COMMAND_CALLBACK(filter)
                                        _("%sError: you must specify at least "
                                          "tags or regex for filter"),
                                        gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (string_strcasecmp (argv[1], "addreplace") == 0)
@@ -2352,7 +2352,7 @@ COMMAND_CALLBACK(filter)
             command_filter_display (ptr_filter);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* rename a filter */
@@ -2375,7 +2375,7 @@ COMMAND_CALLBACK(filter)
                                              "\"%s\" to \"%s\""),
                                            gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                            argv[2], argv[3]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
         else
@@ -2384,9 +2384,9 @@ COMMAND_CALLBACK(filter)
                                        _("%sError: filter \"%s\" not found"),
                                        gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                        argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete filter */
@@ -2427,10 +2427,10 @@ COMMAND_CALLBACK(filter)
                                            _("%sError: filter \"%s\" not found"),
                                            gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                            argv[2]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -2510,7 +2510,7 @@ command_help_list_plugin_commands (struct t_weechat_plugin *plugin,
                 if (length > max_length)
                     max_length = length;
                 weelist_add (list, HOOK_COMMAND(ptr_hook, command),
-                             WEECHAT_LIST_POS_SORT, NULL);
+                             WHOREIRC_LIST_POS_SORT, NULL);
             }
         }
 
@@ -2590,7 +2590,7 @@ command_help_list_commands (int verbose)
 {
     struct t_weechat_plugin *ptr_plugin;
 
-    /* WeeChat commands */
+    /* WhoreIRC commands */
     command_help_list_plugin_commands (NULL, verbose);
 
     /* plugins commands */
@@ -2641,7 +2641,7 @@ COMMAND_CALLBACK(help)
         }
         else
             command_help_list_commands (verbose);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* look for command */
@@ -2738,7 +2738,7 @@ COMMAND_CALLBACK(help)
         }
     }
     if (command_found)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* look for option */
     config_file_search_with_string (argv[1], NULL, NULL, &ptr_option, NULL);
@@ -2940,7 +2940,7 @@ COMMAND_CALLBACK(help)
                                  _("type"), _("color"));
                 gui_chat_printf (NULL, "  %s: %s",
                                  _("values"),
-                                 _("a WeeChat color name (default, black, "
+                                 _("a WhoreIRC color name (default, black, "
                                    "(dark)gray, white, (light)red, (light)green, "
                                    "brown, yellow, (light)blue, (light)magenta, "
                                    "(light)cyan), a terminal color number or "
@@ -2984,7 +2984,7 @@ COMMAND_CALLBACK(help)
                              /* TRANSLATORS: please do not translate "(null)" */
                              _("undefined value allowed (null)"));
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     gui_chat_printf (NULL,
@@ -2993,7 +2993,7 @@ COMMAND_CALLBACK(help)
                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                      argv[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3017,7 +3017,7 @@ COMMAND_CALLBACK(history)
         if (string_strcasecmp (argv[1], "clear") == 0)
         {
             gui_history_buffer_free (buffer);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         else
             n_user = atoi (argv[1]);
@@ -3049,7 +3049,7 @@ COMMAND_CALLBACK(history)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3128,7 +3128,7 @@ COMMAND_CALLBACK(input)
         gui_input_history_global_next (buffer);
     else if (string_strcasecmp (argv[1], "jump_smart") == 0)
         gui_input_jump_smart (buffer);
-    /* not used any more in WeeChat >= 1.0 (replaced by "/buffer ++") */
+    /* not used any more in WhoreIRC >= 1.0 (replaced by "/buffer ++") */
     else if (string_strcasecmp (argv[1], "jump_last_buffer") == 0)
         (void) input_data (buffer, "/buffer +", NULL);
     else if (string_strcasecmp (argv[1], "jump_last_buffer_displayed") == 0)
@@ -3181,7 +3181,7 @@ COMMAND_CALLBACK(input)
         COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3345,7 +3345,7 @@ command_key_reset (int context, const char *key)
 
     internal_code = gui_key_get_internal_code (key);
     if (!internal_code)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     ptr_key = gui_key_search (gui_keys[context],
                               internal_code);
@@ -3369,7 +3369,7 @@ command_key_reset (int context, const char *key)
                                      _("%sError: unable to bind key \"%s\""),
                                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                      key);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
             else
@@ -3392,7 +3392,7 @@ command_key_reset (int context, const char *key)
                                  _("%sError: unable to unbind key \"%s\""),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                  key);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
         else
@@ -3408,7 +3408,7 @@ command_key_reset (int context, const char *key)
                                  _("%sError: unable to bind key \"%s\""),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                  key);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
     }
@@ -3418,7 +3418,7 @@ command_key_reset (int context, const char *key)
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          key);
     }
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3452,7 +3452,7 @@ COMMAND_CALLBACK(key)
                                           i, gui_keys[i], gui_keys_count[i]);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* display redefined or key bindings added */
@@ -3466,7 +3466,7 @@ COMMAND_CALLBACK(key)
                 command_key_display_listdiff (i);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* display default key bindings */
@@ -3487,7 +3487,7 @@ COMMAND_CALLBACK(key)
                                           gui_default_keys_count[i]);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* bind a key (or display binding) */
@@ -3518,7 +3518,7 @@ COMMAND_CALLBACK(key)
             }
             if (internal_code)
                 free (internal_code);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* bind new key */
@@ -3533,7 +3533,7 @@ COMMAND_CALLBACK(key)
                                "weechat.look.key_bind_safe"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         gui_key_verbose = 1;
         ptr_new_key = gui_key_bind (NULL, GUI_KEY_CONTEXT_DEFAULT,
@@ -3545,9 +3545,9 @@ COMMAND_CALLBACK(key)
                              _("%sError: unable to bind key \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* bind a key for given context (or display binding) */
@@ -3563,7 +3563,7 @@ COMMAND_CALLBACK(key)
                              _("%sError: context \"%s\" not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* display a key binding */
@@ -3587,7 +3587,7 @@ COMMAND_CALLBACK(key)
             }
             if (internal_code)
                 free (internal_code);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* bind new key */
@@ -3602,7 +3602,7 @@ COMMAND_CALLBACK(key)
                                "weechat.look.key_bind_safe"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         gui_key_verbose = 1;
@@ -3615,10 +3615,10 @@ COMMAND_CALLBACK(key)
                              _("%sError: unable to bind key \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* unbind a key */
@@ -3635,10 +3635,10 @@ COMMAND_CALLBACK(key)
                              _("%sError: unable to unbind key \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* unbind a key for a given context */
@@ -3654,7 +3654,7 @@ COMMAND_CALLBACK(key)
                              _("%sError: context \"%s\" not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         gui_key_verbose = 1;
@@ -3666,10 +3666,10 @@ COMMAND_CALLBACK(key)
                              _("%sError: unable to unbind key \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* reset a key to default binding */
@@ -3692,7 +3692,7 @@ COMMAND_CALLBACK(key)
                              _("%sError: context \"%s\" not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         return command_key_reset (context, argv[3]);
@@ -3724,9 +3724,9 @@ COMMAND_CALLBACK(key)
                              _("%sError: \"-yes\" argument is required for "
                                "keys reset (security reason)"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add missing keys */
@@ -3750,7 +3750,7 @@ COMMAND_CALLBACK(key)
                                  gui_key_context_string[i]);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -3887,7 +3887,7 @@ COMMAND_CALLBACK(layout)
         else
             gui_chat_printf (NULL, _("No stored layouts"));
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* store in a layout */
@@ -3916,7 +3916,7 @@ COMMAND_CALLBACK(layout)
                          ptr_layout->name,
                          ptr_layout->name);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* apply layout */
@@ -3933,7 +3933,7 @@ COMMAND_CALLBACK(layout)
             gui_layout_current = ptr_layout;
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* leave current layout */
@@ -3947,7 +3947,7 @@ COMMAND_CALLBACK(layout)
         gui_chat_printf (NULL,
                          _("Layout of buffers+windows reset (current layout: -)"));
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete layout */
@@ -3998,7 +3998,7 @@ COMMAND_CALLBACK(layout)
             }
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* rename layout */
@@ -4012,7 +4012,7 @@ COMMAND_CALLBACK(layout)
                              _("%sError: unknown layout \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         ptr_layout2 = gui_layout_search (argv[3]);
         if (ptr_layout2)
@@ -4022,12 +4022,12 @@ COMMAND_CALLBACK(layout)
                                "\"%s\" command"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3], "layout rename");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         gui_layout_rename (ptr_layout, argv[3]);
         gui_chat_printf (NULL, _("Layout \"%s\" has been renamed to \"%s\""),
                          argv[2], argv[3]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -4049,7 +4049,7 @@ command_mouse_timer_cb (const void *pointer, void *data, int remaining_calls)
                             (gui_mouse_enabled) ? "0" : "1",
                             1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4086,7 +4086,7 @@ COMMAND_CALLBACK(mouse)
     if (argc == 1)
     {
         gui_mouse_display_state ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* enable mouse */
@@ -4096,7 +4096,7 @@ COMMAND_CALLBACK(mouse)
         gui_chat_printf (NULL, _("Mouse enabled"));
         if (argc > 2)
             command_mouse_timer (argv[2]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* disable mouse */
@@ -4106,7 +4106,7 @@ COMMAND_CALLBACK(mouse)
         gui_chat_printf (NULL, _("Mouse disabled"));
         if (argc > 2)
             command_mouse_timer (argv[2]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* toggle mouse */
@@ -4124,7 +4124,7 @@ COMMAND_CALLBACK(mouse)
         }
         if (argc > 2)
             command_mouse_timer (argv[2]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -4147,7 +4147,7 @@ COMMAND_CALLBACK(mute)
     if (argc < 2)
     {
         /* silently ignore missing arguments ("/mute" does nothing) */
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     gui_chat_mute_old = gui_chat_mute;
@@ -4184,7 +4184,7 @@ COMMAND_CALLBACK(mute)
     else if (string_strcasecmp (argv[1], "-all") == 0)
     {
         /*
-         * action ignored in WeeChat >= 1.0 (mute on all buffers is default)
+         * action ignored in WhoreIRC >= 1.0 (mute on all buffers is default)
          * (kept for compatibility with old versions)
          */
         ptr_command = argv_eol[2];
@@ -4218,7 +4218,7 @@ COMMAND_CALLBACK(mute)
             gui_chat_mute_buffer_old : NULL;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4518,7 +4518,7 @@ command_plugin_list (const char *name, int full)
 }
 
 /*
- * Callback for command "/plugin": lists/loads/unloads WeeChat plugins.
+ * Callback for command "/plugin": lists/loads/unloads WhoreIRC plugins.
  */
 
 COMMAND_CALLBACK(plugin)
@@ -4535,19 +4535,19 @@ COMMAND_CALLBACK(plugin)
     {
         /* list all plugins */
         command_plugin_list (NULL, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "list") == 0)
     {
         command_plugin_list ((argc > 2) ? argv[2] : NULL, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "listfull") == 0)
     {
         command_plugin_list ((argc > 2) ? argv[2] : NULL, 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "autoload") == 0)
@@ -4555,15 +4555,15 @@ COMMAND_CALLBACK(plugin)
         if (argc > 2)
         {
             plugin_argv = string_split (argv_eol[2], " ", NULL,
-                                        WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                         0, &plugin_argc);
             plugin_auto_load (NULL, 1, 1, 1, plugin_argc, plugin_argv);
         }
         else
             plugin_auto_load (NULL, 1, 1, 1, 0, NULL);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "load") == 0)
@@ -4574,9 +4574,9 @@ COMMAND_CALLBACK(plugin)
         if (argc > 3)
         {
             plugin_argv = string_split (argv_eol[3], " ", NULL,
-                                        WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                         0, &plugin_argc);
         }
         full_name = util_search_full_lib_name (argv[2], "plugins");
@@ -4585,7 +4585,7 @@ COMMAND_CALLBACK(plugin)
             free (full_name);
         if (plugin_argv)
             string_free_split (plugin_argv);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "reload") == 0)
@@ -4596,9 +4596,9 @@ COMMAND_CALLBACK(plugin)
             {
                 plugin_argv = string_split (
                     argv_eol[3], " ", NULL,
-                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                     0, &plugin_argc);
                 if (strcmp (argv[2], "*") == 0)
                 {
@@ -4620,7 +4620,7 @@ COMMAND_CALLBACK(plugin)
             plugin_unload_all ();
             plugin_auto_load (NULL, 1, 1, 1, 0, NULL);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (string_strcasecmp (argv[1], "unload") == 0)
@@ -4629,7 +4629,7 @@ COMMAND_CALLBACK(plugin)
             plugin_unload_name (argv[2]);
         else
             plugin_unload_all ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -4800,7 +4800,7 @@ COMMAND_CALLBACK(print)
         {
             fprintf (stderr, "\a");
             fflush (stderr);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         else if (argv[i][0] == '-')
         {
@@ -4831,7 +4831,7 @@ COMMAND_CALLBACK(print)
             fflush ((to_stdout) ? stdout : stderr);
             free (text);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (arg_new_buffer_name >= 0)
@@ -4840,10 +4840,10 @@ COMMAND_CALLBACK(print)
         if (gui_buffer_is_reserved_name (argv[arg_new_buffer_name]))
         {
             gui_chat_printf (NULL,
-                             _("%sError: name \"%s\" is reserved for WeeChat"),
+                             _("%sError: name \"%s\" is reserved for WhoreIRC"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[arg_new_buffer_name]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         ptr_buffer = gui_buffer_search_by_name (PLUGIN_CORE,
                                                 argv[arg_new_buffer_name]);
@@ -4903,7 +4903,7 @@ COMMAND_CALLBACK(print)
     if (ptr_buffer && switch_to_buffer)
         gui_window_switch_to_buffer (gui_current_window, ptr_buffer, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4965,7 +4965,7 @@ COMMAND_CALLBACK(proxy)
         || ((argc == 2) && (string_strcasecmp (argv[1], "list") == 0)))
     {
         command_proxy_list ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add a new proxy */
@@ -4980,7 +4980,7 @@ COMMAND_CALLBACK(proxy)
                                "\"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3], argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         error = NULL;
         value = strtol (argv[5], &error, 10);
@@ -5010,9 +5010,9 @@ COMMAND_CALLBACK(proxy)
                                "\"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[5], argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete a proxy */
@@ -5033,12 +5033,12 @@ COMMAND_CALLBACK(proxy)
                                  _("%sError: unknown proxy \"%s\""),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                  argv[2]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             proxy_free (ptr_proxy);
             gui_chat_printf (NULL, _("Proxy deleted"));
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set a proxy property */
@@ -5052,7 +5052,7 @@ COMMAND_CALLBACK(proxy)
                              _("%sError: unknown proxy \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (!proxy_set (ptr_proxy, argv[3], argv_eol[4]))
         {
@@ -5061,16 +5061,16 @@ COMMAND_CALLBACK(proxy)
                                "proxy \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[3], argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
 }
 
 /*
- * Callback for command "/quit": quits WeeChat.
+ * Callback for command "/quit": quits WhoreIRC.
  */
 
 COMMAND_CALLBACK(quit)
@@ -5085,7 +5085,7 @@ COMMAND_CALLBACK(quit)
 
     /* already quitting? just ignore the command */
     if (weechat_quit)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     confirm_ok = 0;
     pos_args = NULL;
@@ -5109,19 +5109,19 @@ COMMAND_CALLBACK(quit)
                            "argument \"-yes\" (see /help %s)"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          "quit", "quit");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /*
      * send quit signal: some plugins like irc use this signal to disconnect
      * from servers
      */
-    (void) hook_signal_send ("quit", WEECHAT_HOOK_SIGNAL_STRING, pos_args);
+    (void) hook_signal_send ("quit", WHOREIRC_HOOK_SIGNAL_STRING, pos_args);
 
-    /* force end of WeeChat main loop */
+    /* force end of WhoreIRC main loop */
     weechat_quit = 1;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5141,7 +5141,7 @@ command_reload_file (struct t_config_file *config_file)
     else
         rc = config_file_reload (config_file);
 
-    if (rc == WEECHAT_RC_OK)
+    if (rc == WHOREIRC_RC_OK)
     {
         gui_chat_printf (NULL,
                          _("Options reloaded from %s"),
@@ -5197,7 +5197,7 @@ COMMAND_CALLBACK(reload)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5217,7 +5217,7 @@ command_repeat_timer_cb (const void *pointer, void *data, int remaining_calls)
     repeat_args = (char **)pointer;
 
     if (!repeat_args)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     if (repeat_args[0] && repeat_args[1])
     {
@@ -5237,7 +5237,7 @@ command_repeat_timer_cb (const void *pointer, void *data, int remaining_calls)
         free (repeat_args);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5275,7 +5275,7 @@ COMMAND_CALLBACK(repeat)
         gui_chat_printf (NULL,
                          _("%sError: incorrect number"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* first execute command now */
@@ -5302,7 +5302,7 @@ COMMAND_CALLBACK(repeat)
                                  _("%sNot enough memory (%s)"),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                  "/repeat");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             repeat_args[0] = strdup (buffer->full_name);
             repeat_args[1] = strdup (argv_eol[arg_count + 1]);
@@ -5314,7 +5314,7 @@ COMMAND_CALLBACK(repeat)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5382,7 +5382,7 @@ COMMAND_CALLBACK(save)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5402,7 +5402,7 @@ COMMAND_CALLBACK(secure)
     if (argc == 1)
     {
         secure_buffer_open ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     count_encrypted = secure_hashtable_data_encrypted->items_count;
@@ -5414,13 +5414,13 @@ COMMAND_CALLBACK(secure)
         if (count_encrypted == 0)
         {
             gui_chat_printf (NULL, _("There is no encrypted data"));
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (strcmp (argv[2], "-discard") == 0)
         {
             hashtable_remove_all (secure_hashtable_data_encrypted);
             gui_chat_printf (NULL, _("All encrypted data has been deleted"));
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (secure_decrypt_data_not_decrypted (argv_eol[2]) > 0)
         {
@@ -5436,7 +5436,7 @@ COMMAND_CALLBACK(secure)
                              _("%sFailed to decrypt data (wrong passphrase?)"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (count_encrypted > 0)
@@ -5445,7 +5445,7 @@ COMMAND_CALLBACK(secure)
                          _("%sYou must decrypt data still encrypted before "
                            "doing any operation on secured data or passphrase"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set the passphrase */
@@ -5460,7 +5460,7 @@ COMMAND_CALLBACK(secure)
                                "(max: %d chars)"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              SECURE_PASSPHRASE_MAX_LENGTH);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         passphrase_was_set = 0;
         if (secure_passphrase)
@@ -5491,7 +5491,7 @@ COMMAND_CALLBACK(secure)
                 command_save_file (secure_config_file);
             secure_buffer_display ();
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set a secured data */
@@ -5502,7 +5502,7 @@ COMMAND_CALLBACK(secure)
         gui_chat_printf (NULL, _("Secured data \"%s\" set"), argv[2]);
         command_save_file (secure_config_file);
         secure_buffer_display ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete a secured data */
@@ -5523,7 +5523,7 @@ COMMAND_CALLBACK(secure)
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[2]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* toggle values on secured data buffer */
@@ -5534,7 +5534,7 @@ COMMAND_CALLBACK(secure)
             secure_buffer_display_values ^= 1;
             secure_buffer_display ();
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
@@ -5841,7 +5841,7 @@ COMMAND_CALLBACK(set)
                 COMMAND_ERROR;
             for (i = 0; environ[i]; i++)
             {
-                weelist_add (list, environ[i], WEECHAT_LIST_POS_SORT, NULL);
+                weelist_add (list, environ[i], WHOREIRC_LIST_POS_SORT, NULL);
             }
             list_size = weelist_size (list);
             for (i = 0; i < list_size; i++)
@@ -5855,7 +5855,7 @@ COMMAND_CALLBACK(set)
                 }
             }
             weelist_free (list);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (argc == 3)
@@ -5873,7 +5873,7 @@ COMMAND_CALLBACK(set)
                                    "defined"),
                                  argv[2]);
             }
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* set/unset an environment variable */
@@ -5916,7 +5916,7 @@ COMMAND_CALLBACK(set)
         }
         if (value)
             free (value);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     display_only_changed = 0;
@@ -5967,31 +5967,31 @@ COMMAND_CALLBACK(set)
                                  GUI_COLOR(GUI_COLOR_CHAT));
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set option value */
     config_file_search_with_string (argv[1], NULL, NULL, &ptr_option_before,
                                     NULL);
-    value = (string_strcasecmp (argv_eol[2], WEECHAT_CONFIG_OPTION_NULL) == 0) ?
+    value = (string_strcasecmp (argv_eol[2], WHOREIRC_CONFIG_OPTION_NULL) == 0) ?
         NULL : string_remove_quotes (argv_eol[2], "'\"");
     rc = config_file_option_set_with_string (argv[1], value);
     if (value)
         free (value);
     switch (rc)
     {
-        case WEECHAT_CONFIG_OPTION_SET_ERROR:
+        case WHOREIRC_CONFIG_OPTION_SET_ERROR:
             gui_chat_printf (NULL,
                              _("%sError: failed to set option \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[1]);
-            return WEECHAT_RC_OK;
-        case WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
+            return WHOREIRC_RC_OK;
+        case WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
             gui_chat_printf (NULL,
                              _("%sError: option \"%s\" not found"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              argv[1]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         default:
             config_file_search_with_string (argv[1], NULL, NULL,
                                             &ptr_option, NULL);
@@ -6007,7 +6007,7 @@ COMMAND_CALLBACK(set)
             break;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6021,20 +6021,20 @@ command_unset_option (struct t_config_option *option,
 {
     switch (config_file_option_unset (option))
     {
-        case WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+        case WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
             gui_chat_printf (NULL,
                              _("%sFailed to unset option \"%s\""),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                              option_full_name);
             break;
-        case WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+        case WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
             break;
-        case WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+        case WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
             command_set_display_option (option, _("Option reset: "));
             if (number_reset)
                 (*number_reset)++;
             break;
-        case WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+        case WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
             gui_chat_printf (NULL,
                              _("Option removed: %s"), option_full_name);
             if (number_removed)
@@ -6080,7 +6080,7 @@ COMMAND_CALLBACK(unset)
         gui_chat_printf (NULL,
                          _("%sReset of all options is not allowed"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (mask)
@@ -6138,11 +6138,11 @@ COMMAND_CALLBACK(unset)
                      number_reset,
                      number_removed);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Callback for command "/upgrade": upgrades WeeChat.
+ * Callback for command "/upgrade": upgrades WhoreIRC.
  */
 
 COMMAND_CALLBACK(upgrade)
@@ -6174,13 +6174,13 @@ COMMAND_CALLBACK(upgrade)
                            "argument \"-yes\" (see /help %s)"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          "upgrade", "upgrade");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if ((argc > index_args)
         && (string_strcasecmp (argv[index_args], "-dummy") == 0))
     {
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /*
@@ -6193,7 +6193,7 @@ COMMAND_CALLBACK(upgrade)
                          _("%sCan't upgrade: there is one or more background "
                            "process (hook type 'process' or 'connect')"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     ptr_binary = NULL;
@@ -6213,23 +6213,23 @@ COMMAND_CALLBACK(upgrade)
                 if ((rc != 0) || (!S_ISREG(stat_buf.st_mode)))
                 {
                     gui_chat_printf (NULL,
-                                     _("%sCan't upgrade: WeeChat binary \"%s\" "
+                                     _("%sCan't upgrade: WhoreIRC binary \"%s\" "
                                        "does not exist"),
                                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                      ptr_binary);
                     free (ptr_binary);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
                 if ((!(stat_buf.st_mode & S_IXUSR)) && (!(stat_buf.st_mode & S_IXGRP))
                     && (!(stat_buf.st_mode & S_IXOTH)))
                 {
                     gui_chat_printf (NULL,
-                                     _("%sCan't upgrade: WeeChat binary \"%s\" "
+                                     _("%sCan't upgrade: WhoreIRC binary \"%s\" "
                                        "does not have execute permissions"),
                                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                      ptr_binary);
                     free (ptr_binary);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
         }
@@ -6242,7 +6242,7 @@ COMMAND_CALLBACK(upgrade)
             gui_chat_printf (NULL,
                              _("%sNo binary specified"),
                              gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -6252,18 +6252,18 @@ COMMAND_CALLBACK(upgrade)
                          _("%sNot enough memory (%s)"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          "/upgrade");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (ptr_binary)
     {
         gui_chat_printf (NULL,
-                         _("Upgrading WeeChat with binary file: \"%s\"..."),
+                         _("Upgrading WhoreIRC with binary file: \"%s\"..."),
                          ptr_binary);
     }
 
     /* send "upgrade" signal to plugins */
-    (void) hook_signal_send ("upgrade", WEECHAT_HOOK_SIGNAL_STRING,
+    (void) hook_signal_send ("upgrade", WHOREIRC_HOOK_SIGNAL_STRING,
                              (quit) ? "quit" : NULL);
 
     if (!upgrade_weechat_save ())
@@ -6273,7 +6273,7 @@ COMMAND_CALLBACK(upgrade)
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
         if (ptr_binary)
             free (ptr_binary);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     weechat_quit = 1;
@@ -6290,7 +6290,7 @@ COMMAND_CALLBACK(upgrade)
     if (quit)
     {
         exit (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /*
@@ -6309,7 +6309,7 @@ COMMAND_CALLBACK(upgrade)
     string_fprintf (stderr, "\n\n*****\n");
     string_fprintf (stderr,
                     _("***** Error: exec failed (program: \"%s\"), "
-                      "exiting WeeChat"),
+                      "exiting WhoreIRC"),
                     exec_args[0]);
     string_fprintf (stderr, "\n*****\n\n");
 
@@ -6323,7 +6323,7 @@ COMMAND_CALLBACK(upgrade)
 }
 
 /*
- * Callback for command "/uptime": displays WeeChat uptime.
+ * Callback for command "/uptime": displays WhoreIRC uptime.
  */
 
 COMMAND_CALLBACK(uptime)
@@ -6345,7 +6345,7 @@ COMMAND_CALLBACK(uptime)
         if (str_first_start[0])
             str_first_start[strlen (str_first_start) - 1] = '\0';
         snprintf (string, sizeof (string),
-                  "WeeChat uptime: %d %s %02d:%02d:%02d, started on %s",
+                  "WhoreIRC uptime: %d %s %02d:%02d:%02d, started on %s",
                   days,
                   (days != 1) ? "days" : "day",
                   hours,
@@ -6358,7 +6358,7 @@ COMMAND_CALLBACK(uptime)
     {
         snprintf (string, sizeof (string),
                   /* TRANSLATORS: "%s" after "started on" is a date */
-                  _("WeeChat uptime: %d %s %02d:%02d:%02d, started on %s"),
+                  _("WhoreIRC uptime: %d %s %02d:%02d:%02d, started on %s"),
                   days,
                   NG_("day", "days", days),
                   hours,
@@ -6371,7 +6371,7 @@ COMMAND_CALLBACK(uptime)
     {
         gui_chat_printf (NULL,
                          /* TRANSLATORS: "%s%s" after "started on" is a date */
-                         _("WeeChat uptime: %s%d %s%s "
+                         _("WhoreIRC uptime: %s%d %s%s "
                            "%s%02d%s:%s%02d%s:%s%02d%s, "
                            "started on %s%s"),
                          GUI_COLOR(GUI_COLOR_CHAT_BUFFER),
@@ -6391,11 +6391,11 @@ COMMAND_CALLBACK(uptime)
                          util_get_time_string (&weechat_first_start_time));
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Displays WeeChat version.
+ * Displays WhoreIRC version.
  */
 
 void
@@ -6439,7 +6439,7 @@ command_version_display (struct t_gui_buffer *buffer,
         if (translated_string)
         {
             snprintf (string, sizeof (string),
-                      "WeeChat %s [%s %s %s]",
+                      "WhoreIRC %s [%s %s %s]",
                       (display_git_version) ? version_get_version_with_git () : version_get_version (),
                       _("compiled on"),
                       version_get_compilation_date (),
@@ -6460,7 +6460,7 @@ command_version_display (struct t_gui_buffer *buffer,
         else
         {
             snprintf (string, sizeof (string),
-                      "WeeChat %s [%s %s %s]",
+                      "WhoreIRC %s [%s %s %s]",
                       (display_git_version) ? version_get_version_with_git () : version_get_version (),
                       "compiled on",
                       version_get_compilation_date (),
@@ -6480,7 +6480,7 @@ command_version_display (struct t_gui_buffer *buffer,
     }
     else
     {
-        gui_chat_printf (NULL, "%sWeeChat %s %s[%s%s %s %s%s]",
+        gui_chat_printf (NULL, "%sWhoreIRC %s %s[%s%s %s %s%s]",
                          GUI_COLOR(GUI_COLOR_CHAT_BUFFER),
                          (display_git_version) ? version_get_version_with_git () : version_get_version (),
                          GUI_COLOR(GUI_COLOR_CHAT_DELIMITERS),
@@ -6503,7 +6503,7 @@ command_version_display (struct t_gui_buffer *buffer,
 }
 
 /*
- * Callback for command "/version": displays WeeChat version.
+ * Callback for command "/version": displays WhoreIRC version.
  */
 
 COMMAND_CALLBACK(version)
@@ -6532,7 +6532,7 @@ COMMAND_CALLBACK(version)
     command_version_display (buffer, send_to_buffer_as_input,
                              translated_string, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6553,10 +6553,10 @@ COMMAND_CALLBACK(wait)
     if (delay < 1)
         COMMAND_ERROR;
 
-    if (input_data_delayed (buffer, argv_eol[2], NULL, delay) != WEECHAT_RC_OK)
+    if (input_data_delayed (buffer, argv_eol[2], NULL, delay) != WHOREIRC_RC_OK)
         COMMAND_ERROR;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6601,18 +6601,18 @@ COMMAND_CALLBACK(window)
                              GUI_COLOR(GUI_COLOR_CHAT_DELIMITERS));
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* silently ignore argument "*" (can happen when clicking in a root bar) */
     if (strcmp (argv_eol[1], "*") == 0)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* refresh screen */
     if (string_strcasecmp (argv[1], "refresh") == 0)
     {
         gui_window_ask_refresh (2);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* balance windows */
@@ -6620,7 +6620,7 @@ COMMAND_CALLBACK(window)
     {
         if (gui_window_balance (gui_windows_tree))
             gui_window_ask_refresh (1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /*
@@ -6645,21 +6645,21 @@ COMMAND_CALLBACK(window)
         gui_chat_printf (NULL,
                          _("%sError: incorrect window number"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* page up */
     if (string_strcasecmp (argv[1], "page_up") == 0)
     {
         gui_window_page_up (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* page down */
     if (string_strcasecmp (argv[1], "page_down") == 0)
     {
         gui_window_page_down (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* vertical scroll */
@@ -6667,7 +6667,7 @@ COMMAND_CALLBACK(window)
     {
         if (argc > win_args)
             gui_window_scroll (ptr_win, argv[win_args]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* horizontal scroll in window (for buffers with free content) */
@@ -6678,63 +6678,63 @@ COMMAND_CALLBACK(window)
         {
             gui_window_scroll_horiz (ptr_win, argv[win_args]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll up */
     if (string_strcasecmp (argv[1], "scroll_up") == 0)
     {
         gui_window_scroll_up (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll down */
     if (string_strcasecmp (argv[1], "scroll_down") == 0)
     {
         gui_window_scroll_down (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll to top of window */
     if (string_strcasecmp (argv[1], "scroll_top") == 0)
     {
         gui_window_scroll_top (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll to bottom of window */
     if (string_strcasecmp (argv[1], "scroll_bottom") == 0)
     {
         gui_window_scroll_bottom (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll beyond the end of buffer */
     if (string_strcasecmp (argv[1], "scroll_beyond_end") == 0)
     {
         gui_window_scroll_beyond_end (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll to previous highlight */
     if (string_strcasecmp (argv[1], "scroll_previous_highlight") == 0)
     {
         gui_window_scroll_previous_highlight (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll to next highlight */
     if (string_strcasecmp (argv[1], "scroll_next_highlight") == 0)
     {
         gui_window_scroll_next_highlight (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* scroll to unread marker */
     if (string_strcasecmp (argv[1], "scroll_unread") == 0)
     {
         gui_window_scroll_unread (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* split window horizontally */
@@ -6752,7 +6752,7 @@ COMMAND_CALLBACK(window)
         }
         else
             gui_window_split_horizontal (ptr_win, 50);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* split window vertically */
@@ -6770,7 +6770,7 @@ COMMAND_CALLBACK(window)
         }
         else
             gui_window_split_vertical (ptr_win, 50);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* resize window */
@@ -6811,7 +6811,7 @@ COMMAND_CALLBACK(window)
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* merge windows */
@@ -6833,52 +6833,52 @@ COMMAND_CALLBACK(window)
                                    "there's no other window with same "
                                    "size near current one"),
                                  gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* switch to previous window */
     if (string_strcasecmp (argv[1], "-1") == 0)
     {
         gui_window_switch_previous (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* switch to next window */
     if (string_strcasecmp (argv[1], "+1") == 0)
     {
         gui_window_switch_next (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* switch to window above */
     if (string_strcasecmp (argv[1], "up") == 0)
     {
         gui_window_switch_up (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* switch to window below */
     if (string_strcasecmp (argv[1], "down") == 0)
     {
         gui_window_switch_down (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* switch to window on the left */
     if (string_strcasecmp (argv[1], "left") == 0)
     {
         gui_window_switch_left (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* switch to window on the right */
     if (string_strcasecmp (argv[1], "right") == 0)
     {
         gui_window_switch_right (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* swap windows */
@@ -6901,21 +6901,21 @@ COMMAND_CALLBACK(window)
         {
             gui_window_swap (ptr_win, 0);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* zoom window */
     if (string_strcasecmp (argv[1], "zoom") == 0)
     {
         gui_window_zoom (ptr_win);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* bare display */
     if (string_strcasecmp (argv[1], "bare") == 0)
     {
         gui_window_bare_display_toggle ((argc > 2) ? argv[2] : NULL);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* jump to window by buffer number */
@@ -6926,7 +6926,7 @@ COMMAND_CALLBACK(window)
         if (error && !error[0])
         {
             gui_window_switch_by_buffer (ptr_win, number);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -6936,14 +6936,14 @@ COMMAND_CALLBACK(window)
     if (error && !error[0])
     {
         gui_window_switch_by_number (number);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     COMMAND_ERROR;
 }
 
 /*
- * Hooks WeeChat core commands.
+ * Hooks WhoreIRC core commands.
  */
 
 void
@@ -7181,11 +7181,11 @@ command_init ()
      */
     hook_command (
         NULL, "50000|command",
-        N_("launch explicit WeeChat or plugin command"),
+        N_("launch explicit WhoreIRC or plugin command"),
         N_("[-buffer <name>] <plugin> <command>"),
         N_("-buffer: execute the command on this buffer\n"
            " plugin: execute the command from this plugin; 'core' for a "
-           "WeeChat command, '*' for automatic plugin (it depends on the "
+           "WhoreIRC command, '*' for automatic plugin (it depends on the "
            "buffer where the command is executed)\n"
            "command: command to execute (a '/' is automatically added if not "
            "found at beginning of command)"),
@@ -7243,10 +7243,10 @@ command_init ()
            " || time <command>"),
         N_("     list: list plugins with debug levels\n"
            "      set: set debug level for plugin\n"
-           "   plugin: name of plugin (\"core\" for WeeChat core)\n"
+           "   plugin: name of plugin (\"core\" for WhoreIRC core)\n"
            "    level: debug level for plugin (0 = disable debug)\n"
-           "     dump: save memory dump in WeeChat log file (same dump is "
-           "written when WeeChat crashes)\n"
+           "     dump: save memory dump in WhoreIRC log file (same dump is "
+           "written when WhoreIRC crashes)\n"
            "   buffer: dump buffer content with hexadecimal values in log file\n"
            "    color: display infos about current color pairs\n"
            "   cursor: toggle debug for cursor mode\n"
@@ -7470,9 +7470,9 @@ command_init ()
            "  filter lines containing \"weechat sucks\" on IRC channel "
            "#weechat:\n"
            "    /filter add sucks irc.freenode.#weechat * weechat sucks\n"
-           "  filter lines that are strictly equal to \"WeeChat sucks\" on "
+           "  filter lines that are strictly equal to \"WhoreIRC sucks\" on "
            "all buffers:\n"
-           "    /filter add sucks2 * * (?-i)^WeeChat sucks$"),
+           "    /filter add sucks2 * * (?-i)^WhoreIRC sucks$"),
         "list"
         " || enable %(filters_names)|@"
         " || disable %(filters_names)|@"
@@ -7623,7 +7623,7 @@ command_init ()
            "   resetall: restore bindings to the default values and delete ALL "
            "personal bindings (use carefully!)\n"
            "    missing: add missing keys (using default bindings), useful "
-           "after installing new WeeChat version\n"
+           "after installing new WhoreIRC version\n"
            "\n"
            "When binding a command to a key, it is recommended to use key alt+k "
            "(or Esc then k), and then press the key to bind: this will insert "
@@ -7723,7 +7723,7 @@ command_init ()
         NULL, "mute",
         N_("execute a command silently"),
         N_("[-core | -current | -buffer <name>] <command>"),
-        N_("   -core: no output on WeeChat core buffer\n"
+        N_("   -core: no output on WhoreIRC core buffer\n"
            "-current: no output on current buffer\n"
            " -buffer: no output on specified buffer\n"
            "    name: full buffer name (examples: \"irc.server.freenode\", "
@@ -7876,7 +7876,7 @@ command_init ()
         &command_proxy, NULL, NULL);
     hook_command (
         NULL, "quit",
-        N_("quit WeeChat"),
+        N_("quit WhoreIRC"),
         N_("[-yes] [<arguments>]"),
         N_("     -yes: required if option \"weechat.look.confirm_quit\" "
            "is enabled\n"
@@ -7896,7 +7896,7 @@ command_init ()
         N_("[<file> [<file>...]]"),
         N_("file: configuration file to reload (without extension \".conf\")\n"
            "\n"
-           "Without argument, all files (WeeChat and plugins) are reloaded."),
+           "Without argument, all files (WhoreIRC and plugins) are reloaded."),
         "%(config_files)|%*",
         &command_reload, NULL, NULL);
     hook_command (
@@ -7928,7 +7928,7 @@ command_init ()
         N_("[<file> [<file>...]]"),
         N_("file: configuration file to save (without extension \".conf\")\n"
            "\n"
-           "Without argument, all files (WeeChat and plugins) are saved.\n"
+           "Without argument, all files (WhoreIRC and plugins) are saved.\n"
            "\n"
            "By default all configuration files are saved to disk on /quit "
            "command (see option \"weechat.look.save_config_on_exit\")."),
@@ -7957,10 +7957,10 @@ command_init ()
            "Keys on secure buffer:\n"
            "  alt+v  toggle values\n"
            "\n"
-           "When a passphrase is used (data encrypted), it is asked by WeeChat "
+           "When a passphrase is used (data encrypted), it is asked by WhoreIRC "
            "on startup.\n"
-           "It is possible to set environment variable \"WEECHAT_PASSPHRASE\" "
-           "to prevent the prompt (this same variable is used by WeeChat on "
+           "It is possible to set environment variable \"WHOREIRC_PASSPHRASE\" "
+           "to prevent the prompt (this same variable is used by WhoreIRC on "
            "/upgrade), or to set option sec.crypt.passphrase_file to read "
            "the passphrase from a file (see /help sec.crypt.passphrase_file).\n"
            "\n"
@@ -8052,18 +8052,18 @@ command_init ()
         &command_unset, NULL, NULL);
     hook_command (
         NULL, "upgrade",
-        N_("reload the WeeChat binary without disconnecting from servers"),
+        N_("reload the WhoreIRC binary without disconnecting from servers"),
         N_("[-yes] [<path_to_binary>|-quit]"),
         N_("          -yes: required if option \"weechat.look.confirm_upgrade\" "
            "is enabled\n"
-           "path_to_binary: path to WeeChat binary (default is current binary)\n"
+           "path_to_binary: path to WhoreIRC binary (default is current binary)\n"
            "        -dummy: do nothing (option used to prevent accidental "
            "completion with \"-quit\")\n"
            "         -quit: close *ALL* connections, save session and quit "
-           "WeeChat, which makes possible a delayed restoration (see below)\n"
+           "WhoreIRC, which makes possible a delayed restoration (see below)\n"
            "\n"
-           "This command upgrades and reloads a running WeeChat session. The "
-           "new WeeChat binary must have been compiled or installed with a "
+           "This command upgrades and reloads a running WhoreIRC session. The "
+           "new WhoreIRC binary must have been compiled or installed with a "
            "package manager before running this command.\n"
            "\n"
            "Note: SSL connections are lost during upgrade, because reload of "
@@ -8075,25 +8075,25 @@ command_init ()
            "history, ..)\n"
            "  2. unload all plugins (configuration files (*.conf) are written "
            "on disk)\n"
-           "  3. save WeeChat configuration (weechat.conf)\n"
-           "  4. execute new WeeChat binary and reload session.\n"
+           "  3. save WhoreIRC configuration (weechat.conf)\n"
+           "  4. execute new WhoreIRC binary and reload session.\n"
            "\n"
            "With option \"-quit\", the process is slightly different:\n"
            "  1. close *ALL* connections (irc, xfer, relay, ...)\n"
            "  2. save session into files (*.upgrade)\n"
            "  3. unload all plugins\n"
-           "  4. save WeeChat configuration\n"
-           "  5. quit WeeChat\n"
+           "  4. save WhoreIRC configuration\n"
+           "  5. quit WhoreIRC\n"
            "Then later you can restore session with command: weechat --upgrade\n"
            "IMPORTANT: you must restore the session with exactly same "
            "configuration (files *.conf).\n"
-           "It is possible to restore WeeChat session on another machine if you "
+           "It is possible to restore WhoreIRC session on another machine if you "
            "copy the content of directory \"~/.weechat\"."),
         "%(filename)|-dummy|-quit",
         &command_upgrade, NULL, NULL);
     hook_command (
         NULL, "uptime",
-        N_("show WeeChat uptime"),
+        N_("show WhoreIRC uptime"),
         "[-o | -ol]",
         N_(" -o: send uptime to current buffer as input (English string)\n"
            "-ol: send uptime to current buffer as input (translated string)"),
@@ -8101,7 +8101,7 @@ command_init ()
         &command_uptime, NULL, NULL);
     hook_command (
         NULL, "version",
-        N_("show WeeChat version and compilation date"),
+        N_("show WhoreIRC version and compilation date"),
         "[-o | -ol]",
         N_(" -o: send version to current buffer as input (English string)\n"
            "-ol: send version to current buffer as input (translated string)\n"

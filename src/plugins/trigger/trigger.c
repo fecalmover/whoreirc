@@ -1,22 +1,22 @@
 /*
- * trigger.c - trigger plugin for WeeChat
+ * trigger.c - trigger plugin for WhoreIRC
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -33,12 +33,12 @@
 #include "trigger-config.h"
 
 
-WEECHAT_PLUGIN_NAME(TRIGGER_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Text replacement and command execution on events triggered by WeeChat/plugins"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(12000);
+WHOREIRC_PLUGIN_NAME(TRIGGER_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Text replacement and command execution on events triggered by WhoreIRC/plugins"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(12000);
 
 struct t_weechat_plugin *weechat_trigger_plugin = NULL;
 
@@ -68,7 +68,7 @@ char *trigger_hook_regex_default_var[TRIGGER_NUM_HOOK_TYPES] =
 char *trigger_return_code_string[TRIGGER_NUM_RETURN_CODES] =
 { "ok", "ok_eat", "error" };
 int trigger_return_code[TRIGGER_NUM_RETURN_CODES] =
-{ WEECHAT_RC_OK, WEECHAT_RC_OK_EAT, WEECHAT_RC_ERROR };
+{ WHOREIRC_RC_OK, WHOREIRC_RC_OK_EAT, WHOREIRC_RC_ERROR };
 
 char *trigger_post_action_string[TRIGGER_NUM_POST_ACTIONS] =
 { "none", "disable", "delete" };
@@ -284,7 +284,7 @@ trigger_hook (struct t_trigger *trigger)
         weechat_config_string (trigger->options[TRIGGER_OPTION_ARGUMENTS]),
         ";",
         NULL,
-        WEECHAT_STRING_SPLIT_KEEP_EOL,
+        WHOREIRC_STRING_SPLIT_KEEP_EOL,
         0,
         NULL);
 
@@ -1187,7 +1187,7 @@ trigger_free_all ()
 }
 
 /*
- * Prints trigger infos in WeeChat log file (usually for crash dump).
+ * Prints trigger infos in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1291,7 +1291,7 @@ trigger_debug_dump_cb (const void *pointer, void *data,
                             weechat_plugin->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1310,7 +1310,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     trigger_command_init ();
 
     if (!trigger_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     trigger_config_read ();
 
@@ -1333,7 +1333,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     if (upgrading)
         trigger_buffer_set_callbacks ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1352,5 +1352,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     trigger_config_free ();
     trigger_callback_end ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

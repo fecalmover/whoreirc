@@ -1,30 +1,30 @@
 /*
  * Copyright (C) 2013-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_SECURE_H
-#define WEECHAT_SECURE_H
+#ifndef WHOREIRC_SECURE_H
+#define WHOREIRC_SECURE_H
 
 #include <time.h>
 
-#define SECURE_ENV_PASSPHRASE        "WEECHAT_PASSPHRASE"
+#define SECURE_ENV_PASSPHRASE        "WHOREIRC_PASSPHRASE"
 #define SECURE_PASSPHRASE_MAX_LENGTH 4096
-#define SECURE_SALT_DEFAULT          "WeeChat!"
+#define SECURE_SALT_DEFAULT          "WhoreIRC!"
 #define SECURE_DATA_PASSPHRASE_FLAG  "__passphrase__"
 #define SECURE_SALT_SIZE             8
 #define SECURE_TOTP_MIN_DIGITS       4
@@ -71,4 +71,4 @@ extern int secure_totp_validate (const char *secret, time_t totp_time,
 extern int secure_init ();
 extern void secure_end ();
 
-#endif /* WEECHAT_SECURE_H */
+#endif /* WHOREIRC_SECURE_H */

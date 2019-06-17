@@ -1,4 +1,4 @@
-= WeeChat FAQ (Frequently Asked Questions)
+= WhoreIRC FAQ (Frequently Asked Questions)
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en
@@ -9,8 +9,8 @@
 :docinfo1:
 
 
-This document is written for WeeChat versions ≥ 0.3.0 but should preferably be
-used with latest stable version of WeeChat.
+This document is written for WhoreIRC versions ≥ 0.3.0 but should preferably be
+used with latest stable version of WhoreIRC.
 
 toc::[]
 
@@ -19,34 +19,34 @@ toc::[]
 == General
 
 [[weechat_name]]
-=== Where does the name "WeeChat" come from?
+=== Where does the name "WhoreIRC" come from?
 
 "Wee" is a recursive acronym and stands for "Wee Enhanced Environment".
 So complete name is "Wee Enhanced Environment for Chat".
 
 "Wee" also means "very small" (and yes, there is other meaning, but it does not
-apply to WeeChat!).
+apply to WhoreIRC!).
 
 [[why_choose_weechat]]
-=== Why choose WeeChat? X-Chat and Irssi are so good...
+=== Why choose WhoreIRC? X-Chat and Irssi are so good...
 
-Because WeeChat is very light and brings innovating features.
+Because WhoreIRC is very light and brings innovating features.
 
-More info on the WeeChat features page: https://weechat.org/about/features
+More info on the WhoreIRC features page: https://weechat.org/about/features
 
 [[compilation_install]]
 == Compilation / install
 
 [[gui]]
-=== I've heard about many GUIs for WeeChat. How can I compile/use them?
+=== I've heard about many GUIs for WhoreIRC. How can I compile/use them?
 
 Some remote GUIs are available, see the remote interfaces page:
 https://weechat.org/about/interfaces
 
 [[compile_git]]
-=== I can't compile WeeChat after cloning git repository, why?
+=== I can't compile WhoreIRC after cloning git repository, why?
 
-The recommended way to compile WeeChat is with
+The recommended way to compile WhoreIRC is with
 link:weechat_user.en.html#compile_with_cmake[CMake].
 
 If you're compiling with link:weechat_user.en.html#compile_with_autotools[autotools]
@@ -58,7 +58,7 @@ package may not correspond exactly to git base and that it's less convenient
 than git cloning for installing updates.
 
 [[compile_macos]]
-=== How can I install WeeChat on macOS?
+=== How can I install WhoreIRC on macOS?
 
 It is recommended to use https://brew.sh/[Homebrew], you can get help with:
 
@@ -66,14 +66,14 @@ It is recommended to use https://brew.sh/[Homebrew], you can get help with:
 brew info weechat
 ----
 
-You can install WeeChat with this command:
+You can install WhoreIRC with this command:
 
 ----
 brew install weechat
 ----
 
 [[lost]]
-=== I've launched WeeChat, but I'm lost, what can I do?
+=== I've launched WhoreIRC, but I'm lost, what can I do?
 
 For help you can type `/help`. For help about a command, type `/help command`.
 link:weechat_user.en.html#key_bindings[Keys] and
@@ -113,12 +113,12 @@ It's a common issue with a variety of causes, please read carefully and check
   is off (this option may cause display bugs).
 
 [NOTE]
-UTF-8 locale is recommended for WeeChat. If you're using ISO or other
+UTF-8 locale is recommended for WhoreIRC. If you're using ISO or other
 locale, please check that *all* your settings (terminal, screen, ..) are ISO
 and *not* UTF-8.
 
 [[unicode_chars]]
-=== Some unicode chars are displayed in terminal but not in WeeChat, why?
+=== Some unicode chars are displayed in terminal but not in WhoreIRC, why?
 
 This may be caused by a libc bug in function _wcwidth_, which should be fixed
 in glibc 2.22 (maybe not yet available in your distribution).
@@ -135,13 +135,13 @@ https://github.com/weechat/weechat/issues/79
 This may be caused by a bad value of the TERM variable in your shell (look at
 the output of `echo $TERM` in your terminal).
 
-Depending on where you launch WeeChat, you should have:
+Depending on where you launch WhoreIRC, you should have:
 
-* If WeeChat runs locally or on a remote machine without screen nor tmux, it
+* If WhoreIRC runs locally or on a remote machine without screen nor tmux, it
   depends on the terminal used: _xterm_, _xterm-256color_, _rxvt-unicode_,
   _rxvt-256color_, etc.
-* If WeeChat runs under screen, you should have _screen_ or _screen-256color_.
-* If WeeChat runs under tmux, you should have _tmux_, _tmux-256color_,
+* If WhoreIRC runs under screen, you should have _screen_ or _screen-256color_.
+* If WhoreIRC runs under tmux, you should have _tmux_, _tmux-256color_,
   _screen_ or _screen-256color_.
 
 If needed, fix your TERM variable: `export TERM="xxx"`.
@@ -160,12 +160,12 @@ If you are using gnome-terminal, check that the option
 is set to `narrow`.
 
 [[macos_display_broken]]
-=== I compiled WeeChat under macOS, and I see "(null)" everywhere on screen, what's wrong?
+=== I compiled WhoreIRC under macOS, and I see "(null)" everywhere on screen, what's wrong?
 
 If you compiled ncursesw yourself, try to use standard ncurses (that comes with
 system).
 
-Moreover, under macOS, it is recommended to install WeeChat with Homebrew
+Moreover, under macOS, it is recommended to install WhoreIRC with Homebrew
 package manager.
 
 [[buffer_vs_window]]
@@ -184,7 +184,7 @@ windows.
 [[buffers_list]]
 === How to display the buffers list on the left side?
 
-With WeeChat ≥ 1.8, the plugin link:weechat_user.en.html#buflist_plugin[buflist]
+With WhoreIRC ≥ 1.8, the plugin link:weechat_user.en.html#buflist_plugin[buflist]
 is loaded and enabled by default.
 
 With an older version, you can install script _buffers.pl_:
@@ -303,7 +303,7 @@ For example:
 /bar del input
 ----
 
-If ever you are not satisfied with that, just delete new bar, WeeChat will
+If ever you are not satisfied with that, just delete new bar, WhoreIRC will
 automatically create default bar "input" if item "input_text" is not used in
 any bar:
 
@@ -314,7 +314,7 @@ any bar:
 [[terminal_copy_paste]]
 === How can I copy/paste text without pasting nicklist?
 
-With WeeChat ≥ 1.0, you can use the bare display (default key: kbd:[Alt+l] (`L`)),
+With WhoreIRC ≥ 1.0, you can use the bare display (default key: kbd:[Alt+l] (`L`)),
 which will show just the contents of the currently selected window,
 without any formatting.
 
@@ -331,7 +331,7 @@ Another solution is to move nicklist to top or bottom, for example:
 [[urls]]
 === How can I click on long URLs (more than one line)?
 
-With WeeChat ≥ 1.0, you can use the bare display (default key: kbd:[Alt+l] (`L`)).
+With WhoreIRC ≥ 1.0, you can use the bare display (default key: kbd:[Alt+l] (`L`)).
 
 To make opening URLs easier, you can:
 
@@ -341,7 +341,7 @@ To make opening URLs easier, you can:
 /set weechat.bar.nicklist.position top
 ----
 
-* disable alignment for multiline words (WeeChat ≥ 1.7):
+* disable alignment for multiline words (WhoreIRC ≥ 1.7):
 
 ----
 /set weechat.look.align_multiline_words off
@@ -353,7 +353,7 @@ To make opening URLs easier, you can:
 /set weechat.look.align_end_of_lines time
 ----
 
-With WeeChat ≥ 0.3.6, you can enable option "eat_newline_glitch", so that
+With WhoreIRC ≥ 0.3.6, you can enable option "eat_newline_glitch", so that
 new line char is not added at the end of each line displayed (it will not break
 URL selection):
 
@@ -372,16 +372,16 @@ Other solution is to use a script:
 ----
 
 [[change_locale_without_quit]]
-=== I want to change the language used by WeeChat for messages, but without exiting WeeChat, is it possible?
+=== I want to change the language used by WhoreIRC for messages, but without exiting WhoreIRC, is it possible?
 
-Yes, with WeeChat ≥ 1.0:
+Yes, with WhoreIRC ≥ 1.0:
 
 ----
 /set env LANG en_US.UTF-8
 /upgrade
 ----
 
-With older WeeChat:
+With older WhoreIRC:
 
 ----
 /script install shell.py
@@ -390,9 +390,9 @@ With older WeeChat:
 ----
 
 [[use_256_colors]]
-=== How can I use 256 colors in WeeChat?
+=== How can I use 256 colors in WhoreIRC?
 
-256 colors are supported with WeeChat ≥ 0.3.4.
+256 colors are supported with WhoreIRC ≥ 0.3.4.
 
 First check that your _TERM_ environment variable is correct, recommended values
 are:
@@ -411,8 +411,8 @@ If you are using screen, you can add this line to your _~/.screenrc_:
 term screen-256color
 ----
 
-If your _TERM_ variable has a wrong value and that WeeChat is already running,
-you can change it with these two commands (with WeeChat ≥ 1.0):
+If your _TERM_ variable has a wrong value and that WhoreIRC is already running,
+you can change it with these two commands (with WhoreIRC ≥ 1.0):
 
 ----
 /set env TERM screen-256color
@@ -450,7 +450,7 @@ You must enable the focus events with a special code sent to terminal.
   `set -g focus-events on` to your _.tmux.conf_ file.
 * This does *not* work under screen.
 
-To send the code when WeeChat is starting:
+To send the code when WhoreIRC is starting:
 
 ----
 /set weechat.startup.command_after_plugins "/print -stdout \033[?1004h\n"
@@ -471,7 +471,7 @@ For example to mark buffers as read when the terminal loses the focus:
 ----
 
 [[screen_paste]]
-=== When WeeChat is running in screen, pasting text in another screen window adds ~0 and ~1 around text, why?
+=== When WhoreIRC is running in screen, pasting text in another screen window adds ~0 and ~1 around text, why?
 
 This is caused by the bracketed paste option which is enabled by default, and
 not properly handled by screen in other windows.
@@ -558,7 +558,7 @@ code press kbd:[Alt+k] then key.
 [[mouse_not_working]]
 === Mouse is not working at all, what can I do?
 
-Mouse is supported with WeeChat ≥ 0.3.6.
+Mouse is supported with WhoreIRC ≥ 0.3.6.
 
 First try to enable mouse:
 
@@ -594,9 +594,9 @@ You should use a terminal that supports UTF-8 coordinates for mouse, like
 rxvt-unicode.
 
 [[mouse_select_paste]]
-=== How can I select or paste text in terminal when mouse is enabled in WeeChat?
+=== How can I select or paste text in terminal when mouse is enabled in WhoreIRC?
 
-When mouse is enabled in WeeChat, you can use kbd:[Shift] modifier to select or
+When mouse is enabled in WhoreIRC, you can use kbd:[Shift] modifier to select or
 click in terminal, as if the mouse was disabled (on some terminals like iTerm,
 you have to use kbd:[Alt] instead of kbd:[Shift]).
 
@@ -608,7 +608,7 @@ you have to use kbd:[Alt] instead of kbd:[Shift]).
 
 If you are using macOS, you must install `openssl` from Homebrew.
 A CA file will be bootstrapped using certificates from the system keychain.
-You can then set the path to certificates in WeeChat:
+You can then set the path to certificates in WhoreIRC:
 
 ----
 /set weechat.network.gnutls_ca_file "/usr/local/etc/openssl/cert.pem"
@@ -638,7 +638,7 @@ should be, you can specify the fingerprint (SHA-512, SHA-256 or SHA-1):
 [[irc_ssl_handshake_error]]
 === When connecting to server with SSL, I only see the error "TLS handshake failed", what can I do?
 
-You can try a different priority string (WeeChat ≥ 0.3.5 only), replace "xxx"
+You can try a different priority string (WhoreIRC ≥ 0.3.5 only), replace "xxx"
 by your server name:
 
 ----
@@ -742,7 +742,7 @@ It lets you ignore some nicks or hostnames of users for a server or channel
 Matching messages are deleted by IRC plugin before display (so you'll
 never see them, and can't be recovered by removing the ignore).
 
-The `/filter` command is a WeeChat core command, so it applies to any buffer.
+The `/filter` command is a WhoreIRC core command, so it applies to any buffer.
 It lets you filter some lines in buffers with tags or regular expression for
 prefix and content of line.
 Filtered lines are only hidden, not deleted, and you can see them if you
@@ -771,7 +771,7 @@ link:weechat_user.en.html#irc_smart_filter_join_part_quit[User's guide / Smart f
 [[filter_irc_join_channel_messages]]
 === How can I filter some messages displayed when I join an IRC channel?
 
-With WeeChat ≥ 0.4.1, you can choose which messages are displayed when
+With WhoreIRC ≥ 0.4.1, you can choose which messages are displayed when
 joining a channel with the option _irc.look.display_join_message_ (see
 `/help irc.look.display_join_message` for more info).
 
@@ -787,7 +787,7 @@ modes in same IRC message.
 
 If you want to do that, it's probably because Bitlbee is using voice to show
 away users, and you are flooded with voice messages. Therefore, you can change
-that and let WeeChat use a special color for away nicks in nicklist.
+that and let WhoreIRC use a special color for away nicks in nicklist.
 
 For Bitlbee ≥ 3, issue this on control channel _&bitlbee_:
 
@@ -801,7 +801,7 @@ For older version of Bitlbee, issue this on control channel _&bitlbee_:
 set away_devoice false
 ----
 
-For checking away nicks in WeeChat, see question about
+For checking away nicks in WhoreIRC, see question about
 <<color_away_nicks,away nicks>>.
 
 If you really want to filter voice messages, you can use this command, but this
@@ -829,13 +829,13 @@ nicks:
 ----
 
 [NOTE]
-For WeeChat ≤ 0.3.3, options are _irc.network.away_check_ and
+For WhoreIRC ≤ 0.3.3, options are _irc.network.away_check_ and
 _irc.network.away_check_max_nicks_.
 
 [[highlight_notification]]
 === How can I be warned when someone highlights me on a channel?
 
-With WeeChat ≥ 1.0, there is a default trigger "beep" which sends a _BEL_ to
+With WhoreIRC ≥ 1.0, there is a default trigger "beep" which sends a _BEL_ to
 the terminal on a highlight or private message. Thus you can configure your
 terminal (or multiplexer like screen/tmux) to run a command or play a sound
 when a _BEL_ occurs.
@@ -846,7 +846,7 @@ Or you can add a command in "beep" trigger:
 /set trigger.trigger.beep.command "/print -beep;/exec -bg /path/to/command arguments"
 ----
 
-With an older WeeChat, you can use a script like _beep.pl_ or _launcher.pl_.
+With an older WhoreIRC, you can use a script like _beep.pl_ or _launcher.pl_.
 
 For _launcher.pl_, you have to setup a command:
 
@@ -863,7 +863,7 @@ Other scripts on this subject:
 [[disable_highlights_for_specific_nicks]]
 === How can I disable highlights for specific nicks?
 
-With WeeChat ≥ 0.3.4 you can use the
+With WhoreIRC ≥ 0.3.4 you can use the
 link:weechat_user.en.html#max_hotlist_level_nicks[hotlist_max_level_nicks_add]
 buffer property to set the max hotlist level for some nicks, per buffer,
 or per group of buffers (like IRC servers).
@@ -906,7 +906,7 @@ The default key is kbd:[Ctrl+x] (command is: `/input switch_active_buffer`).
 == Plugins / scripts
 
 [[openbsd_plugins]]
-=== I'm using OpenBSD and WeeChat does not load any plugins, what's wrong?
+=== I'm using OpenBSD and WhoreIRC does not load any plugins, what's wrong?
 
 Under OpenBSD, plugin filenames end with ".so.0.0" (".so" for Linux).
 
@@ -920,7 +920,7 @@ You must set that up:
 [[install_scripts]]
 === How can I install scripts? Are scripts compatible with other IRC clients?
 
-With WeeChat ≥ 0.3.9 you can use the command `/script` to install and manage scripts
+With WhoreIRC ≥ 0.3.9 you can use the command `/script` to install and manage scripts
 (see `/help script` for help). For older versions there is weeget.py and script.pl.
 
 Scripts are not compatible with other IRC clients.
@@ -937,17 +937,17 @@ If still not working, try to manually delete the scripts file (in your shell):
 $ rm ~/.weechat/script/plugins.xml.gz
 ----
 
-And update scripts again in WeeChat:
+And update scripts again in WhoreIRC:
 
 ----
 /script update
 ----
 
 If you still have an error, then you must disable the automatic update of file
-in WeeChat and download the file manually outside WeeChat (that means you'll
+in WhoreIRC and download the file manually outside WhoreIRC (that means you'll
 have to update manually the file yourself to get updates):
 
-* in WeeChat:
+* in WhoreIRC:
 
 ----
 /set script.scripts.cache_expire -1
@@ -961,7 +961,7 @@ $ curl -O https://weechat.org/files/plugins.xml.gz
 ----
 
 [[spell_dictionaries]]
-=== I installed aspell dictionaries on my system, how can I use them without restarting WeeChat?
+=== I installed aspell dictionaries on my system, how can I use them without restarting WhoreIRC?
 
 You have to reload the spell plugin:
 
@@ -970,7 +970,7 @@ You have to reload the spell plugin:
 ----
 
 [NOTE]
-With WeeChat ≤ 2.4, the "spell" plugin was named "aspell", so the command is:
+With WhoreIRC ≤ 2.4, the "spell" plugin was named "aspell", so the command is:
 `/plugin reload aspell`.
 
 [[settings]]
@@ -981,7 +981,7 @@ With WeeChat ≤ 2.4, the "spell" plugin was named "aspell", so the command is:
 
 You can, but this is *NOT* recommended.
 
-Command `/set` in WeeChat is recommended:
+Command `/set` in WhoreIRC is recommended:
 
 * You can complete the name and value of option with kbd:[Tab] key
   (or kbd:[Shift+Tab] for partial completion, useful for the name).
@@ -990,13 +990,13 @@ Command `/set` in WeeChat is recommended:
 
 If you still want to edit files by hand, you should be careful:
 
-* If you put an invalid value for an option, WeeChat will display an error
+* If you put an invalid value for an option, WhoreIRC will display an error
   on load and discard the value (the default value for option will be used).
-* If WeeChat is running, you'll have to issue the command `/reload`, and if
+* If WhoreIRC is running, you'll have to issue the command `/reload`, and if
   some settings were changed but not saved with `/save`, you will lose them.
 
 [[memory_usage]]
-=== How can I tweak WeeChat to consume less memory?
+=== How can I tweak WhoreIRC to consume less memory?
 
 You can try following tips to consume less memory:
 
@@ -1013,7 +1013,7 @@ You can try following tips to consume less memory:
 * Reduce value of option _weechat.history.max_commands_.
 
 [[cpu_usage]]
-=== How can I tweak WeeChat to use less CPU?
+=== How can I tweak WhoreIRC to use less CPU?
 
 You can follow same tips as for <<memory_usage,memory>>, and these ones:
 
@@ -1070,7 +1070,7 @@ For example:
 ----
 
 [[sharing_config_files]]
-=== I want to share my WeeChat configuration, what files should I share and what should I keep private?
+=== I want to share my WhoreIRC configuration, what files should I share and what should I keep private?
 
 You can share files _~/.weechat/*.conf_ except the file _sec.conf_ which
 contains your passwords ciphered with your passphrase.
@@ -1091,9 +1091,9 @@ for more information about configuration files.
 See: https://weechat.org/about/support
 
 [[gdb_error_threads]]
-=== When I run WeeChat under gdb, there is an error about threads, what can I do?
+=== When I run WhoreIRC under gdb, there is an error about threads, what can I do?
 
-When you run WeeChat under gdb, you may have this error:
+When you run WhoreIRC under gdb, you may have this error:
 
 ----
 $ gdb /path/to/weechat
@@ -1103,7 +1103,7 @@ Cannot find new threads: generic error
 ----
 
 To fix that, you can run gdb with this command (replace path to libpthread and
-WeeChat with paths on your system):
+WhoreIRC with paths on your system):
 
 ----
 $ LD_PRELOAD=/lib/libpthread.so.0 gdb /path/to/weechat
@@ -1111,15 +1111,15 @@ $ LD_PRELOAD=/lib/libpthread.so.0 gdb /path/to/weechat
 ----
 
 [[supported_os]]
-=== What is the list of supported platforms for WeeChat? Will it be ported to other operating systems?
+=== What is the list of supported platforms for WhoreIRC? Will it be ported to other operating systems?
 
 The full list is on this page: https://weechat.org/download
 
 We do our best to run on as many platforms as possible. Help is welcome for
-some OS' we don't have, to test WeeChat.
+some OS' we don't have, to test WhoreIRC.
 
 [[help_developers]]
-=== I want to help WeeChat developers. What can I do?
+=== I want to help WhoreIRC developers. What can I do?
 
 There are many tasks to do (testing, code, documentation, etc.)
 
@@ -1127,7 +1127,7 @@ Please contact us via IRC or mail, look at support page:
 https://weechat.org/about/support
 
 [[donate]]
-=== Can I give money or other things to WeeChat developers?
+=== Can I give money or other things to WhoreIRC developers?
 
 You can give us money to help development.
 Details on https://weechat.org/donate

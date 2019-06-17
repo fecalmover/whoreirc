@@ -4,20 +4,20 @@
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  * Copyright (C) 2006-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -98,9 +98,9 @@ spell_config_change_commands (const void *pointer, void *data,
             value,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &spell_count_commands_to_check);
         if (spell_count_commands_to_check > 0)
@@ -208,7 +208,7 @@ spell_config_dict_delete_option (const void *pointer, void *data,
     if (!spell_config_loading)
         spell_speller_remove_unused ();
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
@@ -229,7 +229,7 @@ spell_config_dict_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (value && value[0])
         spell_speller_check_dictionaries (value);
@@ -245,7 +245,7 @@ spell_config_dict_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -261,14 +261,14 @@ spell_config_dict_create_option (const void *pointer, void *data,
                     &spell_config_dict_change, NULL, NULL,
                     NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (NULL,
                         _("%s%s: error creating spell dictionary \"%s\" => \"%s\""),
@@ -325,7 +325,7 @@ spell_config_option_delete_option (const void *pointer, void *data,
     if (!spell_config_loading)
         spell_speller_remove_unused ();
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
@@ -346,7 +346,7 @@ spell_config_option_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -359,7 +359,7 @@ spell_config_option_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -376,14 +376,14 @@ spell_config_option_create_option (const void *pointer, void *data,
                     &spell_config_option_change, NULL, NULL,
                     NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (NULL,
                         _("%s%s: error creating spell option \"%s\" => \"%s\""),
@@ -649,7 +649,7 @@ spell_config_read ()
     spell_config_loading = 1;
     rc = weechat_config_read (spell_config_file);
     spell_config_loading = 0;
-    if (rc == WEECHAT_CONFIG_READ_OK)
+    if (rc == WHOREIRC_CONFIG_READ_OK)
         spell_config_change_commands (NULL, NULL, spell_config_check_commands);
     spell_speller_remove_unused ();
 

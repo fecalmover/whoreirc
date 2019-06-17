@@ -17,10 +17,10 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_XFER_FILE_H
-#define WEECHAT_PLUGIN_XFER_FILE_H
+#ifndef WHOREIRC_PLUGIN_XFER_FILE_H
+#define WHOREIRC_PLUGIN_XFER_FILE_H
 
 extern void xfer_file_find_filename (struct t_xfer *xfer);
 extern void xfer_file_calculate_speed (struct t_xfer *xfer, int ended);
 
-#endif /* WEECHAT_PLUGIN_XFER_FILE_H */
+#endif /* WHOREIRC_PLUGIN_XFER_FILE_H */

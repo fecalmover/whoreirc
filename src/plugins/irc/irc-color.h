@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_IRC_COLOR_H
-#define WEECHAT_PLUGIN_IRC_COLOR_H
+#ifndef WHOREIRC_PLUGIN_IRC_COLOR_H
+#define WHOREIRC_PLUGIN_IRC_COLOR_H
 
 #define IRC_NUM_COLORS        100
 
@@ -27,14 +27,14 @@
  * in IRC messages (same as other IRC clients)
  */
 
-#define WEECHAT_COLOR_BLACK   COLOR_BLACK
-#define WEECHAT_COLOR_RED     COLOR_BLUE
-#define WEECHAT_COLOR_GREEN   COLOR_GREEN
-#define WEECHAT_COLOR_YELLOW  COLOR_CYAN
-#define WEECHAT_COLOR_BLUE    COLOR_RED
-#define WEECHAT_COLOR_MAGENTA COLOR_MAGENTA
-#define WEECHAT_COLOR_CYAN    COLOR_YELLOW
-#define WEECHAT_COLOR_WHITE   COLOR_WHITE
+#define WHOREIRC_COLOR_BLACK   COLOR_BLACK
+#define WHOREIRC_COLOR_RED     COLOR_BLUE
+#define WHOREIRC_COLOR_GREEN   COLOR_GREEN
+#define WHOREIRC_COLOR_YELLOW  COLOR_CYAN
+#define WHOREIRC_COLOR_BLUE    COLOR_RED
+#define WHOREIRC_COLOR_MAGENTA COLOR_MAGENTA
+#define WHOREIRC_COLOR_CYAN    COLOR_YELLOW
+#define WHOREIRC_COLOR_WHITE   COLOR_WHITE
 
 /* attributes in IRC messages for color & style (bold, ..) */
 
@@ -61,7 +61,7 @@
 
 #define IRC_COLOR_TERM2IRC_NUM_COLORS 16
 
-/* macros for WeeChat core and IRC colors */
+/* macros for WhoreIRC core and IRC colors */
 
 #define IRC_COLOR_BAR_FG weechat_color("bar_fg")
 #define IRC_COLOR_BAR_BG weechat_color("bar_bg")
@@ -116,4 +116,4 @@ extern char *irc_color_for_tags (const char *color);
 extern int irc_color_weechat_add_to_infolist (struct t_infolist *infolist);
 extern void irc_color_end ();
 
-#endif /* WEECHAT_PLUGIN_IRC_COLOR_H */
+#endif /* WHOREIRC_PLUGIN_IRC_COLOR_H */

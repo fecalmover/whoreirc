@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -57,7 +57,7 @@
 
 
 /*
- * Returns WeeChat info "version".
+ * Returns WhoreIRC info "version".
  */
 
 char *
@@ -78,7 +78,7 @@ plugin_api_info_version_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "version_number".
+ * Returns WhoreIRC info "version_number".
  */
 
 char *
@@ -100,7 +100,7 @@ plugin_api_info_version_number_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "version_git".
+ * Returns WhoreIRC info "version_git".
  */
 
 char *
@@ -121,7 +121,7 @@ plugin_api_info_version_git_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "date".
+ * Returns WhoreIRC info "date".
  */
 
 char *
@@ -142,7 +142,7 @@ plugin_api_info_date_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "pid".
+ * Returns WhoreIRC info "pid".
  */
 
 char *
@@ -163,7 +163,7 @@ plugin_api_info_pid_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "dir_separator".
+ * Returns WhoreIRC info "dir_separator".
  */
 
 char *
@@ -181,7 +181,7 @@ plugin_api_info_dir_separator_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "weechat_dir".
+ * Returns WhoreIRC info "weechat_dir".
  */
 
 char *
@@ -205,7 +205,7 @@ plugin_api_info_weechat_dir_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "weechat_libdir".
+ * Returns WhoreIRC info "weechat_libdir".
  */
 
 char *
@@ -219,11 +219,11 @@ plugin_api_info_weechat_libdir_cb (const void *pointer, void *data,
     (void) info_name;
     (void) arguments;
 
-    return strdup (WEECHAT_LIBDIR);
+    return strdup (WHOREIRC_LIBDIR);
 }
 
 /*
- * Returns WeeChat info "weechat_sharedir".
+ * Returns WhoreIRC info "weechat_sharedir".
  */
 
 char *
@@ -237,11 +237,11 @@ plugin_api_info_weechat_sharedir_cb (const void *pointer, void *data,
     (void) info_name;
     (void) arguments;
 
-    return strdup (WEECHAT_SHAREDIR);
+    return strdup (WHOREIRC_SHAREDIR);
 }
 
 /*
- * Returns WeeChat info "weechat_localedir".
+ * Returns WhoreIRC info "weechat_localedir".
  */
 
 char *
@@ -259,7 +259,7 @@ plugin_api_info_weechat_localedir_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "weechat_site".
+ * Returns WhoreIRC info "weechat_site".
  */
 
 char *
@@ -273,11 +273,11 @@ plugin_api_info_weechat_site_cb (const void *pointer, void *data,
     (void) info_name;
     (void) arguments;
 
-    return strdup (WEECHAT_WEBSITE);
+    return strdup (WHOREIRC_WEBSITE);
 }
 
 /*
- * Returns WeeChat info "weechat_site_download".
+ * Returns WhoreIRC info "weechat_site_download".
  */
 
 char *
@@ -291,11 +291,11 @@ plugin_api_info_weechat_site_download_cb (const void *pointer, void *data,
     (void) info_name;
     (void) arguments;
 
-    return strdup (WEECHAT_WEBSITE_DOWNLOAD);
+    return strdup (WHOREIRC_WEBSITE_DOWNLOAD);
 }
 
 /*
- * Returns WeeChat info "weechat_upgrading".
+ * Returns WhoreIRC info "weechat_upgrading".
  */
 
 char *
@@ -316,7 +316,7 @@ plugin_api_info_weechat_upgrading_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "charset_terminal".
+ * Returns WhoreIRC info "charset_terminal".
  */
 
 char *
@@ -334,7 +334,7 @@ plugin_api_info_charset_terminal_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "charset_internal".
+ * Returns WhoreIRC info "charset_internal".
  */
 
 char *
@@ -348,11 +348,11 @@ plugin_api_info_charset_internal_cb (const void *pointer, void *data,
     (void) info_name;
     (void) arguments;
 
-    return strdup (WEECHAT_INTERNAL_CHARSET);
+    return strdup (WHOREIRC_INTERNAL_CHARSET);
 }
 
 /*
- * Returns WeeChat info "locale".
+ * Returns WhoreIRC info "locale".
  */
 
 char *
@@ -373,7 +373,7 @@ plugin_api_info_locale_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "inactivity".
+ * Returns WhoreIRC info "inactivity".
  */
 
 char *
@@ -401,7 +401,7 @@ plugin_api_info_inactivity_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "filters_enabled".
+ * Returns WhoreIRC info "filters_enabled".
  */
 
 char *
@@ -422,7 +422,7 @@ plugin_api_info_filters_enabled_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "cursor_mode".
+ * Returns WhoreIRC info "cursor_mode".
  */
 
 char *
@@ -443,7 +443,7 @@ plugin_api_info_cursor_mode_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "term_width".
+ * Returns WhoreIRC info "term_width".
  */
 
 char *
@@ -464,7 +464,7 @@ plugin_api_info_term_width_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "term_height".
+ * Returns WhoreIRC info "term_height".
  */
 
 char *
@@ -485,7 +485,7 @@ plugin_api_info_term_height_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "color_ansi_regex".
+ * Returns WhoreIRC info "color_ansi_regex".
  */
 
 char *
@@ -503,7 +503,7 @@ plugin_api_info_color_ansi_regex_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "color_term2rgb".
+ * Returns WhoreIRC info "color_term2rgb".
  */
 
 char *
@@ -528,7 +528,7 @@ plugin_api_info_color_term2rgb_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "color_rgb2term".
+ * Returns WhoreIRC info "color_rgb2term".
  */
 
 char *
@@ -611,7 +611,7 @@ plugin_api_info_nick_color_name_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "uptime".
+ * Returns WhoreIRC info "uptime".
  */
 
 char *
@@ -657,7 +657,7 @@ plugin_api_info_uptime_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat info "totp_generate": generates a Time-based One-Time
+ * Returns WhoreIRC info "totp_generate": generates a Time-based One-Time
  * Password (TOTP).
  *
  * Arguments: "secret,timestamp,digits" (timestamp and digits are optional).
@@ -685,9 +685,9 @@ plugin_api_info_totp_generate_cb (const void *pointer, void *data,
         goto error;
 
     argv = string_split (arguments, ",", NULL,
-                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                          0, &argc);
     if (!argv || (argc < 1))
         goto error;
@@ -730,7 +730,7 @@ error:
 }
 
 /*
- * Returns WeeChat info "totp_validate": validates a Time-based One-Time
+ * Returns WhoreIRC info "totp_validate": validates a Time-based One-Time
  * Password (TOTP).
  *
  * Arguments: "secret,otp,timestamp,window" (timestamp and window are optional).
@@ -757,9 +757,9 @@ plugin_api_info_totp_validate_cb (const void *pointer, void *data,
         goto error;
 
     argv = string_split (arguments, ",", NULL,
-                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                          0, &argc);
     if (!argv || (argc < 2))
         goto error;
@@ -801,7 +801,7 @@ error:
 }
 
 /*
- * Returns WeeChat infolist "bar".
+ * Returns WhoreIRC infolist "bar".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -859,7 +859,7 @@ plugin_api_infolist_bar_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "bar_item".
+ * Returns WhoreIRC infolist "bar_item".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -918,7 +918,7 @@ plugin_api_infolist_bar_item_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "bar_window".
+ * Returns WhoreIRC infolist "bar_window".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -992,7 +992,7 @@ plugin_api_infolist_bar_window_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "buffer".
+ * Returns WhoreIRC infolist "buffer".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1051,7 +1051,7 @@ plugin_api_infolist_buffer_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "buffer_lines".
+ * Returns WhoreIRC infolist "buffer_lines".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1098,7 +1098,7 @@ plugin_api_infolist_buffer_lines_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "filter".
+ * Returns WhoreIRC infolist "filter".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1138,7 +1138,7 @@ plugin_api_infolist_filter_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "history".
+ * Returns WhoreIRC infolist "history".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1179,7 +1179,7 @@ plugin_api_infolist_history_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "hook".
+ * Returns WhoreIRC infolist "hook".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1213,7 +1213,7 @@ plugin_api_infolist_hook_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "hotlist".
+ * Returns WhoreIRC infolist "hotlist".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1250,7 +1250,7 @@ plugin_api_infolist_hotlist_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "key".
+ * Returns WhoreIRC infolist "key".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1294,7 +1294,7 @@ plugin_api_infolist_key_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "layout".
+ * Returns WhoreIRC infolist "layout".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1331,7 +1331,7 @@ plugin_api_infolist_layout_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "nicklist".
+ * Returns WhoreIRC infolist "nicklist".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1365,7 +1365,7 @@ plugin_api_infolist_nicklist_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "option".
+ * Returns WhoreIRC infolist "option".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1396,7 +1396,7 @@ plugin_api_infolist_option_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "plugin".
+ * Returns WhoreIRC infolist "plugin".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1455,7 +1455,7 @@ plugin_api_infolist_plugin_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "proxy".
+ * Returns WhoreIRC infolist "proxy".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1514,7 +1514,7 @@ plugin_api_infolist_proxy_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "url_options".
+ * Returns WhoreIRC infolist "url_options".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1550,7 +1550,7 @@ plugin_api_infolist_url_options_cb (const void *pointer, void *data,
 }
 
 /*
- * Returns WeeChat infolist "window".
+ * Returns WhoreIRC infolist "window".
  *
  * Note: result must be freed after use with function weechat_infolist_free().
  */
@@ -1652,53 +1652,53 @@ plugin_api_infolist_window_cb (const void *pointer, void *data,
 void
 plugin_api_info_init ()
 {
-    /* WeeChat core info hooks */
+    /* WhoreIRC core info hooks */
     hook_info (NULL, "version",
-               N_("WeeChat version"),
+               N_("WhoreIRC version"),
                NULL, &plugin_api_info_version_cb, NULL, NULL);
     hook_info (NULL, "version_number",
-               N_("WeeChat version (as number)"),
+               N_("WhoreIRC version (as number)"),
                NULL, &plugin_api_info_version_number_cb, NULL, NULL);
     hook_info (NULL, "version_git",
-               N_("WeeChat git version (output of command \"git describe\" "
+               N_("WhoreIRC git version (output of command \"git describe\" "
                   "for a development version only, empty for a stable "
                   "release)"),
                NULL, &plugin_api_info_version_git_cb, NULL, NULL);
     hook_info (NULL, "date",
-               N_("WeeChat compilation date/time"),
+               N_("WhoreIRC compilation date/time"),
                NULL, &plugin_api_info_date_cb, NULL, NULL);
     hook_info (NULL, "pid",
-               N_("WeeChat PID (process ID)"),
+               N_("WhoreIRC PID (process ID)"),
                NULL, &plugin_api_info_pid_cb, NULL, NULL);
     hook_info (NULL, "dir_separator",
                N_("directory separator"),
                NULL, &plugin_api_info_dir_separator_cb, NULL, NULL);
     hook_info (NULL, "weechat_dir",
-               N_("WeeChat directory"),
+               N_("WhoreIRC directory"),
                NULL, &plugin_api_info_weechat_dir_cb, NULL, NULL);
     hook_info (NULL, "weechat_libdir",
-               N_("WeeChat \"lib\" directory"),
+               N_("WhoreIRC \"lib\" directory"),
                NULL, &plugin_api_info_weechat_libdir_cb, NULL, NULL);
     hook_info (NULL, "weechat_sharedir",
-               N_("WeeChat \"share\" directory"),
+               N_("WhoreIRC \"share\" directory"),
                NULL, &plugin_api_info_weechat_sharedir_cb, NULL, NULL);
     hook_info (NULL, "weechat_localedir",
-               N_("WeeChat \"locale\" directory"),
+               N_("WhoreIRC \"locale\" directory"),
                NULL, &plugin_api_info_weechat_localedir_cb, NULL, NULL);
     hook_info (NULL, "weechat_site",
-               N_("WeeChat site"),
+               N_("WhoreIRC site"),
                NULL, &plugin_api_info_weechat_site_cb, NULL, NULL);
     hook_info (NULL, "weechat_site_download",
-               N_("WeeChat site, download page"),
+               N_("WhoreIRC site, download page"),
                NULL, &plugin_api_info_weechat_site_download_cb, NULL, NULL);
     hook_info (NULL, "weechat_upgrading",
-               N_("1 if WeeChat is upgrading (command `/upgrade`)"),
+               N_("1 if WhoreIRC is upgrading (command `/upgrade`)"),
                NULL, &plugin_api_info_weechat_upgrading_cb, NULL, NULL);
     hook_info (NULL, "charset_terminal",
                N_("terminal charset"),
                NULL, &plugin_api_info_charset_terminal_cb, NULL, NULL);
     hook_info (NULL, "charset_internal",
-               N_("WeeChat internal charset"),
+               N_("WhoreIRC internal charset"),
                NULL, &plugin_api_info_charset_internal_cb, NULL, NULL);
     hook_info (NULL, "locale",
                N_("locale used for translating messages"),
@@ -1739,7 +1739,7 @@ plugin_api_info_init ()
                N_("nickname"),
                &plugin_api_info_nick_color_name_cb, NULL, NULL);
     hook_info (NULL, "uptime",
-               N_("WeeChat uptime (format: \"days:hh:mm:ss\")"),
+               N_("WhoreIRC uptime (format: \"days:hh:mm:ss\")"),
                N_("\"days\" (number of days) or \"seconds\" (number of "
                   "seconds) (optional)"),
                &plugin_api_info_uptime_cb, NULL, NULL);
@@ -1757,7 +1757,7 @@ plugin_api_info_init ()
                   "passwords before/after to test (optional, 0 by default)"),
                &plugin_api_info_totp_validate_cb, NULL, NULL);
 
-    /* WeeChat core infolist hooks */
+    /* WhoreIRC core infolist hooks */
     hook_infolist (NULL, "bar",
                    N_("list of bars"),
                    N_("bar pointer (optional)"),

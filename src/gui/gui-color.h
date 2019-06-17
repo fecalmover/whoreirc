@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_GUI_COLOR_H
-#define WEECHAT_GUI_COLOR_H
+#ifndef WHOREIRC_GUI_COLOR_H
+#define WHOREIRC_GUI_COLOR_H
 
 #include <regex.h>
 
@@ -58,18 +58,18 @@ enum t_gui_color_enum
     GUI_COLOR_CHAT_NICK_OTHER,
     /*
      * following obsolete colors are kept here for compatibility
-     * with WeeChat <= 0.3.3
+     * with WhoreIRC <= 0.3.3
      */
-    GUI_COLOR_CHAT_NICK1_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK2_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK3_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK4_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK5_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK6_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK7_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK8_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK9_OBSOLETE,  /* not used any more since WeeChat 0.3.4 */
-    GUI_COLOR_CHAT_NICK10_OBSOLETE, /* not used any more since WeeChat 0.3.4 */
+    GUI_COLOR_CHAT_NICK1_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK2_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK3_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK4_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK5_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK6_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK7_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK8_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK9_OBSOLETE,  /* not used any more since WhoreIRC 0.3.4 */
+    GUI_COLOR_CHAT_NICK10_OBSOLETE, /* not used any more since WhoreIRC 0.3.4 */
     GUI_COLOR_CHAT_HOST,
     GUI_COLOR_CHAT_DELIMITERS,
     GUI_COLOR_CHAT_HIGHLIGHT,
@@ -93,7 +93,7 @@ enum t_gui_color_enum
     GUI_COLOR_NUM_COLORS,
 };
 
-/* WeeChat internal color attributes (should never be in protocol messages) */
+/* WhoreIRC internal color attributes (should never be in protocol messages) */
 
 #define GUI_COLOR_COLOR_CHAR           '\x19'
 #define GUI_COLOR_SET_ATTR_CHAR        '\x1A'
@@ -159,7 +159,7 @@ struct t_gui_color
     int foreground;                /* foreground color                      */
     int background;                /* background color                      */
     int attributes;                /* attributes (bold, ..)                 */
-    char *string;                  /* WeeChat color: "\x19??", ?? is #color */
+    char *string;                  /* WhoreIRC color: "\x19??", ?? is #color */
 };
 
 /* custom color in palette */
@@ -223,4 +223,4 @@ extern struct t_gui_color_palette *gui_color_palette_new (int number,
 extern void gui_color_palette_free (struct t_gui_color_palette *color_palette);
 extern void gui_color_dump ();
 
-#endif /* WEECHAT_GUI_COLOR_H */
+#endif /* WHOREIRC_GUI_COLOR_H */

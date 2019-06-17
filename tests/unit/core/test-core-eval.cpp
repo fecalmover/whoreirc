@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "CppUTest/TestHarness.h"
@@ -77,15 +77,15 @@ TEST(CoreEval, EvalCondition)
     pointers = NULL;
 
     extra_vars = hashtable_new (32,
-                                WEECHAT_HASHTABLE_STRING,
-                                WEECHAT_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
                                 NULL, NULL);
     CHECK(extra_vars);
     hashtable_set (extra_vars, "test", "value");
 
     options = hashtable_new (32,
-                             WEECHAT_HASHTABLE_STRING,
-                             WEECHAT_HASHTABLE_STRING,
+                             WHOREIRC_HASHTABLE_STRING,
+                             WHOREIRC_HASHTABLE_STRING,
                              NULL, NULL);
     CHECK(options);
     hashtable_set (options, "type", "condition");
@@ -235,8 +235,8 @@ TEST(CoreEval, EvalExpression)
     pointers = NULL;
 
     extra_vars = hashtable_new (32,
-                                WEECHAT_HASHTABLE_STRING,
-                                WEECHAT_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
                                 NULL, NULL);
     CHECK(extra_vars);
     hashtable_set (extra_vars, "test", "value");
@@ -424,8 +424,8 @@ TEST(CoreEval, EvalExpression)
 
     /* test with another prefix/suffix */
     options = hashtable_new (32,
-                             WEECHAT_HASHTABLE_STRING,
-                             WEECHAT_HASHTABLE_STRING,
+                             WHOREIRC_HASHTABLE_STRING,
+                             WHOREIRC_HASHTABLE_STRING,
                              NULL, NULL);
     CHECK(options);
     hashtable_set (options, "prefix", "<<<");
@@ -457,21 +457,21 @@ TEST(CoreEval, EvalReplaceRegex)
     regex_t regex;
 
     pointers = hashtable_new (32,
-                              WEECHAT_HASHTABLE_STRING,
-                              WEECHAT_HASHTABLE_POINTER,
+                              WHOREIRC_HASHTABLE_STRING,
+                              WHOREIRC_HASHTABLE_POINTER,
                               NULL, NULL);
     CHECK(pointers);
 
     extra_vars = hashtable_new (32,
-                                WEECHAT_HASHTABLE_STRING,
-                                WEECHAT_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
                                 NULL, NULL);
     CHECK(extra_vars);
     hashtable_set (extra_vars, "test", "value");
 
     options = hashtable_new (32,
-                             WEECHAT_HASHTABLE_STRING,
-                             WEECHAT_HASHTABLE_STRING,
+                             WHOREIRC_HASHTABLE_STRING,
+                             WHOREIRC_HASHTABLE_STRING,
                              NULL, NULL);
     CHECK(options);
 

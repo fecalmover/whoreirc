@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -156,7 +156,7 @@ gui_filter_buffer (struct t_gui_buffer *buffer,
     {
         buffer->lines->lines_hidden = lines_hidden;
         (void) hook_signal_send ("buffer_lines_hidden",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
     }
 
     if (lines_changed)
@@ -220,7 +220,7 @@ gui_filter_global_enable ()
         gui_filters_enabled = 1;
         gui_filter_all_buffers (NULL);
         (void) hook_signal_send ("filters_enabled",
-                                 WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                 WHOREIRC_HOOK_SIGNAL_STRING, NULL);
     }
 }
 
@@ -236,7 +236,7 @@ gui_filter_global_disable ()
         gui_filters_enabled = 0;
         gui_filter_all_buffers (NULL);
         (void) hook_signal_send ("filters_disabled",
-                                 WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                 WHOREIRC_HOOK_SIGNAL_STRING, NULL);
     }
 }
 
@@ -399,9 +399,9 @@ gui_filter_new (int enabled, const char *name, const char *buffer_name,
             new_filter->buffer_name,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &new_filter->num_buffers);
         new_filter->tags = (tags) ? strdup (tags) : NULL;
@@ -421,7 +421,7 @@ gui_filter_new (int enabled, const char *name, const char *buffer_name,
         new_filter->next_filter = NULL;
 
         (void) hook_signal_send ("filter_added",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, new_filter);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, new_filter);
     }
     else
     {
@@ -465,7 +465,7 @@ gui_filter_free (struct t_gui_filter *filter)
         return;
 
     (void) hook_signal_send ("filter_removing",
-                             WEECHAT_HOOK_SIGNAL_POINTER, filter);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, filter);
 
     /* free data */
     if (filter->name)
@@ -503,7 +503,7 @@ gui_filter_free (struct t_gui_filter *filter)
 
     free (filter);
 
-    (void) hook_signal_send ("filter_removed", WEECHAT_HOOK_SIGNAL_STRING, NULL);
+    (void) hook_signal_send ("filter_removed", WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }
 
 /*
@@ -550,7 +550,7 @@ gui_filter_hdata_filter_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_filter, regex_message, POINTER, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_filter, prev_filter, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_filter, next_filter, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_filters, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_filters, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_filter, 0);
     }
     return hdata;
@@ -611,7 +611,7 @@ gui_filter_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints filter infos in WeeChat log file (usually for crash dump).
+ * Prints filter infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

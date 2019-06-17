@@ -10,5 +10,5 @@ about: Ask a question (please read first FAQ and docs)
 
 ---
 
-- WeeChat version: 
+- WhoreIRC version: 
 - OS, distribution and version: 

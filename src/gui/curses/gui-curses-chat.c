@@ -1905,7 +1905,7 @@ gui_chat_draw_formatted_buffer (struct t_gui_window *window)
         || (window->scroll->lines_after != old_lines_after))
     {
         (void) hook_signal_send ("window_scrolled",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, window);
     }
 
     /* cursor is below end line of chat window? */

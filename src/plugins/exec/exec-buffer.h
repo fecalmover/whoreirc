@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_EXEC_BUFFER_H
-#define WEECHAT_PLUGIN_EXEC_BUFFER_H
+#ifndef WHOREIRC_PLUGIN_EXEC_BUFFER_H
+#define WHOREIRC_PLUGIN_EXEC_BUFFER_H
 
 extern void exec_buffer_set_callbacks ();
 extern struct t_gui_buffer *exec_buffer_new (const char *name,
@@ -26,4 +26,4 @@ extern struct t_gui_buffer *exec_buffer_new (const char *name,
                                              int clear_buffer,
                                              int switch_to_buffer);
 
-#endif /* WEECHAT_PLUGIN_EXEC_BUFFER_H */
+#endif /* WHOREIRC_PLUGIN_EXEC_BUFFER_H */

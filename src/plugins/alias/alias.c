@@ -1,22 +1,22 @@
 /*
- * alias.c - alias plugin for WeeChat: command aliases
+ * alias.c - alias plugin for WhoreIRC: command aliases
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -31,12 +31,12 @@
 #include "alias-info.h"
 
 
-WEECHAT_PLUGIN_NAME(ALIAS_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Alias commands"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(10000);
+WHOREIRC_PLUGIN_NAME(ALIAS_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Alias commands"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(10000);
 
 #define ALIAS_IS_ARG_NUMBER(number) ((number >= '1') && (number <= '9'))
 
@@ -191,9 +191,9 @@ alias_replace_args (const char *alias_args, const char *user_args)
     int n, m, argc, length_res, args_count, offset;
 
     argv = weechat_string_split (user_args, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
 
     res = NULL;
@@ -363,7 +363,7 @@ alias_cb (const void *pointer, void *data,
                           "alias \"%s\""),
                         weechat_prefix ("error"), ALIAS_PLUGIN_NAME,
                         ptr_alias->name);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
     else
     {
@@ -438,7 +438,7 @@ alias_cb (const void *pointer, void *data,
             weechat_string_free_split_command (commands);
         }
     }
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -733,7 +733,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_plugin = plugin;
 
     if (!alias_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     alias_config_read ();
 
@@ -743,7 +743,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
 
     alias_info_init ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -760,5 +760,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     alias_free_all ();
     weechat_config_free (alias_config_file);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

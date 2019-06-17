@@ -287,7 +287,7 @@ xfer_buffer_input_cb (const void *pointer, void *data,
         if (xfer && !XFER_HAS_ENDED(xfer->status))
         {
             xfer_close (xfer, XFER_STATUS_ABORTED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
         }
     }
     /* purge old xfer */
@@ -301,7 +301,7 @@ xfer_buffer_input_cb (const void *pointer, void *data,
                 xfer_free (ptr_xfer);
             ptr_xfer = next_xfer;
         }
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
     }
     /* quit xfer buffer (close it) */
     else if (weechat_strcasecmp (input_data, "q") == 0)
@@ -314,11 +314,11 @@ xfer_buffer_input_cb (const void *pointer, void *data,
         if (xfer && XFER_HAS_ENDED(xfer->status))
         {
             xfer_free (xfer);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -336,7 +336,7 @@ xfer_buffer_close_cb (const void *pointer, void *data,
 
     xfer_buffer = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

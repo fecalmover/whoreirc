@@ -36,12 +36,12 @@
 #include "script-repo.h"
 
 
-WEECHAT_PLUGIN_NAME(SCRIPT_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Script manager"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(3000);
+WHOREIRC_PLUGIN_NAME(SCRIPT_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Script manager"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(3000);
 
 struct t_weechat_plugin *weechat_script_plugin = NULL;
 
@@ -167,8 +167,8 @@ script_get_scripts ()
     if (!script_loaded)
     {
         script_loaded = weechat_hashtable_new (32,
-                                               WEECHAT_HASHTABLE_STRING,
-                                               WEECHAT_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_STRING,
                                                NULL, NULL);
     }
     else
@@ -230,7 +230,7 @@ script_debug_dump_cb (const void *pointer, void *data,
                             weechat_plugin->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -252,7 +252,7 @@ script_timer_refresh_cb (const void *pointer, void *data, int remaining_calls)
     if (remaining_calls == 0)
         script_timer_refresh = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -283,7 +283,7 @@ script_signal_plugin_cb (const void *pointer, void *data,
                                                    NULL, NULL);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -314,7 +314,7 @@ script_signal_script_cb (const void *pointer, void *data,
                                                    NULL, NULL);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -340,7 +340,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     script_buffer_set_callbacks ();
 
     if (!script_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     script_config_read ();
 
@@ -372,7 +372,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     if (script_buffer)
         script_buffer_refresh (1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -399,5 +399,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
 
     script_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

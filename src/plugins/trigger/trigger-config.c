@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -516,15 +516,15 @@ trigger_config_trigger_read_cb (const void *pointer, void *data,
     (void) section;
 
     if (!option_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     pos_option = strchr (option_name, '.');
     if (!pos_option)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     trigger_name = weechat_strndup (option_name, pos_option - option_name);
     if (!trigger_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     pos_option++;
 
@@ -564,7 +564,7 @@ trigger_config_trigger_read_cb (const void *pointer, void *data,
 
     free (trigger_name);
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
@@ -584,7 +584,7 @@ trigger_config_trigger_write_default_cb (const void *pointer, void *data,
     (void) data;
 
     if (!weechat_config_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (i = 0; trigger_config_default_list[i][0]; i++)
     {
@@ -601,12 +601,12 @@ trigger_config_trigger_write_default_cb (const void *pointer, void *data,
                                             trigger_config_default_list[i][j + 1],
                                             (quotes) ? "\"" : ""))
             {
-                return WEECHAT_CONFIG_WRITE_ERROR;
+                return WHOREIRC_CONFIG_WRITE_ERROR;
             }
         }
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*

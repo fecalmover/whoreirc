@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -66,26 +66,26 @@ fset_completion_option_cb (const void *pointer, void *data,
                         completion,
                         weechat_config_option_get_string (ptr_option,
                                                           "config_name"),
-                        0, WEECHAT_LIST_POS_SORT);
+                        0, WHOREIRC_LIST_POS_SORT);
                     weechat_hook_completion_list_add (
                         completion,
                         weechat_config_option_get_string (ptr_option,
                                                           "section_name"),
-                        0, WEECHAT_LIST_POS_SORT);
+                        0, WHOREIRC_LIST_POS_SORT);
                     config_section_added = 1;
                 }
                 weechat_hook_completion_list_add (
                     completion,
                     weechat_config_option_get_string (ptr_option, "name"),
                     0,
-                    WEECHAT_LIST_POS_SORT);
+                    WHOREIRC_LIST_POS_SORT);
                 words = weechat_string_split (
                     weechat_config_option_get_string (ptr_option, "name"),
                     "_",
                     NULL,
-                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                     0,
                     &num_words);
                 if (words && (num_words > 1))
@@ -93,7 +93,7 @@ fset_completion_option_cb (const void *pointer, void *data,
                     for (i = 0; i < num_words; i++)
                     {
                         weechat_hook_completion_list_add (
-                            completion, words[i], 0, WEECHAT_LIST_POS_SORT);
+                            completion, words[i], 0, WHOREIRC_LIST_POS_SORT);
                     }
                 }
                 if (words)
@@ -108,7 +108,7 @@ fset_completion_option_cb (const void *pointer, void *data,
                                          ptr_config, 1);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

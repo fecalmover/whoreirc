@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2017-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "CppUTest/TestHarness.h"
@@ -49,7 +49,7 @@ int api_tests_other = 0;
 TEST_GROUP(Scripts)
 {
     /*
-     * Callback for any message displayed by WeeChat or a plugin.
+     * Callback for any message displayed by WhoreIRC or a plugin.
      */
 
     static int
@@ -92,7 +92,7 @@ TEST_GROUP(Scripts)
                 api_tests_other++;
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     void setup()
@@ -140,7 +140,7 @@ TEST(Scripts, API)
 
     printf ("...\n");
 
-    ptr_test_scripts_dir = getenv ("WEECHAT_TESTS_SCRIPTS_DIR");
+    ptr_test_scripts_dir = getenv ("WHOREIRC_TESTS_SCRIPTS_DIR");
     test_scripts_dir = strdup (
         (ptr_test_scripts_dir) ?
         ptr_test_scripts_dir : "../tests/scripts/python");

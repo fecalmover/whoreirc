@@ -1,5 +1,5 @@
 Pro kompletní dokumentaci nastavení pluginů a jejich volby podívejte se na
-https://whoreirc.org/doc[WeeChat user's guide].
+https://whoreirc.org/doc[WhoreIRC user's guide].
 
 S irc pluginem se můžete doččasně připojit na server s URL jako:
 

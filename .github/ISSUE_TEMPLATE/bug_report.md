@@ -36,5 +36,5 @@ about: Create a bug report (please do not report security issues here)
 
 <!-- MANDATORY INFO: -->
 
-- WeeChat version: 
+- WhoreIRC version: 
 - OS, distribution and version: 

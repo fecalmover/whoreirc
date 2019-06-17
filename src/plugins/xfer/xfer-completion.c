@@ -52,15 +52,15 @@ xfer_completion_nick_cb (const void *pointer, void *data,
         weechat_hook_completion_list_add (completion,
                                           ptr_xfer->remote_nick,
                                           0,
-                                          WEECHAT_LIST_POS_SORT);
+                                          WHOREIRC_LIST_POS_SORT);
         /* add self nick at the end */
         weechat_hook_completion_list_add (completion,
                                           ptr_xfer->local_nick,
                                           1,
-                                          WEECHAT_LIST_POS_END);
+                                          WHOREIRC_LIST_POS_END);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

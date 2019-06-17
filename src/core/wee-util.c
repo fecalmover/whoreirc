@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /* for P_tmpdir in stdio.h */
@@ -207,9 +207,9 @@ util_setrlimit ()
     long number;
 
     items = string_split (CONFIG_STRING(config_startup_sys_rlimit), ",", NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           0, &num_items);
     if (items)
     {
@@ -494,7 +494,7 @@ util_get_temp_dir()
 }
 
 /*
- * Creates a directory in WeeChat home.
+ * Creates a directory in WhoreIRC home.
  *
  * Returns:
  *   1: OK
@@ -510,7 +510,7 @@ util_mkdir_home (const char *directory, int mode)
     if (!directory)
         return 0;
 
-    /* build directory, adding WeeChat home */
+    /* build directory, adding WhoreIRC home */
     dir_length = strlen (weechat_home) + strlen (directory) + 2;
     dir_name = malloc (dir_length);
     if (!dir_name)
@@ -703,8 +703,8 @@ util_exec_on_files (const char *directory, int recurse_subdirs,
 }
 
 /*
- * Searches for the full name of a WeeChat library with name and extension
- * (searches first in WeeChat user's dir, then WeeChat global lib directory).
+ * Searches for the full name of a WhoreIRC library with name and extension
+ * (searches first in WhoreIRC user's dir, then WhoreIRC global lib directory).
  *
  * Returns name of library found, NULL if not found.
  *
@@ -728,8 +728,8 @@ util_search_full_lib_name_ext (const char *filename, const char *extension,
               filename,
               (strchr (filename, '.')) ? "" : extension);
 
-    /* try libdir from environment variable WEECHAT_EXTRA_LIBDIR */
-    extra_libdir = getenv (WEECHAT_EXTRA_LIBDIR);
+    /* try libdir from environment variable WHOREIRC_EXTRA_LIBDIR */
+    extra_libdir = getenv (WHOREIRC_EXTRA_LIBDIR);
     if (extra_libdir && extra_libdir[0])
     {
         length = strlen (extra_libdir) + strlen (name_with_ext) +
@@ -755,7 +755,7 @@ util_search_full_lib_name_ext (const char *filename, const char *extension,
         free (final_name);
     }
 
-    /* try WeeChat user's dir */
+    /* try WhoreIRC user's dir */
     length = strlen (weechat_home) + strlen (name_with_ext) +
         strlen (plugins_dir) + 16;
     final_name = malloc (length);
@@ -778,8 +778,8 @@ util_search_full_lib_name_ext (const char *filename, const char *extension,
     }
     free (final_name);
 
-    /* try WeeChat global lib dir */
-    length = strlen (WEECHAT_LIBDIR) + strlen (name_with_ext) +
+    /* try WhoreIRC global lib dir */
+    length = strlen (WHOREIRC_LIBDIR) + strlen (name_with_ext) +
         strlen (plugins_dir) + 16;
     final_name = malloc (length);
     if (!final_name)
@@ -789,7 +789,7 @@ util_search_full_lib_name_ext (const char *filename, const char *extension,
     }
     snprintf (final_name, length,
               "%s%s%s%s%s",
-              WEECHAT_LIBDIR,
+              WHOREIRC_LIBDIR,
               DIR_SEPARATOR,
               plugins_dir,
               DIR_SEPARATOR,
@@ -807,7 +807,7 @@ util_search_full_lib_name_ext (const char *filename, const char *extension,
 }
 
 /*
- * Searches for the full name of a WeeChat library with name.
+ * Searches for the full name of a WhoreIRC library with name.
  *
  * All extensions listed in option "weechat.plugin.extension" are tested.
  *
@@ -938,9 +938,9 @@ util_version_number (const char *version)
     long number;
 
     items = string_split (version, ".", NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           4, &num_items);
     for (i = 0; i < 4; i++)
     {

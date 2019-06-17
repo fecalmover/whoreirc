@@ -1,5 +1,5 @@
 $HOME/.weechat/weechat.conf::
-    main WeeChat configuration file
+    main WhoreIRC configuration file
 
 $HOME/.weechat/plugins.conf::
     plugins configuration file
@@ -71,4 +71,4 @@ $HOME/.weechat/xfer.conf::
     configuration file for _xfer_ plugin
 
 $HOME/.weechat/weechat.log::
-    WeeChat log file
+    WhoreIRC log file

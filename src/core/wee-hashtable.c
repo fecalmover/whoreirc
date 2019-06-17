@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2010-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -37,9 +37,9 @@
 
 
 char *hashtable_type_string[HASHTABLE_NUM_TYPES] =
-{ WEECHAT_HASHTABLE_INTEGER, WEECHAT_HASHTABLE_STRING,
-  WEECHAT_HASHTABLE_POINTER, WEECHAT_HASHTABLE_BUFFER,
-  WEECHAT_HASHTABLE_TIME };
+{ WHOREIRC_HASHTABLE_INTEGER, WHOREIRC_HASHTABLE_STRING,
+  WHOREIRC_HASHTABLE_POINTER, WHOREIRC_HASHTABLE_BUFFER,
+  WHOREIRC_HASHTABLE_TIME };
 
 
 /*
@@ -709,7 +709,7 @@ hashtable_get_list_keys_map_cb (void *data,
     list = (struct t_weelist *)data;
 
     weelist_add (list, hashtable_to_string (hashtable->type_keys, key),
-                 WEECHAT_LIST_POS_SORT, NULL);
+                 WHOREIRC_LIST_POS_SORT, NULL);
 }
 
 /*
@@ -1272,7 +1272,7 @@ hashtable_free (struct t_hashtable *hashtable)
 }
 
 /*
- * Prints hashtable in WeeChat log file (usually for crash dump).
+ * Prints hashtable in WhoreIRC log file (usually for crash dump).
  */
 
 void

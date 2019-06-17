@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_FIFO_H
-#define WEECHAT_PLUGIN_FIFO_H
+#ifndef WHOREIRC_PLUGIN_FIFO_H
+#define WHOREIRC_PLUGIN_FIFO_H
 
 #define weechat_plugin weechat_fifo_plugin
 #define FIFO_PLUGIN_NAME "fifo"
@@ -31,4 +31,4 @@ extern char *fifo_filename;
 extern void fifo_create ();
 extern void fifo_remove ();
 
-#endif /* WEECHAT_PLUGIN_FIFO_H */
+#endif /* WHOREIRC_PLUGIN_FIFO_H */

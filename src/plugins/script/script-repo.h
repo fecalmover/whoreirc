@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_SCRIPT_REPO_H
-#define WEECHAT_PLUGIN_SCRIPT_REPO_H
+#ifndef WHOREIRC_PLUGIN_SCRIPT_REPO_H
+#define WHOREIRC_PLUGIN_SCRIPT_REPO_H
 
 #include <time.h>
 
@@ -88,4 +88,4 @@ extern int script_repo_add_to_infolist (struct t_infolist *infolist,
                                         struct t_script_repo *script);
 extern void script_repo_print_log ();
 
-#endif /* WEECHAT_PLUGIN_SCRIPT_REPO_H */
+#endif /* WHOREIRC_PLUGIN_SCRIPT_REPO_H */

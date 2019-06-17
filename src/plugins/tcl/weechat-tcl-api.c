@@ -52,13 +52,13 @@
     if (__init                                                          \
         && (!tcl_current_script || !tcl_current_script->name))          \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_NOT_INIT(TCL_CURRENT_SCRIPT_NAME,            \
+        WHOREIRC_SCRIPT_MSG_NOT_INIT(TCL_CURRENT_SCRIPT_NAME,            \
                                     tcl_function_name);                 \
         __ret;                                                          \
     }
 #define API_WRONG_ARGS(__ret)                                           \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_WRONG_ARGS(TCL_CURRENT_SCRIPT_NAME,          \
+        WHOREIRC_SCRIPT_MSG_WRONG_ARGS(TCL_CURRENT_SCRIPT_NAME,          \
                                       tcl_function_name);               \
         __ret;                                                          \
     }
@@ -590,17 +590,17 @@ API_FUNC(string_eval_expression)
 
     expr = Tcl_GetStringFromObj (objv[1], &i);
     pointers = weechat_tcl_dict_to_hashtable (interp, objv[2],
-                                              WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                              WEECHAT_HASHTABLE_STRING,
-                                              WEECHAT_HASHTABLE_POINTER);
+                                              WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                              WHOREIRC_HASHTABLE_STRING,
+                                              WHOREIRC_HASHTABLE_POINTER);
     extra_vars = weechat_tcl_dict_to_hashtable (interp, objv[3],
-                                                WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                WEECHAT_HASHTABLE_STRING,
-                                                WEECHAT_HASHTABLE_STRING);
+                                                WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                WHOREIRC_HASHTABLE_STRING,
+                                                WHOREIRC_HASHTABLE_STRING);
     options = weechat_tcl_dict_to_hashtable (interp, objv[4],
-                                             WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                             WEECHAT_HASHTABLE_STRING,
-                                             WEECHAT_HASHTABLE_STRING);
+                                             WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                             WHOREIRC_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_expression (expr, pointers, extra_vars,
                                              options);
@@ -629,19 +629,19 @@ API_FUNC(string_eval_path_home)
     path = Tcl_GetStringFromObj (objv[1], &i);
     pointers = weechat_tcl_dict_to_hashtable (
         interp, objv[2],
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER);
     extra_vars = weechat_tcl_dict_to_hashtable (
         interp, objv[3],
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     options = weechat_tcl_dict_to_hashtable (
         interp, objv[4],
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_path_home (path, pointers, extra_vars,
                                             options);
@@ -997,12 +997,12 @@ weechat_tcl_api_config_reload_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(config_file);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+            ret = WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
         else
         {
             ret = *rc;
@@ -1012,7 +1012,7 @@ weechat_tcl_api_config_reload_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+    return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
 }
 
 API_FUNC(config_new)
@@ -1064,12 +1064,12 @@ weechat_tcl_api_config_section_read_cb (const void *pointer, void *data,
         func_argv[4] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         else
         {
             ret = *rc;
@@ -1079,7 +1079,7 @@ weechat_tcl_api_config_section_read_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 int
@@ -1103,12 +1103,12 @@ weechat_tcl_api_config_section_write_cb (const void *pointer, void *data,
         func_argv[2] = (section_name) ? (char *)section_name : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_WRITE_ERROR;
+            ret = WHOREIRC_CONFIG_WRITE_ERROR;
         else
         {
             ret = *rc;
@@ -1118,7 +1118,7 @@ weechat_tcl_api_config_section_write_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 int
@@ -1142,12 +1142,12 @@ weechat_tcl_api_config_section_write_default_cb (const void *pointer, void *data
         func_argv[2] = (section_name) ? (char *)section_name : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_WRITE_ERROR;
+            ret = WHOREIRC_CONFIG_WRITE_ERROR;
         else
         {
             ret = *rc;
@@ -1157,7 +1157,7 @@ weechat_tcl_api_config_section_write_default_cb (const void *pointer, void *data
         return ret;
     }
 
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 int
@@ -1185,12 +1185,12 @@ weechat_tcl_api_config_section_create_option_cb (const void *pointer, void *data
         func_argv[4] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         else
         {
             ret = *rc;
@@ -1200,7 +1200,7 @@ weechat_tcl_api_config_section_create_option_cb (const void *pointer, void *data
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 int
@@ -1226,12 +1226,12 @@ weechat_tcl_api_config_section_delete_option_cb (const void *pointer, void *data
         func_argv[3] = (char *)API_PTR2STR(option);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
         else
         {
             ret = *rc;
@@ -1241,7 +1241,7 @@ weechat_tcl_api_config_section_delete_option_cb (const void *pointer, void *data
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
 }
 
 API_FUNC(config_new_section)
@@ -1347,7 +1347,7 @@ weechat_tcl_api_config_option_check_value_cb (const void *pointer, void *data,
         func_argv[2] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
@@ -1384,7 +1384,7 @@ weechat_tcl_api_config_option_change_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(option);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ss", func_argv);
 
@@ -1412,7 +1412,7 @@ weechat_tcl_api_config_option_delete_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(option);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ss", func_argv);
 
@@ -1524,12 +1524,12 @@ API_FUNC(config_option_reset)
     char *option;
     int i, run_callback;
 
-    API_INIT_FUNC(1, "config_option_reset", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_reset", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (objc < 3)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     if (Tcl_GetIntFromObj (interp, objv[2], &run_callback) != TCL_OK)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = Tcl_GetStringFromObj (objv[1], &i);
 
@@ -1546,12 +1546,12 @@ API_FUNC(config_option_set)
     char *option, *new_value;
     int i, run_callback;
 
-    API_INIT_FUNC(1, "config_option_set", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (objc < 4)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     if (Tcl_GetIntFromObj (interp, objv[3], &run_callback) != TCL_OK)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = Tcl_GetStringFromObj (objv[1], &i);
     new_value = Tcl_GetStringFromObj (objv[2], &i);
@@ -1570,12 +1570,12 @@ API_FUNC(config_option_set_null)
     char *option;
     int i, run_callback;
 
-    API_INIT_FUNC(1, "config_option_set_null", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set_null", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (objc < 3)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     if (Tcl_GetIntFromObj (interp, objv[2], &run_callback) != TCL_OK)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = Tcl_GetStringFromObj (objv[1], &i);
 
@@ -1592,9 +1592,9 @@ API_FUNC(config_option_unset)
     char *option;
     int i;
 
-    API_INIT_FUNC(1, "config_option_unset", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_option_unset", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
     if (objc < 2)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     option = Tcl_GetStringFromObj (objv[1], &i);
 
@@ -1811,9 +1811,9 @@ API_FUNC(config_write)
     int rc;
     int i;
 
-    API_INIT_FUNC(1, "config_write", API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+    API_INIT_FUNC(1, "config_write", API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
     if (objc < 2)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
 
     rc = weechat_config_write (API_STR2PTR(Tcl_GetStringFromObj (objv[1], &i))); /* config_file */
 
@@ -1826,9 +1826,9 @@ API_FUNC(config_read)
     int rc;
     int i;
 
-    API_INIT_FUNC(1, "config_read", API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+    API_INIT_FUNC(1, "config_read", API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
     if (objc < 2)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
 
     rc = weechat_config_read (API_STR2PTR(Tcl_GetStringFromObj (objv[1], &i))); /* config_file */
 
@@ -1841,9 +1841,9 @@ API_FUNC(config_reload)
     int rc;
     int i;
 
-    API_INIT_FUNC(1, "config_reload", API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+    API_INIT_FUNC(1, "config_reload", API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
     if (objc < 2)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
 
     rc = weechat_config_reload (API_STR2PTR(Tcl_GetStringFromObj (objv[1], &i))); /* config_file */
 
@@ -1967,9 +1967,9 @@ API_FUNC(config_set_plugin)
     char *option, *value;
     int i, rc;
 
-    API_INIT_FUNC(1, "config_set_plugin", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_set_plugin", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (objc < 3)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = Tcl_GetStringFromObj (objv[1], &i);
     value = Tcl_GetStringFromObj (objv[2], &i);
@@ -2009,9 +2009,9 @@ API_FUNC(config_unset_plugin)
     char *option;
     int i, rc;
 
-    API_INIT_FUNC(1, "config_unset_plugin", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_unset_plugin", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
     if (objc < 2)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     option = Tcl_GetStringFromObj (objv[1], &i);
 
@@ -2035,9 +2035,9 @@ API_FUNC(key_bind)
 
     context = Tcl_GetStringFromObj (objv[1], &i);
     hashtable = weechat_tcl_dict_to_hashtable (interp, objv[2],
-                                               WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                               WEECHAT_HASHTABLE_STRING,
-                                               WEECHAT_HASHTABLE_STRING);
+                                               WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                               WHOREIRC_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_STRING);
 
     num_keys = weechat_key_bind (context, hashtable);
 
@@ -2212,12 +2212,12 @@ weechat_tcl_api_hook_command_cb (const void *pointer, void *data,
         func_argv[2] = (argc > 1) ? argv_eol[1] : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2227,7 +2227,7 @@ weechat_tcl_api_hook_command_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_command)
@@ -2287,12 +2287,12 @@ weechat_tcl_api_hook_completion_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(completion);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2302,7 +2302,7 @@ weechat_tcl_api_hook_completion_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_completion)
@@ -2398,12 +2398,12 @@ weechat_tcl_api_hook_command_run_cb (const void *pointer, void *data,
         func_argv[2] = (command) ? (char *)command : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2413,7 +2413,7 @@ weechat_tcl_api_hook_command_run_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_command_run)
@@ -2463,12 +2463,12 @@ weechat_tcl_api_hook_timer_cb (const void *pointer, void *data,
         func_argv[1] = str_remaining_calls;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2478,7 +2478,7 @@ weechat_tcl_api_hook_timer_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_timer)
@@ -2527,12 +2527,12 @@ weechat_tcl_api_hook_fd_cb (const void *pointer, void *data, int fd)
         func_argv[1] = &fd;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "si", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2542,7 +2542,7 @@ weechat_tcl_api_hook_fd_cb (const void *pointer, void *data, int fd)
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_fd)
@@ -2588,14 +2588,14 @@ weechat_tcl_api_hook_process_cb (const void *pointer, void *data,
     script = (struct t_plugin_script *)pointer;
     plugin_script_get_function_and_data (data, &ptr_function, &ptr_data);
 
-    if (return_code == WEECHAT_HOOK_PROCESS_CHILD)
+    if (return_code == WHOREIRC_HOOK_PROCESS_CHILD)
     {
         if (strncmp (command, "func:", 5) == 0)
         {
             func_argv[0] = (ptr_data) ? (char *)ptr_data : empty_arg;
 
             result = (char *) weechat_tcl_exec (script,
-                                                WEECHAT_SCRIPT_EXEC_STRING,
+                                                WHOREIRC_SCRIPT_EXEC_STRING,
                                                 command + 5,
                                                 "s", func_argv);
             if (result)
@@ -2616,12 +2616,12 @@ weechat_tcl_api_hook_process_cb (const void *pointer, void *data,
         func_argv[4] = (err) ? (char *)err : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ssiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2631,7 +2631,7 @@ weechat_tcl_api_hook_process_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_process)
@@ -2680,9 +2680,9 @@ API_FUNC(hook_process_hashtable)
 
     command = Tcl_GetStringFromObj (objv[1], &i);
     options = weechat_tcl_dict_to_hashtable (interp, objv[2],
-                                             WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                             WEECHAT_HASHTABLE_STRING,
-                                             WEECHAT_HASHTABLE_STRING);
+                                             WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                             WHOREIRC_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_STRING);
     function = Tcl_GetStringFromObj (objv[4], &i);
     data = Tcl_GetStringFromObj (objv[5], &i);
 
@@ -2726,12 +2726,12 @@ weechat_tcl_api_hook_connect_cb (const void *pointer, void *data,
         func_argv[5] = (error) ? (char *)error : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "siiiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2741,7 +2741,7 @@ weechat_tcl_api_hook_connect_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_connect)
@@ -2804,7 +2804,7 @@ weechat_tcl_api_hook_line_cb (const void *pointer, void *data,
 
         return (struct t_hashtable *)weechat_tcl_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "sh", func_argv);
     }
@@ -2878,12 +2878,12 @@ weechat_tcl_api_hook_print_cb (const void *pointer, void *data,
         func_argv[7] = (message) ? (char *)message : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ssssiiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2895,7 +2895,7 @@ weechat_tcl_api_hook_print_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_print)
@@ -2950,11 +2950,11 @@ weechat_tcl_api_hook_signal_cb (const void *pointer, void *data,
     {
         func_argv[0] = (ptr_data) ? (char *)ptr_data : empty_arg;
         func_argv[1] = (signal) ? (char *)signal : empty_arg;
-        if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+        if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
         {
             func_argv[2] = (signal_data) ? (char *)signal_data : empty_arg;
         }
-        else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+        else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
         {
             str_value[0] = '\0';
             if (signal_data)
@@ -2964,7 +2964,7 @@ weechat_tcl_api_hook_signal_cb (const void *pointer, void *data,
             }
             func_argv[2] = str_value;
         }
-        else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+        else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
         {
             func_argv[2] = (char *)API_PTR2STR(signal_data);
         }
@@ -2972,12 +2972,12 @@ weechat_tcl_api_hook_signal_cb (const void *pointer, void *data,
             func_argv[2] = empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2987,7 +2987,7 @@ weechat_tcl_api_hook_signal_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_signal)
@@ -3021,31 +3021,31 @@ API_FUNC(hook_signal_send)
     char *signal, *type_data;
     int number, i, rc;
 
-    API_INIT_FUNC(1, "hook_signal_send", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_signal_send", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (objc < 4)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     signal = Tcl_GetStringFromObj (objv[1], &i);
     type_data = Tcl_GetStringFromObj (objv[2], &i);
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         rc = weechat_hook_signal_send (signal,
                                        type_data,
                                        Tcl_GetStringFromObj (objv[3], &i)); /* signal_data */
         API_RETURN_INT(rc);
     }
-    else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+    else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
     {
         if (Tcl_GetIntFromObj (interp, objv[3], &number) != TCL_OK)
         {
-            API_RETURN_INT(WEECHAT_RC_ERROR);
+            API_RETURN_INT(WHOREIRC_RC_ERROR);
         }
         rc = weechat_hook_signal_send (signal,
                                        type_data,
                                        &number); /* signal_data */
         API_RETURN_INT(rc);
     }
-    else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+    else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
     {
         rc = weechat_hook_signal_send (signal,
                                        type_data,
@@ -3053,7 +3053,7 @@ API_FUNC(hook_signal_send)
         API_RETURN_INT(rc);
     }
 
-    API_RETURN_INT(WEECHAT_RC_ERROR);
+    API_RETURN_INT(WHOREIRC_RC_ERROR);
 }
 
 int
@@ -3077,12 +3077,12 @@ weechat_tcl_api_hook_hsignal_cb (const void *pointer, void *data,
         func_argv[2] = hashtable;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ssh", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3092,7 +3092,7 @@ weechat_tcl_api_hook_hsignal_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_hsignal)
@@ -3127,15 +3127,15 @@ API_FUNC(hook_hsignal_send)
     struct t_hashtable *hashtable;
     int i, rc;
 
-    API_INIT_FUNC(1, "hook_hsignal_send", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_hsignal_send", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (objc < 3)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     signal = Tcl_GetStringFromObj (objv[1], &i);
     hashtable = weechat_tcl_dict_to_hashtable (interp, objv[2],
-                                               WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                               WEECHAT_HASHTABLE_STRING,
-                                               WEECHAT_HASHTABLE_STRING);
+                                               WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                               WHOREIRC_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_STRING);
 
     rc = weechat_hook_hsignal_send (signal, hashtable);
 
@@ -3165,12 +3165,12 @@ weechat_tcl_api_hook_config_cb (const void *pointer, void *data,
         func_argv[2] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3180,7 +3180,7 @@ weechat_tcl_api_hook_config_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_config)
@@ -3230,7 +3230,7 @@ weechat_tcl_api_hook_modifier_cb (const void *pointer, void *data,
         func_argv[3] = (string) ? (char *)string : empty_arg;
 
         return (char *)weechat_tcl_exec (script,
-                                         WEECHAT_SCRIPT_EXEC_STRING,
+                                         WHOREIRC_SCRIPT_EXEC_STRING,
                                          ptr_function,
                                          "ssss", func_argv);
     }
@@ -3302,7 +3302,7 @@ weechat_tcl_api_hook_info_cb (const void *pointer, void *data,
         func_argv[2] = (arguments) ? (char *)arguments : empty_arg;
 
         return (char *)weechat_tcl_exec (script,
-                                         WEECHAT_SCRIPT_EXEC_STRING,
+                                         WHOREIRC_SCRIPT_EXEC_STRING,
                                          ptr_function,
                                          "sss", func_argv);
     }
@@ -3360,7 +3360,7 @@ weechat_tcl_api_hook_info_hashtable_cb (const void *pointer, void *data,
 
         return (struct t_hashtable *)weechat_tcl_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "ssh", func_argv);
     }
@@ -3423,7 +3423,7 @@ weechat_tcl_api_hook_infolist_cb (const void *pointer, void *data,
 
         result = (struct t_infolist *)weechat_tcl_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_POINTER,
+            WHOREIRC_SCRIPT_EXEC_POINTER,
             ptr_function,
             "ssss", func_argv);
 
@@ -3484,7 +3484,7 @@ weechat_tcl_api_hook_focus_cb (const void *pointer, void *data,
 
         return (struct t_hashtable *)weechat_tcl_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "sh", func_argv);
     }
@@ -3588,11 +3588,11 @@ weechat_tcl_api_buffer_input_data_cb (const void *pointer, void *data,
         func_argv[2] = (input_data) ? (char *)input_data : empty_arg;
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "sss", func_argv);
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3602,7 +3602,7 @@ weechat_tcl_api_buffer_input_data_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 int
@@ -3624,11 +3624,11 @@ weechat_tcl_api_buffer_close_cb (const void *pointer,
         func_argv[1] = (char *)API_PTR2STR(buffer);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ss", func_argv);
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3638,7 +3638,7 @@ weechat_tcl_api_buffer_close_cb (const void *pointer,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(buffer_new)
@@ -4386,7 +4386,7 @@ weechat_tcl_api_bar_item_build_cb (const void *pointer, void *data,
             func_argv[4] = extra_info;
 
             ret = (char *)weechat_tcl_exec (script,
-                                            WEECHAT_SCRIPT_EXEC_STRING,
+                                            WHOREIRC_SCRIPT_EXEC_STRING,
                                             ptr_function + 7,
                                             "ssssh", func_argv);
         }
@@ -4398,7 +4398,7 @@ weechat_tcl_api_bar_item_build_cb (const void *pointer, void *data,
             func_argv[2] = (char *)API_PTR2STR(window);
 
             ret = (char *)weechat_tcl_exec (script,
-                                            WEECHAT_SCRIPT_EXEC_STRING,
+                                            WHOREIRC_SCRIPT_EXEC_STRING,
                                             ptr_function,
                                             "sss", func_argv);
         }
@@ -4579,9 +4579,9 @@ API_FUNC(command)
     char *buffer, *command;
     int i, rc;
 
-    API_INIT_FUNC(1, "command", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (objc < 3)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     buffer = Tcl_GetStringFromObj (objv[1], &i);
     command = Tcl_GetStringFromObj (objv[2], &i);
@@ -4601,16 +4601,16 @@ API_FUNC(command_options)
     struct t_hashtable *options;
     int i, rc;
 
-    API_INIT_FUNC(1, "command_options", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command_options", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (objc < 4)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     buffer = Tcl_GetStringFromObj (objv[1], &i);
     command = Tcl_GetStringFromObj (objv[2], &i);
     options = weechat_tcl_dict_to_hashtable (interp, objv[3],
-                                             WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                             WEECHAT_HASHTABLE_STRING,
-                                             WEECHAT_HASHTABLE_STRING);
+                                             WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                             WHOREIRC_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_STRING);
 
     rc = plugin_script_api_command_options (weechat_tcl_plugin,
                                             tcl_current_script,
@@ -4651,9 +4651,9 @@ API_FUNC(info_get_hashtable)
         API_WRONG_ARGS(API_RETURN_EMPTY);
 
     hashtable = weechat_tcl_dict_to_hashtable (interp, objv[2],
-                                               WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                               WEECHAT_HASHTABLE_STRING,
-                                               WEECHAT_HASHTABLE_STRING);
+                                               WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                               WHOREIRC_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_STRING);
 
     result_hashtable = weechat_info_get_hashtable (Tcl_GetStringFromObj (objv[1], &i),
                                                    hashtable);
@@ -5358,9 +5358,9 @@ API_FUNC(hdata_update)
     hdata = Tcl_GetStringFromObj (objv[1], &i);
     pointer = Tcl_GetStringFromObj (objv[2], &i);
     hashtable = weechat_tcl_dict_to_hashtable (interp, objv[3],
-                                               WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                               WEECHAT_HASHTABLE_STRING,
-                                               WEECHAT_HASHTABLE_STRING);
+                                               WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                               WHOREIRC_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_STRING);
 
     value = weechat_hdata_update (API_STR2PTR(hdata),
                                   API_STR2PTR(pointer),
@@ -5416,12 +5416,12 @@ weechat_tcl_api_upgrade_read_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(infolist);
 
         rc = (int *) weechat_tcl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        ptr_function,
                                        "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -5431,7 +5431,7 @@ weechat_tcl_api_upgrade_read_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(upgrade_new)
@@ -5535,94 +5535,94 @@ void weechat_tcl_api_init (Tcl_Interp *interp)
     /* interface constants */
     /* set variables, TODO: make them unmodifiable (thru Tcl_TraceVar) ? */
     /* NOTE: it is not good for performance to convert "defines" to Tcl_Obj */
-    objp = Tcl_NewIntObj (WEECHAT_RC_OK);
+    objp = Tcl_NewIntObj (WHOREIRC_RC_OK);
     Tcl_IncrRefCount (objp);
 
-    Tcl_SetVar (interp, "weechat::WEECHAT_RC_OK", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_RC_OK_EAT);
-    Tcl_SetVar (interp, "weechat::WEECHAT_RC_OK_EAT", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_RC_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_RC_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_RC_OK", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_RC_OK_EAT);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_RC_OK_EAT", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_RC_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_RC_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
 
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_READ_OK);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_READ_OK", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_READ_MEMORY_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_READ_MEMORY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_READ_FILE_NOT_FOUND);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_READ_FILE_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_WRITE_OK);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_WRITE_OK", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_WRITE_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_WRITE_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_WRITE_MEMORY_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_WRITE_MEMORY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_SET_OK_CHANGED);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_SET_OK_CHANGED", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_SET_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_SET_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_UNSET_OK_RESET);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_UNSET_OK_RESET", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_CONFIG_OPTION_UNSET_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_CONFIG_OPTION_UNSET_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_READ_OK);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_READ_OK", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_READ_MEMORY_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_READ_MEMORY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_READ_FILE_NOT_FOUND);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_READ_FILE_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_WRITE_OK);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_WRITE_OK", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_WRITE_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_WRITE_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_WRITE_MEMORY_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_WRITE_MEMORY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_SET_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_SET_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_CONFIG_OPTION_UNSET_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_CONFIG_OPTION_UNSET_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
 
-    Tcl_SetStringObj (objp, WEECHAT_LIST_POS_SORT, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_LIST_POS_SORT", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_LIST_POS_BEGINNING, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_LIST_POS_BEGINNING", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_LIST_POS_END, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_LIST_POS_END", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_LIST_POS_SORT, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_LIST_POS_SORT", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_LIST_POS_BEGINNING, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_LIST_POS_BEGINNING", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_LIST_POS_END, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_LIST_POS_END", Tcl_GetStringFromObj (objp, &i), 0);
 
-    Tcl_SetStringObj (objp, WEECHAT_HOTLIST_LOW, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOTLIST_LOW", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_HOTLIST_MESSAGE, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOTLIST_MESSAGE", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_HOTLIST_PRIVATE, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOTLIST_PRIVATE", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_HOTLIST_HIGHLIGHT, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOTLIST_HIGHLIGHT", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOTLIST_LOW, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOTLIST_LOW", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOTLIST_MESSAGE, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOTLIST_MESSAGE", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOTLIST_PRIVATE, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOTLIST_PRIVATE", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOTLIST_HIGHLIGHT, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOTLIST_HIGHLIGHT", Tcl_GetStringFromObj (objp, &i), 0);
 
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_PROCESS_RUNNING);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_PROCESS_RUNNING", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_PROCESS_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_PROCESS_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_PROCESS_RUNNING);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_PROCESS_RUNNING", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_PROCESS_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_PROCESS_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
 
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_OK);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_OK", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_PROXY_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_PROXY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_MEMORY_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_MEMORY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_TIMEOUT);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_TIMEOUT", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetIntObj (objp, WEECHAT_HOOK_CONNECT_SOCKET_ERROR);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_CONNECT_SOCKET_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_OK);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_OK", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_PROXY_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_PROXY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_MEMORY_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_MEMORY_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_TIMEOUT);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_TIMEOUT", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetIntObj (objp, WHOREIRC_HOOK_CONNECT_SOCKET_ERROR);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_CONNECT_SOCKET_ERROR", Tcl_GetStringFromObj (objp, &i), 0);
 
-    Tcl_SetStringObj (objp, WEECHAT_HOOK_SIGNAL_STRING, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_SIGNAL_STRING", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_HOOK_SIGNAL_INT, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_SIGNAL_INT", Tcl_GetStringFromObj (objp, &i), 0);
-    Tcl_SetStringObj (objp, WEECHAT_HOOK_SIGNAL_POINTER, -1);
-    Tcl_SetVar (interp, "weechat::WEECHAT_HOOK_SIGNAL_POINTER", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOOK_SIGNAL_STRING, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_SIGNAL_STRING", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOOK_SIGNAL_INT, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_SIGNAL_INT", Tcl_GetStringFromObj (objp, &i), 0);
+    Tcl_SetStringObj (objp, WHOREIRC_HOOK_SIGNAL_POINTER, -1);
+    Tcl_SetVar (interp, "weechat::WHOREIRC_HOOK_SIGNAL_POINTER", Tcl_GetStringFromObj (objp, &i), 0);
 
     Tcl_DecrRefCount (objp);
 

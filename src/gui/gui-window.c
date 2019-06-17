@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -694,7 +694,7 @@ gui_window_new (struct t_gui_window *parent_window, struct t_gui_buffer *buffer,
 
     /* send signal */
     (void) hook_signal_send ("window_opened",
-                             WEECHAT_HOOK_SIGNAL_POINTER, new_window);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, new_window);
 
     return new_window;
 }
@@ -989,7 +989,7 @@ gui_window_free (struct t_gui_window *window)
     old_current_window = gui_current_window;
 
     (void) hook_signal_send ("window_closing",
-                             WEECHAT_HOOK_SIGNAL_POINTER, window);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, window);
 
     if (window->buffer)
         gui_buffer_add_value_num_displayed (window->buffer, -1);
@@ -1041,14 +1041,14 @@ gui_window_free (struct t_gui_window *window)
     }
 
     (void) hook_signal_send ("window_closed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, window);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, window);
 
     free (window);
 
     if (gui_current_window != old_current_window)
     {
         (void) hook_signal_send ("window_switch",
-                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                  gui_current_window);
     }
 }
@@ -1789,13 +1789,13 @@ gui_window_zoom (struct t_gui_window *window)
     {
         /* restore layout as it was before zooming a window */
         (void) hook_signal_send ("window_unzoom",
-                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                  gui_current_window);
         gui_layout_window_apply (ptr_layout,
                                  ptr_layout->internal_id_current_window);
         gui_layout_remove (ptr_layout);
         (void) hook_signal_send ("window_unzoomed",
-                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                  gui_current_window);
     }
     else
@@ -1806,12 +1806,12 @@ gui_window_zoom (struct t_gui_window *window)
         {
             gui_layout_add (ptr_layout);
             (void) hook_signal_send ("window_zoom",
-                                     WEECHAT_HOOK_SIGNAL_POINTER,
+                                     WHOREIRC_HOOK_SIGNAL_POINTER,
                                      gui_current_window);
             gui_layout_window_store (ptr_layout);
             gui_window_merge_all (window);
             (void) hook_signal_send ("window_zoomed",
-                                     WEECHAT_HOOK_SIGNAL_POINTER,
+                                     WHOREIRC_HOOK_SIGNAL_POINTER,
                                      gui_current_window);
         }
     }
@@ -1859,7 +1859,7 @@ gui_window_hdata_window_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_window, ptr_tree, POINTER, 0, NULL, "window_tree");
         HDATA_VAR(struct t_gui_window, prev_window, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_window, next_window, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_windows, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_windows, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_window, 0);
         HDATA_LIST(gui_current_window, 0);
     }
@@ -1986,7 +1986,7 @@ gui_window_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints window infos in WeeChat log file (usually for crash dump).
+ * Prints window infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

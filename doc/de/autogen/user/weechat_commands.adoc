@@ -808,7 +808,7 @@ Tastenbefehle für den secure-Buffer:
   alt+v Werte werden in Klartext angezeigt bzw. verborgen
 
 Wird eine Passphrase verwendet (Daten liegen verschlüsselt vor), fragt WeeChat beim Start die Passphrase ab.
-Setzt man die Umgebungsvariable "WEECHAT_PASSPHRASE", kann die Eingabeaufforderung der Passphrase beim Programmstart vermieden werden (diese Variable wird von WeeChat auch beim /upgrade verwendet). Es ist auch möglich in der Option sec.crypt.passphrase_file eine Datei anzugeben die die Passphrase beinhaltet (siehe /help sec.crypt.passphrase_file)
+Setzt man die Umgebungsvariable "WHOREIRC_PASSPHRASE", kann die Eingabeaufforderung der Passphrase beim Programmstart vermieden werden (diese Variable wird von WeeChat auch beim /upgrade verwendet). Es ist auch möglich in der Option sec.crypt.passphrase_file eine Datei anzugeben die die Passphrase beinhaltet (siehe /help sec.crypt.passphrase_file)
 
 schutzwürdige Daten mit dem Format ${sec.data.xxx} können wie folgt genutzt werden:
   - Befehl /eval.

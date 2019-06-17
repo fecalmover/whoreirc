@@ -164,10 +164,10 @@ gui_main_init ()
     struct t_gui_bar_window *ptr_bar_win;
     char title[256];
 
-#ifdef WEECHAT_HEADLESS
+#ifdef WHOREIRC_HEADLESS
     /* allow Ctrl-C to quit WeeChat in headless mode */
     util_catch_signal (SIGINT, &gui_main_signal_sigint);
-#endif /* WEECHAT_HEADLESS */
+#endif /* WHOREIRC_HEADLESS */
 
     initscr ();
 
@@ -219,8 +219,8 @@ gui_main_init ()
         /* set title for core buffer */
         snprintf (title, sizeof (title), "WeeChat %s %s - %s",
                   version_get_version (),
-                  WEECHAT_COPYRIGHT_DATE,
-                  WEECHAT_WEBSITE);
+                  WHOREIRC_COPYRIGHT_DATE,
+                  WHOREIRC_WEBSITE);
         gui_buffer_set_title (ptr_buffer, title);
 
         /* create main window (using full space) */
@@ -306,12 +306,12 @@ gui_main_handle_quit_signals ()
                   "signal_%s", str_signal);
         string_tolower (str_weechat_signal);
         rc = hook_signal_send (str_weechat_signal,
-                               WEECHAT_HOOK_SIGNAL_STRING, NULL);
-        if ((rc != WEECHAT_RC_OK_EAT) && !weechat_quit)
+                               WHOREIRC_HOOK_SIGNAL_STRING, NULL);
+        if ((rc != WHOREIRC_RC_OK_EAT) && !weechat_quit)
         {
             log_printf (_("Signal %s received, exiting WeeChat..."),
                         str_signal);
-            (void) hook_signal_send ("quit", WEECHAT_HOOK_SIGNAL_STRING, NULL);
+            (void) hook_signal_send ("quit", WHOREIRC_HOOK_SIGNAL_STRING, NULL);
             weechat_quit = 1;
         }
     }
@@ -498,7 +498,7 @@ gui_main_loop ()
         if (send_signal_sigwinch)
         {
             (void) hook_signal_send ("signal_sigwinch",
-                                     WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, NULL);
             send_signal_sigwinch = 0;
         }
 

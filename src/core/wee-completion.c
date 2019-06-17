@@ -1,23 +1,23 @@
 /*
- * wee-completion.c - completion for WeeChat commands
+ * wee-completion.c - completion for WhoreIRC commands
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -80,10 +80,10 @@ completion_list_add_bars_names_cb (const void *pointer, void *data,
     for (ptr_bar = gui_bars; ptr_bar; ptr_bar = ptr_bar->next_bar)
     {
         gui_completion_list_add (completion, ptr_bar->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -107,10 +107,10 @@ completion_list_add_bars_options_cb (const void *pointer, void *data,
     for (i = 0; i < GUI_BAR_NUM_OPTIONS; i++)
     {
         gui_completion_list_add (completion, gui_bar_option_string[i],
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -135,10 +135,10 @@ completion_list_add_buffers_names_cb (const void *pointer, void *data,
          ptr_buffer = ptr_buffer->next_buffer)
     {
         gui_completion_list_add (completion, ptr_buffer->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -165,10 +165,10 @@ completion_list_add_buffers_numbers_cb (const void *pointer, void *data,
     {
         snprintf (str_number, sizeof (str_number), "%d", ptr_buffer->number);
         gui_completion_list_add (completion, str_number,
-                                 0, WEECHAT_LIST_POS_END);
+                                 0, WHOREIRC_LIST_POS_END);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -193,10 +193,10 @@ completion_list_add_buffers_plugins_names_cb (const void *pointer, void *data,
          ptr_buffer = ptr_buffer->next_buffer)
     {
         gui_completion_list_add (completion, ptr_buffer->full_name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -221,10 +221,10 @@ completion_list_add_buffer_properties_set_cb (const void *pointer, void *data,
     {
         gui_completion_list_add (completion,
                                  gui_buffer_properties_set[i],
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -249,22 +249,22 @@ completion_list_add_buffer_properties_get_cb (const void *pointer, void *data,
     {
         gui_completion_list_add (completion,
                                  gui_buffer_properties_get_integer[i],
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
     for (i = 0; gui_buffer_properties_get_string[i]; i++)
     {
         gui_completion_list_add (completion,
                                  gui_buffer_properties_get_string[i],
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
     for (i = 0; gui_buffer_properties_get_pointer[i]; i++)
     {
         gui_completion_list_add (completion,
                                  gui_buffer_properties_get_pointer[i],
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -290,10 +290,10 @@ completion_list_add_windows_numbers_cb (const void *pointer, void *data,
     {
         snprintf (str_number, sizeof (str_number), "%d", ptr_win->number);
         gui_completion_list_add (completion, str_number,
-                                 0, WEECHAT_LIST_POS_END);
+                                 0, WHOREIRC_LIST_POS_END);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -325,7 +325,7 @@ completion_list_add_colors_cb (const void *pointer, void *data,
         {
             gui_completion_list_add (completion,
                                      color_name,
-                                     0, WEECHAT_LIST_POS_SORT);
+                                     0, WHOREIRC_LIST_POS_SORT);
         }
     }
     num_colors = gui_color_get_term_colors ();
@@ -336,7 +336,7 @@ completion_list_add_colors_cb (const void *pointer, void *data,
         {
             gui_completion_list_add (completion,
                                      color_palette->alias,
-                                     0, WEECHAT_LIST_POS_END);
+                                     0, WHOREIRC_LIST_POS_END);
         }
         else
         {
@@ -346,11 +346,11 @@ completion_list_add_colors_cb (const void *pointer, void *data,
                       i);
             gui_completion_list_add (completion,
                                      str_number,
-                                     0, WEECHAT_LIST_POS_END);
+                                     0, WHOREIRC_LIST_POS_END);
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -368,7 +368,7 @@ completion_list_map_add_palette_color_cb (void *data,
 
     gui_completion_list_add ((struct t_gui_completion *)data,
                              (const char *)key,
-                             0, WEECHAT_LIST_POS_SORT);
+                             0, WHOREIRC_LIST_POS_SORT);
 }
 
 /*
@@ -391,7 +391,7 @@ completion_list_add_palette_colors_cb (const void *pointer, void *data,
                    &completion_list_map_add_palette_color_cb,
                    completion);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -416,10 +416,10 @@ completion_list_add_config_files_cb (const void *pointer, void *data,
          ptr_config_file = ptr_config_file->next_config)
     {
         gui_completion_list_add (completion, ptr_config_file->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -537,7 +537,7 @@ completion_list_add_filename_cb (const void *pointer, void *data,
 
         /* add path to list of completions */
         gui_completion_list_add (completion, buf,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
     closedir (dp);
 
@@ -553,7 +553,7 @@ end:
     if (dir_name)
         free (dir_name);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -578,10 +578,10 @@ completion_list_add_filters_cb (const void *pointer, void *data,
          ptr_filter = ptr_filter->next_filter)
     {
         gui_completion_list_add (completion, ptr_filter->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -621,18 +621,18 @@ completion_list_add_commands_cb (const void *pointer, void *data,
                           pos,
                           HOOK_COMMAND(ptr_hook, command));
                 gui_completion_list_add (completion, str_command,
-                                         0, WEECHAT_LIST_POS_SORT);
+                                         0, WHOREIRC_LIST_POS_SORT);
             }
             else
             {
                 gui_completion_list_add (completion,
                                          HOOK_COMMAND(ptr_hook, command),
-                                         0, WEECHAT_LIST_POS_SORT);
+                                         0, WHOREIRC_LIST_POS_SORT);
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -661,10 +661,10 @@ completion_list_add_infos_cb (const void *pointer, void *data,
             && (HOOK_INFO(ptr_hook, info_name)[0]))
             gui_completion_list_add (completion,
                                      HOOK_INFO(ptr_hook, info_name),
-                                     0, WEECHAT_LIST_POS_SORT);
+                                     0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -693,10 +693,10 @@ completion_list_add_infolists_cb (const void *pointer, void *data,
             && (HOOK_INFOLIST(ptr_hook, infolist_name)[0]))
             gui_completion_list_add (completion,
                                      HOOK_INFOLIST(ptr_hook, infolist_name),
-                                     0, WEECHAT_LIST_POS_SORT);
+                                     0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -740,14 +740,14 @@ completion_list_add_nicks_cb (const void *pointer, void *data,
             {
                 gui_completion_list_add (completion,
                                          ptr_nick->name,
-                                         1, WEECHAT_LIST_POS_END);
+                                         1, WHOREIRC_LIST_POS_END);
             }
             gui_nicklist_get_next_item (completion->buffer,
                                         &ptr_group, &ptr_nick);
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -792,14 +792,14 @@ completion_list_add_config_options_cb (const void *pointer, void *data,
                               ptr_option->name);
                     gui_completion_list_add (completion,
                                              option_full_name,
-                                             0, WEECHAT_LIST_POS_SORT);
+                                             0, WHOREIRC_LIST_POS_SORT);
                     free (option_full_name);
                 }
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -824,10 +824,10 @@ completion_list_add_plugins_cb (const void *pointer, void *data,
          ptr_plugin = ptr_plugin->next_plugin)
     {
         gui_completion_list_add (completion, ptr_plugin->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -860,7 +860,7 @@ completion_list_add_plugins_installed_exec_cb (void *data,
 
     if (name)
     {
-        gui_completion_list_add (completion, name, 0, WEECHAT_LIST_POS_SORT);
+        gui_completion_list_add (completion, name, 0, WHOREIRC_LIST_POS_SORT);
         free (name);
     }
 }
@@ -884,8 +884,8 @@ completion_list_add_plugins_installed_cb (const void *pointer, void *data,
     (void) completion_item;
     (void) buffer;
 
-    /* plugins in WeeChat extra lib dir */
-    extra_libdir = getenv (WEECHAT_EXTRA_LIBDIR);
+    /* plugins in WhoreIRC extra lib dir */
+    extra_libdir = getenv (WHOREIRC_EXTRA_LIBDIR);
     if (extra_libdir && extra_libdir[0])
     {
         length = strlen (extra_libdir) + 16 + 1;
@@ -900,7 +900,7 @@ completion_list_add_plugins_installed_cb (const void *pointer, void *data,
         }
     }
 
-    /* plugins in WeeChat home dir */
+    /* plugins in WhoreIRC home dir */
     if (CONFIG_STRING(config_plugin_path)
         && CONFIG_STRING(config_plugin_path)[0])
     {
@@ -923,19 +923,19 @@ completion_list_add_plugins_installed_cb (const void *pointer, void *data,
             free (plugin_path2);
     }
 
-    /* plugins in WeeChat global lib dir */
-    length = strlen (WEECHAT_LIBDIR) + 16 + 1;
+    /* plugins in WhoreIRC global lib dir */
+    length = strlen (WHOREIRC_LIBDIR) + 16 + 1;
     dir_name = malloc (length);
     if (dir_name)
     {
-        snprintf (dir_name, length, "%s/plugins", WEECHAT_LIBDIR);
+        snprintf (dir_name, length, "%s/plugins", WHOREIRC_LIBDIR);
         util_exec_on_files (dir_name, 1, 0,
                             &completion_list_add_plugins_installed_exec_cb,
                             completion);
         free (dir_name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -962,15 +962,15 @@ completion_list_add_plugins_commands_cb (const void *pointer, void *data,
     (void) buffer;
 
     if (!completion->args)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     argv = string_split (completion->args, " ", NULL,
-                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                          0, &argc);
     if (!argv)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (argc > 0)
     {
@@ -991,7 +991,7 @@ completion_list_add_plugins_commands_cb (const void *pointer, void *data,
              */
             ptr_plugin = plugin_search (argv[arg_index]);
             if (!ptr_plugin)
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
         }
 
         for (ptr_hook = weechat_hooks[HOOK_TYPE_COMMAND]; ptr_hook;
@@ -1009,13 +1009,13 @@ completion_list_add_plugins_commands_cb (const void *pointer, void *data,
                               pos,
                               HOOK_COMMAND(ptr_hook, command));
                     gui_completion_list_add (completion, str_command,
-                                             0, WEECHAT_LIST_POS_SORT);
+                                             0, WHOREIRC_LIST_POS_SORT);
                 }
                 else
                 {
                     gui_completion_list_add (completion,
                                              HOOK_COMMAND(ptr_hook, command),
-                                             0, WEECHAT_LIST_POS_SORT);
+                                             0, WHOREIRC_LIST_POS_SORT);
                 }
             }
         }
@@ -1023,7 +1023,7 @@ completion_list_add_plugins_commands_cb (const void *pointer, void *data,
 
     string_free_split (argv);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1051,7 +1051,7 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
     (void) buffer;
 
     if (!completion->args)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     pos_space = strchr (completion->args, ' ');
     if (pos_space)
@@ -1061,7 +1061,7 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
         option_full_name = strdup (completion->args);
 
     if (!option_full_name)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     file = NULL;
     section = NULL;
@@ -1098,25 +1098,25 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                     {
                         case CONFIG_OPTION_TYPE_BOOLEAN:
                             gui_completion_list_add (completion, "on",
-                                                     0, WEECHAT_LIST_POS_SORT);
+                                                     0, WHOREIRC_LIST_POS_SORT);
                             gui_completion_list_add (completion, "off",
-                                                     0, WEECHAT_LIST_POS_SORT);
+                                                     0, WHOREIRC_LIST_POS_SORT);
                             gui_completion_list_add (completion, "toggle",
-                                                     0, WEECHAT_LIST_POS_END);
+                                                     0, WHOREIRC_LIST_POS_END);
                             if (option_found->value)
                             {
                                 if (CONFIG_BOOLEAN(option_found) == CONFIG_BOOLEAN_TRUE)
                                     gui_completion_list_add (completion, "on",
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 else
                                     gui_completion_list_add (completion, "off",
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                             }
                             else
                             {
                                 gui_completion_list_add (completion,
-                                                         WEECHAT_CONFIG_OPTION_NULL,
-                                                         0, WEECHAT_LIST_POS_BEGINNING);
+                                                         WHOREIRC_CONFIG_OPTION_NULL,
+                                                         0, WHOREIRC_LIST_POS_BEGINNING);
                             }
                             break;
                         case CONFIG_OPTION_TYPE_INTEGER:
@@ -1126,33 +1126,33 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                                 {
                                     gui_completion_list_add (completion,
                                                              option_found->string_values[i],
-                                                             0, WEECHAT_LIST_POS_SORT);
+                                                             0, WHOREIRC_LIST_POS_SORT);
                                 }
                                 gui_completion_list_add (completion, "++1",
-                                                         0, WEECHAT_LIST_POS_END);
+                                                         0, WHOREIRC_LIST_POS_END);
                                 gui_completion_list_add (completion, "--1",
-                                                         0, WEECHAT_LIST_POS_END);
+                                                         0, WHOREIRC_LIST_POS_END);
                                 if (option_found->value)
                                 {
                                     gui_completion_list_add (completion,
                                                              option_found->string_values[CONFIG_INTEGER(option_found)],
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 }
                                 else
                                 {
                                     gui_completion_list_add (completion,
-                                                             WEECHAT_CONFIG_OPTION_NULL,
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             WHOREIRC_CONFIG_OPTION_NULL,
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 }
                             }
                             else
                             {
                                 if (option_found->value && CONFIG_INTEGER(option_found) > option_found->min)
                                     gui_completion_list_add (completion, "--1",
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 if (option_found->value && CONFIG_INTEGER(option_found) < option_found->max)
                                     gui_completion_list_add (completion, "++1",
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 if (option_found->value)
                                 {
                                     length = 64;
@@ -1163,22 +1163,22 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                                                   "%d", CONFIG_INTEGER(option_found));
                                         gui_completion_list_add (completion,
                                                                  value_string,
-                                                                 0, WEECHAT_LIST_POS_BEGINNING);
+                                                                 0, WHOREIRC_LIST_POS_BEGINNING);
                                         free (value_string);
                                     }
                                 }
                                 else
                                 {
                                     gui_completion_list_add (completion,
-                                                             WEECHAT_CONFIG_OPTION_NULL,
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             WHOREIRC_CONFIG_OPTION_NULL,
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 }
                             }
                             break;
                         case CONFIG_OPTION_TYPE_STRING:
                             gui_completion_list_add (completion,
                                                      "\"\"",
-                                                     0, WEECHAT_LIST_POS_BEGINNING);
+                                                     0, WHOREIRC_LIST_POS_BEGINNING);
                             if (option_found->value)
                             {
                                 length = strlen (CONFIG_STRING(option_found)) + 2 + 1;
@@ -1190,15 +1190,15 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                                               CONFIG_STRING(option_found));
                                     gui_completion_list_add (completion,
                                                              value_string,
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                     free (value_string);
                                 }
                             }
                             else
                             {
                                 gui_completion_list_add (completion,
-                                                         WEECHAT_CONFIG_OPTION_NULL,
-                                                         0, WEECHAT_LIST_POS_BEGINNING);
+                                                         WHOREIRC_CONFIG_OPTION_NULL,
+                                                         0, WHOREIRC_LIST_POS_BEGINNING);
                             }
                             break;
                         case CONFIG_OPTION_TYPE_COLOR:
@@ -1206,9 +1206,9 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                                 pointer, data, completion_item, buffer,
                                 completion);
                             gui_completion_list_add (completion, "++1",
-                                                     0, WEECHAT_LIST_POS_END);
+                                                     0, WHOREIRC_LIST_POS_END);
                             gui_completion_list_add (completion, "--1",
-                                                     0, WEECHAT_LIST_POS_END);
+                                                     0, WHOREIRC_LIST_POS_END);
                             if (option_found->value)
                             {
                                 color_name = gui_color_get_name (CONFIG_INTEGER(option_found));
@@ -1216,14 +1216,14 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                                 {
                                     gui_completion_list_add (completion,
                                                              color_name,
-                                                             0, WEECHAT_LIST_POS_BEGINNING);
+                                                             0, WHOREIRC_LIST_POS_BEGINNING);
                                 }
                             }
                             else
                             {
                                 gui_completion_list_add (completion,
-                                                         WEECHAT_CONFIG_OPTION_NULL,
-                                                         0, WEECHAT_LIST_POS_BEGINNING);
+                                                         WHOREIRC_CONFIG_OPTION_NULL,
+                                                         0, WHOREIRC_LIST_POS_BEGINNING);
                             }
                             break;
                         case CONFIG_NUM_OPTION_TYPES:
@@ -1233,9 +1233,9 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
                         && option_found->null_value_allowed)
                     {
                         gui_completion_list_add (completion,
-                                                 WEECHAT_CONFIG_OPTION_NULL,
+                                                 WHOREIRC_CONFIG_OPTION_NULL,
                                                  0,
-                                                 WEECHAT_LIST_POS_END);
+                                                 WHOREIRC_LIST_POS_END);
                     }
                 }
             }
@@ -1249,11 +1249,11 @@ completion_list_add_config_option_values_cb (const void *pointer, void *data,
 
     free (option_full_name);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Adds WeeChat commands to completion list.
+ * Adds WhoreIRC commands to completion list.
  */
 
 int
@@ -1290,18 +1290,18 @@ completion_list_add_weechat_commands_cb (const void *pointer, void *data,
                           pos,
                           HOOK_COMMAND(ptr_hook, command));
                 gui_completion_list_add (completion, str_command,
-                                         0, WEECHAT_LIST_POS_SORT);
+                                         0, WHOREIRC_LIST_POS_SORT);
             }
             else
             {
                 gui_completion_list_add (completion,
                                          HOOK_COMMAND(ptr_hook, command),
-                                         0, WEECHAT_LIST_POS_SORT);
+                                         0, WHOREIRC_LIST_POS_SORT);
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1326,10 +1326,10 @@ completion_list_add_proxies_names_cb (const void *pointer, void *data,
          ptr_proxy = ptr_proxy->next_proxy)
     {
         gui_completion_list_add (completion, ptr_proxy->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1353,10 +1353,10 @@ completion_list_add_proxies_options_cb (const void *pointer, void *data,
     for (i = 0; i < PROXY_NUM_OPTIONS; i++)
     {
         gui_completion_list_add (completion, proxy_option_string[i],
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1380,10 +1380,10 @@ completion_list_add_keys_contexts_cb (const void *pointer, void *data,
     for (i = 0; i < GUI_KEY_NUM_CONTEXTS; i++)
     {
         gui_completion_list_add (completion, gui_key_context_string[i],
-                                 0, WEECHAT_LIST_POS_END);
+                                 0, WHOREIRC_LIST_POS_END);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1414,13 +1414,13 @@ completion_list_add_keys_codes_cb (const void *pointer, void *data,
             gui_completion_list_add (
                 completion,
                 (expanded_name) ? expanded_name : ptr_key->key,
-                0, WEECHAT_LIST_POS_SORT);
+                0, WHOREIRC_LIST_POS_SORT);
             if (expanded_name)
                 free (expanded_name);
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1457,7 +1457,7 @@ completion_list_add_keys_codes_for_reset_cb (const void *pointer, void *data,
                 gui_completion_list_add (
                     completion,
                     (expanded_name) ? expanded_name : ptr_key->key,
-                    0, WEECHAT_LIST_POS_SORT);
+                    0, WHOREIRC_LIST_POS_SORT);
                 if (expanded_name)
                     free (expanded_name);
             }
@@ -1474,14 +1474,14 @@ completion_list_add_keys_codes_for_reset_cb (const void *pointer, void *data,
                 gui_completion_list_add (
                     completion,
                     (expanded_name) ? expanded_name : ptr_default_key->key,
-                    0, WEECHAT_LIST_POS_SORT);
+                    0, WHOREIRC_LIST_POS_SORT);
                 if (expanded_name)
                     free (expanded_name);
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1505,25 +1505,25 @@ completion_list_add_cursor_areas_cb (const void *pointer, void *data,
     (void) buffer;
 
     /* add "chat" for chat area */
-    gui_completion_list_add (completion, "chat", 0, WEECHAT_LIST_POS_SORT);
+    gui_completion_list_add (completion, "chat", 0, WHOREIRC_LIST_POS_SORT);
 
     /* add bar windows (of current window) */
     for (ptr_bar_win = gui_current_window->bar_windows; ptr_bar_win;
          ptr_bar_win = ptr_bar_win->next_bar_window)
     {
         gui_completion_list_add (completion, ptr_bar_win->bar->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
     for (ptr_bar = gui_bars; ptr_bar; ptr_bar = ptr_bar->next_bar)
     {
         if (ptr_bar->bar_window)
         {
             gui_completion_list_add (completion, ptr_bar->name,
-                                     0, WEECHAT_LIST_POS_SORT);
+                                     0, WHOREIRC_LIST_POS_SORT);
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1548,10 +1548,10 @@ completion_list_add_layouts_names_cb (const void *pointer, void *data,
          ptr_layout = ptr_layout->next_layout)
     {
         gui_completion_list_add (completion, ptr_layout->name,
-                                 0, WEECHAT_LIST_POS_SORT);
+                                 0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1569,7 +1569,7 @@ completion_list_map_add_secured_data_cb (void *data,
 
     gui_completion_list_add ((struct t_gui_completion *)data,
                              (const char *)key,
-                             0, WEECHAT_LIST_POS_SORT);
+                             0, WHOREIRC_LIST_POS_SORT);
 }
 
 /*
@@ -1592,7 +1592,7 @@ completion_list_add_secured_data_cb (const void *pointer, void *data,
                    &completion_list_map_add_secured_data_cb,
                    completion);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1623,13 +1623,13 @@ completion_list_add_env_vars_cb (const void *pointer, void *data,
             if (name)
             {
                 gui_completion_list_add (completion, name,
-                                         0, WEECHAT_LIST_POS_SORT);
+                                         0, WHOREIRC_LIST_POS_SORT);
                 free (name);
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1654,12 +1654,12 @@ completion_list_add_env_value_cb (const void *pointer, void *data,
     if (completion->args)
     {
         argv = string_split (completion->args, " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
         if (!argv)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         if (argc > 0)
         {
@@ -1670,17 +1670,17 @@ completion_list_add_env_value_cb (const void *pointer, void *data,
             if (value)
             {
                 gui_completion_list_add (completion, value,
-                                         0, WEECHAT_LIST_POS_END);
+                                         0, WHOREIRC_LIST_POS_END);
             }
         }
         string_free_split (argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Adds hooks for completions done by WeeChat core.
+ * Adds hooks for completions done by WhoreIRC core.
  */
 
 void

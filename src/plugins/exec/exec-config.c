@@ -65,9 +65,9 @@ exec_config_change_command_default_options (const void *pointer, void *data,
         weechat_config_string (exec_config_command_default_options),
         " ",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &exec_config_cmd_num_options);
 }

@@ -1,4 +1,4 @@
-= Guida per l'Utente di WeeChat
+= Guida per l'Utente di WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: it
@@ -16,7 +16,7 @@ Translators:
 * Marco Paolone <marcopaolone@gmail.com>, 2009-2012
 
 
-Questo manuale documenta il client di chat WeeChat, ed è parte
+Questo manuale documenta il client di chat WhoreIRC, ed è parte
 del programma stesso.
 
 È possibile trovare l'ultima versione di questo documento qui:
@@ -26,7 +26,7 @@ https://whoreirc.org/doc
 [[introduction]]
 == Introduzione
 
-WeeChat (Wee Enhanced Environment for Chat) è un client di chat
+WhoreIRC (Wee Enhanced Environment for Chat) è un client di chat
 libero, veloce e leggero, realizzato per diversi sistemi operativi.
 
 [[features]]
@@ -50,16 +50,16 @@ Le principali caratteristiche:
 * multi-piattaforma (GNU/Linux, *BSD, macOS, Windows ed altre)
 * 100% GPL, software libero
 
-La home page di WeeChat si trova qui: https://whoreirc.org/
+La home page di WhoreIRC si trova qui: https://whoreirc.org/
 
 [[prerequisites]]
 === Requisiti
 
-Per poter installare WeeChat, è necessario:
+Per poter installare WhoreIRC, è necessario:
 
 * un sistema GNU/Linux in esecuzione (con gli strumenti di
   compilazione per i sorgenti), oppure OS compatibile
-* privilegi di _root_ (per installare WeeChat in una directory di
+* privilegi di _root_ (per installare WhoreIRC in una directory di
   sistema)
 // TRANSLATION MISSING
 * some libraries (see <<dependencies,dependencies>>).
@@ -74,7 +74,7 @@ I pacchetti binari sono disponibili per molte distribuzioni, incluse:
 
 * Arch Linux: `pacman -S whoreirc`
 // TRANSLATION MISSING
-* Cygwin (Windows): select WeeChat packages in setup.exe
+* Cygwin (Windows): select WhoreIRC packages in setup.exe
 * Debian/Ubuntu (o qualunque distribuzione compatibile):
   `apt-get install whoreirc-curses whoreirc-plugins`
 * Fedora Core: `dnf install whoreirc`
@@ -93,7 +93,7 @@ installazione.
 [[source_package]]
 === Sorgenti
 
-WeeChat può essere compilato con CMake oppure autotools
+WhoreIRC può essere compilato con CMake oppure autotools
 (tuttavia si raccomanda CMake).
 
 // TRANSLATION MISSING
@@ -105,7 +105,7 @@ On macOS, you can use https://brew.sh/[Homebrew]:
 ==== Dipendenze
 
 La seguente tabella mostra l'elenco di pacchetti richiesti o opzionali per
-compilare WeeChat.
+compilare WhoreIRC.
 
 [width="100%",cols="6,^3,^3,.^13",options="header"]
 |===
@@ -155,7 +155,7 @@ compilare WeeChat.
 potrebbero essere differenti in versioni e distribuzioni differenti. +
 // TRANSLATION MISSING
 ^(2)^ It is recommended to compile with libncurses**w**5-dev (the *w* is
-important). WeeChat can compile with libncurses5-dev, but it is *NOT* recommended:
+important). WhoreIRC can compile with libncurses5-dev, but it is *NOT* recommended:
 you may experience display bugs with wide chars. +
 // TRANSLATION MISSING
 ^(3)^ GnuTLS ≥ 3.0.21 is required for IRC SASL authentication with mechanism
@@ -209,13 +209,13 @@ List of commonly used options:
 
 | CMAKE_BUILD_TYPE | `Debug`, `Release`, `RelWithDebInfo`, `MinSizeRel` | |
   The type of build: `Debug` (or `RelWithDebInfo`) is recommended if you are
-  running development version of WeeChat.
+  running development version of WhoreIRC.
 
 | CMAKE_INSTALL_PREFIX | directory | /usr/local |
-  The directory where WeeChat will be installed.
+  The directory where WhoreIRC will be installed.
 
-| WEECHAT_HOME | directory | ~/.whoreirc |
-  The default home directory when running WeeChat.
+| WHOREIRC_HOME | directory | ~/.whoreirc |
+  The default home directory when running WhoreIRC.
 
 | CA_FILE | file | /etc/ssl/certs/ca-certificates.crt |
   File containing the certificate authorities.
@@ -342,7 +342,7 @@ $ ccmake ..
 
 // TRANSLATION MISSING
 [WARNING]
-Only CMake is officially supported to build WeeChat. You should use autotools
+Only CMake is officially supported to build WhoreIRC. You should use autotools
 only if you are not able to use CMake. +
 Build with autotools requires more dependencies and is slower than with CMake.
 
@@ -386,7 +386,7 @@ Following packages are *required* to compile tests:
 * libcpputest-dev
 * C++ compiler
 
-Tests must be enabled when compiling WeeChat (with CMake):
+Tests must be enabled when compiling WhoreIRC (with CMake):
 
 ----
 $ cmake .. -DENABLE_TESTS=ON
@@ -417,7 +417,7 @@ Poi seguire le istruzioni per i sorgenti (consultare
 === Segnalare gli errori
 
 Nel caso in cui si verifichino errori, o si desideri segnalare qualsiasi errore
-futuro di WeeChat, è necessario:
+futuro di WhoreIRC, è necessario:
 
 * compilarlo con informazioni di debug (o installare il pacchetto binario con
   le informazioni di debug)
@@ -449,7 +449,7 @@ To enable _core_ files, you can use option
 ----
 
 // TRANSLATION MISSING
-For WeeChat ≤ 0.3.8 or if you want to enable core files even before WeeChat
+For WhoreIRC ≤ 0.3.8 or if you want to enable core files even before WhoreIRC
 starts, you can use `ulimit` command.
 
 Ad esempio su Linux con la shell _bash_, aggiungere questa riga al proprio
@@ -469,10 +469,10 @@ ulimit -c 200000
 ==== Ottenere un backtrace con gdb
 
 // TRANSLATION MISSING
-When WeeChat crashes, your system will create a file _core_ or _core.12345_
+When WhoreIRC crashes, your system will create a file _core_ or _core.12345_
 (_12345_ is process id) if the <<core_files,option is enabled>>.
-Questo file viene creato nella directory in cui è in esecuzione WeeChat (e
-*non* la directory dove WeeChat è installato!).
+Questo file viene creato nella directory in cui è in esecuzione WhoreIRC (e
+*non* la directory dove WhoreIRC è installato!).
 
 Ad esempio, se _whoreirc_ è installato in _/usr/bin/_ ed il file _core_
 si trova in _/home/xxx/_, allora eseguire gdb con questo comando:
@@ -519,10 +519,10 @@ l'errore.
 Grazie per il vostro aiuto!
 
 [[debug_running_whoreirc]]
-==== Debug di WeeChat durante l'esecuzione
+==== Debug di WhoreIRC durante l'esecuzione
 
-Per eseguire il debug di un'istanza di WeeChat in esecuzione (ad esempio se
-WeeChat sembra sia bloccato), è possibile usare gdb con l'id del processo
+Per eseguire il debug di un'istanza di WhoreIRC in esecuzione (ad esempio se
+WhoreIRC sembra sia bloccato), è possibile usare gdb con l'id del processo
 (sostituire _12345_ con il PID del processo whoreirc):
 
 ----
@@ -539,16 +539,16 @@ Poi, come per un crash, usare il comando `bt full`:
 == Utilizzo
 
 [[running_whoreirc]]
-=== Esecuzione di WeeChat
+=== Esecuzione di WhoreIRC
 
-Per avviare WeeChat, digitare questo comando:
+Per avviare WhoreIRC, digitare questo comando:
 
 ----
 $ whoreirc
 ----
 
 // TRANSLATION MISSING
-When you run WeeChat for the first time, the default configuration files are
+When you run WhoreIRC for the first time, the default configuration files are
 created in _~/.whoreirc_ with default options and values
 (see <<files_and_directories,Files and directories>>).
 
@@ -569,32 +569,32 @@ include::cmdline_options_debug.it.adoc[]
 [[environment_variables]]
 === Environment variables
 
-Some environment variables are used by WeeChat if they are defined:
+Some environment variables are used by WhoreIRC if they are defined:
 
 [width="100%",cols="1m,6",options="header"]
 |===
 | Name                 | Description
-| WEECHAT_HOME         | The WeeChat home (with configuration files, logs, scripts, ...).
-| WEECHAT_PASSPHRASE   | The passphrase used to decrypt secured data.
-| WEECHAT_EXTRA_LIBDIR | An extra directory to load plugins (from the "plugins" directory in this path).
+| WHOREIRC_HOME         | The WhoreIRC home (with configuration files, logs, scripts, ...).
+| WHOREIRC_PASSPHRASE   | The passphrase used to decrypt secured data.
+| WHOREIRC_EXTRA_LIBDIR | An extra directory to load plugins (from the "plugins" directory in this path).
 |===
 
 // TRANSLATION MISSING
 [[files_and_directories]]
 === Files and directories
 
-WeeChat writes configuration files and other data in directory `~/.whoreirc`
+WhoreIRC writes configuration files and other data in directory `~/.whoreirc`
 by default.
 
 [[whoreirc_directories]]
-==== WeeChat directories
+==== WhoreIRC directories
 
-The WeeChat directories are:
+The WhoreIRC directories are:
 
 [width="100%",cols="1m,3",options="header"]
 |===
 | Path/file         | Description
-| ~/.whoreirc/       | WeeChat home directory (can be changed, see <<running_whoreirc,Running WeeChat>>).
+| ~/.whoreirc/       | WhoreIRC home directory (can be changed, see <<running_whoreirc,Running WhoreIRC>>).
 |    logs/          | Log files (one file per buffer).
 |    python/        | Python scripts.
 |       autoload/   | Python scripts auto-loaded on startup ^(1)^.
@@ -618,14 +618,14 @@ The WeeChat directories are:
 ^(1)^ This directory often contains only symbolic links to scripts in parent directory.
 
 [[whoreirc_files]]
-==== WeeChat files
+==== WhoreIRC files
 
-The files in the WeeChat home directory are:
+The files in the WhoreIRC home directory are:
 
 [width="100%",cols="1m,3,6",options="header"]
 |===
 | File            | Description                                | Sensitive data
-| whoreirc.conf    | Main WeeChat configuration file            | Possible (example: list of channels in a saved buffers layout).
+| whoreirc.conf    | Main WhoreIRC configuration file            | Possible (example: list of channels in a saved buffers layout).
 | sec.conf        | Configuration file with secured data       | *Yes, highly sensitive*: this file must never be shared with anyone.
 | plugins.conf    | Plugins configuration file                 | Possible, depends on plugins/scripts.
 | alias.conf      | Configuration file for _alias_ plugin      | Possible, depends on aliases.
@@ -649,11 +649,11 @@ The files in the WeeChat home directory are:
 | tcl.conf        | Configuration file for _tcl_ plugin        | No.
 | trigger.conf    | Configuration file for _trigger_ plugin    | Possible, depends on triggers.
 | xfer.conf       | Configuration file for _xfer_ plugin       | No.
-| whoreirc.log     | WeeChat log file                           | No.
+| whoreirc.log     | WhoreIRC log file                           | No.
 |===
 
 [IMPORTANT]
-It is *not recommended* to edit configuration files by hand because WeeChat
+It is *not recommended* to edit configuration files by hand because WhoreIRC
 may write them at any time (for example on <<command_whoreirc_quit,/quit>>)
 and after any change you must run the command <<command_whoreirc_reload,/reload>>
 (with the risk of losing other changes that were not yet saved with
@@ -664,7 +664,7 @@ and applies immediately the changes.
 [[screen_layout]]
 === Layout dello schermo
 
-Esempio di terminale con WeeChat:
+Esempio di terminale con WhoreIRC:
 
 // TRANSLATION MISSING
 ....
@@ -794,7 +794,7 @@ Other items available (not used in bars by default):
 [[command_line]]
 === Riga di comando
 
-La riga di comando di WeeChat (nella parte inferiore della finestra) consente di
+La riga di comando di WhoreIRC (nella parte inferiore della finestra) consente di
 inserire i comandi o di inviare del testo sul buffer.
 
 [[command_line_syntax]]
@@ -857,7 +857,7 @@ include::autogen/user/irc_colors.adoc[]
 // TRANSLATION MISSING
 [NOTE]
 To show all available colors in your terminal, you can do `/color` then
-kbd:[Alt+c] in WeeChat or run this command in terminal: `whoreirc --colors`.
+kbd:[Alt+c] in WhoreIRC or run this command in terminal: `whoreirc --colors`.
 
 Esempio: visualizza "ciao a tutti!" con "ciao" scritto in blu chiaro grassetto
 e "a tutti" in rosso chiaro sottolineato:
@@ -873,11 +873,11 @@ Nel plugin irc, si possono riorganizzare i colori usando l'opzione
 [[colors]]
 === Colori
 
-WeeChat può usare fino a 256 coppie di colore per visualizzare il testo nelle barre e
-nell'area di chat(il terminale deve supportare 256 colori per essere utilizzati in WeeChat).
+WhoreIRC può usare fino a 256 coppie di colore per visualizzare il testo nelle barre e
+nell'area di chat(il terminale deve supportare 256 colori per essere utilizzati in WhoreIRC).
 
 In base al valore della variabile di ambiente _TERM_, potrebbero verificarsi i
-seguenti limiti per i colori in WeeChat:
+seguenti limiti per i colori in WhoreIRC:
 
 [width="50%",cols="8,>2,>2",options="header"]
 |===
@@ -891,7 +891,7 @@ seguenti limiti per i colori in WeeChat:
 |===
 
 È possibile eseguire `whoreirc --colors` o utilizzare il comando `/color` in
-WeeChat per visualizzare i limiti del proprio ambiente.
+WhoreIRC per visualizzare i limiti del proprio ambiente.
 
 Alcuni valori raccomandati per _TERM_ se si desiderano 256 colori:
 
@@ -913,7 +913,7 @@ term screen-256color
 ----
 
 // TRANSLATION MISSING
-If your _TERM_ variable has wrong value and that WeeChat is already running,
+If your _TERM_ variable has wrong value and that WhoreIRC is already running,
 you can change it with these two commands:
 
 ----
@@ -924,7 +924,7 @@ you can change it with these two commands:
 [[colors_basic]]
 ==== Colori base
 
-I colori base in WeeChat sono:
+I colori base in WhoreIRC sono:
 
 [width="50%",cols="1m,4",options="header"]
 |===
@@ -951,7 +951,7 @@ I colori base in WeeChat sono:
 [[colors_extended]]
 ==== Colori estesi
 
-WeeChat alloca dinamicamente le coppie colore quando vengono usati i colori
+WhoreIRC alloca dinamicamente le coppie colore quando vengono usati i colori
 sullo schermo (per mostrare buffer e barre).
 
 In aggiunta ai colori di base, si può usare un numero per il colore compreso
@@ -1013,7 +1013,7 @@ e in grassetto:
 
 Per usare un attributo con il colore predefinito del terminale (-1), bisogna
 usare un numero maggiore dell'ultimo colore del terminale, ad esempio il
-numero massimo in WeeChat: 99999.
+numero massimo in WhoreIRC: 99999.
 
 Esempio di grassetto con il colore di primo piano del terminale:
 
@@ -1029,7 +1029,7 @@ altri dati).
 
 Esempi di buffer:
 
-* buffer core (creato by WeeChat all'avvio, non può essere chiuso)
+* buffer core (creato by WhoreIRC all'avvio, non può essere chiuso)
 * server irc (mostra i messaggi dal server)
 * canale irc
 * query irc
@@ -1149,7 +1149,7 @@ Lines displayed in formatted buffers have following fields:
 |===
 | Field               | Displayed          | Description
 | date/time (message) | Yes                | Date/time of message (may be past).
-| date/time (print)   | No                 | Date/time when WeeChat prints the message.
+| date/time (print)   | No                 | Date/time when WhoreIRC prints the message.
 | prefix              | Yes                | Prefix of message, commonly a nick.
 | message             | Yes                | The message itself.
 | displayed           | No                 | Boolean: true if line is displayed, false if line is filtered with command <<command_whoreirc_filter,/filter>>.
@@ -1163,7 +1163,7 @@ The display of lines can be customized with many look options
 [[lines_tags]]
 ==== Lines tags
 
-WeeChat uses tags in lines for different purposes:
+WhoreIRC uses tags in lines for different purposes:
 
 * highlight
 * notify level
@@ -1446,7 +1446,7 @@ The bare display has following features:
 
 * it displays only the content of current buffer: no window split neither bars
   (no title, nicklist, status, input, ...)
-* the WeeChat mouse support is disabled (if it was enabled): you can use your
+* the WhoreIRC mouse support is disabled (if it was enabled): you can use your
   mouse like you do in the terminal to click on URLs and select text
 * ncurses is not used, therefore URLs are not cut at the end of lines.
 
@@ -1460,7 +1460,7 @@ The time format can be customized with the option
 The bare display can be enabled for a specific delay using the command
 <<command_whoreirc_window,/window>>.
 
-If WeeChat looks like that:
+If WhoreIRC looks like that:
 
 ....
 ┌──────────────────────────────────────────────────────────────────────────────────────┐
@@ -1608,7 +1608,7 @@ with `/script install buffer_autoset.py` and get help with `/help buffer_autoset
 [[highlights_words]]
 ==== Add words to highlight
 
-By default, WeeChat highlights messages from other users containing your nick,
+By default, WhoreIRC highlights messages from other users containing your nick,
 therefore the highlight depends on the buffer (the nick can be different from
 one buffer to another).
 
@@ -1932,7 +1932,7 @@ evento del mouse.
 [[mouse]]
 === Supporto del mouse
 
-WeeChat supporta i click e le azioni del mouse. Funziona con il terminale
+WhoreIRC supporta i click e le azioni del mouse. Funziona con il terminale
 locale, e da remoto via connessione ssh con o senza screen/tmux.
 
 [[mouse_enable]]
@@ -1959,7 +1959,7 @@ tasto. Ad esempio il tasto kbd:[Alt+%] per disabilitare il mouse per 10 secondi:
 
 // TRANSLATION MISSING
 [IMPORTANT]
-When mouse is enabled in WeeChat, all mouse events are caught by WeeChat, so
+When mouse is enabled in WhoreIRC, all mouse events are caught by WhoreIRC, so
 actions such as copy/paste or clicks on URLs are not sent to the terminal. +
 Using kbd:[Shift] key causes the events to be sent directly to the terminal,
 as if the mouse was disabled (on some terminals like iTerm, you have to use
@@ -1967,12 +1967,12 @@ kbd:[Alt] instead of kbd:[Shift]).
 
 [NOTE]
 Per qualunque problema con il mouse, consultare
-link:whoreirc_faq.it.html#mouse[FAQ di WeeChat / Mouse].
+link:whoreirc_faq.it.html#mouse[FAQ di WhoreIRC / Mouse].
 
 [[mouse_bind_events]]
 ==== Associare gli eventi del mouse a comandi
 
-Molti eventi del mouse predefiniti sono già definiti da WeeChat (consultare
+Molti eventi del mouse predefiniti sono già definiti da WhoreIRC (consultare
 <<key_bindings_mouse_context,tasti per il contesto "mouse">>).
 
 È possibile cambiare o aggiungere combinazioni con il comando `/key` usando il
@@ -2059,11 +2059,11 @@ nella riga di comando.
 [[secured_data_storage]]
 ==== Storage
 
-WeeChat can encrypt passwords or private data using secured data, stored in file
+WhoreIRC can encrypt passwords or private data using secured data, stored in file
 _sec.conf_.
 
 This configuration file is read before any other file, and the values stored
-inside can be used in various WeeChat or plugins/scripts options.
+inside can be used in various WhoreIRC or plugins/scripts options.
 
 You can set a passphrase to encrypt data in _sec.conf_. This is not mandatory
 but highly recommended, otherwise data is stored as plain text in file.
@@ -2072,7 +2072,7 @@ but highly recommended, otherwise data is stored as plain text in file.
 /secure passphrase this is my passphrase
 ----
 
-When a passphrase is set, WeeChat will ask you to enter it on startup (but not
+When a passphrase is set, WhoreIRC will ask you to enter it on startup (but not
 on `/upgrade`).
 
 You can change this behavior and use a file with the passphrase (see option
@@ -2141,7 +2141,7 @@ To use the _freenode_ password, for example with
 === Commands and options
 
 [[whoreirc_commands]]
-==== Comandi di WeeChat
+==== Comandi di WhoreIRC
 
 include::autogen/user/whoreirc_commands.adoc[]
 
@@ -2166,7 +2166,7 @@ Options:
 include::autogen/user/sec_options.adoc[]
 
 [[whoreirc_options]]
-==== Opzioni di WeeChat
+==== Opzioni di WhoreIRC
 
 // TRANSLATION MISSING
 Sections in file _whoreirc.conf_:
@@ -2207,10 +2207,10 @@ include::autogen/user/whoreirc_options.adoc[]
 == Plugin
 
 Un plugin è una libreria dinamica, scritta in C e compilata, che viene caricata
-da WeeChat.
+da WhoreIRC.
 In GNU/Linux, il file ha estensione ".so", ".dll" in Windows.
 
-I plugin trovati vengono caricati automaticamente all'avvio di WeeChat, ed
+I plugin trovati vengono caricati automaticamente all'avvio di WhoreIRC, ed
 è possibile caricare o scaricare i plugin durante l'esecuzione del programma.
 
 È importante evidenziare la differenza tra un _plugin_ ed uno _script_: un
@@ -2241,10 +2241,10 @@ I plugin predefiniti sono:
 | buflist    | Bar item with list of buffers.
 | charset    | Set di caratteri per la codifica/decodifica nei buffer.
 // TRANSLATION MISSING
-| exec       | Execution of external commands in WeeChat.
-| fifo       | pipe FIFO utilizzata per inviare comandi da remoto su WeeChat.
+| exec       | Execution of external commands in WhoreIRC.
+| fifo       | pipe FIFO utilizzata per inviare comandi da remoto su WhoreIRC.
 // TRANSLATION MISSING
-| fset       | Fast set of WeeChat and plugins options.
+| fset       | Fast set of WhoreIRC and plugins options.
 | irc        | protocollo chat per IRC.
 | logger     | Registra i buffer su file.
 | relay      | Relay dei dati via rete.
@@ -2259,23 +2259,23 @@ I plugin predefiniti sono:
 | php        | API per lo scripting in PHP.
 | spell      | Controllo ortografico per la riga di comando.
 // TRANSLATION MISSING
-| trigger    | Text replacement and command execution on events triggered by WeeChat/plugins.
+| trigger    | Text replacement and command execution on events triggered by WhoreIRC/plugins.
 | xfer       | Trasferimento file e chat diretta.
 |===
 
 Per saperne di più riguardo lo sviluppo di plugin o script (tramite le API), per
-favore consultare link:whoreirc_plugin_api.it.html[Riferimento API dei Plugin per WeeChat]
-oppure link:whoreirc_scripting.it.html[Guida allo Scripting di WeeChat].
+favore consultare link:whoreirc_plugin_api.it.html[Riferimento API dei Plugin per WhoreIRC]
+oppure link:whoreirc_scripting.it.html[Guida allo Scripting di WhoreIRC].
 
 [[alias_plugin]]
 === Alias
 
-Il plugin Alias consente di creare alias per i comandi (da WeeChat o altri
+Il plugin Alias consente di creare alias per i comandi (da WhoreIRC o altri
 plugin).
 
 // TRANSLATION MISSING
 Some aliases are created by default, with name in upper case (to make them
-different from standard commands); commands are not case sensitive in WeeChat,
+different from standard commands); commands are not case sensitive in WhoreIRC,
 so for example `/close` runs the alias `/CLOSE`.
 
 // TRANSLATION MISSING
@@ -2345,10 +2345,10 @@ i set caratteri.
 Esiste un set caratteri predefinito per la codifica/decodifica, e set caratteri
 specifici per i buffer (o gruppi di buffer).
 
-Questo plugin è opzionale, ma raccomandato: se non caricato, WeeChat
+Questo plugin è opzionale, ma raccomandato: se non caricato, WhoreIRC
 può leggere/scrivere soltanto dati UTF-8.
 
-Il plugin Charset dovrebbe essere caricato automaticamente da WeeChat.
+Il plugin Charset dovrebbe essere caricato automaticamente da WhoreIRC.
 Per essere sicuri che sia caricato, provare con:
 
 ----
@@ -2361,7 +2361,7 @@ Se non trovato, allora si deve caricare il plugin con il comando:
 /plugin load charset
 ----
 
-Se il plugin non viene trovato, allora è necessario ricompilare WeeChat
+Se il plugin non viene trovato, allora è necessario ricompilare WhoreIRC
 con il supporto ai plugin e a Charset.
 
 Quando viene avviato il plugin Charset, mostra i set caratteri del
@@ -2432,7 +2432,7 @@ Per visualizzare tutti i set caratteri utilizzati, utilizzare il comando seguent
 ==== Risoluzione problemi
 
 Per qualunque problema con i set caratteri, per favore consultare
-le link:whoreirc_faq.it.html#charset[Domande Frequenti di WeeChat / Charset].
+le link:whoreirc_faq.it.html#charset[Domande Frequenti di WhoreIRC / Charset].
 
 [[charset_commands]]
 ==== Comandi
@@ -2465,7 +2465,7 @@ include::autogen/user/charset_options.adoc[]
 [[exec_plugin]]
 === Exec
 
-The `/exec` command lets you execute external commands inside WeeChat and
+The `/exec` command lets you execute external commands inside WhoreIRC and
 display the output locally, or send it to a buffer.
 
 [[exec_commands]]
@@ -2493,7 +2493,7 @@ include::autogen/user/exec_options.adoc[]
 [[fifo_plugin]]
 === Fifo
 
-È possibile controllare da remoto WeeChat, inviando comandi o del testo ad una
+È possibile controllare da remoto WhoreIRC, inviando comandi o del testo ad una
 pipe FIFO (se l'opzione "fifo.file.enabled" è abilitata, e lo è per default).
 
 // TRANSLATION MISSING
@@ -2563,7 +2563,7 @@ include::autogen/user/fifo_options.adoc[]
 === Fset
 
 // TRANSLATION MISSING
-Fast Set plugin displays a list of options in a buffer, and helps to set WeeChat
+Fast Set plugin displays a list of options in a buffer, and helps to set WhoreIRC
 and plugin options.
 
 [[fset_commands]]
@@ -2618,7 +2618,7 @@ $ whoreirc irc://caio@chat.freenode.net/#whoreirc,#tizio
 [[irc_ssl_certificates]]
 ==== Certificati SSL
 
-Al momento della connessione al server IRC con SSL, WeeChat verifica in
+Al momento della connessione al server IRC con SSL, WhoreIRC verifica in
 maniera predefinita che la connessione sia completamente fidata.
 
 Esistono alcune opzioni per controllare la connessione SSL:
@@ -2658,7 +2658,7 @@ $ wget -O ~/.whoreirc/ssl/CAs.pem https://www.spi-inc.org/ca/spi-cacert.crt
 E possibile concatenare più certificati nel file CAs.pem.
 
 // TRANSLATION MISSING
-* In WeeChat, with "oftc" server already added:
+* In WhoreIRC, with "oftc" server already added:
 
 ----
 /connect oftc
@@ -2676,7 +2676,7 @@ $ openssl req -nodes -newkey rsa:2048 -keyout nick.pem -x509 -days 365 -out nick
 ----
 
 // TRANSLATION MISSING
-* In WeeChat, with "oftc" server already added:
+* In WhoreIRC, with "oftc" server already added:
 
 ----
 /set irc.server.oftc.ssl_cert "%h/ssl/nick.pem"
@@ -2690,7 +2690,7 @@ Per maggiori informazioni consultare https://www.oftc.net/NickServ/CertFP
 ==== Autenticazione SASL
 
 // TRANSLATION MISSING
-WeeChat supports SASL authentication, using different mechanisms:
+WhoreIRC supports SASL authentication, using different mechanisms:
 
 // TRANSLATION MISSING
 * _plain_: password in chiaro (default)
@@ -2771,7 +2771,7 @@ Il primo passo consiste nell'installare TOR. Per Debian (e derivate):
 $ sudo apt-get install tor
 ----
 
-In WeeChat è necessario creare un proxy socks5 per il servizio TOR (nome
+In WhoreIRC è necessario creare un proxy socks5 per il servizio TOR (nome
 host/IP e porta dipendono dalla propria configurazione di TOR):
 
 ----
@@ -2860,7 +2860,7 @@ Ad esempio, per personalizzare la richiesta CTCP "VERSIONE", utilizzare il
 seguente comando:
 
 ----
-/set irc.ctcp.version "Uso WeeChat $version, fico!"
+/set irc.ctcp.version "Uso WhoreIRC $version, fico!"
 ----
 
 Se si desidera bloccare CTCP "VERSIONE" (non rispondere ad una query),
@@ -2881,7 +2881,7 @@ può rispondere "BLABLA":
 interno prima del nome CTCP:
 
 ----
-/set irc.ctcp.freenode.version "WeeChat $version (per freenode)"
+/set irc.ctcp.freenode.version "WhoreIRC $version (per freenode)"
 ----
 
 Se si desidera ripristinare la risposta CTCP standard, allora disabilitare
@@ -2892,20 +2892,20 @@ l'opzione:
 ----
 
 I codici seguenti possono essere utilizzati nelle stringhe e vengono estese
-automaticamente da WeeChat quando si risponde alle CTCP
+automaticamente da WhoreIRC quando si risponde alle CTCP
 
 // TRANSLATION MISSING ($versiongit + $git + $username (name))
 [width="100%",cols="2l,4,8",options="header"]
 |===
 | Codice       | Descrizione                             | Valore/esempio
 | $clientinfo  | Elenco di CTCP supportate               | `ACTION DCC CLIENTINFO FINGER PING SOURCE TIME USERINFO VERSION`
-| $version     | Versione di WeeChat                     | `0.4.0-dev`
-| $versiongit  | Versione di WeeChat + git version ^(1)^ | `0.4.0-dev (git: v0.3.9-104-g7eb5cc4)`
+| $version     | Versione di WhoreIRC                     | `0.4.0-dev`
+| $versiongit  | Versione di WhoreIRC + git version ^(1)^ | `0.4.0-dev (git: v0.3.9-104-g7eb5cc4)`
 | $git         | Git version ^(1)^                       | `v0.3.9-104-g7eb5cc4`
-| $compilation | Data di compilazione di WeeChat         | `Dec 16 2012`
+| $compilation | Data di compilazione di WhoreIRC         | `Dec 16 2012`
 | $osinfo      | Informazioni sull'OS                    | `Linux 2.6.32-5-amd64 / x86_64`
-| $site        | Sito di WeeChat                         | `https://whoreirc.org/`
-| $download    | Sito di WeeChat, pagina di download     | `https://whoreirc.org/download`
+| $site        | Sito di WhoreIRC                         | `https://whoreirc.org/`
+| $download    | Sito di WhoreIRC, pagina di download     | `https://whoreirc.org/download`
 | $time        | Data/ora correnti                       | `Sun, 16 Dec 2012 10:40:48 +0100`
 | $username    | Nome utente sul server IRC              | `name`
 | $realname    | Nome reale sul server IRC               | `John Doe`
@@ -2914,7 +2914,7 @@ automaticamente da WeeChat quando si risponde alle CTCP
 // TRANSLATION MISSING
 [NOTE]
 ^(1)^ The git version is the output of command `git describe`. It is known only
-if WeeChat has been compiled inside the git repository and if git was installed.
+if WhoreIRC has been compiled inside the git repository and if git was installed.
 
 Se le opzioni CTCP non sono definite (comportamento predefinito),
 le risposte CTCP sono:
@@ -2924,11 +2924,11 @@ le risposte CTCP sono:
 |===
 | CTCP       | Formato risposta                     | Esempio
 | CLIENTINFO | `$clientinfo`                        | `ACTION DCC CLIENTINFO FINGER PING SOURCE TIME USERINFO VERSION`
-| FINGER     | `WeeChat $versiongit`                | `WeeChat 0.4.0-dev (git: v0.3.9-104-g7eb5cc4)`
+| FINGER     | `WhoreIRC $versiongit`                | `WhoreIRC 0.4.0-dev (git: v0.3.9-104-g7eb5cc4)`
 | SOURCE     | `$download`                          | `https://whoreirc.org/download`
 | TIME       | `$time`                              | `Sun, 16 Dec 2012 10:40:48 +0100`
 | USERINFO   | `$username ($realname)`              | `name (John Doe)`
-| VERSION    | `WeeChat $versiongit ($compilation)` | `WeeChat 0.4.0-dev (git: v0.3.9-104-g7eb5cc4) (Dec 16 2012)`
+| VERSION    | `WhoreIRC $versiongit ($compilation)` | `WhoreIRC 0.4.0-dev (git: v0.3.9-104-g7eb5cc4) (Dec 16 2012)`
 |===
 
 [[irc_target_buffer]]
@@ -2952,9 +2952,9 @@ server::
     buffer del server
 
 whoreirc::
-    Il buffer "core" di WeeChat
+    Il buffer "core" di WhoreIRC
 
-Quando l'opzione non è impostata (default), WeeChat sceglie il buffer
+Quando l'opzione non è impostata (default), WhoreIRC sceglie il buffer
 appropriato, di solito quello del server o del canale.
 
 Ecco una lista incompleta dei messaggi IRC o degli alias che è possibile
@@ -3066,7 +3066,7 @@ Alcuni esempi:
 /set irc.msgbuffer.freenode.invite current
 ----
 
-* visualizza messaggio "303" (ison) sul buffer "core" di WeeChat:
+* visualizza messaggio "303" (ison) sul buffer "core" di WhoreIRC:
 
 ----
 /set irc.msgbuffer.303 whoreirc
@@ -3127,7 +3127,7 @@ Il plugin IRC usa i seguenti livelli:
 * livello 3: ogni messaggio del server (esclui entrata/uscita/disconnessione)
 * livello 4: messaggio del server entrata/uscita/disconnessione
 
-Se viene impostato il livello 3 per un canale IRC, WeeChat registrerà
+Se viene impostato il livello 3 per un canale IRC, WhoreIRC registrerà
 tutti i messaggi, ma non quelli di entrata/uscita/disconnessione.
 
 Alcuni esempi:
@@ -3167,7 +3167,7 @@ variabili locali per il buffer corrente:
 /buffer localvar
 ----
 
-Ad esempio, sul buffer "irc.freenode.#whoreirc", WeeChat cercherà un mask con il
+Ad esempio, sul buffer "irc.freenode.#whoreirc", WhoreIRC cercherà un mask con il
 nome dell'opzione, in quest'ordine:
 
 ----
@@ -3273,10 +3273,10 @@ protocolli differenti:
 * _irc_: proxy IRC: usato per condividere le connessioni ai server IRC con uno
   o più client IRC
 * _whoreirc_: protocollo usato dalle interfacce remote per mostrare ed interagire
-  con WeeChat, ad esempio:
+  con WhoreIRC, ad esempio:
 ** Glowing Bear (HTML5): https://www.glowing-bear.org/
-** QWeeChat (Qt): https://whoreirc.org/download
-** WeeChat-Android (Android): https://github.com/ubergeek42/whoreirc-android
+** QWhoreIRC (Qt): https://whoreirc.org/download
+** WhoreIRC-Android (Android): https://github.com/ubergeek42/whoreirc-android
 ** whoreirc.el (Emacs): https://github.com/the-kenny/whoreirc.el
 ** WeeCloud (JavaScript): https://github.com/eirikb/weecloud
 
@@ -3311,7 +3311,7 @@ One-time passwords can be generated with applications, for example:
   https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2[Android],
   https://itunes.apple.com/fr/app/google-authenticator/id388497605[iOS]
 
-The TOTP secret must be set in WeeChat and the application used to generate
+The TOTP secret must be set in WhoreIRC and the application used to generate
 one-time passwords.
 
 It must be a string encoded in base32, with only letters and digits from 2 to 7,
@@ -3338,7 +3338,7 @@ $ cd ~/.whoreirc/ssl
 $ openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem
 ----
 
-Se WeeChat è già in esecuzione, è possibile ricaricare il certificato e la
+Se WhoreIRC è già in esecuzione, è possibile ricaricare il certificato e la
 chiave privata con il comando:
 
 ----
@@ -3350,7 +3350,7 @@ chiave privata con il comando:
 ==== Proxy IRC
 
 The Relay plugin can act as an IRC proxy: it will simulate an IRC server, and
-you can connect to WeeChat with any other IRC client (including WeeChat itself).
+you can connect to WhoreIRC with any other IRC client (including WhoreIRC itself).
 
 You can define one port by IRC server, or one generic port for all servers.
 
@@ -3376,7 +3376,7 @@ Example: IRC proxy without SSL only for server "freenode":
 Now you can connect on port 8000 with any IRC client using server password
 "miapass" (or "freenode:miapass" if no server was specified in the relay).
 
-For example if you use WeeChat as IRC client of the relay, with a server called
+For example if you use WhoreIRC as IRC client of the relay, with a server called
 "relay" and the relay password "secret", you can setup the password with this
 command:
 
@@ -3385,17 +3385,17 @@ command:
 ----
 
 [[relay_whoreirc_protocol]]
-==== Protocollo WeeChat
+==== Protocollo WhoreIRC
 
 Il plugin Relay può inviare dati alle interfacce remote usando il protocollo
-WeeChat.
+WhoreIRC.
 
 // TRANSLATION MISSING
 You can connect with a remote interface, see the list in <<relay_plugin>>.
 
 [IMPORTANT]
 // TRANSLATION MISSING
-WeeChat itself can NOT connect to another WeeChat with this protocol.
+WhoreIRC itself can NOT connect to another WhoreIRC with this protocol.
 
 Ad esempio:
 
@@ -3447,7 +3447,7 @@ for relay clients, when other ports cannot be opened. Using OpenSSH:
 $ ssh -L 9000:.whoreirc/relay_socket user@hostname
 ----
 
-This redirects local relay clients connecting on port 9000 to the WeeChat
+This redirects local relay clients connecting on port 9000 to the WhoreIRC
 instance running on "hostname".
 
 [[relay_commands]]
@@ -3482,18 +3482,18 @@ include::autogen/user/relay_options.adoc[]
 [[scripts_plugins]]
 === Scripts
 
-WeeChat fornisce 8 plugin per lo scripting: Python, Perl, Ruby, Lua, Tcl, Guile
+WhoreIRC fornisce 8 plugin per lo scripting: Python, Perl, Ruby, Lua, Tcl, Guile
 (scheme), JavaScript, PHP.
 Questi plugin possono caricare, eseguire e scaricare gli script per questi
 linguaggi.
 
 // TRANSLATION MISSING
 Another plugin called "script" is a script manager and is used to load/unload
-scripts of any language, and install/remove scripts of WeeChat scripts
+scripts of any language, and install/remove scripts of WhoreIRC scripts
 repository, which are visible at this URL: https://whoreirc.org/scripts
 
-Per maggiori informazioni su come scrivere gli script, o le API WeeChat
-per gli script, consultare la link:whoreirc_scripting.it.html[Guida allo Scripting di WeeChat].
+Per maggiori informazioni su come scrivere gli script, o le API WhoreIRC
+per gli script, consultare la link:whoreirc_scripting.it.html[Guida allo Scripting di WhoreIRC].
 
 [[script_commands]]
 ==== Comandi Script
@@ -3729,7 +3729,7 @@ Spell checking is disabled by default and can be toggled with key kbd:[Alt+s].
 Before using spell checking, dictionaries must be defined, either globally or
 specific to buffers.
 
-Multiple dictionaries can be used at same time: WeeChat will check words in all
+Multiple dictionaries can be used at same time: WhoreIRC will check words in all
 dictionaries.
 
 For example to use English and French:
@@ -3832,19 +3832,19 @@ include::autogen/user/spell_options.adoc[]
 [[trigger_plugin]]
 === Trigger
 
-Trigger is the Swiss Army knife for WeeChat: it can hook many things (signal,
+Trigger is the Swiss Army knife for WhoreIRC: it can hook many things (signal,
 modifier, print, ...), change the content of data, and execute one or more
 commands. A condition can be used to prevent the trigger to run in some
 circumstances.
 
 Using triggers require you to know how the signals, modifiers, ... are working.
 So you might consider reading the
-link:whoreirc_plugin_api.it.html#hooks[WeeChat plugin API reference / Hooks].
+link:whoreirc_plugin_api.it.html#hooks[WhoreIRC plugin API reference / Hooks].
 
 [[trigger_default]]
 ==== Default triggers
 
-WeeChat creates 5 triggers by default, which can be disabled, updated or
+WhoreIRC creates 5 triggers by default, which can be disabled, updated or
 deleted:
 
 * a _beep_ trigger for notifications
@@ -3895,7 +3895,7 @@ A trigger has the following options (names are
 | hook | `signal`, `hsignal`, `modifier`, `line`, `print`, `command`,
   `command_run`, `timer`, `config`, `focus`, `info`, `info_hashtable` |
   The hook used in trigger. For more information, see
-  link:whoreirc_plugin_api.it.html#hooks[WeeChat plugin API reference / Hooks].
+  link:whoreirc_plugin_api.it.html#hooks[WhoreIRC plugin API reference / Hooks].
 
 | arguments | string |
   The arguments for the hook, it depends on the hook type used.
@@ -4107,7 +4107,7 @@ type:
 
 [NOTE]
 ^(1)^ All variables can be updated in the trigger, but only these variables
-have an effect on the value returned by the trigger and used by WeeChat.
+have an effect on the value returned by the trigger and used by WhoreIRC.
 
 Many regular expressions can be separated by a space, for example:
 "/regex1/replace1/var1 /regex2/replace2/var2".
@@ -4463,7 +4463,7 @@ terminal is changed:
 /trigger add resize_big signal signal_sigwinch "${info:term_width} >= 100" "" "/bar show nicklist"
 ----
 
-The triggers catch the signal "signal_sigwinch", which is sent by WeeChat when
+The triggers catch the signal "signal_sigwinch", which is sent by WhoreIRC when
 signal SIGWINCH is received (when terminal size is changed).
 
 The condition with `+${info:term_width}+` checks the width of terminal (you can
@@ -4555,7 +4555,7 @@ include::autogen/user/xfer_options.adoc[]
 
 // TRANSLATION MISSING
 Before asking for support, be sure you've read documentation and FAQ provided
-with WeeChat.
+with WhoreIRC.
 
 // TRANSLATION MISSING
 For support with IRC, on server _chat.freenode.net_:

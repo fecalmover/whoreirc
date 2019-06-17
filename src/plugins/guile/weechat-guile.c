@@ -37,12 +37,12 @@
 #include "weechat-guile-api.h"
 
 
-WEECHAT_PLUGIN_NAME(GUILE_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of scheme scripts (with Guile)"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(GUILE_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of scheme scripts (with Guile)"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_guile_plugin = NULL;
 
@@ -60,8 +60,8 @@ int guile_eval_send_input = 0;
 int guile_eval_exec_commands = 0;
 struct t_gui_buffer *guile_eval_buffer = NULL;
 #define GUILE_EVAL_SCRIPT                                               \
-    "(weechat:register \"" WEECHAT_SCRIPT_EVAL_NAME "\" \"\" \"1.0\" "  \
-    "\"" WEECHAT_LICENSE "\" \"Evaluation of source code\" "            \
+    "(weechat:register \"" WHOREIRC_SCRIPT_EVAL_NAME "\" \"\" \"1.0\" "  \
+    "\"" WHOREIRC_LICENSE "\" \"Evaluation of source code\" "            \
     "\"\" \"\")\n"                                                      \
     "\n"                                                                \
     "(define (script_guile_eval code)\n"                                \
@@ -304,7 +304,7 @@ weechat_guile_alist_to_hashtable (SCM alist, int size, const char *type_keys,
     for (i = 0; i < length; i++)
     {
         pair = scm_list_ref (alist, scm_from_int (i));
-        if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+        if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
         {
             str = scm_to_locale_string (scm_list_ref (pair, scm_from_int (0)));
             str2 = scm_to_locale_string (scm_list_ref (pair, scm_from_int (1)));
@@ -314,7 +314,7 @@ weechat_guile_alist_to_hashtable (SCM alist, int size, const char *type_keys,
             if (str2)
                 free (str2);
         }
-        else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+        else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
         {
             str = scm_to_locale_string (scm_list_ref (pair, scm_from_int (0)));
             str2 = scm_to_locale_string (scm_list_ref (pair, scm_from_int (1)));
@@ -387,11 +387,11 @@ weechat_guile_exec (struct t_plugin_script *script,
 
     weechat_guile_output_flush ();
 
-    if ((ret_type == WEECHAT_SCRIPT_EXEC_STRING) && (scm_is_string (rc)))
+    if ((ret_type == WHOREIRC_SCRIPT_EXEC_STRING) && (scm_is_string (rc)))
     {
         ret_value = scm_to_locale_string (rc);
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_POINTER) && (scm_is_string (rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_POINTER) && (scm_is_string (rc)))
     {
         ret_temp = scm_to_locale_string (rc);
         if (ret_temp)
@@ -406,23 +406,23 @@ weechat_guile_exec (struct t_plugin_script *script,
             ret_value = NULL;
         }
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_INT) && (scm_is_integer (rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_INT) && (scm_is_integer (rc)))
     {
         ret_int = malloc (sizeof (*ret_int));
         if (ret_int)
             *ret_int = scm_to_int (rc);
         ret_value = ret_int;
     }
-    else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+    else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
     {
         ret_value = weechat_guile_alist_to_hashtable (rc,
-                                                      WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_STRING);
+                                                      WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING);
     }
     else
     {
-        if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+        if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
         {
             weechat_printf (NULL,
                             weechat_gettext ("%s%s: function \"%s\" must "
@@ -432,7 +432,7 @@ weechat_guile_exec (struct t_plugin_script *script,
         }
     }
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -583,7 +583,7 @@ weechat_guile_load (const char *filename, const char *code)
                                         &weechat_guile_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("guile_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      guile_current_script->filename);
 
     return guile_current_script;
@@ -622,7 +622,7 @@ weechat_guile_unload (struct t_plugin_script *script)
 
     if (script->shutdown_func && script->shutdown_func[0])
     {
-        rc = (int *)weechat_guile_exec (script, WEECHAT_SCRIPT_EXEC_INT,
+        rc = (int *)weechat_guile_exec (script, WHOREIRC_SCRIPT_EXEC_INT,
                                         script->shutdown_func, NULL, NULL);
         if (rc)
             free (rc);
@@ -645,7 +645,7 @@ weechat_guile_unload (struct t_plugin_script *script)
         scm_set_current_module ((SCM)(guile_current_script->interpreter));
 
     (void) weechat_hook_signal_send ("guile_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -743,7 +743,7 @@ weechat_guile_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
     if (!guile_script_eval)
     {
         guile_quiet = 1;
-        guile_script_eval = weechat_guile_load (WEECHAT_SCRIPT_EVAL_NAME,
+        guile_script_eval = weechat_guile_load (WHOREIRC_SCRIPT_EVAL_NAME,
                                                 GUILE_EVAL_SCRIPT);
         guile_quiet = 0;
         if (!guile_script_eval)
@@ -759,7 +759,7 @@ weechat_guile_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
 
     func_argv[0] = (char *)code;
     result = weechat_guile_exec (guile_script_eval,
-                                  WEECHAT_SCRIPT_EXEC_IGNORE,
+                                  WHOREIRC_SCRIPT_EXEC_IGNORE,
                                   "script_guile_eval",
                                   "s", func_argv);
     /* result is ignored */
@@ -835,7 +835,7 @@ weechat_guile_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_guile_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -897,7 +897,7 @@ weechat_guile_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -905,7 +905,7 @@ weechat_guile_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -916,13 +916,13 @@ weechat_guile_command_cb (const void *pointer, void *data,
             }
             if (!weechat_guile_eval (buffer, send_to_buffer_as_input,
                                      exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -943,7 +943,7 @@ weechat_guile_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_guile_plugin, completion, guile_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1033,7 +1033,7 @@ weechat_guile_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_guile_plugin, guile_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1075,7 +1075,7 @@ weechat_guile_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1092,7 +1092,7 @@ weechat_guile_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "guile_script_install") == 0)
         {
@@ -1120,7 +1120,7 @@ weechat_guile_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1198,7 +1198,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     /* init stdout/stderr buffer */
     guile_buffer_output = weechat_string_dyn_alloc (256);
     if (!guile_buffer_output)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
 #ifdef HAVE_GUILE_GMP_MEMORY_FUNCTIONS
     /*
@@ -1240,7 +1240,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                       guile_scripts);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1272,5 +1272,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (guile_action_autoload_list);
     weechat_string_dyn_free (guile_buffer_output, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

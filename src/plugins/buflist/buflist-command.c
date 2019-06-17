@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -43,21 +43,21 @@ buflist_command_buflist (const void *pointer, void *data,
     (void) argv_eol;
 
     if (argc == 1)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (weechat_strcasecmp (argv[1], "bar") == 0)
     {
         buflist_add_bar ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "refresh") == 0)
     {
         buflist_bar_item_update (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*

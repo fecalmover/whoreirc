@@ -1,4 +1,4 @@
-= WeeChat plugin API reference
+= WhoreIRC plugin API reference
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en
@@ -9,7 +9,7 @@
 :docinfo1:
 
 
-This manual documents WeeChat chat client, it is part of WeeChat.
+This manual documents WhoreIRC chat client, it is part of WhoreIRC.
 
 Latest version of this document can be found on this page:
 https://weechat.org/doc
@@ -18,30 +18,30 @@ https://weechat.org/doc
 [[introduction]]
 == Introduction
 
-WeeChat (Wee Enhanced Environment for Chat) is a free chat client, fast and
+WhoreIRC (Wee Enhanced Environment for Chat) is a free chat client, fast and
 light, designed for many operating systems.
 
-This manual documents WeeChat plugins API, used by C plugins to interact with
-WeeChat core.
+This manual documents WhoreIRC plugins API, used by C plugins to interact with
+WhoreIRC core.
 
 [[plugins_in_weechat]]
-== Plugins in WeeChat
+== Plugins in WhoreIRC
 
-A plugin is a C program which can call WeeChat functions defined in an
+A plugin is a C program which can call WhoreIRC functions defined in an
 interface.
 
-This C program does not need WeeChat sources to compile and can be dynamically
-loaded into WeeChat with command `/plugin`.
+This C program does not need WhoreIRC sources to compile and can be dynamically
+loaded into WhoreIRC with command `/plugin`.
 
 The plugin has to be a dynamic library, for dynamic loading by operating
 system.
 Under GNU/Linux, the file has ".so" extension, ".dll" under Windows.
 
-The plugin has to include "weechat-plugin.h" file (available in WeeChat source
+The plugin has to include "weechat-plugin.h" file (available in WhoreIRC source
 code).
-This file defines structures and types used to communicate with WeeChat.
+This file defines structures and types used to communicate with WhoreIRC.
 
-In order to call WeeChat functions in the format displayed in <<plugin_api>>,
+In order to call WhoreIRC functions in the format displayed in <<plugin_api>>,
 the following global pointer must be declared and initialized in the function
 <<_weechat_plugin_init,weechat_plugin_init>>:
 
@@ -55,19 +55,19 @@ struct t_weechat_plugin *weechat_plugin;
 
 The plugin must use some macros (to define some variables):
 
-WEECHAT_PLUGIN_NAME("name")::
+WHOREIRC_PLUGIN_NAME("name")::
     the plugin name
 
-WEECHAT_PLUGIN_DESCRIPTION("description")::
+WHOREIRC_PLUGIN_DESCRIPTION("description")::
     a short description of plugin
 
-WEECHAT_PLUGIN_VERSION("1.0")::
+WHOREIRC_PLUGIN_VERSION("1.0")::
     the plugin version
 
-WEECHAT_PLUGIN_LICENSE("GPL3")::
+WHOREIRC_PLUGIN_LICENSE("GPL3")::
     the plugin license
 
-WEECHAT_PLUGIN_PRIORITY(1000)::
+WHOREIRC_PLUGIN_PRIORITY(1000)::
     the plugin priority (optional, see below)
 
 [[main_functions]]
@@ -80,7 +80,7 @@ The plugin must use two functions:
 
 ==== weechat_plugin_init
 
-This function is called when plugin is loaded by WeeChat.
+This function is called when plugin is loaded by WhoreIRC.
 
 Prototype:
 
@@ -92,33 +92,33 @@ int weechat_plugin_init (struct t_weechat_plugin *plugin,
 
 Arguments:
 
-* _plugin_: pointer to WeeChat plugin structure, used to initialize the
+* _plugin_: pointer to WhoreIRC plugin structure, used to initialize the
   convenience global pointer `weechat_plugin`
 * _argc_: number of arguments for plugin (given on command line by user)
 * _argv_: arguments for plugin
 
 Return value:
 
-* _WEECHAT_RC_OK_ if successful (plugin will be loaded)
-* _WEECHAT_RC_ERROR_ if error (plugin will NOT be loaded)
+* _WHOREIRC_RC_OK_ if successful (plugin will be loaded)
+* _WHOREIRC_RC_ERROR_ if error (plugin will NOT be loaded)
 
 [[plugin_priority]]
 ===== Plugin priority
 
-When plugins are auto-loaded (for example on startup), WeeChat first loads all
+When plugins are auto-loaded (for example on startup), WhoreIRC first loads all
 plugins, and then calls the _init_ functions, using the priority defined in
 each plugin. A high priority means that the _init_ function is called first.
 
 Default priority is 1000 (with such priority, the plugin is loaded after all
 default plugins).
 
-The default WeeChat plugins are initialized in this order:
+The default WhoreIRC plugins are initialized in this order:
 
 include::autogen/plugin_api/plugins_priority.adoc[]
 
 ==== weechat_plugin_end
 
-This function is called when plugin is unloaded by WeeChat.
+This function is called when plugin is unloaded by WhoreIRC.
 
 Prototype:
 
@@ -129,17 +129,17 @@ int weechat_plugin_end (struct t_weechat_plugin *plugin);
 
 Arguments:
 
-* _plugin_: pointer to WeeChat plugin structure
+* _plugin_: pointer to WhoreIRC plugin structure
 
 Return value:
 
-* _WEECHAT_RC_OK_ if successful
-* _WEECHAT_RC_ERROR_ if error
+* _WHOREIRC_RC_OK_ if successful
+* _WHOREIRC_RC_ERROR_ if error
 
 [[compile_plugin]]
 === Compile plugin
 
-Compile does not need WeeChat sources, only file _weechat-plugin.h_ is
+Compile does not need WhoreIRC sources, only file _weechat-plugin.h_ is
 required.
 
 To compile a plugin which has one file "toto.c" (under GNU/Linux):
@@ -156,7 +156,7 @@ Copy file _toto.so_ into system plugins directory (for example
 _/usr/local/lib/weechat/plugins_) or into user's plugins directory (for example
 _/home/xxx/.weechat/plugins_).
 
-Under WeeChat:
+Under WhoreIRC:
 
 ----
 /plugin load toto
@@ -175,11 +175,11 @@ very useful, but that's just an example!):
 
 #include "weechat-plugin.h"
 
-WEECHAT_PLUGIN_NAME("double");
-WEECHAT_PLUGIN_DESCRIPTION("Test plugin for WeeChat");
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION("0.1");
-WEECHAT_PLUGIN_LICENSE("GPL3");
+WHOREIRC_PLUGIN_NAME("double");
+WHOREIRC_PLUGIN_DESCRIPTION("Test plugin for WhoreIRC");
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION("0.1");
+WHOREIRC_PLUGIN_LICENSE("GPL3");
 
 struct t_weechat_plugin *weechat_plugin = NULL;
 
@@ -203,7 +203,7 @@ command_double_cb (const void *pointer, void *data,
         weechat_command (NULL, argv_eol[1]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -221,7 +221,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin,
                           NULL,
                           &command_double_cb, NULL, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -230,7 +230,7 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     /* make C compiler happy */
     (void) plugin;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -266,11 +266,11 @@ const char *weechat_plugin_get_name (struct t_weechat_plugin *plugin);
 
 Arguments:
 
-* _plugin_: pointer to WeeChat plugin structure (can be NULL)
+* _plugin_: pointer to WhoreIRC plugin structure (can be NULL)
 
 Return value:
 
-* name of plugin, "core" for WeeChat core (if plugin pointer is NULL)
+* name of plugin, "core" for WhoreIRC core (if plugin pointer is NULL)
 
 C example:
 
@@ -334,7 +334,7 @@ weechat.charset_set("iso-8859-1")
 
 ==== iconv_to_internal
 
-Convert string to WeeChat internal charset (UTF-8).
+Convert string to WhoreIRC internal charset (UTF-8).
 
 Prototype:
 
@@ -374,7 +374,7 @@ str = weechat.iconv_to_internal("iso-8859-1", "iso string: é à")
 
 ==== iconv_from_internal
 
-Convert string from internal WeeChat charset (UTF-8) to another.
+Convert string from internal WhoreIRC charset (UTF-8) to another.
 
 Prototype:
 
@@ -613,7 +613,7 @@ This function is not available in scripting API.
 
 ==== strcasecmp_range
 
-_WeeChat ≥ 0.3.7, updated in 1.0._
+_WhoreIRC ≥ 0.3.7, updated in 1.0._
 
 Locale and case independent string comparison, using a range for case
 comparison.
@@ -690,7 +690,7 @@ This function is not available in scripting API.
 
 ==== strncasecmp_range
 
-_WeeChat ≥ 0.3.7, updated in 1.0._
+_WhoreIRC ≥ 0.3.7, updated in 1.0._
 
 Locale and case independent string comparison, for _max_ chars, using a range
 for case comparison.
@@ -791,7 +791,7 @@ Arguments:
 Return value:
 
 * pointer to string found, or NULL if not found
-  (_WeeChat ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
+  (_WhoreIRC ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
 
 C example:
 
@@ -805,7 +805,7 @@ This function is not available in scripting API.
 
 ==== strlen_screen
 
-_WeeChat ≥ 0.4.2._
+_WhoreIRC ≥ 0.4.2._
 
 Return number of chars needed on screen to display UTF-8 string.
 Non-printable chars have a width of 1 (this is the difference with the function
@@ -901,7 +901,7 @@ match5 = weechat.string_match("abcdef", "*b*d*", 0)  # == 1
 
 ==== string_match_list
 
-_WeeChat ≥ 2.5._
+_WhoreIRC ≥ 2.5._
 
 Check if a string matches a list of masks where negative mask is allowed
 with the format "!word". A negative mask has higher priority than a standard
@@ -952,7 +952,7 @@ match3 = weechat.string_match("def", "*,!abc*", 0)     # == 1
 
 ==== string_expand_home
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Replace leading `+~+` by string with home directory. If string does not start
 with `+~+`, then same string is returned.
@@ -988,11 +988,11 @@ This function is not available in scripting API.
 
 ==== string_eval_path_home
 
-_WeeChat ≥ 1.3._
+_WhoreIRC ≥ 1.3._
 
 Evaluate a path in 3 steps:
 
-. replace leading `%h` by WeeChat home directory,
+. replace leading `%h` by WhoreIRC home directory,
 . replace leading `+~+` by user home directory (call to
   <<_string_expand_home,string_expand_home>>),
 . evaluate variables (see <<_string_eval_expression,string_eval_expression>>).
@@ -1115,7 +1115,7 @@ This function is not available in scripting API.
 
 ==== string_convert_escaped_chars
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 Convert escaped chars to their value:
 
@@ -1206,7 +1206,7 @@ regex = weechat.string_mask_to_regex("test*mask")  # "test.*mask"
 
 ==== string_regex_flags
 
-_WeeChat ≥ 0.3.7._
+_WhoreIRC ≥ 0.3.7._
 
 Get pointer on string after flags and mask with flags to compile regular
 expression.
@@ -1258,7 +1258,7 @@ This function is not available in scripting API.
 
 ==== string_regcomp
 
-_WeeChat ≥ 0.3.7._
+_WhoreIRC ≥ 0.3.7._
 
 Compile a POSIX extended regular expression using optional flags at beginning
 of string (for format of flags, see
@@ -1341,7 +1341,7 @@ highlight = weechat.string_has_highlight("my test string", "test,word2")  # 1
 
 ==== string_has_highlight_regex
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Check if a string has one or more highlights, using a POSIX extended regular
 expression. +
@@ -1419,7 +1419,7 @@ This function is not available in scripting API.
 
 ==== string_replace_regex
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 Replace text in a string using a regular expression, replacement text and
 optional callback.
@@ -1438,7 +1438,7 @@ Arguments:
 
 * _string_: string
 * _regex_: pointer to a regular expression (_regex_t_ structure) compiled with
-  WeeChat function <<_string_regcomp,string_regcomp>> or regcomp (see `man regcomp`)
+  WhoreIRC function <<_string_regcomp,string_regcomp>> or regcomp (see `man regcomp`)
 * _replace_: replacement text, where following references are allowed:
 ** `+$0+` to `+$99+`: match 0 to 99 in regular expression (0 is the whole match,
    1 to 99 are groups captured between parentheses)
@@ -1506,25 +1506,25 @@ Arguments:
   the default behavior is used (no strip of separators at beginning/end of string,
   multiple separators are kept as-is so empty strings can be returned);
   the following flags are accepted:
-** WEECHAT_STRING_SPLIT_STRIP_LEFT: strip separators on the left
+** WHOREIRC_STRING_SPLIT_STRIP_LEFT: strip separators on the left
    (beginning of string)
-** WEECHAT_STRING_SPLIT_STRIP_RIGHT: strip separators on the right
+** WHOREIRC_STRING_SPLIT_STRIP_RIGHT: strip separators on the right
    (end of string)
-** WEECHAT_STRING_SPLIT_COLLAPSE_SEPS: collapse multiple consecutive separators
+** WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS: collapse multiple consecutive separators
    into a single one
-** WEECHAT_STRING_SPLIT_KEEP_EOL: keep end of line for each value
+** WHOREIRC_STRING_SPLIT_KEEP_EOL: keep end of line for each value
 * _num_items_max_: maximum number of items created (0 = no limit)
 * _num_items_: pointer to int which will contain number of items created
 
 [NOTE]
-With WeeChat ≤ 2.4, the _flags_ argument was called _keep_eol_ and took other
+With WhoreIRC ≤ 2.4, the _flags_ argument was called _keep_eol_ and took other
 values, which must be converted like that:
 [width="100%",cols="1,10",options="header"]
 |===
 | keep_eol | flags
-| 0        | WEECHAT_STRING_SPLIT_STRIP_LEFT \| WEECHAT_STRING_SPLIT_STRIP_RIGHT \| WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-| 1        | WEECHAT_STRING_SPLIT_STRIP_LEFT \| WEECHAT_STRING_SPLIT_STRIP_RIGHT \| WEECHAT_STRING_SPLIT_COLLAPSE_SEPS \| WEECHAT_STRING_SPLIT_KEEP_EOL
-| 2        | WEECHAT_STRING_SPLIT_STRIP_LEFT \| WEECHAT_STRING_SPLIT_COLLAPSE_SEPS \| WEECHAT_STRING_SPLIT_KEEP_EOL
+| 0        | WHOREIRC_STRING_SPLIT_STRIP_LEFT \| WHOREIRC_STRING_SPLIT_STRIP_RIGHT \| WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+| 1        | WHOREIRC_STRING_SPLIT_STRIP_LEFT \| WHOREIRC_STRING_SPLIT_STRIP_RIGHT \| WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS \| WHOREIRC_STRING_SPLIT_KEEP_EOL
+| 2        | WHOREIRC_STRING_SPLIT_STRIP_LEFT \| WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS \| WHOREIRC_STRING_SPLIT_KEEP_EOL
 |===
 
 Return value:
@@ -1551,9 +1551,9 @@ argv = weechat_string_split ("abc de  fghi ", " ", NULL, 0, 0, &argc);
 weechat_string_free_split (argv);
 
 argv = weechat_string_split ("abc de  fghi ", " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
 /* result: argv[0] == "abc"
            argv[1] == "de"
@@ -1564,10 +1564,10 @@ argv = weechat_string_split ("abc de  fghi ", " ", NULL,
 weechat_string_free_split (argv);
 
 argv = weechat_string_split ("abc de  fghi ", " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                             | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                             | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                              0, &argc);
 /* result: argv[0] == "abc de  fghi"
            argv[1] == "de  fghi"
@@ -1578,9 +1578,9 @@ argv = weechat_string_split ("abc de  fghi ", " ", NULL,
 weechat_string_free_split (argv);
 
 argv = weechat_string_split ("abc de  fghi ", " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                             | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                             | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                              0, &argc);
 /* result: argv[0] == "abc de  fghi "
            argv[1] == "de  fghi "
@@ -1591,9 +1591,9 @@ argv = weechat_string_split ("abc de  fghi ", " ", NULL,
 weechat_string_free_split (argv);
 
 argv = weechat_string_split (" abc, de,, fghi ", ",", " ",
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
 /* result: argv[0] == "abc"
            argv[1] == "de"
@@ -1609,7 +1609,7 @@ This function is not available in scripting API.
 
 ==== string_split_shell
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 Split a string like the shell does for a command with arguments.
 
@@ -1829,7 +1829,7 @@ char *str = weechat_string_format_size (2097152);  /* str == "2.10 MB" */
 free (str);
 ----
 
-Script (Python), _WeeChat ≥ 2.2_:
+Script (Python), _WhoreIRC ≥ 2.2_:
 
 [source,python]
 ----
@@ -1842,7 +1842,7 @@ str = weechat.string_format_size(15200)  # == "15.2 KB"
 
 ==== string_remove_color
 
-Remove WeeChat colors from a string.
+Remove WhoreIRC colors from a string.
 
 Prototype:
 
@@ -1855,8 +1855,8 @@ char *weechat_string_remove_color (const char *string,
 Arguments:
 
 * _string_: string
-* _replacement_: if not NULL and not empty, WeeChat color codes are replaced by
-  first char of this string, otherwise WeeChat color codes and following chars
+* _replacement_: if not NULL and not empty, WhoreIRC color codes are replaced by
+  first char of this string, otherwise WhoreIRC color codes and following chars
   (if related to color) are removed from string
 
 Return value:
@@ -1891,7 +1891,7 @@ str = weechat.string_remove_color(my_string, "?")
 
 ==== string_base_encode
 
-_WeeChat ≥ 2.4._
+_WhoreIRC ≥ 2.4._
 
 Encode a string in base 16, 32, or 64.
 
@@ -1933,7 +1933,7 @@ This function is not available in scripting API.
 
 ==== string_base_decode
 
-_WeeChat ≥ 2.4._
+_WhoreIRC ≥ 2.4._
 
 Decode a string encoded in base 16, 32, or 64.
 
@@ -1974,7 +1974,7 @@ This function is not available in scripting API.
 
 ==== string_hex_dump
 
-_WeeChat ≥ 1.4._
+_WhoreIRC ≥ 1.4._
 
 Display a dump of data as hexadecimal and ascii bytes.
 
@@ -2015,7 +2015,7 @@ This function is not available in scripting API.
 
 ==== string_is_command_char
 
-_WeeChat ≥ 0.3.2._
+_WhoreIRC ≥ 0.3.2._
 
 Check if first char of string is a command char (default command char is `+/+`).
 
@@ -2056,7 +2056,7 @@ command_char2 = weechat.string_is_command_char("test")   # == 0
 
 ==== string_input_for_buffer
 
-_WeeChat ≥ 0.3.2._
+_WhoreIRC ≥ 0.3.2._
 
 Return pointer to input text for buffer (pointer inside "string" argument), or
 NULL if it's a command.
@@ -2100,7 +2100,7 @@ str3 = weechat.string_input_for_buffer("//test")  # "/test"
 
 ==== string_eval_expression
 
-_WeeChat ≥ 0.4.0, updated in 0.4.2, 0.4.3, 1.0, 1.1, 1.2, 1.3, 1.6, 1.8 and 2.0._
+_WhoreIRC ≥ 0.4.0, updated in 0.4.2, 0.4.3, 1.0, 1.1, 1.2, 1.3, 1.6, 1.8 and 2.0._
 
 Evaluate an expression and return result as a string.
 Special variables with format `+${variable}+` are expanded (see table below).
@@ -2127,7 +2127,7 @@ Arguments:
   pointer); pointers "window" and "buffer" are automatically added if they are
   not in hashtable (with pointer to current window/buffer) (can be NULL):
 ** _regex_: pointer to a regular expression (_regex_t_ structure) compiled with
-   WeeChat function <<_string_regcomp,string_regcomp>> or regcomp (see `man regcomp`);
+   WhoreIRC function <<_string_regcomp,string_regcomp>> or regcomp (see `man regcomp`);
    this option is similar to _regex_ in hashtable _options_ (below),
    but is used for better performance
 * _extra_vars_: extra variables that will be expanded (can be NULL)
@@ -2142,7 +2142,7 @@ Arguments:
 ** _extra_: default behavior is to just replace extra variables (_extra_vars_),
    other behavior can be selected:
 *** _eval_: extra variables (_extra_vars_) are evaluated themselves before
-    replacing (_WeeChat ≥ 1.6_)
+    replacing (_WhoreIRC ≥ 1.6_)
 ** _regex_: a regex used to replace text in _expr_ (which is then not
    evaluated)
 ** _regex_replace_: the replacement text to use with _regex_, to replace
@@ -2160,8 +2160,8 @@ C examples:
 ----
 /* conditions */
 struct t_hashtable *options1 = weechat_hashtable_new (8,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
                                                       NULL,
                                                       NULL);
 weechat_hashtable_set (options1, "type", "condition");
@@ -2173,8 +2173,8 @@ char *str3 = weechat_string_eval_expression ("${buffer.full_name}", NULL, NULL, 
 
 /* replace with regex */
 struct t_hashtable *options2 = weechat_hashtable_new (8,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
                                                       NULL,
                                                       NULL);
 /* add brackets around URLs */
@@ -2266,7 +2266,7 @@ from first used to last):
   `+1+`
 
 | `+=*+` +
-  (_WeeChat ≥ 1.8_) |
+  (_WhoreIRC ≥ 1.8_) |
   Is matching mask where "*" is allowed (see function <<_string_match,string_match>>) |
   `+abc def =* a*f+` +
   `+abc def =* y*z+` |
@@ -2274,7 +2274,7 @@ from first used to last):
   `+0+`
 
 | `+!*+` +
-  (_WeeChat ≥ 1.8_) |
+  (_WhoreIRC ≥ 1.8_) |
   Is NOT wildcard mask where "*" is allowed (see function <<_string_match,string_match>>) |
   `+abc def !* a*f+` +
   `+abc def !* y*z+` |
@@ -2344,8 +2344,8 @@ The comparison is made using floating point numbers if the two expressions are
 valid numbers, with one of the following formats:
 
 * integer (examples: 5, -7)
-* floating point number (examples: 5.2, -7.5, 2.83e-2) (_WeeChat ≥ 2.0_)
-* hexadecimal number (examples: 0xA3, -0xA3) (_WeeChat ≥ 2.0_)
+* floating point number (examples: 5.2, -7.5, 2.83e-2) (_WhoreIRC ≥ 2.0_)
+* hexadecimal number (examples: 0xA3, -0xA3) (_WhoreIRC ≥ 2.0_)
 
 To force a string comparison, you can add double quotes around each expression,
 for example:
@@ -2369,7 +2369,7 @@ expanded to last):
   `+value+`
 
 | `+${eval:xxx}+` +
-  (_WeeChat ≥ 1.3_) |
+  (_WhoreIRC ≥ 1.3_) |
   String to evaluate. |
   `+${eval:${date:${weechat.look.buffer_time_format}}}+` |
   `+19:02:45+` (with colors if there are color codes in the option
@@ -2377,7 +2377,7 @@ expanded to last):
 
 | `+${esc:xxx}+` +
   `+${\xxx}+` +
-  (_WeeChat ≥ 1.0_) |
+  (_WhoreIRC ≥ 1.0_) |
   String with escaped chars. |
   `+${esc:prefix\tmessage}+` +
   `+${\ua9}+` |
@@ -2385,14 +2385,14 @@ expanded to last):
   `+©+`
 
 | `+${hide:x,string}+` +
-  (_WeeChat ≥ 1.1_) |
+  (_WhoreIRC ≥ 1.1_) |
   String with hidden chars (all chars in `string` replaced by `x`). |
   `+${hide:*,password}+` |
   `+********+`
 
 | `+${cut:max,suffix,string}+` +
   `+${cut:+max,suffix,string}+` +
-  (_WeeChat ≥ 1.8_) |
+  (_WhoreIRC ≥ 1.8_) |
   String with `max` chars, and optional `suffix` if string is cut. +
   With the format `+max`, the suffix is counted in max length. |
   `+${cut:4,…,this is a test}+` +
@@ -2404,7 +2404,7 @@ expanded to last):
 
 | `+${cutscr:max,suffix,string}+` +
   `+${cutscr:+max,suffix,string}+` +
-  (_WeeChat ≥ 1.8_) |
+  (_WhoreIRC ≥ 1.8_) |
   String with `max` chars displayed on screen, and optional `suffix` if string is cut. +
   With the format `+max`, the suffix is counted in max length. |
   `+${cutscr:4,…,this is a test}+` +
@@ -2415,22 +2415,22 @@ expanded to last):
   `+こ>>+`
 
 | `+${rev:xxx}+` +
-  (_WeeChat ≥ 2.2_) |
+  (_WhoreIRC ≥ 2.2_) |
   Reversed string. |
   `+${rev:Hello, world!}+` |
   `+!dlrow ,olleH+`
 
 | `+${repeat:count,string}+` +
-  (_WeeChat ≥ 2.3_) |
+  (_WhoreIRC ≥ 2.3_) |
   Repeated string. |
   `+${repeat:5,-}+` |
   `+-----+`
 
 | `+${re:N}+` +
-  (_WeeChat ≥ 1.1_) |
+  (_WhoreIRC ≥ 1.1_) |
   Regex captured group: `0` = whole string matching, `1` to `99` = group
   captured, `+++` = last group captured,
-  `#` = index of last group captured (_WeeChat ≥ 1.8_). |
+  `#` = index of last group captured (_WhoreIRC ≥ 1.8_). |
   `+${re:0}+` +
   `+${re:1}+` +
   `+${re:2}+` +
@@ -2443,8 +2443,8 @@ expanded to last):
   `+2+`
 
 | `+${color:name}+` +
-  (_WeeChat ≥ 0.4.2_) |
-  WeeChat color code (the name of color has optional attributes),
+  (_WhoreIRC ≥ 0.4.2_) |
+  WhoreIRC color code (the name of color has optional attributes),
   see function <<_color,color>> for supported formats. |
   `+${color:red}red text+` +
   `+${color:*214}bold orange text+` |
@@ -2453,8 +2453,8 @@ expanded to last):
 
 | `+${info:name}+` +
   `+${info:name,arguments}+` +
-  (_WeeChat ≥ 0.4.3_) |
-  Info from WeeChat or a plugin, see function
+  (_WhoreIRC ≥ 0.4.3_) |
+  Info from WhoreIRC or a plugin, see function
   <<_info_get,info_get>>. |
   `+${info:version}+` +
   `+${info:nick_color_name,foo}+` |
@@ -2463,7 +2463,7 @@ expanded to last):
 
 | `+${date}+` +
   `+${date:xxx}+` +
-  (_WeeChat ≥ 1.3_) |
+  (_WhoreIRC ≥ 1.3_) |
   Current date/time, with custom format (see `man strftime`),
   default format is `%F %T`. |
   `+${date}+` +
@@ -2472,7 +2472,7 @@ expanded to last):
   `+19:02:45+`
 
 | `+${env:NAME}+` +
-  (_WeeChat ≥ 1.2_) |
+  (_WhoreIRC ≥ 1.2_) |
   Value of the environment variable `NAME`. |
   `+${env:HOME}+` |
   `+/home/user+`
@@ -2480,7 +2480,7 @@ expanded to last):
 | `+${if:condition}+` +
   `+${if:condition?true}+`
   `+${if:condition?true:false}+`
-  (_WeeChat ≥ 1.8_) |
+  (_WhoreIRC ≥ 1.8_) |
   Ternary operator with a condition, a value if the condition is true (optional)
   and another value if the condition is false (optional). If values are not
   given, "1" or "0" are returned, according to the result of the condition. |
@@ -2514,7 +2514,7 @@ expanded to last):
 
 ==== string_dyn_alloc
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Allocate a dynamic string, with a variable length. +
 Internally, a structure is allocated with the string pointer, the allocated size
@@ -2550,7 +2550,7 @@ This function is not available in scripting API.
 
 ==== string_dyn_copy
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Copy a string in a dynamic string.
 
@@ -2593,7 +2593,7 @@ This function is not available in scripting API.
 
 ==== string_dyn_concat
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Concatenate a string to a dynamic string.
 
@@ -2635,7 +2635,7 @@ This function is not available in scripting API.
 
 ==== string_dyn_free
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Free a dynamic string.
 
@@ -2730,7 +2730,7 @@ Arguments:
 
 * _string_: string
 * _length_: max number of UTF-8 chars to check; if ≤ 0, the whole string is
-  checked _(WeeChat ≥ 1.4)_
+  checked _(WhoreIRC ≥ 1.4)_
 * _error_: if not NULL, _*error_ is set with pointer to first non valid UTF-8
   char in string, if any
 
@@ -2805,7 +2805,7 @@ Arguments:
 Return value:
 
 * pointer to previous UTF-8 char, NULL if not found (start of string reached)
-  (_WeeChat ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
+  (_WhoreIRC ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
 
 C example:
 
@@ -2837,7 +2837,7 @@ Arguments:
 Return value:
 
 * pointer to next UTF-8 char, NULL if not found (end of string reached)
-  (_WeeChat ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
+  (_WhoreIRC ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
 
 C example:
 
@@ -3113,7 +3113,7 @@ Arguments:
 Return value:
 
 * pointer to string, N chars after (NULL if it's not reachable)
-  (_WeeChat ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
+  (_WhoreIRC ≥ 1.3_: pointer returned is a _const char *_ instead of _char *_)
 
 C example:
 
@@ -3225,7 +3225,7 @@ Some functions related to directories.
 
 ==== mkdir_home
 
-Create a directory in WeeChat home.
+Create a directory in WhoreIRC home.
 
 Prototype:
 
@@ -3367,12 +3367,12 @@ void weechat_exec_on_files (const char *directory,
 Arguments:
 
 * _directory_: directory for searching files
-* _recurse_subdirs_: 1 to recurse into sub-directories (_WeeChat ≥ 2.0_)
+* _recurse_subdirs_: 1 to recurse into sub-directories (_WhoreIRC ≥ 2.0_)
 * _hidden_files_: 1 to include hidden files, otherwise 0
 * _callback_: function called for each file found, arguments:
 ** _void *data_: pointer
 ** _const char *filename_: filename found
-* _callback_data_: pointer given to callback when it is called by WeeChat
+* _callback_data_: pointer given to callback when it is called by WhoreIRC
 
 C example:
 
@@ -3391,7 +3391,7 @@ This function is not available in scripting API.
 
 ==== file_get_content
 
-_WeeChat ≥ 0.3.1._
+_WhoreIRC ≥ 0.3.1._
 
 Get content of text file in a string.
 
@@ -3487,7 +3487,7 @@ Return value:
 * difference in microseconds
 
 [NOTE]
-With WeeChat ≤ 1.0, the returned value was in milliseconds.
+With WhoreIRC ≤ 1.0, the returned value was in milliseconds.
 
 C example:
 
@@ -3518,7 +3518,7 @@ Arguments:
 * _interval_: interval (in microseconds)
 
 [NOTE]
-With WeeChat ≤ 1.0, the interval was expressed in milliseconds.
+With WhoreIRC ≤ 1.0, the interval was expressed in milliseconds.
 
 C example:
 
@@ -3532,7 +3532,7 @@ This function is not available in scripting API.
 
 ==== util_get_time_string
 
-_WeeChat ≥ 0.3.2, updated in 1.3._
+_WhoreIRC ≥ 0.3.2, updated in 1.3._
 
 Get date/time as a string built with "strftime" and the format defined in
 option _weechat.look.time_format_.
@@ -3566,9 +3566,9 @@ This function is not available in scripting API.
 
 ==== util_version_number
 
-_WeeChat ≥ 0.3.9._
+_WhoreIRC ≥ 0.3.9._
 
-Convert a string with WeeChat version to a number.
+Convert a string with WhoreIRC version to a number.
 
 Prototype:
 
@@ -3579,7 +3579,7 @@ int weechat_util_version_number (const char *version);
 
 Arguments:
 
-* _version_: WeeChat version as string (example: "0.3.9" or "0.3.9-dev")
+* _version_: WhoreIRC version as string (example: "0.3.9" or "0.3.9-dev")
 
 C example:
 
@@ -3651,9 +3651,9 @@ Arguments:
 * _weelist_: list pointer
 * _data_: data to insert in list
 * _where_: position in list:
-** _WEECHAT_LIST_POS_SORT_: add in list, keeping list sorted
-** _WEECHAT_LIST_POS_BEGINNING_: add to beginning of list
-** _WEECHAT_LIST_POS_END_: add to end of list
+** _WHOREIRC_LIST_POS_SORT_: add in list, keeping list sorted
+** _WHOREIRC_LIST_POS_BEGINNING_: add to beginning of list
+** _WHOREIRC_LIST_POS_END_: add to end of list
 * _user_data_: any pointer
 
 Return value:
@@ -3665,7 +3665,7 @@ C example:
 [source,C]
 ----
 struct t_weelist_item *my_item =
-    weechat_list_add (list, "my data", WEECHAT_LIST_POS_SORT, NULL);
+    weechat_list_add (list, "my data", WHOREIRC_LIST_POS_SORT, NULL);
 ----
 
 Script (Python):
@@ -3676,7 +3676,7 @@ Script (Python):
 item = weechat.list_add(list, data, where, user_data)
 
 # example
-item = weechat.list_add(list, "my data", weechat.WEECHAT_LIST_POS_SORT, "")
+item = weechat.list_add(list, "my data", weechat.WHOREIRC_LIST_POS_SORT, "")
 ----
 
 ==== list_search
@@ -3720,7 +3720,7 @@ item = weechat.list_search(list, "my data")
 
 ==== list_search_pos
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Search an item position in a list.
 
@@ -3800,7 +3800,7 @@ item = weechat.list_casesearch(list, "my data")
 
 ==== list_casesearch_pos
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Search an item position in a list, ignoring case.
 
@@ -4170,7 +4170,7 @@ An array list is a list of pointers with a dynamic size and optional sort.
 
 ==== arraylist_new
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Create a new array list.
 
@@ -4208,12 +4208,12 @@ Arguments:
 *** negative number if first item is less than second item
 *** 0 if first item equals second item
 *** positive number if first item is greater than second item
-* _callback_cmp_data_: pointer given to callback when it is called by WeeChat
+* _callback_cmp_data_: pointer given to callback when it is called by WhoreIRC
 * _callback_free_: callback used to free an item (optional), arguments:
 ** _void *data_: pointer
 ** _struct t_arraylist *arraylist_: array list pointer
 ** _void *pointer_: pointer to item
-* _callback_free_data_: pointer given to callback when it is called by WeeChat
+* _callback_free_data_: pointer given to callback when it is called by WhoreIRC
 
 Return value:
 
@@ -4244,7 +4244,7 @@ This function is not available in scripting API.
 
 ==== arraylist_size
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Return size of array list (number of item pointers).
 
@@ -4275,7 +4275,7 @@ This function is not available in scripting API.
 
 ==== arraylist_get
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Return an item pointer by position.
 
@@ -4307,7 +4307,7 @@ This function is not available in scripting API.
 
 ==== arraylist_search
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Search an item in an array list.
 
@@ -4345,7 +4345,7 @@ This function is not available in scripting API.
 
 ==== arraylist_insert
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Insert an item in an array list.
 
@@ -4380,7 +4380,7 @@ This function is not available in scripting API.
 
 ==== arraylist_add
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Add an item in an array list.
 
@@ -4412,7 +4412,7 @@ This function is not available in scripting API.
 
 ==== arraylist_remove
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Remove an item from an array list.
 
@@ -4444,7 +4444,7 @@ This function is not available in scripting API.
 
 ==== arraylist_clear
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Remove all items from an array list.
 
@@ -4478,7 +4478,7 @@ This function is not available in scripting API.
 
 ==== arraylist_free
 
-_WeeChat ≥ 1.8._
+_WhoreIRC ≥ 1.8._
 
 Free an array list.
 
@@ -4510,7 +4510,7 @@ Hashtable functions.
 
 ==== hashtable_new
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Create a new hashtable.
 
@@ -4534,17 +4534,17 @@ Arguments:
   memory, but has better performance (this is *not* a limit for number of items
   in hashtable)
 * _type_keys_: type for keys in hashtable:
-** _WEECHAT_HASHTABLE_INTEGER_
-** _WEECHAT_HASHTABLE_STRING_
-** _WEECHAT_HASHTABLE_POINTER_
-** _WEECHAT_HASHTABLE_BUFFER_
-** _WEECHAT_HASHTABLE_TIME_
+** _WHOREIRC_HASHTABLE_INTEGER_
+** _WHOREIRC_HASHTABLE_STRING_
+** _WHOREIRC_HASHTABLE_POINTER_
+** _WHOREIRC_HASHTABLE_BUFFER_
+** _WHOREIRC_HASHTABLE_TIME_
 * _type_values_: type for values in hashtable:
-** _WEECHAT_HASHTABLE_INTEGER_
-** _WEECHAT_HASHTABLE_STRING_
-** _WEECHAT_HASHTABLE_POINTER_
-** _WEECHAT_HASHTABLE_BUFFER_
-** _WEECHAT_HASHTABLE_TIME_
+** _WHOREIRC_HASHTABLE_INTEGER_
+** _WHOREIRC_HASHTABLE_STRING_
+** _WHOREIRC_HASHTABLE_POINTER_
+** _WHOREIRC_HASHTABLE_BUFFER_
+** _WHOREIRC_HASHTABLE_TIME_
 * _callback_hash_key_: callback used to "hash" a key (key as integer value), can
   be NULL if key type is not "buffer" (a default hash function is used),
   arguments and return value:
@@ -4571,8 +4571,8 @@ C example:
 [source,C]
 ----
 struct t_hashtable *hashtable = weechat_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 ----
@@ -4582,7 +4582,7 @@ This function is not available in scripting API.
 
 ==== hashtable_set_with_size
 
-_WeeChat ≥ 0.3.3, updated in 0.4.2._
+_WhoreIRC ≥ 0.3.3, updated in 0.4.2._
 
 Add or update item in a hashtable with size for key and value.
 
@@ -4622,7 +4622,7 @@ This function is not available in scripting API.
 
 ==== hashtable_set
 
-_WeeChat ≥ 0.3.3, updated in 0.4.2._
+_WhoreIRC ≥ 0.3.3, updated in 0.4.2._
 
 Add or update item in a hashtable.
 
@@ -4656,7 +4656,7 @@ This function is not available in scripting API.
 
 ==== hashtable_get
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Get value associated with a key in a hashtable.
 
@@ -4688,7 +4688,7 @@ This function is not available in scripting API.
 
 ==== hashtable_has_key
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Check if a key is in the hashtable.
 
@@ -4724,7 +4724,7 @@ This function is not available in scripting API.
 
 ==== hashtable_map
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Call a function on all hashtable entries.
 
@@ -4768,7 +4768,7 @@ This function is not available in scripting API.
 
 ==== hashtable_map_string
 
-_WeeChat ≥ 0.3.7._
+_WhoreIRC ≥ 0.3.7._
 
 Call a function on all hashtable entries, sending keys and values as strings.
 
@@ -4815,7 +4815,7 @@ This function is not available in scripting API.
 
 ==== hashtable_dup
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 Duplicate a hashtable.
 
@@ -4846,7 +4846,7 @@ This function is not available in scripting API.
 
 ==== hashtable_get_integer
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Return integer value of a hashtable property.
 
@@ -4881,7 +4881,7 @@ This function is not available in scripting API.
 
 ==== hashtable_get_string
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return string value of a hashtable property.
 
@@ -4936,7 +4936,7 @@ This function is not available in scripting API.
 
 ==== hashtable_set_pointer
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Set pointer value of a hashtable property.
 
@@ -4953,7 +4953,7 @@ Arguments:
 * _hashtable_: hashtable pointer
 * _property_: property name:
 ** _callback_free_key_: set callback function used to free keys in hashtable
-   _(WeeChat ≥ 0.4.2)_
+   _(WhoreIRC ≥ 0.4.2)_
 ** _callback_free_value_: set callback function used to free values in hashtable
 * _pointer_: new pointer value for property
 
@@ -4982,7 +4982,7 @@ This function is not available in scripting API.
 
 ==== hashtable_add_to_infolist
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Add hashtable items to an infolist item.
 
@@ -5027,7 +5027,7 @@ This function is not available in scripting API.
 
 ==== hashtable_add_from_infolist
 
-_WeeChat ≥ 2.2._
+_WhoreIRC ≥ 2.2._
 
 Add infolist items in a hashtable.
 
@@ -5072,7 +5072,7 @@ This function is not available in scripting API.
 
 ==== hashtable_remove
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Remove an item from a hashtable.
 
@@ -5100,7 +5100,7 @@ This function is not available in scripting API.
 
 ==== hashtable_remove_all
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Remove all items from a hashtable.
 
@@ -5127,7 +5127,7 @@ This function is not available in scripting API.
 
 ==== hashtable_free
 
-_WeeChat ≥ 0.3.3._
+_WhoreIRC ≥ 0.3.3._
 
 Free a hashtable.
 
@@ -5184,13 +5184,13 @@ Arguments:
 ** _void *data_: pointer
 ** _struct t_config_file *config_file_: configuration file pointer
 ** return value:
-*** _WEECHAT_CONFIG_READ_OK_
-*** _WEECHAT_CONFIG_READ_MEMORY_ERROR_
-*** _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_
+*** _WHOREIRC_CONFIG_READ_OK_
+*** _WHOREIRC_CONFIG_READ_MEMORY_ERROR_
+*** _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_
 * _callback_reload_pointer_: pointer given to callback when it is called by
-  WeeChat
+  WhoreIRC
 * _callback_reload_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the configuration file is freed
 
 Reload callback:
@@ -5199,7 +5199,7 @@ Reload callback:
   it must not remove the configuration file.
 * A callback is needed only if it does some things before and/or after the
   call to the function <<_config_reload,config_reload>>. +
-  If no callback is given, WeeChat will call its internal reload function,
+  If no callback is given, WhoreIRC will call its internal reload function,
   so the configuration file will be reloaded in all cases.
 
 Return value:
@@ -5223,7 +5223,7 @@ my_config_reload_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_config_file *config_file = weechat_config_new ("test",
@@ -5241,7 +5241,7 @@ config_file = weechat.config_new(name, callback_reload, callback_reload_data)
 # example
 def my_config_reload_cb(data, config_file):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 config_file = weechat.config_new("test", "my_config_reload_cb", "")
 ----
@@ -5316,12 +5316,12 @@ Arguments:
 ** _const char *option_name_: name of option
 ** _const char *value_: value
 ** return value:
-*** _WEECHAT_CONFIG_READ_OK_
-*** _WEECHAT_CONFIG_READ_MEMORY_ERROR_
-*** _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_
+*** _WHOREIRC_CONFIG_READ_OK_
+*** _WHOREIRC_CONFIG_READ_MEMORY_ERROR_
+*** _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_
 * _callback_read_pointer_: pointer given to callback when it is called by
-  WeeChat
-* _callback_read_data_: pointer given to callback when it is called by WeeChat;
+  WhoreIRC
+* _callback_read_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the section is freed
 * _callback_write_: function called when section is written in file (should be
@@ -5333,12 +5333,12 @@ Arguments:
 ** _struct t_config_section *section_: section pointer
 ** _const char *section_name_: name of section
 ** return value:
-*** _WEECHAT_CONFIG_WRITE_OK_
-*** _WEECHAT_CONFIG_WRITE_ERROR_
-*** _WEECHAT_CONFIG_WRITE_MEMORY_ERROR_
+*** _WHOREIRC_CONFIG_WRITE_OK_
+*** _WHOREIRC_CONFIG_WRITE_ERROR_
+*** _WHOREIRC_CONFIG_WRITE_MEMORY_ERROR_
 * _callback_write_pointer_: pointer given to callback when it is called by
-  WeeChat
-* _callback_write_data_: pointer given to callback when it is called by WeeChat;
+  WhoreIRC
+* _callback_write_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the section is freed
 * _callback_write_default_: function called when default values for section
@@ -5348,13 +5348,13 @@ Arguments:
 ** _struct t_config_file *config_file_: configuration file pointer
 ** _const char *section_name_: name of section
 ** return value:
-*** _WEECHAT_CONFIG_WRITE_OK_
-*** _WEECHAT_CONFIG_WRITE_ERROR_
-*** _WEECHAT_CONFIG_WRITE_MEMORY_ERROR_
+*** _WHOREIRC_CONFIG_WRITE_OK_
+*** _WHOREIRC_CONFIG_WRITE_ERROR_
+*** _WHOREIRC_CONFIG_WRITE_MEMORY_ERROR_
 * _callback_write_default_pointer_: pointer given to callback when it is called
-  by WeeChat
+  by WhoreIRC
 * _callback_write_default_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the section is freed
 * _callback_create_option_: function called when a new option is created in
   section (NULL if section does not allow new options to be created),
@@ -5366,14 +5366,14 @@ Arguments:
 ** _const char *option_name_: name of option
 ** _const char *value_: value
 ** return value:
-*** _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_
-*** _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_
-*** _WEECHAT_CONFIG_OPTION_SET_ERROR_
-*** _WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND_
+*** _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_
+*** _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_
+*** _WHOREIRC_CONFIG_OPTION_SET_ERROR_
+*** _WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND_
 * _callback_create_option_pointer_: pointer given to callback when it is called
-  by WeeChat
+  by WhoreIRC
 * _callback_create_option_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the section is freed
 * _callback_delete_option_: function called when an option is deleted in
   section (NULL if section does not allow options to be deleted),
@@ -5384,14 +5384,14 @@ Arguments:
 ** _struct t_config_section *section_: section pointer
 ** _struct t_config_option *option_: option pointer
 ** return value:
-*** _WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET_
-*** _WEECHAT_CONFIG_OPTION_UNSET_OK_RESET_
-*** _WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED_
-*** _WEECHAT_CONFIG_OPTION_UNSET_ERROR_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_ERROR_
 * _callback_delete_option_pointer_: pointer given to callback when it is called
-  by WeeChat
+  by WhoreIRC
 * _callback_delete_option_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the section is freed
 
 Return value:
@@ -5411,9 +5411,9 @@ my_section_read_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_READ_OK;
-    /* return WEECHAT_CONFIG_READ_MEMORY_ERROR; */
-    /* return WEECHAT_CONFIG_READ_FILE_NOT_FOUND; */
+    return WHOREIRC_CONFIG_READ_OK;
+    /* return WHOREIRC_CONFIG_READ_MEMORY_ERROR; */
+    /* return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND; */
 }
 
 int
@@ -5423,9 +5423,9 @@ my_section_write_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_WRITE_OK;
-    /* return WEECHAT_CONFIG_WRITE_ERROR; */
-    /* return WEECHAT_CONFIG_WRITE_MEMORY_ERROR; */
+    return WHOREIRC_CONFIG_WRITE_OK;
+    /* return WHOREIRC_CONFIG_WRITE_ERROR; */
+    /* return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR; */
 }
 
 int
@@ -5435,9 +5435,9 @@ my_section_write_default_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_WRITE_OK;
-    /* return WEECHAT_CONFIG_WRITE_ERROR; */
-    /* return WEECHAT_CONFIG_WRITE_MEMORY_ERROR; */
+    return WHOREIRC_CONFIG_WRITE_OK;
+    /* return WHOREIRC_CONFIG_WRITE_ERROR; */
+    /* return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR; */
 }
 
 int
@@ -5449,10 +5449,10 @@ my_section_create_option_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
-    /* return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE; */
-    /* return WEECHAT_CONFIG_OPTION_SET_ERROR; */
-    /* return WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND; */
+    return WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
+    /* return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE; */
+    /* return WHOREIRC_CONFIG_OPTION_SET_ERROR; */
+    /* return WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND; */
 }
 
 int
@@ -5463,10 +5463,10 @@ my_section_delete_option_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
-    /* return WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET; */
-    /* return WEECHAT_CONFIG_OPTION_UNSET_OK_RESET; */
-    /* return WEECHAT_CONFIG_OPTION_UNSET_ERROR; */
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
+    /* return WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET; */
+    /* return WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET; */
+    /* return WHOREIRC_CONFIG_OPTION_UNSET_ERROR; */
 }
 
 /* standard section, user can not add/delete options */
@@ -5504,26 +5504,26 @@ section = weechat.config_new_section(config_file, name,
 # example
 def my_section_read_cb(data, config_file, section, option_name, value):
     # ...
-    return weechat.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED
-    # return weechat.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE
-    # return weechat.WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND
-    # return weechat.WEECHAT_CONFIG_OPTION_SET_ERROR
+    return weechat.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED
+    # return weechat.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE
+    # return weechat.WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND
+    # return weechat.WHOREIRC_CONFIG_OPTION_SET_ERROR
 
 def my_section_write_cb(data, config_file, section_name):
     # ...
-    return weechat.WEECHAT_CONFIG_WRITE_OK
+    return weechat.WHOREIRC_CONFIG_WRITE_OK
 
 def my_section_write_default_cb(data, config_file, section_name):
     # ...
-    return weechat.WEECHAT_CONFIG_WRITE_OK
+    return weechat.WHOREIRC_CONFIG_WRITE_OK
 
 def my_section_create_option_cb(data, config_file, section, option_name, value):
     # ...
-    return weechat.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE
+    return weechat.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE
 
 def my_section_delete_option_cb(data, config_file, section, option):
     # ...
-    return weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED
+    return weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED
 
 section = weechat.config_new_section(config_file, "section1", 1, 1,
     "my_section_read_cb", "",
@@ -5618,7 +5618,7 @@ Arguments:
 
 * _config_file_: configuration file pointer
 * _section_: section pointer
-* _name_: name of option; with WeeChat ≥ 1.4, the name can include a parent
+* _name_: name of option; with WhoreIRC ≥ 1.4, the name can include a parent
   option name (the value of parent option will be displayed in `/set` command
   output if this option is "null"), the syntax is then:
   "name << file.section.option"
@@ -5646,9 +5646,9 @@ Arguments:
 *** 1 if value is OK
 *** 0 if value is invalid
 * _callback_check_value_pointer_: pointer given to check_value callback when it
-  is called by WeeChat
+  is called by WhoreIRC
 * _callback_check_value_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the option is freed
 * _callback_change_: function called when value of option has changed
   (optional), arguments:
@@ -5656,9 +5656,9 @@ Arguments:
 ** _void *data_: pointer
 ** _struct t_config_option *option_: option pointer
 * _callback_change_pointer_: pointer given to change callback when it is called
-  by WeeChat
+  by WhoreIRC
 * _callback_change_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the option is freed
 * _callback_delete_: function called when option will be deleted (optional),
   arguments:
@@ -5666,9 +5666,9 @@ Arguments:
 ** _void *data_: pointer
 ** _struct t_config_option *option_: option pointer
 * _callback_delete_pointer_: pointer given to delete callback when it is called
-  by WeeChat
+  by WhoreIRC
 * _callback_delete_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the option is freed
 
 Return value:
@@ -5808,7 +5808,7 @@ option5 = weechat.config_new_option(config_file, section, "option5", "color",
 [NOTE]
 In Ruby, the 3 callbacks + data (6 strings) must be given in an array of 6
 strings (due to a Ruby limitation of 15 arguments by function), see the
-link:++weechat_scripting.en.html#_ruby++[WeeChat scripting guide] for more info
+link:++weechat_scripting.en.html#_ruby++[WhoreIRC scripting guide] for more info
 _(fixed in version 0.4.1)_.
 
 ==== config_search_option
@@ -6024,9 +6024,9 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been reset
-* _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
-* _WEECHAT_CONFIG_OPTION_SET_ERROR_ if an error occurred
+* _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been reset
+* _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
+* _WHOREIRC_CONFIG_OPTION_SET_ERROR_ if an error occurred
 
 C example:
 
@@ -6034,13 +6034,13 @@ C example:
 ----
 switch (weechat_config_option_reset (option, 1))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* .... */
         break;
 }
@@ -6055,11 +6055,11 @@ rc = weechat.config_option_reset(option, run_callback)
 
 # example
 rc = weechat.config_option_reset(option, 1)
-if rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
@@ -6090,9 +6090,9 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been changed
-* _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
-* _WEECHAT_CONFIG_OPTION_SET_ERROR_ if an error occurred
+* _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been changed
+* _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
+* _WHOREIRC_CONFIG_OPTION_SET_ERROR_ if an error occurred
 
 C example:
 
@@ -6100,13 +6100,13 @@ C example:
 ----
 switch (weechat_config_option_set (option, "new_value", 1))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* .... */
         break;
 }
@@ -6121,11 +6121,11 @@ rc = weechat.config_option_set(option, value, run_callback)
 
 # example
 rc = weechat.config_option_set(option, "new_value", 1)
-if rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
@@ -6153,9 +6153,9 @@ You can set value to null only if it is allowed for option (see
 
 Return value:
 
-* _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been changed
-* _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
-* _WEECHAT_CONFIG_OPTION_SET_ERROR_ if an error occurred
+* _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been changed
+* _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
+* _WHOREIRC_CONFIG_OPTION_SET_ERROR_ if an error occurred
 
 C example:
 
@@ -6163,13 +6163,13 @@ C example:
 ----
 switch (weechat_config_option_set_null (option, 1))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* .... */
         break;
 }
@@ -6184,11 +6184,11 @@ rc = weechat.config_option_set_null(option, run_callback)
 
 # example
 rc = weechat.config_option_set_null(option, 1)
-if rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
@@ -6209,10 +6209,10 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET_ if option value has not been reset
-* _WEECHAT_CONFIG_OPTION_UNSET_OK_RESET_ if option value has been reset
-* _WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED_ if option has been removed
-* _WEECHAT_CONFIG_OPTION_UNSET_ERROR_ if an error occurred
+* _WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET_ if option value has not been reset
+* _WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET_ if option value has been reset
+* _WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED_ if option has been removed
+* _WHOREIRC_CONFIG_OPTION_UNSET_ERROR_ if an error occurred
 
 C example:
 
@@ -6220,16 +6220,16 @@ C example:
 ----
 switch (weechat_config_option_unset (option))
 {
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
         /* .... */
         break;
 }
@@ -6244,13 +6244,13 @@ rc = weechat.config_option_unset(option)
 
 # example
 rc = weechat.config_option_unset(option)
-if rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+if rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
     # ...
 ----
 
@@ -6291,7 +6291,7 @@ weechat.config_option_rename(option, "new_name")
 
 ==== config_option_get_string
 
-_WeeChat ≥ 1.9._
+_WhoreIRC ≥ 1.9._
 
 Return string value of an option property.
 
@@ -6351,7 +6351,7 @@ Arguments:
 ** _config_file_: configuration file pointer (_struct t_config_file *_)
 ** _section_: section pointer (_struct t_config_section *_)
 ** _name_: option name (_char *_)
-** _parent_name_: name of parent option (_char *_) _(WeeChat ≥ 1.4)_
+** _parent_name_: name of parent option (_char *_) _(WhoreIRC ≥ 1.4)_
 ** _type_: option type (_int *_)
 ** _description_: option description (_char *_)
 ** _string_values_: string values (_char *_)
@@ -6853,7 +6853,7 @@ my_section_write_cb (const void *pointer, void *data,
 
     weechat_config_write_option (config_file, option);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -6868,7 +6868,7 @@ weechat.config_write_option(config_file, option)
 def my_section_write_cb(data, config_file, section_name):
     weechat.config_write_line(config_file, "my_section", "")
     weechat.config_write_option(config_file, option)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 ----
 
 ==== config_write_line
@@ -6906,7 +6906,7 @@ my_section_write_cb (const void *pointer, void *data,
     weechat_config_write_line (config_file, "option", "%s;%d",
                                "value", 123);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -6921,7 +6921,7 @@ weechat.config_write_line(config_file, option_name, value)
 def my_section_write_cb(data, config_file, section_name):
     weechat.config_write_line(config_file, "my_section", "")
     weechat.config_write_line(config_file, "option", "value")
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 ----
 
 ==== config_write
@@ -6941,9 +6941,9 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_CONFIG_WRITE_OK_ if configuration was written
-* _WEECHAT_CONFIG_WRITE_MEMORY_ERROR_ if there was not enough memory
-* _WEECHAT_CONFIG_WRITE_ERROR_ if another error occurred
+* _WHOREIRC_CONFIG_WRITE_OK_ if configuration was written
+* _WHOREIRC_CONFIG_WRITE_MEMORY_ERROR_ if there was not enough memory
+* _WHOREIRC_CONFIG_WRITE_ERROR_ if another error occurred
 
 C example:
 
@@ -6951,13 +6951,13 @@ C example:
 ----
 switch (weechat_config_write (config_file))
 {
-    case WEECHAT_CONFIG_WRITE_OK:
+    case WHOREIRC_CONFIG_WRITE_OK:
         /* ... */
         break;
-    case WEECHAT_CONFIG_WRITE_MEMORY_ERROR:
+    case WHOREIRC_CONFIG_WRITE_MEMORY_ERROR:
         /* ... */
         break;
-    case WEECHAT_CONFIG_WRITE_ERROR:
+    case WHOREIRC_CONFIG_WRITE_ERROR:
         /* ... */
         break;
 }
@@ -6972,11 +6972,11 @@ rc = weechat.config_write(config_file)
 
 # example
 rc = weechat.config_write(config_file)
-if rc == weechat.WEECHAT_CONFIG_WRITE_OK:
+if rc == weechat.WHOREIRC_CONFIG_WRITE_OK:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_WRITE_MEMORY_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_WRITE_MEMORY_ERROR:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_WRITE_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_WRITE_ERROR:
     # ...
 ----
 
@@ -6997,9 +6997,9 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_CONFIG_READ_OK_ if configuration was loaded
-* _WEECHAT_CONFIG_READ_MEMORY_ERROR_ if there was not enough memory
-* _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_ if file was not found
+* _WHOREIRC_CONFIG_READ_OK_ if configuration was loaded
+* _WHOREIRC_CONFIG_READ_MEMORY_ERROR_ if there was not enough memory
+* _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_ if file was not found
 
 C example:
 
@@ -7007,13 +7007,13 @@ C example:
 ----
 switch (weechat_config_read (config_file))
 {
-    case WEECHAT_CONFIG_READ_OK:
+    case WHOREIRC_CONFIG_READ_OK:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_MEMORY_ERROR:
+    case WHOREIRC_CONFIG_READ_MEMORY_ERROR:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+    case WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
         /* ... */
         break;
 }
@@ -7028,11 +7028,11 @@ rc = weechat.config_read(config_file)
 
 # example
 rc = weechat.config_read(config_file)
-if rc == weechat.WEECHAT_CONFIG_READ_OK:
+if rc == weechat.WHOREIRC_CONFIG_READ_OK:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_READ_MEMORY_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_READ_MEMORY_ERROR:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+elif rc == weechat.WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
     # ...
 ----
 
@@ -7053,9 +7053,9 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_CONFIG_READ_OK_ if configuration was reloaded
-* _WEECHAT_CONFIG_READ_MEMORY_ERROR_ if there was not enough memory
-* _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_ if file was not found
+* _WHOREIRC_CONFIG_READ_OK_ if configuration was reloaded
+* _WHOREIRC_CONFIG_READ_MEMORY_ERROR_ if there was not enough memory
+* _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_ if file was not found
 
 C example:
 
@@ -7063,13 +7063,13 @@ C example:
 ----
 switch (weechat_config_reload (config_file))
 {
-    case WEECHAT_CONFIG_READ_OK:
+    case WHOREIRC_CONFIG_READ_OK:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_MEMORY_ERROR:
+    case WHOREIRC_CONFIG_READ_MEMORY_ERROR:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+    case WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
         /* ... */
         break;
 }
@@ -7084,11 +7084,11 @@ rc = weechat.config_reload(config_file)
 
 # example
 rc = weechat.config_reload(config_file)
-if rc == weechat.WEECHAT_CONFIG_READ_OK:
+if rc == weechat.WHOREIRC_CONFIG_READ_OK:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_READ_MEMORY_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_READ_MEMORY_ERROR:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+elif rc == weechat.WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
     # ...
 ----
 
@@ -7274,7 +7274,7 @@ const char *weechat_config_get_plugin (const char *option_name);
 
 Arguments:
 
-* _option_name_: option name, WeeChat will add prefix "plugins.var.xxx."
+* _option_name_: option name, WhoreIRC will add prefix "plugins.var.xxx."
   (where "xxx" is current plugin name)
 
 Return value:
@@ -7314,7 +7314,7 @@ int weechat_config_is_set_plugin (const char *option_name);
 
 Arguments:
 
-* _option_name_: option name, WeeChat will add prefix "plugins.var.xxx."
+* _option_name_: option name, WhoreIRC will add prefix "plugins.var.xxx."
   (where "xxx" is current plugin name)
 
 Return value:
@@ -7364,16 +7364,16 @@ int weechat_config_set_plugin (const char *option_name, const char *value);
 
 Arguments:
 
-* _option_name_: option name, WeeChat will add prefix "plugins.var.xxx."
+* _option_name_: option name, WhoreIRC will add prefix "plugins.var.xxx."
   (where "xxx" is current plugin name)
 * _value_: new value for option
 
 Return value:
 
-* _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been changed
-* _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
-* _WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND_ if option was not found
-* _WEECHAT_CONFIG_OPTION_SET_ERROR_ if other error occurred
+* _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_ if option value has been changed
+* _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_ if value was not changed
+* _WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND_ if option was not found
+* _WHOREIRC_CONFIG_OPTION_SET_ERROR_ if other error occurred
 
 C example:
 
@@ -7381,16 +7381,16 @@ C example:
 ----
 switch (weechat_config_set_plugin ("option", "test_value"))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
+    case WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* ... */
         break;
 }
@@ -7405,19 +7405,19 @@ rc = weechat.config_set_plugin(option_name, value)
 
 # example
 rc = weechat.config_set_plugin("option", "test_value")
-if rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
 ==== config_set_desc_plugin
 
-_WeeChat ≥ 0.3.5._
+_WhoreIRC ≥ 0.3.5._
 
 Set description for option in plugins configuration file (plugins.conf).
 
@@ -7431,7 +7431,7 @@ void weechat_config_set_desc_plugin (const char *option_name,
 
 Arguments:
 
-* _option_name_: option name, WeeChat will add prefix "plugins.desc.xxx."
+* _option_name_: option name, WhoreIRC will add prefix "plugins.desc.xxx."
   (where "xxx" is current plugin name)
 * _description_: description for option
 
@@ -7472,15 +7472,15 @@ int weechat_config_unset_plugin (const char *option_name);
 
 Arguments:
 
-* _option_name_: option name, WeeChat will add prefix "plugins.var.xxx."
+* _option_name_: option name, WhoreIRC will add prefix "plugins.var.xxx."
   (where xxx is current plugin name)
 
 Return value:
 
-* _WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET_ if option value has not been reset
-* _WEECHAT_CONFIG_OPTION_UNSET_OK_RESET_ if option value has been reset
-* _WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED_ if option has been removed
-* _WEECHAT_CONFIG_OPTION_UNSET_ERROR_ if an error occurred
+* _WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET_ if option value has not been reset
+* _WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET_ if option value has been reset
+* _WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED_ if option has been removed
+* _WHOREIRC_CONFIG_OPTION_UNSET_ERROR_ if an error occurred
 
 C example:
 
@@ -7488,16 +7488,16 @@ C example:
 ----
 switch (weechat_config_unset_plugin ("option"))
 {
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
         /* ... */
         break;
 }
@@ -7512,13 +7512,13 @@ rc = weechat.config_unset_plugin(option_name)
 
 # example
 rc = weechat.config_unset_plugin("option")
-if rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+if rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
     # ...
-elif rc == weechat.WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+elif rc == weechat.WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
     # ...
 ----
 
@@ -7529,7 +7529,7 @@ Functions for key bindings.
 
 ==== key_bind
 
-_WeeChat ≥ 0.3.6, updated in 1.8._
+_WhoreIRC ≥ 0.3.6, updated in 1.8._
 
 Add new key bindings.
 
@@ -7555,7 +7555,7 @@ Arguments:
 ** _mouse_: keys for mouse events
 * _keys_: hashtable with key bindings; it can contain following special keys:
 ** _{key_bind_quiet}_: do not display the keys added in _core_ buffer
-   _(WeeChat ≥ 1.8)_
+   _(WhoreIRC ≥ 1.8)_
 
 Return value:
 
@@ -7566,8 +7566,8 @@ C example:
 [source,C]
 ----
 struct t_hashtable *keys = weechat_hashtable_new (8,
-                                                  WEECHAT_HASHTABLE_STRING,
-                                                  WEECHAT_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING,
                                                   NULL,
                                                   NULL);
 if (keys)
@@ -7596,7 +7596,7 @@ weechat.key_bind("mouse", keys)
 
 ==== key_unbind
 
-_WeeChat ≥ 0.3.6, updated in 2.0._
+_WhoreIRC ≥ 0.3.6, updated in 2.0._
 
 Remove key binding(s).
 
@@ -7615,7 +7615,7 @@ Arguments:
 * _context_: context for keys (see <<_key_bind,key_bind>>)
 * _key_: key to remove or a special value "area:XXX" to remove all keys having
   _XXX_ as first or second area; if the key starts with "quiet:", the keys
-  removed are not displayed in _core_ buffer (_WeeChat ≥ 2.0_).
+  removed are not displayed in _core_ buffer (_WhoreIRC ≥ 2.0_).
 
 Return value:
 
@@ -7720,10 +7720,10 @@ const char *weechat_color (const char *color_name);
 Arguments:
 
 * _color_name_: name of color, one of:
-** WeeChat color option name (from weechat.color.xxx), for example
+** WhoreIRC color option name (from weechat.color.xxx), for example
    _chat_delimiters_
 ** option name (format: file.section.option), for example
-   _irc.color.message_quit_ (_WeeChat ≥ 1.2_)
+   _irc.color.message_quit_ (_WhoreIRC ≥ 1.2_)
 ** color with optional attributes/background (see below)
 ** attribute:
 *** _bold_: set bold
@@ -7735,15 +7735,15 @@ Arguments:
 *** _underline_: set underline
 *** _-underline_: remove underline
 *** _emphasis_: toggle the emphasis for text (note: this should be used only in
-    bars, because WeeChat uses text emphasis when searching text in buffer)
-    _(WeeChat ≥ 0.4.2)_
+    bars, because WhoreIRC uses text emphasis when searching text in buffer)
+    _(WhoreIRC ≥ 0.4.2)_
 ** bar color name:
 *** _bar_fg_: foreground color for bar
 *** _bar_delim_: delimiters color for bar
 *** _bar_bg_: background color for bar
 ** reset:
 *** _reset_: reset color and attributes
-*** _resetcolor_: reset color (keep attributes) _(WeeChat ≥ 0.3.6)_
+*** _resetcolor_: reset color (keep attributes) _(WhoreIRC ≥ 0.3.6)_
 
 Format of color is: attributes (optional) + color name + ",background"
 (optional). Possible attributes are:
@@ -7753,7 +7753,7 @@ Format of color is: attributes (optional) + color name + ",background"
 * `+/+`: italic
 * `+_+`: underlined text
 * `+|+`: keep attributes: do not reset bold/reverse/italic/underlined when
-  changing color _(WeeChat ≥ 0.3.6)_
+  changing color _(WhoreIRC ≥ 0.3.6)_
 
 Examples:
 
@@ -7811,7 +7811,7 @@ weechat_printf_date_tags (buffer, 0, NULL, "message");
 
 Arguments:
 
-* _buffer_: buffer pointer, if NULL, message is displayed on WeeChat buffer
+* _buffer_: buffer pointer, if NULL, message is displayed on WhoreIRC buffer
 * _message_: message to display
 
 [NOTE]
@@ -7829,7 +7829,7 @@ C example:
 
 [source,C]
 ----
-weechat_printf (NULL, "Hello on WeeChat buffer");
+weechat_printf (NULL, "Hello on WhoreIRC buffer");
 weechat_printf (buffer, "Hello on this buffer");
 weechat_printf (buffer, "%sThis is an error!", weechat_prefix ("error"));
 weechat_printf (buffer, " \tMessage without prefix but with \t some \t tabs");
@@ -7845,7 +7845,7 @@ Script (Python):
 weechat.prnt(buffer, message)
 
 # example
-weechat.prnt("", "Hello on WeeChat buffer")
+weechat.prnt("", "Hello on WhoreIRC buffer")
 weechat.prnt(buffer, "Hello on this buffer")
 weechat.prnt(buffer, "%sThis is an error!" % weechat.prefix("error"))
 weechat.prnt(buffer, " \tMessage without prefix but with \t some \t tabs")
@@ -7870,13 +7870,13 @@ void weechat_printf_date_tags (struct t_gui_buffer *buffer, time_t date,
 
 Arguments:
 
-* _buffer_: buffer pointer, if NULL, message is displayed on WeeChat buffer
+* _buffer_: buffer pointer, if NULL, message is displayed on WhoreIRC buffer
 * _date_: date for message (0 means current date/time)
 * _tags_: comma separated list of tags (NULL means no tags)
 * _message_: message to display
 
-See the link:weechat_user.en.html#lines_tags[WeeChat user's guide / Lines tags]
-for a list of commonly used tags in WeeChat.
+See the link:weechat_user.en.html#lines_tags[WhoreIRC user's guide / Lines tags]
+for a list of commonly used tags in WhoreIRC.
 
 C example:
 
@@ -7920,7 +7920,7 @@ Arguments:
 * _y_: line number (first line is 0); a negative value adds a line after last
   line displayed: absolute value of _y_ is the number of lines after last line
   (for example -1 is immediately after last line, -2 is 2 lines after last line)
-  _(WeeChat ≥ 1.0)_
+  _(WhoreIRC ≥ 1.0)_
 * _message_: message to display
 
 C example:
@@ -7946,7 +7946,7 @@ Function is called "print_y" in scripts ("prnt_y" in Python).
 
 ==== log_printf
 
-Write a message in WeeChat log file (weechat.log).
+Write a message in WhoreIRC log file (weechat.log).
 
 Prototype:
 
@@ -7987,7 +7987,7 @@ Function is called "log_print" in scripts.
 [float]
 ==== Hook priority
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 In some hooks, you can set a priority. A hook with higher priority is at the
 beginning of hooks list, so it will be found and executed before other hooks.
@@ -8053,10 +8053,10 @@ Arguments:
 ** _char **argv_eol_: arguments given for command (until end of line for each
    argument)
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -8068,7 +8068,7 @@ The format of a completion can be:
 
 * _%(name)_: the completion _name_
 * _%(name:arguments)_: the completion _name_ with _arguments_ sent to the
-  callback _(WeeChat ≥ 1.7)_
+  callback _(WhoreIRC ≥ 1.7)_
 * any string: it is used as-is in completion
 
 For example the template `list || add %(filters_names) || del %(filters_names)|-all`
@@ -8103,7 +8103,7 @@ my_command_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
                int argc, char **argv, char **argv_eol)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* this example is inspired by command /filter */
@@ -8150,7 +8150,7 @@ hook = weechat.hook_command(command, description, args, args_description,
 # example
 def my_command_cb(data, buffer, args):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_command("myfilter", "description of myfilter",
     "[list] | [enable|disable|toggle [name]] | [add name plugin.buffer tags regex] | [del name|-all]",
@@ -8188,7 +8188,7 @@ struct t_hook *weechat_hook_completion (const char *completion_item,
 Arguments:
 
 * _completion_item_: name of completion item, after you can use _%(name)_
-  (or _%(name:arguments)_ with WeeChat ≥ 1.7) in a command hooked
+  (or _%(name:arguments)_ with WhoreIRC ≥ 1.7) in a command hooked
   (argument _completion_)
   (priority allowed, see note about <<hook_priority,priority>>)
 * _description_: description of completion
@@ -8196,22 +8196,22 @@ Arguments:
   something using this item), arguments and return value:
 ** _const void *pointer_: pointer
 ** _void *data_: pointer
-** _const char *completion_item_: name of completion item (with WeeChat ≥ 1.7 it
+** _const char *completion_item_: name of completion item (with WhoreIRC ≥ 1.7 it
    can include arguments, with the format: _name:arguments_)
 ** _struct t_gui_buffer *buffer_: buffer where completion is made
 ** _struct t_gui_completion *completion_: structure used to add words for
    completion (see
    <<_hook_completion_list_add,hook_completion_list_add>>)
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
 [NOTE]
-Completion names are global (shared across WeeChat and plugins). So it is
+Completion names are global (shared across WhoreIRC and plugins). So it is
 recommended to choose a name with a unique prefix, like "plugin_xxx" (where
 "xxx" is your item name).
 
@@ -8220,8 +8220,8 @@ The callback must only call function <<_hook_completion_list_add,hook_completion
 and must *NOT* update the command line. +
 To update the command line when kbd:[Tab] is pressed, you can use the function
 <<_hook_command_run,hook_command_run>> with command: `/input complete_next`
-(and you must return _WEECHAT_RC_OK_EAT_ if your callback has updated the command line,
-so that WeeChat will not perform the completion).
+(and you must return _WHOREIRC_RC_OK_EAT_ if your callback has updated the command line,
+so that WhoreIRC will not perform the completion).
 
 Return value:
 
@@ -8237,10 +8237,10 @@ my_completion_cb (const void *pointer, void *data, const char *completion_item,
                   struct t_gui_completion *completion)
 {
     weechat_hook_completion_list_add (completion, "word1",
-                                      0, WEECHAT_LIST_POS_SORT);
+                                      0, WHOREIRC_LIST_POS_SORT);
     weechat_hook_completion_list_add (completion, "test_word2",
-                                      0, WEECHAT_LIST_POS_SORT);
-    return WEECHAT_RC_OK;
+                                      0, WHOREIRC_LIST_POS_SORT);
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_completion_hook = weechat_hook_completion ("plugin_item",
@@ -8257,9 +8257,9 @@ hook = weechat.hook_completion(completion_item, description, callback, callback_
 
 # example
 def my_completion_cb(data, completion_item, buffer, completion):
-    weechat.hook_completion_list_add(completion, "word1", 0, weechat.WEECHAT_LIST_POS_SORT)
-    weechat.hook_completion_list_add(completion, "test_word2", 0, weechat.WEECHAT_LIST_POS_SORT)
-    return weechat.WEECHAT_RC_OK
+    weechat.hook_completion_list_add(completion, "word1", 0, weechat.WHOREIRC_LIST_POS_SORT)
+    weechat.hook_completion_list_add(completion, "test_word2", 0, weechat.WHOREIRC_LIST_POS_SORT)
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_completion("plugin_item", "my custom completion!",
                                "my_completion_cb", "")
@@ -8267,7 +8267,7 @@ hook = weechat.hook_completion("plugin_item", "my custom completion!",
 
 ==== hook_completion_get_string
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Get a completion property as string.
 
@@ -8302,7 +8302,7 @@ my_completion_cb (const void *pointer, void *data, const char *completion_item,
     /* completion depending on args */
     /* ... */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -8319,7 +8319,7 @@ def my_completion_cb(data, completion_item, buffer, completion):
     args = weechat.hook_completion_get_string(completion, "args")
     # completion depending on args
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 ----
 
 ==== hook_completion_list_add
@@ -8342,9 +8342,9 @@ Arguments:
 * _word_: word to add
 * _nick_completion_: 1 if word is a nick, otherwise 0
 * _where_: position where word will be inserted in list:
-** _WEECHAT_LIST_POS_SORT_: any position, to keep list sorted
-** _WEECHAT_LIST_POS_BEGINNING_: beginning of list
-** _WEECHAT_LIST_POS_END_: end of list
+** _WHOREIRC_LIST_POS_SORT_: any position, to keep list sorted
+** _WHOREIRC_LIST_POS_BEGINNING_: beginning of list
+** _WHOREIRC_LIST_POS_END_: end of list
 
 C example: see <<_hook_completion,hook_completion>>.
 
@@ -8362,7 +8362,7 @@ weechat.hook_completion_list_add(completion, word, nick_completion, where)
 
 _Updated in 1.5._
 
-Hook a command when WeeChat runs it.
+Hook a command when WhoreIRC runs it.
 
 Prototype:
 
@@ -8387,11 +8387,11 @@ Arguments:
 ** _struct t_gui_buffer *buffer_: buffer where command is executed
 ** _const char *command_: the command executed, with its arguments
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_OK_EAT_: command will not be executed by WeeChat after callback
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_OK_EAT_: command will not be executed by WhoreIRC after callback
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -8408,7 +8408,7 @@ my_command_run_cb (const void *pointer, void *data,
                    struct t_gui_buffer *buffer, const char *command)
 {
     weechat_printf (NULL, "I'm eating the completion!");
-    return WEECHAT_RC_OK_EAT;
+    return WHOREIRC_RC_OK_EAT;
 }
 
 struct t_hook *my_command_run_hook =
@@ -8426,7 +8426,7 @@ hook = weechat.hook_command_run(command, callback, callback_data)
 # example
 def my_command_run_cb(data, buffer, command):
     weechat.prnt("", "I'm eating the completion!")
-    return weechat.WEECHAT_RC_OK_EAT
+    return weechat.WHOREIRC_RC_OK_EAT
 
 hook = weechat.hook_command_run("/input complete*", "my_command_run_cb", "")
 ----
@@ -8463,10 +8463,10 @@ Arguments:
 ** _void *data_: pointer
 ** _int remaining_calls_: remaining calls (-1 if timer has no end)
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -8482,7 +8482,7 @@ int
 my_timer_cb (const void *pointer, void *data, int remaining_calls)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* timer called each 20 seconds */
@@ -8500,7 +8500,7 @@ hook = weechat.hook_timer(interval, align_second, max_calls, callback, callback_
 # example
 def my_timer_cb(data, remaining_calls):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # timer called each 20 seconds
 hook = weechat.hook_timer(20 * 1000, 0, 0, "my_timer_cb", "")
@@ -8533,17 +8533,17 @@ Arguments:
 * _flag_read_: 1 = catch read event, 0 = ignore
 * _flag_write_: 1 = catch write event, 0 = ignore
 * _flag_exception_: 1 = catch exception event, 0 = ignore
-  (_WeeChat ≥ 1.3_: this argument is ignored and not used any more)
+  (_WhoreIRC ≥ 1.3_: this argument is ignored and not used any more)
 * _callback_: function called a selected event occurs for file (or socket),
   arguments and return value:
 ** _const void *pointer_: pointer
 ** _void *data_: pointer
 ** _int fd_: file descriptor
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -8552,8 +8552,8 @@ Return value:
 * pointer to new hook, NULL if error occurred
 
 [IMPORTANT]
-In scripts, with WeeChat ≥ 2.0, the callback argument _fd_ is an integer
-(with WeeChat ≤ 1.9, it was a string). +
+In scripts, with WhoreIRC ≥ 2.0, the callback argument _fd_ is an integer
+(with WhoreIRC ≤ 1.9, it was a string). +
 To be compatible with all versions, it is recommended to convert the argument
 to integer before using it, for example in Python: `int(fd)`.
 
@@ -8565,7 +8565,7 @@ int
 my_fd_cb (const void *pointer, void *data, int fd)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int sock = socket (AF_INET, SOCK_STREAM, 0);
@@ -8584,7 +8584,7 @@ hook = weechat.hook_fd(fd, flag_read, flag_write, flag_exception, callback, call
 # example
 def my_fd_cb(data, fd):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 sock = ...
 hook = weechat.hook_fd(sock, 1, 0, 0, "my_fd_cb", "")
@@ -8598,12 +8598,12 @@ Hook a process (launched with fork), and catch output.
 
 [NOTE]
 Since version 0.3.9.2, the shell is not used any more to execute the command.
-WeeChat makes an automatic split of the command and its arguments (like the
+WhoreIRC makes an automatic split of the command and its arguments (like the
 shell does). +
 If the split is not correct (according to quotes in your command), or if you
 want to use shell, you can use function
 <<_hook_process_hashtable,hook_process_hashtable>> with arguments in the hashtable
-_options_ _(WeeChat ≥ 0.4.0)_.
+_options_ _(WhoreIRC ≥ 0.4.0)_.
 
 Prototype:
 
@@ -8624,8 +8624,8 @@ struct t_hook *weechat_hook_process (const char *command,
 
 Arguments:
 
-* _command_: command to launch in child process, URL _(WeeChat ≥ 0.3.7)_ or
-  function _(WeeChat ≥ 1.5)_ (see below)
+* _command_: command to launch in child process, URL _(WhoreIRC ≥ 0.3.7)_ or
+  function _(WhoreIRC ≥ 1.5)_ (see below)
 * _timeout_: timeout for command (in milliseconds): after this timeout, child
   process is killed (0 means no timeout)
 * _callback_: function called when data from child is available, or when child
@@ -8641,17 +8641,17 @@ Arguments:
 **** _3_: not enough memory
 **** _4_: error with a file
 *** _< 0_:
-**** _WEECHAT_HOOK_PROCESS_RUNNING_: data available, but child still running)
-**** _WEECHAT_HOOK_PROCESS_ERROR_: error when launching command
-**** _WEECHAT_HOOK_PROCESS_CHILD_: callback is called in the child process
+**** _WHOREIRC_HOOK_PROCESS_RUNNING_: data available, but child still running)
+**** _WHOREIRC_HOOK_PROCESS_ERROR_: error when launching command
+**** _WHOREIRC_HOOK_PROCESS_CHILD_: callback is called in the child process
 ** _out_: standard output of command (stdout)
 ** _err_: error output of command (stderr)
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
 *** child process return code (in case of function with "func:" in command)
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -8659,24 +8659,24 @@ Return value:
 
 * pointer to new hook, NULL if error occurred
 
-When command has ended, or if timeout is reached, WeeChat will automatically
+When command has ended, or if timeout is reached, WhoreIRC will automatically
 unhook (and kill process if it is still running).
 
 The command can be an URL with format: "url:https://www.example.com",
-to download content of URL _(WeeChat ≥ 0.3.7)_. Options are possible for URL
+to download content of URL _(WhoreIRC ≥ 0.3.7)_. Options are possible for URL
 with function <<_hook_process_hashtable,hook_process_hashtable>>.
 
 The command can also be a function name with format: "func:name", to execute
-the function "name" _(WeeChat ≥ 1.5)_. This function receives a single argument
+the function "name" _(WhoreIRC ≥ 1.5)_. This function receives a single argument
 (_data_) and must return a string, which is sent to the callback. +
 In C API, the callback is called with the return code set to
-_WEECHAT_HOOK_PROCESS_CHILD_, which means the callback is running in the child
+_WHOREIRC_HOOK_PROCESS_CHILD_, which means the callback is running in the child
 process (after fork). +
 In scripting API, the function _name_ is called directly and its result
 (string) is sent to the callback (like the output of an external command).
 
 [TIP]
-If you want to retrieve infos about WeeChat (like current stable version,
+If you want to retrieve infos about WhoreIRC (like current stable version,
 latest git commit, etc.), you can use URLs on page https://weechat.org/dev/info
 
 [NOTE]
@@ -8699,10 +8699,10 @@ int
 my_process_cb (const void *pointer, void *data, const char *command,
                int return_code, const char *out, const char *err)
 {
-    if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+    if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
     {
         weechat_printf (NULL, "Error with command '%s'", command);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (return_code >= 0)
@@ -8720,7 +8720,7 @@ my_process_cb (const void *pointer, void *data, const char *command,
         weechat_printf (NULL, "stderr: %s", err);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_process_hook = weechat_hook_process ("ls", 5000,
@@ -8731,7 +8731,7 @@ int
 my_process_func_cb (const void *pointer, void *data, const char *command,
                     int return_code, const char *out, const char *err)
 {
-    if (return_code == WEECHAT_HOOK_PROCESS_CHILD)
+    if (return_code == WHOREIRC_HOOK_PROCESS_CHILD)
     {
         /* do something blocking... */
         /* ... */
@@ -8744,10 +8744,10 @@ my_process_func_cb (const void *pointer, void *data, const char *command,
     }
     else
     {
-        if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+        if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
         {
             weechat_printf (NULL, "Error with command '%s'", command);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (return_code >= 0)
@@ -8765,7 +8765,7 @@ my_process_func_cb (const void *pointer, void *data, const char *command,
             weechat_printf (NULL, "stderr: %s", err);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 }
 
@@ -8782,16 +8782,16 @@ hook = weechat.hook_process(command, timeout, callback, callback_data)
 
 # example with an external command
 def my_process_cb(data, command, return_code, out, err):
-    if return_code == weechat.WEECHAT_HOOK_PROCESS_ERROR:
+    if return_code == weechat.WHOREIRC_HOOK_PROCESS_ERROR:
         weechat.prnt("", "Error with command '%s'" % command)
-        return weechat.WEECHAT_RC_OK
+        return weechat.WHOREIRC_RC_OK
     if return_code >= 0:
         weechat.prnt("", "return_code = %d" % return_code)
     if out != "":
         weechat.prnt("", "stdout: %s" % out)
     if err != "":
         weechat.prnt("", "stderr: %s" % err)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_process("ls", 5000, "my_process_cb", "")
 
@@ -8802,23 +8802,23 @@ def get_status(data):
     return "this is the result"
 
 def my_process_cb(data, command, return_code, out, err):
-    if return_code == weechat.WEECHAT_HOOK_PROCESS_ERROR:
+    if return_code == weechat.WHOREIRC_HOOK_PROCESS_ERROR:
         weechat.prnt("", "Error with command '%s'" % command)
-        return weechat.WEECHAT_RC_OK
+        return weechat.WHOREIRC_RC_OK
     if return_code >= 0:
         weechat.prnt("", "return_code = %d" % return_code)
     if out != "":
         weechat.prnt("", "stdout: %s" % out)
     if err != "":
         weechat.prnt("", "stderr: %s" % err)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_process("func:get_status", 5000, "my_process_cb", "")
 ----
 
 ==== hook_process_hashtable
 
-_WeeChat ≥ 0.3.7, updated in 1.5._
+_WhoreIRC ≥ 0.3.7, updated in 1.5._
 
 Hook a process (launched with fork) using options in a hashtable, and catch
 output.
@@ -8853,7 +8853,7 @@ available:
 | Option | Value | Default | Description
 
 | argN (N ≥ 1) +
-  _(WeeChat ≥ 0.4.0)_ |
+  _(WhoreIRC ≥ 0.4.0)_ |
   any string |
   no arguments |
   Arguments for command; if no argument is given with these options,
@@ -8861,14 +8861,14 @@ available:
   arguments are read in the _command_ argument).
 
 | stdin +
-  _(WeeChat ≥ 0.4.3)_ |
+  _(WhoreIRC ≥ 0.4.3)_ |
   (not used) |
   no stdin |
   Create a pipe for writing data on standard input (stdin) of child process
   (see function <<_hook_set,hook_set>>).
 
 | buffer_flush +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   number of bytes |
   65536 |
   Minimum number of bytes to flush stdout/stderr (to send output to callback),
@@ -8876,7 +8876,7 @@ available:
   callback.
 
 | detached +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   (not used) |
   not detached |
   Run the process in a detached mode: stdout and stderr are redirected to
@@ -8912,10 +8912,10 @@ int
 my_process_cb (const void *pointer, void *data, const char *command,
                int return_code, const char *out, const char *err)
 {
-    if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+    if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
     {
         weechat_printf (NULL, "Error with command '%s'", command);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (return_code >= 0)
@@ -8933,13 +8933,13 @@ my_process_cb (const void *pointer, void *data, const char *command,
         weechat_printf (NULL, "stderr: %s", err);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* example 1: download URL */
 struct t_hashtable *options_url1 = weechat_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_url1)
@@ -8954,8 +8954,8 @@ if (options_url1)
 
 /* example 2: open URL with custom HTTP headers */
 struct t_hashtable *options_url2 = weechat_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_url2)
@@ -8972,8 +8972,8 @@ if (options_url2)
 
 /* example 3: execute a notify program with a message from someone */
 struct t_hashtable *options_cmd1 = weechat_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_cmd1)
@@ -8991,8 +8991,8 @@ if (options_cmd1)
 
 /* example 4: call shell to execute a command (command must be SAFE) */
 struct t_hashtable *options_cmd2 = weechat_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                              WHOREIRC     WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_cmd2)
@@ -9016,16 +9016,16 @@ hook = weechat.hook_process_hashtable(command, options, timeout, callback, callb
 
 # example
 def my_process_cb(data, command, return_code, out, err):
-    if return_code == weechat.WEECHAT_HOOK_PROCESS_ERROR:
+    if return_code == weechat.WHOREIRC_HOOK_PROCESS_ERROR:
         weechat.prnt("", "Error with command '%s'" % command)
-        return weechat.WEECHAT_RC_OK
+        return weechat.WHOREIRC_RC_OK
     if return_code >= 0:
         weechat.prnt("", "return_code = %d" % return_code)
     if out != "":
         weechat.prnt("", "stdout: %s" % out)
     if err != "":
         weechat.prnt("", "stderr: %s" % err)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # example 1: download URL
 hook1 = weechat.hook_process_hashtable("url:https://weechat.org/",
@@ -9116,26 +9116,26 @@ Arguments:
 ** _const void *pointer_: pointer
 ** _void *data_: pointer
 ** _int status_: connection status:
-*** _WEECHAT_HOOK_CONNECT_OK_: connection OK
-*** _WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND_: address not found
-*** _WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND_: IP address not found
-*** _WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED_: connection refused
-*** _WEECHAT_HOOK_CONNECT_PROXY_ERROR_: error with proxy
-*** _WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR_: error with local hostname
-*** _WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR_: GnuTLS init error
-*** _WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR_: GnuTLS handshake error
-*** _WEECHAT_HOOK_CONNECT_MEMORY_ERROR_: insufficient memory
-*** _WEECHAT_HOOK_CONNECT_TIMEOUT_: timeout
-*** _WEECHAT_HOOK_CONNECT_SOCKET_ERROR_: unable to create socket
+*** _WHOREIRC_HOOK_CONNECT_OK_: connection OK
+*** _WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND_: address not found
+*** _WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND_: IP address not found
+*** _WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED_: connection refused
+*** _WHOREIRC_HOOK_CONNECT_PROXY_ERROR_: error with proxy
+*** _WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR_: error with local hostname
+*** _WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR_: GnuTLS init error
+*** _WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR_: GnuTLS handshake error
+*** _WHOREIRC_HOOK_CONNECT_MEMORY_ERROR_: insufficient memory
+*** _WHOREIRC_HOOK_CONNECT_TIMEOUT_: timeout
+*** _WHOREIRC_HOOK_CONNECT_SOCKET_ERROR_: unable to create socket
 ** _gnutls_rc_: return value of _gnutls_handshake()_
 ** _sock_: socket used to connect
 ** _const char *error_: return value of _gnutls_strerror(gnutls_rc)_
 ** _const char *ip_address_: IP address found
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -9144,8 +9144,8 @@ Return value:
 * pointer to new hook, NULL if error occurred
 
 [IMPORTANT]
-In scripts, with WeeChat ≥ 2.0, the callback arguments _status_, _gnutls_rc_
-and _sock_ are integers (with WeeChat ≤ 1.9, they were strings). +
+In scripts, with WhoreIRC ≥ 2.0, the callback arguments _status_, _gnutls_rc_
+and _sock_ are integers (with WhoreIRC ≤ 1.9, they were strings). +
 To be compatible with all versions, it is recommended to convert the argument
 to integer before using it, for example in Python: `int(sock)`.
 
@@ -9159,41 +9159,41 @@ my_connect_cb (const void *pointer, void *data, int status, int gnutls_rc,
 {
     switch (status)
     {
-        case WEECHAT_HOOK_CONNECT_OK:
+        case WHOREIRC_HOOK_CONNECT_OK:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND:
+        case WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
+        case WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED:
+        case WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_PROXY_ERROR:
+        case WHOREIRC_HOOK_CONNECT_PROXY_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
+        case WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR:
+        case WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
+        case WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_MEMORY_ERROR:
+        case WHOREIRC_HOOK_CONNECT_MEMORY_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_TIMEOUT:
+        case WHOREIRC_HOOK_CONNECT_TIMEOUT:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_SOCKET_ERROR:
+        case WHOREIRC_HOOK_CONNECT_SOCKET_ERROR:
             /* ... */
             break;
     }
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_connect_hook = weechat_hook_connect (NULL,
@@ -9214,29 +9214,29 @@ hook = weechat.hook_connect(proxy, address, port, ipv6, retry, local_hostname,
 
 # example
 def my_connect_cb(data, status, gnutls_rc, sock, error, ip_address):
-    if status == WEECHAT_HOOK_CONNECT_OK:
+    if status == WHOREIRC_HOOK_CONNECT_OK:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND:
+    elif status == WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
+    elif status == WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED:
+    elif status == WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_PROXY_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_PROXY_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_MEMORY_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_MEMORY_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_TIMEOUT:
+    elif status == WHOREIRC_HOOK_CONNECT_TIMEOUT:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_SOCKET_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_SOCKET_ERROR:
         # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_connect("", "my.server.org", 1234, 1, 0, "",
                             "my_connect_cb", "")
@@ -9244,7 +9244,7 @@ hook = weechat.hook_connect("", "my.server.org", 1234, 1, 0, "",
 
 ==== hook_line
 
-_WeeChat ≥ 2.3._
+_WhoreIRC ≥ 2.3._
 
 Hook a line to be printed in a buffer.
 
@@ -9296,8 +9296,8 @@ Arguments:
 ** _struct t_hashtable *line_: hashtable with the line info, keys and values are
    strings (see table below)
 ** return value: hashtable with new values (see table below)
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -9396,7 +9396,7 @@ Line data sent to the callback is a hashtable, with following values
 |===
 
 The callback can return a hashtable with some fields to update the line.
-Any invalid value in a field is silently ignored by WeeChat.
+Any invalid value in a field is silently ignored by WhoreIRC.
 
 The following keys can be set in the hashtable (keys and values are strings
 in this hashtable):
@@ -9484,8 +9484,8 @@ my_line_cb (const void *pointer, void *data, struct t_hasbtable *line)
     struct t_hashtable *hashtable;
 
     hashtable = weechat_hashtable_new (8,
-                                       WEECHAT_HASHTABLE_STRING,
-                                       WEECHAT_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
                                        NULL,
                                        NULL);
     /* force a highlight on the line */
@@ -9550,10 +9550,10 @@ Arguments:
 
 * _buffer_: buffer pointer, if NULL, messages from any buffer are caught
 * _tags_: catch only messages with these tags (optional):
-** with WeeChat ≥ 0.4.3: comma-separated list of tags that must be in message
+** with WhoreIRC ≥ 0.4.3: comma-separated list of tags that must be in message
    (logical "or"); it is possible to combine many tags as a logical "and" with
    separator `+++`; wildcard `+*+` is allowed in tags
-** with WeeChat ≤ 0.4.2: comma-separated list of tags that must all be in
+** with WhoreIRC ≤ 0.4.2: comma-separated list of tags that must all be in
    message (logical "and")
 * _message_: only messages with this string will be caught (optional, case
   insensitive)
@@ -9572,10 +9572,10 @@ Arguments:
 ** _const char *prefix_: prefix
 ** _const char *message_: message
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -9584,8 +9584,8 @@ Return value:
 * pointer to new hook, NULL if error occurred
 
 [IMPORTANT]
-In scripts, with WeeChat ≥ 1.0, the callback arguments _displayed_ and
-_highlight_ are integers (with WeeChat ≤ 0.4.3, they were strings). +
+In scripts, with WhoreIRC ≥ 1.0, the callback arguments _displayed_ and
+_highlight_ are integers (with WhoreIRC ≤ 0.4.3, they were strings). +
 To be compatible with all versions, it is recommended to convert the argument
 to integer before testing it, for example in Python: `if int(highlight):`.
 
@@ -9600,7 +9600,7 @@ my_print_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
              const char *prefix, const char *message)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* catch all messages, on all buffers, without color */
@@ -9619,7 +9619,7 @@ hook = weechat.hook_print(buffer, tags, message, strip_colors, callback, callbac
 def my_print_cb(data, buffer, date, tags, displayed, highlight, prefix, message):
     if int(highlight):
         # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # catch all messages, on all buffers, without color
 hook = weechat.hook_print("", "", "", 1, "my_print_cb", "")
@@ -9656,17 +9656,17 @@ Arguments:
 ** _void *data_: pointer
 ** _const char *signal_: signal received
 ** _const char *type_data_: type of data sent with signal:
-*** _WEECHAT_HOOK_SIGNAL_STRING_: string
-*** _WEECHAT_HOOK_SIGNAL_INT_: integer number
-*** _WEECHAT_HOOK_SIGNAL_POINTER_: pointer
+*** _WHOREIRC_HOOK_SIGNAL_STRING_: string
+*** _WHOREIRC_HOOK_SIGNAL_INT_: integer number
+*** _WHOREIRC_HOOK_SIGNAL_POINTER_: pointer
 ** _void *signal_data_: data sent with signal
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_OK_EAT_ (stop sending the signal immediately)
-    _(WeeChat ≥ 0.4.0)_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_OK_EAT_ (stop sending the signal immediately)
+    _(WhoreIRC ≥ 0.4.0)_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -9674,29 +9674,29 @@ Return value:
 
 * pointer to new hook, NULL if error occurred
 
-List of signals sent by WeeChat and plugins:
+List of signals sent by WhoreIRC and plugins:
 
 [width="100%",cols="^1,^3,4,5",options="header"]
 |===
 | Plugin | Signal | Arguments | Description
 
 | guile | guile_script_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Scheme script loaded.
 
 | guile | guile_script_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Scheme script unloaded.
 
 | guile | guile_script_installed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of paths to scripts installed. |
   Scheme script(s) installed.
 
 | guile | guile_script_removed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of scripts removed. |
   Scheme script(s) removed.
 
@@ -9713,21 +9713,21 @@ List of signals sent by WeeChat and plugins:
   Since version 2.2, the whole IRC message is sent, including tags.
 
 | irc | xxx,irc_raw_in_yyy ^(1)^ +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: message. |
   IRC message from server (before irc plugin uses it,
   signal sent even if message is ignored). +
   Since version 2.2, the whole IRC message is sent, including tags.
 
 | irc | xxx,irc_raw_in2_yyy ^(1)^ +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: message. |
   IRC message from server (after irc plugin uses it,
   signal sent even if message is ignored). +
   Since version 2.2, the whole IRC message is sent, including tags.
 
 | irc | xxx,irc_out1_yyy ^(1)^ +
-  _(WeeChat ≥ 0.3.7)_ |
+  _(WhoreIRC ≥ 0.3.7)_ |
   String: message. |
   IRC message sent to server before automatic split
   (to fit in 512 bytes by default).
@@ -9738,7 +9738,7 @@ List of signals sent by WeeChat and plugins:
   (to fit in 512 bytes by default).
 
 | irc | xxx,irc_outtags_yyy ^(1)^ +
-  _(WeeChat ≥ 0.3.4)_ |
+  _(WhoreIRC ≥ 0.3.4)_ |
   String: tags + ";" + message. |
   Tags + IRC message sent to server.
 
@@ -9763,7 +9763,7 @@ List of signals sent by WeeChat and plugins:
   Private opened.
 
 | irc | irc_server_opened +
-  _(WeeChat ≥ 0.3.7)_ |
+  _(WhoreIRC ≥ 0.3.7)_ |
   Pointer: buffer. |
   Server buffer opened.
 
@@ -9780,7 +9780,7 @@ List of signals sent by WeeChat and plugins:
   Disconnected from server.
 
 | irc | irc_server_lag_changed +
-  _(WeeChat ≥ 1.8)_ |
+  _(WhoreIRC ≥ 1.8)_ |
   String: server name. |
   Lag changed on the server.
 
@@ -9793,47 +9793,47 @@ List of signals sent by WeeChat and plugins:
   Ignore removed.
 
 | irc | irc_notify_join +
-  _(WeeChat ≥ 0.3.8)_ |
+  _(WhoreIRC ≥ 0.3.8)_ |
   String: server name + "," + nick. |
   A nick in notify list has joined server.
 
 | irc | irc_notify_quit +
-  _(WeeChat ≥ 0.3.8)_ |
+  _(WhoreIRC ≥ 0.3.8)_ |
   String: server name + "," + nick. |
   A nick in notify list has quit server.
 
 | irc | irc_notify_away +
-  _(WeeChat ≥ 0.3.8)_ |
+  _(WhoreIRC ≥ 0.3.8)_ |
   String: server name + "," + nick + "," + away message. |
   A nick in notify list is now away on server.
 
 | irc | irc_notify_still_away +
-  _(WeeChat ≥ 0.3.8)_ |
+  _(WhoreIRC ≥ 0.3.8)_ |
   String: server name + "," + nick + "," + away message. |
   A nick in notify list is still away on server (away message has changed).
 
 | irc | irc_notify_back +
-  _(WeeChat ≥ 0.3.8)_ |
+  _(WhoreIRC ≥ 0.3.8)_ |
   String: server name + "," + nick. |
   A nick in notify list is back (away status removed).
 
 | javascript | javascript_script_loaded +
-  _(WeeChat ≥ 1.2)_ |
+  _(WhoreIRC ≥ 1.2)_ |
   String: path to script. |
   JavaScript script loaded.
 
 | javascript | javascript_script_unloaded +
-  _(WeeChat ≥ 1.2)_ |
+  _(WhoreIRC ≥ 1.2)_ |
   String: path to script. |
   JavaScript script unloaded.
 
 | javascript | javascript_script_installed +
-  _(WeeChat ≥ 1.2)_ |
+  _(WhoreIRC ≥ 1.2)_ |
   String: comma-separated list of paths to scripts installed. |
   JavaScript script(s) installed.
 
 | javascript | javascript_script_removed +
-  _(WeeChat ≥ 1.2)_ |
+  _(WhoreIRC ≥ 1.2)_ |
   String: comma-separated list of scripts removed. |
   JavaScript script(s) removed.
 
@@ -9850,157 +9850,157 @@ List of signals sent by WeeChat and plugins:
   Display backlog for buffer.
 
 | lua | lua_script_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Lua script loaded.
 
 | lua | lua_script_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Lua script unloaded.
 
 | lua | lua_script_installed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of paths to scripts installed. |
   Lua script(s) installed.
 
 | lua | lua_script_removed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of scripts removed. |
   Lua script(s) removed.
 
 | perl | perl_script_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Perl script loaded.
 
 | perl | perl_script_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Perl script unloaded.
 
 | perl | perl_script_installed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of paths to scripts installed. |
   Perl script(s) installed.
 
 | perl | perl_script_removed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of scripts removed. |
   Perl script(s) removed.
 
 | php | php_script_loaded +
-  _(WeeChat ≥ 2.0)_ |
+  _(WhoreIRC ≥ 2.0)_ |
   String: path to script. |
   PHP script loaded.
 
 | php | php_script_unloaded +
-  _(WeeChat ≥ 2.0)_ |
+  _(WhoreIRC ≥ 2.0)_ |
   String: path to script. |
   PHP script unloaded.
 
 | php | php_script_installed +
-  _(WeeChat ≥ 2.0)_ |
+  _(WhoreIRC ≥ 2.0)_ |
   String: comma-separated list of paths to scripts installed. |
   PHP script(s) installed.
 
 | php | php_script_removed +
-  _(WeeChat ≥ 2.0)_ |
+  _(WhoreIRC ≥ 2.0)_ |
   String: comma-separated list of scripts removed. |
   PHP script(s) removed.
 
 | python | python_script_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Python script loaded.
 
 | python | python_script_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Python script unloaded.
 
 | python | python_script_installed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of paths to scripts installed. |
   Python script(s) installed.
 
 | python | python_script_removed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of scripts removed. |
   Python script(s) removed.
 
 | relay | relay_client_connecting +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   Pointer: relay client. |
   A relay client is connecting.
 
 | relay | relay_client_waiting_auth +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   Pointer: relay client. |
   Waiting for authentication from a relay client.
 
 | relay | relay_client_auth_ok +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   Pointer: relay client. |
   Successful authentication from a relay client.
 
 | relay | relay_client_connected +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   Pointer: relay client. |
   A relay client is connected.
 
 | relay | relay_client_auth_failed +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   Pointer: relay client. |
   Authentication of a relay client has failed.
 
 | relay | relay_client_disconnected +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   Pointer: relay client. |
   A relay client is disconnected.
 
 | ruby | ruby_script_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Ruby script loaded.
 
 | ruby | ruby_script_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Ruby script unloaded.
 
 | ruby | ruby_script_installed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of paths to scripts installed. |
   Ruby script(s) installed.
 
 | ruby | ruby_script_removed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of scripts removed. |
   Ruby script(s) removed.
 
 | spell | spell_suggest +
-  _(WeeChat ≥ 2.4)_ |
+  _(WhoreIRC ≥ 2.4)_ |
   Pointer: buffer. |
   New suggestions for a misspelled word.
 
 | tcl | tcl_script_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Tcl script loaded.
 
 | tcl | tcl_script_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to script. |
   Tcl script unloaded.
 
 | tcl | tcl_script_installed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of paths to scripts installed. |
   Tcl script(s) installed.
 
 | tcl | tcl_script_removed +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: comma-separated list of scripts removed. |
   Tcl script(s) removed.
 
@@ -10021,12 +10021,12 @@ List of signals sent by WeeChat and plugins:
   Buffer cleared.
 
 | weechat | buffer_filters_enabled +
-  _(WeeChat ≥ 2.0)_ |
+  _(WhoreIRC ≥ 2.0)_ |
   Pointer: buffer. |
   Filters enabled in buffer.
 
 | weechat | buffer_filters_disabled +
-  _(WeeChat ≥ 2.0)_ |
+  _(WhoreIRC ≥ 2.0)_ |
   Pointer: buffer. |
   Filters disabled in buffer.
 
@@ -10039,7 +10039,7 @@ List of signals sent by WeeChat and plugins:
   Buffer unhidden.
 
 | weechat | buffer_line_added +
-  _(WeeChat ≥ 0.3.7)_ |
+  _(WhoreIRC ≥ 0.3.7)_ |
   Pointer: line. |
   Line added in a buffer.
 
@@ -10088,17 +10088,17 @@ List of signals sent by WeeChat and plugins:
   Type of buffer changed.
 
 | weechat | buffer_zoomed +
-  _(WeeChat ≥ 0.4.3)_ |
+  _(WhoreIRC ≥ 0.4.3)_ |
   Pointer: buffer. |
   Merged buffer zoomed.
 
 | weechat | buffer_unzoomed +
-  _(WeeChat ≥ 0.4.3)_ |
+  _(WhoreIRC ≥ 0.4.3)_ |
   Pointer: buffer. |
   Merged buffer unzoomed.
 
 | weechat | day_changed +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: new date, format: "2010-01-31". |
   Day of system date has changed.
 
@@ -10163,67 +10163,67 @@ List of signals sent by WeeChat and plugins:
   Key pressed.
 
 | weechat | key_combo_default +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   String: key combo. |
   Key combo in _default_ context.
 
 | weechat | key_combo_search +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   String: key combo. |
   Key combo in _search_ context.
 
 | weechat | key_combo_cursor +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   String: key combo. |
   Key combo in _cursor_ context.
 
 | weechat | mouse_enabled +
-  _(WeeChat ≥ 1.1)_ |
+  _(WhoreIRC ≥ 1.1)_ |
   - |
   Mouse enabled.
 
 | weechat | mouse_disabled +
-  _(WeeChat ≥ 1.1)_ |
+  _(WhoreIRC ≥ 1.1)_ |
   - |
   Mouse disabled.
 
 | weechat | nicklist_group_added +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: buffer pointer + "," + group name. |
   Group added in nicklist.
 
 | weechat | nicklist_group_changed +
-  _(WeeChat ≥ 0.3.4)_ |
+  _(WhoreIRC ≥ 0.3.4)_ |
   String: buffer pointer + "," + group name. |
   Group changed in nicklist.
 
 | weechat | nicklist_group_removing +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   String: buffer pointer + "," + group name. |
   Removing group from nicklist.
 
 | weechat | nicklist_group_removed +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: buffer pointer + "," + group name. |
   Group removed from nicklist.
 
 | weechat | nicklist_nick_added +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: buffer pointer + "," + nick name. |
   Nick added in nicklist.
 
 | weechat | nicklist_nick_changed +
-  _(WeeChat ≥ 0.3.4)_ |
+  _(WhoreIRC ≥ 0.3.4)_ |
   String: buffer pointer + "," + nick name. |
   Nick changed in nicklist.
 
 | weechat | nicklist_nick_removing +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   String: buffer pointer + "," + nick name. |
   Removing nick from nicklist.
 
 | weechat | nicklist_nick_removed +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String: buffer pointer + "," + nick name. |
   Nick removed from nicklist.
 
@@ -10232,12 +10232,12 @@ List of signals sent by WeeChat and plugins:
   Partial completion happened.
 
 | weechat | plugin_loaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: path to plugin loaded. |
   Plugin loaded.
 
 | weechat | plugin_unloaded +
-  _(WeeChat ≥ 0.3.9)_ |
+  _(WhoreIRC ≥ 0.3.9)_ |
   String: name of plugin unloaded (example: "irc"). |
   Plugin unloaded.
 
@@ -10246,22 +10246,22 @@ List of signals sent by WeeChat and plugins:
   Command `/quit` issued by user.
 
 | weechat | signal_sighup +
-  _(WeeChat ≥ 1.3)_ |
+  _(WhoreIRC ≥ 1.3)_ |
   - |
   Signal SIGHUP received.
 
 | weechat | signal_sigquit +
-  _(WeeChat ≥ 1.2)_ |
+  _(WhoreIRC ≥ 1.2)_ |
   - |
   Signal SIGQUIT received (quit request with core dump).
 
 | weechat | signal_sigterm +
-  _(WeeChat ≥ 1.2)_ |
+  _(WhoreIRC ≥ 1.2)_ |
   - |
-  Signal SIGTERM received (graceful termination of WeeChat process).
+  Signal SIGTERM received (graceful termination of WhoreIRC process).
 
 | weechat | signal_sigwinch +
-  _(WeeChat ≥ 0.4.3)_ |
+  _(WhoreIRC ≥ 0.4.3)_ |
   - |
   Signal SIGWINCH received (terminal was resized).
 
@@ -10270,7 +10270,7 @@ List of signals sent by WeeChat and plugins:
   Command `/upgrade` issued by user.
 
 | weechat | upgrade_ended +
-  _(WeeChat ≥ 0.3.4)_ |
+  _(WhoreIRC ≥ 0.3.4)_ |
   - |
   End of upgrade process (command `/upgrade`).
 
@@ -10283,17 +10283,17 @@ List of signals sent by WeeChat and plugins:
   Private message displayed.
 
 | weechat | window_closing +
-  _(WeeChat ≥ 0.3.6)_ |
+  _(WhoreIRC ≥ 0.3.6)_ |
   Pointer: window. |
   Closing window.
 
 | weechat | window_closed +
-  _(WeeChat ≥ 0.3.6)_ |
+  _(WhoreIRC ≥ 0.3.6)_ |
   Pointer: window. |
   Window closed.
 
 | weechat | window_opened +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   Pointer: window. |
   Window opened.
 
@@ -10302,7 +10302,7 @@ List of signals sent by WeeChat and plugins:
   Scroll in window.
 
 | weechat | window_switch +
-  _(WeeChat ≥ 0.3.7)_ |
+  _(WhoreIRC ≥ 0.3.7)_ |
   Pointer: window. |
   Switching window.
 
@@ -10347,7 +10347,7 @@ List of signals sent by WeeChat and plugins:
   Xfer resume ready.
 
 | xfer | xfer_ended +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   Pointer: infolist with xfer info. |
   Xfer has ended.
 |===
@@ -10364,7 +10364,7 @@ my_signal_cb (const void *pointer, void *data, const char *signal,
               const char *type_data, void *signal_data)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* catch signal "quit" */
@@ -10382,7 +10382,7 @@ hook = weechat.hook_signal(signal, callback, callback_data)
 # example
 def my_signal_cb(data, signal, signal_data):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # catch signal "quit"
 hook = weechat.hook_signal("quit", "my_signal_cb", "")
@@ -10408,19 +10408,19 @@ Arguments:
 * _type_data_: type of data sent with signal (see <<_hook_signal,hook_signal>>)
 * _signal_data_: data sent with signal
 
-Return value _(WeeChat ≥ 1.0)_:
+Return value _(WhoreIRC ≥ 1.0)_:
 
-* return code of last callback executed (_WEECHAT_RC_OK_ if no callback was
+* return code of last callback executed (_WHOREIRC_RC_OK_ if no callback was
   executed):
-** _WEECHAT_RC_OK_
-** _WEECHAT_RC_OK_EAT_
-** _WEECHAT_RC_ERROR_
+** _WHOREIRC_RC_OK_
+** _WHOREIRC_RC_OK_EAT_
+** _WHOREIRC_RC_ERROR_
 
 C example:
 
 [source,C]
 ----
-int rc = weechat_hook_signal_send ("my_signal", WEECHAT_HOOK_SIGNAL_STRING, my_string);
+int rc = weechat_hook_signal_send ("my_signal", WHOREIRC_HOOK_SIGNAL_STRING, my_string);
 ----
 
 Script (Python):
@@ -10431,7 +10431,7 @@ Script (Python):
 rc = weechat.hook_signal_send(signal, type_data, signal_data)
 
 # example
-rc = weechat.hook_signal_send("my_signal", weechat.WEECHAT_HOOK_SIGNAL_STRING, my_string)
+rc = weechat.hook_signal_send("my_signal", weechat.WHOREIRC_HOOK_SIGNAL_STRING, my_string)
 ----
 
 [[signal_logger_backlog]]
@@ -10446,14 +10446,14 @@ C example:
 
 [source,C]
 ----
-weechat_hook_signal_send ("logger_backlog", WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+weechat_hook_signal_send ("logger_backlog", WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 ----
 
 Script (Python):
 
 [source,python]
 ----
-weechat.hook_signal_send("logger_backlog", weechat.WEECHAT_HOOK_SIGNAL_POINTER, buffer)
+weechat.hook_signal_send("logger_backlog", weechat.WHOREIRC_HOOK_SIGNAL_POINTER, buffer)
 ----
 
 [[signals_xxx_script_install]]
@@ -10487,7 +10487,7 @@ C example:
 
 [source,C]
 ----
-weechat_hook_signal_send ("python_script_install", WEECHAT_HOOK_SIGNAL_STRING,
+weechat_hook_signal_send ("python_script_install", WHOREIRC_HOOK_SIGNAL_STRING,
                           "/home/xxx/.weechat/test.py");
 ----
 
@@ -10495,7 +10495,7 @@ Script (Python):
 
 [source,python]
 ----
-weechat.hook_signal_send("python_script_install", WEECHAT_HOOK_SIGNAL_STRING,
+weechat.hook_signal_send("python_script_install", WHOREIRC_HOOK_SIGNAL_STRING,
                          "/home/xxx/.weechat/test.py")
 ----
 
@@ -10525,7 +10525,7 @@ C example:
 [source,C]
 ----
 /* unload and remove scripts test.py and script.py */
-weechat_hook_signal_send ("python_script_remove", WEECHAT_HOOK_SIGNAL_STRING,
+weechat_hook_signal_send ("python_script_remove", WHOREIRC_HOOK_SIGNAL_STRING,
                           "test.py,script.py");
 ----
 
@@ -10534,14 +10534,14 @@ Script (Python):
 [source,python]
 ----
 # unload and remove scripts test.py and script.py
-weechat.hook_signal_send("python_script_remove", WEECHAT_HOOK_SIGNAL_STRING,
+weechat.hook_signal_send("python_script_remove", WHOREIRC_HOOK_SIGNAL_STRING,
                          "test.py,script.py")
 ----
 
 [[signal_irc_input_send]]
 ===== Signal irc_input_send
 
-_WeeChat ≥ 0.3.4, updated in 1.5._
+_WhoreIRC ≥ 0.3.4, updated in 1.5._
 
 The signal "irc_input_send" can be sent to simulate input in an irc buffer
 (server, channel or private).
@@ -10556,7 +10556,7 @@ Argument is a string with following format:
 ** _priority_high_: queue with high priority (like user messages); this is the
    default priority
 ** _priority_low_: queue with low priority (like messages automatically sent by
-   WeeChat)
+   WhoreIRC)
 ** _user_message_: force user message (don't execute a command)
 * semicolon
 * comma-separated list of tags used when sending message (optional)
@@ -10568,11 +10568,11 @@ C examples:
 [source,C]
 ----
 /* say "Hello!" on freenode server, #weechat channel */
-weechat_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
+weechat_hook_signal_send ("irc_input_send", WHOREIRC_HOOK_SIGNAL_STRING,
                           "freenode;#weechat;priority_high,user_message;;Hello!");
 
 /* send command "/whois FlashCode" on freenode server, with low priority */
-weechat_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
+weechat_hook_signal_send ("irc_input_send", WHOREIRC_HOOK_SIGNAL_STRING,
                           "freenode;;priority_low;;/whois FlashCode");
 ----
 
@@ -10581,17 +10581,17 @@ Script (Python):
 [source,python]
 ----
 # say "Hello!" on freenode server, #weechat channel
-weechat.hook_signal_send("irc_input_send", weechat.WEECHAT_HOOK_SIGNAL_STRING,
+weechat.hook_signal_send("irc_input_send", weechat.WHOREIRC_HOOK_SIGNAL_STRING,
                          "freenode;#weechat;priority_high,user_message;;Hello!")
 
 # send command "/whois FlashCode" on freenode server, with low priority
-weechat.hook_signal_send("irc_input_send", weechat.WEECHAT_HOOK_SIGNAL_STRING,
+weechat.hook_signal_send("irc_input_send", weechat.WHOREIRC_HOOK_SIGNAL_STRING,
                          "freenode;;priority_low;;/whois FlashCode")
 ----
 
 ==== hook_hsignal
 
-_WeeChat ≥ 0.3.4, updated in 1.5._
+_WhoreIRC ≥ 0.3.4, updated in 1.5._
 
 Hook a hsignal (signal with hashtable).
 
@@ -10620,12 +10620,12 @@ Arguments:
 ** _const char *signal_: signal received
 ** _struct t_hashtable *hashtable_: hashtable
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_OK_EAT_ (stop sending the signal immediately)
-    _(WeeChat ≥ 0.4.0)_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_OK_EAT_ (stop sending the signal immediately)
+    _(WhoreIRC ≥ 0.4.0)_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -10640,47 +10640,47 @@ List of hsignals:
 | Plugin | Signal | Arguments | Description
 
 | irc | irc_redirection_xxx_yyy ^(1)^ +
-  _(WeeChat ≥ 0.3.4)_ |
+  _(WhoreIRC ≥ 0.3.4)_ |
   See <<hsignal_irc_redirect_command,hsignal_irc_redirect_command>> |
   Redirection output.
 
 | weechat | nicklist_group_added +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   _buffer_ (_struct t_gui_buffer *_): buffer +
   _parent_group_ (_struct t_gui_nick_group *_): parent group +
   _group_ (_struct t_gui_nick_group *_): group |
   Group added in nicklist.
 
 | weechat | nicklist_nick_added +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   _buffer_ (_struct t_gui_buffer *_): buffer +
   _parent_group_ (_struct t_gui_nick_group *_): parent group +
   _nick_ (_struct t_gui_nick *_): nick |
   Nick added in nicklist.
 
 | weechat | nicklist_group_removing +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   _buffer_ (_struct t_gui_buffer *_): buffer +
   _parent_group_ (_struct t_gui_nick_group *_): parent group +
   _group_ (_struct t_gui_nick_group *_): group |
   Removing group from nicklist.
 
 | weechat | nicklist_nick_removing +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   _buffer_ (_struct t_gui_buffer *_): buffer +
   _parent_group_ (_struct t_gui_nick_group *_): parent group +
   _nick_ (_struct t_gui_nick *_): nick |
   Removing nick from nicklist.
 
 | weechat | nicklist_group_changed +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   _buffer_ (_struct t_gui_buffer *_): buffer +
   _parent_group_ (_struct t_gui_nick_group *_): parent group +
   _group_ (_struct t_gui_nick_group *_): group |
   Group changed in nicklist.
 
 | weechat | nicklist_nick_changed +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   _buffer_ (_struct t_gui_buffer *_): buffer +
   _parent_group_ (_struct t_gui_nick_group *_): parent group +
   _nick_ (_struct t_gui_nick *_): nick |
@@ -10700,7 +10700,7 @@ my_hsignal_cb (const void *pointer, void *data, const char *signal,
                struct t_hashtable *hashtable)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_hsignal_hook = weechat_hook_hsignal ("test",
@@ -10717,14 +10717,14 @@ hook = weechat.hook_hsignal(signal, callback, callback_data)
 # example
 def my_hsignal_cb(data, signal, hashtable):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_hsignal("test", "my_hsignal_cb", "")
 ----
 
 ==== hook_hsignal_send
 
-_WeeChat ≥ 0.3.4, updated in 1.0._
+_WhoreIRC ≥ 0.3.4, updated in 1.0._
 
 Send a hsignal (signal with hashtable).
 
@@ -10740,13 +10740,13 @@ Arguments:
 * _signal_: signal to send
 * _hashtable_: hashtable
 
-Return value _(WeeChat ≥ 1.0)_:
+Return value _(WhoreIRC ≥ 1.0)_:
 
-* return code of last callback executed (_WEECHAT_RC_OK_ if no callback was
+* return code of last callback executed (_WHOREIRC_RC_OK_ if no callback was
   executed):
-** _WEECHAT_RC_OK_
-** _WEECHAT_RC_OK_EAT_
-** _WEECHAT_RC_ERROR_
+** _WHOREIRC_RC_OK_
+** _WHOREIRC_RC_OK_EAT_
+** _WHOREIRC_RC_ERROR_
 
 C example:
 
@@ -10754,8 +10754,8 @@ C example:
 ----
 int rc;
 struct t_hashtable *hashtable = weechat_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 if (hashtable)
@@ -10780,7 +10780,7 @@ rc = weechat.hook_hsignal_send("my_hsignal", {"key": "value"})
 [[hsignal_irc_redirect_command]]
 ===== Hsignal irc_redirect_command
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 The hsignal "irc_redirect_command" can be sent to redirect output of irc
 command to a callback.
@@ -10843,13 +10843,13 @@ test_whois_cb (const void *pointer, void *data, const char *signal,
 {
     weechat_printf (NULL, "error = %s", weechat_hashtable_get (hashtable, "error"));
     weechat_printf (NULL, "output = %s", weechat_hashtable_get (hashtable, "output"));
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 weechat_hook_hsignal ("irc_redirection_test_whois", &test_whois_cb, NULL, NULL);
 struct t_hashtable *hashtable = weechat_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 if (hashtable)
@@ -10859,7 +10859,7 @@ if (hashtable)
     weechat_hashtable_set (hashtable, "signal", "test");
     weechat_hashtable_set (hashtable, "string", "FlashCode");
     weechat_hook_hsignal_send ("irc_redirect_command", hashtable);
-    weechat_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
+    weechat_hook_signal_send ("irc_input_send", WHOREIRC_HOOK_SIGNAL_STRING,
                               "freenode;;2;;/whois FlashCode");
     weechat_hashtable_free (hashtable);
 }
@@ -10872,20 +10872,20 @@ Script (Python):
 def test_whois_cb(data, signal, hashtable):
     weechat.prnt("", "error = %s" % hashtable["error"])
     weechat.prnt("", "output = %s" % hashtable["output"])
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 weechat.hook_hsignal ("irc_redirection_test_whois", "test_whois_cb", "")
 weechat.hook_hsignal_send("irc_redirect_command",
                           {"server": "freenode", "pattern": "whois", "signal": "test",
                            "string": "FlashCode"})
-weechat.hook_signal_send("irc_input_send", weechat.WEECHAT_HOOK_SIGNAL_STRING,
+weechat.hook_signal_send("irc_input_send", weechat.WHOREIRC_HOOK_SIGNAL_STRING,
                          "freenode;;2;;/whois FlashCode")
 ----
 
 [[hsignal_irc_redirect_pattern]]
 ===== Hsignal irc_redirect_pattern
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 The hsignal "irc_redirect_pattern" can be sent to create a pattern for irc
 redirect (see <<hsignal_irc_redirect_command>>).
@@ -10919,8 +10919,8 @@ C example:
 [source,C]
 ----
 struct t_hashtable *hashtable = weechat_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 if (hashtable)
@@ -10985,10 +10985,10 @@ Arguments:
 ** _const char *option_: name of option
 ** _const char *value_: new value for option
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11005,7 +11005,7 @@ my_config_cb (const void *pointer, void *data, const char *option,
               const char *value)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* catch changes to option "weechat.look.item_time_format" */
@@ -11023,7 +11023,7 @@ hook = weechat.hook_config(option, callback, callback_data)
 # example
 def my_config_cb(data, option, value):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # catch changes to option "weechat.look.item_time_format"
 hook = weechat.hook_config("weechat.look.item_time_format", "my_config_cb", "")
@@ -11051,7 +11051,7 @@ struct t_hook *weechat_hook_modifier (const char *modifier,
 
 Arguments:
 
-* _modifier_: modifier name, list of modifiers used by WeeChat or plugins
+* _modifier_: modifier name, list of modifiers used by WhoreIRC or plugins
   (priority allowed, see note about <<hook_priority,priority>>)
   (see table below)
 * _callback_: function called when modifier is used, arguments and return value:
@@ -11061,8 +11061,8 @@ Arguments:
 ** _const char *modifier_data_: data for modifier
 ** _const char *string_: string to modify
 ** return value: new string
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11070,7 +11070,7 @@ Return value:
 
 * pointer to new hook, NULL if error occurred
 
-List of modifiers used by WeeChat and plugins:
+List of modifiers used by WhoreIRC and plugins:
 
 [width="100%",cols="^2,3,4,4",options="header"]
 |===
@@ -11082,13 +11082,13 @@ List of modifiers used by WeeChat and plugins:
   New content of message.
 
 | [[hook_modifier_irc_in2_xxx]] irc_in2_xxx ^(1)^ +
-  _(WeeChat ≥ 0.3.5)_ |
+  _(WhoreIRC ≥ 0.3.5)_ |
   Server name |
   Content of message received from IRC server (after charset decoding). |
   New content of message.
 
 | [[hook_modifier_irc_out1_xxx]] irc_out1_xxx ^(1)^ +
-  _(WeeChat ≥ 0.3.7)_ |
+  _(WhoreIRC ≥ 0.3.7)_ |
   Server name |
   Content of message about to be sent to IRC server before automatic split
   (to fit in 512 bytes by default). |
@@ -11106,7 +11106,7 @@ List of modifiers used by WeeChat and plugins:
   "1" to display bar, "0" to hide it.
 
 | [[hook_modifier_history_add]] history_add +
-  _(WeeChat ≥ 0.3.2)_ |
+  _(WhoreIRC ≥ 0.3.2)_ |
   String with buffer pointer ("0x123..") |
   Content of command line to add in command history (buffer and global). |
   String added to command history.
@@ -11127,7 +11127,7 @@ List of modifiers used by WeeChat and plugins:
   New string, for display only (command line is not changed).
 
 | [[hook_modifier_input_text_for_buffer]] input_text_for_buffer +
-  _(WeeChat ≥ 0.3.7)_ |
+  _(WhoreIRC ≥ 0.3.7)_ |
   String with buffer pointer ("0x123..") |
   Content of command line sent to buffer (text or command). |
   New content of command line sent to buffer.
@@ -11211,7 +11211,7 @@ Return value:
 
 * string modified, NULL if error occurred
 
-List of modifiers defined by WeeChat and plugins that can be used:
+List of modifiers defined by WhoreIRC and plugins that can be used:
 
 [width="100%",cols="^2,3,4,4",options="header"]
 |===
@@ -11230,7 +11230,7 @@ List of modifiers defined by WeeChat and plugins that can be used:
 | [[hook_modifier_irc_color_decode]] irc_color_decode |
   "1" to keep colors, "0" to remove colors |
   Any string. |
-  String with IRC colors converted to WeeChat colors (or IRC colors removed).
+  String with IRC colors converted to WhoreIRC colors (or IRC colors removed).
 
 | [[hook_modifier_irc_color_encode]] irc_color_encode |
   "1" to keep colors, "0" to remove colors |
@@ -11238,28 +11238,28 @@ List of modifiers defined by WeeChat and plugins that can be used:
   String with IRC colors (or IRC colors removed).
 
 | [[hook_modifier_irc_color_decode_ansi]] irc_color_decode_ansi +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   "1" to keep colors, "0" to remove colors |
   Any string. |
   String with ANSI colors converted to IRC colors (or ANSI colors removed).
 
 | [[hook_modifier_irc_command_auth]] irc_command_auth +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   Server name |
   Authentication command (for example: `+/msg nickserv identify password+`). |
   command with hidden password (for example: `+/msg nickserv identify ********+`).
 
 | [[hook_modifier_irc_message_auth]] irc_message_auth +
-  _(WeeChat ≥ 0.4.1)_ |
+  _(WhoreIRC ≥ 0.4.1)_ |
   Server name |
   Message displayed after `/msg` sent to nickserv. |
   Message with hidden password.
 
 | [[hook_modifier_color_decode_ansi]] color_decode_ansi +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   "1" to keep colors, "0" to remove colors |
   Any string. |
-  String with ANSI colors converted to WeeChat colors (or ANSI colors removed).
+  String with ANSI colors converted to WhoreIRC colors (or ANSI colors removed).
 |===
 
 C example:
@@ -11314,8 +11314,8 @@ Arguments:
 ** _const char *info_name_: name of info
 ** _const char *arguments_: additional arguments, depending on info
 ** return value: value of info asked
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11324,8 +11324,8 @@ Return value:
 * pointer to new hook, NULL if error occurred
 
 [NOTE]
-With WeeChat ≥ 2.5, the callback returns an allocated string
-(with WeeChat ≤ 2.4, it was a pointer to a static string).
+With WhoreIRC ≥ 2.5, the callback returns an allocated string
+(with WhoreIRC ≤ 2.4, it was a pointer to a static string).
 
 C example:
 
@@ -11363,7 +11363,7 @@ hook = weechat.hook_info("my_info", "Some info", "Info about arguments",
 
 ==== hook_info_hashtable
 
-_WeeChat ≥ 0.3.4, updated in 1.5._
+_WhoreIRC ≥ 0.3.4, updated in 1.5._
 
 Hook an information (callback takes and returns a hashtable).
 
@@ -11397,8 +11397,8 @@ Arguments:
 ** _const char *info_name_: name of info
 ** _struct t_hashtable *hashtable_: hashtable, depending on info
 ** return value: hashtable asked
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11483,8 +11483,8 @@ Arguments:
    one item in infolist)
 ** _const char *arguments_: additional arguments, depending on infolist
 ** return value: infolist asked
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11565,8 +11565,8 @@ Arguments:
 ** _void *data_: pointer
 ** _const char *hdata_name_: name of hdata
 ** return value: hdata asked
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11631,8 +11631,8 @@ Arguments:
    new hashtable (created by callback, with keys and values of type "string"),
    this new hashtable content will be added to _info_ for other calls to focus
    callbacks
-* _callback_pointer_: pointer given to callback when it is called by WeeChat
-* _callback_data_: pointer given to callback when it is called by WeeChat;
+* _callback_pointer_: pointer given to callback when it is called by WhoreIRC
+* _callback_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the hook is deleted
 
@@ -11686,7 +11686,7 @@ Content of hashtable sent to callback (keys and values are of type "string"):
   "0" or "1" | "0"
 
 | _chat_line | Pointer to line +
-  _(WeeChat ≥ 1.2)_. |
+  _(WhoreIRC ≥ 1.2)_. |
   "0x12345678" | ""
 
 | _chat_line_x | Column in line ^(3)^. |
@@ -11747,7 +11747,7 @@ with info on second point (useful only for mouse gestures, to know where mouse
 button has been released). +
 ^(2)^ `XXX` is name of local variable in buffer. +
 ^(3)^ It is set only for buffers with free content. +
-^(4)^ It is date when WeeChat adds line in buffer (greater or equal to
+^(4)^ It is date when WhoreIRC adds line in buffer (greater or equal to
 "_chat_line_date").
 
 Extra info for bar item "buffer_nicklist":
@@ -11806,7 +11806,7 @@ hook = weechat.hook_focus("buffer_nicklist", "my_focus_nicklist_cb", "")
 
 ==== hook_set
 
-_WeeChat ≥ 0.3.9 (script: WeeChat ≥ 0.4.3)._
+_WhoreIRC ≥ 0.3.9 (script: WhoreIRC ≥ 0.4.3)._
 
 Set string value of a hook property.
 
@@ -11835,17 +11835,17 @@ Properties:
   `/help command` for a hook of type _command_).
 
 | stdin +
-  _(WeeChat ≥ 0.4.3)_ |
+  _(WhoreIRC ≥ 0.4.3)_ |
   _process_, _process_hashtable_ | any string |
   Send data on standard input (_stdin_) of child process.
 
 | stdin_close +
-  _(WeeChat ≥ 0.4.3)_ |
+  _(WhoreIRC ≥ 0.4.3)_ |
   _process_, _process_hashtable_ | (not used) |
   Close pipe used to send data on standard input (_stdin_) of child process.
 
 | signal +
-  _(WeeChat ≥ 1.0)_ |
+  _(WhoreIRC ≥ 1.0)_ |
   _process_, _process_hashtable_ |
   signal number or one of these names: `hup`, `int`, `quit`, `kill`, `term`,
   `usr1`, `usr2` |
@@ -11873,7 +11873,7 @@ weechat.hook_set(hook, property, value)
 # example
 def my_process_cb(data, command, return_code, out, err):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_process_hashtable("/path/to/command", {"stdin": "1"},
                                       20000, "my_process_cb", "")
@@ -11991,12 +11991,12 @@ Arguments:
 ** _struct t_gui_buffer *buffer_: buffer pointer
 ** _const char *input_data_: input data
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
 * _input_callback_pointer_: pointer given to callback when it is called by
-  WeeChat
+  WhoreIRC
 * _input_callback_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the buffer is closed
 * _close_callback_: function called when buffer is closed, arguments and return
   value:
@@ -12004,12 +12004,12 @@ Arguments:
 ** _void *data_: pointer
 ** _struct t_gui_buffer *buffer_: buffer pointer
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
 * _close_callback_pointer_: pointer given to callback when it is called by
-  WeeChat
+  WhoreIRC
 * _close_callback_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the buffer is closed
 
 Return value:
@@ -12025,7 +12025,7 @@ my_input_cb (const void *pointer, void *data,
              struct t_gui_buffer *buffer, const char *input_data)
 {
     weechat_printf (buffer, "Text: %s", input_data);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -12033,7 +12033,7 @@ my_close_cb (const void *pointer, void *data, struct t_gui_buffer *buffer)
 {
     weechat_printf (NULL, "Buffer '%s' will be closed!",
                     weechat_buffer_get_string (buffer, "name"));
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_gui_buffer *my_buffer = weechat_buffer_new ("my_buffer",
@@ -12052,11 +12052,11 @@ buffer = weechat.buffer_new(name, input_callback, input_callback_data,
 # example
 def my_input_cb(data, buffer, input_data):
     weechat.prnt(buffer, "Text: %s" % input_data)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 def my_close_cb(data, buffer):
     weechat.prnt("", "Buffer '%s' will be closed!" % weechat.buffer_get_string(buffer, "name"))
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 buffer = weechat.buffer_new("my_buffer", "my_input_cb", "", "my_close_cb", "")
 ----
@@ -12113,10 +12113,10 @@ Arguments:
 * _plugin_: name of plugin, following special value is allowed:
 ** `+==+`: the name used is the buffer full name (for example:
    `irc.freenode.#weechat` instead of `freenode.#weechat`)
-   _(WeeChat ≥ 1.0)_
+   _(WhoreIRC ≥ 1.0)_
 * _name_: name of buffer, if it is NULL or empty string, the current buffer is
   returned (buffer displayed by current window); if the name starts with
-  `(?i)`, the search is case insensitive _(WeeChat ≥ 1.0)_
+  `(?i)`, the search is case insensitive _(WhoreIRC ≥ 1.0)_
 
 Return value:
 
@@ -12127,7 +12127,7 @@ C examples:
 [source,C]
 ----
 struct t_gui_buffer *buffer1 = weechat_buffer_search ("irc", "freenode.#weechat");
-struct t_gui_buffer *buffer2 = weechat_buffer_search ("==", "irc.freenode.#test");  /* WeeChat ≥ 1.0 */
+struct t_gui_buffer *buffer2 = weechat_buffer_search ("==", "irc.freenode.#test");  /* WhoreIRC ≥ 1.0 */
 ----
 
 Script (Python):
@@ -12143,7 +12143,7 @@ buffer = weechat.buffer_search("my_plugin", "my_buffer")
 
 ==== buffer_search_main
 
-Search WeeChat main buffer (_core_ buffer, first buffer displayed when WeeChat
+Search WhoreIRC main buffer (_core_ buffer, first buffer displayed when WhoreIRC
 is starting).
 
 Prototype:
@@ -12155,7 +12155,7 @@ struct t_gui_buffer *weechat_buffer_search_main ();
 
 Return value:
 
-* pointer to WeeChat main buffer (_core_ buffer)
+* pointer to WhoreIRC main buffer (_core_ buffer)
 
 C example:
 
@@ -12257,7 +12257,7 @@ weechat.buffer_close(buffer)
 ==== buffer_merge
 
 Merge buffer into another buffer: both buffers will still exist separately, but
-with same number, and WeeChat will display lines from both buffers (mixed
+with same number, and WhoreIRC will display lines from both buffers (mixed
 lines).
 
 Prototype:
@@ -12290,7 +12290,7 @@ Script (Python):
 weechat.buffer_merge(buffer, target_buffer)
 
 # example
-# merge current buffer with WeeChat "core" buffer
+# merge current buffer with WhoreIRC "core" buffer
 weechat.buffer_merge(weechat.current_buffer(), weechat.buffer_search_main())
 ----
 
@@ -12356,16 +12356,16 @@ Arguments:
 ** _active_: 2 if buffer is the only active (merged), 1 if buffer is active,
    0 if buffer is merged and not selected
 ** _hidden_: 1 if buffer is hidden, otherwise 0
-   _(WeeChat ≥ 1.0)_
+   _(WhoreIRC ≥ 1.0)_
 ** _zoomed_: 1 if buffer is merged and zoomed, otherwise 0
-   _(WeeChat ≥ 1.0)_
+   _(WhoreIRC ≥ 1.0)_
 ** _print_hooks_enabled_: 1 if print hooks are enabled, otherwise 0
 ** _day_change_: 1 if messages for the day change are displayed, otherwise 0
-   _(WeeChat ≥ 0.4.3)_
+   _(WhoreIRC ≥ 0.4.3)_
 ** _clear_: 1 if buffer can be cleared with command `/buffer clear`, otherwise 0
-   _(WeeChat ≥ 1.0)_
+   _(WhoreIRC ≥ 1.0)_
 ** _filter_: 1 if filters are enabled on buffer, otherwise 0
-   _(WeeChat ≥ 1.0)_
+   _(WhoreIRC ≥ 1.0)_
 ** _lines_hidden_: 1 if at least one line is hidden on buffer (filtered), or 0
    if all lines are displayed
 ** _prefix_max_length_: max length for prefix in this buffer
@@ -12434,10 +12434,10 @@ Arguments:
 
 * _buffer_: buffer pointer
 * _property_: property name:
-** _plugin_: name of plugin which created this buffer ("core" for WeeChat main
+** _plugin_: name of plugin which created this buffer ("core" for WhoreIRC main
    buffer)
 ** _name_: name of buffer
-** _full_name_: full name of buffer ("plugin.name") _(WeeChat ≥ 0.3.7)_
+** _full_name_: full name of buffer ("plugin.name") _(WhoreIRC ≥ 0.3.7)_
 ** _short_name_: short name of buffer (note: used for display only and can be
    changed by user, this must not be used to find name of buffer, use instead
    _name_, _full_name_ or local variable _channel_)
@@ -12494,7 +12494,7 @@ Arguments:
 
 * _buffer_: buffer pointer
 * _property_: property name:
-** _plugin_: pointer to plugin which created this buffer (NULL for WeeChat main
+** _plugin_: pointer to plugin which created this buffer (NULL for WhoreIRC main
    buffer)
 ** _highlight_regex_compiled_: regular expression _highlight_regex_ compiled
 
@@ -12545,12 +12545,12 @@ Properties:
 |===
 | Name | Value | Description
 
-| hotlist | "+", "-", WEECHAT_HOTLIST_LOW, WEECHAT_HOTLIST_MESSAGE,
-  WEECHAT_HOTLIST_PRIVATE, WEECHAT_HOTLIST_HIGHLIGHT, "-1" |
+| hotlist | "+", "-", WHOREIRC_HOTLIST_LOW, WHOREIRC_HOTLIST_MESSAGE,
+  WHOREIRC_HOTLIST_PRIVATE, WHOREIRC_HOTLIST_HIGHLIGHT, "-1" |
   "+": enable hotlist (global setting, buffer pointer is not used) +
   "-": disable hotlist (global setting, buffer pointer is not used) +
   priority: add buffer to hotlist with this priority +
-  "-1": remove buffer from hotlist _(WeeChat ≥ 1.0)_.
+  "-1": remove buffer from hotlist _(WhoreIRC ≥ 1.0)_.
 
 | completion_freeze | "0" or "1" |
   "0": no freeze of completion (default value)
@@ -12566,7 +12566,7 @@ Properties:
   "auto": switch to this buffer in current window, read marker is not reset.
 
 | hidden +
-  _(WeeChat ≥ 1.0)_ | "0" or "1" |
+  _(WhoreIRC ≥ 1.0)_ | "0" or "1" |
   "0": unhide the buffer +
   "1": hide the buffer.
 
@@ -12582,7 +12582,7 @@ Properties:
 | type | "formatted" or "free" |
   Set type for buffer: "formatted" (for printing chat messages), or "free" (for
   free content); when the value is "free", the property _clear_ is forced to "0"
-  _(WeeChat ≥ 1.0)_.
+  _(WhoreIRC ≥ 1.0)_.
 
 | notify | "0", "1", "2", "3" |
   Set notify level for buffer: "0" = never add to hotlist, "1" = add for
@@ -12593,19 +12593,19 @@ Properties:
   "0" to disable print hooks, "1" to enable them (default for a new buffer).
 
 | day_change +
-  _(WeeChat ≥ 0.4.3)_ | "0" or "1" |
+  _(WhoreIRC ≥ 0.4.3)_ | "0" or "1" |
   "0" to hide messages for the day change, "1" to see them
   (default for a new buffer).
 
 | clear +
-  _(WeeChat ≥ 1.0)_ | "0" or "1" |
+  _(WhoreIRC ≥ 1.0)_ | "0" or "1" |
   "0" to prevent user from clearing buffer with the command `/buffer clear`,
   "1" to let user clear the buffer (default for a new buffer)
    (note: even when it is set to "0", the buffer can still be cleared with
    the function <<_buffer_clear,buffer_clear>>).
 
 | filter +
-  _(WeeChat ≥ 1.0)_ | "0" or "1" |
+  _(WhoreIRC ≥ 1.0)_ | "0" or "1" |
   "0": disable filters on buffer +
   "1": enable filters on buffer.
 
@@ -12758,9 +12758,9 @@ Arguments:
 ** _input_callback_: set input callback function
 ** _input_callback_data_: set input callback data
 ** _nickcmp_callback_: set nick comparison callback function (this callback is
-   called when searching nick in nicklist) _(WeeChat ≥ 0.3.9)_
+   called when searching nick in nicklist) _(WhoreIRC ≥ 0.3.9)_
 ** _nickcmp_callback_data_: set nick comparison callback data
-   _(WeeChat ≥ 0.3.9)_
+   _(WhoreIRC ≥ 0.3.9)_
 * _pointer_: new pointer value for property
 
 Prototypes for callbacks:
@@ -12786,7 +12786,7 @@ int
 my_close_cb (const void *pointer, void *data, struct t_gui_buffer *buffer)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 weechat_buffer_set_pointer (my_buffer, "close_callback", &my_close_cb);
@@ -12843,7 +12843,7 @@ str = weechat.buffer_string_replace_local_var(my_buffer, "test with $toto")
 
 ==== buffer_match_list
 
-_WeeChat ≥ 0.3.5._
+_WhoreIRC ≥ 0.3.5._
 
 Check if buffer matches a list of buffers.
 
@@ -12936,7 +12936,7 @@ current_window = weechat.current_window()
 
 ==== window_search_with_buffer
 
-_WeeChat ≥ 0.3.5._
+_WhoreIRC ≥ 0.3.5._
 
 Return pointer to window displaying buffer.
 
@@ -13167,7 +13167,7 @@ Arguments:
   (nicklist root)
 * _name_: group name
 * _color_: color option name:
-** WeeChat option name, for example _weechat.color.nicklist_group_
+** WhoreIRC option name, for example _weechat.color.nicklist_group_
 ** color with optional background, for example _yellow_ or _yellow,red_
 ** bar color name:
 *** _bar_fg_: foreground color for bar
@@ -13277,7 +13277,7 @@ Arguments:
 * _group_: group pointer
 * _name_: nick name
 * _color_: color option name:
-*** WeeChat option name (from weechat.color.xxx), for example _chat_delimiters_
+*** WhoreIRC option name (from weechat.color.xxx), for example _chat_delimiters_
 *** color with optional background, for example _yellow_ or _yellow,red_
 *** bar color name:
 **** _bar_fg_: foreground color for bar
@@ -13285,7 +13285,7 @@ Arguments:
 **** _bar_bg_: background color for bar
 * _prefix_: prefix displayed before nick
 * _prefix_color_: color option name:
-** WeeChat option name (from weechat.color.xxx), for example _chat_delimiters_
+** WhoreIRC option name (from weechat.color.xxx), for example _chat_delimiters_
 ** color with optional background, for example _yellow_ or _yellow,red_
 ** bar color name:
 *** _bar_fg_: foreground color for bar
@@ -13474,7 +13474,7 @@ weechat.nicklist_remove_all(my_buffer)
 
 ==== nicklist_get_next_item
 
-_WeeChat ≥ 0.3.7._
+_WhoreIRC ≥ 0.3.7._
 
 Get next group or nick from nicklist (mainly used to display nicklist).
 
@@ -13524,7 +13524,7 @@ This function is not available in scripting API.
 
 ==== nicklist_group_get_integer
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return integer value of a group property.
 
@@ -13569,7 +13569,7 @@ visible = weechat.nicklist_group_get_integer(buffer, group, "visible")
 
 ==== nicklist_group_get_string
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return string value of a group property.
 
@@ -13614,7 +13614,7 @@ color = weechat.nicklist_group_get_string(buffer, group, "color")
 
 ==== nicklist_group_get_pointer
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return pointer value of a group property.
 
@@ -13658,7 +13658,7 @@ parent = weechat.nicklist_group_get_pointer(buffer, group, "parent")
 
 ==== nicklist_group_set
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Set string value of a group property.
 
@@ -13685,7 +13685,7 @@ Properties:
 |===
 | Name | Value | Description
 
-| color | WeeChat color option name |
+| color | WhoreIRC color option name |
   See argument "color" of function <<_nicklist_add_group,nicklist_add_group>>.
 
 | visible | "0", "1" |
@@ -13727,7 +13727,7 @@ weechat.nicklist_group_set(buffer, group, "visible", "0")
 
 ==== nicklist_nick_get_integer
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return integer value of a nick property.
 
@@ -13771,7 +13771,7 @@ visible = weechat.nicklist_nick_get_integer(buffer, nick, "visible")
 
 ==== nicklist_nick_get_string
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return string value of a nick property.
 
@@ -13818,7 +13818,7 @@ color = weechat.nicklist_nick_get_string(buffer, nick, "color")
 
 ==== nicklist_nick_get_pointer
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Return pointer value of a nick property.
 
@@ -13862,7 +13862,7 @@ group = weechat.nicklist_nick_get_pointer(buffer, nick, "group")
 
 ==== nicklist_nick_set
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
 Set string value of a nick property.
 
@@ -13889,13 +13889,13 @@ Properties:
 |===
 | Name | Value | Description
 
-| color | WeeChat color option name |
+| color | WhoreIRC color option name |
   See argument "color" of function <<_nicklist_add_nick,nicklist_add_nick>>.
 
 | prefix | any string |
   Prefix of nick.
 
-| prefix_color | WeeChat color option name |
+| prefix_color | WhoreIRC color option name |
   See argument "prefix_color" of function <<_nicklist_add_nick,nicklist_add_nick>>.
 
 | visible | "0", "1" |
@@ -14016,14 +14016,14 @@ Arguments:
    bar)
 ** _struct t_gui_buffer *buffer_: buffer displayed in window (if window is NULL,
    then it is current buffer) or buffer given in bar item with syntax:
-   "@buffer:item" _(WeeChat ≥ 0.4.2)_
+   "@buffer:item" _(WhoreIRC ≥ 0.4.2)_
 ** _struct t_hashtable *extra_info_: always NULL (argument is reserved for a
-   future version) _(WeeChat ≥ 0.4.2)_
+   future version) _(WhoreIRC ≥ 0.4.2)_
 ** return value: content of bar item
 * _build_callback_pointer_: pointer given to build callback, when it is called
-  by WeeChat
+  by WhoreIRC
 * _build_callback_data_: pointer given to callback when it is called by
-  WeeChat; if not NULL, it must have been allocated with malloc (or similar
+  WhoreIRC; if not NULL, it must have been allocated with malloc (or similar
   function) and it is automatically freed when the bar item is removed
 
 Return value:
@@ -14055,7 +14055,7 @@ Script (Python):
 For compatibility with versions ≤ 0.4.1, the default callback has only 3
 arguments: _data_, _item_ and _window_ (no _buffer_ and _extra_info_). +
 To use a callback with all arguments, you must add "(extra)" before the name,
-see example below (supported only in WeeChat ≥ 0.4.2).
+see example below (supported only in WhoreIRC ≥ 0.4.2).
 
 [source,python]
 ----
@@ -14068,11 +14068,11 @@ def my_build_callback(data, item, window):
 
 bar_item = weechat.bar_item_new("myitem", "my_build_callback", "")
 
-# example (callback with all arguments, for WeeChat ≥ 0.4.2)
+# example (callback with all arguments, for WhoreIRC ≥ 0.4.2)
 def my_build_callback2(data, item, window, buffer, extra_info):
     return "my content"
 
-bar_item2 = weechat.bar_item_new("(extra)myitem2", "my_build_callback2", "")  # WeeChat ≥ 0.4.2
+bar_item2 = weechat.bar_item_new("(extra)myitem2", "my_build_callback2", "")  # WhoreIRC ≥ 0.4.2
 ----
 
 ==== bar_item_update
@@ -14218,7 +14218,7 @@ Arguments:
 ** _inactive_: bar is displayed in inactive windows only
 ** _nicklist_: bar is displayed in windows with nicklist
 ** evaluated expression: see the
-   link:weechat_user.en.html#bar_conditions[WeeChat user's guide / Bar conditions]
+   link:weechat_user.en.html#bar_conditions[WhoreIRC user's guide / Bar conditions]
 * _position_: _top_, _bottom_, _left_ or _right_
 * _filling_top_bottom_:
 ** _horizontal_: items are filled horizontally (space after each item)
@@ -14391,7 +14391,7 @@ weechat.bar_remove(my_bar)
 [[commands]]
 === Commands
 
-Functions for executing WeeChat commands.
+Functions for executing WhoreIRC commands.
 
 ==== command
 
@@ -14413,10 +14413,10 @@ Arguments:
 * _command_: command to execute (if beginning with a "/"), or text to send to
   buffer
 
-Return value (_WeeChat ≥ 1.1_):
+Return value (_WhoreIRC ≥ 1.1_):
 
-* _WEECHAT_RC_OK_ if successful
-* _WEECHAT_RC_ERROR_ if error
+* _WHOREIRC_RC_OK_ if successful
+* _WHOREIRC_RC_ERROR_ if error
 
 C example:
 
@@ -14440,7 +14440,7 @@ rc = weechat.command(weechat.buffer_search("irc", "freenode.#weechat"), "/whois 
 
 ==== command_options
 
-_WeeChat ≥ 2.5._
+_WhoreIRC ≥ 2.5._
 
 Execute a command or send text to buffer with options.
 
@@ -14467,8 +14467,8 @@ Arguments:
 
 Return value:
 
-* _WEECHAT_RC_OK_ if successful
-* _WEECHAT_RC_ERROR_ if error
+* _WHOREIRC_RC_OK_ if successful
+* _WHOREIRC_RC_ERROR_ if error
 
 C example:
 
@@ -14477,8 +14477,8 @@ C example:
 /* allow any command except /exec, run command in 2 seconds */
 int rc;
 struct t_hashtable *options = weechat_hashtable_new (8,
-                                                     WEECHAT_HASHTABLE_STRING,
-                                                     WEECHAT_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
                                                      NULL,
                                                      NULL);
 weechat_hashtable_set (options, "commands", "*,!exec");
@@ -14508,7 +14508,7 @@ Establish a connection/authentication to a proxy.
 
 [IMPORTANT]
 This function is blocking on call to connect(), so it must be called in a forked
-process only, to not block WeeChat.
+process only, to not block WhoreIRC.
 
 Prototype:
 
@@ -14556,7 +14556,7 @@ Establish a connection to a remote host.
 
 [IMPORTANT]
 This function is blocking on call to connect(), so it must be called in a forked
-process only, to not block WeeChat.
+process only, to not block WhoreIRC.
 
 Prototype:
 
@@ -14611,7 +14611,7 @@ Functions to get infos.
 
 _Updated in 2.5._
 
-Return info, as string, from WeeChat or a plugin.
+Return info, as string, from WhoreIRC or a plugin.
 
 Prototype:
 
@@ -14631,8 +14631,8 @@ Return value:
 * string with info asked, NULL if an error occurred
 
 [NOTE]
-With WeeChat ≥ 2.5, the value returned is an allocated string
-(with WeeChat ≤ 2.4, it was a pointer to a static string).
+With WhoreIRC ≥ 2.5, the value returned is an allocated string
+(with WhoreIRC ≤ 2.4, it was a pointer to a static string).
 
 Infos:
 
@@ -14644,7 +14644,7 @@ C example:
 ----
 char *version = weechat_info_get ("version", NULL);
 char *date = weechat_info_get ("date", NULL);
-weechat_printf (NULL, "Current WeeChat version is: %s (compiled on %s)",
+weechat_printf (NULL, "Current WhoreIRC version is: %s (compiled on %s)",
                 version, date);
 if (version)
     free (version);
@@ -14652,7 +14652,7 @@ if (date)
     free (date);
 
 char *weechat_dir = weechat_info_get ("weechat_dir", NULL);
-weechat_printf (NULL, "WeeChat home is: %s", weechat_dir);
+weechat_printf (NULL, "WhoreIRC home is: %s", weechat_dir);
 if (weechat_dir)
     free (weechat_dir);
 ----
@@ -14665,16 +14665,16 @@ Script (Python):
 value = weechat.info_get(info_name, arguments)
 
 # example
-weechat.prnt("", "Current WeeChat version is: %s (compiled on %s)"
+weechat.prnt("", "Current WhoreIRC version is: %s (compiled on %s)"
     % (weechat.info_get("version", ""), weechat.info_get("date", ""))
-weechat.prnt("", "WeeChat home is: %s" % weechat.info_get("weechat_dir", ""))
+weechat.prnt("", "WhoreIRC home is: %s" % weechat.info_get("weechat_dir", ""))
 ----
 
 ==== info_get_hashtable
 
-_WeeChat ≥ 0.3.4._
+_WhoreIRC ≥ 0.3.4._
 
-Return info, as hashtable, from WeeChat or a plugin.
+Return info, as hashtable, from WhoreIRC or a plugin.
 
 Prototype:
 
@@ -14705,8 +14705,8 @@ C example:
 struct t_hashtable *hashtable_in, *hashtable_out;
 
 hashtable_in = weechat_hashtable_new (8,
-                                      WEECHAT_HASHTABLE_STRING,
-                                      WEECHAT_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_STRING,
                                       NULL,
                                       NULL);
 if (hashtable_in)
@@ -14738,7 +14738,7 @@ if (hashtable_in)
 ----
 
 [NOTE]
-See the link:weechat_scripting.en.html#irc_message_parse[WeeChat scripting guide / Parse message]
+See the link:weechat_scripting.en.html#irc_message_parse[WhoreIRC scripting guide / Parse message]
 for more info about "irc_message_parse" output.
 
 Script (Python):
@@ -15055,11 +15055,11 @@ var = weechat.infolist_new_var_time(item, "my_time", int(time.time()))
 
 ==== infolist_get
 
-Return infolist from WeeChat or a plugin.
+Return infolist from WhoreIRC or a plugin.
 
 [IMPORTANT]
 Content of infolist is a duplication of actual data. So if you are asking
-infolist with lot of data (like "buffer_lines"), WeeChat will allocate memory
+infolist with lot of data (like "buffer_lines"), WhoreIRC will allocate memory
 to duplicate all data, and this can take some time. +
 Instead of using big infolist, it is preferable to use hdata (but infolist may
 have more info than hdata, which is raw data), see <<hdata,hdata>>.
@@ -15241,7 +15241,7 @@ weechat.infolist_reset_item_cursor(infolist)
 
 ==== infolist_search_var
 
-_WeeChat ≥ 0.4.3._
+_WhoreIRC ≥ 0.4.3._
 
 Search a variable in the current infolist item.
 
@@ -15556,7 +15556,7 @@ weechat.infolist_free(infolist)
 [[hdata]]
 === Hdata
 
-Functions for hdata (raw access to WeeChat or plugins data).
+Functions for hdata (raw access to WhoreIRC or plugins data).
 
 [IMPORTANT]
 Hdata provides read-only access to data. It is *STRICTLY FORBIDDEN* to write
@@ -15566,14 +15566,14 @@ The only way to update data is to call function
 
 ==== hdata_new
 
-_WeeChat ≥ 0.3.6, updated in 0.3.9 and 0.4.0._
+_WhoreIRC ≥ 0.3.6, updated in 0.3.9 and 0.4.0._
 
 Create a new hdata.
 
 [NOTE]
 .hdata vs infolist
 ====
-Hdata is a fast way to read WeeChat or plugins data. It is similar to
+Hdata is a fast way to read WhoreIRC or plugins data. It is similar to
 infolist, but there are some differences:
 
 * It is faster and uses less memory: direct read of data without duplication.
@@ -15602,18 +15602,18 @@ Arguments:
 * _var_next_: name of variable in structure which is a pointer to next
   element in list (may be NULL if no such variable is available)
 * _create_allowed_: 1 if create of structure is allowed, otherwise 0
-  _(WeeChat ≥ 0.4.0)_
+  _(WhoreIRC ≥ 0.4.0)_
 * _delete_allowed_: 1 if delete of structure is allowed, otherwise 0
-  _(WeeChat ≥ 0.3.9)_
+  _(WhoreIRC ≥ 0.3.9)_
 * _callback_update_: callback to update data in hdata, can be NULL if no update
-  is allowed _(WeeChat ≥ 0.3.9)_, arguments and return value:
+  is allowed _(WhoreIRC ≥ 0.3.9)_, arguments and return value:
 ** _void *data_: pointer
 ** _struct t_hdata *hdata_: pointer to hdata
 ** _struct t_hashtable *hashtable_: hashtable with variables to update
    (see <<_hdata_update,hdata_update>>)
 ** return value: number of variables updated
 * _callback_update_data_: pointer given to update callback when it is called by
-  WeeChat _(WeeChat ≥ 0.3.9)_
+  WhoreIRC _(WhoreIRC ≥ 0.3.9)_
 
 Return value:
 
@@ -15631,7 +15631,7 @@ This function is not available in scripting API.
 
 ==== hdata_new_var
 
-_WeeChat ≥ 0.3.6, updated in 0.3.9._
+_WhoreIRC ≥ 0.3.6, updated in 0.3.9._
 
 Create a new variable in hdata.
 
@@ -15649,19 +15649,19 @@ Arguments:
 * _name_: variable name
 * _offset_: offset of variable in structure
 * _type_: variable type, one of:
-** WEECHAT_HDATA_CHAR
-** WEECHAT_HDATA_INTEGER
-** WEECHAT_HDATA_LONG
-** WEECHAT_HDATA_STRING
-** WEECHAT_HDATA_SHARED_STRING
-** WEECHAT_HDATA_POINTER
-** WEECHAT_HDATA_TIME
-** WEECHAT_HDATA_HASHTABLE
-** WEECHAT_HDATA_OTHER
+** WHOREIRC_HDATA_CHAR
+** WHOREIRC_HDATA_INTEGER
+** WHOREIRC_HDATA_LONG
+** WHOREIRC_HDATA_STRING
+** WHOREIRC_HDATA_SHARED_STRING
+** WHOREIRC_HDATA_POINTER
+** WHOREIRC_HDATA_TIME
+** WHOREIRC_HDATA_HASHTABLE
+** WHOREIRC_HDATA_OTHER
 * _update_allowed_: 1 if update of variable is allowed, otherwise 0
-  _(WeeChat ≥ 0.3.9)_
+  _(WhoreIRC ≥ 0.3.9)_
 * _array_size_: not NULL only if a variable is an array, and it can be:
-  _(WeeChat ≥ 0.3.9)_
+  _(WhoreIRC ≥ 0.3.9)_
 ** name of variable in hdata: this variable will be used as size of array
    (dynamic size for array)
 ** integer (as string): fixed size for array
@@ -15687,26 +15687,26 @@ struct t_myplugin_list
 /* ... */
 
 struct t_hdata *hdata = weechat_hdata_new ("myplugin_list", "prev", "next");
-weechat_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WEECHAT_HDATA_STRING, 0, NULL, NULL);
-weechat_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WEECHAT_HDATA_POINTER, 0, NULL, NULL);
-weechat_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WEECHAT_HDATA_INTEGER, 0, NULL, NULL);
-weechat_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WEECHAT_HDATA_STRING, 0, "tags_count", NULL);
-weechat_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WEECHAT_HDATA_STRING, 0, "*", NULL);
-weechat_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WEECHAT_HDATA_POINTER, 0, NULL, "myplugin_list");
-weechat_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WEECHAT_HDATA_POINTER, 0, NULL, "myplugin_list");
+weechat_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WHOREIRC_HDATA_STRING, 0, NULL, NULL);
+weechat_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WHOREIRC_HDATA_POINTER, 0, NULL, NULL);
+weechat_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WHOREIRC_HDATA_INTEGER, 0, NULL, NULL);
+weechat_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WHOREIRC_HDATA_STRING, 0, "tags_count", NULL);
+weechat_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WHOREIRC_HDATA_STRING, 0, "*", NULL);
+weechat_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WHOREIRC_HDATA_POINTER, 0, NULL, "myplugin_list");
+weechat_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WHOREIRC_HDATA_POINTER, 0, NULL, "myplugin_list");
 ----
 
-The macro "WEECHAT_HDATA_VAR" can be used to shorten code:
+The macro "WHOREIRC_HDATA_VAR" can be used to shorten code:
 
 [source,C]
 ----
-WEECHAT_HDATA_VAR(struct t_myplugin_list, name, STRING, 0, NULL, NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, buffer, POINTER, 0, NULL, NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, tags_count, INTEGER, 0, NULL, NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, tags_array, STRING, 0, "tags_count", NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, string_split, STRING, 0, "*", NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, prev, POINTER, 0, NULL, "myplugin_list");
-WEECHAT_HDATA_VAR(struct t_myplugin_list, next, POINTER, 0, NULL, "myplugin_list");
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, name, STRING, 0, NULL, NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, buffer, POINTER, 0, NULL, NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, tags_count, INTEGER, 0, NULL, NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, tags_array, STRING, 0, "tags_count", NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, string_split, STRING, 0, "*", NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, prev, POINTER, 0, NULL, "myplugin_list");
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, next, POINTER, 0, NULL, "myplugin_list");
 ----
 
 [NOTE]
@@ -15714,7 +15714,7 @@ This function is not available in scripting API.
 
 ==== hdata_new_list
 
-_WeeChat ≥ 0.3.6, updated in 1.0._
+_WhoreIRC ≥ 0.3.6, updated in 1.0._
 
 Create a new list pointer in hdata.
 
@@ -15730,8 +15730,8 @@ Arguments:
 * _hdata_: hdata pointer
 * _name_: variable name
 * _pointer_: list pointer
-* _flags_: combination of following values: _(WeeChat ≥ 1.0)_
-** _WEECHAT_HDATA_LIST_CHECK_POINTERS_: list used to check pointers
+* _flags_: combination of following values: _(WhoreIRC ≥ 1.0)_
+** _WHOREIRC_HDATA_LIST_CHECK_POINTERS_: list used to check pointers
 
 C example:
 
@@ -15751,24 +15751,24 @@ struct t_myplugin_list
 /* ... */
 
 struct t_hdata *hdata = weechat_hdata_new ("myplugin_list", "prev", "next");
-weechat_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WEECHAT_HDATA_STRING, NULL, NULL);
-weechat_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WEECHAT_HDATA_POINTER, NULL, NULL);
-weechat_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WEECHAT_HDATA_INTEGER, NULL, NULL);
-weechat_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WEECHAT_HDATA_STRING, "tags_count", NULL);
-weechat_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WEECHAT_HDATA_STRING, "*", NULL);
-weechat_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WEECHAT_HDATA_POINTER, NULL, "myplugin_list");
-weechat_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WEECHAT_HDATA_POINTER, NULL, "myplugin_list");
+weechat_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WHOREIRC_HDATA_STRING, NULL, NULL);
+weechat_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WHOREIRC_HDATA_POINTER, NULL, NULL);
+weechat_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WHOREIRC_HDATA_INTEGER, NULL, NULL);
+weechat_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WHOREIRC_HDATA_STRING, "tags_count", NULL);
+weechat_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WHOREIRC_HDATA_STRING, "*", NULL);
+weechat_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WHOREIRC_HDATA_POINTER, NULL, "myplugin_list");
+weechat_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WHOREIRC_HDATA_POINTER, NULL, "myplugin_list");
 
-weechat_hdata_new_list (hdata, "buffers", &buffers, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+weechat_hdata_new_list (hdata, "buffers", &buffers, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
 weechat_hdata_new_list (hdata, "last_buffer", &last_buffer, 0);
 ----
 
-The macro "WEECHAT_HDATA_LIST" can be used to shorten code:
+The macro "WHOREIRC_HDATA_LIST" can be used to shorten code:
 
 [source,C]
 ----
-WEECHAT_HDATA_LIST(buffers, WEECHAT_HDATA_LIST_CHECK_POINTERS);
-WEECHAT_HDATA_LIST(last_buffer, 0);
+WHOREIRC_HDATA_LIST(buffers, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
+WHOREIRC_HDATA_LIST(last_buffer, 0);
 ----
 
 [NOTE]
@@ -15776,14 +15776,14 @@ This function is not available in scripting API.
 
 ==== hdata_get
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
-Return hdata for a WeeChat or plugin structure.
+Return hdata for a WhoreIRC or plugin structure.
 
 [NOTE]
 Hdata does not contain data, it's only a hashtable with position of variables
 in structure. That means you will need this hdata and a pointer to a
-WeeChat/plugin object to read some data.
+WhoreIRC/plugin object to read some data.
 
 Prototype:
 
@@ -15824,7 +15824,7 @@ hdata = weechat.hdata_get("irc_server")
 
 ==== hdata_get_var_offset
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return offset of variable in hdata.
 
@@ -15864,7 +15864,7 @@ offset = weechat.hdata_get_var_offset(hdata, "name")
 
 ==== hdata_get_var_type
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return type of variable in hdata (as integer).
 
@@ -15891,31 +15891,31 @@ C example:
 int type = weechat_hdata_get_var_type (hdata, "name");
 switch (type)
 {
-    case WEECHAT_HDATA_CHAR:
+    case WHOREIRC_HDATA_CHAR:
         /* ... */
         break;
-    case WEECHAT_HDATA_INTEGER:
+    case WHOREIRC_HDATA_INTEGER:
         /* ... */
         break;
-    case WEECHAT_HDATA_LONG:
+    case WHOREIRC_HDATA_LONG:
         /* ... */
         break;
-    case WEECHAT_HDATA_STRING:
+    case WHOREIRC_HDATA_STRING:
         /* ... */
         break;
-    case WEECHAT_HDATA_SHARED_STRING:
+    case WHOREIRC_HDATA_SHARED_STRING:
         /* ... */
         break;
-    case WEECHAT_HDATA_POINTER:
+    case WHOREIRC_HDATA_POINTER:
         /* ... */
         break;
-    case WEECHAT_HDATA_TIME:
+    case WHOREIRC_HDATA_TIME:
         /* ... */
         break;
-    case WEECHAT_HDATA_HASHTABLE:
+    case WHOREIRC_HDATA_HASHTABLE:
         /* ... */
         break;
-    case WEECHAT_HDATA_OTHER:
+    case WHOREIRC_HDATA_OTHER:
         /* ... */
         break;
     default:
@@ -15929,7 +15929,7 @@ This function is not available in scripting API.
 
 ==== hdata_get_var_type_string
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return type of variable in hdata (as string).
 
@@ -15969,7 +15969,7 @@ weechat.prnt("", "type = %s" % weechat.hdata_get_var_type_string("name"))
 
 ==== hdata_get_var_array_size
 
-_WeeChat ≥ 0.3.9._
+_WhoreIRC ≥ 0.3.9._
 
 Return array size for variable in hdata.
 
@@ -15983,7 +15983,7 @@ int weechat_hdata_get_var_array_size (struct t_hdata *hdata, void *pointer, cons
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name
 
 Return value:
@@ -16010,7 +16010,7 @@ array_size = weechat.hdata_get_var_array_size(hdata, pointer, "name")
 
 ==== hdata_get_var_array_size_string
 
-_WeeChat ≥ 0.3.9._
+_WhoreIRC ≥ 0.3.9._
 
 Return array size for variable in hdata (as string).
 
@@ -16025,7 +16025,7 @@ const char *weechat_hdata_get_var_array_size_string (struct t_hdata *hdata, void
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name
 
 Return value:
@@ -16053,7 +16053,7 @@ array_size = weechat.hdata_get_var_array_size_string(hdata, pointer, "name")
 
 ==== hdata_get_var_hdata
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return hdata for a variable in hdata.
 
@@ -16093,7 +16093,7 @@ weechat.prnt("", "hdata = %s" % weechat.hdata_get_var_hdata(hdata, "name"))
 
 ==== hdata_get_var
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return pointer to content of variable in hdata.
 
@@ -16107,7 +16107,7 @@ void *weechat_hdata_get_var (struct t_hdata *hdata, void *pointer, const char *n
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name
 
 Return value:
@@ -16128,7 +16128,7 @@ This function is not available in scripting API.
 
 ==== hdata_get_var_at_offset
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return pointer to content of variable in hdata, using offset.
 
@@ -16142,7 +16142,7 @@ void *weechat_hdata_get_var_at_offset (struct t_hdata *hdata, void *pointer, int
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _offset_: offset of variable
 
 Return value:
@@ -16164,7 +16164,7 @@ This function is not available in scripting API.
 
 ==== hdata_get_list
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return list pointer from hdata.
 
@@ -16206,7 +16206,7 @@ buffers = weechat.hdata_get_list(hdata, "gui_buffers")
 
 ==== hdata_check_pointer
 
-_WeeChat ≥ 0.3.7, updated in 1.0._
+_WhoreIRC ≥ 0.3.7, updated in 1.0._
 
 Check if a pointer is valid for a hdata and a list pointer.
 
@@ -16220,7 +16220,7 @@ int weechat_hdata_check_pointer (struct t_hdata *hdata, void *list, void *pointe
 Arguments:
 
 * _hdata_: hdata pointer
-* _list_: list pointer; if NULL _(WeeChat ≥ 1.0)_, the pointer is checked with
+* _list_: list pointer; if NULL _(WhoreIRC ≥ 1.0)_, the pointer is checked with
   the lists in hdata that have flag "check pointers" (see
   <<_hdata_new_list,hdata_new_list>>), and if no such list
   exists, the pointer is considered as valid
@@ -16267,7 +16267,7 @@ else:
 
 ==== hdata_move
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Move pointer to another element in list.
 
@@ -16281,7 +16281,7 @@ void *weechat_hdata_move (struct t_hdata *hdata, void *pointer, int count);
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to a WeeChat/plugin object
+* _pointer_: pointer to a WhoreIRC/plugin object
 * _count_: number of jump(s) to execute (negative or positive integer, different
   from 0)
 
@@ -16326,7 +16326,7 @@ if buffer:
 
 ==== hdata_search
 
-_WeeChat ≥ 0.4.1._
+_WhoreIRC ≥ 0.4.1._
 
 Search element in a list: the expression _search_ is evaluated for each element
 in list, until element is found (or end of list).
@@ -16341,11 +16341,11 @@ void *weechat_hdata_search (struct t_hdata *hdata, void *pointer, const char *se
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to a WeeChat/plugin object
+* _pointer_: pointer to a WhoreIRC/plugin object
 * _search_: expression to evaluate, default pointer in expression is the name of
   hdata (and this pointer changes for each element in list); for help on
   expression, see the
-  link:weechat_user.en.html#command_weechat_eval[WeeChat user's guide / Command /eval]
+  link:weechat_user.en.html#command_weechat_eval[WhoreIRC user's guide / Command /eval]
 * _move_: number of jump(s) to execute after unsuccessful search (negative or
   positive integer, different from 0)
 
@@ -16387,7 +16387,7 @@ if server:
 
 ==== hdata_char
 
-_WeeChat ≥ 0.3.7._
+_WhoreIRC ≥ 0.3.7._
 
 Return value of char variable in structure using hdata.
 
@@ -16401,7 +16401,7 @@ char weechat_hdata_char (struct t_hdata *hdata, void *pointer, const char *name)
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "char"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16429,7 +16429,7 @@ weechat.prnt("", "letter = %c" % weechat.hdata_char(hdata, pointer, "letter"))
 
 ==== hdata_integer
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return value of integer variable in structure using hdata.
 
@@ -16443,7 +16443,7 @@ int weechat_hdata_integer (struct t_hdata *hdata, void *pointer, const char *nam
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "integer"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16475,7 +16475,7 @@ weechat.prnt("", "number = %d" % weechat.hdata_integer(hdata, buffer, "number"))
 
 ==== hdata_long
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return value of long variable in structure using hdata.
 
@@ -16489,7 +16489,7 @@ long weechat_hdata_long (struct t_hdata *hdata, void *pointer, const char *name)
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "long"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16517,7 +16517,7 @@ weechat.prnt("", "longvar = %ld" % weechat.hdata_long(hdata, pointer, "longvar")
 
 ==== hdata_string
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return value of string variable in structure using hdata.
 
@@ -16531,7 +16531,7 @@ const char *weechat_hdata_string (struct t_hdata *hdata, void *pointer, const ch
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "string"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16563,7 +16563,7 @@ weechat.prnt("", "name = %s" % weechat.hdata_string(hdata, buffer, "name"))
 
 ==== hdata_pointer
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return value of pointer variable in structure using hdata.
 
@@ -16577,7 +16577,7 @@ void *weechat_hdata_pointer (struct t_hdata *hdata, void *pointer, const char *n
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "pointer"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16609,7 +16609,7 @@ weechat.prnt("", "lines = %lx" % weechat.hdata_pointer(hdata, buffer, "lines"))
 
 ==== hdata_time
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return value of time variable in structure using hdata.
 
@@ -16623,7 +16623,7 @@ time_t weechat_hdata_time (struct t_hdata *hdata, void *pointer, const char *nam
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "time"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16677,7 +16677,7 @@ if ptr:
 
 ==== hdata_hashtable
 
-_WeeChat ≥ 0.3.7._
+_WhoreIRC ≥ 0.3.7._
 
 Return value of hashtable variable in structure using hdata.
 
@@ -16691,7 +16691,7 @@ struct t_hashtable *weechat_hdata_hashtable (struct t_hdata *hdata, void *pointe
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (must be type "hashtable"); for arrays, the name can be
   "N|name" where N is the index in array (starting at 0), for example: "2|name"
 
@@ -16728,7 +16728,7 @@ for key in hash:
 
 ==== hdata_compare
 
-_WeeChat ≥ 1.9._
+_WhoreIRC ≥ 1.9._
 
 Compare a hdata variable of two objects.
 
@@ -16742,8 +16742,8 @@ int weechat_hdata_compare (struct t_hdata *hdata, void *pointer1, void *pointer2
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer1_: pointer to first WeeChat/plugin object
-* _pointer2_: pointer to second WeeChat/plugin object
+* _pointer1_: pointer to first WhoreIRC/plugin object
+* _pointer2_: pointer to second WhoreIRC/plugin object
 * _name_: variable name; for arrays, the name can be "N|name" where N is
   the index in array (starting at 0), for example: "2|name"
 * _case_sensitive_: 1 for case sensitive comparison of strings, otherwise 0
@@ -16781,7 +16781,7 @@ weechat.prnt("", "number comparison = %d" % weechat.hdata_compare(hdata, buffer1
 
 ==== hdata_set
 
-_WeeChat ≥ 0.3.9._
+_WhoreIRC ≥ 0.3.9._
 
 Set new value for variable in a hdata.
 
@@ -16800,7 +16800,7 @@ int weechat_hdata_set (struct t_hdata *hdata, void *pointer, const char *name, c
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _name_: variable name (types allowed: char, integer, long, string, pointer,
   time)
 * _value_: new value for variable
@@ -16821,7 +16821,7 @@ This function is not available in scripting API.
 
 ==== hdata_update
 
-_WeeChat ≥ 0.3.9._
+_WhoreIRC ≥ 0.3.9._
 
 Update data in a hdata.
 
@@ -16835,12 +16835,12 @@ int weechat_hdata_update (struct t_hdata *hdata, void *pointer, struct t_hashtab
 Arguments:
 
 * _hdata_: hdata pointer
-* _pointer_: pointer to WeeChat/plugin object
+* _pointer_: pointer to WhoreIRC/plugin object
 * _hashtable_: variables to update: keys are name of variables, values are new
   values for variables (keys and values are string), some special keys are
   allowed:
 ** key `__create_allowed` (with any value): return 1 if create is allowed for
-   structure, otherwise 0 _(WeeChat ≥ 0.4.0)_
+   structure, otherwise 0 _(WhoreIRC ≥ 0.4.0)_
 ** key `__delete_allowed` (with any value): return 1 if delete is allowed for
    structure, otherwise 0
 ** key `__update_allowed`, value is name of a variable: return 1 if update is
@@ -16873,8 +16873,8 @@ if (own_lines)
         line_data = weechat_hdata_pointer (weechat_hdata_get ("line"), line, "data");
         hdata = weechat_hdata_get ("line_data");
         hashtable = weechat_hashtable_new (8,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL,
                                            NULL);
         if (hashtable)
@@ -16907,7 +16907,7 @@ if own_lines:
 
 ==== hdata_get_string
 
-_WeeChat ≥ 0.3.6._
+_WhoreIRC ≥ 0.3.6._
 
 Return string value of a hdata property.
 
@@ -16966,7 +16966,7 @@ weechat.prnt("", "lists in hdata: %s" % weechat.hdata_get_string(hdata, "list_ke
 [[upgrade]]
 === Upgrade
 
-Functions for upgrading WeeChat (command "/upgrade").
+Functions for upgrading WhoreIRC (command "/upgrade").
 
 ==== upgrade_new
 
@@ -16991,7 +16991,7 @@ struct t_upgrade_file *upgrade_file_new (const char *filename,
 Arguments:
 
 * _filename_: name of file (extension ".upgrade" is added to this name by
-  WeeChat)
+  WhoreIRC)
 * _callback_read_: function called for each object read in upgrade file
   (if NULL, the upgrade file is opened in write mode), arguments and return
   value:
@@ -17001,11 +17001,11 @@ Arguments:
 ** _int object_id_: object id
 ** _struct t_infolist *infolist_: infolist with content of object
 ** return value:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
 * _callback_read_pointer_: pointer given to callback when it is called by
-  WeeChat
-* _callback_read_data_: pointer given to callback when it is called by WeeChat;
+  WhoreIRC
+* _callback_read_data_: pointer given to callback when it is called by WhoreIRC;
   if not NULL, it must have been allocated with malloc (or similar function)
   and it is automatically freed when the upgrade file is closed
 

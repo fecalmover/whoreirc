@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -129,7 +129,7 @@ buflist_config_signal_buffer_cb (const void *pointer, void *data,
 
     buflist_bar_item_update (0);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -166,9 +166,9 @@ buflist_config_hook_signals_refresh ()
     }
 
     signals = weechat_string_split (*all_signals, ",", NULL,
-                                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                     0, &count);
     if (signals)
     {
@@ -258,9 +258,9 @@ buflist_config_change_sort (const void *pointer, void *data,
         weechat_config_string (buflist_config_look_sort),
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &buflist_config_sort_fields_count);
 
@@ -699,7 +699,7 @@ buflist_config_read ()
 
     rc = weechat_config_read (buflist_config_file);
 
-    if (rc == WEECHAT_CONFIG_READ_OK)
+    if (rc == WHOREIRC_CONFIG_READ_OK)
     {
         buflist_config_change_sort (NULL, NULL, NULL);
         buflist_config_change_signals_refresh (NULL, NULL, NULL);

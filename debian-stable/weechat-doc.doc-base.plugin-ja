@@ -1,8 +1,8 @@
 Document: whoreirc-plugin-ja
-Title: WeeChat plugin API reference (Japanese)
+Title: WhoreIRC plugin API reference (Japanese)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create plugins
- for WeeChat (Japanese version).
+ for WhoreIRC (Japanese version).
 Section: Network/Communication
 
 Format: HTML

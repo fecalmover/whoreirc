@@ -41,13 +41,13 @@
     if (__init                                                          \
         && (!ruby_current_script || !ruby_current_script->name))        \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_NOT_INIT(RUBY_CURRENT_SCRIPT_NAME,           \
+        WHOREIRC_SCRIPT_MSG_NOT_INIT(RUBY_CURRENT_SCRIPT_NAME,           \
                                     ruby_function_name);                \
         __ret;                                                          \
     }
 #define API_WRONG_ARGS(__ret)                                           \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_WRONG_ARGS(RUBY_CURRENT_SCRIPT_NAME,         \
+        WHOREIRC_SCRIPT_MSG_WRONG_ARGS(RUBY_CURRENT_SCRIPT_NAME,         \
                                       ruby_function_name);              \
         __ret;                                                          \
     }
@@ -528,17 +528,17 @@ weechat_ruby_api_string_eval_expression (VALUE class, VALUE expr,
 
     c_expr = StringValuePtr (expr);
     c_pointers = weechat_ruby_hash_to_hashtable (pointers,
-                                                 WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                 WEECHAT_HASHTABLE_STRING,
-                                                 WEECHAT_HASHTABLE_POINTER);
+                                                 WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                 WHOREIRC_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_POINTER);
     c_extra_vars = weechat_ruby_hash_to_hashtable (extra_vars,
-                                                   WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                   WEECHAT_HASHTABLE_STRING,
-                                                   WEECHAT_HASHTABLE_STRING);
+                                                   WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                   WHOREIRC_HASHTABLE_STRING,
+                                                   WHOREIRC_HASHTABLE_STRING);
     c_options = weechat_ruby_hash_to_hashtable (options,
-                                                WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                WEECHAT_HASHTABLE_STRING,
-                                                WEECHAT_HASHTABLE_STRING);
+                                                WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                WHOREIRC_HASHTABLE_STRING,
+                                                WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_expression (c_expr, c_pointers, c_extra_vars,
                                              c_options);
@@ -575,19 +575,19 @@ weechat_ruby_api_string_eval_path_home (VALUE class, VALUE path,
     c_path = StringValuePtr (path);
     c_pointers = weechat_ruby_hash_to_hashtable (
         pointers,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER);
     c_extra_vars = weechat_ruby_hash_to_hashtable (
         extra_vars,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     c_options = weechat_ruby_hash_to_hashtable (
         options,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_path_home (c_path, c_pointers, c_extra_vars,
                                             c_options);
@@ -991,12 +991,12 @@ weechat_ruby_api_config_reload_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(config_file);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+            ret = WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
         else
         {
             ret = *rc;
@@ -1006,7 +1006,7 @@ weechat_ruby_api_config_reload_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+    return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
 }
 
 static VALUE
@@ -1062,12 +1062,12 @@ weechat_ruby_api_config_read_cb (const void *pointer, void *data,
         func_argv[4] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         else
         {
             ret = *rc;
@@ -1077,7 +1077,7 @@ weechat_ruby_api_config_read_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 int
@@ -1101,12 +1101,12 @@ weechat_ruby_api_config_section_write_cb (const void *pointer, void *data,
         func_argv[2] = (section_name) ? (char *)section_name : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_WRITE_ERROR;
+            ret = WHOREIRC_CONFIG_WRITE_ERROR;
         else
         {
             ret = *rc;
@@ -1116,7 +1116,7 @@ weechat_ruby_api_config_section_write_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 int
@@ -1140,12 +1140,12 @@ weechat_ruby_api_config_section_write_default_cb (const void *pointer, void *dat
         func_argv[2] = (section_name) ? (char *)section_name : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_WRITE_ERROR;
+            ret = WHOREIRC_CONFIG_WRITE_ERROR;
         else
         {
             ret = *rc;
@@ -1155,7 +1155,7 @@ weechat_ruby_api_config_section_write_default_cb (const void *pointer, void *dat
         return ret;
     }
 
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 int
@@ -1183,12 +1183,12 @@ weechat_ruby_api_config_section_create_option_cb (const void *pointer, void *dat
         func_argv[4] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         else
         {
             ret = *rc;
@@ -1198,7 +1198,7 @@ weechat_ruby_api_config_section_create_option_cb (const void *pointer, void *dat
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 int
@@ -1224,12 +1224,12 @@ weechat_ruby_api_config_section_delete_option_cb (const void *pointer, void *dat
         func_argv[3] = (char *)API_PTR2STR(option);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
         else
         {
             ret = *rc;
@@ -1239,7 +1239,7 @@ weechat_ruby_api_config_section_delete_option_cb (const void *pointer, void *dat
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
 }
 
 static VALUE
@@ -1375,7 +1375,7 @@ weechat_ruby_api_config_option_check_value_cb (const void *pointer, void *data,
         func_argv[2] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
@@ -1412,7 +1412,7 @@ weechat_ruby_api_config_option_change_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(option);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ss", func_argv);
 
@@ -1440,7 +1440,7 @@ weechat_ruby_api_config_option_delete_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(option);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ss", func_argv);
 
@@ -1596,9 +1596,9 @@ weechat_ruby_api_config_option_reset (VALUE class, VALUE option,
     char *c_option;
     int c_run_callback, rc;
 
-    API_INIT_FUNC(1, "config_option_reset", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_reset", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (NIL_P (option) || NIL_P (run_callback))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     Check_Type (option, T_STRING);
     Check_Type (run_callback, T_FIXNUM);
@@ -1619,9 +1619,9 @@ weechat_ruby_api_config_option_set (VALUE class, VALUE option, VALUE new_value,
     char *c_option, *c_new_value;
     int c_run_callback, rc;
 
-    API_INIT_FUNC(1, "config_option_set", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (NIL_P (option) || NIL_P (new_value) || NIL_P (run_callback))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     Check_Type (option, T_STRING);
     Check_Type (new_value, T_STRING);
@@ -1645,9 +1645,9 @@ weechat_ruby_api_config_option_set_null (VALUE class, VALUE option,
     char *c_option;
     int c_run_callback, rc;
 
-    API_INIT_FUNC(1, "config_option_set_null", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set_null", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (NIL_P (option) || NIL_P (run_callback))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     Check_Type (option, T_STRING);
     Check_Type (run_callback, T_FIXNUM);
@@ -1667,9 +1667,9 @@ weechat_ruby_api_config_option_unset (VALUE class, VALUE option)
     char *c_option;
     int rc;
 
-    API_INIT_FUNC(1, "config_option_unset", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_option_unset", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
     if (NIL_P (option))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     Check_Type (option, T_STRING);
 
@@ -1946,9 +1946,9 @@ weechat_ruby_api_config_write (VALUE class, VALUE config_file)
     char *c_config_file;
     int rc;
 
-    API_INIT_FUNC(1, "config_write", API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+    API_INIT_FUNC(1, "config_write", API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
     if (NIL_P (config_file))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
 
     Check_Type (config_file, T_STRING);
 
@@ -1965,9 +1965,9 @@ weechat_ruby_api_config_read (VALUE class, VALUE config_file)
     char *c_config_file;
     int rc;
 
-    API_INIT_FUNC(1, "config_read", API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+    API_INIT_FUNC(1, "config_read", API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
     if (NIL_P (config_file))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
 
     Check_Type (config_file, T_STRING);
 
@@ -1984,9 +1984,9 @@ weechat_ruby_api_config_reload (VALUE class, VALUE config_file)
     char *c_config_file;
     int rc;
 
-    API_INIT_FUNC(1, "config_reload", API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+    API_INIT_FUNC(1, "config_reload", API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
     if (NIL_P (config_file))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
 
     Check_Type (config_file, T_STRING);
 
@@ -2136,9 +2136,9 @@ weechat_ruby_api_config_set_plugin (VALUE class, VALUE option, VALUE value)
     char *c_option, *c_value;
     int rc;
 
-    API_INIT_FUNC(1, "config_set_plugin", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_set_plugin", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (NIL_P (option) || NIL_P (value))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     Check_Type (option, T_STRING);
     Check_Type (value, T_STRING);
@@ -2184,9 +2184,9 @@ weechat_ruby_api_config_unset_plugin (VALUE class, VALUE option)
     char *c_option;
     int rc;
 
-    API_INIT_FUNC(1, "config_unset_plugin", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_unset_plugin", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
     if (NIL_P (option))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     Check_Type (option, T_STRING);
 
@@ -2215,9 +2215,9 @@ weechat_ruby_api_key_bind (VALUE class, VALUE context, VALUE keys)
 
     c_context = StringValuePtr (context);
     c_keys = weechat_ruby_hash_to_hashtable (keys,
-                                             WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                             WEECHAT_HASHTABLE_STRING,
-                                             WEECHAT_HASHTABLE_STRING);
+                                             WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                             WHOREIRC_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_STRING);
 
     num_keys = weechat_key_bind (c_context, c_keys);
 
@@ -2411,12 +2411,12 @@ weechat_ruby_api_hook_command_cb (const void *pointer, void *data,
         func_argv[2] = (argc > 1) ? argv_eol[1] : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2426,7 +2426,7 @@ weechat_ruby_api_hook_command_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -2497,12 +2497,12 @@ weechat_ruby_api_hook_completion_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(completion);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2512,7 +2512,7 @@ weechat_ruby_api_hook_completion_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -2624,12 +2624,12 @@ weechat_ruby_api_hook_command_run_cb (const void *pointer, void *data,
         func_argv[2] = (command) ? (char *)command : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2639,7 +2639,7 @@ weechat_ruby_api_hook_command_run_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -2693,12 +2693,12 @@ weechat_ruby_api_hook_timer_cb (const void *pointer, void *data,
         func_argv[1] = str_remaining_calls;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2708,7 +2708,7 @@ weechat_ruby_api_hook_timer_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -2766,12 +2766,12 @@ weechat_ruby_api_hook_fd_cb (const void *pointer, void *data, int fd)
         func_argv[1] = &fd;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "si", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2781,7 +2781,7 @@ weechat_ruby_api_hook_fd_cb (const void *pointer, void *data, int fd)
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -2838,14 +2838,14 @@ weechat_ruby_api_hook_process_cb (const void *pointer, void *data,
     script = (struct t_plugin_script *)pointer;
     plugin_script_get_function_and_data (data, &ptr_function, &ptr_data);
 
-    if (return_code == WEECHAT_HOOK_PROCESS_CHILD)
+    if (return_code == WHOREIRC_HOOK_PROCESS_CHILD)
     {
         if (strncmp (command, "func:", 5) == 0)
         {
             func_argv[0] = (ptr_data) ? (char *)ptr_data : empty_arg;
 
             result = (char *) weechat_ruby_exec (script,
-                                                 WEECHAT_SCRIPT_EXEC_STRING,
+                                                 WHOREIRC_SCRIPT_EXEC_STRING,
                                                  command + 5,
                                                  "s", func_argv);
             if (result)
@@ -2866,12 +2866,12 @@ weechat_ruby_api_hook_process_cb (const void *pointer, void *data,
         func_argv[4] = (err) ? (char *)err : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ssiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2881,7 +2881,7 @@ weechat_ruby_api_hook_process_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -2940,9 +2940,9 @@ weechat_ruby_api_hook_process_hashtable (VALUE class, VALUE command,
 
     c_command = StringValuePtr (command);
     c_options = weechat_ruby_hash_to_hashtable (options,
-                                                WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                WEECHAT_HASHTABLE_STRING,
-                                                WEECHAT_HASHTABLE_STRING);
+                                                WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                WHOREIRC_HASHTABLE_STRING,
+                                                WHOREIRC_HASHTABLE_STRING);
     c_timeout = FIX2INT (timeout);
     c_function = StringValuePtr (function);
     c_data = StringValuePtr (data);
@@ -2987,12 +2987,12 @@ weechat_ruby_api_hook_connect_cb (const void *pointer, void *data,
         func_argv[5] = (error) ? (char *)error : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "siiiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3002,7 +3002,7 @@ weechat_ruby_api_hook_connect_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -3077,7 +3077,7 @@ weechat_ruby_api_hook_line_cb (const void *pointer, void *data,
 
         return (struct t_hashtable *)weechat_ruby_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "sh", func_argv);
     }
@@ -3158,12 +3158,12 @@ weechat_ruby_api_hook_print_cb (const void *pointer, void *data,
         func_argv[7] = (message) ? (char *)message : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ssssiiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3175,7 +3175,7 @@ weechat_ruby_api_hook_print_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -3238,11 +3238,11 @@ weechat_ruby_api_hook_signal_cb (const void *pointer, void *data,
     {
         func_argv[0] = (ptr_data) ? (char *)ptr_data : empty_arg;
         func_argv[1] = (signal) ? (char *)signal : empty_arg;
-        if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+        if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
         {
             func_argv[2] = (signal_data) ? (char *)signal_data : empty_arg;
         }
-        else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+        else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
         {
             str_value[0] = '\0';
             if (signal_data)
@@ -3252,7 +3252,7 @@ weechat_ruby_api_hook_signal_cb (const void *pointer, void *data,
             }
             func_argv[2] = str_value;
         }
-        else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+        else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
         {
             func_argv[2] = (char *)API_PTR2STR(signal_data);
         }
@@ -3260,12 +3260,12 @@ weechat_ruby_api_hook_signal_cb (const void *pointer, void *data,
             func_argv[2] = empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3275,7 +3275,7 @@ weechat_ruby_api_hook_signal_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -3314,9 +3314,9 @@ weechat_ruby_api_hook_signal_send (VALUE class, VALUE signal, VALUE type_data,
     char *c_signal, *c_type_data, *c_signal_data;
     int number, rc;
 
-    API_INIT_FUNC(1, "hook_signal_send", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_signal_send", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (NIL_P (signal) || NIL_P (type_data) || NIL_P (signal_data))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     Check_Type (signal, T_STRING);
     Check_Type (type_data, T_STRING);
@@ -3324,21 +3324,21 @@ weechat_ruby_api_hook_signal_send (VALUE class, VALUE signal, VALUE type_data,
     c_signal = StringValuePtr (signal);
     c_type_data = StringValuePtr (type_data);
 
-    if (strcmp (c_type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (c_type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         Check_Type (signal_data, T_STRING);
         c_signal_data = StringValuePtr (signal_data);
         rc = weechat_hook_signal_send (c_signal, c_type_data, c_signal_data);
         API_RETURN_INT(rc);
     }
-    else if (strcmp (c_type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+    else if (strcmp (c_type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
     {
         Check_Type (signal_data, T_FIXNUM);
         number = FIX2INT (signal_data);
         rc = weechat_hook_signal_send (c_signal, c_type_data, &number);
         API_RETURN_INT(rc);
     }
-    else if (strcmp (c_type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+    else if (strcmp (c_type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
     {
         Check_Type (signal_data, T_STRING);
         c_signal_data = StringValuePtr (signal_data);
@@ -3347,7 +3347,7 @@ weechat_ruby_api_hook_signal_send (VALUE class, VALUE signal, VALUE type_data,
         API_RETURN_INT(rc);
     }
 
-    API_RETURN_INT(WEECHAT_RC_ERROR);
+    API_RETURN_INT(WHOREIRC_RC_ERROR);
 }
 
 int
@@ -3371,12 +3371,12 @@ weechat_ruby_api_hook_hsignal_cb (const void *pointer, void *data,
         func_argv[2] = hashtable;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ssh", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3386,7 +3386,7 @@ weechat_ruby_api_hook_hsignal_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -3425,18 +3425,18 @@ weechat_ruby_api_hook_hsignal_send (VALUE class, VALUE signal, VALUE hashtable)
     struct t_hashtable *c_hashtable;
     int rc;
 
-    API_INIT_FUNC(1, "hook_hsignal_send", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_hsignal_send", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (NIL_P (signal) || NIL_P (hashtable))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     Check_Type (signal, T_STRING);
     Check_Type (hashtable, T_HASH);
 
     c_signal = StringValuePtr (signal);
     c_hashtable = weechat_ruby_hash_to_hashtable (hashtable,
-                                                  WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                  WEECHAT_HASHTABLE_STRING,
-                                                  WEECHAT_HASHTABLE_STRING);
+                                                  WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                  WHOREIRC_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING);
 
     rc = weechat_hook_hsignal_send (c_signal, c_hashtable);
 
@@ -3466,12 +3466,12 @@ weechat_ruby_api_hook_config_cb (const void *pointer, void *data,
         func_argv[2] = (value) ? (char *)value : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3481,7 +3481,7 @@ weechat_ruby_api_hook_config_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -3535,7 +3535,7 @@ weechat_ruby_api_hook_modifier_cb (const void *pointer, void *data,
         func_argv[3] = (string) ? (char *)string : empty_arg;
 
         return (char *)weechat_ruby_exec (script,
-                                          WEECHAT_SCRIPT_EXEC_STRING,
+                                          WHOREIRC_SCRIPT_EXEC_STRING,
                                           ptr_function,
                                           "ssss", func_argv);
     }
@@ -3616,7 +3616,7 @@ weechat_ruby_api_hook_info_cb (const void *pointer, void *data,
         func_argv[2] = (arguments) ? (char *)arguments : empty_arg;
 
         return (char *)weechat_ruby_exec (script,
-                                          WEECHAT_SCRIPT_EXEC_STRING,
+                                          WHOREIRC_SCRIPT_EXEC_STRING,
                                           ptr_function,
                                           "sss", func_argv);
     }
@@ -3682,7 +3682,7 @@ weechat_ruby_api_hook_info_hashtable_cb (const void *pointer, void *data,
 
         return (struct t_hashtable *)weechat_ruby_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "ssh", func_argv);
     }
@@ -3757,7 +3757,7 @@ weechat_ruby_api_hook_infolist_cb (const void *pointer, void *data,
 
         result = (struct t_infolist *)weechat_ruby_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_POINTER,
+            WHOREIRC_SCRIPT_EXEC_POINTER,
             ptr_function,
             "ssss", func_argv);
 
@@ -3829,7 +3829,7 @@ weechat_ruby_api_hook_focus_cb (const void *pointer, void *data,
 
         return (struct t_hashtable *)weechat_ruby_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "sh", func_argv);
     }
@@ -3940,12 +3940,12 @@ weechat_ruby_api_buffer_input_data_cb (const void *pointer, void *data,
         func_argv[2] = (input_data) ? (char *)input_data : empty_arg;
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3955,7 +3955,7 @@ weechat_ruby_api_buffer_input_data_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 int
@@ -3977,12 +3977,12 @@ weechat_ruby_api_buffer_close_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(buffer);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3992,7 +3992,7 @@ weechat_ruby_api_buffer_close_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -4852,7 +4852,7 @@ weechat_ruby_api_bar_item_build_cb (const void *pointer, void *data,
             func_argv[4] = extra_info;
 
             ret = (char *)weechat_ruby_exec (script,
-                                             WEECHAT_SCRIPT_EXEC_STRING,
+                                             WHOREIRC_SCRIPT_EXEC_STRING,
                                              ptr_function + 7,
                                              "ssssh", func_argv);
         }
@@ -4864,7 +4864,7 @@ weechat_ruby_api_bar_item_build_cb (const void *pointer, void *data,
             func_argv[2] = (char *)API_PTR2STR(window);
 
             ret = (char *)weechat_ruby_exec (script,
-                                             WEECHAT_SCRIPT_EXEC_STRING,
+                                             WHOREIRC_SCRIPT_EXEC_STRING,
                                              ptr_function,
                                              "sss", func_argv);
         }
@@ -5096,9 +5096,9 @@ weechat_ruby_api_command (VALUE class, VALUE buffer, VALUE command)
     char *c_buffer, *c_command;
     int rc;
 
-    API_INIT_FUNC(1, "command", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (NIL_P (buffer) || NIL_P (command))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     Check_Type (buffer, T_STRING);
     Check_Type (command, T_STRING);
@@ -5122,9 +5122,9 @@ weechat_ruby_api_command_options (VALUE class, VALUE buffer, VALUE command,
     struct t_hashtable *c_options;
     int rc;
 
-    API_INIT_FUNC(1, "command_options", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command_options", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (NIL_P (buffer) || NIL_P (command) || NIL_P (options))
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     Check_Type (buffer, T_STRING);
     Check_Type (command, T_STRING);
@@ -5133,9 +5133,9 @@ weechat_ruby_api_command_options (VALUE class, VALUE buffer, VALUE command,
     c_buffer = StringValuePtr (buffer);
     c_command = StringValuePtr (command);
     c_options = weechat_ruby_hash_to_hashtable (options,
-                                                WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                WEECHAT_HASHTABLE_STRING,
-                                                WEECHAT_HASHTABLE_STRING);
+                                                WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                WHOREIRC_HASHTABLE_STRING,
+                                                WHOREIRC_HASHTABLE_STRING);
 
     rc = plugin_script_api_command_options (weechat_ruby_plugin,
                                             ruby_current_script,
@@ -5187,9 +5187,9 @@ weechat_ruby_api_info_get_hashtable (VALUE class, VALUE info_name,
 
     c_info_name = StringValuePtr (info_name);
     c_hashtable = weechat_ruby_hash_to_hashtable (hash,
-                                                  WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                  WEECHAT_HASHTABLE_STRING,
-                                                  WEECHAT_HASHTABLE_STRING);
+                                                  WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                  WHOREIRC_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING);
 
     result_hashtable = weechat_info_get_hashtable (c_info_name, c_hashtable);
     result_hash = weechat_ruby_hashtable_to_hash (result_hashtable);
@@ -6040,9 +6040,9 @@ weechat_ruby_api_hdata_update (VALUE class, VALUE hdata, VALUE pointer,
     c_hdata = StringValuePtr (hdata);
     c_pointer = StringValuePtr (pointer);
     c_hashtable = weechat_ruby_hash_to_hashtable (hashtable,
-                                                  WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                  WEECHAT_HASHTABLE_STRING,
-                                                  WEECHAT_HASHTABLE_STRING);
+                                                  WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                  WHOREIRC_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING);
 
     value = weechat_hdata_update (API_STR2PTR(c_hdata),
                                   API_STR2PTR(c_pointer),
@@ -6101,12 +6101,12 @@ weechat_ruby_api_upgrade_read_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(infolist);
 
         rc = (int *) weechat_ruby_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_INT,
+                                        WHOREIRC_SCRIPT_EXEC_INT,
                                         ptr_function,
                                         "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -6116,7 +6116,7 @@ weechat_ruby_api_upgrade_read_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 static VALUE
@@ -6220,52 +6220,52 @@ weechat_ruby_api_upgrade_close (VALUE class, VALUE upgrade_file)
 void
 weechat_ruby_api_init (VALUE ruby_mWeechat)
 {
-    rb_define_const (ruby_mWeechat, "WEECHAT_RC_OK", INT2NUM(WEECHAT_RC_OK));
-    rb_define_const (ruby_mWeechat, "WEECHAT_RC_OK_EAT", INT2NUM(WEECHAT_RC_OK_EAT));
-    rb_define_const (ruby_mWeechat, "WEECHAT_RC_ERROR", INT2NUM(WEECHAT_RC_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_RC_OK", INT2NUM(WHOREIRC_RC_OK));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_RC_OK_EAT", INT2NUM(WHOREIRC_RC_OK_EAT));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_RC_ERROR", INT2NUM(WHOREIRC_RC_ERROR));
 
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_READ_OK", INT2NUM(WEECHAT_CONFIG_READ_OK));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_READ_MEMORY_ERROR", INT2NUM(WEECHAT_CONFIG_READ_MEMORY_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_READ_FILE_NOT_FOUND", INT2NUM(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_WRITE_OK", INT2NUM(WEECHAT_CONFIG_WRITE_OK));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_WRITE_ERROR", INT2NUM(WEECHAT_CONFIG_WRITE_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_WRITE_MEMORY_ERROR", INT2NUM(WEECHAT_CONFIG_WRITE_MEMORY_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_SET_OK_CHANGED", INT2NUM(WEECHAT_CONFIG_OPTION_SET_OK_CHANGED));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE", INT2NUM(WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_SET_ERROR", INT2NUM(WEECHAT_CONFIG_OPTION_SET_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND", INT2NUM(WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET", INT2NUM(WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_UNSET_OK_RESET", INT2NUM(WEECHAT_CONFIG_OPTION_UNSET_OK_RESET));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED", INT2NUM(WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED));
-    rb_define_const (ruby_mWeechat, "WEECHAT_CONFIG_OPTION_UNSET_ERROR", INT2NUM(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_READ_OK", INT2NUM(WHOREIRC_CONFIG_READ_OK));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_READ_MEMORY_ERROR", INT2NUM(WHOREIRC_CONFIG_READ_MEMORY_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_READ_FILE_NOT_FOUND", INT2NUM(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_WRITE_OK", INT2NUM(WHOREIRC_CONFIG_WRITE_OK));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_WRITE_ERROR", INT2NUM(WHOREIRC_CONFIG_WRITE_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_WRITE_MEMORY_ERROR", INT2NUM(WHOREIRC_CONFIG_WRITE_MEMORY_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED", INT2NUM(WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE", INT2NUM(WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_SET_ERROR", INT2NUM(WHOREIRC_CONFIG_OPTION_SET_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND", INT2NUM(WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET", INT2NUM(WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET", INT2NUM(WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED", INT2NUM(WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_CONFIG_OPTION_UNSET_ERROR", INT2NUM(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
-    rb_define_const (ruby_mWeechat, "WEECHAT_LIST_POS_SORT", rb_str_new2 (WEECHAT_LIST_POS_SORT));
-    rb_define_const (ruby_mWeechat, "WEECHAT_LIST_POS_BEGINNING", rb_str_new2 (WEECHAT_LIST_POS_BEGINNING));
-    rb_define_const (ruby_mWeechat, "WEECHAT_LIST_POS_END", rb_str_new2 (WEECHAT_LIST_POS_END));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_LIST_POS_SORT", rb_str_new2 (WHOREIRC_LIST_POS_SORT));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_LIST_POS_BEGINNING", rb_str_new2 (WHOREIRC_LIST_POS_BEGINNING));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_LIST_POS_END", rb_str_new2 (WHOREIRC_LIST_POS_END));
 
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOTLIST_LOW", rb_str_new2 (WEECHAT_HOTLIST_LOW));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOTLIST_MESSAGE", rb_str_new2 (WEECHAT_HOTLIST_MESSAGE));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOTLIST_PRIVATE", rb_str_new2 (WEECHAT_HOTLIST_PRIVATE));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOTLIST_HIGHLIGHT", rb_str_new2 (WEECHAT_HOTLIST_HIGHLIGHT));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOTLIST_LOW", rb_str_new2 (WHOREIRC_HOTLIST_LOW));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOTLIST_MESSAGE", rb_str_new2 (WHOREIRC_HOTLIST_MESSAGE));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOTLIST_PRIVATE", rb_str_new2 (WHOREIRC_HOTLIST_PRIVATE));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOTLIST_HIGHLIGHT", rb_str_new2 (WHOREIRC_HOTLIST_HIGHLIGHT));
 
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_PROCESS_RUNNING", INT2NUM(WEECHAT_HOOK_PROCESS_RUNNING));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_PROCESS_ERROR", INT2NUM(WEECHAT_HOOK_PROCESS_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_PROCESS_RUNNING", INT2NUM(WHOREIRC_HOOK_PROCESS_RUNNING));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_PROCESS_ERROR", INT2NUM(WHOREIRC_HOOK_PROCESS_ERROR));
 
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_OK", INT2NUM(WEECHAT_HOOK_CONNECT_OK));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND", INT2NUM(WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND", INT2NUM(WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED", INT2NUM(WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_PROXY_ERROR", INT2NUM(WEECHAT_HOOK_CONNECT_PROXY_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR", INT2NUM(WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR", INT2NUM(WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR", INT2NUM(WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_MEMORY_ERROR", INT2NUM(WEECHAT_HOOK_CONNECT_MEMORY_ERROR));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_TIMEOUT", INT2NUM(WEECHAT_HOOK_CONNECT_TIMEOUT));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_CONNECT_SOCKET_ERROR", INT2NUM(WEECHAT_HOOK_CONNECT_SOCKET_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_OK", INT2NUM(WHOREIRC_HOOK_CONNECT_OK));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND", INT2NUM(WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND", INT2NUM(WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED", INT2NUM(WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_PROXY_ERROR", INT2NUM(WHOREIRC_HOOK_CONNECT_PROXY_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR", INT2NUM(WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR", INT2NUM(WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR", INT2NUM(WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_MEMORY_ERROR", INT2NUM(WHOREIRC_HOOK_CONNECT_MEMORY_ERROR));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_TIMEOUT", INT2NUM(WHOREIRC_HOOK_CONNECT_TIMEOUT));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_CONNECT_SOCKET_ERROR", INT2NUM(WHOREIRC_HOOK_CONNECT_SOCKET_ERROR));
 
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_SIGNAL_STRING", rb_str_new2 (WEECHAT_HOOK_SIGNAL_STRING));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_SIGNAL_INT", rb_str_new2 (WEECHAT_HOOK_SIGNAL_INT));
-    rb_define_const (ruby_mWeechat, "WEECHAT_HOOK_SIGNAL_POINTER", rb_str_new2 (WEECHAT_HOOK_SIGNAL_POINTER));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_SIGNAL_STRING", rb_str_new2 (WHOREIRC_HOOK_SIGNAL_STRING));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_SIGNAL_INT", rb_str_new2 (WHOREIRC_HOOK_SIGNAL_INT));
+    rb_define_const (ruby_mWeechat, "WHOREIRC_HOOK_SIGNAL_POINTER", rb_str_new2 (WHOREIRC_HOOK_SIGNAL_POINTER));
 
     API_DEF_FUNC(register, 7);
     API_DEF_FUNC(plugin_get_name, 1);

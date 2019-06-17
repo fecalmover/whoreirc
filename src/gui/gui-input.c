@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -132,7 +132,7 @@ gui_input_paste_pending_signal ()
     }
 
     (void) hook_signal_send ("input_paste_pending",
-                             WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                             WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }
 
 /*
@@ -182,7 +182,7 @@ gui_input_text_changed_modifier_and_signal (struct t_gui_buffer *buffer,
 
     /* send signal */
     (void) hook_signal_send ("input_text_changed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -199,7 +199,7 @@ gui_input_text_cursor_moved_signal (struct t_gui_buffer *buffer)
     }
 
     (void) hook_signal_send ("input_text_cursor_moved",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -216,7 +216,7 @@ gui_input_search_signal (struct t_gui_buffer *buffer)
     }
 
     (void) hook_signal_send ("input_search",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -1781,7 +1781,7 @@ gui_input_zoom_merged_buffer (struct t_gui_buffer *buffer)
 
     (void) hook_signal_send ((buffer_was_zoomed) ?
                              "buffer_unzoomed" : "buffer_zoomed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*

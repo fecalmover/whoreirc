@@ -80,9 +80,9 @@ hook_line (struct t_weechat_plugin *plugin, const char *buffer_type,
         (buffer_name && buffer_name[0]) ? buffer_name : "*",
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &new_hook_line->num_buffers);
     new_hook_line->tags_array = string_split_tags (tags,
@@ -131,8 +131,8 @@ hook_line_exec (struct t_gui_line *line)
             if (!hashtable)
             {
                 hashtable = hashtable_new (32,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL, NULL);
                 if (!hashtable)
                     break;

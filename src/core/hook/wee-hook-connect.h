@@ -18,8 +18,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_HOOK_CONNECT_H
-#define WEECHAT_HOOK_CONNECT_H
+#ifndef WHOREIRC_HOOK_CONNECT_H
+#define WHOREIRC_HOOK_CONNECT_H
 
 #ifdef HAVE_GNUTLS
 #include <gnutls/gnutls.h>
@@ -111,4 +111,4 @@ extern int hook_connect_add_to_infolist (struct t_infolist_item *item,
                                          struct t_hook *hook);
 extern void hook_connect_print_log (struct t_hook *hook);
 
-#endif /* WEECHAT_HOOK_CONNECT_H */
+#endif /* WHOREIRC_HOOK_CONNECT_H */

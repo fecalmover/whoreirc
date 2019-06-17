@@ -100,13 +100,13 @@ int
 relay_weechat_protocol_sync_flag (const char *flag)
 {
     if (strcmp (flag, "buffer") == 0)
-        return RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER;
+        return RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER;
     if (strcmp (flag, "nicklist") == 0)
-        return RELAY_WEECHAT_PROTOCOL_SYNC_NICKLIST;
+        return RELAY_WHOREIRC_PROTOCOL_SYNC_NICKLIST;
     if (strcmp (flag, "buffers") == 0)
-        return RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS;
+        return RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS;
     if (strcmp (flag, "upgrade") == 0)
-        return RELAY_WEECHAT_PROTOCOL_SYNC_UPGRADE;
+        return RELAY_WHOREIRC_PROTOCOL_SYNC_UPGRADE;
 
     /* unknown flag */
     return 0;
@@ -120,10 +120,10 @@ relay_weechat_protocol_sync_flag (const char *flag)
  * If buffer is NULL or not found, searches "*" (which means "all buffers").
  *
  * The "flags" argument can be a combination (logical OR) of:
- *   RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER
- *   RELAY_WEECHAT_PROTOCOL_SYNC_NICKLIST
- *   RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS
- *   RELAY_WEECHAT_PROTOCOL_SYNC_UPGRADE
+ *   RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER
+ *   RELAY_WHOREIRC_PROTOCOL_SYNC_NICKLIST
+ *   RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS
+ *   RELAY_WHOREIRC_PROTOCOL_SYNC_UPGRADE
  *
  * Returns:
  *   1: buffer is synchronized with at least one flag given
@@ -139,14 +139,14 @@ relay_weechat_protocol_is_sync (struct t_relay_client *ptr_client,
     /* search buffer using its full name */
     if (buffer)
     {
-        ptr_flags = weechat_hashtable_get (RELAY_WEECHAT_DATA(ptr_client, buffers_sync),
+        ptr_flags = weechat_hashtable_get (RELAY_WHOREIRC_DATA(ptr_client, buffers_sync),
                                            weechat_buffer_get_string (buffer, "full_name"));
         if (ptr_flags)
             return ((*ptr_flags) & flags) ? 1 : 0;
     }
 
     /* search special name "*" as fallback */
-    ptr_flags = weechat_hashtable_get (RELAY_WEECHAT_DATA(ptr_client, buffers_sync),
+    ptr_flags = weechat_hashtable_get (RELAY_WHOREIRC_DATA(ptr_client, buffers_sync),
                                        "*");
     if (ptr_flags)
         return ((*ptr_flags) & flags) ? 1 : 0;
@@ -167,12 +167,12 @@ relay_weechat_protocol_is_sync (struct t_relay_client *ptr_client,
  *   init password=mypass,compression=off
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(init)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(init)
 {
     char **options, *pos, *password, *totp_secret, *info_totp_args, *info_totp;
     int i, compression, length;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(1);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(1);
 
     options = weechat_string_split_command (argv_eol[0], ',');
     if (options)
@@ -192,7 +192,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(init)
                     if (password)
                     {
                         if (strcmp (password, pos) == 0)
-                            RELAY_WEECHAT_DATA(client, password_ok) = 1;
+                            RELAY_WHOREIRC_DATA(client, password_ok) = 1;
                         free (password);
                     }
                 }
@@ -215,7 +215,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(init)
                                       weechat_config_integer (relay_config_network_totp_window));
                             info_totp = weechat_info_get ("totp_validate", info_totp_args);
                             if (info_totp && (strcmp (info_totp, "1") == 0))
-                                RELAY_WEECHAT_DATA(client, totp_ok) = 1;
+                                RELAY_WHOREIRC_DATA(client, totp_ok) = 1;
                             if (info_totp)
                                 free (info_totp);
                             free (info_totp_args);
@@ -227,18 +227,18 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(init)
                 {
                     compression = relay_weechat_compression_search (pos);
                     if (compression >= 0)
-                        RELAY_WEECHAT_DATA(client, compression) = compression;
+                        RELAY_WHOREIRC_DATA(client, compression) = compression;
                 }
             }
         }
         weechat_string_free_split_command (options);
     }
 
-    if (RELAY_WEECHAT_DATA(client, password_ok)
-        && RELAY_WEECHAT_DATA(client, totp_ok))
+    if (RELAY_WHOREIRC_DATA(client, password_ok)
+        && RELAY_WHOREIRC_DATA(client, totp_ok))
     {
         weechat_hook_signal_send ("relay_client_auth_ok",
-                                  WEECHAT_HOOK_SIGNAL_POINTER,
+                                  WHOREIRC_HOOK_SIGNAL_POINTER,
                                   client);
     }
     else
@@ -246,7 +246,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(init)
         relay_client_set_status (client, RELAY_STATUS_AUTH_FAILED);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -257,11 +257,11 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(init)
  *   hdata buffer:gui_buffers(*)/own_lines/first_line(*)/data date,displayed,prefix,message
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(hdata)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(hdata)
 {
     struct t_relay_weechat_msg *msg;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(1);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(1);
 
     msg = relay_weechat_msg_new (id);
     if (msg)
@@ -269,7 +269,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(hdata)
         if (!relay_weechat_msg_add_hdata (msg, argv[0],
                                           (argc > 1) ? argv_eol[1] : NULL))
         {
-            relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_HDATA);
+            relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_HDATA);
             relay_weechat_msg_add_string (msg, NULL);  /* h-path */
             relay_weechat_msg_add_string (msg, NULL);  /* keys */
             relay_weechat_msg_add_int (msg, 0);  /* count */
@@ -278,7 +278,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(hdata)
         relay_weechat_msg_free (msg);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -288,19 +288,19 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(hdata)
  *   info version
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(info)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(info)
 {
     struct t_relay_weechat_msg *msg;
     char *info;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(1);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(1);
 
     msg = relay_weechat_msg_new (id);
     if (msg)
     {
         info = weechat_info_get (argv[0],
                                  (argc > 1) ? argv_eol[1] : NULL);
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INFO);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INFO);
         relay_weechat_msg_add_string (msg, argv[0]);
         relay_weechat_msg_add_string (msg, info);
         relay_weechat_msg_send (client, msg);
@@ -309,7 +309,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(info)
             free (info);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -319,14 +319,14 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(info)
  *   infolist buffer
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(infolist)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(infolist)
 {
     struct t_relay_weechat_msg *msg;
     unsigned long value;
     char *args;
     int rc;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(1);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(1);
 
     msg = relay_weechat_msg_new (id);
     if (msg)
@@ -346,7 +346,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(infolist)
         relay_weechat_msg_free (msg);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -357,12 +357,12 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(infolist)
  *   nicklist 0x12345678
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(nicklist)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(nicklist)
 {
     struct t_relay_weechat_msg *msg;
     struct t_gui_buffer *ptr_buffer;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(0);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(0);
 
     ptr_buffer = NULL;
 
@@ -380,7 +380,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(nicklist)
                                 command,
                                 argv_eol[0]);
             }
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -392,7 +392,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(nicklist)
         relay_weechat_msg_free (msg);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -404,14 +404,14 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(nicklist)
  *   input 0x12345678 hello guys!
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(input)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(input)
 {
     struct t_gui_buffer *ptr_buffer;
     struct t_hashtable *options;
     const char *ptr_weechat_commands;
     char *pos;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(1);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(1);
 
     ptr_buffer = relay_weechat_protocol_get_buffer (argv[0]);
     if (!ptr_buffer)
@@ -425,24 +425,24 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(input)
                             command,
                             argv[0]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     pos = strchr (argv_eol[0], ' ');
     if (!pos)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     pos++;
     options = weechat_hashtable_new (8,
-                                     WEECHAT_HASHTABLE_STRING,
-                                     WEECHAT_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
                                      NULL, NULL);
     if (!options)
     {
         weechat_printf (NULL,
                         _("%s%s: not enough memory"),
                         weechat_prefix ("error"), RELAY_PLUGIN_NAME);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     ptr_weechat_commands = weechat_config_string (
@@ -466,7 +466,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(input)
 
     weechat_hashtable_free (options);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -493,7 +493,7 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
 
     ptr_client = (struct t_relay_client *)pointer;
     if (!ptr_client || !relay_client_valid (ptr_client))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     snprintf (str_signal, sizeof (str_signal), "_%s", signal);
 
@@ -501,12 +501,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -526,12 +526,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -549,12 +549,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -574,12 +574,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -599,12 +599,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -623,12 +623,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -647,12 +647,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -670,12 +670,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -693,11 +693,11 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer || relay_weechat_is_relay_buffer (ptr_buffer))
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -715,28 +715,28 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_line = (struct t_gui_line *)signal_data;
         if (!ptr_line)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         ptr_hdata_line = weechat_hdata_get ("line");
         if (!ptr_hdata_line)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         ptr_hdata_line_data = weechat_hdata_get ("line_data");
         if (!ptr_hdata_line_data)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         ptr_line_data = weechat_hdata_pointer (ptr_hdata_line, ptr_line, "data");
         if (!ptr_line_data)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         ptr_buffer = weechat_hdata_pointer (ptr_hdata_line_data, ptr_line_data,
                                             "buffer");
         if (!ptr_buffer || relay_weechat_is_relay_buffer (ptr_buffer))
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -757,12 +757,12 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
     {
         ptr_buffer = (struct t_gui_buffer *)signal_data;
         if (!ptr_buffer)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         /* send signal only if sync with flag "buffers" or "buffer" */
         if (relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -778,14 +778,14 @@ relay_weechat_protocol_signal_buffer_cb (const void *pointer, void *data,
 
         /* remove buffer from hashtables */
         weechat_hashtable_remove (
-            RELAY_WEECHAT_DATA(ptr_client, buffers_sync),
+            RELAY_WHOREIRC_DATA(ptr_client, buffers_sync),
             weechat_buffer_get_string (ptr_buffer, "full_name"));
         weechat_hashtable_remove (
-            RELAY_WEECHAT_DATA(ptr_client, buffers_nicklist),
+            RELAY_WHOREIRC_DATA(ptr_client, buffers_nicklist),
             ptr_buffer);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -858,17 +858,17 @@ relay_weechat_protocol_timer_nicklist_cb (const void *pointer, void *data,
 
     ptr_client = (struct t_relay_client *)pointer;
     if (!ptr_client || !relay_client_valid (ptr_client))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
-    weechat_hashtable_map (RELAY_WEECHAT_DATA(ptr_client, buffers_nicklist),
+    weechat_hashtable_map (RELAY_WHOREIRC_DATA(ptr_client, buffers_nicklist),
                            &relay_weechat_protocol_nicklist_map_cb,
                            ptr_client);
 
-    weechat_hashtable_remove_all (RELAY_WEECHAT_DATA(ptr_client, buffers_nicklist));
+    weechat_hashtable_remove_all (RELAY_WHOREIRC_DATA(ptr_client, buffers_nicklist));
 
-    RELAY_WEECHAT_DATA(ptr_client, hook_timer_nicklist) = NULL;
+    RELAY_WHOREIRC_DATA(ptr_client, hook_timer_nicklist) = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -892,13 +892,13 @@ relay_weechat_protocol_hsignal_nicklist_cb (const void *pointer, void *data,
 
     ptr_client = (struct t_relay_client *)pointer;
     if (!ptr_client || !relay_client_valid (ptr_client))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* check if buffer is synchronized with flag "nicklist" */
     ptr_buffer = weechat_hashtable_get (hashtable, "buffer");
     if (!relay_weechat_protocol_is_sync (ptr_client, ptr_buffer,
-                                         RELAY_WEECHAT_PROTOCOL_SYNC_NICKLIST))
-        return WEECHAT_RC_OK;
+                                         RELAY_WHOREIRC_PROTOCOL_SYNC_NICKLIST))
+        return WHOREIRC_RC_OK;
 
     parent_group = weechat_hashtable_get (hashtable, "parent_group");
     group = weechat_hashtable_get (hashtable, "group");
@@ -906,42 +906,42 @@ relay_weechat_protocol_hsignal_nicklist_cb (const void *pointer, void *data,
 
     /* if there is no parent group (for example "root" group), ignore the signal */
     if (!parent_group)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
-    ptr_nicklist = weechat_hashtable_get (RELAY_WEECHAT_DATA(ptr_client,
+    ptr_nicklist = weechat_hashtable_get (RELAY_WHOREIRC_DATA(ptr_client,
                                                              buffers_nicklist),
                                           ptr_buffer);
     if (!ptr_nicklist)
     {
         ptr_nicklist = relay_weechat_nicklist_new ();
         if (!ptr_nicklist)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         ptr_nicklist->nicklist_count = weechat_buffer_get_integer (ptr_buffer,
                                                                    "nicklist_count");
-        weechat_hashtable_set (RELAY_WEECHAT_DATA(ptr_client, buffers_nicklist),
+        weechat_hashtable_set (RELAY_WHOREIRC_DATA(ptr_client, buffers_nicklist),
                                ptr_buffer,
                                ptr_nicklist);
     }
 
     /* set diff type */
-    diff = RELAY_WEECHAT_NICKLIST_DIFF_UNKNOWN;
+    diff = RELAY_WHOREIRC_NICKLIST_DIFF_UNKNOWN;
     if ((strcmp (signal, "nicklist_group_added") == 0)
         || (strcmp (signal, "nicklist_nick_added") == 0))
     {
-        diff = RELAY_WEECHAT_NICKLIST_DIFF_ADDED;
+        diff = RELAY_WHOREIRC_NICKLIST_DIFF_ADDED;
     }
     else if ((strcmp (signal, "nicklist_group_removing") == 0)
         || (strcmp (signal, "nicklist_nick_removing") == 0))
     {
-        diff = RELAY_WEECHAT_NICKLIST_DIFF_REMOVED;
+        diff = RELAY_WHOREIRC_NICKLIST_DIFF_REMOVED;
     }
     else if ((strcmp (signal, "nicklist_group_changed") == 0)
         || (strcmp (signal, "nicklist_nick_changed") == 0))
     {
-        diff = RELAY_WEECHAT_NICKLIST_DIFF_CHANGED;
+        diff = RELAY_WHOREIRC_NICKLIST_DIFF_CHANGED;
     }
 
-    if (diff != RELAY_WEECHAT_NICKLIST_DIFF_UNKNOWN)
+    if (diff != RELAY_WHOREIRC_NICKLIST_DIFF_UNKNOWN)
     {
         /*
          * add items if nicklist was not empty or very small (otherwise we will
@@ -951,21 +951,21 @@ relay_weechat_protocol_hsignal_nicklist_cb (const void *pointer, void *data,
         {
             /* add nicklist item for parent group and group/nick */
             relay_weechat_nicklist_add_item (ptr_nicklist,
-                                             RELAY_WEECHAT_NICKLIST_DIFF_PARENT,
+                                             RELAY_WHOREIRC_NICKLIST_DIFF_PARENT,
                                              parent_group, NULL);
             relay_weechat_nicklist_add_item (ptr_nicklist, diff, group, nick);
         }
 
         /* add timer to send nicklist */
-        if (RELAY_WEECHAT_DATA(ptr_client, hook_timer_nicklist))
+        if (RELAY_WHOREIRC_DATA(ptr_client, hook_timer_nicklist))
         {
-            weechat_unhook (RELAY_WEECHAT_DATA(ptr_client, hook_timer_nicklist));
-            RELAY_WEECHAT_DATA(ptr_client, hook_timer_nicklist) = NULL;
+            weechat_unhook (RELAY_WHOREIRC_DATA(ptr_client, hook_timer_nicklist));
+            RELAY_WHOREIRC_DATA(ptr_client, hook_timer_nicklist) = NULL;
         }
         relay_weechat_hook_timer_nicklist (ptr_client);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -989,7 +989,7 @@ relay_weechat_protocol_signal_upgrade_cb (const void *pointer, void *data,
 
     ptr_client = (struct t_relay_client *)pointer;
     if (!ptr_client || !relay_client_valid (ptr_client))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     snprintf (str_signal, sizeof (str_signal), "_%s", signal);
 
@@ -998,7 +998,7 @@ relay_weechat_protocol_signal_upgrade_cb (const void *pointer, void *data,
     {
         /* send signal only if client is synchronized with flag "upgrade" */
         if (relay_weechat_protocol_is_sync (ptr_client, NULL,
-                                            RELAY_WEECHAT_PROTOCOL_SYNC_UPGRADE))
+                                            RELAY_WHOREIRC_PROTOCOL_SYNC_UPGRADE))
         {
             msg = relay_weechat_msg_new (str_signal);
             if (msg)
@@ -1009,7 +1009,7 @@ relay_weechat_protocol_signal_upgrade_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1021,33 +1021,33 @@ relay_weechat_protocol_signal_upgrade_cb (const void *pointer, void *data,
  *   sync irc.freenode.#weechat buffer,nicklist
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(sync)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(sync)
 {
     char **buffers, **flags;
     const char *ptr_full_name;
     int num_buffers, num_flags, i, add_flags, mask, *ptr_old_flags, new_flags;
     struct t_gui_buffer *ptr_buffer;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(0);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(0);
 
     buffers = weechat_string_split ((argc > 0) ? argv[0] : "*",
                                     ",",
                                     NULL,
-                                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                     0,
                                     &num_buffers);
     if (buffers)
     {
-        add_flags = RELAY_WEECHAT_PROTOCOL_SYNC_ALL;
+        add_flags = RELAY_WHOREIRC_PROTOCOL_SYNC_ALL;
         if (argc > 1)
         {
             add_flags = 0;
             flags = weechat_string_split (argv[1], ",", NULL,
-                                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                           0, &num_flags);
             if (flags)
             {
@@ -1063,12 +1063,12 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(sync)
             for (i = 0; i < num_buffers; i++)
             {
                 ptr_full_name = NULL;
-                mask = RELAY_WEECHAT_PROTOCOL_SYNC_FOR_BUFFER;
+                mask = RELAY_WHOREIRC_PROTOCOL_SYNC_FOR_BUFFER;
 
                 if (strcmp (buffers[i], "*") == 0)
                 {
                     ptr_full_name = buffers[i];
-                    mask = RELAY_WEECHAT_PROTOCOL_SYNC_ALL;
+                    mask = RELAY_WHOREIRC_PROTOCOL_SYNC_ALL;
                 }
                 else
                 {
@@ -1082,13 +1082,13 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(sync)
 
                 if (ptr_full_name)
                 {
-                    ptr_old_flags = weechat_hashtable_get (RELAY_WEECHAT_DATA(client, buffers_sync),
+                    ptr_old_flags = weechat_hashtable_get (RELAY_WHOREIRC_DATA(client, buffers_sync),
                                                            ptr_full_name);
                     new_flags = ((ptr_old_flags) ? *ptr_old_flags : 0);
                     new_flags |= (add_flags & mask);
                     if (new_flags)
                     {
-                        weechat_hashtable_set (RELAY_WEECHAT_DATA(client, buffers_sync),
+                        weechat_hashtable_set (RELAY_WHOREIRC_DATA(client, buffers_sync),
                                                ptr_full_name,
                                                &new_flags);
                     }
@@ -1098,7 +1098,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(sync)
         weechat_string_free_split (buffers);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1110,33 +1110,33 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(sync)
  *   desync irc.freenode.#weechat buffer,nicklist
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(desync)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(desync)
 {
     char **buffers, **flags;
     const char *ptr_full_name;
     int num_buffers, num_flags, i, sub_flags, mask, *ptr_old_flags, new_flags;
     struct t_gui_buffer *ptr_buffer;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(0);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(0);
 
     buffers = weechat_string_split ((argc > 0) ? argv[0] : "*",
                                     ",",
                                     NULL,
-                                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                     0,
                                     &num_buffers);
     if (buffers)
     {
-        sub_flags = RELAY_WEECHAT_PROTOCOL_SYNC_ALL;
+        sub_flags = RELAY_WHOREIRC_PROTOCOL_SYNC_ALL;
         if (argc > 1)
         {
             sub_flags = 0;
             flags = weechat_string_split (argv[1], ",", NULL,
-                                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                           0, &num_flags);
             if (flags)
             {
@@ -1152,12 +1152,12 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(desync)
             for (i = 0; i < num_buffers; i++)
             {
                 ptr_full_name = NULL;
-                mask = RELAY_WEECHAT_PROTOCOL_SYNC_FOR_BUFFER;
+                mask = RELAY_WHOREIRC_PROTOCOL_SYNC_FOR_BUFFER;
 
                 if (strcmp (buffers[i], "*") == 0)
                 {
                     ptr_full_name = buffers[i];
-                    mask = RELAY_WEECHAT_PROTOCOL_SYNC_ALL;
+                    mask = RELAY_WHOREIRC_PROTOCOL_SYNC_ALL;
                 }
                 else
                 {
@@ -1171,19 +1171,19 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(desync)
 
                 if (ptr_full_name)
                 {
-                    ptr_old_flags = weechat_hashtable_get (RELAY_WEECHAT_DATA(client, buffers_sync),
+                    ptr_old_flags = weechat_hashtable_get (RELAY_WHOREIRC_DATA(client, buffers_sync),
                                                            ptr_full_name);
                     new_flags = ((ptr_old_flags) ? *ptr_old_flags : 0);
                     new_flags &= ~(sub_flags & mask);
                     if (new_flags)
                     {
-                        weechat_hashtable_set (RELAY_WEECHAT_DATA(client, buffers_sync),
+                        weechat_hashtable_set (RELAY_WHOREIRC_DATA(client, buffers_sync),
                                                ptr_full_name,
                                                &new_flags);
                     }
                     else
                     {
-                        weechat_hashtable_remove (RELAY_WEECHAT_DATA(client, buffers_sync),
+                        weechat_hashtable_remove (RELAY_WHOREIRC_DATA(client, buffers_sync),
                                                   ptr_full_name);
                     }
                 }
@@ -1192,7 +1192,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(desync)
         weechat_string_free_split (buffers);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1202,77 +1202,77 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(desync)
  *   test
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(test)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(test)
 {
     struct t_relay_weechat_msg *msg;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(0);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(0);
 
     msg = relay_weechat_msg_new (id);
     if (msg)
     {
         /* char */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_CHAR);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_CHAR);
         relay_weechat_msg_add_char (msg, 'A');
 
         /* integer */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INT);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INT);
         relay_weechat_msg_add_int (msg, 123456);
 
         /* integer (negative) */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INT);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INT);
         relay_weechat_msg_add_int (msg, -123456);
 
         /* long */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_LONG);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_LONG);
         relay_weechat_msg_add_long (msg, 1234567890L);
 
         /* long (negative) */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_LONG);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_LONG);
         relay_weechat_msg_add_long (msg, -1234567890L);
 
         /* string */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
         relay_weechat_msg_add_string (msg, "a string");
 
         /* empty string */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
         relay_weechat_msg_add_string (msg, "");
 
         /* NULL string */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
         relay_weechat_msg_add_string (msg, NULL);
 
         /* buffer */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_BUFFER);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_BUFFER);
         relay_weechat_msg_add_buffer (msg, "buffer", 6);
 
         /* NULL buffer */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_BUFFER);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_BUFFER);
         relay_weechat_msg_add_buffer (msg, NULL, 0);
 
         /* pointer */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_POINTER);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_POINTER);
         relay_weechat_msg_add_pointer (msg, (void *)0x1234abcd);
 
         /* NULL pointer */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_POINTER);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_POINTER);
         relay_weechat_msg_add_pointer (msg, NULL);
 
         /* time */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_TIME);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_TIME);
         relay_weechat_msg_add_time (msg, 1321993456);
 
         /* array of strings: { "abc", "de" } */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_ARRAY);
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_ARRAY);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
         relay_weechat_msg_add_int (msg, 2);
         relay_weechat_msg_add_string (msg, "abc");
         relay_weechat_msg_add_string (msg, "de");
 
         /* array of integers: { 123, 456, 789 } */
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_ARRAY);
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INT);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_ARRAY);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INT);
         relay_weechat_msg_add_int (msg, 3);
         relay_weechat_msg_add_int (msg, 123);
         relay_weechat_msg_add_int (msg, 456);
@@ -1283,7 +1283,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(test)
         relay_weechat_msg_free (msg);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1294,16 +1294,16 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(test)
  *   ping 1370802127000
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(ping)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(ping)
 {
     struct t_relay_weechat_msg *msg;
 
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(0);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(0);
 
     msg = relay_weechat_msg_new ("_pong");
     if (msg)
     {
-        relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+        relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
         relay_weechat_msg_add_string (msg, (argc > 0) ? argv_eol[0] : "");
 
         /* send message */
@@ -1311,7 +1311,7 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(ping)
         relay_weechat_msg_free (msg);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1321,13 +1321,13 @@ RELAY_WEECHAT_PROTOCOL_CALLBACK(ping)
  *   test
  */
 
-RELAY_WEECHAT_PROTOCOL_CALLBACK(quit)
+RELAY_WHOREIRC_PROTOCOL_CALLBACK(quit)
 {
-    RELAY_WEECHAT_PROTOCOL_MIN_ARGS(0);
+    RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(0);
 
     relay_client_set_status (client, RELAY_STATUS_DISCONNECTED);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1409,14 +1409,14 @@ relay_weechat_protocol_recv (struct t_relay_client *client, const char *data)
             pos++;
         }
         argv = weechat_string_split (pos, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
         argv_eol = weechat_string_split (pos, " ", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                                         | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                                         | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                                          0, NULL);
     }
 
@@ -1425,8 +1425,8 @@ relay_weechat_protocol_recv (struct t_relay_client *client, const char *data)
         if (strcmp (protocol_cb[i].name, command) == 0)
         {
             if ((strcmp (protocol_cb[i].name, "init") != 0)
-                && (!RELAY_WEECHAT_DATA(client, password_ok)
-                    || !RELAY_WEECHAT_DATA(client, totp_ok)))
+                && (!RELAY_WHOREIRC_DATA(client, password_ok)
+                    || !RELAY_WHOREIRC_DATA(client, totp_ok)))
             {
                 /*
                  * command is not "init" and password or totp are not set?
@@ -1444,7 +1444,7 @@ relay_weechat_protocol_recv (struct t_relay_client *client, const char *data)
                                                                    argv,
                                                                    argv_eol);
                 if ((weechat_relay_plugin->debug >= 1)
-                    && (return_code == WEECHAT_RC_ERROR))
+                    && (return_code == WHOREIRC_RC_ERROR))
                 {
                     weechat_printf (NULL,
                                     _("%s%s: failed to execute command \"%s\" "

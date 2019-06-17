@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -750,7 +750,7 @@ fset_option_set_max_length_fields_all ()
 
 /*
  * Allocates an fset option structure using a pointer to a
- * WeeChat/plugin option.
+ * WhoreIRC/plugin option.
  *
  * Returns pointer to new fset option, NULL if error.
  */
@@ -787,7 +787,7 @@ fset_option_alloc (struct t_config_option *option)
 
 /*
  * Allocates an fset option structure using a pointer to a
- * WeeChat/plugin option.
+ * WhoreIRC/plugin option.
  *
  * Returns pointer to new fset option, NULL if the option does not match
  * filters or if error.
@@ -967,8 +967,8 @@ fset_option_get_options ()
     if (!weechat_config_boolean (fset_config_look_auto_unmark))
     {
         marked_options = weechat_hashtable_new (256,
-                                                WEECHAT_HASHTABLE_STRING,
-                                                WEECHAT_HASHTABLE_POINTER,
+                                                WHOREIRC_HASHTABLE_STRING,
+                                                WHOREIRC_HASHTABLE_POINTER,
                                                 NULL, NULL);
         num_options = weechat_arraylist_size (fset_options);
         for (i = 0; i < num_options; i++)
@@ -1332,13 +1332,13 @@ fset_option_export (const char *filename, int with_help)
 
     hashtable_pointers = weechat_hashtable_new (
         8,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER,
         NULL, NULL);
     hashtable_extra_vars = weechat_hashtable_new (
         128,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
 
     num_options = weechat_arraylist_size (fset_options);
@@ -1509,7 +1509,7 @@ fset_option_config_timer_cb (const void *pointer,
 
     fset_option_timer_hook = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1531,14 +1531,14 @@ fset_option_config_cb (const void *pointer,
 
     /* do nothing if fset buffer is not opened */
     if (!fset_buffer)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
-    /* do nothing if WeeChat is upgrading */
+    /* do nothing if WhoreIRC is upgrading */
     info = weechat_info_get ("weechat_upgrading", NULL);
     if (info && (strcmp (info, "1") == 0))
     {
         free (info);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
     if (info)
         free (info);
@@ -1563,7 +1563,7 @@ fset_option_config_cb (const void *pointer,
             &fset_option_config_timer_cb, NULL, NULL);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1583,21 +1583,21 @@ fset_option_hdata_option_cb (const void *pointer, void *data,
     hdata = weechat_hdata_new (hdata_name, NULL, NULL, 0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_fset_option, index, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, file, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, section, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, option, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, parent_name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, type, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, default_value, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, value, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, parent_value, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, min, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, max, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, description, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, string_values, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_fset_option, marked, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, index, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, file, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, section, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, option, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, parent_name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, type, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, default_value, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, value, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, parent_value, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, min, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, max, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, description, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, string_values, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_fset_option, marked, INTEGER, 0, NULL, NULL);
     }
     return hdata;
 }
@@ -1664,7 +1664,7 @@ fset_option_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints fset options in WeeChat log file (usually for crash dump).
+ * Prints fset options in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1726,8 +1726,8 @@ fset_option_init ()
 
     fset_option_filter_hashtable_pointers = weechat_hashtable_new (
         8,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER,
         NULL, NULL);
     if (!fset_option_filter_hashtable_pointers)
     {
@@ -1737,8 +1737,8 @@ fset_option_init ()
     }
     fset_option_filter_hashtable_extra_vars = weechat_hashtable_new (
         128,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     if (!fset_option_filter_hashtable_extra_vars)
     {
@@ -1749,8 +1749,8 @@ fset_option_init ()
     }
     fset_option_filter_hashtable_options = weechat_hashtable_new (
         8,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     if (!fset_option_filter_hashtable_options)
     {
@@ -1765,8 +1765,8 @@ fset_option_init ()
 
     fset_option_timer_options_changed = weechat_hashtable_new (
         128,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER,
         NULL, NULL);
     if (!fset_option_timer_options_changed)
     {

@@ -2,20 +2,20 @@
 # Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
 # Copyright (C) 2006 Julien Louis <ptitlouis@sysif.net>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 
 docdir = $(datadir)/doc/$(PACKAGE)
@@ -52,9 +52,9 @@ all-local: $(man_targets) $(doc_targets)
 
 # man pages
 whoreirc.1: whoreirc.1.pl.adoc cmdline_options.pl.adoc cmdline_options_debug.pl.adoc
-	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o whoreirc.1 $(abs_top_srcdir)/doc/pl/whoreirc.1.pl.adoc
+	$(ASCIIDOCTOR) -a revision="WhoreIRC $(VERSION)" -b manpage -o whoreirc.1 $(abs_top_srcdir)/doc/pl/whoreirc.1.pl.adoc
 whoreirc-headless.1: whoreirc-headless.1.pl.adoc cmdline_options.pl.adoc cmdline_options_debug.pl.adoc
-	$(ASCIIDOCTOR) -a revision="WeeChat $(VERSION)" -b manpage -o whoreirc-headless.1 $(abs_top_srcdir)/doc/pl/whoreirc-headless.1.pl.adoc
+	$(ASCIIDOCTOR) -a revision="WhoreIRC $(VERSION)" -b manpage -o whoreirc-headless.1 $(abs_top_srcdir)/doc/pl/whoreirc-headless.1.pl.adoc
 
 # user's guide
 whoreirc_user.pl.html: whoreirc_user.pl.adoc cmdline_options.pl.adoc cmdline_options_debug.pl.adoc $(wildcard autogen/user/*.adoc) $(abs_top_srcdir)/doc/docinfo.html

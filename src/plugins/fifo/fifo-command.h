@@ -17,9 +17,9 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_FIFO_COMMAND_H
-#define WEECHAT_PLUGIN_FIFO_COMMAND_H
+#ifndef WHOREIRC_PLUGIN_FIFO_COMMAND_H
+#define WHOREIRC_PLUGIN_FIFO_COMMAND_H
 
 extern void fifo_command_init ();
 
-#endif /* WEECHAT_PLUGIN_FIFO_COMMAND_H */
+#endif /* WHOREIRC_PLUGIN_FIFO_COMMAND_H */

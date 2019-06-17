@@ -1,20 +1,20 @@
 #
 # Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 
 set(PO_FILES
@@ -49,15 +49,15 @@ if(XGETTEXT_EXECUTABLE AND MSGMERGE_EXECUTABLE AND MSGFMT_EXECUTABLE)
   set(SRC_FILES)
   set(POT_DEPENDS)
 
-  foreach(srcfile ${WEECHAT_SOURCES})
+  foreach(srcfile ${WHOREIRC_SOURCES})
     set(SRC_FILES ${SRC_FILES} ${srcfile})
     set(POT_DEPENDS ${POT_DEPENDS} ${CMAKE_SOURCE_DIR}/${srcfile})
-  endforeach(srcfile ${WEECHAT_SOURCES})
+  endforeach(srcfile ${WHOREIRC_SOURCES})
 
   add_custom_command(
     OUTPUT ${POT_FILE_PATH}
     COMMAND ${XGETTEXT_EXECUTABLE}
-    ARGS -o ${POT_FILE_PATH} --add-comments='TRANSLATORS:' --keyword='_' --keyword='whoreirc_gettext' --keyword='N_' --keyword='NG_:1,2' --keyword='whoreirc_ngettext:1,2' --no-location --from-code=UTF-8 --directory=${CMAKE_SOURCE_DIR} --package-name='WeeChat' --package-version=${VERSION} --msgid-bugs-address=${BUGS_ADDRESS} --copyright-holder='NAME' ${SRC_FILES}
+    ARGS -o ${POT_FILE_PATH} --add-comments='TRANSLATORS:' --keyword='_' --keyword='whoreirc_gettext' --keyword='N_' --keyword='NG_:1,2' --keyword='whoreirc_ngettext:1,2' --no-location --from-code=UTF-8 --directory=${CMAKE_SOURCE_DIR} --package-name='WhoreIRC' --package-version=${VERSION} --msgid-bugs-address=${BUGS_ADDRESS} --copyright-holder='NAME' ${SRC_FILES}
     DEPENDS ${POT_DEPENDS}
     COMMENT "Generating ${POT_FILE}"
     )

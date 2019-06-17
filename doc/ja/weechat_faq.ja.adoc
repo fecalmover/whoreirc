@@ -1,4 +1,4 @@
-= WeeChat FAQ (よくある質問)
+= WhoreIRC FAQ (よくある質問)
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
@@ -10,8 +10,8 @@
 :docinfo1:
 
 
-この文書は WeeChat バージョン 0.3.0 以上向けに書かれたものですが、
-最新安定版の WeeChat に対しても利用できます。
+この文書は WhoreIRC バージョン 0.3.0 以上向けに書かれたものですが、
+最新安定版の WhoreIRC に対しても利用できます。
 
 翻訳者:
 
@@ -24,34 +24,34 @@ toc::[]
 == 一般
 
 [[weechat_name]]
-=== "WeeChat" という名前の由来は何ですか?
+=== "WhoreIRC" という名前の由来は何ですか?
 
 "Wee" は再帰的頭字語で、"Wee Enhanced Environment"
 の略です。そのため、完全な名前は "Wee Enhanced Environment for Chat" です。
 
 "Wee" はまた「とても小さい」を意味します。(もちろん、その他の意味もありますが、それは
-WeeChat とは関係ありませんよ!)。
+WhoreIRC とは関係ありませんよ!)。
 
 [[why_choose_weechat]]
-=== WeeChat を選ぶ理由は何ですか? X-Chat や Irssi は最高なのに...
+=== WhoreIRC を選ぶ理由は何ですか? X-Chat や Irssi は最高なのに...
 
-WeeChat は非常に軽く、革新的な機能を備えているからです。
+WhoreIRC は非常に軽く、革新的な機能を備えているからです。
 
-WeeChat の機能に関するより詳しい情報: https://weechat.org/about/features
+WhoreIRC の機能に関するより詳しい情報: https://weechat.org/about/features
 
 [[compilation_install]]
 == コンパイル / インストール
 
 [[gui]]
-=== WeeChat には多くの GUI があると聞きました。コンパイル/利用方法を教えてください。
+=== WhoreIRC には多くの GUI があると聞きました。コンパイル/利用方法を教えてください。
 
 いくつかのリモート GUI が利用可能です、以下のリモートインターフェースに関するページを参照してください:
 https://weechat.org/about/interfaces
 
 [[compile_git]]
-=== git リポジトリをクローンした後に WeeChat をコンパイルできません。
+=== git リポジトリをクローンした後に WhoreIRC をコンパイルできません。
 
-WeeChat をコンパイルするには link:weechat_user.ja.html#compile_with_cmake[CMake]
+WhoreIRC をコンパイルするには link:weechat_user.ja.html#compile_with_cmake[CMake]
 を使うことが推奨されています。
 
 link:weechat_user.ja.html#compile_with_autotools[autotools] を使って (CMake を使わずに)
@@ -63,7 +63,7 @@ git ベースではなく、アップデートをインストールする場合�
 git をクローンする方法よりも不便であることに注意してください。
 
 [[compile_macos]]
-=== どうすれば macOS に WeeChat をインストールできますか?
+=== どうすれば macOS に WhoreIRC をインストールできますか?
 
 https://brew.sh/[Homebrew] を使うことをお勧めします、ヘルプを見るには:
 
@@ -71,14 +71,14 @@ https://brew.sh/[Homebrew] を使うことをお勧めします、ヘルプを�
 brew info weechat
 ----
 
-以下のコマンドで WeeChat をインストールします:
+以下のコマンドで WhoreIRC をインストールします:
 
 ----
 brew install weechat
 ----
 
 [[lost]]
-=== WeeChat を起動しました。でも何をすればいいかわかりません。
+=== WhoreIRC を起動しました。でも何をすればいいかわかりません。
 
 ヘルプを見るには、`/help` と入力してください。コマンドに関するヘルプを見るには、`/help command`
 と入力してください。link:weechat_user.ja.html#key_bindings[キー]とlink:weechat_user.ja.html#commands_and_options[コマンド]は文書中で説明されています。
@@ -113,12 +113,12 @@ brew install weechat
   オプションが off であることを確認してください (このオプションは表示上のバグを引き起こす可能性があります)
 
 [NOTE]
-WeeChat は UTF-8 ロケールを推奨します。ISO
+WhoreIRC は UTF-8 ロケールを推奨します。ISO
 またはその他のロケールを使う場合、*全ての* 設定 (端末、screen、..)
 が ISO であり、UTF-8 *でない* ことを確認してください。
 
 [[unicode_chars]]
-=== 端末で表示されるユニコード文字が WeeChat では表示されない場合があります。なぜでしょうか。
+=== 端末で表示されるユニコード文字が WhoreIRC では表示されない場合があります。なぜでしょうか。
 
 この問題は libc の _wcwidth_ 関数のバグによって引き起こされている可能性があります。これは glibc 2.22
 で修正されているはずです (使用中のディストリビューションではまだ提供されていないかもしれません)
@@ -135,13 +135,13 @@ https://github.com/weechat/weechat/issues/79
 シェルの TERM 変数に間違った値が設定されている可能性があります
 (端末で `echo $TERM` の出力を確認してください)。
 
-WeeChat を起動した場所に依存しますが、以下の値を持つはずです:
+WhoreIRC を起動した場所に依存しますが、以下の値を持つはずです:
 
-* WeeChat を screen および tmux
+* WhoreIRC を screen および tmux
   を使わずにローカルまたはリモートマシンで実行している場合、使用中の端末に依存します:
   _xterm_、_xterm-256color_、_rxvt-unicode_、_rxvt-256color_、...
-* WeeChat を screen 内で実行している場合、_screen_ または _screen-256color_ です、
-* WeeChat を tmux
+* WhoreIRC を screen 内で実行している場合、_screen_ または _screen-256color_ です、
+* WhoreIRC を tmux
   内で実行している場合、_tmux_、_tmux-256color_、_screen_、_screen-256color_ です。
 
 もし必要であれば、TERM 変数を修正してください: `export TERM="xxx"`
@@ -160,13 +160,13 @@ gnome-terminal
 `半角` にしてください。
 
 [[macos_display_broken]]
-=== macOS 上で WeeChat をコンパイルした場合、"(null)" という文字列が至る所に表示されます。
+=== macOS 上で WhoreIRC をコンパイルした場合、"(null)" という文字列が至る所に表示されます。
 
 ncursesw を自分でコンパイルした場合は、標準の (システムに元から存在する)
 ncurses を使ってみてください。
 
 さらに macOS では、Homebrew パッケージマネージャを使って
-WeeChat をインストールすることをお勧めします。
+WhoreIRC をインストールすることをお勧めします。
 
 [[buffer_vs_window]]
 === 「バッファ」と「ウィンドウ」の違いは何ですか。
@@ -184,10 +184,10 @@ _ウィンドウ_
 [[buffers_list]]
 === どうすれば左側にバッファリストを表示できますか。
 
-WeeChat バージョン 1.8 以上の場合、link:weechat_user.ja.html#buflist_plugin[buflist]
+WhoreIRC バージョン 1.8 以上の場合、link:weechat_user.ja.html#buflist_plugin[buflist]
 プラグインがロードされ、デフォルトで有効化されます。
 
-バージョン 1.8 よりも古い WeeChat をお使いなら、以下の方法で _buffers.pl_ スクリプトをインストールしてください:
+バージョン 1.8 よりも古い WhoreIRC をお使いなら、以下の方法で _buffers.pl_ スクリプトをインストールしてください:
 
 ----
 /script install buffers.pl
@@ -302,7 +302,7 @@ kbd:[Alt+k] の後にキーを押してください。
 
 これに満足できない場合は、新しいバーを削除してください。全てのバーに
 "input_text" 要素が設定されていない場合は
-WeeChat は自動的にデフォルトバー "input" を作成します:
+WhoreIRC は自動的にデフォルトバー "input" を作成します:
 
 ----
 /bar del rootinput
@@ -311,7 +311,7 @@ WeeChat は自動的にデフォルトバー "input" を作成します:
 [[terminal_copy_paste]]
 === どうすればニックネームリストを選択せずにテキストだけをコピー/ペーストできますか。
 
-WeeChat バージョン 1.0 以上の場合、最小限表示を使うことができます
+WhoreIRC バージョン 1.0 以上の場合、最小限表示を使うことができます
 (デフォルトキー: kbd:[Alt+l] (`L`))。
 最小限表示では現在選択中のウィンドウの内容のみが表示され、フォーマットもされません。
 
@@ -328,7 +328,7 @@ kbd:[Ctrl] + kbd:[Alt] + マウス選択です。
 [[urls]]
 === どうすれば長い (一行以上に渡る) URL をクリックできますか。
 
-WeeChat バージョン 1.0 以上の場合、最小限表示を使うことができます (デフォルトキー: kbd:[Alt+l] (`L`))。
+WhoreIRC バージョン 1.0 以上の場合、最小限表示を使うことができます (デフォルトキー: kbd:[Alt+l] (`L`))。
 
 URL を簡単にクリックできるようにするには、以下を試してみてください:
 
@@ -338,7 +338,7 @@ URL を簡単にクリックできるようにするには、以下を試して�
 /set weechat.bar.nicklist.position top
 ----
 
-* 複数行に渡る単語の整列を無効化します (WeeChat バージョン 1.7 以上の場合):
+* 複数行に渡る単語の整列を無効化します (WhoreIRC バージョン 1.7 以上の場合):
 
 ----
 /set weechat.look.align_multiline_words off
@@ -350,7 +350,7 @@ URL を簡単にクリックできるようにするには、以下を試して�
 /set weechat.look.align_end_of_lines time
 ----
 
-WeeChat バージョン 0.3.6 以上の場合、"eat_newline_glitch"
+WhoreIRC バージョン 0.3.6 以上の場合、"eat_newline_glitch"
 オプションを有効化できます。これを有効化すると、表示行の行末に改行文字が入らなくなります
 (url 選択を邪魔しません)。
 
@@ -368,16 +368,16 @@ WeeChat バージョン 0.3.6 以上の場合、"eat_newline_glitch"
 ----
 
 [[change_locale_without_quit]]
-=== WeeChat が出力するメッセージの言語を、再起動せずに変更したいです。このようなことは可能ですか。
+=== WhoreIRC が出力するメッセージの言語を、再起動せずに変更したいです。このようなことは可能ですか。
 
-WeeChat バージョン 1.0 以上の場合、再起動せずに変更できます:
+WhoreIRC バージョン 1.0 以上の場合、再起動せずに変更できます:
 
 ----
 /set env LANG ja_JP.UTF-8
 /upgrade
 ----
 
-古い WeeChat をお使いの場合は:
+古い WhoreIRC をお使いの場合は:
 
 ----
 /script install shell.py
@@ -386,9 +386,9 @@ WeeChat バージョン 1.0 以上の場合、再起動せずに変更できま�
 ----
 
 [[use_256_colors]]
-=== どうすれば WeeChat で 256 色が使えますか。
+=== どうすれば WhoreIRC で 256 色が使えますか。
 
-WeeChat バージョン 0.3.4 以上の場合、256 色がサポートされます。
+WhoreIRC バージョン 0.3.4 以上の場合、256 色がサポートされます。
 
 最初に _TERM_
 環境変数が正しいことを確認してください、お勧めの値は:
@@ -407,17 +407,17 @@ screen を使っている場合は、以下の行を _~/.screenrc_ に追加し�
 term screen-256color
 ----
 
-_TERM_ 変数が間違った値に設定された状態で WeeChat が起動完了している場合は、以下の
-2 つのコマンドを使って変数の値を変更してください (WeeChat バージョン 1.0 以上で利用可):
+_TERM_ 変数が間違った値に設定された状態で WhoreIRC が起動完了している場合は、以下の
+2 つのコマンドを使って変数の値を変更してください (WhoreIRC バージョン 1.0 以上で利用可):
 
 ----
 /set env TERM screen-256color
 /upgrade
 ----
 
-WeeChat バージョン 0.3.4 の場合、新しい色を追加するには `/color` コマンドを使ってください。
+WhoreIRC バージョン 0.3.4 の場合、新しい色を追加するには `/color` コマンドを使ってください。
 
-WeeChat バージョン 0.3.5 以上の場合、任意の色番号を利用できます (オプション:
+WhoreIRC バージョン 0.3.5 以上の場合、任意の色番号を利用できます (オプション:
 色の別名を追加するには `/color` コマンドを使ってください)。
 
 色管理に関するより詳しい情報はlink:weechat_user.ja.html#colors[ユーザーズガイド / 色]を参照してください
@@ -444,7 +444,7 @@ WeeChat バージョン 0.3.5 以上の場合、任意の色番号を利用で�
   _.tmux.conf_ に追加して、フォーカスイベントを有効化してください。
 * screen ではこの機能を *使えません*。
 
-WeeChat の開始時にコードを送信するには:
+WhoreIRC の開始時にコードを送信するには:
 
 ----
 /set weechat.startup.command_after_plugins "/print -stdout \033[?1004h\n"
@@ -465,7 +465,7 @@ WeeChat の開始時にコードを送信するには:
 ----
 
 [[screen_paste]]
-=== WeeChat を screen の内部で実行している場合、別の screen ウィンドウ内にペーストされるテキストの周りに ~0 と ~1 が追加されます。なぜでしょうか。
+=== WhoreIRC を screen の内部で実行している場合、別の screen ウィンドウ内にペーストされるテキストの周りに ~0 と ~1 が追加されます。なぜでしょうか。
 
 scrreen
 がデフォルトで有効化されている括弧付きペーストオプションの挙動を別のウィンドウ内で適切に処理できないことが原因です。
@@ -551,7 +551,7 @@ kbd:[Alt+k] の後にキー を押してください。
 [[mouse_not_working]]
 === マウスが少しも動きません。どうすれば良いですか。
 
-マウスのサポートは WeeChat 0.3.6 以上からです。
+マウスのサポートは WhoreIRC 0.3.6 以上からです。
 
 最初にマウスを有効化してください:
 
@@ -587,9 +587,9 @@ $ printf '\033[?1002l'
 例えば rxvt-unicode 等です。
 
 [[mouse_select_paste]]
-=== WeeChat でマウスが利用可能な場合、端末のテキストを選択したり、ペーストするにはどうすれば良いですか。
+=== WhoreIRC でマウスが利用可能な場合、端末のテキストを選択したり、ペーストするにはどうすれば良いですか。
 
-WeeChat でマウスが利用可能な場合、kbd:[Shift]
+WhoreIRC でマウスが利用可能な場合、kbd:[Shift]
 キーを押しながら端末をクリックして選択してください、マウスが無効化されます
 (例えば iTerm 等の場合、kbd:[Shift] の代わりに kbd:[Alt] を使ってください)。
 
@@ -601,7 +601,7 @@ WeeChat でマウスが利用可能な場合、kbd:[Shift]
 
 macOS をお使いの場合、必ず Homebrew から `openssl`
 をインストールしてください。こうすることでシステムの鍵束に含まれる証明書を使いつつ、CA
-ファイルを起動時に読み込ませることが可能になります。その後、WeeChat で証明書へのパスを設定してください:
+ファイルを起動時に読み込ませることが可能になります。その後、WhoreIRC で証明書へのパスを設定してください:
 
 ----
 /set weechat.network.gnutls_ca_file "/usr/local/etc/openssl/cert.pem"
@@ -632,7 +632,7 @@ gnutls ハンドシェイクに関するエラーの場合、Diffie-Hellman キ�
 === SSL を使うサーバへの接続中に、"TLS handshake failed" というエラーだけが表示されます。どうすれば良いですか。
 
 異なる優先順位文字列を試してみてください
-(WeeChat 0.3.5 以上)、"xxx" はサーバ名に書き換えてください。
+(WhoreIRC 0.3.5 以上)、"xxx" はサーバ名に書き換えてください。
 
 ----
 /set irc.server.xxx.ssl_priorities "NORMAL:-VERS-TLS-ALL:+VERS-TLS1.0:+VERS-SSL3.0:%COMPAT"
@@ -736,7 +736,7 @@ IRC プラグインによって表示される前に削除されます
 (無視設定されたものは完全に見えなくなります。無視設定を元に戻すには、無視エントリを削除してください)。
 
 `/filter` コマンドは
-WeeChat
+WhoreIRC
 のコアコマンドです。このため、このコマンドの結果は任意のバッファに適用されます。バッファ内の行のプレフィックスと内容に基づいて付けられたタグや正規表現にマッチする行をフィルタすることが可能です。
 フィルタされた行は隠されているだけで削除されているわけではありません。このため、フィルタを無効化
 (デフォルトでは kbd:[Alt+=] でフィルタの有効無効を切り替えられます) すれば見ることが可能です。
@@ -764,7 +764,7 @@ WeeChat
 [[filter_irc_join_channel_messages]]
 === どうすれば IRC チャンネルに参加した際に表示される一部のメッセージをフィルタできますか。
 
-WeeChat バージョン 0.4.1 以上の場合、_irc.look.display_join_message_
+WhoreIRC バージョン 0.4.1 以上の場合、_irc.look.display_join_message_
 オプションを使って、チャンネル参加時に表示するメッセージの種類を選択できます
 (より詳しい情報は `/help irc.look.display_join_message` を参照)。
 
@@ -780,7 +780,7 @@ voice メッセージをフィルタするのは簡単ではありません、�
 
 Bitlbee は離席ユーザを表示するために voice を利用します。このため、voice
 メッセージでチャットエリアが溢れてしまいます。おそらくこれをフィルタしたいのではないでしょうか。この様な場合には、Bitlbee
-が離席状態を通知することを禁止し、WeeChat にニックネームリスト中に含まれる離席中のニックネームに対して特別な色を使わせることができます。
+が離席状態を通知することを禁止し、WhoreIRC にニックネームリスト中に含まれる離席中のニックネームに対して特別な色を使わせることができます。
 
 Bitlbee 3 以上の場合、以下のコマンドをチャンネル _&bitlbee_ で入力:
 
@@ -794,7 +794,7 @@ Bitlbee の古いバージョンでは、以下のコマンドを _&bitlbee_ で
 set away_devoice false
 ----
 
-WeeChat
+WhoreIRC
 で離席中のニックネームをチェックするには、<<color_away_nicks,離席状態のニックネーム>>に関する質問を参照してください。
 
 もし本当に voice メッセージをフィルタしたい場合は、以下のコマンドを使ってください、ただしこれは完璧なものではありません
@@ -822,13 +822,13 @@ WeeChat
 ----
 
 [NOTE]
-WeeChat 0.3.3 以下では、オプション名が _irc.network.away_check_ と
+WhoreIRC 0.3.3 以下では、オプション名が _irc.network.away_check_ と
 _irc.network.away_check_max_nicks_ になっています。
 
 [[highlight_notification]]
 === どうすればあるチャンネルで自分が呼ばれたら警告できますか。
 
-WeeChat バージョン 1.0 以上の場合、デフォルトトリガ "beep"
+WhoreIRC バージョン 1.0 以上の場合、デフォルトトリガ "beep"
 が設定されています。これはハイライトまたはプライベートメッセージを受け取った際に
 _BEL_ を端末に送信します。このため、端末 (または screen/tmux などのマルチプレクサ)
 を設定して、_BEL_ が発生した際にコマンドを実行させたり音を再生させることができます。
@@ -839,7 +839,7 @@ _BEL_ を端末に送信します。このため、端末 (または screen/tmux
 /set trigger.trigger.beep.command "/print -beep;/exec -bg /path/to/command arguments"
 ----
 
-古い WeeChat をお使いの場合、_beep.pl_ や _launcher.pl_ 等のスクリプトを使ってください。
+古い WhoreIRC をお使いの場合、_beep.pl_ や _launcher.pl_ 等のスクリプトを使ってください。
 
 _launcher.pl_ の場合、コマンドの設定が必要です:
 
@@ -856,7 +856,7 @@ _launcher.pl_ の場合、コマンドの設定が必要です:
 [[disable_highlights_for_specific_nicks]]
 === 特定のニックネームのみハイライトを無効化する方法を教えてください。
 
-WeeChat バージョン 0.3.4 以上の場合、link:weechat_user.en.html#max_hotlist_level_nicks[hotlist_max_level_nicks_add]
+WhoreIRC バージョン 0.3.4 以上の場合、link:weechat_user.en.html#max_hotlist_level_nicks[hotlist_max_level_nicks_add]
 バッファプロパティを使うことで、ニックネーム単位、バッファ単位、バッファグループ単位
 (IRC サーバ単位) でホットリストレベルの最大値を設定できます。
 
@@ -897,7 +897,7 @@ WeeChat バージョン 0.3.4 以上の場合、link:weechat_user.en.html#max_ho
 == プラグイン / スクリプト
 
 [[openbsd_plugins]]
-=== OpenBSD と WeeChat を使っている場合、プラグインが 1 つもロードされません。
+=== OpenBSD と WhoreIRC を使っている場合、プラグインが 1 つもロードされません。
 
 OpenBSD では、プラグインファイル名の末尾が ".so.0.0" です (Linux では ".so")。
 
@@ -911,7 +911,7 @@ OpenBSD では、プラグインファイル名の末尾が ".so.0.0" です (Li
 [[install_scripts]]
 === どうすればスクリプトをインストールできますか。スクリプトは他の IRC クライアントと互換性がありますか。
 
-WeeChat バージョン 0.3.9 以上の場合、コマンド `/script`
+WhoreIRC バージョン 0.3.9 以上の場合、コマンド `/script`
 を使うことで、スクリプトをインストールしたり管理することができます
 (ヘルプは `/help script` で見ることができます)。それよりも古いバージョンでは
 weeget.py と script.pl を使ってください。
@@ -930,17 +930,17 @@ weeget.py と script.pl を使ってください。
 $ rm ~/.weechat/script/plugins.xml.gz
 ----
 
-その後、WeeChat からスクリプトリストを更新してください:
+その後、WhoreIRC からスクリプトリストを更新してください:
 
 ----
 /script update
 ----
 
-それでもまだエラーが出るなら、WeeChat に含まれるファイルの自動更新を無効化して、WeeChat
+それでもまだエラーが出るなら、WhoreIRC に含まれるファイルの自動更新を無効化して、WhoreIRC
 を使わずに手作業でファイルをダウンロードしなければいけません
 (つまり、更新を入手するには自分自身でそのファイルを更新しなければいけないということです):
 
-* WeeChat から WeeChat のファイル自動更新機能を無効化します:
+* WhoreIRC から WhoreIRC のファイル自動更新機能を無効化します:
 
 ----
 /set script.scripts.cache_expire -1
@@ -954,7 +954,7 @@ $ curl -O https://weechat.org/files/plugins.xml.gz
 ----
 
 [[spell_dictionaries]]
-=== システムに aspell 辞書をインストールした後、WeeChat を再起動せずにそれを使う方法を教えてください。
+=== システムに aspell 辞書をインストールした後、WhoreIRC を再起動せずにそれを使う方法を教えてください。
 
 spell プラグインをリロードしてください:
 
@@ -963,7 +963,7 @@ spell プラグインをリロードしてください:
 ----
 
 [NOTE]
-WeeChat バージョン 2.4 以下では "spell" プラグインは "aspell" と呼ばれていたため、コマンドは以下のようになります:
+WhoreIRC バージョン 2.4 以下では "spell" プラグインは "aspell" と呼ばれていたため、コマンドは以下のようになります:
 `/plugin reload aspell`.
 
 [[settings]]
@@ -974,7 +974,7 @@ WeeChat バージョン 2.4 以下では "spell" プラグインは "aspell" と
 
 可能ですが、*非推奨* です。
 
-その代わり WeeChat 内でコマンド `/set` を使うことを推奨します。その理由は:
+その代わり WhoreIRC 内でコマンド `/set` を使うことを推奨します。その理由は:
 
 * kbd:[Tab] キー を使ってオプションの名前と値を補完できるからです (さらに
   kbd:[Shift+Tab] キーを使えばオプション名の補完に役立つ部分補完もできるからです)
@@ -983,13 +983,13 @@ WeeChat バージョン 2.4 以下では "spell" プラグインは "aspell" と
 
 それでもなお手作業で設定ファイルを編集したいなら、以下の点に注意してください:
 
-* あるオプションに対して不正な値を設定した場合、WeeChat
+* あるオプションに対して不正な値を設定した場合、WhoreIRC
   は設定ファイルのロード時にエラーを表示し、その値を破棄します (そのオプションのデフォルト値が使われます)
-* WeeChat が実行中の場合には、必ずコマンド `/reload` を実行してください。設定が変更されその変更をコマンド
+* WhoreIRC が実行中の場合には、必ずコマンド `/reload` を実行してください。設定が変更されその変更をコマンド
   `/save` で保存していなかった場合、これらの設定の変更内容は破棄されます
 
 [[memory_usage]]
-=== どうすれば WeeChat のメモリ使用量を節約できますか。
+=== どうすれば WhoreIRC のメモリ使用量を節約できますか。
 
 メモリ使用量を減らすには以下のヒントを試してください:
 
@@ -1006,7 +1006,7 @@ WeeChat バージョン 2.4 以下では "spell" プラグインは "aspell" と
 * _weechat.history.max_commands_ オプションの値を減らしてください。
 
 [[cpu_usage]]
-=== どうすれば WeeChat の CPU 負荷を低減できますか?
+=== どうすれば WhoreIRC の CPU 負荷を低減できますか?
 
 以下に挙げる <<memory_usage,memory>> に関するヒントに従ってください:
 
@@ -1063,7 +1063,7 @@ link:weechat_user.ja.html#secured_data[ユーザーズガイド / 暗号化デ�
 ----
 
 [[sharing_config_files]]
-=== WeeChat の設定を共有したいのですが、公開しても良いファイルと秘密にしておくべきファイルを教えてください。
+=== WhoreIRC の設定を共有したいのですが、公開しても良いファイルと秘密にしておくべきファイルを教えてください。
 
 _~/.weechat/*.conf_ ファイルは公開しても問題ありませんが、
 パスフレーズで暗号化されたパスワードが含まれる _sec.conf_ ファイルは秘密にしてください。
@@ -1083,9 +1083,9 @@ _sec.conf_ に保存していない場合、これらの情報は _irc.conf_
 以下のページを参照してください: https://weechat.org/about/support
 
 [[gdb_error_threads]]
-=== gdb で WeeChat を実行する場合、スレッドに関するエラーが発生します。
+=== gdb で WhoreIRC を実行する場合、スレッドに関するエラーが発生します。
 
-gdb で WeeChat を実行する場合、以下のエラーが出るかもしれません:
+gdb で WhoreIRC を実行する場合、以下のエラーが出るかもしれません:
 
 ----
 $ gdb /path/to/weechat
@@ -1095,7 +1095,7 @@ Cannot find new threads: generic error
 ----
 
 これを修正するには、以下のコマンドを使って gdb を実行してください
-(システム上の libpthread と WeeChat へのパスを変更):
+(システム上の libpthread と WhoreIRC へのパスを変更):
 
 ----
 $ LD_PRELOAD=/lib/libpthread.so.0 gdb /path/to/weechat
@@ -1103,15 +1103,15 @@ $ LD_PRELOAD=/lib/libpthread.so.0 gdb /path/to/weechat
 ----
 
 [[supported_os]]
-=== WeeChat をサポートするプラットフォームのリストを教えてください。他のオペレーティングシステムへの移植予定はありますか。
+=== WhoreIRC をサポートするプラットフォームのリストを教えてください。他のオペレーティングシステムへの移植予定はありますか。
 
 完全なリストはこのページにあります: https://weechat.org/download
 
 我々は可能な限り多くのプラットフォームに移植することに最善を尽くしています。我々が持っていない
-OS で WeeChat をテストすることを歓迎します。
+OS で WhoreIRC をテストすることを歓迎します。
 
 [[help_developers]]
-=== どうすれば WeeChat 開発者を手伝えますか。
+=== どうすれば WhoreIRC 開発者を手伝えますか。
 
 多くの課題があります (テスト、コード、ドキュメント作成、...)。
 
@@ -1119,7 +1119,7 @@ IRC かメールで連絡を取り、サポートページを確認してくだ�
 https://weechat.org/about/support
 
 [[donate]]
-=== WeeChat 開発者にお金か何かを贈りたいのですが。
+=== WhoreIRC 開発者にお金か何かを贈りたいのですが。
 
 開発補助のためお金を贈ることができます。詳しいことは
 https://weechat.org/donate に載っています。

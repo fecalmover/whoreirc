@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -49,10 +49,10 @@ alias_completion_alias_cb (const void *pointer, void *data,
          ptr_alias = ptr_alias->next_alias)
     {
         weechat_hook_completion_list_add (completion, ptr_alias->name,
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -80,9 +80,9 @@ alias_completion_alias_value_cb (const void *pointer, void *data,
     if (args)
     {
         argv = weechat_string_split (args, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
         if (argv)
         {
@@ -99,7 +99,7 @@ alias_completion_alias_value_cb (const void *pointer, void *data,
                     weechat_hook_completion_list_add (completion,
                                                       ptr_alias->command,
                                                       0,
-                                                      WEECHAT_LIST_POS_BEGINNING);
+                                                      WHOREIRC_LIST_POS_BEGINNING);
                 }
                 free (alias_name);
             }
@@ -107,7 +107,7 @@ alias_completion_alias_value_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

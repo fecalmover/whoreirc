@@ -412,9 +412,9 @@ relay_config_check_irc_backlog_tags (const void *pointer, void *data,
 
     /* split tags and check them */
     tags = weechat_string_split (value, ",", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &num_tags);
     if (tags)
     {
@@ -452,8 +452,8 @@ relay_config_change_irc_backlog_tags (const void *pointer, void *data,
     {
         relay_config_hashtable_irc_backlog_tags = weechat_hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
     }
     else
@@ -463,9 +463,9 @@ relay_config_change_irc_backlog_tags (const void *pointer, void *data,
         weechat_config_string (relay_config_irc_backlog_tags),
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &num_items);
     if (items)
@@ -718,7 +718,7 @@ relay_config_create_option_port_path (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     protocol_number = -1;
     port = -1;
@@ -733,11 +733,11 @@ relay_config_create_option_port_path (const void *pointer, void *data,
                         _("%s%s: cannot use SSL because WeeChat was not built "
                           "with GnuTLS support"),
                         weechat_prefix ("error"), RELAY_PLUGIN_NAME);
-        rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+        rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
     }
 #endif /* HAVE_GNUTLS */
 
-    if (rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         if (protocol)
             protocol_number = relay_protocol_search (protocol);
@@ -747,31 +747,31 @@ relay_config_create_option_port_path (const void *pointer, void *data,
             weechat_printf (NULL, _("%s%s: error: unknown protocol \"%s\""),
                             weechat_prefix ("error"),
                             RELAY_PLUGIN_NAME, protocol);
-            rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         }
 
-        if ((protocol_number == RELAY_PROTOCOL_WEECHAT) && protocol_args)
+        if ((protocol_number == RELAY_PROTOCOL_WHOREIRC) && protocol_args)
         {
             weechat_printf (NULL, _("%s%s: error: name is not allowed for "
                                     "protocol \"%s\""),
                             weechat_prefix ("error"),
                             RELAY_PLUGIN_NAME, protocol);
-            rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         }
     }
 
-    if (rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         if (weechat_config_search_option (config_file, section, option_name))
         {
             weechat_printf (NULL, _("%s%s: error: relay for \"%s\" already exists"),
                             weechat_prefix ("error"),
                             RELAY_PLUGIN_NAME, option_name);
-            rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         }
     }
 
-    if (rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         if (unix_socket)
         {
@@ -799,11 +799,11 @@ relay_config_create_option_port_path (const void *pointer, void *data,
                                 weechat_prefix ("error"), RELAY_PLUGIN_NAME,
                                 (int)port);
             }
-            rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         }
     }
 
-    if (rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         if (relay_server_new (option_name, protocol_number, protocol_args,
                               port, value, ipv4, ipv6, ssl, unix_socket))
@@ -833,10 +833,10 @@ relay_config_create_option_port_path (const void *pointer, void *data,
                     &relay_config_change_port_cb, NULL, NULL,
                     &relay_config_delete_port_cb, NULL, NULL);
             }
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
         else
-            rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
     }
 
     if (protocol)
@@ -1281,7 +1281,7 @@ relay_config_read ()
     int rc;
 
     rc = weechat_config_read (relay_config_file);
-    if (rc == WEECHAT_CONFIG_READ_OK)
+    if (rc == WHOREIRC_CONFIG_READ_OK)
     {
         relay_config_change_network_allowed_ips (NULL, NULL, NULL);
         relay_config_change_irc_backlog_tags (NULL, NULL, NULL);

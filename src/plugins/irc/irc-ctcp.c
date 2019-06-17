@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -41,11 +41,11 @@
 
 struct t_irc_ctcp_reply irc_ctcp_default_reply[] =
 { { "clientinfo", "$clientinfo" },
-  { "finger",     "WeeChat $versiongit" },
+  { "finger",     "WhoreIRC $versiongit" },
   { "source",     "$download" },
   { "time",       "$time" },
   { "userinfo",   "$username ($realname)" },
-  { "version",    "WeeChat $versiongit ($compilation)" },
+  { "version",    "WhoreIRC $versiongit ($compilation)" },
   { NULL,         NULL },
 };
 
@@ -360,7 +360,7 @@ irc_ctcp_replace_variables (struct t_irc_server *server, const char *format)
     res = temp;
 
     /*
-     * $versiongit: WeeChat version + git version (if known), examples:
+     * $versiongit: WhoreIRC version + git version (if known), examples:
      *   0.3.9
      *   0.4.0-dev
      *   0.4.0-dev (git: v0.3.9-104-g7eb5cc4)
@@ -383,7 +383,7 @@ irc_ctcp_replace_variables (struct t_irc_server *server, const char *format)
     res = temp;
 
     /*
-     * $version: WeeChat version, examples:
+     * $version: WhoreIRC version, examples:
      *   0.3.9
      *   0.4.0-dev
      */
@@ -434,7 +434,7 @@ irc_ctcp_replace_variables (struct t_irc_server *server, const char *format)
     }
 
     /*
-     * $site: WeeChat website, example:
+     * $site: WhoreIRC website, example:
      *   https://weechat.org/
      */
     info = weechat_info_get ("weechat_site", "");
@@ -447,7 +447,7 @@ irc_ctcp_replace_variables (struct t_irc_server *server, const char *format)
     res = temp;
 
     /*
-     * $download: WeeChat download page, example:
+     * $download: WhoreIRC download page, example:
      *   https://weechat.org/download
      */
     info = weechat_info_get ("weechat_site_download", "");
@@ -661,14 +661,14 @@ irc_ctcp_recv_dcc (struct t_irc_server *server, const char *nick,
                 weechat_infolist_new_var_string (item, "remote_address", pos_addr);
                 weechat_infolist_new_var_integer (item, "port", atoi (pos_port));
                 (void) weechat_hook_signal_send ("xfer_add",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  infolist);
             }
             weechat_infolist_free (infolist);
         }
 
         (void) weechat_hook_signal_send ("irc_dcc",
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          message);
 
         if (filename)
@@ -757,14 +757,14 @@ irc_ctcp_recv_dcc (struct t_irc_server *server, const char *nick,
                 weechat_infolist_new_var_integer (item, "port", atoi (pos_port));
                 weechat_infolist_new_var_string (item, "start_resume", pos_start_resume);
                 (void) weechat_hook_signal_send ("xfer_accept_resume",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  infolist);
             }
             weechat_infolist_free (infolist);
         }
 
         (void) weechat_hook_signal_send ("irc_dcc",
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          message);
 
         if (filename)
@@ -853,14 +853,14 @@ irc_ctcp_recv_dcc (struct t_irc_server *server, const char *nick,
                 weechat_infolist_new_var_integer (item, "port", atoi (pos_port));
                 weechat_infolist_new_var_string (item, "start_resume", pos_start_resume);
                 (void) weechat_hook_signal_send ("xfer_start_resume",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  infolist);
             }
             weechat_infolist_free (infolist);
         }
 
         (void) weechat_hook_signal_send ("irc_dcc",
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          message);
 
         if (filename)
@@ -964,14 +964,14 @@ irc_ctcp_recv_dcc (struct t_irc_server *server, const char *nick,
                 weechat_infolist_new_var_string (item, "remote_address", pos_addr);
                 weechat_infolist_new_var_integer (item, "port", atoi (pos_port));
                 (void) weechat_hook_signal_send ("xfer_add",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  infolist);
             }
             weechat_infolist_free (infolist);
         }
 
         (void) weechat_hook_signal_send ("irc_dcc",
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          message);
 
         free (dcc_args);
@@ -1094,7 +1094,7 @@ irc_ctcp_recv (struct t_irc_server *server, time_t date, const char *command,
                         (pos_args) ? " " : "",
                         (pos_args) ? pos_args : "");
                     (void) weechat_hook_signal_send ("irc_pv",
-                                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                                      message);
                 }
             }
@@ -1175,7 +1175,7 @@ irc_ctcp_recv (struct t_irc_server *server, time_t date, const char *command,
         }
 
         (void) weechat_hook_signal_send ("irc_ctcp",
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          message);
 
         if (pos_space)

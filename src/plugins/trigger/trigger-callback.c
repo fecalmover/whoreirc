@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -54,8 +54,8 @@ trigger_callback_irc_message_parse (const char *irc_message,
     hashtable_out = NULL;
 
     hashtable_in = weechat_hashtable_new (32,
-                                          WEECHAT_HASHTABLE_STRING,
-                                          WEECHAT_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_STRING,
                                           NULL, NULL);
     if (hashtable_in)
     {
@@ -242,8 +242,8 @@ trigger_callback_replace_regex (struct t_trigger *trigger,
     if (!pointers)
     {
         pointers = weechat_hashtable_new (32,
-                                          WEECHAT_HASHTABLE_STRING,
-                                          WEECHAT_HASHTABLE_POINTER,
+                                          WHOREIRC_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_POINTER,
                                           NULL, NULL);
         if (!pointers)
             return;
@@ -316,7 +316,7 @@ trigger_callback_replace_regex (struct t_trigger *trigger,
             weechat_hashtable_set (extra_vars, ptr_key, value);
             if (vars_updated)
             {
-                weechat_list_add (vars_updated, ptr_key, WEECHAT_LIST_POS_END,
+                weechat_list_add (vars_updated, ptr_key, WHOREIRC_LIST_POS_END,
                                   NULL);
             }
             free (value);
@@ -439,14 +439,14 @@ trigger_callback_signal_cb (const void *pointer, void *data,
     const char *pos, *ptr_irc_message;
     void *ptr_irc_server, *ptr_irc_channel;
 
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     TRIGGER_CALLBACK_CB_NEW_POINTERS;
 
     /* split IRC message (if signal_data is an IRC message) */
     irc_server_name = NULL;
     ptr_irc_message = NULL;
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strstr (signal, ",irc_in_")
             || strstr (signal, ",irc_in2_")
@@ -502,11 +502,11 @@ trigger_callback_signal_cb (const void *pointer, void *data,
     /* add data in hashtable used for conditions/replace/command */
     ptr_signal_data = NULL;
     weechat_hashtable_set (extra_vars, "tg_signal", signal);
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         ptr_signal_data = (const char *)signal_data;
     }
-    else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+    else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
     {
         str_data[0] = '\0';
         if (signal_data)
@@ -516,7 +516,7 @@ trigger_callback_signal_cb (const void *pointer, void *data,
         }
         ptr_signal_data = str_data;
     }
-    else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+    else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
     {
         str_data[0] = '\0';
         if (signal_data)
@@ -546,7 +546,7 @@ trigger_callback_hsignal_cb (const void *pointer, void *data,
 {
     const char *type_values;
 
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     /* duplicate hashtable */
     if (hashtable
@@ -645,7 +645,7 @@ trigger_callback_modifier_cb (const void *pointer, void *data,
                                "tg_string_nocolor", string_no_color);
     }
 
-    /* add special variables for a WeeChat message */
+    /* add special variables for a WhoreIRC message */
     if (strcmp (modifier, "weechat_print") == 0)
     {
         /* set "tg_prefix" and "tg_message" */
@@ -737,9 +737,9 @@ trigger_callback_modifier_cb (const void *pointer, void *data,
                             pos2,
                             ",",
                             NULL,
-                            WEECHAT_STRING_SPLIT_STRIP_LEFT
-                            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                             0,
                             &num_tags);
                         length = 1 + strlen (pos2) + 1 + 1;
@@ -828,9 +828,9 @@ trigger_callback_line_cb (const void *pointer, void *data,
     tags = weechat_string_split ((ptr_value) ? ptr_value : "",
                                  ",",
                                  NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0,
                                  &num_tags);
 
@@ -870,8 +870,8 @@ trigger_callback_line_cb (const void *pointer, void *data,
                               vars_updated);
 
     hashtable = weechat_hashtable_new (32,
-                                       WEECHAT_HASHTABLE_STRING,
-                                       WEECHAT_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
                                        NULL, NULL);
     if (hashtable)
     {
@@ -940,7 +940,7 @@ trigger_callback_print_cb  (const void *pointer, void *data,
     int length;
     struct tm *date_tmp;
 
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     /* do nothing if the buffer does not match buffers defined in the trigger */
     if (trigger->hook_print_buffers
@@ -1015,7 +1015,7 @@ trigger_callback_command_cb  (const void *pointer, void *data,
     char str_name[32];
     int i;
 
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     TRIGGER_CALLBACK_CB_NEW_POINTERS;
     TRIGGER_CALLBACK_CB_NEW_EXTRA_VARS;
@@ -1046,7 +1046,7 @@ trigger_callback_command_run_cb  (const void *pointer, void *data,
                                   struct t_gui_buffer *buffer,
                                   const char *command)
 {
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     TRIGGER_CALLBACK_CB_NEW_POINTERS;
     TRIGGER_CALLBACK_CB_NEW_EXTRA_VARS;
@@ -1075,11 +1075,11 @@ trigger_callback_timer_cb  (const void *pointer, void *data,
     time_t date;
     struct tm *date_tmp;
 
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     /*
      * remove the hook if this is the last call to timer
-     * (because WeeChat will remove the hook after this call, so the pointer
+     * (because WhoreIRC will remove the hook after this call, so the pointer
      * will become invalid)
      */
     if ((remaining_calls == 0) && trigger->hooks)
@@ -1120,7 +1120,7 @@ int
 trigger_callback_config_cb  (const void *pointer, void *data,
                              const char *option, const char *value)
 {
-    TRIGGER_CALLBACK_CB_INIT(WEECHAT_RC_OK);
+    TRIGGER_CALLBACK_CB_INIT(WHOREIRC_RC_OK);
 
     TRIGGER_CALLBACK_CB_NEW_EXTRA_VARS;
 
@@ -1234,8 +1234,8 @@ trigger_callback_info_hashtable_cb (const void *pointer, void *data,
                               vars_updated);
 
     ret_hashtable = weechat_hashtable_new (32,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL, NULL);
     if (ret_hashtable)
     {
@@ -1267,8 +1267,8 @@ trigger_callback_init ()
 {
     trigger_callback_hashtable_options_conditions = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     if (trigger_callback_hashtable_options_conditions)
     {
@@ -1278,8 +1278,8 @@ trigger_callback_init ()
 
     trigger_callback_hashtable_options_regex = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
 }
 

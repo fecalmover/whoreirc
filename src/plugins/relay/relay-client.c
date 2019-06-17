@@ -198,7 +198,7 @@ relay_client_send_signal (struct t_relay_client *client)
     snprintf (signal, sizeof (signal),
               "relay_client_%s",
               relay_client_status_name[client->status]);
-    weechat_hook_signal_send (signal, WEECHAT_HOOK_SIGNAL_POINTER, client);
+    weechat_hook_signal_send (signal, WHOREIRC_HOOK_SIGNAL_POINTER, client);
 }
 
 /*
@@ -254,7 +254,7 @@ relay_client_handshake_timer_cb (const void *pointer, void *data,
         client->hook_timer_handshake = NULL;
         client->gnutls_handshake_ok = 1;
         relay_client_set_status (client, RELAY_STATUS_CONNECTED);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (gnutls_error_is_fatal (rc))
@@ -273,7 +273,7 @@ relay_client_handshake_timer_cb (const void *pointer, void *data,
         weechat_unhook (client->hook_timer_handshake);
         client->hook_timer_handshake = NULL;
         relay_client_set_status (client, RELAY_STATUS_DISCONNECTED);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (remaining_calls == 0)
@@ -290,11 +290,11 @@ relay_client_handshake_timer_cb (const void *pointer, void *data,
         weechat_unhook (client->hook_timer_handshake);
         client->hook_timer_handshake = NULL;
         relay_client_set_status (client, RELAY_STATUS_DISCONNECTED);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* handshake in progress, we will try again on next call to timer */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 #endif /* HAVE_GNUTLS */
 
@@ -340,9 +340,9 @@ relay_client_recv_text (struct t_relay_client *client, const char *data)
         pos[0] = '\0';
 
         lines = weechat_string_split (client->partial_message, "\n", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_lines);
         if (lines)
         {
@@ -465,7 +465,7 @@ relay_client_recv_text (struct t_relay_client *client, const char *data)
                      */
                     switch (client->protocol)
                     {
-                        case RELAY_PROTOCOL_WEECHAT:
+                        case RELAY_PROTOCOL_WHOREIRC:
                             relay_weechat_recv (client, lines[i]);
                             break;
                         case RELAY_PROTOCOL_IRC:
@@ -578,7 +578,7 @@ relay_client_recv_cb (const void *pointer, void *data, int fd)
     client = (struct t_relay_client *)pointer;
 
     if (client->status != RELAY_STATUS_CONNECTED)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
 #ifdef HAVE_GNUTLS
     if (client->ssl)
@@ -610,8 +610,8 @@ relay_client_recv_cb (const void *pointer, void *data, int fd)
                 client->websocket = 1;
                 client->http_headers = weechat_hashtable_new (
                     32,
-                    WEECHAT_HASHTABLE_STRING,
-                    WEECHAT_HASHTABLE_STRING,
+                    WHOREIRC_HASHTABLE_STRING,
+                    WHOREIRC_HASHTABLE_STRING,
                     NULL, NULL);
             }
         }
@@ -636,7 +636,7 @@ relay_client_recv_cb (const void *pointer, void *data, int fd)
                  *   unidirectional heartbeat.  A response to an unsolicited
                  *   Pong frame is not expected."
                  */
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             if (!rc)
             {
@@ -650,7 +650,7 @@ relay_client_recv_cb (const void *pointer, void *data, int fd)
                     client->desc,
                     RELAY_COLOR_CHAT);
                 relay_client_set_status (client, RELAY_STATUS_DISCONNECTED);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             ptr_buffer = decoded;
             length_buffer = decoded_length;
@@ -713,7 +713,7 @@ relay_client_recv_cb (const void *pointer, void *data, int fd)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1213,7 +1213,7 @@ relay_client_timer_cb (const void *pointer, void *data, int remaining_calls)
         ptr_client = ptr_next_client;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1261,7 +1261,7 @@ relay_client_new (int sock, const char *address, struct t_relay_server *server)
         new_client->bytes_sent = 0;
         switch (new_client->protocol)
         {
-            case RELAY_PROTOCOL_WEECHAT:
+            case RELAY_PROTOCOL_WHOREIRC:
                 new_client->recv_data_type = RELAY_CLIENT_DATA_TEXT;
                 new_client->send_data_type = RELAY_CLIENT_DATA_BINARY;
                 break;
@@ -1334,7 +1334,7 @@ relay_client_new (int sock, const char *address, struct t_relay_server *server)
         new_client->protocol_data = NULL;
         switch (new_client->protocol)
         {
-            case RELAY_PROTOCOL_WEECHAT:
+            case RELAY_PROTOCOL_WHOREIRC:
                 relay_weechat_alloc (new_client);
                 break;
             case RELAY_PROTOCOL_IRC:
@@ -1391,7 +1391,7 @@ relay_client_new (int sock, const char *address, struct t_relay_server *server)
 
         relay_client_send_signal (new_client);
 
-        relay_buffer_refresh (WEECHAT_HOTLIST_PRIVATE);
+        relay_buffer_refresh (WHOREIRC_HOTLIST_PRIVATE);
     }
     else
     {
@@ -1470,7 +1470,7 @@ relay_client_new_with_infolist (struct t_infolist *infolist)
 
         switch (new_client->protocol)
         {
-            case RELAY_PROTOCOL_WEECHAT:
+            case RELAY_PROTOCOL_WHOREIRC:
                 relay_weechat_alloc_with_infolist (new_client,
                                                    infolist);
                 break;
@@ -1536,7 +1536,7 @@ relay_client_set_status (struct t_relay_client *client,
         }
         switch (client->protocol)
         {
-            case RELAY_PROTOCOL_WEECHAT:
+            case RELAY_PROTOCOL_WHOREIRC:
                 relay_weechat_close_connection (client);
                 break;
             case RELAY_PROTOCOL_IRC:
@@ -1587,7 +1587,7 @@ relay_client_set_status (struct t_relay_client *client,
 
     relay_client_send_signal (client);
 
-    relay_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+    relay_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
 }
 
 /*
@@ -1640,7 +1640,7 @@ relay_client_free (struct t_relay_client *client)
     {
         switch (client->protocol)
         {
-            case RELAY_PROTOCOL_WEECHAT:
+            case RELAY_PROTOCOL_WHOREIRC:
                 relay_weechat_free (client);
                 break;
             case RELAY_PROTOCOL_IRC:
@@ -1787,7 +1787,7 @@ relay_client_add_to_infolist (struct t_infolist *infolist,
 
     switch (client->protocol)
     {
-        case RELAY_PROTOCOL_WEECHAT:
+        case RELAY_PROTOCOL_WHOREIRC:
             relay_weechat_add_to_infolist (ptr_item, client);
             break;
         case RELAY_PROTOCOL_IRC:
@@ -1855,7 +1855,7 @@ relay_client_print_log ()
         weechat_log_printf ("  protocol_data . . . . : 0x%lx", ptr_client->protocol_data);
         switch (ptr_client->protocol)
         {
-            case RELAY_PROTOCOL_WEECHAT:
+            case RELAY_PROTOCOL_WHOREIRC:
                 relay_weechat_print_log (ptr_client);
                 break;
             case RELAY_PROTOCOL_IRC:

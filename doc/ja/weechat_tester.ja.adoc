@@ -1,4 +1,4 @@
-= WeeChat テスターガイド
+= WhoreIRC テスターガイド
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
@@ -16,27 +16,27 @@
 [[purpose]]
 == 目的
 
-WeeChat
+WhoreIRC
 開発への協力に興味を持っていただきありがとうございます。開発に協力する最も簡単
 (で最も大変) な方法はテストです!
 
 テストはソフトウェア開発においてとても重要で、疎かにできないものです。何か新しい機能が実装されたらその機能はテストされるべきです。しかし、機能によっては使用条件が広すぎるか使用条件が特殊過ぎるため、開発チームが全ての条件をテストできない場合があります。
 
-例: WeeChat 0.2.2 で導入された charset プラグインは悪名高いものでした:
+例: WhoreIRC 0.2.2 で導入された charset プラグインは悪名高いものでした:
 開発チームにはチャンネル名に各国語を使うユーザー
 (開発者、貢献者、テスター)
 がいなかったため、0.2.2
 がリリースされると、チームを非難するロシア人ユーザが殺到しました。より多くのテスターがいれば、今後そのようなことはおきないでしょう。
 
-開発者は新機能の実装 (と古いバグの修正) に忙しいので、WeeChat
+開発者は新機能の実装 (と古いバグの修正) に忙しいので、WhoreIRC
 安定版をテストすることは意味がありません。
 
 
 [[prepare_system]]
 == システムの準備
 
-Linux の _core_ ファイルを有効にすることはとても役に立ちます: WeeChat
-がクラッシュすると、Linux は _core_ と呼ばれるファイルを作ります。このファイルには、WeeChat
+Linux の _core_ ファイルを有効にすることはとても役に立ちます: WhoreIRC
+がクラッシュすると、Linux は _core_ と呼ばれるファイルを作ります。このファイルには、WhoreIRC
 に問題の有る箇所を正確に示す、とても役立つデバッグ情報が含まれています。
 
 _bash_ シェルを使っている場合、以下の行を _~/.bashrc_ に追記してください:
@@ -54,7 +54,7 @@ ulimit -c unlimited
 手作業で最新のコードをビルドすることができます (推奨):
 
 * GIT 版は安定版と共存してビルド、インストールできます。
-* root 権限は必要ありません、WeeChat
+* root 権限は必要ありません、WhoreIRC
   安定版を捨てる必要もありません。
 
 [[get_sources]]
@@ -92,7 +92,7 @@ $ cd weechat-devel
 ----
 $ mkdir build
 $ cd build
-$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/weechat-git -DWEECHAT_HOME=~/.weechat-dev -DCMAKE_BUILD_TYPE=Debug
+$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/weechat-git -DWHOREIRC_HOME=~/.weechat-dev -DCMAKE_BUILD_TYPE=Debug
 $ make
 $ make install
 ----
@@ -101,7 +101,7 @@ CMake が無い場合は autotools を使うことも可能です:
 
 ----
 $ ./autogen.sh
-$ ./configure --prefix=$HOME/weechat-git WEECHAT_HOME=~/.weechat-dev
+$ ./configure --prefix=$HOME/weechat-git WHOREIRC_HOME=~/.weechat-dev
 $ make
 $ make install
 ----
@@ -118,7 +118,7 @@ Linux ディストリビューション別に:
 
 
 [[run]]
-== WeeChat の実行
+== WhoreIRC の実行
 
 コマンド:
 
@@ -126,7 +126,7 @@ Linux ディストリビューション別に:
 $ ~/weechat-git/bin/weechat
 ----
 
-より万全を期すなら、上の方法を使って WeeChat
+より万全を期すなら、上の方法を使って WhoreIRC
 の最新バージョンを使っていることを確認するべきです ;)
 
 おかしな (問題を引き起こしたり、クラッシュしたり、あなたを怒らせるような) 挙動を見つけたら

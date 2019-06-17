@@ -93,7 +93,7 @@ hook_command_run_exec (struct t_gui_buffer *buffer, const char *command)
     const char *ptr_command;
 
     if (!weechat_hooks[HOOK_TYPE_COMMAND_RUN])
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     ptr_command = command;
     command2 = NULL;
@@ -142,7 +142,7 @@ hook_command_run_exec (struct t_gui_buffer *buffer, const char *command)
                     buffer,
                     ptr_command);
                 ptr_hook->running = 0;
-                if (rc == WEECHAT_RC_OK_EAT)
+                if (rc == WHOREIRC_RC_OK_EAT)
                 {
                     if (command2)
                         free (command2);
@@ -157,7 +157,7 @@ hook_command_run_exec (struct t_gui_buffer *buffer, const char *command)
     if (command2)
         free (command2);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

@@ -17,12 +17,12 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_GUI_CURSES_H
-#define WEECHAT_GUI_CURSES_H
+#ifndef WHOREIRC_GUI_CURSES_H
+#define WHOREIRC_GUI_CURSES_H
 
 #include <time.h>
 
-#ifdef WEECHAT_HEADLESS
+#ifdef WHOREIRC_HEADLESS
 #include "ncurses-fake.h"
 #else
 #ifdef HAVE_NCURSESW_CURSES_H
@@ -32,14 +32,14 @@
 #else
 #include <curses.h>
 #endif /* HAVE_NCURSESW_CURSES_H */
-#endif /* WEECHAT_HEADLESS */
+#endif /* WHOREIRC_HEADLESS */
 
 struct t_gui_buffer;
 struct t_gui_line;
 struct t_gui_window;
 struct t_gui_bar_window;
 
-#define GUI_CURSES_NUM_WEECHAT_COLORS 17
+#define GUI_CURSES_NUM_WHOREIRC_COLORS 17
 
 #ifndef A_ITALIC /* A_ITALIC is defined in ncurses >= 5.9 patch 20130831 */
 #define A_ITALIC 0
@@ -143,4 +143,4 @@ extern void gui_window_vline (WINDOW *window, int x, int y, int height,
                               const char *string);
 extern void gui_window_set_title (const char *title);
 
-#endif /* WEECHAT_GUI_CURSES_H */
+#endif /* WHOREIRC_GUI_CURSES_H */

@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_XFER_H
-#define WEECHAT_PLUGIN_XFER_H
+#ifndef WHOREIRC_PLUGIN_XFER_H
+#define WHOREIRC_PLUGIN_XFER_H
 
 #include <unistd.h>
 #include <time.h>
@@ -209,4 +209,4 @@ extern void xfer_free (struct t_xfer *xfer);
 extern int xfer_add_to_infolist (struct t_infolist *infolist,
                                  struct t_xfer *xfer);
 
-#endif /* WEECHAT_PLUGIN_XFER_H */
+#endif /* WHOREIRC_PLUGIN_XFER_H */

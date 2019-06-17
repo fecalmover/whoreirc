@@ -5,21 +5,21 @@
     Afficher les couleurs par défaut du terminal.
 
 *--daemon*::
-    Lancer WeeChat en tâche de fond, comme un daemon (fonctionne seulement avec
+    Lancer WhoreIRC en tâche de fond, comme un daemon (fonctionne seulement avec
     la commande *weechat-headless*).
 
 *-d*, *--dir* _<répertoire>_::
-    Définir le répertoire comme étant la base de WeeChat
+    Définir le répertoire comme étant la base de WhoreIRC
     (utilisé pour les fichiers de configuration, logs, extensions
     et scripts de l'utilisateur), la valeur par défaut est "~/.weechat"
-    (note : le répertoire est créé s'il n'est pas trouvé par WeeChat).
-    Si cette option n'est pas donnée, la variable d'environnement WEECHAT_HOME
+    (note : le répertoire est créé s'il n'est pas trouvé par WhoreIRC).
+    Si cette option n'est pas donnée, la variable d'environnement WHOREIRC_HOME
     est utilisée (si non vide).
 
 *-t*, *--temp-dir*::
-    Créer un répertoire de base WeeChat temporaire et le supprimer en quittant
+    Créer un répertoire de base WhoreIRC temporaire et le supprimer en quittant
     (incompatible avec l'option "-d"). +
-    Le nom du répertoire est automatiquement construit par WeeChat, avec ce
+    Le nom du répertoire est automatiquement construit par WhoreIRC, avec ce
     modèle : "weechat_temp_XXXXXX" (où "XXXXXX" est aléatoire). Il est créé dans
     le premier répertoire disponible de cette liste : variable d'environnement
     "TMPDIR", "/tmp" (cela peut être différent selon le système d'exploitation),
@@ -31,7 +31,7 @@
     Afficher l'aide.
 
 *-l*, *--license*::
-    Afficher la licence de WeeChat.
+    Afficher la licence de WhoreIRC.
 
 *-p*, *--no-plugin*::
     Supprimer le chargement automatique des extensions au démarrage.
@@ -49,11 +49,11 @@
     Supprimer le chargement automatique des scripts au démarrage.
 
 *--upgrade*::
-    Mettre à jour WeeChat en utilisant les fichiers de session générés avec la
+    Mettre à jour WhoreIRC en utilisant les fichiers de session générés avec la
     commande `/upgrade -quit`.
 
 *-v*, *--version*::
-    Afficher la version de WeeChat.
+    Afficher la version de WhoreIRC.
 
 *extension:option*::
     Option pour une extension.

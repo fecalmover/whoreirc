@@ -6,20 +6,20 @@
  * Copyright (C) 2010 Gu1ll4um3r0m41n <aeroxteam@gmail.com>
  * Copyright (C) 2012 Simon Arlott
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -797,7 +797,7 @@ network_connect_child (struct t_hook *hook_connect)
         {
             /* proxy not found */
             snprintf (status_without_string, sizeof (status_without_string),
-                      "%c00000", '0' + WEECHAT_HOOK_CONNECT_PROXY_ERROR);
+                      "%c00000", '0' + WHOREIRC_HOOK_CONNECT_PROXY_ERROR);
             num_written = write (HOOK_CONNECT(hook_connect, child_write),
                                  status_without_string, strlen (status_without_string));
             (void) num_written;
@@ -839,7 +839,7 @@ network_connect_child (struct t_hook *hook_connect)
             if (status_with_string)
             {
                 snprintf (status_with_string, length, "%c%05d%s",
-                          '0' + WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND,
+                          '0' + WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND,
                           (int)strlen (error), error);
             }
         }
@@ -851,7 +851,7 @@ network_connect_child (struct t_hook *hook_connect)
         else
         {
             snprintf (status_without_string, sizeof (status_without_string),
-                      "%c00000", '0' + WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND);
+                      "%c00000", '0' + WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND);
             num_written = write (HOOK_CONNECT(hook_connect, child_write),
                                  status_without_string, strlen (status_without_string));
         }
@@ -863,7 +863,7 @@ network_connect_child (struct t_hook *hook_connect)
     {
         /* address not found */
         snprintf (status_without_string, sizeof (status_without_string),
-                  "%c00000", '0' + WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND);
+                  "%c00000", '0' + WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND);
         num_written = write (HOOK_CONNECT(hook_connect, child_write),
                              status_without_string, strlen (status_without_string));
         (void) num_written;
@@ -894,7 +894,7 @@ network_connect_child (struct t_hook *hook_connect)
                 if (status_with_string)
                 {
                     snprintf (status_with_string, length, "%c%05d%s",
-                              '0' + WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR,
+                              '0' + WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR,
                               (int)strlen (error), error);
                 }
             }
@@ -906,7 +906,7 @@ network_connect_child (struct t_hook *hook_connect)
             else
             {
                 snprintf (status_without_string, sizeof (status_without_string),
-                          "%c00000", '0' + WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
+                          "%c00000", '0' + WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
                 num_written = write (HOOK_CONNECT(hook_connect, child_write),
                                      status_without_string, strlen (status_without_string));
             }
@@ -918,7 +918,7 @@ network_connect_child (struct t_hook *hook_connect)
         {
             /* address not found */
             snprintf (status_without_string, sizeof (status_without_string),
-                      "%c00000", '0' + WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
+                      "%c00000", '0' + WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
             num_written = write (HOOK_CONNECT(hook_connect, child_write),
                                  status_without_string, strlen (status_without_string));
             (void) num_written;
@@ -953,7 +953,7 @@ network_connect_child (struct t_hook *hook_connect)
     if (!res_reorder)
     {
         snprintf (status_without_string, sizeof (status_without_string),
-                  "%c00000", '0' + WEECHAT_HOOK_CONNECT_MEMORY_ERROR);
+                  "%c00000", '0' + WHOREIRC_HOOK_CONNECT_MEMORY_ERROR);
         num_written = write (HOOK_CONNECT(hook_connect, child_write),
                              status_without_string, strlen (status_without_string));
         (void) num_written;
@@ -1035,14 +1035,14 @@ network_connect_child (struct t_hook *hook_connect)
     {
         /* no IP addresses found (all AF_UNSPEC) */
         snprintf (status_without_string, sizeof (status_without_string),
-                  "%c00000", '0' + WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
+                  "%c00000", '0' + WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
         num_written = write (HOOK_CONNECT(hook_connect, child_write),
                              status_without_string, strlen (status_without_string));
         (void) num_written;
         goto end;
     }
 
-    status_str[0] = '0' + WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND;
+    status_str[0] = '0' + WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND;
 
     /* try all IP addresses found, stop when connection is OK */
     sock = -1;
@@ -1087,7 +1087,7 @@ network_connect_child (struct t_hook *hook_connect)
         }
         if (sock < 0)
         {
-            status_str[0] = '0' + WEECHAT_HOOK_CONNECT_SOCKET_ERROR;
+            status_str[0] = '0' + WHOREIRC_HOOK_CONNECT_SOCKET_ERROR;
             continue;
         }
 
@@ -1122,7 +1122,7 @@ network_connect_child (struct t_hook *hook_connect)
 
             if (rc < 0)
             {
-                status_str[0] = '0' + WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR;
+                status_str[0] = '0' + WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR;
                 close (sock);
                 sock = -1;
                 continue;
@@ -1132,7 +1132,7 @@ network_connect_child (struct t_hook *hook_connect)
         /* connect to peer */
         if (network_connect (sock, ptr_res->ai_addr, ptr_res->ai_addrlen))
         {
-            status_str[0] = '0' + WEECHAT_HOOK_CONNECT_OK;
+            status_str[0] = '0' + WHOREIRC_HOOK_CONNECT_OK;
             rc = getnameinfo (ptr_res->ai_addr, ptr_res->ai_addrlen,
                               remote_address, sizeof (remote_address),
                               NULL, 0, NI_NUMERICHOST);
@@ -1142,7 +1142,7 @@ network_connect_child (struct t_hook *hook_connect)
         }
         else
         {
-            status_str[0] = '0' + WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED;
+            status_str[0] = '0' + WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED;
             close (sock);
             sock = -1;
         }
@@ -1150,7 +1150,7 @@ network_connect_child (struct t_hook *hook_connect)
 
     HOOK_CONNECT(hook_connect, sock) = sock;
 
-    if (ptr_proxy && status_str[0] == '0' + WEECHAT_HOOK_CONNECT_OK)
+    if (ptr_proxy && status_str[0] == '0' + WHOREIRC_HOOK_CONNECT_OK)
     {
         if (!network_pass_proxy (HOOK_CONNECT(hook_connect, proxy),
                                  HOOK_CONNECT(hook_connect, sock),
@@ -1158,11 +1158,11 @@ network_connect_child (struct t_hook *hook_connect)
                                  HOOK_CONNECT(hook_connect, port)))
         {
             /* proxy fails to connect to peer */
-            status_str[0] = '0' + WEECHAT_HOOK_CONNECT_PROXY_ERROR;
+            status_str[0] = '0' + WHOREIRC_HOOK_CONNECT_PROXY_ERROR;
         }
     }
 
-    if (status_str[0] == '0' + WEECHAT_HOOK_CONNECT_OK)
+    if (status_str[0] == '0' + WHOREIRC_HOOK_CONNECT_OK)
     {
         status_with_string = NULL;
         if (ptr_address)
@@ -1264,17 +1264,17 @@ network_connect_child_timer_cb (const void *pointer, void *data,
     (void) (HOOK_CONNECT(hook_connect, callback))
         (hook_connect->callback_pointer,
          hook_connect->callback_data,
-         WEECHAT_HOOK_CONNECT_TIMEOUT,
+         WHOREIRC_HOOK_CONNECT_TIMEOUT,
          0, -1, NULL, NULL);
     unhook (hook_connect);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
  * Callback for GnuTLS handshake.
  *
- * This callback is used to not block WeeChat (handshake takes some time to
+ * This callback is used to not block WhoreIRC (handshake takes some time to
  * finish).
  */
 
@@ -1313,7 +1313,7 @@ network_connect_gnutls_handshake_fd_cb (const void *pointer, void *data,
         (void) (HOOK_CONNECT(hook_connect, callback))
             (hook_connect->callback_pointer,
              hook_connect->callback_data,
-             WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR, rc,
+             WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR, rc,
              HOOK_CONNECT(hook_connect, sock),
              gnutls_strerror (rc),
              HOOK_CONNECT(hook_connect, handshake_ip_address));
@@ -1335,25 +1335,25 @@ network_connect_gnutls_handshake_fd_cb (const void *pointer, void *data,
             (void) (HOOK_CONNECT(hook_connect, callback))
                 (hook_connect->callback_pointer,
                  hook_connect->callback_data,
-                 WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR, rc,
+                 WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR, rc,
                  HOOK_CONNECT(hook_connect, sock),
                  "Error in the certificate.",
                  HOOK_CONNECT(hook_connect, handshake_ip_address));
             unhook (hook_connect);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 #endif /* LIBGNUTLS_VERSION_NUMBER < 0x02090a */
         unhook (HOOK_CONNECT(hook_connect, handshake_hook_fd));
         (void) (HOOK_CONNECT(hook_connect, callback))
             (hook_connect->callback_pointer,
              hook_connect->callback_data,
-             WEECHAT_HOOK_CONNECT_OK, 0,
+             WHOREIRC_HOOK_CONNECT_OK, 0,
              HOOK_CONNECT(hook_connect, sock),
              NULL, HOOK_CONNECT(hook_connect, handshake_ip_address));
         unhook (hook_connect);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 #endif /* HAVE_GNUTLS */
 
@@ -1381,14 +1381,14 @@ network_connect_gnutls_handshake_timer_cb (const void *pointer,
     (void) (HOOK_CONNECT(hook_connect, callback))
         (hook_connect->callback_pointer,
          hook_connect->callback_data,
-         WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR,
+         WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR,
          GNUTLS_E_EXPIRED,
          HOOK_CONNECT(hook_connect, sock),
          gnutls_strerror (GNUTLS_E_EXPIRED),
          HOOK_CONNECT(hook_connect, handshake_ip_address));
     unhook (hook_connect);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 #endif /* HAVE_GNUTLS */
 
@@ -1427,7 +1427,7 @@ network_connect_child_read_cb (const void *pointer, void *data, int fd)
                      buffer, sizeof (buffer));
     if (num_read == sizeof (buffer))
     {
-        if (buffer[0] - '0' == WEECHAT_HOOK_CONNECT_OK)
+        if (buffer[0] - '0' == WHOREIRC_HOOK_CONNECT_OK)
         {
             /* connection OK, read IP address */
             buf_size[5] = '\0';
@@ -1546,21 +1546,21 @@ network_connect_child_read_cb (const void *pointer, void *data, int fd)
                                     0, 1,
                                     &network_connect_gnutls_handshake_timer_cb,
                                     hook_connect, NULL);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
                 else if (rc != GNUTLS_E_SUCCESS)
                 {
                     (void) (HOOK_CONNECT(hook_connect, callback))
                         (hook_connect->callback_pointer,
                          hook_connect->callback_data,
-                         WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR,
+                         WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR,
                          rc, sock,
                          gnutls_strerror (rc),
                          cb_ip_address);
                     unhook (hook_connect);
                     if (cb_ip_address)
                         free (cb_ip_address);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
                 fcntl (HOOK_CONNECT(hook_connect, sock), F_SETFL,
                        HOOK_CONNECT(hook_connect, handshake_fd_flags));
@@ -1575,14 +1575,14 @@ network_connect_child_read_cb (const void *pointer, void *data, int fd)
                     (void) (HOOK_CONNECT(hook_connect, callback))
                         (hook_connect->callback_pointer,
                          hook_connect->callback_data,
-                         WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR,
+                         WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR,
                          rc, sock,
                          "Error in the certificate.",
                          cb_ip_address);
                     unhook (hook_connect);
                     if (cb_ip_address)
                         free (cb_ip_address);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
 #endif /* LIBGNUTLS_VERSION_NUMBER < 0x02090a */
             }
@@ -1628,7 +1628,7 @@ network_connect_child_read_cb (const void *pointer, void *data, int fd)
         (void) (HOOK_CONNECT(hook_connect, callback))
             (hook_connect->callback_pointer,
              hook_connect->callback_data,
-             WEECHAT_HOOK_CONNECT_MEMORY_ERROR,
+             WHOREIRC_HOOK_CONNECT_MEMORY_ERROR,
              0, sock, "child_read_cb", NULL);
         unhook (hook_connect);
     }
@@ -1638,7 +1638,7 @@ network_connect_child_read_cb (const void *pointer, void *data, int fd)
     if (cb_ip_address)
         free (cb_ip_address);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1664,7 +1664,7 @@ network_connect_with_fork (struct t_hook *hook_connect)
             (void) (HOOK_CONNECT(hook_connect, callback))
                 (hook_connect->callback_pointer,
                  hook_connect->callback_data,
-                 WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR,
+                 WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR,
                  0, -1, NULL, NULL);
             unhook (hook_connect);
             return;
@@ -1678,7 +1678,7 @@ network_connect_with_fork (struct t_hook *hook_connect)
             (void) (HOOK_CONNECT(hook_connect, callback))
                 (hook_connect->callback_pointer,
                  hook_connect->callback_data,
-                 WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR,
+                 WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR,
                  0, -1, _("set server name indication (SNI) failed"), NULL);
             unhook (hook_connect);
             return;
@@ -1691,7 +1691,7 @@ network_connect_with_fork (struct t_hook *hook_connect)
             (void) (HOOK_CONNECT(hook_connect, callback))
                 (hook_connect->callback_pointer,
                  hook_connect->callback_data,
-                 WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR,
+                 WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR,
                  0, -1, _("invalid priorities"), NULL);
             unhook (hook_connect);
             return;
@@ -1710,7 +1710,7 @@ network_connect_with_fork (struct t_hook *hook_connect)
         (void) (HOOK_CONNECT(hook_connect, callback))
             (hook_connect->callback_pointer,
              hook_connect->callback_data,
-             WEECHAT_HOOK_CONNECT_MEMORY_ERROR,
+             WHOREIRC_HOOK_CONNECT_MEMORY_ERROR,
              0, -1, "pipe", NULL);
         unhook (hook_connect);
         return;
@@ -1726,7 +1726,7 @@ network_connect_with_fork (struct t_hook *hook_connect)
             (void) (HOOK_CONNECT(hook_connect, callback))
                 (hook_connect->callback_pointer,
                  hook_connect->callback_data,
-                 WEECHAT_HOOK_CONNECT_MEMORY_ERROR,
+                 WHOREIRC_HOOK_CONNECT_MEMORY_ERROR,
                  0, -1, "socketpair", NULL);
             unhook (hook_connect);
             return;
@@ -1753,7 +1753,7 @@ network_connect_with_fork (struct t_hook *hook_connect)
             (void) (HOOK_CONNECT(hook_connect, callback))
                 (hook_connect->callback_pointer,
                  hook_connect->callback_data,
-                 WEECHAT_HOOK_CONNECT_MEMORY_ERROR,
+                 WHOREIRC_HOOK_CONNECT_MEMORY_ERROR,
                  0, -1, str_error, NULL);
             unhook (hook_connect);
             return;

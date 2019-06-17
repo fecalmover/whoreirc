@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -32,12 +32,12 @@
 #include "buflist-mouse.h"
 
 
-WEECHAT_PLUGIN_NAME(BUFLIST_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Buffers list"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(9000);
+WHOREIRC_PLUGIN_NAME(BUFLIST_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Buffers list"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(9000);
 
 struct t_weechat_plugin *weechat_buflist_plugin = NULL;
 
@@ -374,17 +374,17 @@ buflist_script_loaded_cb (const void *pointer, void *data, const char *signal,
 
     /* display a warning only if buflist is enabled */
     if (!weechat_config_boolean (buflist_config_look_enabled))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (!signal_data)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     base_name = basename (signal_data);
     if (!base_name)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     base_name2 = strdup (base_name);
     if (!base_name2)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (strcmp (base_name2, "buffers.pl") == 0)
     {
@@ -394,14 +394,14 @@ buflist_script_loaded_cb (const void *pointer, void *data, const char *signal,
                           "similar to the buflist plugin; you may want to "
                           "uninstall the script buffers.pl "
                           "(/script remove buffers.pl) or disable/unload the "
-                          "buflist plugin; see WeeChat release notes for more "
+                          "buflist plugin; see WhoreIRC release notes for more "
                           "information"),
                         weechat_prefix ("error"));
     }
 
     free (base_name2);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -446,12 +446,12 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     buflist_hdata_bar_window = weechat_hdata_get ("bar_window");
 
     if (!buflist_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     buflist_config_read ();
 
     if (!buflist_bar_item_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     buflist_command_init ();
 
@@ -464,8 +464,8 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
 
     /* default keys and mouse actions */
     keys = weechat_hashtable_new (32,
-                                  WEECHAT_HASHTABLE_STRING,
-                                  WEECHAT_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_STRING,
                                   NULL, NULL);
     if (keys)
     {
@@ -506,7 +506,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_hook_signal ("perl_script_loaded",
                          &buflist_script_loaded_cb, NULL, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -526,5 +526,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     buflist_config_write ();
     buflist_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

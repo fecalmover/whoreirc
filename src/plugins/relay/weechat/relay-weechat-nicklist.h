@@ -17,14 +17,14 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_WEECHAT_NICKLIST_H
-#define WEECHAT_PLUGIN_RELAY_WEECHAT_NICKLIST_H
+#ifndef WHOREIRC_PLUGIN_RELAY_WHOREIRC_NICKLIST_H
+#define WHOREIRC_PLUGIN_RELAY_WHOREIRC_NICKLIST_H
 
-#define RELAY_WEECHAT_NICKLIST_DIFF_UNKNOWN ' '
-#define RELAY_WEECHAT_NICKLIST_DIFF_PARENT  '^'
-#define RELAY_WEECHAT_NICKLIST_DIFF_ADDED   '+'
-#define RELAY_WEECHAT_NICKLIST_DIFF_REMOVED '-'
-#define RELAY_WEECHAT_NICKLIST_DIFF_CHANGED '*'
+#define RELAY_WHOREIRC_NICKLIST_DIFF_UNKNOWN ' '
+#define RELAY_WHOREIRC_NICKLIST_DIFF_PARENT  '^'
+#define RELAY_WHOREIRC_NICKLIST_DIFF_ADDED   '+'
+#define RELAY_WHOREIRC_NICKLIST_DIFF_REMOVED '-'
+#define RELAY_WHOREIRC_NICKLIST_DIFF_CHANGED '*'
 
 struct t_relay_weechat_nicklist_item
 {
@@ -54,4 +54,4 @@ extern void relay_weechat_nicklist_add_item (struct t_relay_weechat_nicklist *ni
                                              struct t_gui_nick *nick);
 extern void relay_weechat_nicklist_free (struct t_relay_weechat_nicklist *nicklist);
 
-#endif /* WEECHAT_PLUGIN_RELAY_WEECHAT_NICKLIST_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_WHOREIRC_NICKLIST_H */

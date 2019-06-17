@@ -1,23 +1,23 @@
 /*
- * weechat-php.c - PHP plugin for WeeChat
+ * weechat-php.c - PHP plugin for WhoreIRC
  *
  * Copyright (C) 2006-2017 Adam Saponara <as@php.net>
  * Copyright (C) 2017-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  *
  * OpenSSL licensing:
  *
@@ -43,12 +43,12 @@
 #include "weechat-php.h"
 #include "weechat-php-api.h"
 
-WEECHAT_PLUGIN_NAME(PHP_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of PHP scripts"));
-WEECHAT_PLUGIN_AUTHOR("Adam Saponara <as@php.net>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(PHP_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of PHP scripts"));
+WHOREIRC_PLUGIN_AUTHOR("Adam Saponara <as@php.net>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_php_plugin = NULL;
 
@@ -305,74 +305,74 @@ PHP_MINIT_FUNCTION(weechat)
     (void) type;
 
     /* Register integer constants */
-    #define PHP_WEECHAT_CONSTANT(NAME) \
+    #define PHP_WHOREIRC_CONSTANT(NAME) \
         zend_register_long_constant(#NAME, sizeof(#NAME)-1, (NAME), CONST_CS | CONST_PERSISTENT, module_number)
-    PHP_WEECHAT_CONSTANT(WEECHAT_RC_OK);
-    PHP_WEECHAT_CONSTANT(WEECHAT_RC_OK_EAT);
-    PHP_WEECHAT_CONSTANT(WEECHAT_RC_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_READ_OK);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_READ_MEMORY_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_WRITE_OK);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_WRITE_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_WRITE_MEMORY_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_SET_OK_CHANGED);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_SET_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_UNSET_OK_RESET);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_UNSET_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_OTHER);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_CHAR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_INTEGER);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_LONG);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_STRING);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_POINTER);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_TIME);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_HASHTABLE);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_SHARED_STRING);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HDATA_LIST_CHECK_POINTERS);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_PROCESS_RUNNING);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_PROCESS_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_PROCESS_CHILD);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_OK);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_PROXY_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_MEMORY_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_TIMEOUT);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_SOCKET_ERROR);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_GNUTLS_CB_VERIFY_CERT);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_CONNECT_GNUTLS_CB_SET_CERT);
-    #undef PHP_WEECHAT_CONSTANT
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_RC_OK);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_RC_OK_EAT);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_RC_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_READ_OK);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_READ_MEMORY_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_WRITE_OK);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_WRITE_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_WRITE_MEMORY_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_SET_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_OTHER);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_CHAR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_INTEGER);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_LONG);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_STRING);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_POINTER);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_TIME);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_HASHTABLE);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_SHARED_STRING);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HDATA_LIST_CHECK_POINTERS);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_PROCESS_RUNNING);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_PROCESS_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_PROCESS_CHILD);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_OK);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_PROXY_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_MEMORY_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_TIMEOUT);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_SOCKET_ERROR);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_GNUTLS_CB_VERIFY_CERT);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_CONNECT_GNUTLS_CB_SET_CERT);
+    #undef PHP_WHOREIRC_CONSTANT
 
     /* Register string constants */
-    #define PHP_WEECHAT_CONSTANT(NAME) \
+    #define PHP_WHOREIRC_CONSTANT(NAME) \
         zend_register_string_constant(#NAME, sizeof(#NAME)-1, (NAME), CONST_CS | CONST_PERSISTENT, module_number)
-    PHP_WEECHAT_CONSTANT(WEECHAT_PLUGIN_API_VERSION);
-    PHP_WEECHAT_CONSTANT(WEECHAT_CONFIG_OPTION_NULL);
-    PHP_WEECHAT_CONSTANT(WEECHAT_LIST_POS_SORT);
-    PHP_WEECHAT_CONSTANT(WEECHAT_LIST_POS_BEGINNING);
-    PHP_WEECHAT_CONSTANT(WEECHAT_LIST_POS_END);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HASHTABLE_INTEGER);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HASHTABLE_STRING);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HASHTABLE_POINTER);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HASHTABLE_BUFFER);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HASHTABLE_TIME);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOTLIST_LOW);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOTLIST_MESSAGE);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOTLIST_PRIVATE);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOTLIST_HIGHLIGHT);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_SIGNAL_STRING);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_SIGNAL_INT);
-    PHP_WEECHAT_CONSTANT(WEECHAT_HOOK_SIGNAL_POINTER);
-    #undef PHP_WEECHAT_CONSTANT
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_PLUGIN_API_VERSION);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_CONFIG_OPTION_NULL);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_LIST_POS_SORT);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_LIST_POS_BEGINNING);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_LIST_POS_END);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HASHTABLE_INTEGER);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HASHTABLE_STRING);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HASHTABLE_POINTER);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HASHTABLE_BUFFER);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HASHTABLE_TIME);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOTLIST_LOW);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOTLIST_MESSAGE);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOTLIST_PRIVATE);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOTLIST_HIGHLIGHT);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_SIGNAL_STRING);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_SIGNAL_INT);
+    PHP_WHOREIRC_CONSTANT(WHOREIRC_HOOK_SIGNAL_POINTER);
+    #undef PHP_WHOREIRC_CONSTANT
     return SUCCESS;
 }
 
@@ -385,7 +385,7 @@ zend_module_entry weechat_module_entry = {
     NULL,
     NULL,
     NULL,
-    PHP_WEECHAT_VERSION,
+    PHP_WHOREIRC_VERSION,
     STANDARD_MODULE_PROPERTIES
 };
 
@@ -406,7 +406,7 @@ weechat_php_hashtable_to_array_cb (void *data,
 }
 
 /*
- * Converts a WeeChat hashtable to a PHP array.
+ * Converts a WhoreIRC hashtable to a PHP array.
  */
 
 void
@@ -419,7 +419,7 @@ weechat_php_hashtable_to_array (struct t_hashtable *hashtable, zval *arr)
 }
 
 /*
- * Converts a PHP array to a WeeChat hashtable.
+ * Converts a PHP array to a WhoreIRC hashtable.
  *
  * Note: hashtable must be freed after use.
  */
@@ -440,13 +440,13 @@ weechat_php_array_to_hashtable (zval *arr,
         return NULL;
 
     ZEND_HASH_FOREACH_STR_KEY_VAL(Z_ARRVAL_P(arr), key, val) {
-        if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+        if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
         {
             weechat_hashtable_set (hashtable,
                                    ZSTR_VAL(key),
                                    Z_STRVAL_P(val));
         }
-        else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+        else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
         {
             weechat_hashtable_set (hashtable,
                                    ZSTR_VAL(key),
@@ -499,8 +499,8 @@ weechat_php_func_map_add (zval *ofunc)
     if (!weechat_php_func_map)
     {
         weechat_php_func_map = weechat_hashtable_new (32,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_POINTER,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_POINTER,
                                                       NULL, NULL);
         weechat_hashtable_set_pointer (weechat_php_func_map,
                                        "callback_free_value",
@@ -587,35 +587,35 @@ weechat_php_exec (struct t_plugin_script *script, int ret_type,
     {
         if (zfunc && zend_call_function (&fci, &fci_cache) == SUCCESS)
         {
-            if (ret_type == WEECHAT_SCRIPT_EXEC_STRING)
+            if (ret_type == WHOREIRC_SCRIPT_EXEC_STRING)
             {
                 convert_to_string (&zretval);
                 ret_value = strdup ((char *)Z_STRVAL(zretval));
             }
-            else if (ret_type == WEECHAT_SCRIPT_EXEC_POINTER)
+            else if (ret_type == WHOREIRC_SCRIPT_EXEC_POINTER)
             {
                 convert_to_string (&zretval);
                 ret_value = plugin_script_str2ptr (weechat_php_plugin,
                                                    script->name, function,
                                                    (char *)Z_STRVAL(zretval));
             }
-            else if (ret_type == WEECHAT_SCRIPT_EXEC_INT)
+            else if (ret_type == WHOREIRC_SCRIPT_EXEC_INT)
             {
                 convert_to_long (&zretval);
                 ret_i = malloc (sizeof (*ret_i));
                 *ret_i = Z_LVAL(zretval);
                 ret_value = ret_i;
             }
-            else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+            else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
             {
                 ret_value = weechat_php_array_to_hashtable (&zretval,
-                                                            WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                            WEECHAT_HASHTABLE_STRING,
-                                                            WEECHAT_HASHTABLE_STRING);
+                                                            WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                            WHOREIRC_HASHTABLE_STRING,
+                                                            WHOREIRC_HASHTABLE_STRING);
             }
             else
             {
-                if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+                if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
                 {
                     weechat_printf (NULL,
                                     weechat_gettext ("%s%s: function \"%s\" "
@@ -635,7 +635,7 @@ weechat_php_exec (struct t_plugin_script *script, int ret_type,
     }
     zend_end_try ();
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -716,7 +716,7 @@ weechat_php_load (const char *filename, const char *code)
                                         &weechat_php_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("php_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      php_current_script->filename);
 
     return php_current_script;
@@ -755,7 +755,7 @@ weechat_php_unload (struct t_plugin_script *script)
     if (script->shutdown_func && script->shutdown_func[0])
     {
         rc = (int *)weechat_php_exec (script,
-                                      WEECHAT_SCRIPT_EXEC_INT,
+                                      WHOREIRC_SCRIPT_EXEC_INT,
                                       script->shutdown_func,
                                       NULL, NULL);
         if (rc)
@@ -771,7 +771,7 @@ weechat_php_unload (struct t_plugin_script *script)
     plugin_script_remove (weechat_php_plugin, &php_scripts, &last_php_script, script);
 
     (void) weechat_hook_signal_send ("php_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -924,7 +924,7 @@ weechat_php_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_php_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -986,7 +986,7 @@ weechat_php_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -994,7 +994,7 @@ weechat_php_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -1005,7 +1005,7 @@ weechat_php_command_cb (const void *pointer, void *data,
             }
             if (!weechat_php_eval (buffer, send_to_buffer_as_input,
                                    exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             /* TODO: implement /php eval */
             weechat_printf (NULL,
                             _("%sCommand \"/%s eval\" is not yet implemented"),
@@ -1013,10 +1013,10 @@ weechat_php_command_cb (const void *pointer, void *data,
                             weechat_php_plugin->name);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1037,7 +1037,7 @@ weechat_php_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_php_plugin, completion, php_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1104,7 +1104,7 @@ weechat_php_infolist_cb (const void *pointer, void *data,
 }
 
 /*
- * Dumps PHP plugin data in WeeChat log file.
+ * Dumps PHP plugin data in WhoreIRC log file.
  */
 
 int
@@ -1124,7 +1124,7 @@ weechat_php_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_php_plugin, php_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1166,7 +1166,7 @@ weechat_php_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1184,7 +1184,7 @@ weechat_php_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "php_script_install") == 0)
         {
@@ -1212,7 +1212,7 @@ weechat_php_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -1314,7 +1314,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                       php_scripts);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1351,5 +1351,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (php_action_autoload_list);
     /* weechat_string_dyn_free (php_buffer_output, 1); */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

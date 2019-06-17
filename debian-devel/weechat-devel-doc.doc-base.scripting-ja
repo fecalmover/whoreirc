@@ -1,8 +1,8 @@
 Document: whoreirc-scripting-ja
-Title: WeeChat scripting guide (Japanese)
+Title: WhoreIRC scripting guide (Japanese)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create scripts
- for WeeChat (Japanese version).
+ for WhoreIRC (Japanese version).
 Section: Network/Communication
 
 Format: HTML

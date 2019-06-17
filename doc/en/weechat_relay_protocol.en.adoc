@@ -1,4 +1,4 @@
-= WeeChat Relay protocol
+= WhoreIRC Relay protocol
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en
@@ -11,15 +11,15 @@
 [[introduction]]
 == Introduction
 
-This document is the specification of WeeChat Relay protocol: the protocol used
-to relay WeeChat data to clients, which are mostly remote interfaces.
+This document is the specification of WhoreIRC Relay protocol: the protocol used
+to relay WhoreIRC data to clients, which are mostly remote interfaces.
 
 [[terminology]]
 === Terminology
 
 The following terms are used in this document:
 
-* _relay_: this is the WeeChat with relay plugin, which acts as "server" and
+* _relay_: this is the WhoreIRC with relay plugin, which acts as "server" and
   allows _clients_ to connect
 * _client_: this is another software, connected to _relay_ via a network
   connection; in most cases, this _client_ is a remote interface.
@@ -34,7 +34,7 @@ The _clients_ are connected to _relay_ like shown in this diagram:
  ┌────────┐                               ┌───┤ client 1 │ (Linux, Windows,
  │  irc   │◄──┐  ╔═══════════╤═══════╗    │   └──────────┘ BSD, macOS ...)
  └────────┘   └──╢           │       ║◄───┘   ┌──────────┐
-   ......        ║  WeeChat  │ Relay ║◄───────┤ client 2 │ Mobile device
+   ......        ║  WhoreIRC  │ Relay ║◄───────┤ client 2 │ Mobile device
  ┌────────┐   ┌──╢           │       ║◄───┐   └──────────┘ (Android, iPhone ...)
  │ jabber │◄──┘  ╚═══════════╧═══════╝    │      ......
  └────────┘                               │   ┌──────────┐
@@ -77,7 +77,7 @@ Fields are:
 
 * _id_: optional message identifier that will be sent in answer from _relay_;
   it must be enclosed in parentheses, and must not start with an underscore
-  (ids starting with underscore are reserved for WeeChat _event_ messages)
+  (ids starting with underscore are reserved for WhoreIRC _event_ messages)
 * _command_: a command (see table below)
 * _arguments_: optional arguments for command (many arguments are separated by
   spaces).
@@ -115,30 +115,30 @@ Arguments:
 
 * _option_: one of following options:
 ** _password_: password used to authenticate on _relay_
-   (option _relay.network.password_ in WeeChat)
+   (option _relay.network.password_ in WhoreIRC)
 ** _totp_: Time-based One-Time Password (TOTP) used as secondary authentication
    factor, in addition to the password
-   (option _relay.network.totp_secret_ in WeeChat)
-   _(WeeChat ≥ 2.4)_
+   (option _relay.network.totp_secret_ in WhoreIRC)
+   _(WhoreIRC ≥ 2.4)_
 ** _compression_: compression type:
 *** _zlib_: enable _zlib_ compression for messages sent by _relay_
     (enabled by default if _relay_ supports _zlib_ compression)
 *** _off_: disable compression
 
 [NOTE]
-With WeeChat ≥ 1.6, commas can be escaped in the value, for example
+With WhoreIRC ≥ 1.6, commas can be escaped in the value, for example
 `init password=foo\,bar` to send the password "foo,bar".
 
 Examples:
 
 ----
-# initialize and use zlib compression by default (if WeeChat supports it)
+# initialize and use zlib compression by default (if WhoreIRC supports it)
 init password=mypass
 
-# initialize with commas in the password (WeeChat ≥ 1.6)
+# initialize with commas in the password (WhoreIRC ≥ 1.6)
 init password=mypass\,with\,commas
 
-# initialize with password and TOTP (WeeChat ≥ 2.4)
+# initialize with password and TOTP (WhoreIRC ≥ 2.4)
 init password=mypass,totp=123456
 
 # initialize and disable compression
@@ -176,7 +176,7 @@ values are:
 * _*_: iterate using next element, until end of list
 
 [NOTE]
-With WeeChat ≥ 1.6, if the hdata path is invalid or if a NULL pointer is found,
+With WhoreIRC ≥ 1.6, if the hdata path is invalid or if a NULL pointer is found,
 an empty hdata is returned (see example in <<object_hdata,hdata object>>). +
 With older versions, nothing was returned.
 
@@ -325,10 +325,10 @@ Arguments:
   _buffers,upgrade,buffer,nicklist_ for "*" and _buffer,nicklist_ for a buffer):
 ** _buffers_: receive signals about buffers (opened/closed, moved, renamed,
    merged/unmerged, hidden/unhidden); this can be used only with name "*"
-   _(WeeChat ≥ 0.4.1)_
-** _upgrade_: receive signals about WeeChat upgrade (upgrade, upgrade ended);
+   _(WhoreIRC ≥ 0.4.1)_
+** _upgrade_: receive signals about WhoreIRC upgrade (upgrade, upgrade ended);
    this can be used only with name "*"
-   _(WeeChat ≥ 0.4.1)_
+   _(WhoreIRC ≥ 0.4.1)_
 ** _buffer_: receive signals about buffer (new lines, type changed, title
    changed, local variable added/removed, and same signals as _buffers_ for the
    buffer) _(updated in version 0.4.1)_
@@ -384,7 +384,7 @@ Arguments:
 [NOTE]
 When using buffer "*", the other buffers synchronized (using a name) are kept. +
 So if you send: "sync *", then "sync irc.freenode.#weechat", then "desync *",
-the updates on #weechat channel will still be sent by WeeChat (you must remove
+the updates on #weechat channel will still be sent by WhoreIRC (you must remove
 it explicitly to stop updates).
 
 Examples:
@@ -407,15 +407,15 @@ desync irc.freenode.#weechat
 [[command_test]]
 === test
 
-Test command: WeeChat will reply with various different objects.
+Test command: WhoreIRC will reply with various different objects.
 
 This command is useful to test the decoding of binary objects returned by
-WeeChat.
+WhoreIRC.
 
 [IMPORTANT]
 You must not use the pointer values returned by this command, they are not
 valid. This command must be used only to test decoding of a message sent by
-WeeChat.
+WhoreIRC.
 
 Syntax:
 
@@ -454,11 +454,11 @@ Returned objects (in this order):
 [[command_ping]]
 === ping
 
-_WeeChat ≥ 0.4.2._
+_WhoreIRC ≥ 0.4.2._
 
-Send a ping to WeeChat which will reply with a message "_pong" and same arguments.
+Send a ping to WhoreIRC which will reply with a message "_pong" and same arguments.
 
-This command is useful to test that connection with WeeChat is still alive and
+This command is useful to test that connection with WhoreIRC is still alive and
 measure the response time.
 
 Syntax:
@@ -533,7 +533,7 @@ There are two types of identifiers (_id_):
 * _id_ of an event: on some events, _relay_ will send message to _client_ using
   a specific _id_, beginning with underscore (see table below)
 
-WeeChat reserved identifiers:
+WhoreIRC reserved identifiers:
 
 [width="100%",cols="5m,5,3,4,7",options="header"]
 |===
@@ -595,17 +595,17 @@ WeeChat reserved identifiers:
   Answer to a "ping". | Measure response time.
 
 | _upgrade | upgrade | (empty) |
-  WeeChat is upgrading. | Desync from WeeChat (or disconnect).
+  WhoreIRC is upgrading. | Desync from WhoreIRC (or disconnect).
 
 | _upgrade_ended | upgrade | (empty) |
-  Upgrade of WeeChat done. | Sync/resync with WeeChat.
+  Upgrade of WhoreIRC done. | Sync/resync with WhoreIRC.
 |===
 
 [[message_buffer_opened]]
 ==== _buffer_opened
 
 This message is sent to the client when the signal "buffer_opened" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -648,7 +648,7 @@ hda:
 ==== _buffer_moved
 
 This message is sent to the client when the signal "buffer_moved" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -681,7 +681,7 @@ hda:
 ==== _buffer_merged
 
 This message is sent to the client when the signal "buffer_merged" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -714,7 +714,7 @@ hda:
 ==== _buffer_unmerged
 
 This message is sent to the client when the signal "buffer_unmerged" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -746,10 +746,10 @@ hda:
 [[message_buffer_hidden]]
 ==== _buffer_hidden
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 This message is sent to the client when the signal "buffer_hidden" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -781,10 +781,10 @@ hda:
 [[message_buffer_unhidden]]
 ==== _buffer_unhidden
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 This message is sent to the client when the signal "buffer_unhidden" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -817,7 +817,7 @@ hda:
 ==== _buffer_renamed
 
 This message is sent to the client when the signal "buffer_renamed" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -851,7 +851,7 @@ hda:
 ==== _buffer_title_changed
 
 This message is sent to the client when the signal "buffer_title_changed" is
-sent by WeeChat.
+sent by WhoreIRC.
 
 Data sent as hdata:
 
@@ -881,10 +881,10 @@ hda:
 [[message_buffer_cleared]]
 ==== _buffer_cleared
 
-_WeeChat ≥ 1.0._
+_WhoreIRC ≥ 1.0._
 
 This message is sent to the client when the signal "buffer_cleared" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -913,7 +913,7 @@ hda:
 ==== _buffer_type_changed
 
 This message is sent to the client when the signal "buffer_type_changed" is sent
-by WeeChat.
+by WhoreIRC.
 
 Data sent as hdata:
 
@@ -945,7 +945,7 @@ hda:
 ==== _buffer_localvar_added
 
 This message is sent to the client when the signal "buffer_localvar_added" is
-sent by WeeChat.
+sent by WhoreIRC.
 
 Data sent as hdata:
 
@@ -978,7 +978,7 @@ hda:
 ==== _buffer_localvar_changed
 
 This message is sent to the client when the signal "buffer_localvar_changed" is
-sent by WeeChat.
+sent by WhoreIRC.
 
 Data sent as hdata:
 
@@ -1011,7 +1011,7 @@ hda:
 ==== _buffer_localvar_removed
 
 This message is sent to the client when the signal "buffer_localvar_removed" is
-sent by WeeChat.
+sent by WhoreIRC.
 
 Data sent as hdata:
 
@@ -1043,7 +1043,7 @@ hda:
 ==== _buffer_line_added
 
 This message is sent to the client when the signal "buffer_line_added" is sent
-by WeeChat.
+by WhoreIRC.
 
 Data sent as hdata:
 
@@ -1052,7 +1052,7 @@ Data sent as hdata:
 | Name         | Type             | Description
 | buffer       | pointer          | Buffer pointer.
 | date         | time             | Date of message.
-| date_printed | time             | Date when WeeChat displayed message.
+| date_printed | time             | Date when WhoreIRC displayed message.
 | displayed    | char             | 1 if message is displayed, 0 if message is filtered (hidden).
 | highlight    | char             | 1 if line has a highlight, otherwise 0.
 | tags_array   | array of strings | List of tags for line.
@@ -1085,7 +1085,7 @@ hda:
 ==== _buffer_closing
 
 This message is sent to the client when the signal "buffer_closing" is sent by
-WeeChat.
+WhoreIRC.
 
 Data sent as hdata:
 
@@ -1096,7 +1096,7 @@ Data sent as hdata:
 | full_name | string  | Full name (example: _irc.freenode.#weechat_).
 |===
 
-Example: buffer _irc.freenode.#weechat_ is being closed by WeeChat:
+Example: buffer _irc.freenode.#weechat_ is being closed by WhoreIRC:
 
 [source,python]
 ----
@@ -1201,7 +1201,7 @@ hda:
 [[message_nicklist_diff]]
 ==== _nicklist_diff
 
-_WeeChat ≥ 0.4.1._
+_WhoreIRC ≥ 0.4.1._
 
 This message is sent to the client when small updates are made on a nicklist
 (groups/nicks added/removed/changed). The message contains nicklist differences
@@ -1296,7 +1296,7 @@ hda:
 [[message_pong]]
 ==== _pong
 
-_WeeChat ≥ 0.4.2._
+_WhoreIRC ≥ 0.4.2._
 
 This message is sent to the client when _relay_ receives a "ping" message.
 
@@ -1308,31 +1308,31 @@ if it is high.
 [[message_upgrade]]
 ==== _upgrade
 
-_WeeChat ≥ 0.3.8._
+_WhoreIRC ≥ 0.3.8._
 
-This message is sent to the client when WeeChat is starting upgrade process.
+This message is sent to the client when WhoreIRC is starting upgrade process.
 
 There is no data in the message.
 
-The recommended action in client is to desynchronize from WeeChat (send command
-_desync_), or to disconnect from WeeChat (because after upgrade, all pointers
+The recommended action in client is to desynchronize from WhoreIRC (send command
+_desync_), or to disconnect from WhoreIRC (because after upgrade, all pointers
 will change).
 
 [NOTE]
-During WeeChat upgrade, the socket remains opened (except if connection uses
+During WhoreIRC upgrade, the socket remains opened (except if connection uses
 SSL).
 
 [[message_upgrade_ended]]
 ==== _upgrade_ended
 
-_WeeChat ≥ 0.3.8._
+_WhoreIRC ≥ 0.3.8._
 
-This message is sent to the client when WeeChat has finished the upgrade
+This message is sent to the client when WhoreIRC has finished the upgrade
 process.
 
 There is no data in the message.
 
-The recommended action in client is to resynchronize with WeeChat: resend all
+The recommended action in client is to resynchronize with WhoreIRC: resend all
 commands sent on startup after the _init_.
 
 [[objects]]
@@ -1637,7 +1637,7 @@ nicklist
                                nick (@ChanServ)
 ....
 
-Example of empty hdata (hotlist is empty in WeeChat):
+Example of empty hdata (hotlist is empty in WhoreIRC):
 
 ....
 # command
@@ -1669,7 +1669,7 @@ Example of info _version_:
 
 ....
 ┌─────────┬───────────────────┐
-│ version │ WeeChat 0.3.7-dev │
+│ version │ WhoreIRC 0.3.7-dev │
 └─────────┴───────────────────┘
 ....
 
@@ -1773,7 +1773,7 @@ A _NULL_ array:
 
 ....
     ┌────────┐                         ┌───────┐                ┌─────────┐
-    │ Client ├ ─ ─ ─ ─(network)─ ─ ─ ─ ┤ Relay ├────────────────┤ WeeChat │
+    │ Client ├ ─ ─ ─ ─(network)─ ─ ─ ─ ┤ Relay ├────────────────┤ WhoreIRC │
     └────────┘                         └───────┘                └─────────┘
          ║                                 ║                         ║
          ╟───────────────────────────────► ║                         ║

@@ -1,4 +1,4 @@
-= WeeChat szybki start
+= WhoreIRC szybki start
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: pl
@@ -14,7 +14,7 @@ Tłumaczenie:
 
 
 [[start]]
-== Uruchamianie WeeChat
+== Uruchamianie WhoreIRC
 
 Zalecanym emulatorem terminala dla X (ale nieobowiązkowym) jest rxvt-unicode:
 posiada dobre wsparcie UTF-8, oraz nie ma problemów z domyślnymi skrótami
@@ -29,7 +29,7 @@ $ whoreirc
 [[help]]
 == Pomoc online
 
-WeeChat posiada pomoc dla wszystkich komend, wystarczy wywołać:
+WhoreIRC posiada pomoc dla wszystkich komend, wystarczy wywołać:
 
 ----
 /help
@@ -59,14 +59,14 @@ Do ustawiania opcji służy:
 /set config.sekcja.opcja wartość
 ----
 
-WeeChat natychmiast używa nowej wartości (*nigdy* nie musisz restartować WeeChat
+WhoreIRC natychmiast używa nowej wartości (*nigdy* nie musisz restartować WhoreIRC
 po zmianach w ustawieniach).
 
-Wszystkie ustawienia są zapisywane podczas wyjścia z WeeChat (lub za pomocą
+Wszystkie ustawienia są zapisywane podczas wyjścia z WhoreIRC (lub za pomocą
 komendy `/save`, która wymusza zapisanie opcji).
 
 [IMPORTANT]
-*Nie zaleca się* ręcznie edytować plików konfiguracyjnych, ponieważ WeeChat
+*Nie zaleca się* ręcznie edytować plików konfiguracyjnych, ponieważ WhoreIRC
 może je nadpisać w dowolnej chwili (na przykład podczas `/quit`),
 oraz po każdej zmianie musisz wykonać komendę `/reload`
 (ryzykując utratę zmian, które nie zostały zapisane za pomocą `/save`). +
@@ -75,7 +75,7 @@ zmiany.
 
 Wtyczka _fset_ pozwala na łatwe przeglądanie i zmianę opcji.
 
-Na przykład w celu wyświetlenia opci WeeChat:
+Na przykład w celu wyświetlenia opci WhoreIRC:
 
 ----
 /fset whoreirc.*
@@ -96,7 +96,7 @@ Więcej informacji o komendzie `/fset`, można uzyskać wpisując `/help fset`.
 [[core_vs_plugins]]
 == Rdzeń vs wtyczki
 
-"Rdzeń" WeeChat jest używany tylko do wyświetlania danych na ekranie oraz
+"Rdzeń" WhoreIRC jest używany tylko do wyświetlania danych na ekranie oraz
 interakcji z użytkownikiem, oznacza to, że rdzeń whoreirc bez wtyczek jest
 bezużyteczny (wierni użytkownicy: IRC był częścią rdzenia dla wersji ≤ 0.2.6).
 
@@ -114,7 +114,7 @@ Możesz dodać serwer IRC za pomocą komendy `/server`, na przykład:
 /server add freenode chat.freenode.net
 ----
 
-W tej komendzie `freenode` to nazwa wewnętrzna używana przez WeeChat:
+W tej komendzie `freenode` to nazwa wewnętrzna używana przez WhoreIRC:
 będziesz mógł połączyć się za pomocą `/connect freenode`. Opcje serwera
 będą miały postać _irc.server.freenode.xxx_.
 
@@ -127,12 +127,12 @@ Jak zawsze w razie wątpliwości dostępna jest pomoc:
 [[irc_server_options]]
 == Ustawianie własnych opcji dla serwerów IRC
 
-WeeChat używa domyślnych wartości dla wszystkich serwerów ("fall backs"), jeśli
+WhoreIRC używa domyślnych wartości dla wszystkich serwerów ("fall backs"), jeśli
 nie określisz konkretnej wartości dla opcji serwera.
 Te domyślne opcje to "irc.server_default.*".
 
-Dla każdej opcji serwera WeeChat używa jej wartości jeśli jest zdefiniowana (nie
-"null"). W przeciwnym przypadku WeeChat używa wartości domyślnych ("irc.server_default.xxx").
+Dla każdej opcji serwera WhoreIRC używa jej wartości jeśli jest zdefiniowana (nie
+"null"). W przeciwnym przypadku WhoreIRC używa wartości domyślnych ("irc.server_default.xxx").
 
 Na przykład znajdują się tam domyślne nicki (bazujące na Twoim loginie un*x),
 możesz je zmienić dla serwera freenode następującą komendą:
@@ -237,7 +237,7 @@ nazwa opcji):
 Ta komenda może być użyta do utworzenia i połączenia się z nowym serwerem bez
 użycia komendy `/server` (zobacz `/help connect`).
 
-Domyślnie bufory serwerów są połączone z buforem WeeChat _core_. Aby przełączać
+Domyślnie bufory serwerów są połączone z buforem WhoreIRC _core_. Aby przełączać
 się pomiędzy buforem _core_ a buforami serwerów możesz użyć kbd:[Ctrl+x].
 
 Jest możliwe wyłączenie automatycznego łączenia buforów serwerów, aby mieć
@@ -325,7 +325,7 @@ Usunięcie podziału:
 [[key_bindings]]
 == Skróty klawiszowe
 
-WeeChat używa domyślnie wiele klawiszy. Wszystkie z nich są w dokumentacji,
+WhoreIRC używa domyślnie wiele klawiszy. Wszystkie z nich są w dokumentacji,
 ale powinieneś znać przynajmniej kilka najprzydatniejszych:
 
 - kbd:[Alt+←] / kbd:[Alt+→] lub kbd:[F5] / kbd:[F6]: przełącza na
@@ -367,7 +367,7 @@ Aby usunąć klawisz:
 W niektórych dystrybucjach, jak np Debian, wtyczki są dostarczane jako oddzielne
 pakiety (jak whoreirc-plugins).
 Wtyczki są automatycznie ładowane, kiedy zostaną wykryte (proszę spojrzeć do
-dokumentacji WeeChat, aby się dowiedzieć jak ładować/wyładowywać wtyczki lub
+dokumentacji WhoreIRC, aby się dowiedzieć jak ładować/wyładowywać wtyczki lub
 skrypty).
 
 Dostępne jest wiele zewnętrznych skryptów (od społeczności), możesz je pobrać
@@ -379,13 +379,13 @@ i zainstalować za pomocą komendy `/script`, na przykład:
 
 Więcej informacji można uzyskać wykonując komendę `/help script`.
 
-Listę skryptów dostepnych dla WeeChat można uzyskać wywołując komendę `/script`
+Listę skryptów dostepnych dla WhoreIRC można uzyskać wywołując komendę `/script`
 lub pod adresem https://whoreirc.org/scripts
 
 [[more_doc]]
 == Więcej dokumentacji
 
-Możesz teraz używać WeeChat oraz przeczytać FAQ/dokumentację w razie innych pytań:
+Możesz teraz używać WhoreIRC oraz przeczytać FAQ/dokumentację w razie innych pytań:
 https://whoreirc.org/doc
 
-Miłej pracy z WeeChat!
+Miłej pracy z WhoreIRC!

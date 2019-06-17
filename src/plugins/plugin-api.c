@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -212,7 +212,7 @@ plugin_api_config_set_plugin (struct t_weechat_plugin *plugin,
                               const char *option_name, const char *value)
 {
     if (!plugin || !option_name)
-        return WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND;
+        return WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND;
 
     return plugin_config_set (plugin->name, option_name, value);
 }
@@ -241,11 +241,11 @@ plugin_api_config_unset_plugin (struct t_weechat_plugin *plugin,
     struct t_config_option *ptr_option;
 
     if (!plugin || !option_name)
-        return WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
 
     ptr_option = plugin_config_search (plugin->name, option_name);
     if (!ptr_option)
-        return WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
 
     return config_file_option_unset (ptr_option);
 }
@@ -275,7 +275,7 @@ plugin_api_prefix (const char *prefix)
 }
 
 /*
- * Returns a WeeChat color for display with printf.
+ * Returns a WhoreIRC color for display with printf.
  */
 
 const char *
@@ -309,7 +309,7 @@ plugin_api_command_options (struct t_weechat_plugin *plugin,
     int rc;
 
     if (!plugin || !command)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     ptr_commands_allowed = NULL;
     delay = 0;
@@ -518,14 +518,14 @@ plugin_api_infolist_free (struct t_infolist *infolist)
 void
 plugin_api_init ()
 {
-    /* WeeChat core modifiers */
+    /* WhoreIRC core modifiers */
     hook_modifier (NULL, "color_decode_ansi",
                    &plugin_api_modifier_color_decode_ansi_cb, NULL, NULL);
 
-    /* WeeChat core info/infolist hooks */
+    /* WhoreIRC core info/infolist hooks */
     plugin_api_info_init ();
 
-    /* WeeChat core hdata */
+    /* WhoreIRC core hdata */
     hook_hdata (NULL, "bar", N_("bar"),
                 &gui_bar_hdata_bar_cb, NULL, NULL);
     hook_hdata (NULL, "bar_item", N_("bar item"),

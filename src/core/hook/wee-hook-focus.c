@@ -234,9 +234,9 @@ hook_focus_get_data (struct t_hashtable *hashtable_focus1,
         if (keys)
         {
             list_keys = string_split (keys, ",", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_keys);
             if (list_keys)
             {

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -48,9 +48,9 @@ irc_mode_get_arguments (const char *arguments)
         return strdup ("");
 
     argv = weechat_string_split (arguments, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     if (!argv)
         return strdup ("");
@@ -174,9 +174,9 @@ irc_mode_channel_update (struct t_irc_server *server,
         while (pos_args[0] == ' ')
             pos_args++;
         argv = weechat_string_split (pos_args, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
     }
     else
@@ -387,9 +387,9 @@ irc_mode_channel_set (struct t_irc_server *server,
     if (modes_arguments)
     {
         argv = weechat_string_split (modes_arguments, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
     }
 

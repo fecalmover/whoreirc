@@ -35,12 +35,12 @@
 #include "weechat-tcl-api.h"
 
 
-WEECHAT_PLUGIN_NAME(TCL_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of tcl scripts"));
-WEECHAT_PLUGIN_AUTHOR("Dmitry Kobylin <fnfal@academ.tsc.ru>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(TCL_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of tcl scripts"));
+WHOREIRC_PLUGIN_AUTHOR("Dmitry Kobylin <fnfal@academ.tsc.ru>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_tcl_plugin = NULL;
 
@@ -166,13 +166,13 @@ weechat_tcl_dict_to_hashtable (Tcl_Interp *interp, Tcl_Obj *dict,
     {
         for (; !done ; Tcl_DictObjNext (&search, &key, &value, &done))
         {
-            if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+            if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
             {
                 weechat_hashtable_set (hashtable,
                                        Tcl_GetString (key),
                                        Tcl_GetString (value));
             }
-            else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+            else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
             {
                 weechat_hashtable_set (hashtable,
                                        Tcl_GetString (key),
@@ -254,7 +254,7 @@ weechat_tcl_exec (struct t_plugin_script *script,
         Tcl_ListObjReplace (interp, cmdlist, 0, llength, 0, NULL);
         Tcl_DecrRefCount (cmdlist);  /* -1 */
         ret_val = NULL;
-        if (ret_type == WEECHAT_SCRIPT_EXEC_STRING)
+        if (ret_type == WHOREIRC_SCRIPT_EXEC_STRING)
         {
             ret_cv = Tcl_GetStringFromObj (Tcl_GetObjResult (interp), &i);
             if (ret_cv)
@@ -262,7 +262,7 @@ weechat_tcl_exec (struct t_plugin_script *script,
             else
                 ret_val = NULL;
         }
-        else if (ret_type == WEECHAT_SCRIPT_EXEC_POINTER)
+        else if (ret_type == WHOREIRC_SCRIPT_EXEC_POINTER)
         {
             ret_cv = Tcl_GetStringFromObj (Tcl_GetObjResult (interp), &i);
             if (ret_cv)
@@ -274,7 +274,7 @@ weechat_tcl_exec (struct t_plugin_script *script,
             else
                 ret_val = NULL;
         }
-        else if ( ret_type == WEECHAT_SCRIPT_EXEC_INT
+        else if ( ret_type == WHOREIRC_SCRIPT_EXEC_INT
                   && Tcl_GetIntFromObj (interp, Tcl_GetObjResult (interp), &i) == TCL_OK)
         {
             ret_i = (int *)malloc (sizeof (*ret_i));
@@ -282,20 +282,20 @@ weechat_tcl_exec (struct t_plugin_script *script,
                 *ret_i = i;
             ret_val = (void *)ret_i;
         }
-        else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+        else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
         {
             ret_val = weechat_tcl_dict_to_hashtable (interp,
                                                      Tcl_GetObjResult (interp),
-                                                     WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                     WEECHAT_HASHTABLE_STRING,
-                                                     WEECHAT_HASHTABLE_STRING);
+                                                     WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                     WHOREIRC_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING);
         }
 
         tcl_current_script = old_tcl_script;
         if (ret_val)
             return ret_val;
 
-        if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+        if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
         {
             weechat_printf (NULL,
                             weechat_gettext ("%s%s: function \"%s\" must "
@@ -410,7 +410,7 @@ weechat_tcl_load (const char *filename, const char *code)
                                         &weechat_tcl_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("tcl_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      tcl_current_script->filename);
 
     return tcl_current_script;
@@ -450,7 +450,7 @@ weechat_tcl_unload (struct t_plugin_script *script)
     if (script->shutdown_func && script->shutdown_func[0])
     {
         rc = (int *)weechat_tcl_exec (script,
-                                      WEECHAT_SCRIPT_EXEC_INT,
+                                      WHOREIRC_SCRIPT_EXEC_INT,
                                       script->shutdown_func,
                                       NULL, NULL);
         if (rc)
@@ -469,7 +469,7 @@ weechat_tcl_unload (struct t_plugin_script *script)
     Tcl_DeleteInterp (interp);
 
     (void) weechat_hook_signal_send ("tcl_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -622,7 +622,7 @@ weechat_tcl_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_tcl_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -684,7 +684,7 @@ weechat_tcl_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -692,7 +692,7 @@ weechat_tcl_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -703,7 +703,7 @@ weechat_tcl_command_cb (const void *pointer, void *data,
             }
             if (!weechat_tcl_eval (buffer, send_to_buffer_as_input,
                                    exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             /* TODO: implement /tcl eval */
             weechat_printf (NULL,
                             _("%sCommand \"/%s eval\" is not yet implemented"),
@@ -711,10 +711,10 @@ weechat_tcl_command_cb (const void *pointer, void *data,
                             weechat_tcl_plugin->name);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -735,7 +735,7 @@ weechat_tcl_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_tcl_plugin, completion, tcl_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -822,7 +822,7 @@ weechat_tcl_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_tcl_plugin, tcl_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -864,7 +864,7 @@ weechat_tcl_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -881,7 +881,7 @@ weechat_tcl_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "tcl_script_install") == 0)
         {
@@ -909,7 +909,7 @@ weechat_tcl_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -955,7 +955,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                       tcl_scripts);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -984,5 +984,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (tcl_action_autoload_list);
     /* weechat_string_dyn_free (tcl_buffer_output, 1); */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

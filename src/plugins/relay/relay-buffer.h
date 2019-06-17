@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_BUFFER_H
-#define WEECHAT_PLUGIN_RELAY_BUFFER_H
+#ifndef WHOREIRC_PLUGIN_RELAY_BUFFER_H
+#define WHOREIRC_PLUGIN_RELAY_BUFFER_H
 
 #define RELAY_BUFFER_NAME "relay.list"
 
@@ -33,4 +33,4 @@ extern int relay_buffer_close_cb (const void *pointer, void *data,
                                   struct t_gui_buffer *buffer);
 extern void relay_buffer_open ();
 
-#endif /* WEECHAT_PLUGIN_RELAY_BUFFER_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_BUFFER_H */

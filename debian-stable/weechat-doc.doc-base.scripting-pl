@@ -1,8 +1,8 @@
 Document: whoreirc-scripting-pl
-Title: WeeChat scripting guide (Polish)
+Title: WhoreIRC scripting guide (Polish)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create scripts
- for WeeChat (Polish version).
+ for WhoreIRC (Polish version).
 Section: Network/Communication
 
 Format: HTML

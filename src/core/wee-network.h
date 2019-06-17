@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_NETWORK_H
-#define WEECHAT_NETWORK_H
+#ifndef WHOREIRC_NETWORK_H
+#define WHOREIRC_NETWORK_H
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -55,4 +55,4 @@ extern int network_connect_to (const char *proxy, struct sockaddr *address,
                                socklen_t address_length);
 extern void network_connect_with_fork (struct t_hook *hook_connect);
 
-#endif /* WEECHAT_NETWORK_H */
+#endif /* WHOREIRC_NETWORK_H */

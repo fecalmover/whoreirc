@@ -1,26 +1,26 @@
 /*
- * weechat-plugin.h - header to compile WeeChat plugins
+ * weechat-plugin.h - header to compile WhoreIRC plugins
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_WEECHAT_PLUGIN_H
-#define WEECHAT_WEECHAT_PLUGIN_H
+#ifndef WHOREIRC_WHOREIRC_PLUGIN_H
+#define WHOREIRC_WHOREIRC_PLUGIN_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,7 +58,7 @@ struct t_hdata;
 struct timeval;
 
 /*
- * IMPORTANT NOTE for WeeChat developers: if you update, add or remove
+ * IMPORTANT NOTE for WhoreIRC developers: if you update, add or remove
  * some functions in this file, then please update API version below.
  */
 
@@ -67,90 +67,90 @@ struct timeval;
  * please change the date with current one; for a second change at same
  * date, increment the 01, otherwise please keep 01.
  */
-#define WEECHAT_PLUGIN_API_VERSION "20190615-01"
+#define WHOREIRC_PLUGIN_API_VERSION "20190615-01"
 
 /* macros for defining plugin infos */
-#define WEECHAT_PLUGIN_NAME(__name)                                     \
+#define WHOREIRC_PLUGIN_NAME(__name)                                     \
     char weechat_plugin_name[] = __name;                                \
-    char weechat_plugin_api_version[] = WEECHAT_PLUGIN_API_VERSION;
-#define WEECHAT_PLUGIN_AUTHOR(__author)         \
+    char weechat_plugin_api_version[] = WHOREIRC_PLUGIN_API_VERSION;
+#define WHOREIRC_PLUGIN_AUTHOR(__author)         \
     char weechat_plugin_author[] = __author;
-#define WEECHAT_PLUGIN_DESCRIPTION(__desc)      \
+#define WHOREIRC_PLUGIN_DESCRIPTION(__desc)      \
     char weechat_plugin_description[] = __desc;
-#define WEECHAT_PLUGIN_VERSION(__version)       \
+#define WHOREIRC_PLUGIN_VERSION(__version)       \
     char weechat_plugin_version[] = __version;
-#define WEECHAT_PLUGIN_LICENSE(__license)       \
+#define WHOREIRC_PLUGIN_LICENSE(__license)       \
     char weechat_plugin_license[] = __license;
-#define WEECHAT_PLUGIN_PRIORITY(__priority)     \
+#define WHOREIRC_PLUGIN_PRIORITY(__priority)     \
     int weechat_plugin_priority = __priority;
 
 /* return codes for plugin functions */
-#define WEECHAT_RC_OK                               0
-#define WEECHAT_RC_OK_EAT                           1
-#define WEECHAT_RC_ERROR                           -1
+#define WHOREIRC_RC_OK                               0
+#define WHOREIRC_RC_OK_EAT                           1
+#define WHOREIRC_RC_ERROR                           -1
 
 /* flags for string_split function */
-#define WEECHAT_STRING_SPLIT_STRIP_LEFT            (1 << 0)
-#define WEECHAT_STRING_SPLIT_STRIP_RIGHT           (1 << 1)
-#define WEECHAT_STRING_SPLIT_COLLAPSE_SEPS         (1 << 2)
-#define WEECHAT_STRING_SPLIT_KEEP_EOL              (1 << 3)
+#define WHOREIRC_STRING_SPLIT_STRIP_LEFT            (1 << 0)
+#define WHOREIRC_STRING_SPLIT_STRIP_RIGHT           (1 << 1)
+#define WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS         (1 << 2)
+#define WHOREIRC_STRING_SPLIT_KEEP_EOL              (1 << 3)
 
 /* return codes for config read functions/callbacks */
-#define WEECHAT_CONFIG_READ_OK                      0
-#define WEECHAT_CONFIG_READ_MEMORY_ERROR           -1
-#define WEECHAT_CONFIG_READ_FILE_NOT_FOUND         -2
+#define WHOREIRC_CONFIG_READ_OK                      0
+#define WHOREIRC_CONFIG_READ_MEMORY_ERROR           -1
+#define WHOREIRC_CONFIG_READ_FILE_NOT_FOUND         -2
 
 /* return codes for config write functions/callbacks */
-#define WEECHAT_CONFIG_WRITE_OK                     0
-#define WEECHAT_CONFIG_WRITE_ERROR                 -1
-#define WEECHAT_CONFIG_WRITE_MEMORY_ERROR          -2
+#define WHOREIRC_CONFIG_WRITE_OK                     0
+#define WHOREIRC_CONFIG_WRITE_ERROR                 -1
+#define WHOREIRC_CONFIG_WRITE_MEMORY_ERROR          -2
 
 /* null value for option */
-#define WEECHAT_CONFIG_OPTION_NULL                 "null"
+#define WHOREIRC_CONFIG_OPTION_NULL                 "null"
 
 /* return codes for config option set */
-#define WEECHAT_CONFIG_OPTION_SET_OK_CHANGED        2
-#define WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE     1
-#define WEECHAT_CONFIG_OPTION_SET_ERROR             0
-#define WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND -1
+#define WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED        2
+#define WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE     1
+#define WHOREIRC_CONFIG_OPTION_SET_ERROR             0
+#define WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND -1
 
 /* return codes for config option unset */
-#define WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET     0
-#define WEECHAT_CONFIG_OPTION_UNSET_OK_RESET        1
-#define WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED      2
-#define WEECHAT_CONFIG_OPTION_UNSET_ERROR          -1
+#define WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET     0
+#define WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET        1
+#define WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED      2
+#define WHOREIRC_CONFIG_OPTION_UNSET_ERROR          -1
 
 /* list management (order of elements) */
-#define WEECHAT_LIST_POS_SORT                       "sort"
-#define WEECHAT_LIST_POS_BEGINNING                  "beginning"
-#define WEECHAT_LIST_POS_END                        "end"
+#define WHOREIRC_LIST_POS_SORT                       "sort"
+#define WHOREIRC_LIST_POS_BEGINNING                  "beginning"
+#define WHOREIRC_LIST_POS_END                        "end"
 
 /* type for keys and values in hashtable */
-#define WEECHAT_HASHTABLE_INTEGER                   "integer"
-#define WEECHAT_HASHTABLE_STRING                    "string"
-#define WEECHAT_HASHTABLE_POINTER                   "pointer"
-#define WEECHAT_HASHTABLE_BUFFER                    "buffer"
-#define WEECHAT_HASHTABLE_TIME                      "time"
+#define WHOREIRC_HASHTABLE_INTEGER                   "integer"
+#define WHOREIRC_HASHTABLE_STRING                    "string"
+#define WHOREIRC_HASHTABLE_POINTER                   "pointer"
+#define WHOREIRC_HASHTABLE_BUFFER                    "buffer"
+#define WHOREIRC_HASHTABLE_TIME                      "time"
 
 /* types for hdata */
-#define WEECHAT_HDATA_OTHER                         0
-#define WEECHAT_HDATA_CHAR                          1
-#define WEECHAT_HDATA_INTEGER                       2
-#define WEECHAT_HDATA_LONG                          3
-#define WEECHAT_HDATA_STRING                        4
-#define WEECHAT_HDATA_POINTER                       5
-#define WEECHAT_HDATA_TIME                          6
-#define WEECHAT_HDATA_HASHTABLE                     7
-#define WEECHAT_HDATA_SHARED_STRING                 8
+#define WHOREIRC_HDATA_OTHER                         0
+#define WHOREIRC_HDATA_CHAR                          1
+#define WHOREIRC_HDATA_INTEGER                       2
+#define WHOREIRC_HDATA_LONG                          3
+#define WHOREIRC_HDATA_STRING                        4
+#define WHOREIRC_HDATA_POINTER                       5
+#define WHOREIRC_HDATA_TIME                          6
+#define WHOREIRC_HDATA_HASHTABLE                     7
+#define WHOREIRC_HDATA_SHARED_STRING                 8
 
 /* flags for hdata lists */
-#define WEECHAT_HDATA_LIST_CHECK_POINTERS           1
+#define WHOREIRC_HDATA_LIST_CHECK_POINTERS           1
 
 /* buffer hotlist */
-#define WEECHAT_HOTLIST_LOW                         "0"
-#define WEECHAT_HOTLIST_MESSAGE                     "1"
-#define WEECHAT_HOTLIST_PRIVATE                     "2"
-#define WEECHAT_HOTLIST_HIGHLIGHT                   "3"
+#define WHOREIRC_HOTLIST_LOW                         "0"
+#define WHOREIRC_HOTLIST_MESSAGE                     "1"
+#define WHOREIRC_HOTLIST_PRIVATE                     "2"
+#define WHOREIRC_HOTLIST_HIGHLIGHT                   "3"
 
 /*
  * process return code (for callback):
@@ -161,31 +161,31 @@ struct timeval;
  *          (note: the return code -3 is NEVER sent to script plugins,
  *           it can be used only in C API)
  */
-#define WEECHAT_HOOK_PROCESS_RUNNING                -1
-#define WEECHAT_HOOK_PROCESS_ERROR                  -2
-#define WEECHAT_HOOK_PROCESS_CHILD                  -3
+#define WHOREIRC_HOOK_PROCESS_RUNNING                -1
+#define WHOREIRC_HOOK_PROCESS_ERROR                  -2
+#define WHOREIRC_HOOK_PROCESS_CHILD                  -3
 
 /* connect status for connection hooked */
-#define WEECHAT_HOOK_CONNECT_OK                     0
-#define WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND      1
-#define WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND   2
-#define WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED     3
-#define WEECHAT_HOOK_CONNECT_PROXY_ERROR            4
-#define WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR   5
-#define WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR      6
-#define WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR 7
-#define WEECHAT_HOOK_CONNECT_MEMORY_ERROR           8
-#define WEECHAT_HOOK_CONNECT_TIMEOUT                9
-#define WEECHAT_HOOK_CONNECT_SOCKET_ERROR           10
+#define WHOREIRC_HOOK_CONNECT_OK                     0
+#define WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND      1
+#define WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND   2
+#define WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED     3
+#define WHOREIRC_HOOK_CONNECT_PROXY_ERROR            4
+#define WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR   5
+#define WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR      6
+#define WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR 7
+#define WHOREIRC_HOOK_CONNECT_MEMORY_ERROR           8
+#define WHOREIRC_HOOK_CONNECT_TIMEOUT                9
+#define WHOREIRC_HOOK_CONNECT_SOCKET_ERROR           10
 
 /* action for gnutls callback: verify or set certificate */
-#define WEECHAT_HOOK_CONNECT_GNUTLS_CB_VERIFY_CERT  0
-#define WEECHAT_HOOK_CONNECT_GNUTLS_CB_SET_CERT     1
+#define WHOREIRC_HOOK_CONNECT_GNUTLS_CB_VERIFY_CERT  0
+#define WHOREIRC_HOOK_CONNECT_GNUTLS_CB_SET_CERT     1
 
 /* type of data for signal hooked */
-#define WEECHAT_HOOK_SIGNAL_STRING                  "string"
-#define WEECHAT_HOOK_SIGNAL_INT                     "int"
-#define WEECHAT_HOOK_SIGNAL_POINTER                 "pointer"
+#define WHOREIRC_HOOK_SIGNAL_STRING                  "string"
+#define WHOREIRC_HOOK_SIGNAL_INT                     "int"
+#define WHOREIRC_HOOK_SIGNAL_POINTER                 "pointer"
 
 /* macro to format string with variable args, using dynamic buffer size */
 #define weechat_va_format(__format)                                     \
@@ -219,7 +219,7 @@ struct timeval;
  * macro to return error in case of missing arguments in callback of
  * hook_command
  */
-#define WEECHAT_COMMAND_MIN_ARGS(__min_args, __option)                  \
+#define WHOREIRC_COMMAND_MIN_ARGS(__min_args, __option)                  \
     if (argc < __min_args)                                              \
     {                                                                   \
         weechat_printf_date_tags (                                      \
@@ -231,11 +231,11 @@ struct timeval;
             (__option && __option[0]) ? " " : "",                       \
             (__option && __option[0]) ? __option : "",                  \
             argv[0] + 1);                                               \
-        return WEECHAT_RC_ERROR;                                        \
+        return WHOREIRC_RC_ERROR;                                        \
     }
 
 /* macro to return error in callback of hook_command */
-#define WEECHAT_COMMAND_ERROR                                           \
+#define WHOREIRC_COMMAND_ERROR                                           \
     {                                                                   \
         weechat_printf_date_tags (                                      \
             NULL, 0, "no_filter",                                       \
@@ -244,7 +244,7 @@ struct timeval;
             weechat_prefix ("error"),                                   \
             argv_eol[0],                                                \
             argv[0] + 1);                                               \
-        return WEECHAT_RC_ERROR;                                        \
+        return WHOREIRC_RC_ERROR;                                        \
     }
 
 struct t_weechat_plugin
@@ -267,8 +267,8 @@ struct t_weechat_plugin
 
     /*
      * plugin functions (API)
-     * WeeChat developers: if you add functions in API, update value of
-     * constant WEECHAT_PLUGIN_API_VERSION
+     * WhoreIRC developers: if you add functions in API, update value of
+     * constant WHOREIRC_PLUGIN_API_VERSION
      */
 
     /* plugins */
@@ -1142,7 +1142,7 @@ extern int weechat_plugin_end (struct t_weechat_plugin *plugin);
     (weechat_plugin->iconv_to_internal)(__charset, __string)
 #define weechat_iconv_from_internal(__charset, __string)                \
     (weechat_plugin->iconv_from_internal)(__charset, __string)
-#ifndef WEECHAT_H
+#ifndef WHOREIRC_H
 #ifndef _
 #define _(string) (weechat_plugin->gettext)(string)
 #endif /* _ */
@@ -1153,7 +1153,7 @@ extern int weechat_plugin_end (struct t_weechat_plugin *plugin);
 #define NG_(single,plural,number)                                       \
     (weechat_plugin->ngettext)(single, plural, number)
 #endif /* NG_ */
-#endif /* WEECHAT_H */
+#endif /* WHOREIRC_H */
 #define weechat_gettext(string) (weechat_plugin->gettext)(string)
 #define weechat_ngettext(single,plural,number)                          \
     (weechat_plugin->ngettext)(single, plural, number)
@@ -1989,15 +1989,15 @@ extern int weechat_plugin_end (struct t_weechat_plugin *plugin);
     (weechat_plugin->hdata_new_var)(__hdata, __name, __offset, __type,  \
                                     __update_allowed, __array_size,     \
                                     __hdata_name)
-#define WEECHAT_HDATA_VAR(__struct, __name, __type, __update_allowed,   \
+#define WHOREIRC_HDATA_VAR(__struct, __name, __type, __update_allowed,   \
                           __array_size, __hdata_name)                   \
     weechat_hdata_new_var (hdata, #__name, offsetof (__struct, __name), \
-                           WEECHAT_HDATA_##__type, __update_allowed,    \
+                           WHOREIRC_HDATA_##__type, __update_allowed,    \
                            __array_size, __hdata_name)
 #define weechat_hdata_new_list(__hdata, __name, __pointer, __flags)     \
     (weechat_plugin->hdata_new_list)(__hdata, __name, __pointer,        \
                                      __flags)
-#define WEECHAT_HDATA_LIST(__name, __flags)                             \
+#define WHOREIRC_HDATA_LIST(__name, __flags)                             \
     weechat_hdata_new_list (hdata, #__name, &(__name), __flags);
 #define weechat_hdata_get(__hdata_name)                                 \
     (weechat_plugin->hdata_get)(weechat_plugin, __hdata_name)
@@ -2076,4 +2076,4 @@ extern int weechat_plugin_end (struct t_weechat_plugin *plugin);
 }
 #endif /* __cplusplus */
 
-#endif /* WEECHAT_WEECHAT_PLUGIN_H */
+#endif /* WHOREIRC_WHOREIRC_PLUGIN_H */

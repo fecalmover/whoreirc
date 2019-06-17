@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_WEBSOCKET_H
-#define WEECHAT_PLUGIN_RELAY_WEBSOCKET_H
+#ifndef WHOREIRC_PLUGIN_RELAY_WEBSOCKET_H
+#define WHOREIRC_PLUGIN_RELAY_WEBSOCKET_H
 
 #define WEBSOCKET_FRAME_OPCODE_CONTINUATION 0x00
 #define WEBSOCKET_FRAME_OPCODE_TEXT         0x01
@@ -43,4 +43,4 @@ extern char *relay_websocket_encode_frame (int opcode,
                                            unsigned long long length,
                                            unsigned long long *length_frame);
 
-#endif /* WEECHAT_PLUGIN_RELAY_WEBSOCKET_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_WEBSOCKET_H */

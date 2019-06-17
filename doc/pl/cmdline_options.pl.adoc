@@ -1,21 +1,21 @@
 *-a*, *--no-connect*::
-    Wyłącza automatyczne łączenie się z serwerami podczas uruchamiania WeeChat.
+    Wyłącza automatyczne łączenie się z serwerami podczas uruchamiania WhoreIRC.
 
 *-c*, *--colors*::
     Wyświetla domślne kolory w terminalu.
 
 *--daemon*::
-    Uruchamia WeeChat w tle jako demona (działa tylko z komendą *whoreirc-headless*).
+    Uruchamia WhoreIRC w tle jako demona (działa tylko z komendą *whoreirc-headless*).
 
 *-d*, *--dir* _<ścieżka>_::
-    Ustawia ścieżkę jako katalog domowy WeeChat (używany dla plików
+    Ustawia ścieżkę jako katalog domowy WhoreIRC (używany dla plików
     konfiguracyjnych, logów, wtyczek użytkownika i skryptów), domyślna wartość
     to "~/.whoreirc" (katalog zostanie utworzony jeśli nie istnieje).
     Jeśli ta opcja nie zostanie podada, użyta zostanie zawartość zmiennej
-    WEECHAT_HOME (jeśli została ustawiona).
+    WHOREIRC_HOME (jeśli została ustawiona).
 
 *-t*, *--temp-dir*::
-    Tworzy tymczasowy katalog dla ustawień WeeChat, który jest kasowany po wyłączeniu
+    Tworzy tymczasowy katalog dla ustawień WhoreIRC, który jest kasowany po wyłączeniu
     aplikacji (nie kompatybilne z opcją "-d"). +
     Nazwa katalogu jest automatyczne tworzona według wzoru: "whoreirc_temp_XXXXXX" 
     (gdzie "XXXXXX" jest losowe). Katalog jest tworzony w pierwszym dostępnym miejscu
@@ -45,11 +45,11 @@
     Wyłącza automatyczne ładowanie skryptów.
 
 *--upgrade*::
-    Aktualizuje WeeChat z użyciem plików sesji wygenerowanych przez komende
+    Aktualizuje WhoreIRC z użyciem plików sesji wygenerowanych przez komende
     `/upgrade -quit`.
 
 *-v*, *--version*::
-    Wyświetla wersję WeeChat.
+    Wyświetla wersję WhoreIRC.
 
 *wtyczka:opcja*::
     Opcja dla wtyczki.

@@ -179,9 +179,9 @@ hook_command_build_completion (struct t_hook_command *hook_command)
             hook_command->cplt_templates[i],
             " ",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &(hook_command->cplt_template_num_args[i]));
         if (hook_command->cplt_template_num_args[i] > hook_command->cplt_template_num_args_concat)
@@ -224,9 +224,9 @@ hook_command_build_completion (struct t_hook_command *hook_command)
                             hook_command->cplt_template_args[j][i],
                             "|",
                             NULL,
-                            WEECHAT_STRING_SPLIT_STRIP_LEFT
-                            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                             0,
                             &num_items);
                         for (k = 0; k < num_items; k++)
@@ -237,7 +237,7 @@ hook_command_build_completion (struct t_hook_command *hook_command)
                                     strcat (hook_command->cplt_template_args_concat[i], "|");
                                 strcat (hook_command->cplt_template_args_concat[i],
                                         items[k]);
-                                weelist_add (list, items[k], WEECHAT_LIST_POS_END,
+                                weelist_add (list, items[k], WHOREIRC_LIST_POS_END,
                                              NULL);
                             }
                         }
@@ -354,13 +354,13 @@ hook_command_exec (struct t_gui_buffer *buffer, int any_plugin,
     if (!buffer || !string || !string[0])
         return HOOK_COMMAND_EXEC_NOT_FOUND;
 
-    if (hook_command_run_exec (buffer, string) == WEECHAT_RC_OK_EAT)
+    if (hook_command_run_exec (buffer, string) == WHOREIRC_RC_OK_EAT)
         return HOOK_COMMAND_EXEC_OK;
 
     argv = string_split (string, " ", NULL,
-                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                          0, &argc);
     if (argc == 0)
     {
@@ -368,10 +368,10 @@ hook_command_exec (struct t_gui_buffer *buffer, int any_plugin,
         return HOOK_COMMAND_EXEC_NOT_FOUND;
     }
     argv_eol = string_split (string, " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                             | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                             | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                              0, NULL);
 
     ptr_command_name = utf8_next_char (argv[0]);
@@ -492,7 +492,7 @@ hook_command_exec (struct t_gui_buffer *buffer, int any_plugin,
                  argv,
                  argv_eol);
             ptr_hook->running--;
-            if (rc == WEECHAT_RC_ERROR)
+            if (rc == WHOREIRC_RC_ERROR)
                 rc = HOOK_COMMAND_EXEC_ERROR;
             else
                 rc = HOOK_COMMAND_EXEC_OK;

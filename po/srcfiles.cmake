@@ -1,4 +1,4 @@
-SET(WEECHAT_SOURCES
+SET(WHOREIRC_SOURCES
 ./doc/docgen.py
 ./src/core/hook/wee-hook-command-run.c
 ./src/core/hook/wee-hook-command-run.h

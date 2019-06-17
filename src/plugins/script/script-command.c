@@ -136,7 +136,7 @@ script_command_script (const void *pointer, void *data,
     if (argc == 1)
     {
         script_action_schedule ("buffer", 1, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "go") == 0)
@@ -150,7 +150,7 @@ script_command_script (const void *pointer, void *data,
                 script_buffer_set_current_line (value);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "search") == 0)
@@ -160,13 +160,13 @@ script_command_script (const void *pointer, void *data,
         else
             script_repo_set_filter ((argc > 2) ? argv_eol[2] : NULL);
         script_action_schedule ("buffer", 1, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "list") == 0)
     {
         script_action_schedule (argv_eol[1], 1, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if ((weechat_strcasecmp (argv[1], "load") == 0)
@@ -180,7 +180,7 @@ script_command_script (const void *pointer, void *data,
                                argv[1],
                                (argc > 2) ? argv_eol[2] : NULL,
                                0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if ((weechat_strcasecmp (argv[1], "install") == 0)
@@ -194,19 +194,19 @@ script_command_script (const void *pointer, void *data,
                                argv[1],
                                (argc > 2) ? argv_eol[2] : NULL,
                                1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "upgrade") == 0)
     {
         script_action_schedule ("upgrade", 1, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "update") == 0)
     {
         script_repo_file_update (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "up") == 0)
@@ -240,7 +240,7 @@ script_command_script (const void *pointer, void *data,
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "down") == 0)
@@ -274,10 +274,10 @@ script_command_script (const void *pointer, void *data,
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*

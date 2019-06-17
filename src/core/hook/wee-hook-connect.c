@@ -150,7 +150,7 @@ hook_connect_gnutls_verify_certificates (gnutls_session_t tls_session)
                  ptr_hook->callback_data,
                  tls_session, NULL, 0,
                  NULL, 0, NULL,
-                 WEECHAT_HOOK_CONNECT_GNUTLS_CB_VERIFY_CERT);
+                 WHOREIRC_HOOK_CONNECT_GNUTLS_CB_VERIFY_CERT);
             break;
         }
         ptr_hook = ptr_hook->next_hook;
@@ -193,7 +193,7 @@ hook_connect_gnutls_set_certificates (gnutls_session_t tls_session,
                  ptr_hook->callback_data,
                  tls_session, req_ca, nreq,
                  pk_algos, pk_algos_len, answer,
-                 WEECHAT_HOOK_CONNECT_GNUTLS_CB_SET_CERT);
+                 WHOREIRC_HOOK_CONNECT_GNUTLS_CB_SET_CERT);
             break;
         }
         ptr_hook = ptr_hook->next_hook;

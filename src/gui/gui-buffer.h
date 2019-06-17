@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_GUI_BUFFER_H
-#define WEECHAT_GUI_BUFFER_H
+#ifndef WHOREIRC_GUI_BUFFER_H
+#define WHOREIRC_GUI_BUFFER_H
 
 #include <limits.h>
 #include <regex.h>
@@ -73,7 +73,7 @@ struct t_gui_input_undo
 struct t_gui_buffer
 {
     struct t_weechat_plugin *plugin;   /* plugin which created this buffer  */
-                                       /* (NULL for a WeeChat buffer)       */
+                                       /* (NULL for a WhoreIRC buffer)       */
     /*
      * when upgrading, plugins are not loaded, so we use next variable
      * to store plugin name, then restore plugin pointer when plugin is
@@ -364,4 +364,4 @@ extern int gui_buffer_add_to_infolist (struct t_infolist *infolist,
 extern void gui_buffer_dump_hexa (struct t_gui_buffer *buffer);
 extern void gui_buffer_print_log ();
 
-#endif /* WEECHAT_GUI_BUFFER_H */
+#endif /* WHOREIRC_GUI_BUFFER_H */

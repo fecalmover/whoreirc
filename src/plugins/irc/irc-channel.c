@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -344,7 +344,7 @@ irc_channel_create_buffer (struct t_irc_server *server,
     if (buffer_created)
     {
         (void) weechat_hook_signal_send ("logger_backlog",
-                                         WEECHAT_HOOK_SIGNAL_POINTER,
+                                         WHOREIRC_HOOK_SIGNAL_POINTER,
                                          ptr_buffer);
         if (weechat_config_boolean (irc_config_network_send_unknown_commands))
             weechat_buffer_set (ptr_buffer, "input_get_unknown_commands", "1");
@@ -465,8 +465,8 @@ irc_channel_new (struct t_irc_server *server, int channel_type,
     }
     new_channel->join_msg_received = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     new_channel->checking_whox = 0;
     new_channel->away_message = NULL;
@@ -507,7 +507,7 @@ irc_channel_new (struct t_irc_server *server, int channel_type,
     (void) weechat_hook_signal_send (
         (channel_type == IRC_CHANNEL_TYPE_CHANNEL) ?
         "irc_channel_opened" : "irc_pv_opened",
-        WEECHAT_HOOK_SIGNAL_POINTER, ptr_buffer);
+        WHOREIRC_HOOK_SIGNAL_POINTER, ptr_buffer);
 
     /* all is OK, return address of new channel */
     return new_channel;
@@ -772,7 +772,7 @@ irc_channel_nick_speaking_add_to_list (struct t_irc_channel *channel,
 
     /* add nick in list */
     weechat_list_add (channel->nicks_speaking[highlight], nick_name,
-                      WEECHAT_LIST_POS_END, NULL);
+                      WHOREIRC_LIST_POS_END, NULL);
 
     /* reduce list size if it's too big */
     size = weechat_list_size (channel->nicks_speaking[highlight]);
@@ -1036,8 +1036,8 @@ irc_channel_join_smart_filtered_add (struct t_irc_channel *channel,
     {
         channel->join_smart_filtered = weechat_hashtable_new (
             64,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_TIME,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_TIME,
             NULL, NULL);
     }
     if (!channel->join_smart_filtered)
@@ -1238,8 +1238,8 @@ irc_channel_join_smart_filtered_unmask (struct t_irc_channel *channel,
                         }
                     }
                     hashtable = weechat_hashtable_new (4,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL, NULL);
                     if (hashtable)
                     {
@@ -1328,7 +1328,7 @@ irc_channel_autorejoin_cb (const void *pointer, void *data,
         ptr_channel_arg->hook_autorejoin = NULL;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1487,34 +1487,34 @@ irc_channel_hdata_channel_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_channel, type, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, topic, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, modes, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, limit, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, key, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, join_msg_received, HASHTABLE, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, checking_whox, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, away_message, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, has_quit_server, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, cycle, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, part, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, nick_completion_reset, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, pv_remote_nick_color, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, hook_autorejoin, POINTER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, nicks_count, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, nicks, POINTER, 0, NULL, "irc_nick");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, last_nick, POINTER, 0, NULL, "irc_nick");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, nicks_speaking, POINTER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, nicks_speaking_time, POINTER, 0, NULL, "irc_channel_speaking");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, last_nick_speaking_time, POINTER, 0, NULL, "irc_channel_speaking");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, modelists, POINTER, 0, NULL, "irc_modelist");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, last_modelist, POINTER, 0, NULL, "irc_modelist");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, join_smart_filtered, HASHTABLE, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, buffer, POINTER, 0, NULL, "buffer");
-        WEECHAT_HDATA_VAR(struct t_irc_channel, buffer_as_string, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, prev_channel, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_channel, next_channel, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, type, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, topic, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, modes, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, limit, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, key, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, join_msg_received, HASHTABLE, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, checking_whox, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, away_message, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, has_quit_server, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, cycle, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, part, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, nick_completion_reset, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, pv_remote_nick_color, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, hook_autorejoin, POINTER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, nicks_count, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, nicks, POINTER, 0, NULL, "irc_nick");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, last_nick, POINTER, 0, NULL, "irc_nick");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, nicks_speaking, POINTER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, nicks_speaking_time, POINTER, 0, NULL, "irc_channel_speaking");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, last_nick_speaking_time, POINTER, 0, NULL, "irc_channel_speaking");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, modelists, POINTER, 0, NULL, "irc_modelist");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, last_modelist, POINTER, 0, NULL, "irc_modelist");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, join_smart_filtered, HASHTABLE, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, buffer, POINTER, 0, NULL, "buffer");
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, buffer_as_string, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, prev_channel, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel, next_channel, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -1537,10 +1537,10 @@ irc_channel_hdata_channel_speaking_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_channel_speaking, nick, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel_speaking, time_last_message, TIME, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_channel_speaking, prev_nick, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_channel_speaking, next_nick, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel_speaking, nick, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel_speaking, time_last_message, TIME, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel_speaking, prev_nick, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_channel_speaking, next_nick, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -1657,7 +1657,7 @@ irc_channel_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints channel infos in WeeChat log file (usually for crash dump).
+ * Prints channel infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

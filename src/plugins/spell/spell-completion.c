@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2013-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -50,10 +50,10 @@ spell_completion_langs_cb (const void *pointer, void *data,
     {
         weechat_hook_completion_list_add (completion,
                                           spell_langs[i].code,
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -74,7 +74,7 @@ spell_completion_enchant_add_dict_cb (const char *lang_tag,
     (void) provider_file;
 
     weechat_hook_completion_list_add ((struct t_gui_completion *)user_data,
-                                      lang_tag, 0, WEECHAT_LIST_POS_SORT);
+                                      lang_tag, 0, WHOREIRC_LIST_POS_SORT);
 }
 #endif /* USE_ENCHANT */
 
@@ -113,14 +113,14 @@ spell_completion_dicts_cb (const void *pointer, void *data,
     while ((dict = aspell_dict_info_enumeration_next (elements)) != NULL)
     {
         weechat_hook_completion_list_add (completion, dict->name,
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 
     delete_aspell_dict_info_enumeration (elements);
     delete_aspell_config (config);
 #endif /* USE_ENCHANT */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

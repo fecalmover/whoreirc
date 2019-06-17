@@ -1,23 +1,23 @@
 /*
- * wee-config.c - WeeChat configuration options (file weechat.conf)
+ * wee-config.c - WhoreIRC configuration options (file weechat.conf)
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2005-2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -444,9 +444,9 @@ config_set_word_chars (const char *str_word_chars,
         return;
 
     items = string_split (str_word_chars, ",", NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           0, word_chars_count);
     if (!items)
     {
@@ -719,9 +719,9 @@ config_set_nick_colors ()
         CONFIG_STRING(config_color_chat_nick_colors),
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0, &config_num_nick_colors);
 }
 
@@ -745,8 +745,8 @@ config_change_look_nick_color_force (const void *pointer, void *data,
     {
         config_hashtable_nick_color_force = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
     }
     else
@@ -757,9 +757,9 @@ config_change_look_nick_color_force (const void *pointer, void *data,
     items = string_split (CONFIG_STRING(config_look_nick_color_force),
                           ";",
                           NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           0,
                           &num_items);
     if (items)
@@ -1237,8 +1237,8 @@ config_change_completion_partial_completion_templates (const void *pointer,
     {
         config_hashtable_completion_partial_templates = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_POINTER,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_POINTER,
             NULL, NULL);
     }
     else
@@ -1250,9 +1250,9 @@ config_change_completion_partial_completion_templates (const void *pointer,
         CONFIG_STRING(config_completion_partial_completion_templates),
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &num_items);
     if (items)
@@ -1335,9 +1335,9 @@ config_change_plugin_extension (const void *pointer, void *data,
             CONFIG_STRING(config_plugin_extension),
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &config_num_plugin_extensions);
     }
@@ -1385,16 +1385,16 @@ config_day_change_timer_cb (const void *pointer, void *data,
         if (strftime (str_time, sizeof (str_time), "%Y-%m-%d", local_time) == 0)
             str_time[0] = '\0';
         (void) hook_signal_send ("day_changed",
-                                 WEECHAT_HOOK_SIGNAL_STRING, str_time);
+                                 WHOREIRC_HOOK_SIGNAL_STRING, str_time);
     }
 
     config_day_change_old_day = new_mday;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Initializes some things after reading/reloading WeeChat configuration file.
+ * Initializes some things after reading/reloading WhoreIRC configuration file.
  */
 
 void
@@ -1437,12 +1437,12 @@ config_weechat_init_after_read ()
 }
 
 /*
- * Reloads WeeChat configuration file.
+ * Reloads WhoreIRC configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -1556,7 +1556,7 @@ config_weechat_debug_create_option_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -1569,7 +1569,7 @@ config_weechat_debug_create_option_cb (const void *pointer, void *data,
             else
             {
                 config_file_option_free (ptr_option, 1);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -1579,16 +1579,16 @@ config_weechat_debug_create_option_cb (const void *pointer, void *data,
                 ptr_option = config_file_new_option (
                     config_file, section,
                     option_name, "integer",
-                    _("debug level for plugin (\"core\" for WeeChat core)"),
+                    _("debug level for plugin (\"core\" for WhoreIRC core)"),
                     NULL, 0, 32, "0", value, 0,
                     NULL, NULL, NULL,
                     &config_weechat_debug_change_cb, NULL, NULL,
                     NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
@@ -1618,7 +1618,7 @@ config_weechat_debug_delete_option_cb (const void *pointer, void *data,
 
     config_weechat_debug_set_all ();
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
@@ -1678,7 +1678,7 @@ config_weechat_palette_create_option_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     error = NULL;
     number = (int)strtol (option_name, &error, 10);
@@ -1695,7 +1695,7 @@ config_weechat_palette_create_option_cb (const void *pointer, void *data,
                 else
                 {
                     config_file_option_free (ptr_option, 1);
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                 }
             }
             else
@@ -1711,12 +1711,12 @@ config_weechat_palette_create_option_cb (const void *pointer, void *data,
                         &config_weechat_palette_change_cb, NULL, NULL,
                         NULL, NULL, NULL);
                     rc = (ptr_option) ?
-                        WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                        WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
                     if (ptr_option)
                         gui_color_palette_add (number, value);
                 }
                 else
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
     }
@@ -1756,11 +1756,11 @@ config_weechat_palette_delete_option_cb (const void *pointer, void *data,
 
     config_file_option_free (option, 1);
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
- * Reads a proxy option in WeeChat configuration file.
+ * Reads a proxy option in WhoreIRC configuration file.
  */
 
 int
@@ -1779,15 +1779,15 @@ config_weechat_proxy_read_cb (const void *pointer, void *data,
     (void) config_file;
 
     if (!option_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     pos_option = strchr (option_name, '.');
     if (!pos_option)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     proxy_name = string_strndup (option_name, pos_option - option_name);
     if (!proxy_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     pos_option++;
 
@@ -1835,11 +1835,11 @@ config_weechat_proxy_read_cb (const void *pointer, void *data,
 
     free (proxy_name);
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
- * Reads a bar option in WeeChat configuration file.
+ * Reads a bar option in WhoreIRC configuration file.
  */
 
 int
@@ -1859,15 +1859,15 @@ config_weechat_bar_read_cb (const void *pointer, void *data,
     (void) section;
 
     if (!option_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     pos_option = strchr (option_name, '.');
     if (!pos_option)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     bar_name = string_strndup (option_name, pos_option - option_name);
     if (!bar_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     pos_option++;
 
@@ -1915,11 +1915,11 @@ config_weechat_bar_read_cb (const void *pointer, void *data,
 
     free (bar_name);
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
- * Reads a layout option in WeeChat configuration file.
+ * Reads a layout option in WhoreIRC configuration file.
  */
 
 int
@@ -1942,7 +1942,7 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
     (void) section;
 
     if (!option_name || !value || !value[0])
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     force_current_layout = 0;
 
@@ -1955,7 +1955,7 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
     else
     {
         /*
-         * old config file (WeeChat <= 0.4.0): no "." in name, use default
+         * old config file (WhoreIRC <= 0.4.0): no "." in name, use default
          * layout name
          */
         layout_name = strdup (GUI_LAYOUT_DEFAULT_NAME);
@@ -1964,7 +1964,7 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
     }
 
     if (!layout_name)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     ptr_layout = gui_layout_search (layout_name);
     if (!ptr_layout)
@@ -1973,7 +1973,7 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
         if (!ptr_layout)
         {
             free (layout_name);
-            return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+            return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
         gui_layout_add (ptr_layout);
     }
@@ -1981,9 +1981,9 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
     if (string_strcasecmp (ptr_option_name, "buffer") == 0)
     {
         argv = string_split (value, ";", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
         if (argv)
         {
@@ -2000,9 +2000,9 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
     else if (string_strcasecmp (ptr_option_name, "window") == 0)
     {
         argv = string_split (value, ";", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
         if (argv)
         {
@@ -2046,11 +2046,11 @@ config_weechat_layout_read_cb (const void *pointer, void *data,
 
     free (layout_name);
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
- * Writes layout of windows in WeeChat configuration file.
+ * Writes layout of windows in WhoreIRC configuration file.
  *
  * Returns:
  *   1: OK
@@ -2093,7 +2093,7 @@ config_weechat_layout_write_tree (struct t_config_file *config_file,
 }
 
 /*
- * Writes section "layout" in WeeChat configuration file.
+ * Writes section "layout" in WhoreIRC configuration file.
  */
 
 int
@@ -2110,7 +2110,7 @@ config_weechat_layout_write_cb (const void *pointer, void *data,
     (void) data;
 
     if (!config_file_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (ptr_layout = gui_layouts; ptr_layout;
          ptr_layout = ptr_layout->next_layout)
@@ -2126,7 +2126,7 @@ config_weechat_layout_write_cb (const void *pointer, void *data,
                                          ptr_layout_buffer->plugin_name,
                                          ptr_layout_buffer->buffer_name,
                                          ptr_layout_buffer->number))
-                return WEECHAT_CONFIG_WRITE_ERROR;
+                return WHOREIRC_CONFIG_WRITE_ERROR;
         }
 
         /* write layout for windows */
@@ -2136,7 +2136,7 @@ config_weechat_layout_write_cb (const void *pointer, void *data,
                       "%s.window", ptr_layout->name);
             if (!config_weechat_layout_write_tree (config_file, option_name,
                                                    ptr_layout->layout_windows))
-                return WEECHAT_CONFIG_WRITE_ERROR;
+                return WHOREIRC_CONFIG_WRITE_ERROR;
         }
 
         /* write "current = on" if it is current layout */
@@ -2145,11 +2145,11 @@ config_weechat_layout_write_cb (const void *pointer, void *data,
             snprintf (option_name, sizeof (option_name),
                       "%s.current", ptr_layout->name);
             if (!config_file_write_line (config_file, option_name, "on"))
-                return WEECHAT_CONFIG_WRITE_ERROR;
+                return WHOREIRC_CONFIG_WRITE_ERROR;
         }
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
@@ -2186,7 +2186,7 @@ config_weechat_notify_create_option_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -2199,7 +2199,7 @@ config_weechat_notify_create_option_cb (const void *pointer, void *data,
             else
             {
                 config_file_option_free (ptr_option, 1);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -2215,14 +2215,14 @@ config_weechat_notify_create_option_cb (const void *pointer, void *data,
                     &config_weechat_notify_change_cb, NULL, NULL,
                     NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if (rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
         gui_buffer_notify_set_all ();
 
     return rc;
@@ -2248,7 +2248,7 @@ config_weechat_notify_delete_option_cb (const void *pointer, void *data,
 
     gui_buffer_notify_set_all ();
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
@@ -2289,11 +2289,11 @@ config_weechat_notify_set (struct t_gui_buffer *buffer, const char *notify)
                 weechat_config_section_notify,
                 buffer->full_name,
                 (value < 0) ?
-                NULL : gui_buffer_notify_string[value]) != WEECHAT_CONFIG_OPTION_SET_ERROR) ? 1 : 0;
+                NULL : gui_buffer_notify_string[value]) != WHOREIRC_CONFIG_OPTION_SET_ERROR) ? 1 : 0;
 }
 
 /*
- * Reads a filter option in WeeChat configuration file.
+ * Reads a filter option in WhoreIRC configuration file.
  */
 
 int
@@ -2314,15 +2314,15 @@ config_weechat_filter_read_cb (const void *pointer, void *data,
     if (option_name && value && value[0])
     {
         argv = string_split (value, ";", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
         argv_eol = string_split (value, ";", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                                 | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                                 | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                                  0, NULL);
         if (argv && argv_eol && (argc >= 4))
         {
@@ -2335,11 +2335,11 @@ config_weechat_filter_read_cb (const void *pointer, void *data,
             string_free_split (argv_eol);
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
- * Writes section "filter" in WeeChat configuration file.
+ * Writes section "filter" in WhoreIRC configuration file.
  */
 
 int
@@ -2354,7 +2354,7 @@ config_weechat_filter_write_cb (const void *pointer, void *data,
     (void) data;
 
     if (!config_file_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (ptr_filter = gui_filters; ptr_filter;
          ptr_filter = ptr_filter->next_filter)
@@ -2366,14 +2366,14 @@ config_weechat_filter_write_cb (const void *pointer, void *data,
                                      ptr_filter->buffer_name,
                                      ptr_filter->tags,
                                      ptr_filter->regex))
-            return WEECHAT_CONFIG_WRITE_ERROR;
+            return WHOREIRC_CONFIG_WRITE_ERROR;
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
- * Reads a key option in WeeChat configuration file.
+ * Reads a key option in WhoreIRC configuration file.
  */
 
 int
@@ -2413,11 +2413,11 @@ config_weechat_key_read_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
- * Writes section "key" in WeeChat configuration file.
+ * Writes section "key" in WhoreIRC configuration file.
  */
 
 int
@@ -2434,7 +2434,7 @@ config_weechat_key_write_cb (const void *pointer, void *data,
     (void) data;
 
     if (!config_file_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     context = GUI_KEY_CONTEXT_DEFAULT;
     pos = strchr (section_name, '_');
@@ -2456,15 +2456,15 @@ config_weechat_key_write_cb (const void *pointer, void *data,
                                          ptr_key->command);
             free (expanded_name);
             if (!rc)
-                return WEECHAT_CONFIG_WRITE_ERROR;
+                return WHOREIRC_CONFIG_WRITE_ERROR;
         }
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
- * Creates options in WeeChat configuration.
+ * Creates options in WhoreIRC configuration.
  *
  * Returns:
  *   1: OK
@@ -2479,7 +2479,7 @@ config_weechat_init_options ()
     char section_name[128];
 
     weechat_config_file = config_file_new (
-        NULL, WEECHAT_CONFIG_NAME, &config_weechat_reload_cb, NULL, NULL);
+        NULL, WHOREIRC_CONFIG_NAME, &config_weechat_reload_cb, NULL, NULL);
     if (!weechat_config_file)
         return 0;
 
@@ -2519,33 +2519,33 @@ config_weechat_init_options ()
     config_startup_command_after_plugins = config_file_new_option (
         weechat_config_file, ptr_section,
         "command_after_plugins", "string",
-        N_("command executed when WeeChat starts, after loading plugins "
+        N_("command executed when WhoreIRC starts, after loading plugins "
            "(note: content is evaluated, see /help eval)"),
         NULL, 0, 0, "", NULL, 0,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     config_startup_command_before_plugins = config_file_new_option (
         weechat_config_file, ptr_section,
         "command_before_plugins", "string",
-        N_("command executed when WeeChat starts, before loading plugins "
+        N_("command executed when WhoreIRC starts, before loading plugins "
            "(note: content is evaluated, see /help eval)"),
         NULL, 0, 0, "", NULL, 0,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     config_startup_display_logo = config_file_new_option (
         weechat_config_file, ptr_section,
         "display_logo", "boolean",
-        N_("display WeeChat logo at startup"),
+        N_("display WhoreIRC logo at startup"),
         NULL, 0, 0, "on", NULL, 0,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     config_startup_display_version = config_file_new_option (
         weechat_config_file, ptr_section,
         "display_version", "boolean",
-        N_("display WeeChat version at startup"),
+        N_("display WhoreIRC version at startup"),
         NULL, 0, 0, "on", NULL, 0,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     config_startup_sys_rlimit = config_file_new_option (
         weechat_config_file, ptr_section,
         "sys_rlimit", "string",
-        N_("set resource limits for WeeChat process, format is: "
+        N_("set resource limits for WhoreIRC process, format is: "
            "\"res1:limit1,res2:limit2\"; resource name is the end of constant "
            "(RLIMIT_XXX) in lower case (see man setrlimit for values); limit "
            "-1 means \"unlimited\"; example: set unlimited size for core file "
@@ -2655,7 +2655,7 @@ config_weechat_init_options ()
     config_look_buffer_notify_default = config_file_new_option (
         weechat_config_file, ptr_section,
         "buffer_notify_default", "integer",
-        N_("default notify level for buffers (used to tell WeeChat if buffer "
+        N_("default notify level for buffers (used to tell WhoreIRC if buffer "
            "must be displayed in hotlist or not, according to importance "
            "of message): all=all messages (default), "
            "message=messages+highlights, highlight=highlights only, "
@@ -2890,7 +2890,7 @@ config_weechat_init_options ()
         "eat_newline_glitch", "boolean",
         N_("if set, the eat_newline_glitch will be set to 0; this is used to "
            "not add new line char at end of each line, and then not break "
-           "text when you copy/paste text from WeeChat to another application "
+           "text when you copy/paste text from WhoreIRC to another application "
            "(this option is disabled by default because it can cause serious "
            "display bugs)"),
         NULL, 0, 0, "off", NULL, 0,
@@ -3199,7 +3199,7 @@ config_weechat_init_options ()
     config_look_mouse_timer_delay = config_file_new_option (
         weechat_config_file, ptr_section,
         "mouse_timer_delay", "integer",
-        N_("delay (in milliseconds) to grab a mouse event: WeeChat will "
+        N_("delay (in milliseconds) to grab a mouse event: WhoreIRC will "
            "wait this delay before processing event"),
         NULL, 1, 10000, "100", NULL, 0,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -3264,7 +3264,7 @@ config_weechat_init_options ()
         "paste_bracketed", "boolean",
         N_("enable terminal \"bracketed paste mode\" (not supported in all "
            "terminals/multiplexers): in this mode, pasted text is bracketed "
-           "with control sequences so that WeeChat can differentiate pasted "
+           "with control sequences so that WhoreIRC can differentiate pasted "
            "text from typed-in text (\"ESC[200~\", followed by the pasted text, "
            "followed by \"ESC[201~\")"),
         NULL, 0, 0, "on", NULL, 0,
@@ -3615,7 +3615,7 @@ config_weechat_init_options ()
         N_("title for window (terminal for Curses GUI), set on startup; "
            "an empty string will keep title unchanged "
            "(note: content is evaluated, see /help eval); example: "
-           "\"WeeChat ${info:version}\""),
+           "\"WhoreIRC ${info:version}\""),
         NULL, 0, 0, "", NULL, 0,
         NULL, NULL, NULL,
         &config_change_window_title, NULL, NULL,
@@ -4444,7 +4444,7 @@ config_weechat_init_options ()
         weechat_config_file, ptr_section,
         "gnutls_ca_file", "string",
         N_("file containing the certificate authorities (\"%h\" will be "
-           "replaced by WeeChat home, \"~/.weechat\" by default)"),
+           "replaced by WhoreIRC home, \"~/.weechat\" by default)"),
         NULL, 0, 0, CA_FILE, NULL, 0,
         NULL, NULL, NULL,
         &config_change_network_gnutls_ca_file, NULL, NULL,
@@ -4510,7 +4510,7 @@ config_weechat_init_options ()
         weechat_config_file, ptr_section,
         "path", "string",
         N_("path for searching plugins (\"%h\" will be replaced by "
-           "WeeChat home, \"~/.weechat\" by default)"),
+           "WhoreIRC home, \"~/.weechat\" by default)"),
         NULL, 0, 0, "%h/plugins", NULL, 0,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     config_plugin_save_config_on_unload = config_file_new_option (
@@ -4615,7 +4615,7 @@ config_weechat_init_options ()
 }
 
 /*
- * Initializes WeeChat configuration.
+ * Initializes WhoreIRC configuration.
  *
  * Returns:
  *   1: OK
@@ -4671,12 +4671,12 @@ config_weechat_init ()
 }
 
 /*
- * Reads WeeChat configuration file.
+ * Reads WhoreIRC configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -4692,12 +4692,12 @@ config_weechat_read ()
 }
 
 /*
- * Writes WeeChat configuration file.
+ * Writes WhoreIRC configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_WRITE_OK: OK
- *   WEECHAT_CONFIG_WRITE_ERROR: error
- *   WEECHAT_CONFIG_WRITE_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_WRITE_OK: OK
+ *   WHOREIRC_CONFIG_WRITE_ERROR: error
+ *   WHOREIRC_CONFIG_WRITE_MEMORY_ERROR: not enough memory
  */
 
 int
@@ -4707,7 +4707,7 @@ config_weechat_write ()
 }
 
 /*
- * Frees WeeChat configuration file and variables.
+ * Frees WhoreIRC configuration file and variables.
  */
 
 void

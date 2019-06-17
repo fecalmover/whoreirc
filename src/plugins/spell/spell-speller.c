@@ -4,20 +4,20 @@
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  * Copyright (C) 2006-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -100,9 +100,9 @@ spell_speller_check_dictionaries (const char *dict_list)
     if (dict_list)
     {
         argv = weechat_string_split (dict_list, ",", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
         if (argv)
         {
@@ -228,9 +228,9 @@ spell_speller_add_dicts_to_hash (struct t_hashtable *hashtable,
         return;
 
     dicts = weechat_string_split (dict, ",", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &num_dicts);
     if (dicts)
     {
@@ -282,8 +282,8 @@ spell_speller_remove_unused ()
 
     /* create a hashtable that will contain all used spellers */
     used_spellers = weechat_hashtable_new (32,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL, NULL);
     if (!used_spellers)
         return;
@@ -384,9 +384,9 @@ spell_speller_buffer_new (struct t_gui_buffer *buffer)
     if (buffer_dicts)
     {
         dicts = weechat_string_split (buffer_dicts, ",", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_dicts);
         if (dicts && (num_dicts > 0))
         {
@@ -461,8 +461,8 @@ int
 spell_speller_init ()
 {
     spell_spellers = weechat_hashtable_new (32,
-                                            WEECHAT_HASHTABLE_STRING,
-                                            WEECHAT_HASHTABLE_POINTER,
+                                            WHOREIRC_HASHTABLE_STRING,
+                                            WHOREIRC_HASHTABLE_POINTER,
                                             NULL, NULL);
     if (!spell_spellers)
         return 0;
@@ -471,8 +471,8 @@ spell_speller_init ()
                                    &spell_speller_free_value_cb);
 
     spell_speller_buffer = weechat_hashtable_new (32,
-                                                  WEECHAT_HASHTABLE_POINTER,
-                                                  WEECHAT_HASHTABLE_POINTER,
+                                                  WHOREIRC_HASHTABLE_POINTER,
+                                                  WHOREIRC_HASHTABLE_POINTER,
                                                   NULL, NULL);
     if (!spell_speller_buffer)
     {

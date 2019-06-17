@@ -397,8 +397,8 @@ exec_command_parse_options (struct t_exec_cmd_options *cmd_options,
  * Runs a command.
  *
  * Returns:
- *   WEECHAT_RC_OK: command run successfully
- *   WEECHAT_RC_ERROR: error running command
+ *   WHOREIRC_RC_OK: command run successfully
+ *   WHOREIRC_RC_ERROR: error running command
  */
 
 int
@@ -477,8 +477,8 @@ exec_command_run (struct t_gui_buffer *buffer,
 
     /* create hashtable for weechat_hook_process_hashtable() */
     process_options = weechat_hashtable_new (32,
-                                             WEECHAT_HASHTABLE_STRING,
-                                             WEECHAT_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_STRING,
                                              NULL, NULL);
     if (!process_options)
         goto error;
@@ -637,7 +637,7 @@ exec_command_run (struct t_gui_buffer *buffer,
         free (shell);
     weechat_hashtable_free (process_options);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 
 error:
     if (shell)
@@ -647,7 +647,7 @@ error:
     if (process_options)
         weechat_hashtable_free (process_options);
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -673,13 +673,13 @@ exec_command_exec (const void *pointer, void *data,
         || ((argc == 2) && (weechat_strcasecmp (argv[1], "-list") == 0)))
     {
         exec_command_list ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* send text to a running process */
     if (weechat_strcasecmp (argv[1], "-in") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "-in");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "-in");
         ptr_exec_cmd = exec_command_search_running_id (argv[2]);
         if (ptr_exec_cmd && ptr_exec_cmd->hook)
         {
@@ -692,13 +692,13 @@ exec_command_exec (const void *pointer, void *data,
                 free (text);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* send text to a running process (if given), then close stdin */
     if (weechat_strcasecmp (argv[1], "-inclose") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "-inclose");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "-inclose");
         ptr_exec_cmd = exec_command_search_running_id (argv[2]);
         if (ptr_exec_cmd && ptr_exec_cmd->hook)
         {
@@ -715,27 +715,27 @@ exec_command_exec (const void *pointer, void *data,
             }
             weechat_hook_set (ptr_exec_cmd->hook, "stdin_close", "1");
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* send a signal to a running process */
     if (weechat_strcasecmp (argv[1], "-signal") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "-signal");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "-signal");
         ptr_exec_cmd = exec_command_search_running_id (argv[2]);
         if (ptr_exec_cmd)
             weechat_hook_set (ptr_exec_cmd->hook, "signal", argv[3]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* send a KILL signal to a running process */
     if (weechat_strcasecmp (argv[1], "-kill") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "-kill");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "-kill");
         ptr_exec_cmd = exec_command_search_running_id (argv[2]);
         if (ptr_exec_cmd)
             weechat_hook_set (ptr_exec_cmd->hook, "signal", "kill");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* send a KILL signal to all running processes */
@@ -749,23 +749,23 @@ exec_command_exec (const void *pointer, void *data,
                 weechat_hook_set (ptr_exec_cmd->hook, "signal", "kill");
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set a hook property */
     if (weechat_strcasecmp (argv[1], "-set") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(5, "-set");
+        WHOREIRC_COMMAND_MIN_ARGS(5, "-set");
         ptr_exec_cmd = exec_command_search_running_id (argv[2]);
         if (ptr_exec_cmd)
             weechat_hook_set (ptr_exec_cmd->hook, argv[3], argv_eol[4]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete terminated command(s) */
     if (weechat_strcasecmp (argv[1], "-del") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "-del");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "-del");
         if (weechat_strcasecmp (argv[2], "-all") == 0)
         {
             count = 0;
@@ -813,7 +813,7 @@ exec_command_exec (const void *pointer, void *data,
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     return exec_command_run (buffer, argc, argv, argv_eol, 1);

@@ -55,7 +55,7 @@ xfer_command_me (const void *pointer, void *data,
                         _("%s%s: can't find xfer for buffer \"%s\""),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         weechat_buffer_get_string (buffer, "name"));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (!XFER_HAS_ENDED(ptr_xfer->status))
@@ -73,7 +73,7 @@ xfer_command_me (const void *pointer, void *data,
                                   (argv_eol[1]) ? argv_eol[1] : "");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -210,13 +210,13 @@ xfer_command_xfer (const void *pointer, void *data,
     if ((argc > 1) && (weechat_strcasecmp (argv[1], "list") == 0))
     {
         xfer_command_xfer_list (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if ((argc > 1) && (weechat_strcasecmp (argv[1], "listfull") == 0))
     {
         xfer_command_xfer_list (1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (!xfer_buffer)
@@ -243,7 +243,7 @@ xfer_command_xfer (const void *pointer, void *data,
 
     xfer_buffer_refresh (NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

@@ -1,22 +1,22 @@
 /*
- * logger.c - logger plugin for WeeChat: save buffer lines to disk files
+ * logger.c - logger plugin for WhoreIRC: save buffer lines to disk files
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /* this define is needed for strptime() (not on OpenBSD/Sun) */
@@ -46,12 +46,12 @@
 #include "logger-tail.h"
 
 
-WEECHAT_PLUGIN_NAME(LOGGER_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Log buffers to files"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(14000);
+WHOREIRC_PLUGIN_NAME(LOGGER_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Log buffers to files"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(14000);
 
 struct t_weechat_plugin *weechat_logger_plugin = NULL;
 
@@ -62,7 +62,7 @@ struct t_hook *logger_timer = NULL;    /* timer to flush log files          */
  * Gets logger file path option.
  *
  * Special vars are replaced:
- *   - "%h" (at beginning of string): WeeChat home
+ *   - "%h" (at beginning of string): WhoreIRC home
  *   - "~": user home
  *   - date/time specifiers (see man strftime)
  *
@@ -796,7 +796,7 @@ logger_buffer_opened_signal_cb (const void *pointer, void *data,
 
     logger_start_buffer (signal_data, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -816,7 +816,7 @@ logger_buffer_closing_signal_cb (const void *pointer, void *data,
 
     logger_stop (logger_buffer_search_buffer (signal_data), 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -837,7 +837,7 @@ logger_buffer_renamed_signal_cb (const void *pointer, void *data,
     logger_stop (logger_buffer_search_buffer (signal_data), 1);
     logger_start_buffer (signal_data, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -863,8 +863,8 @@ logger_backlog_check_conditions (struct t_gui_buffer *buffer)
         return 1;
 
     pointers = weechat_hashtable_new (32,
-                                      WEECHAT_HASHTABLE_STRING,
-                                      WEECHAT_HASHTABLE_POINTER,
+                                      WHOREIRC_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_POINTER,
                                       NULL,
                                       NULL);
     if (pointers)
@@ -875,8 +875,8 @@ logger_backlog_check_conditions (struct t_gui_buffer *buffer)
     }
 
     options = weechat_hashtable_new (32,
-                                     WEECHAT_HASHTABLE_STRING,
-                                     WEECHAT_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
                                      NULL,
                                      NULL);
     if (options)
@@ -997,10 +997,10 @@ logger_backlog_signal_cb (const void *pointer, void *data,
     (void) type_data;
 
     if (weechat_config_integer (logger_config_look_backlog) == 0)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (!logger_backlog_check_conditions (signal_data))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     ptr_logger_buffer = logger_buffer_search_buffer (signal_data);
     if (ptr_logger_buffer && ptr_logger_buffer->log_enabled)
@@ -1017,7 +1017,7 @@ logger_backlog_signal_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1037,7 +1037,7 @@ logger_start_signal_cb (const void *pointer, void *data,
 
     logger_start_buffer (signal_data, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1061,7 +1061,7 @@ logger_stop_signal_cb (const void *pointer, void *data,
     if (ptr_logger_buffer)
         logger_stop (ptr_logger_buffer, 0);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1126,7 +1126,7 @@ logger_day_changed_signal_cb (const void *pointer, void *data,
 
     logger_adjust_log_filenames ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1230,7 +1230,7 @@ logger_print_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1247,7 +1247,7 @@ logger_timer_cb (const void *pointer, void *data, int remaining_calls)
 
     logger_flush ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1264,7 +1264,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_plugin = plugin;
 
     if (!logger_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     logger_config_read ();
 
@@ -1291,7 +1291,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
 
     logger_info_init ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1316,5 +1316,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
 
     logger_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

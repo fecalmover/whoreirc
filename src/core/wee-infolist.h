@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_INFOLIST_H
-#define WEECHAT_INFOLIST_H
+#ifndef WHOREIRC_INFOLIST_H
+#define WHOREIRC_INFOLIST_H
 
 #include <time.h>
 
@@ -57,7 +57,7 @@ struct t_infolist_item
 struct t_infolist
 {
     struct t_weechat_plugin *plugin;   /* plugin which created this infolist*/
-                                       /* (NULL if created by WeeChat)      */
+                                       /* (NULL if created by WhoreIRC)      */
     struct t_infolist_item *items;     /* link to items                     */
     struct t_infolist_item *last_item; /* last variable                     */
     struct t_infolist_item *ptr_item;  /* pointer to current item           */
@@ -111,4 +111,4 @@ extern void infolist_free (struct t_infolist *infolist);
 extern void infolist_free_all_plugin (struct t_weechat_plugin *plugin);
 extern void infolist_print_log ();
 
-#endif /* WEECHAT_INFOLIST_H */
+#endif /* WHOREIRC_INFOLIST_H */

@@ -1,6 +1,6 @@
 // TRANSLATION MISSING
 $HOME/.whoreirc/whoreirc.conf::
-    main WeeChat configuration file
+    main WhoreIRC configuration file
 
 $HOME/.whoreirc/plugins.conf::
     plugins configuration file
@@ -72,4 +72,4 @@ $HOME/.whoreirc/xfer.conf::
     configuration file for _xfer_ plugin
 
 $HOME/.whoreirc/whoreirc.log::
-    WeeChat log file
+    WhoreIRC log file

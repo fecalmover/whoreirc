@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_GUI_CHAT_H
-#define WEECHAT_GUI_CHAT_H
+#ifndef WHOREIRC_GUI_CHAT_H
+#define WHOREIRC_GUI_CHAT_H
 
 #include <stdio.h>
 #include <time.h>
@@ -109,4 +109,4 @@ extern const char *gui_chat_string_next_char (struct t_gui_window *window,
                                               int nick_offline);
 extern void gui_chat_draw (struct t_gui_buffer *buffer, int clear_chat);
 
-#endif /* WEECHAT_GUI_CHAT_H */
+#endif /* WHOREIRC_GUI_CHAT_H */

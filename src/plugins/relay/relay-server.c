@@ -340,7 +340,7 @@ relay_server_sock_cb (const void *pointer, void *data, int fd)
         goto error;
     }
 
-    if (server->protocol == RELAY_PROTOCOL_WEECHAT)
+    if (server->protocol == RELAY_PROTOCOL_WHOREIRC)
     {
         /*
          * TOTP can be enabled only as second factor, in addition to the
@@ -475,7 +475,7 @@ end:
     if (relay_totp_secret)
         free (relay_totp_secret);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

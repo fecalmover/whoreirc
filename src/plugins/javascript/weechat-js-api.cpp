@@ -60,13 +60,13 @@ extern "C"
     if (__init                                                          \
         && (!js_current_script || !js_current_script->name))            \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_NOT_INIT(JS_CURRENT_SCRIPT_NAME,             \
+        WHOREIRC_SCRIPT_MSG_NOT_INIT(JS_CURRENT_SCRIPT_NAME,             \
                                     js_function_name.c_str());          \
         __ret;                                                          \
     }                                                                   \
     if (args.Length() < js_args_len)                                    \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_WRONG_ARGS(JS_CURRENT_SCRIPT_NAME,           \
+        WHOREIRC_SCRIPT_MSG_WRONG_ARGS(JS_CURRENT_SCRIPT_NAME,           \
                                       js_function_name.c_str());        \
         __ret;                                                          \
     }                                                                   \
@@ -77,14 +77,14 @@ extern "C"
             || ((js_args[num] == 'n') && (!args[num]->IsNumber()))      \
             || ((js_args[num] == 'h') && (!args[num]->IsObject())))     \
         {                                                               \
-            WEECHAT_SCRIPT_MSG_WRONG_ARGS(JS_CURRENT_SCRIPT_NAME,       \
+            WHOREIRC_SCRIPT_MSG_WRONG_ARGS(JS_CURRENT_SCRIPT_NAME,       \
                                           js_function_name.c_str());    \
             __ret;                                                      \
         }                                                               \
     }
 #define API_WRONG_ARGS(__ret)                                           \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_WRONG_ARGS(JS_CURRENT_SCRIPT_NAME,           \
+        WHOREIRC_SCRIPT_MSG_WRONG_ARGS(JS_CURRENT_SCRIPT_NAME,           \
                                       js_function_name.c_str());        \
         __ret;                                                          \
     }
@@ -426,19 +426,19 @@ API_FUNC(string_eval_expression)
     v8::String::Utf8Value expr(args[0]);
     pointers = weechat_js_object_to_hashtable (
         args[1]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER);
     extra_vars = weechat_js_object_to_hashtable (
         args[2]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     options = weechat_js_object_to_hashtable (
         args[3]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_expression (*expr, pointers, extra_vars,
                                              options);
@@ -463,19 +463,19 @@ API_FUNC(string_eval_path_home)
     v8::String::Utf8Value path(args[0]);
     pointers = weechat_js_object_to_hashtable (
         args[1]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER);
     extra_vars = weechat_js_object_to_hashtable (
         args[2]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     options = weechat_js_object_to_hashtable (
         args[3]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_path_home (*path, pointers, extra_vars,
                                             options);
@@ -768,12 +768,12 @@ weechat_js_api_config_reload_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(config_file);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+            ret = WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
         else
         {
             ret = *rc;
@@ -783,7 +783,7 @@ weechat_js_api_config_reload_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+    return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
 }
 
 API_FUNC(config_new)
@@ -831,12 +831,12 @@ weechat_js_api_config_read_cb (const void *pointer, void *data,
         func_argv[4] = (value) ? (char *)value : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         else
         {
             ret = *rc;
@@ -846,7 +846,7 @@ weechat_js_api_config_read_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 int
@@ -870,12 +870,12 @@ weechat_js_api_config_section_write_cb (const void *pointer, void *data,
         func_argv[2] = (section_name) ? (char *)section_name : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_WRITE_ERROR;
+            ret = WHOREIRC_CONFIG_WRITE_ERROR;
         else
         {
             ret = *rc;
@@ -885,7 +885,7 @@ weechat_js_api_config_section_write_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 int
@@ -909,12 +909,12 @@ weechat_js_api_config_section_write_default_cb (const void *pointer, void *data,
         func_argv[2] = (section_name) ? (char *)section_name : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_WRITE_ERROR;
+            ret = WHOREIRC_CONFIG_WRITE_ERROR;
         else
         {
             ret = *rc;
@@ -924,7 +924,7 @@ weechat_js_api_config_section_write_default_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 int
@@ -952,12 +952,12 @@ weechat_js_api_config_section_create_option_cb (const void *pointer, void *data,
         func_argv[4] = (value) ? (char *)value : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_SET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_SET_ERROR;
         else
         {
             ret = *rc;
@@ -967,7 +967,7 @@ weechat_js_api_config_section_create_option_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_SET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 int
@@ -993,12 +993,12 @@ weechat_js_api_config_section_delete_option_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(option);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+            ret = WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
         else
         {
             ret = *rc;
@@ -1008,7 +1008,7 @@ weechat_js_api_config_section_delete_option_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+    return WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
 }
 
 API_FUNC(config_new_section)
@@ -1098,7 +1098,7 @@ weechat_js_api_config_option_check_value_cb (const void *pointer, void *data,
         func_argv[2] = (value) ? (char *)value : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
@@ -1135,7 +1135,7 @@ weechat_js_api_config_option_change_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(option);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ss", func_argv);
 
@@ -1163,7 +1163,7 @@ weechat_js_api_config_option_delete_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(option);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ss", func_argv);
 
@@ -1276,7 +1276,7 @@ API_FUNC(config_option_set)
 {
     int run_callback, rc;
 
-    API_INIT_FUNC(1, "config_option_set", "ssi", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set", "ssi", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     v8::String::Utf8Value option(args[0]);
     v8::String::Utf8Value value(args[1]);
@@ -1292,7 +1292,7 @@ API_FUNC(config_option_set_null)
 {
     int run_callback, rc;
 
-    API_INIT_FUNC(1, "config_option_set_null", "si", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set_null", "si", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     v8::String::Utf8Value option(args[0]);
     run_callback = args[1]->IntegerValue();
@@ -1307,7 +1307,7 @@ API_FUNC(config_option_unset)
 {
     int rc;
 
-    API_INIT_FUNC(1, "config_option_unset", "s", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_option_unset", "s", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     v8::String::Utf8Value option(args[0]);
 
@@ -1505,7 +1505,7 @@ API_FUNC(config_write)
 {
     int rc;
 
-    API_INIT_FUNC(1, "config_write", "s", API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+    API_INIT_FUNC(1, "config_write", "s", API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
 
     v8::String::Utf8Value config_file(args[0]);
 
@@ -1637,7 +1637,7 @@ API_FUNC(config_set_plugin)
 {
     int rc;
 
-    API_INIT_FUNC(1, "config_set_plugin", "ss", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_set_plugin", "ss", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     v8::String::Utf8Value option(args[0]);
     v8::String::Utf8Value value(args[1]);
@@ -1669,7 +1669,7 @@ API_FUNC(config_unset_plugin)
 {
     int rc;
 
-    API_INIT_FUNC(1, "config_unset_plugin", "s", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_unset_plugin", "s", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     v8::String::Utf8Value option(args[0]);
 
@@ -1691,9 +1691,9 @@ API_FUNC(key_bind)
     v8::String::Utf8Value context(args[0]);
     hashtable = weechat_js_object_to_hashtable (
         args[1]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     num_keys = weechat_key_bind (*context, hashtable);
 
@@ -1836,12 +1836,12 @@ weechat_js_api_hook_command_cb (const void *pointer, void *data,
         func_argv[2] = (argc > 1) ? argv_eol[1] : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -1851,7 +1851,7 @@ weechat_js_api_hook_command_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_command)
@@ -1906,12 +1906,12 @@ weechat_js_api_hook_completion_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(completion);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -1921,7 +1921,7 @@ weechat_js_api_hook_completion_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_completion)
@@ -2005,12 +2005,12 @@ weechat_js_api_hook_command_run_cb (const void *pointer, void *data,
         func_argv[2] = (command) ? (char *)command : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2020,7 +2020,7 @@ weechat_js_api_hook_command_run_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_command_run)
@@ -2067,12 +2067,12 @@ weechat_js_api_hook_timer_cb (const void *pointer, void *data,
         func_argv[1] = str_remaining_calls;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2082,7 +2082,7 @@ weechat_js_api_hook_timer_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_timer)
@@ -2130,12 +2130,12 @@ weechat_js_api_hook_fd_cb (const void *pointer, void *data, int fd)
         func_argv[1] = &fd;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "si", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2145,7 +2145,7 @@ weechat_js_api_hook_fd_cb (const void *pointer, void *data, int fd)
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_fd)
@@ -2191,14 +2191,14 @@ weechat_js_api_hook_process_cb (const void *pointer, void *data,
     script = (struct t_plugin_script *)pointer;
     plugin_script_get_function_and_data (data, &ptr_function, &ptr_data);
 
-    if (return_code == WEECHAT_HOOK_PROCESS_CHILD)
+    if (return_code == WHOREIRC_HOOK_PROCESS_CHILD)
     {
         if (strncmp (command, "func:", 5) == 0)
         {
             func_argv[0] = (ptr_data) ? (char *)ptr_data : empty_arg;
 
             result = (char *) weechat_js_exec (script,
-                                               WEECHAT_SCRIPT_EXEC_STRING,
+                                               WHOREIRC_SCRIPT_EXEC_STRING,
                                                command + 5,
                                                "s", func_argv);
             if (result)
@@ -2219,12 +2219,12 @@ weechat_js_api_hook_process_cb (const void *pointer, void *data,
         func_argv[4] = (err) ? (char *)err : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ssiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2234,7 +2234,7 @@ weechat_js_api_hook_process_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_process)
@@ -2273,9 +2273,9 @@ API_FUNC(hook_process_hashtable)
     v8::String::Utf8Value command(args[0]);
     options = weechat_js_object_to_hashtable (
         args[1]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     timeout = args[2]->IntegerValue();
     v8::String::Utf8Value function(args[3]);
     v8::String::Utf8Value data(args[4]);
@@ -2322,12 +2322,12 @@ weechat_js_api_hook_connect_cb (const void *pointer, void *data,
         func_argv[5] = (error) ? (char *)error : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "siiiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2337,7 +2337,7 @@ weechat_js_api_hook_connect_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_connect)
@@ -2397,7 +2397,7 @@ weechat_js_api_hook_line_cb (const void *pointer, void *data,
 
         ret_hashtable = (struct t_hashtable *)weechat_js_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "sh", func_argv);
 
@@ -2470,12 +2470,12 @@ weechat_js_api_hook_print_cb (const void *pointer, void *data,
         func_argv[7] = (message) ? (char *)message : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ssssiiss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2487,7 +2487,7 @@ weechat_js_api_hook_print_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_print)
@@ -2538,11 +2538,11 @@ weechat_js_api_hook_signal_cb (const void *pointer, void *data,
     {
         func_argv[0] = (ptr_data) ? (char *)ptr_data : empty_arg;
         func_argv[1] = (signal) ? (char *)signal : empty_arg;
-        if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+        if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
         {
             func_argv[2] = (signal_data) ? (char *)signal_data : empty_arg;
         }
-        else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+        else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
         {
             str_value[0] = '\0';
             if (signal_data)
@@ -2552,7 +2552,7 @@ weechat_js_api_hook_signal_cb (const void *pointer, void *data,
             }
             func_argv[2] = str_value;
         }
-        else if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+        else if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
         {
             func_argv[2] = (char *)API_PTR2STR(signal_data);
         }
@@ -2560,12 +2560,12 @@ weechat_js_api_hook_signal_cb (const void *pointer, void *data,
             func_argv[2] = empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2575,7 +2575,7 @@ weechat_js_api_hook_signal_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_signal)
@@ -2605,35 +2605,35 @@ API_FUNC(hook_signal_send)
     char *error;
     int number, rc;
 
-    API_INIT_FUNC(1, "hook_signal_send", "sss", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_signal_send", "sss", API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     v8::String::Utf8Value signal(args[0]);
     v8::String::Utf8Value type_data(args[1]);
     v8::String::Utf8Value signal_data(args[2]);
 
-    if (strcmp (*type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (*type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         rc = weechat_hook_signal_send (*signal, *type_data, *signal_data);
         API_RETURN_INT(rc);
     }
-    else if (strcmp (*type_data, WEECHAT_HOOK_SIGNAL_INT) == 0)
+    else if (strcmp (*type_data, WHOREIRC_HOOK_SIGNAL_INT) == 0)
     {
         error = NULL;
         number = (int)strtol (*signal_data, &error, 10);
         if (error && !error[0])
             rc = weechat_hook_signal_send (*signal, *type_data, &number);
         else
-            rc = WEECHAT_RC_ERROR;
+            rc = WHOREIRC_RC_ERROR;
         API_RETURN_INT(rc);
     }
-    else if (strcmp (*type_data, WEECHAT_HOOK_SIGNAL_POINTER) == 0)
+    else if (strcmp (*type_data, WHOREIRC_HOOK_SIGNAL_POINTER) == 0)
     {
         rc = weechat_hook_signal_send (*signal, *type_data,
                                        API_STR2PTR(*signal_data));
         API_RETURN_INT(rc);
     }
 
-    API_RETURN_INT(WEECHAT_RC_ERROR);
+    API_RETURN_INT(WHOREIRC_RC_ERROR);
 }
 
 int
@@ -2657,12 +2657,12 @@ weechat_js_api_hook_hsignal_cb (const void *pointer, void *data,
         func_argv[2] = hashtable;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ssh", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2672,7 +2672,7 @@ weechat_js_api_hook_hsignal_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_hsignal)
@@ -2702,14 +2702,14 @@ API_FUNC(hook_hsignal_send)
     struct t_hashtable *hashtable;
     int rc;
 
-    API_INIT_FUNC(1, "hook_hsignal_send", "sh", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_hsignal_send", "sh", API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     v8::String::Utf8Value signal(args[0]);
     hashtable = weechat_js_object_to_hashtable (
         args[1]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     rc = weechat_hook_hsignal_send (*signal, hashtable);
 
@@ -2739,12 +2739,12 @@ weechat_js_api_hook_config_cb (const void *pointer, void *data,
         func_argv[2] = (value) ? (char *)value : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -2754,7 +2754,7 @@ weechat_js_api_hook_config_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(hook_config)
@@ -2800,7 +2800,7 @@ weechat_js_api_hook_modifier_cb (const void *pointer, void *data,
         func_argv[3] = (string) ? (char *)string : empty_arg;
 
         return (char *)weechat_js_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_STRING,
+                                        WHOREIRC_SCRIPT_EXEC_STRING,
                                         ptr_function,
                                         "ssss", func_argv);
     }
@@ -2865,7 +2865,7 @@ weechat_js_api_hook_info_cb (const void *pointer, void *data,
         func_argv[2] = (arguments) ? (char *)arguments : empty_arg;
 
         return (char *)weechat_js_exec (script,
-                                        WEECHAT_SCRIPT_EXEC_STRING,
+                                        WHOREIRC_SCRIPT_EXEC_STRING,
                                         ptr_function,
                                         "sss", func_argv);
     }
@@ -2921,7 +2921,7 @@ weechat_js_api_hook_info_hashtable_cb (const void *pointer, void *data,
 
         ret_hashtable = (struct t_hashtable *)weechat_js_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "ssh", func_argv);
 
@@ -2982,7 +2982,7 @@ weechat_js_api_hook_infolist_cb (const void *pointer, void *data,
 
         result = (struct t_infolist *)weechat_js_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_POINTER,
+            WHOREIRC_SCRIPT_EXEC_POINTER,
             ptr_function,
             "ssss", func_argv);
 
@@ -3040,7 +3040,7 @@ weechat_js_api_hook_focus_cb (const void *pointer, void *data,
 
         ret_hashtable = (struct t_hashtable *)weechat_js_exec (
             script,
-            WEECHAT_SCRIPT_EXEC_HASHTABLE,
+            WHOREIRC_SCRIPT_EXEC_HASHTABLE,
             ptr_function,
             "sh", func_argv);
 
@@ -3128,12 +3128,12 @@ weechat_js_api_buffer_input_data_cb (const void *pointer, void *data,
         func_argv[2] = (input_data) ? (char *)input_data : empty_arg;
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "sss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3143,7 +3143,7 @@ weechat_js_api_buffer_input_data_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 int
@@ -3165,12 +3165,12 @@ weechat_js_api_buffer_close_cb (const void *pointer, void *data,
         func_argv[1] = (char *)API_PTR2STR(buffer);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -3180,7 +3180,7 @@ weechat_js_api_buffer_close_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(buffer_new)
@@ -3794,7 +3794,7 @@ weechat_js_api_bar_item_build_cb (const void *pointer, void *data,
             func_argv[4] = extra_info;
 
             ret = (char *)weechat_js_exec (script,
-                                           WEECHAT_SCRIPT_EXEC_STRING,
+                                           WHOREIRC_SCRIPT_EXEC_STRING,
                                            ptr_function + 7,
                                            "ssssh", func_argv);
         }
@@ -3806,7 +3806,7 @@ weechat_js_api_bar_item_build_cb (const void *pointer, void *data,
             func_argv[2] = (char *)API_PTR2STR(window);
 
             ret = (char *)weechat_js_exec (script,
-                                           WEECHAT_SCRIPT_EXEC_STRING,
+                                           WHOREIRC_SCRIPT_EXEC_STRING,
                                            ptr_function,
                                            "sss", func_argv);
         }
@@ -3959,7 +3959,7 @@ API_FUNC(command)
 {
     int rc;
 
-    API_INIT_FUNC(1, "command", "ss", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command", "ss", API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     v8::String::Utf8Value buffer(args[0]);
     v8::String::Utf8Value command(args[1]);
@@ -3977,15 +3977,15 @@ API_FUNC(command_options)
     struct t_hashtable *options;
     int rc;
 
-    API_INIT_FUNC(1, "command_options", "ssh", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command_options", "ssh", API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     v8::String::Utf8Value buffer(args[0]);
     v8::String::Utf8Value command(args[1]);
     options = weechat_js_object_to_hashtable (
         args[2]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     rc = plugin_script_api_command_options (weechat_js_plugin,
                                             js_current_script,
@@ -4023,9 +4023,9 @@ API_FUNC(info_get_hashtable)
     v8::String::Utf8Value info_name(args[0]);
     hashtable = weechat_js_object_to_hashtable (
         args[1]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result_hashtable = weechat_info_get_hashtable (*info_name, hashtable);
     result_obj = weechat_js_hashtable_to_object (
@@ -4644,9 +4644,9 @@ API_FUNC(hdata_update)
     v8::String::Utf8Value pointer(args[1]);
     hashtable = weechat_js_object_to_hashtable (
         args[2]->ToObject(),
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     value = weechat_hdata_update (
         (struct t_hdata *)API_STR2PTR(*hdata),
@@ -4700,12 +4700,12 @@ weechat_js_api_upgrade_read_cb (const void *pointer, void *data,
         func_argv[3] = (char *)API_PTR2STR(infolist);
 
         rc = (int *)weechat_js_exec (script,
-                                     WEECHAT_SCRIPT_EXEC_INT,
+                                     WHOREIRC_SCRIPT_EXEC_INT,
                                      ptr_function,
                                      "ssss", func_argv);
 
         if (!rc)
-            ret = WEECHAT_RC_ERROR;
+            ret = WHOREIRC_RC_ERROR;
         else
         {
             ret = *rc;
@@ -4715,7 +4715,7 @@ weechat_js_api_upgrade_read_cb (const void *pointer, void *data,
         return ret;
     }
 
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 API_FUNC(upgrade_new)
@@ -4790,52 +4790,52 @@ WeechatJsV8::loadLibs()
     v8::Local<v8::ObjectTemplate> weechat_obj = v8::ObjectTemplate::New();
 
     /* constants */
-    API_DEF_CONST_INT(WEECHAT_RC_OK);
-    API_DEF_CONST_INT(WEECHAT_RC_OK_EAT);
-    API_DEF_CONST_INT(WEECHAT_RC_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_RC_OK);
+    API_DEF_CONST_INT(WHOREIRC_RC_OK_EAT);
+    API_DEF_CONST_INT(WHOREIRC_RC_ERROR);
 
-    API_DEF_CONST_INT(WEECHAT_CONFIG_READ_OK);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_READ_MEMORY_ERROR);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_WRITE_OK);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_WRITE_ERROR);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_WRITE_MEMORY_ERROR);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_SET_OK_CHANGED);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_SET_ERROR);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_UNSET_OK_RESET);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED);
-    API_DEF_CONST_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_READ_OK);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_READ_MEMORY_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_WRITE_OK);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_WRITE_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_WRITE_MEMORY_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED);
+    API_DEF_CONST_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR);
 
-    API_DEF_CONST_STR(WEECHAT_LIST_POS_SORT);
-    API_DEF_CONST_STR(WEECHAT_LIST_POS_BEGINNING);
-    API_DEF_CONST_STR(WEECHAT_LIST_POS_END);
+    API_DEF_CONST_STR(WHOREIRC_LIST_POS_SORT);
+    API_DEF_CONST_STR(WHOREIRC_LIST_POS_BEGINNING);
+    API_DEF_CONST_STR(WHOREIRC_LIST_POS_END);
 
-    API_DEF_CONST_STR(WEECHAT_HOTLIST_LOW);
-    API_DEF_CONST_STR(WEECHAT_HOTLIST_MESSAGE);
-    API_DEF_CONST_STR(WEECHAT_HOTLIST_PRIVATE);
-    API_DEF_CONST_STR(WEECHAT_HOTLIST_HIGHLIGHT);
+    API_DEF_CONST_STR(WHOREIRC_HOTLIST_LOW);
+    API_DEF_CONST_STR(WHOREIRC_HOTLIST_MESSAGE);
+    API_DEF_CONST_STR(WHOREIRC_HOTLIST_PRIVATE);
+    API_DEF_CONST_STR(WHOREIRC_HOTLIST_HIGHLIGHT);
 
-    API_DEF_CONST_INT(WEECHAT_HOOK_PROCESS_RUNNING);
-    API_DEF_CONST_INT(WEECHAT_HOOK_PROCESS_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_PROCESS_RUNNING);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_PROCESS_ERROR);
 
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_OK);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_PROXY_ERROR);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_MEMORY_ERROR);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_TIMEOUT);
-    API_DEF_CONST_INT(WEECHAT_HOOK_CONNECT_SOCKET_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_OK);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_PROXY_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_MEMORY_ERROR);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_TIMEOUT);
+    API_DEF_CONST_INT(WHOREIRC_HOOK_CONNECT_SOCKET_ERROR);
 
-    API_DEF_CONST_STR(WEECHAT_HOOK_SIGNAL_STRING);
-    API_DEF_CONST_STR(WEECHAT_HOOK_SIGNAL_INT);
-    API_DEF_CONST_STR(WEECHAT_HOOK_SIGNAL_POINTER);
+    API_DEF_CONST_STR(WHOREIRC_HOOK_SIGNAL_STRING);
+    API_DEF_CONST_STR(WHOREIRC_HOOK_SIGNAL_INT);
+    API_DEF_CONST_STR(WHOREIRC_HOOK_SIGNAL_POINTER);
 
     /* functions */
     API_DEF_FUNC(register);

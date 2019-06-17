@@ -808,7 +808,7 @@ passphrase: パスフレーズを変更 (パスフレーズがない場合、sec
   alt+v  値を切り替えます
 
 パスフレーズを利用する場合 (データが暗号化されている場合)、WeeChat は起動時にパスフレーズを尋ねます。
-入力を回避するには、環境変数 "WEECHAT_PASSPHRASE" を利用するか (WeeChat は /upgrade の時に同じ変数を利用します)、sec.crypt.passphrase_file オプションを設定してファイルからパスフレーズを読み込みます (/help sec.crypt.passphrase_file を参照してください)。
+入力を回避するには、環境変数 "WHOREIRC_PASSPHRASE" を利用するか (WeeChat は /upgrade の時に同じ変数を利用します)、sec.crypt.passphrase_file オプションを設定してファイルからパスフレーズを読み込みます (/help sec.crypt.passphrase_file を参照してください)。
 
 ${sec.data.xxx} の形で書かれた保護データは以下の様に利用できます:
   - /eval コマンド

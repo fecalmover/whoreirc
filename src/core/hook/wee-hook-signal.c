@@ -87,7 +87,7 @@ hook_signal_send (const char *signal, const char *type_data, void *signal_data)
     struct t_hook *ptr_hook, *next_hook;
     int rc;
 
-    rc = WEECHAT_RC_OK;
+    rc = WHOREIRC_RC_OK;
 
     hook_exec_start ();
 
@@ -109,7 +109,7 @@ hook_signal_send (const char *signal, const char *type_data, void *signal_data)
                  signal_data);
             ptr_hook->running = 0;
 
-            if (rc == WEECHAT_RC_OK_EAT)
+            if (rc == WHOREIRC_RC_OK_EAT)
                 break;
         }
 

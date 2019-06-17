@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_GUI_HISTORY_H
-#define WEECHAT_GUI_HISTORY_H
+#ifndef WHOREIRC_GUI_HISTORY_H
+#define WHOREIRC_GUI_HISTORY_H
 
 struct t_gui_buffer;
 
@@ -45,4 +45,4 @@ extern struct t_hdata *gui_history_hdata_history_cb (const void *pointer,
 extern int gui_history_add_to_infolist (struct t_infolist *infolist,
                                         struct t_gui_history *history);
 
-#endif /* WEECHAT_GUI_HISTORY_H */
+#endif /* WHOREIRC_GUI_HISTORY_H */

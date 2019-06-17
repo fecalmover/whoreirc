@@ -50,19 +50,19 @@ exec_buffer_input_cb (const void *pointer, void *data,
     if (strcmp (input_data, "q") == 0)
     {
         weechat_buffer_close (buffer);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     argv = weechat_string_split (input_data, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     argv_eol = weechat_string_split (input_data, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                                     | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                                     | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                                      0, NULL);
 
     if (argv && argv_eol)
@@ -73,7 +73,7 @@ exec_buffer_input_cb (const void *pointer, void *data,
     if (argv_eol)
         weechat_string_free_split (argv_eol);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -104,7 +104,7 @@ exec_buffer_close_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

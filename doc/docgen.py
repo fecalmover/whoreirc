@@ -17,13 +17,13 @@
 #
 
 """
-Documentation generator for WeeChat: build include files with commands,
-options, infos, infolists, hdata and completions for WeeChat core and
+Documentation generator for WhoreIRC: build include files with commands,
+options, infos, infolists, hdata and completions for WhoreIRC core and
 plugins.
 
-Instructions to build config files yourself in WeeChat directories (replace
-all paths with your path to WeeChat):
-    1.  run WeeChat and load this script, with following command:
+Instructions to build config files yourself in WhoreIRC directories (replace
+all paths with your path to WhoreIRC):
+    1.  run WhoreIRC and load this script, with following command:
           /python load ~/src/whoreirc/doc/docgen.py
     2.  change path to build in your doc/ directory:
           /set plugins.var.python.docgen.path "~/src/whoreirc/doc"
@@ -39,7 +39,7 @@ SCRIPT_NAME = 'docgen'
 SCRIPT_AUTHOR = 'Sébastien Helleu <flashcode@flashtux.org>'
 SCRIPT_VERSION = '0.1'
 SCRIPT_LICENSE = 'GPL3'
-SCRIPT_DESC = 'Documentation generator for WeeChat'
+SCRIPT_DESC = 'Documentation generator for WhoreIRC'
 
 SCRIPT_COMMAND = 'docgen'
 
@@ -61,8 +61,8 @@ except ImportError as message:
 try:
     import whoreirc  # pylint: disable=import-error
 except ImportError:
-    print('This script must be run under WeeChat.')
-    print('Get WeeChat now at: https://whoreirc.org/')
+    print('This script must be run under WhoreIRC.')
+    print('Get WhoreIRC now at: https://whoreirc.org/')
     IMPORT_OK = False
 
 # default path where doc files will be written (should be doc/ in sources
@@ -199,7 +199,7 @@ class AutogenDoc(object):
 
 def get_commands():
     """
-    Get list of WeeChat/plugins commands as dictionary with 3 indexes: plugin,
+    Get list of WhoreIRC/plugins commands as dictionary with 3 indexes: plugin,
     command, xxx.
     """
     commands = defaultdict(lambda: defaultdict(defaultdict))
@@ -219,7 +219,7 @@ def get_commands():
 
 def get_options():
     """
-    Get list of WeeChat/plugins config options as dictionary with 4 indexes:
+    Get list of WhoreIRC/plugins config options as dictionary with 4 indexes:
     config, section, option, xxx.
     """
     options = \
@@ -245,7 +245,7 @@ def get_options():
 
 def get_infos():
     """
-    Get list of WeeChat/plugins infos as dictionary with 3 indexes: plugin,
+    Get list of WhoreIRC/plugins infos as dictionary with 3 indexes: plugin,
     name, xxx.
     """
     infos = defaultdict(lambda: defaultdict(defaultdict))
@@ -262,7 +262,7 @@ def get_infos():
 
 def get_infos_hashtable():
     """
-    Get list of WeeChat/plugins infos (hashtable) as dictionary with 3 indexes:
+    Get list of WhoreIRC/plugins infos (hashtable) as dictionary with 3 indexes:
     plugin, name, xxx.
     """
     infos_hashtable = defaultdict(lambda: defaultdict(defaultdict))
@@ -279,7 +279,7 @@ def get_infos_hashtable():
 
 def get_infolists():
     """
-    Get list of WeeChat/plugins infolists as dictionary with 3 indexes: plugin,
+    Get list of WhoreIRC/plugins infolists as dictionary with 3 indexes: plugin,
     name, xxx.
     """
     infolists = defaultdict(lambda: defaultdict(defaultdict))
@@ -297,7 +297,7 @@ def get_infolists():
 # pylint: disable=too-many-locals
 def get_hdata():
     """
-    Get list of WeeChat/plugins hdata as dictionary with 3 indexes: plugin,
+    Get list of WhoreIRC/plugins hdata as dictionary with 3 indexes: plugin,
     name, xxx.
     """
     hdata = defaultdict(lambda: defaultdict(defaultdict))
@@ -367,7 +367,7 @@ def get_hdata():
 
 def get_completions():
     """
-    Get list of WeeChat/plugins completions as dictionary with 3 indexes:
+    Get list of WhoreIRC/plugins completions as dictionary with 3 indexes:
     plugin, item, xxx.
     """
     completions = defaultdict(lambda: defaultdict(defaultdict))
@@ -435,7 +435,7 @@ def get_irc_colors():
 
 def get_plugins_priority():
     """
-    Get priority of default WeeChat plugins as a dictionary.
+    Get priority of default WhoreIRC plugins as a dictionary.
     """
     plugins_priority = {}
     infolist = whoreirc.infolist_get('plugin', '', '')
@@ -566,7 +566,7 @@ def docgen_cmd_cb(data, buf, args):
                         default_value = '"{0}"'.format(
                             default_value.replace('"', '\\"'))
                     elif opt_type == 'color':
-                        values = _('a WeeChat color name (default, black, '
+                        values = _('a WhoreIRC color name (default, black, '
                                    '(dark)gray, white, (light)red, '
                                    '(light)green, brown, yellow, (light)blue, '
                                    '(light)magenta, (light)cyan), a terminal '
@@ -608,7 +608,7 @@ def docgen_cmd_cb(data, buf, args):
         doc.write('[width="30%",cols="^2m,3",options="header"]\n')
         doc.write('|===\n')
         doc.write('| {0} | {1}\n\n'
-                  ''.format(_('IRC color'), _('WeeChat color')))
+                  ''.format(_('IRC color'), _('WhoreIRC color')))
         for color in irc_colors:
             doc.write('| {0} | {1}\n'
                       ''.format(escape(color['color_irc']),
@@ -756,15 +756,15 @@ def docgen_cmd_cb(data, buf, args):
     whoreirc.prnt('',
                  'docgen: total: {0} files, {1} updated'
                  ''.format(num_files['total2'], num_files_updated['total2']))
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 
 def docgen_completion_cb(data, completion_item, buf, completion):
     """Callback for completion."""
     for locale in LOCALE_LIST:
         whoreirc.hook_completion_list_add(completion, locale, 0,
-                                         whoreirc.WEECHAT_LIST_POS_SORT)
-    return whoreirc.WEECHAT_RC_OK
+                                         whoreirc.WHOREIRC_LIST_POS_SORT)
+    return whoreirc.WHOREIRC_RC_OK
 
 
 if __name__ == '__main__' and IMPORT_OK:

@@ -4,20 +4,20 @@
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2005-2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -650,9 +650,9 @@ config_file_new_option (struct t_config_file *config_file,
                         string_values,
                         "|",
                         NULL,
-                        WEECHAT_STRING_SPLIT_STRIP_LEFT
-                        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                         0,
                         &argc);
                     if (!new_option->string_values)
@@ -1046,9 +1046,9 @@ config_file_string_to_boolean (const char *text)
  * Resets an option to its default value.
  *
  * Returns:
- *   WEECHAT_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
- *   WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
- *   WEECHAT_CONFIG_OPTION_SET_ERROR: error
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
+ *   WHOREIRC_CONFIG_OPTION_SET_ERROR: error
  */
 
 int
@@ -1057,9 +1057,9 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
     int rc, old_value_was_null;
 
     if (!option)
-        return WEECHAT_CONFIG_OPTION_SET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option->default_value)
     {
@@ -1073,17 +1073,17 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
                     if (option->value)
                     {
                         CONFIG_BOOLEAN(option) = CONFIG_BOOLEAN_DEFAULT(option);
-                        rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                        rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                     }
                 }
                 else
                 {
                     if (CONFIG_BOOLEAN(option) == CONFIG_BOOLEAN_DEFAULT(option))
-                        rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                        rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                     else
                     {
                         CONFIG_BOOLEAN(option) = CONFIG_BOOLEAN_DEFAULT(option);
-                        rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                        rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                     }
                 }
                 break;
@@ -1097,19 +1097,19 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
                         break;
                 }
                 if (CONFIG_INTEGER(option) == CONFIG_INTEGER_DEFAULT(option))
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                 else
                 {
                     CONFIG_INTEGER(option) = CONFIG_INTEGER_DEFAULT(option);
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                 }
                 break;
             case CONFIG_OPTION_TYPE_STRING:
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                 if (!option->value
                     || (strcmp ((char *)option->value,
                                 (char *)option->default_value) != 0))
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                 if (option->value)
                 {
                     free (option->value);
@@ -1117,7 +1117,7 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
                 }
                 option->value = strdup ((char *)option->default_value);
                 if (!option->value)
-                    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
                 break;
             case CONFIG_OPTION_TYPE_COLOR:
                 if (!option->value)
@@ -1129,18 +1129,18 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
                         break;
                 }
                 if (CONFIG_COLOR(option) == CONFIG_COLOR_DEFAULT(option))
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                 else
                 {
                     CONFIG_COLOR(option) = CONFIG_COLOR_DEFAULT(option);
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                 }
                 break;
             case CONFIG_NUM_OPTION_TYPES:
                 break;
         }
         if (old_value_was_null && option->value)
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
     }
     else
     {
@@ -1150,14 +1150,14 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
             {
                 free (option->value);
                 option->value = NULL;
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if ((rc == WEECHAT_CONFIG_OPTION_SET_OK_CHANGED)
+    if ((rc == WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED)
         && run_callback && option->callback_change)
     {
         (void) (option->callback_change) (
@@ -1167,7 +1167,7 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
     }
 
     /* run config hook(s) */
-    if ((rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if ((rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
         && option->config_file && option->section)
     {
         config_file_hook_config_exec (option);
@@ -1180,9 +1180,9 @@ config_file_option_reset (struct t_config_option *option, int run_callback)
  * Sets the value for an option.
  *
  * Returns:
- *   WEECHAT_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
- *   WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
- *   WEECHAT_CONFIG_OPTION_SET_ERROR: error
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
+ *   WHOREIRC_CONFIG_OPTION_SET_ERROR: error
  */
 
 int
@@ -1194,9 +1194,9 @@ config_file_option_set (struct t_config_option *option, const char *value,
     char *error;
 
     if (!option)
-        return WEECHAT_CONFIG_OPTION_SET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option->callback_check_value)
     {
@@ -1206,7 +1206,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
                 option,
                 value))
         {
-            return WEECHAT_CONFIG_OPTION_SET_ERROR;
+            return WHOREIRC_CONFIG_OPTION_SET_ERROR;
         }
     }
 
@@ -1224,7 +1224,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
                         if (string_strcasecmp (value, "toggle") == 0)
                         {
                             CONFIG_BOOLEAN(option) = CONFIG_BOOLEAN_TRUE;
-                            rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                            rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                         }
                         else
                         {
@@ -1232,7 +1232,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
                             {
                                 value_int = config_file_string_to_boolean (value);
                                 CONFIG_BOOLEAN(option) = value_int;
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                             }
                             else
                             {
@@ -1249,7 +1249,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
                         CONFIG_BOOLEAN(option) =
                             (CONFIG_BOOLEAN(option) == CONFIG_BOOLEAN_TRUE) ?
                             CONFIG_BOOLEAN_FALSE : CONFIG_BOOLEAN_TRUE;
-                        rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                        rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                     }
                     else
                     {
@@ -1257,11 +1257,11 @@ config_file_option_set (struct t_config_option *option, const char *value,
                         {
                             value_int = config_file_string_to_boolean (value);
                             if (value_int == CONFIG_BOOLEAN(option))
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                             else
                             {
                                 CONFIG_BOOLEAN(option) = value_int;
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                             }
                         }
                     }
@@ -1318,10 +1318,10 @@ config_file_option_set (struct t_config_option *option, const char *value,
                                 || (value_int != old_value))
                             {
                                 CONFIG_INTEGER(option) = value_int;
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                             }
                             else
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                         }
                         else
                         {
@@ -1375,10 +1375,10 @@ config_file_option_set (struct t_config_option *option, const char *value,
                                 || (value_int != old_value))
                             {
                                 CONFIG_INTEGER(option) = value_int;
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                             }
                             else
-                                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                         }
                         else
                         {
@@ -1392,10 +1392,10 @@ config_file_option_set (struct t_config_option *option, const char *value,
                 }
                 break;
             case CONFIG_OPTION_TYPE_STRING:
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                 if (!option->value
                     || (strcmp (CONFIG_STRING(option), value) != 0))
-                    rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                 if (option->value)
                 {
                     free (option->value);
@@ -1403,7 +1403,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
                 }
                 option->value = strdup (value);
                 if (!option->value)
-                    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
                 break;
             case CONFIG_OPTION_TYPE_COLOR:
                 old_value = 0;
@@ -1450,10 +1450,10 @@ config_file_option_set (struct t_config_option *option, const char *value,
                             || (value_int != old_value))
                         {
                             CONFIG_COLOR(option) = value_int;
-                            rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+                            rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
                         }
                         else
-                            rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                            rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
                     }
                 }
                 break;
@@ -1461,7 +1461,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
                 break;
         }
         if (old_value_was_null && option->value)
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
     }
     else
     {
@@ -1469,14 +1469,14 @@ config_file_option_set (struct t_config_option *option, const char *value,
         {
             free (option->value);
             option->value = NULL;
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
         }
         else
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
     }
 
     /* run callback if asked and value was changed */
-    if ((rc == WEECHAT_CONFIG_OPTION_SET_OK_CHANGED)
+    if ((rc == WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED)
         && run_callback && option->callback_change)
     {
         (void) (option->callback_change) (
@@ -1486,7 +1486,7 @@ config_file_option_set (struct t_config_option *option, const char *value,
     }
 
     /* run config hook(s) */
-    if ((rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if ((rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
         && option->config_file && option->section)
     {
         config_file_hook_config_exec (option);
@@ -1499,9 +1499,9 @@ config_file_option_set (struct t_config_option *option, const char *value,
  * Sets null (undefined) value for an option.
  *
  * Returns:
- *   WEECHAT_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
- *   WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
- *   WEECHAT_CONFIG_OPTION_SET_ERROR: error
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
+ *   WHOREIRC_CONFIG_OPTION_SET_ERROR: error
  */
 
 int
@@ -1510,27 +1510,27 @@ config_file_option_set_null (struct t_config_option *option, int run_callback)
     int rc;
 
     if (!option)
-        return WEECHAT_CONFIG_OPTION_SET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     /* null value is authorized only if it's allowed in option */
     if (option->null_value_allowed)
     {
         /* option was already null: do nothing */
         if (!option->value)
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         else
         {
             /* set option to null */
             free (option->value);
             option->value = NULL;
-            rc = WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
+            rc = WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
         }
     }
 
     /* run callback if asked and value was changed */
-    if ((rc == WEECHAT_CONFIG_OPTION_SET_OK_CHANGED)
+    if ((rc == WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED)
         && run_callback && option->callback_change)
     {
         (void) (option->callback_change) (
@@ -1540,7 +1540,7 @@ config_file_option_set_null (struct t_config_option *option, int run_callback)
     }
 
     /* run config hook(s) */
-    if ((rc != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if ((rc != WHOREIRC_CONFIG_OPTION_SET_ERROR)
         && option->config_file && option->section)
     {
         config_file_hook_config_exec (option);
@@ -1553,10 +1553,10 @@ config_file_option_set_null (struct t_config_option *option, int run_callback)
  * Unsets/resets an option.
  *
  * Returns:
- *   WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET: OK, value has not been reset
- *   WEECHAT_CONFIG_OPTION_UNSET_OK_RESET: OK, value has been reset
- *   WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED: OK, value has been removed
- *   WEECHAT_CONFIG_OPTION_UNSET_ERROR: error
+ *   WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET: OK, value has not been reset
+ *   WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET: OK, value has been reset
+ *   WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED: OK, value has been removed
+ *   WHOREIRC_CONFIG_OPTION_UNSET_ERROR: error
  */
 
 int
@@ -1566,9 +1566,9 @@ config_file_option_unset (struct t_config_option *option)
     char *option_full_name;
 
     if (!option)
-        return WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
 
-    rc = WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET;
+    rc = WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET;
 
     if (option->section && option->section->user_can_delete_options)
     {
@@ -1595,7 +1595,7 @@ config_file_option_unset (struct t_config_option *option)
         else
         {
             config_file_option_free (option, 0);
-            rc = WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+            rc = WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
         }
 
         if (option_full_name)
@@ -1609,14 +1609,14 @@ config_file_option_unset (struct t_config_option *option)
         /* reset value */
         switch (config_file_option_reset (option, 1))
         {
-            case WEECHAT_CONFIG_OPTION_SET_ERROR:
-                rc = WEECHAT_CONFIG_OPTION_UNSET_ERROR;
+            case WHOREIRC_CONFIG_OPTION_SET_ERROR:
+                rc = WHOREIRC_CONFIG_OPTION_UNSET_ERROR;
                 break;
-            case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
-                rc = WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET;
+            case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
+                rc = WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET;
                 break;
-            case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
-                rc = WEECHAT_CONFIG_OPTION_UNSET_OK_RESET;
+            case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
+                rc = WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET;
                 break;
         }
     }
@@ -1969,10 +1969,10 @@ int config_file_option_has_changed (struct t_config_option *option)
  * "file.section.option").
  *
  * Returns:
- *   WEECHAT_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
- *   WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
- *   WEECHAT_CONFIG_OPTION_SET_ERROR: error
- *   WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND: option not found
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED: OK, value has been changed
+ *   WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE: OK, value not changed
+ *   WHOREIRC_CONFIG_OPTION_SET_ERROR: error
+ *   WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND: option not found
  */
 
 int
@@ -1984,7 +1984,7 @@ config_file_option_set_with_string (const char *option_name, const char *value)
     struct t_config_option *ptr_option;
     char *pos_option;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND;
+    rc = WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND;
 
     config_file_search_with_string (option_name, &ptr_config, &ptr_section,
                                     &ptr_option, &pos_option);
@@ -2332,9 +2332,9 @@ config_file_write_line (struct t_config_file *config_file,
  * Writes a configuration file (this function must not be called directly).
  *
  * Returns:
- *   WEECHAT_CONFIG_WRITE_OK: OK
- *   WEECHAT_CONFIG_WRITE_ERROR: error
- *   WEECHAT_CONFIG_WRITE_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_WRITE_OK: OK
+ *   WHOREIRC_CONFIG_WRITE_ERROR: error
+ *   WHOREIRC_CONFIG_WRITE_MEMORY_ERROR: not enough memory
  */
 
 int
@@ -2347,14 +2347,14 @@ config_file_write_internal (struct t_config_file *config_file,
     struct t_config_option *ptr_option;
 
     if (!config_file)
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     /* build filename */
     filename_length = strlen (weechat_home) +
         strlen (config_file->filename) + 2;
     filename = malloc (filename_length);
     if (!filename)
-        return WEECHAT_CONFIG_WRITE_MEMORY_ERROR;
+        return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR;
     snprintf (filename, filename_length, "%s%s%s",
               weechat_home, DIR_SEPARATOR, config_file->filename);
 
@@ -2366,7 +2366,7 @@ config_file_write_internal (struct t_config_file *config_file,
     if (!filename2)
     {
         free (filename);
-        return WEECHAT_CONFIG_WRITE_MEMORY_ERROR;
+        return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR;
     }
     snprintf (filename2, filename_length + 32, "%s.weechattmp", filename);
 
@@ -2380,7 +2380,7 @@ config_file_write_internal (struct t_config_file *config_file,
             if (!filename)
             {
                 free (filename2);
-                return WEECHAT_CONFIG_WRITE_MEMORY_ERROR;
+                return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR;
             }
         }
     }
@@ -2401,16 +2401,16 @@ config_file_write_internal (struct t_config_file *config_file,
         goto error;
     }
 
-    /* write header with name of config file and WeeChat version */
+    /* write header with name of config file and WhoreIRC version */
     if (!string_fprintf (
             config_file->file,
             "#\n"
             "# %s -- %s\n"
             "#\n"
             "# WARNING: It is NOT recommended to edit this file by hand,\n"
-            "# especially if WeeChat is running.\n"
+            "# especially if WhoreIRC is running.\n"
             "#\n"
-            "# Use /set or similar command to change settings in WeeChat.\n"
+            "# Use /set or similar command to change settings in WhoreIRC.\n"
             "#\n"
             "# For more info, see: https://weechat.org/doc/quickstart\n"
             "#\n",
@@ -2431,7 +2431,7 @@ config_file_write_internal (struct t_config_file *config_file,
                     ptr_section->callback_write_default_pointer,
                     ptr_section->callback_write_default_data,
                     config_file,
-                    ptr_section->name) != WEECHAT_CONFIG_WRITE_OK)
+                    ptr_section->name) != WHOREIRC_CONFIG_WRITE_OK)
                 goto error;
         }
         else if (!default_options && ptr_section->callback_write)
@@ -2440,7 +2440,7 @@ config_file_write_internal (struct t_config_file *config_file,
                     ptr_section->callback_write_pointer,
                     ptr_section->callback_write_data,
                     config_file,
-                    ptr_section->name) != WEECHAT_CONFIG_WRITE_OK)
+                    ptr_section->name) != WHOREIRC_CONFIG_WRITE_OK)
                 goto error;
         }
         else
@@ -2486,9 +2486,9 @@ config_file_write_internal (struct t_config_file *config_file,
     free (filename2);
 
     if (rc != 0)
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 
 error:
     gui_chat_printf (NULL,
@@ -2505,16 +2505,16 @@ error:
     unlink (filename2);
     free (filename);
     free (filename2);
-    return WEECHAT_CONFIG_WRITE_ERROR;
+    return WHOREIRC_CONFIG_WRITE_ERROR;
 }
 
 /*
  * Writes a configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_WRITE_OK: OK
- *   WEECHAT_CONFIG_WRITE_ERROR: error
- *   WEECHAT_CONFIG_WRITE_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_WRITE_OK: OK
+ *   WHOREIRC_CONFIG_WRITE_ERROR: error
+ *   WHOREIRC_CONFIG_WRITE_MEMORY_ERROR: not enough memory
  */
 
 int
@@ -2527,9 +2527,9 @@ config_file_write (struct t_config_file *config_file)
  * Reads a configuration file (this function must not be called directly).
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -2542,21 +2542,21 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
     char line[16384], *ptr_line, *ptr_line2, *pos, *pos2, *ptr_option_name;
 
     if (!config_file)
-        return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+        return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
 
     /* build filename */
     filename_length = strlen (weechat_home) + strlen (DIR_SEPARATOR) +
         strlen (config_file->filename) + 1;
     filename = malloc (filename_length);
     if (!filename)
-        return WEECHAT_CONFIG_READ_MEMORY_ERROR;
+        return WHOREIRC_CONFIG_READ_MEMORY_ERROR;
     snprintf (filename, filename_length, "%s%s%s",
               weechat_home, DIR_SEPARATOR, config_file->filename);
 
     /* create file with default options if it does not exist */
     if (access (filename, F_OK) != 0)
     {
-        if (strcmp (config_file->name, WEECHAT_CONFIG_NAME) == 0)
+        if (strcmp (config_file->name, WHOREIRC_CONFIG_NAME) == 0)
             weechat_first_start = 1;
         config_file_write_internal (config_file, 1);
     }
@@ -2578,7 +2578,7 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          filename);
         free (filename);
-        return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+        return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
     }
 
     if (!reload)
@@ -2670,7 +2670,7 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
                         }
 
                         if (pos[0]
-                            && string_strcasecmp (pos, WEECHAT_CONFIG_OPTION_NULL) != 0)
+                            && string_strcasecmp (pos, WHOREIRC_CONFIG_OPTION_NULL) != 0)
                         {
                             undefined_value = 0;
                             /* remove simple or double quotes and spaces at the end */
@@ -2710,7 +2710,7 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
                     }
                     else
                     {
-                        rc = WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND;
+                        rc = WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND;
                         ptr_option = config_file_search_option (config_file,
                                                                 ptr_section,
                                                                 ptr_option_name);
@@ -2740,7 +2740,7 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
 
                     switch (rc)
                     {
-                        case WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
+                        case WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
                             if (ptr_section)
                                 gui_chat_printf (NULL,
                                                  _("%sWarning: %s, line %d: "
@@ -2759,7 +2759,7 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
                                                  filename, line_number,
                                                  ptr_line2);
                             break;
-                        case WEECHAT_CONFIG_OPTION_SET_ERROR:
+                        case WHOREIRC_CONFIG_OPTION_SET_ERROR:
                             gui_chat_printf (NULL,
                                              _("%sWarning: %s, line %d: "
                                                "invalid value for option: "
@@ -2781,16 +2781,16 @@ config_file_read_internal (struct t_config_file *config_file, int reload)
     config_file->file = NULL;
     free (filename);
 
-    return WEECHAT_CONFIG_READ_OK;
+    return WHOREIRC_CONFIG_READ_OK;
 }
 
 /*
  * Reads a configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -2803,9 +2803,9 @@ config_file_read (struct t_config_file *config_file)
  * Reloads a configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -2816,7 +2816,7 @@ config_file_reload (struct t_config_file *config_file)
     int rc;
 
     if (!config_file)
-        return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+        return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
 
     log_printf (_("Reloading configuration file %s"), config_file->filename);
 
@@ -3103,7 +3103,7 @@ config_file_hdata_config_file_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_config_file, last_section, POINTER, 0, NULL, "config_section");
         HDATA_VAR(struct t_config_file, prev_config, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_config_file, next_config, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(config_files, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(config_files, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_config_file, 0);
     }
     return hdata;
@@ -3388,7 +3388,7 @@ config_file_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints configuration file in WeeChat log file (usually for crash dump).
+ * Prints configuration file in WhoreIRC log file (usually for crash dump).
  */
 
 void

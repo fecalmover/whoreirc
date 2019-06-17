@@ -1,20 +1,20 @@
 #
 # Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 #
 
@@ -40,7 +40,7 @@ Vendor:    Sébastien Helleu <flashcode@flashtux.org>
 Packager:  [Odin] <odin@dtdm.org>
 
 %description
-WeeChat (Wee Enhanced Environment for Chat) is a portable, fast, light and
+WhoreIRC (Wee Enhanced Environment for Chat) is a portable, fast, light and
 extensible chat client. Everything can be done with a keyboard.
 It is customizable and extensible with scripts.
 

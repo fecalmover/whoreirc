@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_CONFIG_H
-#define WEECHAT_PLUGIN_RELAY_CONFIG_H
+#ifndef WHOREIRC_PLUGIN_RELAY_CONFIG_H
+#define WHOREIRC_PLUGIN_RELAY_CONFIG_H
 
 #include <regex.h>
 
@@ -80,4 +80,4 @@ extern int relay_config_read ();
 extern int relay_config_write ();
 extern void relay_config_free ();
 
-#endif /* WEECHAT_PLUGIN_RELAY_CONFIG_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_CONFIG_H */

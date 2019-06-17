@@ -3,8 +3,8 @@
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: pl
-:man manual: WeeChat Manual
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC Manual
+:man source: WhoreIRC {revnumber}
 
 == NAZWA
 
@@ -21,7 +21,7 @@ whoreirc - rozszerzalny klient rozmów
 
 == OPIS
 
-WeeChat (Wee Enhanced Environment for Chat) to darmowy klient rozmów, szybki
+WhoreIRC (Wee Enhanced Environment for Chat) to darmowy klient rozmów, szybki
 i lekki, przeznaczony dla wielu systemów operacyjnych.
 Posiada dużo opcji konfiguracyjnych i dodatkowych wtyczek.
 

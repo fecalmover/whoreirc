@@ -2,24 +2,24 @@
 #
 # Copyright (C) 2015-2019 Sébastien Helleu <flashcode@flashtux.org>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 
 #
-# Build WeeChat Debian packages for a stable or development version.
+# Build WhoreIRC Debian packages for a stable or development version.
 #
 # According to the version (stable/devel), a symbolic "debian" is made:
 #        debian/ --> debian-stable/
@@ -76,7 +76,7 @@ Syntax: $0 devel|stable|<version> distro
 
   test-patches  test that all Debian/Ubuntu patches apply fine (with git apply --check)
 
-IMPORTANT: the current OS must match the distro, and the WeeChat sources
+IMPORTANT: the current OS must match the distro, and the WhoreIRC sources
            must be checkouted in the appropriate version (this script
            does not checkout sources on a specific tag).
 
@@ -137,7 +137,7 @@ fi
 # check git repository
 ROOT_DIR=$(git rev-parse --show-toplevel)
 if [ -z "${ROOT_DIR}" -o ! -d "${ROOT_DIR}/.git" -o ! -d "${ROOT_DIR}/debian-stable" ]; then
-    error "this script must be run from WeeChat git repository."
+    error "this script must be run from WhoreIRC git repository."
 fi
 cd "${ROOT_DIR}"
 

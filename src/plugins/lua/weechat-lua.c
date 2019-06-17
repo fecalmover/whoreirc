@@ -35,12 +35,12 @@
 #include "weechat-lua-api.h"
 
 
-WEECHAT_PLUGIN_NAME(LUA_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of lua scripts"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(LUA_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of lua scripts"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_lua_plugin = NULL;
 
@@ -67,8 +67,8 @@ struct t_gui_buffer *lua_eval_buffer = NULL;
     "    assert(" LUA_LOAD "(code))()\n"                                \
     "end\n"                                                             \
     "\n"                                                                \
-    "weechat.register('" WEECHAT_SCRIPT_EVAL_NAME "', '', '1.0', "      \
-    "'" WEECHAT_LICENSE "', 'Evaluation of source code', '', '')\n"
+    "weechat.register('" WHOREIRC_SCRIPT_EVAL_NAME "', '', '1.0', "      \
+    "'" WHOREIRC_LICENSE "', 'Evaluation of source code', '', '')\n"
 
 struct t_plugin_script *lua_scripts = NULL;
 struct t_plugin_script *last_lua_script = NULL;
@@ -159,13 +159,13 @@ weechat_lua_tohashtable (lua_State *interpreter, int index, int size,
     lua_pushnil (interpreter);
     while (lua_next (interpreter, index - 1) != 0)
     {
-        if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+        if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
         {
             weechat_hashtable_set (hashtable,
                                    lua_tostring (interpreter, -2),
                                    lua_tostring (interpreter, -1));
         }
-        else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+        else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
         {
             weechat_hashtable_set (hashtable,
                                    lua_tostring (interpreter, -2),
@@ -335,7 +335,7 @@ weechat_lua_exec (struct t_plugin_script *script, int ret_type,
 
     if (rc == 0)
     {
-        if (ret_type == WEECHAT_SCRIPT_EXEC_STRING)
+        if (ret_type == WHOREIRC_SCRIPT_EXEC_STRING)
         {
             ret_value = (char *) lua_tostring (lua_current_interpreter, -1);
             if (ret_value)
@@ -351,7 +351,7 @@ weechat_lua_exec (struct t_plugin_script *script, int ret_type,
                                 function);
             }
         }
-        else if (ret_type == WEECHAT_SCRIPT_EXEC_POINTER)
+        else if (ret_type == WHOREIRC_SCRIPT_EXEC_POINTER)
         {
             ret_value = (char *) lua_tostring (lua_current_interpreter, -1);
             if (ret_value)
@@ -369,23 +369,23 @@ weechat_lua_exec (struct t_plugin_script *script, int ret_type,
                                 function);
             }
         }
-        else if (ret_type == WEECHAT_SCRIPT_EXEC_INT)
+        else if (ret_type == WHOREIRC_SCRIPT_EXEC_INT)
         {
             ret_i = malloc (sizeof (*ret_i));
             if (ret_i)
                 *ret_i = lua_tonumber (lua_current_interpreter, -1);
             ret_value = ret_i;
         }
-        else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+        else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
         {
             ret_value = weechat_lua_tohashtable (lua_current_interpreter, -1,
-                                                 WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                 WEECHAT_HASHTABLE_STRING,
-                                                 WEECHAT_HASHTABLE_STRING);
+                                                 WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                 WHOREIRC_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_STRING);
         }
         else
         {
-            if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+            if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
             {
                 weechat_printf (NULL,
                                 weechat_gettext ("%s%s: function \"%s\" must "
@@ -406,7 +406,7 @@ weechat_lua_exec (struct t_plugin_script *script, int ret_type,
                         lua_tostring (lua_current_interpreter, -1));
     }
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -685,7 +685,7 @@ weechat_lua_load (const char *filename, const char *code)
                                         &weechat_lua_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("lua_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      lua_current_script->filename);
 
     return lua_current_script;
@@ -725,7 +725,7 @@ weechat_lua_unload (struct t_plugin_script *script)
     if (script->shutdown_func && script->shutdown_func[0])
     {
         rc = (int *)weechat_lua_exec (script,
-                                      WEECHAT_SCRIPT_EXEC_INT,
+                                      WHOREIRC_SCRIPT_EXEC_INT,
                                       script->shutdown_func,
                                       NULL, NULL);
         if (rc)
@@ -748,7 +748,7 @@ weechat_lua_unload (struct t_plugin_script *script)
         lua_current_interpreter = lua_current_script->interpreter;
 
     (void) weechat_hook_signal_send ("lua_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -846,7 +846,7 @@ weechat_lua_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
     if (!lua_script_eval)
     {
         lua_quiet = 1;
-        lua_script_eval = weechat_lua_load (WEECHAT_SCRIPT_EVAL_NAME,
+        lua_script_eval = weechat_lua_load (WHOREIRC_SCRIPT_EVAL_NAME,
                                             LUA_EVAL_SCRIPT);
         lua_quiet = 0;
         if (!lua_script_eval)
@@ -862,7 +862,7 @@ weechat_lua_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
 
     func_argv[0] = (char *)code;
     result = weechat_lua_exec (lua_script_eval,
-                               WEECHAT_SCRIPT_EXEC_IGNORE,
+                               WHOREIRC_SCRIPT_EXEC_IGNORE,
                                "script_lua_eval",
                                "s", func_argv);
     /* result is ignored */
@@ -938,7 +938,7 @@ weechat_lua_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_lua_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -1000,7 +1000,7 @@ weechat_lua_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -1008,7 +1008,7 @@ weechat_lua_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -1019,13 +1019,13 @@ weechat_lua_command_cb (const void *pointer, void *data,
             }
             if (!weechat_lua_eval (buffer, send_to_buffer_as_input,
                                    exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1046,7 +1046,7 @@ weechat_lua_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_lua_plugin, completion, lua_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1136,7 +1136,7 @@ weechat_lua_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_lua_plugin, lua_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1178,7 +1178,7 @@ weechat_lua_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1195,7 +1195,7 @@ weechat_lua_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "lua_script_install") == 0)
         {
@@ -1223,7 +1223,7 @@ weechat_lua_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1249,7 +1249,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     /* init stdout/stderr buffer */
     lua_buffer_output = weechat_string_dyn_alloc (256);
     if (!lua_buffer_output)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     lua_data.config_file = &lua_config_file;
     lua_data.config_look_check_license = &lua_config_look_check_license;
@@ -1274,7 +1274,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                       lua_scripts);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1303,5 +1303,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (lua_action_autoload_list);
     weechat_string_dyn_free (lua_buffer_output, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

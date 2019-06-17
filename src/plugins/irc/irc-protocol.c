@@ -5,20 +5,20 @@
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  * Copyright (C) 2014 Shawn Smith <ShawnSmith0828@gmail.com>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /* this define is needed for strptime() (not on OpenBSD/Sun) */
@@ -231,7 +231,7 @@ IRC_PROTOCOL_CALLBACK(account)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -305,7 +305,7 @@ IRC_PROTOCOL_CALLBACK(authenticate)
             free (sasl_password);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -332,7 +332,7 @@ IRC_PROTOCOL_CALLBACK(away)
             irc_nick_set_away (server, ptr_channel, ptr_nick, (argc > 2));
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -399,9 +399,9 @@ irc_protocol_cap_sync (struct t_irc_server *server, int sasl)
             cap_option,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &num_caps_requested);
         if (caps_requested)
@@ -517,9 +517,9 @@ IRC_PROTOCOL_CALLBACK(cap)
                 ptr_caps,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_caps_supported);
             if (caps_supported)
@@ -600,9 +600,9 @@ IRC_PROTOCOL_CALLBACK(cap)
                 ptr_caps,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_caps_enabled);
             if (caps_enabled)
@@ -662,9 +662,9 @@ IRC_PROTOCOL_CALLBACK(cap)
                 ptr_caps,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_caps_supported);
             if (caps_supported)
@@ -775,9 +775,9 @@ IRC_PROTOCOL_CALLBACK(cap)
                 ptr_caps,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_caps_added);
             if (caps_added)
@@ -822,9 +822,9 @@ IRC_PROTOCOL_CALLBACK(cap)
                 ptr_caps,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_caps_removed);
             if (caps_removed)
@@ -839,7 +839,7 @@ IRC_PROTOCOL_CALLBACK(cap)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -877,7 +877,7 @@ IRC_PROTOCOL_CALLBACK(chghost)
             server->buffer,
             _("%s%s: not enough memory for \"%s\" command"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "chghost");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
     snprintf (str_host, length, "%s@%s", argv[2], pos_new_host);
 
@@ -926,7 +926,7 @@ IRC_PROTOCOL_CALLBACK(chghost)
 
     free (str_host);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -957,7 +957,7 @@ IRC_PROTOCOL_CALLBACK(error)
         irc_server_disconnect (server, !server->is_connected, 1);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1017,7 +1017,7 @@ IRC_PROTOCOL_CALLBACK(generic_error)
         (chan_nick) ? ": " : "",
         args);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1038,7 +1038,7 @@ IRC_PROTOCOL_CALLBACK(invite)
     IRC_PROTOCOL_CHECK_HOST;
 
     if (ignored)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (irc_server_strcasecmp (server, argv[2], server->nick) == 0)
     {
@@ -1076,7 +1076,7 @@ IRC_PROTOCOL_CALLBACK(invite)
             IRC_COLOR_RESET);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1144,7 +1144,7 @@ IRC_PROTOCOL_CALLBACK(join)
          * ignore it (we should receive our self join first)
          */
         if (!local_join)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         ptr_channel = irc_channel_new (server, IRC_CHANNEL_TYPE_CHANNEL,
                                        pos_channel, 1, 1);
@@ -1154,7 +1154,7 @@ IRC_PROTOCOL_CALLBACK(join)
                             _("%s%s: cannot create new channel \"%s\""),
                             weechat_prefix ("error"), IRC_PLUGIN_NAME,
                             pos_channel);
-            return WEECHAT_RC_ERROR;
+            return WHOREIRC_RC_ERROR;
         }
     }
 
@@ -1253,7 +1253,7 @@ IRC_PROTOCOL_CALLBACK(join)
         irc_bar_item_update_channel ();
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1279,7 +1279,7 @@ IRC_PROTOCOL_CALLBACK(kick)
 
     ptr_channel = irc_channel_search (server, argv[2]);
     if (!ptr_channel)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     ptr_nick = irc_nick_search (server, ptr_channel, nick);
     ptr_nick_kicked = irc_nick_search (server, ptr_channel, argv[3]);
@@ -1377,7 +1377,7 @@ IRC_PROTOCOL_CALLBACK(kick)
             irc_nick_free (server, ptr_channel, ptr_nick_kicked);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1462,7 +1462,7 @@ IRC_PROTOCOL_CALLBACK(kill)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1543,7 +1543,7 @@ IRC_PROTOCOL_CALLBACK(mode)
         irc_mode_user_set (server, pos_modes, 0);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1719,7 +1719,7 @@ IRC_PROTOCOL_CALLBACK(nick)
     if (!local_nick)
         irc_channel_display_nick_back_in_pv (server, ptr_nick_found, new_nick);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1743,7 +1743,7 @@ IRC_PROTOCOL_CALLBACK(notice)
     IRC_PROTOCOL_MIN_ARGS(3);
 
     if (ignored)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     status_notice[0] = '\0';
     status_notice[1] = '\0';
@@ -1751,7 +1751,7 @@ IRC_PROTOCOL_CALLBACK(notice)
     if (argv[0][0] == ':')
     {
         if (argc < 4)
-            return WEECHAT_RC_ERROR;
+            return WHOREIRC_RC_ERROR;
         pos_target = argv[2];
         is_channel = irc_channel_is_channel (server, pos_target + 1);
         if (is_channel
@@ -1935,7 +1935,7 @@ IRC_PROTOCOL_CALLBACK(notice)
                                                               command, NULL,
                                                               NULL);
                 /*
-                 * if notice is sent from myself (for example another WeeChat
+                 * if notice is sent from myself (for example another WhoreIRC
                  * via relay), then display message of outgoing notice
                  */
                 if (nick && (irc_server_strcasecmp (server, server->nick, nick) == 0))
@@ -1979,7 +1979,7 @@ IRC_PROTOCOL_CALLBACK(notice)
             free (channel);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2010,7 +2010,7 @@ IRC_PROTOCOL_CALLBACK(part)
     ptr_channel = irc_channel_search (server,
                                       (argv[2][0] == ':') ? argv[2] + 1 : argv[2]);
     if (!ptr_channel)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     ptr_nick = irc_nick_search (server, ptr_channel, nick);
 
@@ -2141,7 +2141,7 @@ IRC_PROTOCOL_CALLBACK(part)
         irc_nick_free (server, ptr_channel, ptr_nick);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2158,7 +2158,7 @@ IRC_PROTOCOL_CALLBACK(ping)
     irc_server_sendf (server, 0, NULL, "PONG :%s",
                       (argv[1][0] == ':') ? argv[1] + 1 : argv[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2206,7 +2206,7 @@ IRC_PROTOCOL_CALLBACK(pong)
                            argv_eol[3] + 1 : argv_eol[3]) : "");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2235,7 +2235,7 @@ IRC_PROTOCOL_CALLBACK(privmsg)
     IRC_PROTOCOL_CHECK_HOST;
 
     if (ignored)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     pos_args = (argv_eol[3][0] == ':') ? argv_eol[3] + 1 : argv_eol[3];
 
@@ -2271,7 +2271,7 @@ IRC_PROTOCOL_CALLBACK(privmsg)
             {
                 irc_ctcp_recv (server, date, command, ptr_channel,
                                address, nick, NULL, pos_args, argv_eol[0]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
 
             /* other message */
@@ -2344,7 +2344,7 @@ IRC_PROTOCOL_CALLBACK(privmsg)
         {
             irc_ctcp_recv (server, date, command, NULL,
                            address, nick, remote_nick, pos_args, argv_eol[0]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* private message received => display it */
@@ -2362,7 +2362,7 @@ IRC_PROTOCOL_CALLBACK(privmsg)
                                   "private buffer \"%s\""),
                                 weechat_prefix ("error"),
                                 IRC_PLUGIN_NAME, remote_nick);
-                return WEECHAT_RC_ERROR;
+                return WHOREIRC_RC_ERROR;
             }
         }
         irc_channel_set_topic (ptr_channel, address);
@@ -2421,11 +2421,11 @@ IRC_PROTOCOL_CALLBACK(privmsg)
             ptr_channel->has_quit_server = 0;
 
         (void) weechat_hook_signal_send ("irc_pv",
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          argv_eol[0]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2547,7 +2547,7 @@ IRC_PROTOCOL_CALLBACK(quit)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2583,7 +2583,7 @@ IRC_PROTOCOL_CALLBACK(server_mode_reason)
         pos_mode,
         (pos_args) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2614,7 +2614,7 @@ IRC_PROTOCOL_CALLBACK(numeric)
         weechat_prefix ("network"),
         pos_args);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2638,7 +2638,7 @@ IRC_PROTOCOL_CALLBACK(topic)
         weechat_printf (server->buffer,
                         _("%s%s: \"%s\" command received without channel"),
                         weechat_prefix ("error"), IRC_PLUGIN_NAME, "topic");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     pos_topic = (argc > 3) ?
@@ -2760,7 +2760,7 @@ IRC_PROTOCOL_CALLBACK(topic)
     if (ptr_channel)
         irc_channel_set_topic (ptr_channel, pos_topic);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2777,7 +2777,7 @@ IRC_PROTOCOL_CALLBACK(wallops)
     IRC_PROTOCOL_MIN_ARGS(3);
 
     if (ignored)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     nick_address = irc_protocol_nick_address (server, 0, NULL, nick, address);
     weechat_printf_date_tags (
@@ -2789,7 +2789,7 @@ IRC_PROTOCOL_CALLBACK(wallops)
         (nick_address[0]) ? nick_address : "?",
         (argv_eol[2][0] == ':') ? argv_eol[2] + 1 : argv_eol[2]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2840,7 +2840,7 @@ IRC_PROTOCOL_CALLBACK(001)
 
     /* send signal "irc_server_connected" with server name */
     (void) weechat_hook_signal_send ("irc_server_connected",
-                                     WEECHAT_HOOK_SIGNAL_STRING, server->name);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, server->name);
 
     /* set usermode when connected */
     usermode = irc_server_eval_expression (
@@ -2890,7 +2890,7 @@ IRC_PROTOCOL_CALLBACK(001)
     if (server_command)
         free (server_command);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3035,7 +3035,7 @@ IRC_PROTOCOL_CALLBACK(005)
         pos_start[length + 1] = '\0';
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3060,7 +3060,7 @@ IRC_PROTOCOL_CALLBACK(008)
         IRC_COLOR_RESET,
         (argv_eol[3][0] == ':') ? argv_eol[3] + 1 : argv_eol[3]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3096,7 +3096,7 @@ IRC_PROTOCOL_CALLBACK(221)
             1);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3151,7 +3151,7 @@ IRC_PROTOCOL_CALLBACK(301)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3174,7 +3174,7 @@ IRC_PROTOCOL_CALLBACK(303)
         IRC_COLOR_CHAT_NICK,
         (argv_eol[3][0] == ':') ? argv_eol[3] + 1 : argv_eol[3]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3205,7 +3205,7 @@ IRC_PROTOCOL_CALLBACK(305)
 
     weechat_bar_item_update ("away");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3236,7 +3236,7 @@ IRC_PROTOCOL_CALLBACK(306)
 
     weechat_bar_item_update ("away");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3264,7 +3264,7 @@ IRC_PROTOCOL_CALLBACK(whois_nick_msg)
         IRC_COLOR_RESET,
         (argv_eol[4][0] == ':') ? argv_eol[4] + 1 : argv_eol[4]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3292,7 +3292,7 @@ IRC_PROTOCOL_CALLBACK(whowas_nick_msg)
         IRC_COLOR_RESET,
         (argv_eol[4][0] == ':') ? argv_eol[4] + 1 : argv_eol[4]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3324,7 +3324,7 @@ IRC_PROTOCOL_CALLBACK(311)
         IRC_COLOR_RESET,
         (argv_eol[7][0] == ':') ? argv_eol[7] + 1 : argv_eol[7]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3356,7 +3356,7 @@ IRC_PROTOCOL_CALLBACK(312)
         (argv_eol[5][0] == ':') ? argv_eol[5] + 1 : argv_eol[5],
         IRC_COLOR_CHAT_DELIMITERS);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3388,7 +3388,7 @@ IRC_PROTOCOL_CALLBACK(314)
         IRC_COLOR_RESET,
         (argv_eol[7][0] == ':') ? argv_eol[7] + 1 : argv_eol[7]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3426,7 +3426,7 @@ IRC_PROTOCOL_CALLBACK(315)
             (argv_eol[4][0] == ':') ? argv_eol[4] + 1 : argv_eol[4]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3518,7 +3518,7 @@ IRC_PROTOCOL_CALLBACK(317)
             weechat_util_get_time_string (&datetime));
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3548,7 +3548,7 @@ IRC_PROTOCOL_CALLBACK(321)
         (pos_args) ? " " : "",
         (pos_args) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3588,7 +3588,7 @@ IRC_PROTOCOL_CALLBACK(322)
             (pos_topic && pos_topic[0]) ? pos_topic : "");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3615,7 +3615,7 @@ IRC_PROTOCOL_CALLBACK(323)
         weechat_prefix ("network"),
         (pos_args && pos_args[0]) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3670,7 +3670,7 @@ IRC_PROTOCOL_CALLBACK(324)
     if (ptr_channel)
         weechat_hashtable_set (ptr_channel->join_msg_received, command, "1");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3730,7 +3730,7 @@ IRC_PROTOCOL_CALLBACK(327)
             argv[5]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3763,7 +3763,7 @@ IRC_PROTOCOL_CALLBACK(328)
             argv_eol[4] + 1 : argv_eol[4]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3820,7 +3820,7 @@ IRC_PROTOCOL_CALLBACK(329)
     if (ptr_channel)
         weechat_hashtable_set (ptr_channel->join_msg_received, command, "1");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3878,7 +3878,7 @@ IRC_PROTOCOL_CALLBACK(330_343)
             (argv_eol[4][0] == ':') ? argv_eol[4] + 1 : argv_eol[4]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3907,7 +3907,7 @@ IRC_PROTOCOL_CALLBACK(331)
         IRC_COLOR_CHAT_CHANNEL,
         argv[3]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3979,7 +3979,7 @@ IRC_PROTOCOL_CALLBACK(332)
     if (ptr_channel)
         weechat_hashtable_set (ptr_channel->join_msg_received, command, "1");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4013,7 +4013,7 @@ IRC_PROTOCOL_CALLBACK(333)
                               argv_eol[arg_date] + 1 : argv_eol[arg_date]));
 
     if (!topic_nick && (datetime == 0))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (ptr_channel && ptr_channel->nicks)
     {
@@ -4101,7 +4101,7 @@ IRC_PROTOCOL_CALLBACK(333)
     if (ptr_channel)
         weechat_hashtable_set (ptr_channel->join_msg_received, command, "1");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4131,7 +4131,7 @@ IRC_PROTOCOL_CALLBACK(338)
         IRC_COLOR_CHAT_HOST,
         argv[4]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4166,7 +4166,7 @@ IRC_PROTOCOL_CALLBACK(341)
         pos_channel,
         IRC_COLOR_RESET);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4192,7 +4192,7 @@ IRC_PROTOCOL_CALLBACK(344)
         IRC_COLOR_CHAT_HOST,
         (argv_eol[4][0] == ':') ? argv_eol[4] + 1 : argv_eol[4]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4217,7 +4217,7 @@ IRC_PROTOCOL_CALLBACK(345)
         IRC_COLOR_RESET,
         (argv_eol[4][0] == ':') ? argv_eol[4] + 1 : argv_eol[4]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4335,7 +4335,7 @@ IRC_PROTOCOL_CALLBACK(346)
             IRC_COLOR_RESET);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4388,7 +4388,7 @@ IRC_PROTOCOL_CALLBACK(347)
         (pos_args) ? " " : "",
         (pos_args) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4508,7 +4508,7 @@ IRC_PROTOCOL_CALLBACK(348)
             argv[4]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4561,7 +4561,7 @@ IRC_PROTOCOL_CALLBACK(349)
         (pos_args) ? " " : "",
         (pos_args) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4604,7 +4604,7 @@ IRC_PROTOCOL_CALLBACK(351)
             argv[4]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4625,7 +4625,7 @@ IRC_PROTOCOL_CALLBACK(352)
 
     /* silently ignore malformed 352 message (missing infos) */
     if (argc < 8)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     pos_attr = NULL;
     pos_hopcount = NULL;
@@ -4717,7 +4717,7 @@ IRC_PROTOCOL_CALLBACK(352)
             (pos_realname) ? pos_realname : "");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4865,7 +4865,7 @@ IRC_PROTOCOL_CALLBACK(353)
     if (str_nicks)
         free (str_nicks);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4910,7 +4910,7 @@ IRC_PROTOCOL_CALLBACK(354)
                 (argc > 4) ? " " : "",
                 (argc > 4) ? argv_eol[4] : "");
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     ptr_nick = (ptr_channel) ?
@@ -5007,7 +5007,7 @@ IRC_PROTOCOL_CALLBACK(354)
             (pos_realname) ? pos_realname : "");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5232,7 +5232,7 @@ IRC_PROTOCOL_CALLBACK(366)
 
     weechat_bar_item_update ("input_prompt");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5349,7 +5349,7 @@ IRC_PROTOCOL_CALLBACK(367)
             IRC_COLOR_RESET);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5402,7 +5402,7 @@ IRC_PROTOCOL_CALLBACK(368)
         (pos_args) ? " " : "",
         (pos_args) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5435,7 +5435,7 @@ IRC_PROTOCOL_CALLBACK(432)
                   "invalid, closing connection with server"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
             irc_server_disconnect (server, 0, 1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         weechat_printf_date_tags (
@@ -5449,7 +5449,7 @@ IRC_PROTOCOL_CALLBACK(432)
         irc_server_sendf (server, 0, NULL, "NICK :%s", server->nick);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5478,7 +5478,7 @@ IRC_PROTOCOL_CALLBACK(433)
                   "connection with server"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
             irc_server_disconnect (server, 0, 1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         weechat_printf_date_tags (
@@ -5500,7 +5500,7 @@ IRC_PROTOCOL_CALLBACK(433)
                                               argv_eol);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5536,7 +5536,7 @@ IRC_PROTOCOL_CALLBACK(437)
                       "invalid, closing connection with server"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME);
                 irc_server_disconnect (server, 0, 1);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
 
             weechat_printf_date_tags (
@@ -5552,7 +5552,7 @@ IRC_PROTOCOL_CALLBACK(437)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5595,7 +5595,7 @@ IRC_PROTOCOL_CALLBACK(438)
             argv[3]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5658,7 +5658,7 @@ IRC_PROTOCOL_CALLBACK(470)
             if (lines_count == 0)
             {
                 (void) weechat_hook_signal_send ("logger_backlog",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  ptr_buffer);
             }
         }
@@ -5704,7 +5704,7 @@ IRC_PROTOCOL_CALLBACK(470)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5821,7 +5821,7 @@ IRC_PROTOCOL_CALLBACK(728)
             IRC_COLOR_RESET);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5874,7 +5874,7 @@ IRC_PROTOCOL_CALLBACK(729)
         (pos_args) ? " " : "",
         (pos_args) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5898,9 +5898,9 @@ IRC_PROTOCOL_CALLBACK(730)
                                   argv_eol[3] + 1 : argv_eol[3],
                                   ",",
                                   NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0,
                                   &num_nicks);
     if (nicks)
@@ -5918,7 +5918,7 @@ IRC_PROTOCOL_CALLBACK(730)
         weechat_string_free_split (nicks);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5942,9 +5942,9 @@ IRC_PROTOCOL_CALLBACK(731)
                                   argv_eol[3] + 1 : argv_eol[3],
                                   ",",
                                   NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0,
                                   &num_nicks);
     if (nicks)
@@ -5962,7 +5962,7 @@ IRC_PROTOCOL_CALLBACK(731)
         weechat_string_free_split (nicks);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5990,7 +5990,7 @@ IRC_PROTOCOL_CALLBACK(732)
         weechat_prefix ("network"),
         (pos_args && pos_args[0]) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6018,7 +6018,7 @@ IRC_PROTOCOL_CALLBACK(733)
         weechat_prefix ("network"),
         (pos_args && pos_args[0]) ? pos_args : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6047,7 +6047,7 @@ IRC_PROTOCOL_CALLBACK(734)
         (pos_args && pos_args[0]) ? pos_args : "",
         argv[3]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6073,7 +6073,7 @@ IRC_PROTOCOL_CALLBACK(900)
         argv[3],
         IRC_COLOR_CHAT_DELIMITERS);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6104,7 +6104,7 @@ IRC_PROTOCOL_CALLBACK(901)
                                  ignored, argc, argv, argv_eol);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6124,7 +6124,7 @@ IRC_PROTOCOL_CALLBACK(sasl_end_ok)
     if (!server->is_connected)
         irc_server_sendf (server, 0, NULL, "CAP END");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6149,13 +6149,13 @@ IRC_PROTOCOL_CALLBACK(sasl_end_fail)
         irc_server_disconnect (
             server, 0,
             (sasl_fail == IRC_SERVER_SASL_FAIL_RECONNECT) ? 1 : 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (!server->is_connected)
         irc_server_sendf (server, 0, NULL, "CAP END");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6180,16 +6180,16 @@ irc_protocol_get_message_tags (const char *tags)
         return NULL;
 
     hashtable = weechat_hashtable_new (32,
-                                       WEECHAT_HASHTABLE_STRING,
-                                       WEECHAT_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
                                        NULL, NULL);
     if (!hashtable)
         return NULL;
 
     items = weechat_string_split (tags, ";", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &num_items);
     if (items)
     {
@@ -6605,15 +6605,15 @@ irc_protocol_recv_command (struct t_irc_server *server,
         else
             message_colors_decoded = NULL;
         argv = weechat_string_split (message_colors_decoded, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
-        flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-            | WEECHAT_STRING_SPLIT_KEEP_EOL;
+        flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+            | WHOREIRC_STRING_SPLIT_KEEP_EOL;
         if (keep_trailing_spaces)
-            flags |= WEECHAT_STRING_SPLIT_STRIP_RIGHT;
+            flags |= WHOREIRC_STRING_SPLIT_STRIP_RIGHT;
         argv_eol = weechat_string_split (message_colors_decoded, " ", NULL,
                                          flags, 0, NULL);
 
@@ -6623,7 +6623,7 @@ irc_protocol_recv_command (struct t_irc_server *server,
                                              message_ignored, argc, argv,
                                              argv_eol);
 
-        if (return_code == WEECHAT_RC_ERROR)
+        if (return_code == WHOREIRC_RC_ERROR)
         {
             weechat_printf (server->buffer,
                             _("%s%s: failed to parse command \"%s\" (please "

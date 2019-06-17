@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2013-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -379,7 +379,7 @@ spell_command_cb (const void *pointer, void *data,
             }
             weechat_infolist_free (infolist);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* enable spell */
@@ -387,7 +387,7 @@ spell_command_cb (const void *pointer, void *data,
     {
         weechat_config_option_set (spell_config_check_enabled, "1", 1);
         weechat_printf (NULL, _("Spell checker enabled"));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* disable spell */
@@ -395,7 +395,7 @@ spell_command_cb (const void *pointer, void *data,
     {
         weechat_config_option_set (spell_config_check_enabled, "0", 1);
         weechat_printf (NULL, _("Spell checker disabled"));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* toggle spell */
@@ -411,39 +411,39 @@ spell_command_cb (const void *pointer, void *data,
             weechat_config_option_set (spell_config_check_enabled, "1", 1);
             weechat_printf (NULL, _("Spell checker enabled"));
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* list of dictionaries */
     if (weechat_strcasecmp (argv[1], "listdict") == 0)
     {
         spell_command_speller_list_dicts ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set dictionary for current buffer */
     if (weechat_strcasecmp (argv[1], "setdict") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "setdict");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "setdict");
         dicts = weechat_string_replace (argv_eol[2], " ", "");
         spell_command_set_dict (buffer,
                                 (dicts) ? dicts : argv[2]);
         if (dicts)
             free (dicts);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete dictionary used on current buffer */
     if (weechat_strcasecmp (argv[1], "deldict") == 0)
     {
         spell_command_set_dict (buffer, NULL);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add word to personal dictionary */
     if (weechat_strcasecmp (argv[1], "addword") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "addword");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "addword");
         if (argc > 3)
         {
             /* use a given dict */
@@ -454,10 +454,10 @@ spell_command_cb (const void *pointer, void *data,
             /* use default dict */
             spell_command_add_word (buffer, NULL, argv_eol[2]);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*

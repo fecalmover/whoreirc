@@ -124,8 +124,8 @@ script_mouse_init ()
     struct t_hashtable *keys;
 
     keys = weechat_hashtable_new (4,
-                                  WEECHAT_HASHTABLE_STRING,
-                                  WEECHAT_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_STRING,
                                   NULL, NULL);
     if (!keys)
         return 0;

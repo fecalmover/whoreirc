@@ -32,12 +32,12 @@
 #include "exec-config.h"
 
 
-WEECHAT_PLUGIN_NAME(EXEC_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Execution of external commands in WeeChat"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(13000);
+WHOREIRC_PLUGIN_NAME(EXEC_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Execution of external commands in WeeChat"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(13000);
 
 struct t_weechat_plugin *weechat_exec_plugin = NULL;
 
@@ -186,7 +186,7 @@ exec_timer_delete_cb (const void *pointer, void *data, int remaining_calls)
 
     exec_cmd = (struct t_exec_cmd *)pointer;
     if (!exec_cmd)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     for (ptr_exec_cmd = exec_cmds; ptr_exec_cmd;
          ptr_exec_cmd = ptr_exec_cmd->next_cmd)
@@ -198,7 +198,7 @@ exec_timer_delete_cb (const void *pointer, void *data, int remaining_calls)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -230,7 +230,7 @@ exec_decode_color (struct t_exec_cmd *exec_cmd, const char *string)
         case EXEC_COLOR_IRC:
             irc_color = 1;
             break;
-        case EXEC_COLOR_WEECHAT:
+        case EXEC_COLOR_WHOREIRC:
             irc_color = 0;
             break;
         case EXEC_COLOR_STRIP:
@@ -454,8 +454,8 @@ exec_end_command (struct t_exec_cmd *exec_cmd, int return_code)
     if (exec_cmd->hsignal)
     {
         hashtable = weechat_hashtable_new (32,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL, NULL);
         if (hashtable)
         {
@@ -580,7 +580,7 @@ exec_process_cb (const void *pointer, void *data, const char *command,
 
     ptr_exec_cmd = (struct t_exec_cmd *)pointer;
     if (!ptr_exec_cmd)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     if (weechat_exec_plugin->debug >= 2)
     {
@@ -604,12 +604,12 @@ exec_process_cb (const void *pointer, void *data, const char *command,
             exec_concat_output (ptr_exec_cmd, ptr_buffer, EXEC_STDERR, err);
     }
 
-    if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+    if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
         exec_end_command (ptr_exec_cmd, -1);
     else if (return_code >= 0)
         exec_end_command (ptr_exec_cmd, return_code);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -740,7 +740,7 @@ exec_debug_dump_cb (const void *pointer, void *data,
                             weechat_plugin->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -757,7 +757,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     exec_command_init ();
 
     if (!exec_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     exec_config_read ();
 
@@ -780,7 +780,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     if (upgrading)
         exec_buffer_set_callbacks ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -797,5 +797,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     exec_free_all ();
     exec_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

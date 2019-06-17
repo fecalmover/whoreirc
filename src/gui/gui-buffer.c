@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -217,7 +217,7 @@ gui_buffer_local_var_add (struct t_gui_buffer *buffer, const char *name,
     hashtable_set (buffer->local_variables, name, value);
     (void) hook_signal_send ((ptr_value) ?
                              "buffer_localvar_changed" : "buffer_localvar_added",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -237,7 +237,7 @@ gui_buffer_local_var_remove (struct t_gui_buffer *buffer, const char *name)
     {
         hashtable_remove (buffer->local_variables, name);
         (void) hook_signal_send ("buffer_localvar_removed",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
     }
 }
 
@@ -252,7 +252,7 @@ gui_buffer_local_var_remove_all (struct t_gui_buffer *buffer)
     {
         hashtable_remove_all (buffer->local_variables);
         (void) hook_signal_send ("buffer_localvar_removed",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
     }
 }
 
@@ -576,11 +576,11 @@ gui_buffer_input_buffer_init (struct t_gui_buffer *buffer)
 }
 
 /*
- * Checks if the name is reserved for WeeChat.
+ * Checks if the name is reserved for WhoreIRC.
  *
  * Returns:
- *   0: name is not reserved for WeeChat
- *   1: name is reserved for WeeChat
+ *   0: name is not reserved for WhoreIRC
+ *   1: name is reserved for WhoreIRC
  */
 
 int
@@ -767,8 +767,8 @@ gui_buffer_new (struct t_weechat_plugin *plugin,
     new_buffer->hotlist = NULL;
     new_buffer->hotlist_max_level_nicks = hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_INTEGER,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_INTEGER,
         NULL, NULL);
 
     /* keys */
@@ -778,8 +778,8 @@ gui_buffer_new (struct t_weechat_plugin *plugin,
 
     /* local variables */
     new_buffer->local_variables = hashtable_new (32,
-                                                 WEECHAT_HASHTABLE_STRING,
-                                                 WEECHAT_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_STRING,
                                                  NULL, NULL);
     hashtable_set (new_buffer->local_variables,
                    "plugin", plugin_get_name (plugin));
@@ -804,7 +804,7 @@ gui_buffer_new (struct t_weechat_plugin *plugin,
     else
     {
         (void) hook_signal_send ("buffer_opened",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, new_buffer);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, new_buffer);
     }
 
     return new_buffer;
@@ -827,7 +827,7 @@ gui_buffer_user_input_cb (const void *pointer, void *data,
         gui_buffer_close (buffer);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1020,9 +1020,9 @@ gui_buffer_match_list (struct t_gui_buffer *buffer, const char *string)
     match = 0;
 
     buffers = string_split (string, ",", NULL,
-                            WEECHAT_STRING_SPLIT_STRIP_LEFT
-                            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                             0, NULL);
     if (buffers)
     {
@@ -1276,7 +1276,7 @@ gui_buffer_set_name (struct t_gui_buffer *buffer, const char *name)
     gui_buffer_local_var_add (buffer, "name", name);
 
     (void) hook_signal_send ("buffer_renamed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -1302,7 +1302,7 @@ gui_buffer_set_short_name (struct t_gui_buffer *buffer, const char *short_name)
     gui_buffer_ask_chat_refresh (buffer, 1);
 
     (void) hook_signal_send ("buffer_renamed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -1324,7 +1324,7 @@ gui_buffer_set_type (struct t_gui_buffer *buffer, enum t_gui_buffer_type type)
     gui_buffer_ask_chat_refresh (buffer, 2);
 
     (void) hook_signal_send ("buffer_type_changed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -1342,7 +1342,7 @@ gui_buffer_set_title (struct t_gui_buffer *buffer, const char *new_title)
     buffer->title = (new_title && new_title[0]) ? strdup (new_title) : NULL;
 
     (void) hook_signal_send ("buffer_title_changed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -1493,25 +1493,25 @@ gui_buffer_add_highlight_words (struct t_gui_buffer *buffer,
         return;
 
     current_words = string_split (buffer->highlight_words, ",", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &current_count);
     add_words = string_split (words_to_add, ",", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, &add_count);
 
     for (i = 0; i < current_count; i++)
     {
         if (!weelist_search (list, current_words[i]))
-            weelist_add (list, current_words[i], WEECHAT_LIST_POS_END, NULL);
+            weelist_add (list, current_words[i], WHOREIRC_LIST_POS_END, NULL);
     }
     for (i = 0; i < add_count; i++)
     {
         if (!weelist_search (list, add_words[i]))
-            weelist_add (list, add_words[i], WEECHAT_LIST_POS_END, NULL);
+            weelist_add (list, add_words[i], WHOREIRC_LIST_POS_END, NULL);
     }
 
     gui_buffer_set_highlight_words_list (buffer, list);
@@ -1544,14 +1544,14 @@ gui_buffer_remove_highlight_words (struct t_gui_buffer *buffer,
         return;
 
     current_words = string_split (buffer->highlight_words, ",", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &current_count);
     remove_words = string_split (words_to_remove, ",", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &remove_count);
 
     for (i = 0; i < current_count; i++)
@@ -1567,7 +1567,7 @@ gui_buffer_remove_highlight_words (struct t_gui_buffer *buffer,
             }
         }
         if (!to_remove)
-            weelist_add (list, current_words[i], WEECHAT_LIST_POS_END, NULL);
+            weelist_add (list, current_words[i], WHOREIRC_LIST_POS_END, NULL);
     }
 
     gui_buffer_set_highlight_words_list (buffer, list);
@@ -1714,9 +1714,9 @@ gui_buffer_set_hotlist_max_level_nicks (struct t_gui_buffer *buffer,
     if (new_hotlist_max_level_nicks && new_hotlist_max_level_nicks[0])
     {
         nicks = string_split (new_hotlist_max_level_nicks, ",", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, &nicks_count);
         if (nicks)
         {
@@ -1757,9 +1757,9 @@ gui_buffer_add_hotlist_max_level_nicks (struct t_gui_buffer *buffer,
         return;
 
     nicks = string_split (nicks_to_add, ",", NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           0, &nicks_count);
     if (nicks)
     {
@@ -1798,9 +1798,9 @@ gui_buffer_remove_hotlist_max_level_nicks (struct t_gui_buffer *buffer,
         return;
 
     nicks = string_split (nicks_to_remove, ",", NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           0, &nicks_count);
     if (nicks)
     {
@@ -2234,10 +2234,10 @@ gui_buffer_add_value_num_displayed (struct t_gui_buffer *buffer, int value)
 }
 
 /*
- * Checks if a buffer is the WeeChat core buffer.
+ * Checks if a buffer is the WhoreIRC core buffer.
  *
  * Returns:
- *   1: buffer is WeeChat core buffer
+ *   1: buffer is WhoreIRC core buffer
  *   0: buffer is another buffer
  */
 
@@ -2657,7 +2657,7 @@ gui_buffer_clear (struct t_gui_buffer *buffer)
     gui_buffer_ask_chat_refresh (buffer, 2);
 
     (void) hook_signal_send ("buffer_cleared",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -2696,7 +2696,7 @@ gui_buffer_close (struct t_gui_buffer *buffer)
     buffer->closing = 1;
 
     (void) hook_signal_send ("buffer_closing",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 
     if (buffer->close_callback)
     {
@@ -2883,7 +2883,7 @@ gui_buffer_close (struct t_gui_buffer *buffer)
         gui_buffers_count--;
 
     (void) hook_signal_send ("buffer_closed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 
     free (buffer);
 }
@@ -3147,7 +3147,7 @@ gui_buffer_renumber (int number1, int number2, int start_number)
         if (ptr_buffer_moved)
         {
             (void) hook_signal_send ("buffer_moved",
-                                     WEECHAT_HOOK_SIGNAL_POINTER,
+                                     WHOREIRC_HOOK_SIGNAL_POINTER,
                                      ptr_buffer_moved);
         }
         ptr_buffer = ptr_buffer2;
@@ -3283,7 +3283,7 @@ gui_buffer_move_to_number (struct t_gui_buffer *buffer, int number)
     }
 
     (void) hook_signal_send ("buffer_moved",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -3375,9 +3375,9 @@ gui_buffer_swap (int number1, int number2)
 
     /* send signals */
     (void) hook_signal_send ("buffer_moved",
-                             WEECHAT_HOOK_SIGNAL_POINTER, ptr_first_buffer[0]);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, ptr_first_buffer[0]);
     (void) hook_signal_send ("buffer_moved",
-                             WEECHAT_HOOK_SIGNAL_POINTER, ptr_first_buffer[1]);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, ptr_first_buffer[1]);
 }
 
 /*
@@ -3482,7 +3482,7 @@ gui_buffer_merge (struct t_gui_buffer *buffer,
     gui_window_ask_refresh (1);
 
     (void) hook_signal_send ("buffer_merged",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -3616,7 +3616,7 @@ gui_buffer_unmerge (struct t_gui_buffer *buffer, int number)
     gui_window_ask_refresh (1);
 
     (void) hook_signal_send ("buffer_unmerged",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -3660,7 +3660,7 @@ gui_buffer_hide (struct t_gui_buffer *buffer)
     buffer->hidden = 1;
 
     (void) hook_signal_send ("buffer_hidden",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -3692,7 +3692,7 @@ gui_buffer_unhide (struct t_gui_buffer *buffer)
     buffer->hidden = 0;
 
     (void) hook_signal_send ("buffer_unhidden",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -4244,7 +4244,7 @@ gui_buffer_hdata_buffer_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_buffer, local_variables, HASHTABLE, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_buffer, prev_buffer, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_buffer, next_buffer, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_buffers, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_buffers, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_buffer, 0);
         HDATA_LIST(gui_buffer_last_displayed, 0);
     }
@@ -4298,7 +4298,7 @@ gui_buffer_hdata_buffer_visited_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_buffer_visited, buffer, POINTER, 0, NULL, "buffer");
         HDATA_VAR(struct t_gui_buffer_visited, prev_buffer, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_buffer_visited, next_buffer, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_buffers_visited, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_buffers_visited, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_buffer_visited, 0);
     }
     return hdata;
@@ -4462,7 +4462,7 @@ gui_buffer_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Dumps content of buffer as hexa data in WeeChat log file.
+ * Dumps content of buffer as hexa data in WhoreIRC log file.
  */
 
 void
@@ -4538,7 +4538,7 @@ gui_buffer_dump_hexa (struct t_gui_buffer *buffer)
 }
 
 /*
- * Prints buffer infos in WeeChat log file (usually for crash dump).
+ * Prints buffer infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

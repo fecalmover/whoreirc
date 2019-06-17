@@ -1,4 +1,4 @@
-= WeeChat プラグイン API リファレンス
+= WhoreIRC プラグイン API リファレンス
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
@@ -15,7 +15,7 @@
 * Ryuunosuke Ayanokouzi <i38w7i3@yahoo.co.jp>, 2014-2019
 
 
-このマニュアルは WeeChat チャットクライアントについての文書で、WeeChat の一部です。
+このマニュアルは WhoreIRC チャットクライアントについての文書で、WhoreIRC の一部です。
 
 この文書の最新版を見るには以下のページを確認して下さい:
 https://whoreirc.org/doc
@@ -24,19 +24,19 @@ https://whoreirc.org/doc
 [[introduction]]
 == はじめに
 
-WeeChat (Wee Enhanced Environment for Chat)
+WhoreIRC (Wee Enhanced Environment for Chat)
 は無料のチャットクライアントで、高速、軽量、多くのオペレーティングシステムで動くように設計されています。
 
-このマニュアルは WeeChat プラグイン API についての文書で、C
-言語プラグインはこの API を使って WeeChat の中核部と通信しています。
+このマニュアルは WhoreIRC プラグイン API についての文書で、C
+言語プラグインはこの API を使って WhoreIRC の中核部と通信しています。
 
 [[plugins_in_whoreirc]]
-== WeeChat プラグイン
+== WhoreIRC プラグイン
 
 プラグインは C 言語のプログラムであり、インターフェースが定義する
-WeeChat 関数を呼び出すことができます。
+WhoreIRC 関数を呼び出すことができます。
 
-この C 言語プログラムはコンパイルの際に WeeChat のソースを必要としません、WeeChat
+この C 言語プログラムはコンパイルの際に WhoreIRC のソースを必要としません、WhoreIRC
 は `/plugin` コマンドでこのプログラムを動的に読み込むことができます。
 
 プラグインを動的にオペレーティングシステムに読み込ませるために、プラグインは必ずダイナミックライブラリにしてください。ファイルの拡張子は
@@ -44,10 +44,10 @@ GNU/Linux では ".so"、Windows
 では ".dll" です。
 
 プラグインでは必ず "whoreirc-plugin.h" ファイルをインクルードしてください
-(WeeChat ソースコードに含まれています)。このファイルでは WeeChat
+(WhoreIRC ソースコードに含まれています)。このファイルでは WhoreIRC
 と通信する際に使う構造体や型が定義されています。
 
-WeeChat 関数を <<plugin_api>>
+WhoreIRC 関数を <<plugin_api>>
 に表示された書式で呼び出すには、以下のグローバルポインタを定義して
 <<_whoreirc_plugin_init,whoreirc_plugin_init>> 関数の中でそれを初期化しなければいけません:
 
@@ -61,19 +61,19 @@ struct t_whoreirc_plugin *whoreirc_plugin;
 
 プラグインでは必ず以下のマクロを使ってください (いくつかの変数を定義するために必要です):
 
-WEECHAT_PLUGIN_NAME("name")::
+WHOREIRC_PLUGIN_NAME("name")::
     プラグイン名
 
-WEECHAT_PLUGIN_DESCRIPTION("description")::
+WHOREIRC_PLUGIN_DESCRIPTION("description")::
     プラグインの短い説明
 
-WEECHAT_PLUGIN_VERSION("1.0")::
+WHOREIRC_PLUGIN_VERSION("1.0")::
     プラグインのバージョン番号
 
-WEECHAT_PLUGIN_LICENSE("GPL3")::
+WHOREIRC_PLUGIN_LICENSE("GPL3")::
     プラグインのライセンス
 
-WEECHAT_PLUGIN_PRIORITY(1000)::
+WHOREIRC_PLUGIN_PRIORITY(1000)::
     プラグインの優先度 (任意、下記参照)
 
 [[main_functions]]
@@ -86,7 +86,7 @@ WEECHAT_PLUGIN_PRIORITY(1000)::
 
 ==== whoreirc_plugin_init
 
-WeeChat はプラグインを読み込む際にこの関数を呼び出します。
+WhoreIRC はプラグインを読み込む際にこの関数を呼び出します。
 
 プロトタイプ:
 
@@ -98,33 +98,33 @@ int whoreirc_plugin_init (struct t_whoreirc_plugin *plugin,
 
 引数:
 
-* _plugin_: WeeChat プラグイン構造体へのポインタ。これはグローバルポインタ
+* _plugin_: WhoreIRC プラグイン構造体へのポインタ。これはグローバルポインタ
   `whoreirc_plugin` を初期化する際に使われます
 * _argc_: プラグインに対する引数の数 (ユーザがコマンドラインで指定)
 * _argv_: プラグインに対する引数
 
 戻り値:
 
-* _WEECHAT_RC_OK_ 成功した場合 (プラグインをロードします)
-* _WEECHAT_RC_ERROR_ エラーが起きた場合 (プラグインをロードしません)
+* _WHOREIRC_RC_OK_ 成功した場合 (プラグインをロードします)
+* _WHOREIRC_RC_ERROR_ エラーが起きた場合 (プラグインをロードしません)
 
 [[plugin_priority]]
 ===== プラグインの優先度
 
-複数のプラグインが自動ロードされた場合 (たとえば起動時)、WeeChat
+複数のプラグインが自動ロードされた場合 (たとえば起動時)、WhoreIRC
 はまず全てのプラグインをロードし、各プラグインで定義された優先度に従って _init_
 関数を呼び出します。優先度を大きな値にすれば _init_ 関数を呼び出す順番が早くなります
 
 デフォルトの優先度は 1000 です
 (この値を設定した場合、全てのデフォルトプラグインの後にプラグインをロードします)。
 
-WeeChat のデフォルトプラグインは以下の順番で初期化されます:
+WhoreIRC のデフォルトプラグインは以下の順番で初期化されます:
 
 include::autogen/plugin_api/plugins_priority.adoc[]
 
 ==== whoreirc_plugin_end
 
-WeeChat プラグインをリロードする際にこの関数を呼び出します。
+WhoreIRC プラグインをリロードする際にこの関数を呼び出します。
 
 プロトタイプ:
 
@@ -135,17 +135,17 @@ int whoreirc_plugin_end (struct t_whoreirc_plugin *plugin);
 
 引数:
 
-* _plugin_: WeeChat プラグイン構造体へのポインタ
+* _plugin_: WhoreIRC プラグイン構造体へのポインタ
 
 戻り値:
 
-* _WEECHAT_RC_OK_ 成功した場合
-* _WEECHAT_RC_ERROR_ エラーが起きた場合
+* _WHOREIRC_RC_OK_ 成功した場合
+* _WHOREIRC_RC_ERROR_ エラーが起きた場合
 
 [[compile_plugin]]
 === プラグインのコンパイル
 
-コンパイルするために WeeChat のソースは不要で、_whoreirc-plugin.h_
+コンパイルするために WhoreIRC のソースは不要で、_whoreirc-plugin.h_
 ファイルだけが必要です。
 
 1 つのファイル "toto.c" からなるプラグインは以下のようにコンパイルします (GNU/Linux の場合):
@@ -162,7 +162,7 @@ _toto.so_ ファイルをシステムのプラグインディレクトリ (例�
 _/usr/local/lib/whoreirc/plugins_) またはユーザのプラグインディレクトリ (例えば
 _/home/xxx/.whoreirc/plugins_) にコピーしてください。
 
-WeeChat の中で:
+WhoreIRC の中で:
 
 ----
 /plugin load toto
@@ -181,11 +181,11 @@ WeeChat の中で:
 
 #include "whoreirc-plugin.h"
 
-WEECHAT_PLUGIN_NAME("double");
-WEECHAT_PLUGIN_DESCRIPTION("Test plugin for WeeChat");
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION("0.1");
-WEECHAT_PLUGIN_LICENSE("GPL3");
+WHOREIRC_PLUGIN_NAME("double");
+WHOREIRC_PLUGIN_DESCRIPTION("Test plugin for WhoreIRC");
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION("0.1");
+WHOREIRC_PLUGIN_LICENSE("GPL3");
 
 struct t_whoreirc_plugin *whoreirc_plugin = NULL;
 
@@ -209,7 +209,7 @@ command_double_cb (const void *pointer, void *data,
         whoreirc_command (NULL, argv_eol[1]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -227,7 +227,7 @@ whoreirc_plugin_init (struct t_whoreirc_plugin *plugin,
                           NULL,
                           &command_double_cb, NULL, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -236,7 +236,7 @@ whoreirc_plugin_end (struct t_whoreirc_plugin *plugin)
     /* C 言語コンパイラ向けに必要 */
     (void) plugin;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -272,11 +272,11 @@ const char *whoreirc_plugin_get_name (struct t_whoreirc_plugin *plugin);
 
 引数:
 
-* _plugin_: WeeChat プラグイン構造体へのポインタ (NULL でも可)
+* _plugin_: WhoreIRC プラグイン構造体へのポインタ (NULL でも可)
 
 戻り値:
 
-* プラグインの名前、WeeChat コアの場合は "core" (プラグインへのポインタが NULL の場合)
+* プラグインの名前、WhoreIRC コアの場合は "core" (プラグインへのポインタが NULL の場合)
 
 C 言語での使用例:
 
@@ -340,7 +340,7 @@ whoreirc.charset_set("iso-8859-1")
 
 ==== iconv_to_internal
 
-文字列の文字セットを WeeChat の内部文字セット (UTF-8) に変換。
+文字列の文字セットを WhoreIRC の内部文字セット (UTF-8) に変換。
 
 プロトタイプ:
 
@@ -380,7 +380,7 @@ str = whoreirc.iconv_to_internal("iso-8859-1", "iso string: é à")
 
 ==== iconv_from_internal
 
-文字列の文字セットを WeeChat の内部文字セット (UTF-8) から別の文字セットに変換。
+文字列の文字セットを WhoreIRC の内部文字セット (UTF-8) から別の文字セットに変換。
 
 プロトタイプ:
 
@@ -585,7 +585,7 @@ whoreirc_string_toupper (str);  /* str is now: "ABCDé" */
 
 ==== strcasecmp
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 ロケールと大文字小文字を無視して文字列を比較。
 
@@ -619,7 +619,7 @@ int diff = whoreirc_strcasecmp ("aaa", "CCC");  /* == -2 */
 
 ==== strcasecmp_range
 
-_WeeChat バージョン 0.3.7 以上で利用可、バージョン 1.0 で更新。_
+_WhoreIRC バージョン 0.3.7 以上で利用可、バージョン 1.0 で更新。_
 
 大文字小文字を無視する文字範囲の幅を使い、ロケールと大文字小文字を無視して文字列を比較。
 
@@ -660,7 +660,7 @@ int diff = whoreirc_strcasecmp_range ("nick{away}", "NICK[away]", 29);  /* == 0 
 
 ==== strncasecmp
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 ロケールと大文字小文字を無視して _max_ 文字だけ文字列を比較。
 
@@ -695,7 +695,7 @@ int diff = whoreirc_strncasecmp ("aabb", "aacc", 2);  /* == 0 */
 
 ==== strncasecmp_range
 
-_WeeChat バージョン 0.3.7 以上で利用可、バージョン 1.0 で更新。_
+_WhoreIRC バージョン 0.3.7 以上で利用可、バージョン 1.0 で更新。_
 
 大文字小文字を無視する文字範囲の幅を使い、ロケールと大文字小文字を無視して
 _max_ 文字だけ文字列を比較。
@@ -738,7 +738,7 @@ int diff = whoreirc_strncasecmp_range ("nick{away}", "NICK[away]", 6, 29);  /* =
 
 ==== strcmp_ignore_chars
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 一部の文字列を無視して、ロケールに依存して
 (オプションで大文字小文字の区別をしない) 文字列を比較。
@@ -777,7 +777,7 @@ int diff = whoreirc_strcmp_ignore_chars ("a-b", "--a-e", "-", 1);  /* == -3 */
 
 ==== strcasestr
 
-_WeeChat バージョン 1.3 で更新。_
+_WhoreIRC バージョン 1.3 で更新。_
 
 ロケールと大文字小文字を区別して文字列を検索。
 
@@ -796,7 +796,7 @@ const char *whoreirc_strcasestr (const char *string, const char *search);
 戻り値:
 
 * 見つかった文字列へのポインタ、見つからない場合は NULL
-  (_WeeChat バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
+  (_WhoreIRC バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
 
 C 言語での使用例:
 
@@ -810,7 +810,7 @@ const char *pos = whoreirc_strcasestr ("aBcDeF", "de");  /* result: pointer to "
 
 ==== strlen_screen
 
-_WeeChat バージョン 0.4.2 以上で利用可。_
+_WhoreIRC バージョン 0.4.2 以上で利用可。_
 
 UTF-8 文字列を画面上に表示するために必要な画面幅を返す。非表示文字を
 1 文字として数えます (これが
@@ -851,7 +851,7 @@ length = whoreirc.strlen_screen("é")  # 1
 
 ==== string_match
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 文字列がマスクにマッチするか確認。
 
@@ -871,7 +871,7 @@ int whoreirc_string_match (const char *string, const char *mask,
 * _case_sensitive_: 大文字小文字を区別する場合は 1、区別しない場合は 0
 
 [NOTE]
-WeeChat バージョン 1.0 以上の場合、ワイルドカードをマスクの内部で使うことが可能です
+WhoreIRC バージョン 1.0 以上の場合、ワイルドカードをマスクの内部で使うことが可能です
 (マスクの最初および最後だけではありません)。
 
 戻り値:
@@ -906,7 +906,7 @@ match5 = whoreirc.string_match("abcdef", "*b*d*", 0)  # == 1
 
 ==== string_match_list
 
-_WeeChat バージョン 2.5 以上で利用可。_
+_WhoreIRC バージョン 2.5 以上で利用可。_
 
 文字列が否定マスク
 (書式: "!word")
@@ -959,7 +959,7 @@ match3 = whoreirc.string_match("def", "*,!abc*", 0)     # == 1
 
 ==== string_expand_home
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 文字列が `+~+` から始まる場合はこれをホームディレクトリで置換。文字列が
 `+~+` から始まっていない場合は同じ文字列を返す。
@@ -995,11 +995,11 @@ free (str);
 
 ==== string_eval_path_home
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 3 段階でパスを評価します:
 
-. 先頭の `%h` を WeeChat ホームディレクトリで置換し、
+. 先頭の `%h` を WhoreIRC ホームディレクトリで置換し、
 . 先頭の `+~+` をユーザのホームディレクトリで置換し
   (<<_string_expand_home,string_expand_home>> を実行し)、
 . 変数を評価します
@@ -1123,7 +1123,7 @@ free (str);
 
 ==== string_convert_escaped_chars
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
 エスケープ文字を値に変換:
 
@@ -1214,7 +1214,7 @@ regex = whoreirc.string_mask_to_regex("test*mask")  # "test.*mask"
 
 ==== string_regex_flags
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 フラグ以降の文字列へのポインタと正規表現をコンパイルするためのフラグ付きマスクを返す
 
@@ -1265,7 +1265,7 @@ const char *ptr_regex = whoreirc_string_regex_flags (regex, REG_EXTENDED, &flags
 
 ==== string_regcomp
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 文字列の最初に含まれるオプションフラグを使って POSIX
 拡張正規表現をコンパイル (フラグの書式については
@@ -1348,7 +1348,7 @@ highlight = whoreirc.string_has_highlight("my test string", "test,word2")  # 1
 
 ==== string_has_highlight_regex
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 POSIX 拡張正規表現を使って、文字列中から正規表現にマッチする部分が 1
 つ以上あるか確認。 +
@@ -1426,7 +1426,7 @@ free (str);
 
 ==== string_replace_regex
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
 文字列中のテキストを正規表現、置換先テキスト、任意指定のコールバックを使って置換。
 
@@ -1443,7 +1443,7 @@ char *whoreirc_string_replace_regex (const char *string, void *regex,
 引数:
 
 * _string_: 文字列
-* _regex_: WeeChat 関数 <<_string_regcomp,string_regcomp>>
+* _regex_: WhoreIRC 関数 <<_string_regcomp,string_regcomp>>
   または regcomp (`man regcomp` を参照)
   でコンパイルした正規表現へのポインタ (_regex_t_ 構造体)
 * _replace_: 置換先テキスト、以下のリファレンスを使うことができます:
@@ -1489,7 +1489,7 @@ if (whoreirc_string_regcomp (&my_regex, "([0-9]{4})-([0-9]{2})-([0-9]{2})",
 
 ==== string_split
 
-_WeeChat バージョン 2.5、2.6 で更新。_
+_WhoreIRC バージョン 2.5、2.6 で更新。_
 
 1 つ以上の区切り文字に従って文字列を分割。
 
@@ -1513,25 +1513,25 @@ char **whoreirc_string_split (const char *string, const char *separators,
   デフォルト動作を変更するビットフラグの組合せ値; 値が 0 の場合、デフォルト動作
   (文字列の先頭と末尾にある区切り文字を削除しない、連続する区切り文字を 1 つにまとめない)
   になります。以下のフラグを組み合わせて値を指定してください:
-** WEECHAT_STRING_SPLIT_STRIP_LEFT:
+** WHOREIRC_STRING_SPLIT_STRIP_LEFT:
    文字列左端 (先頭) の区切り文字を削除する
-** WEECHAT_STRING_SPLIT_STRIP_RIGHT:
+** WHOREIRC_STRING_SPLIT_STRIP_RIGHT:
    文字列右端 (末尾) の区切り文字を削除する
-** WEECHAT_STRING_SPLIT_COLLAPSE_SEPS:
+** WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS:
    連続する区切り文字を 1 つにまとめる
-** WEECHAT_STRING_SPLIT_KEEP_EOL: 分割後の各値は分割位置先頭から文字列の最後までとする
+** WHOREIRC_STRING_SPLIT_KEEP_EOL: 分割後の各値は分割位置先頭から文字列の最後までとする
 * _num_items_max_: 分割回数の上限 (0 = 制限なし)
 * _num_items_: 分割回数を返す整数型変数へのポインタ
 
 [NOTE]
-WeeChat バージョン 2.4 以下で _keep_eol_ とされていた引数は現在 _flags_
+WhoreIRC バージョン 2.4 以下で _keep_eol_ とされていた引数は現在 _flags_
 引数に変わられました。両引数の値の対応関係は以下の通りです:
 [width="100%",cols="1,10",options="header"]
 |===
 | keep_eol | flags
-| 0        | WEECHAT_STRING_SPLIT_STRIP_LEFT \| WEECHAT_STRING_SPLIT_STRIP_RIGHT \| WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-| 1        | WEECHAT_STRING_SPLIT_STRIP_LEFT \| WEECHAT_STRING_SPLIT_STRIP_RIGHT \| WEECHAT_STRING_SPLIT_COLLAPSE_SEPS \| WEECHAT_STRING_SPLIT_KEEP_EOL
-| 2        | WEECHAT_STRING_SPLIT_STRIP_LEFT \| WEECHAT_STRING_SPLIT_COLLAPSE_SEPS \| WEECHAT_STRING_SPLIT_KEEP_EOL
+| 0        | WHOREIRC_STRING_SPLIT_STRIP_LEFT \| WHOREIRC_STRING_SPLIT_STRIP_RIGHT \| WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+| 1        | WHOREIRC_STRING_SPLIT_STRIP_LEFT \| WHOREIRC_STRING_SPLIT_STRIP_RIGHT \| WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS \| WHOREIRC_STRING_SPLIT_KEEP_EOL
+| 2        | WHOREIRC_STRING_SPLIT_STRIP_LEFT \| WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS \| WHOREIRC_STRING_SPLIT_KEEP_EOL
 |===
 
 戻り値:
@@ -1558,9 +1558,9 @@ argv = whoreirc_string_split ("abc de  fghi ", " ", NULL, 0, 0, &argc);
 whoreirc_string_free_split (argv);
 
 argv = whoreirc_string_split ("abc de  fghi ", " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
 /* result: argv[0] == "abc"
            argv[1] == "de"
@@ -1571,10 +1571,10 @@ argv = whoreirc_string_split ("abc de  fghi ", " ", NULL,
 whoreirc_string_free_split (argv);
 
 argv = whoreirc_string_split ("abc de  fghi ", " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                             | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                             | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                              0, &argc);
 /* result: argv[0] == "abc de  fghi"
            argv[1] == "de  fghi"
@@ -1585,9 +1585,9 @@ argv = whoreirc_string_split ("abc de  fghi ", " ", NULL,
 whoreirc_string_free_split (argv);
 
 argv = whoreirc_string_split ("abc de  fghi ", " ", NULL,
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                             | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                             | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                              0, &argc);
 /* result: argv[0] == "abc de  fghi "
            argv[1] == "de  fghi "
@@ -1598,9 +1598,9 @@ argv = whoreirc_string_split ("abc de  fghi ", " ", NULL,
 whoreirc_string_free_split (argv);
 
 argv = whoreirc_string_split (" abc, de,, fghi ", ",", " ",
-                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                              0, &argc);
 /* result: argv[0] == "abc"
            argv[1] == "de"
@@ -1616,7 +1616,7 @@ whoreirc_string_free_split (argv);
 
 ==== string_split_shell
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
 コマンドを引数を分割する際にシェルがやるように文字列を分割。
 
@@ -1838,7 +1838,7 @@ char *str = whoreirc_string_format_size (2097152);  /* str == "2.10 MB" */
 free (str);
 ----
 
-スクリプト (Python) での使用例、_WeeChat バージョン 2.2 以上で利用可_:
+スクリプト (Python) での使用例、_WhoreIRC バージョン 2.2 以上で利用可_:
 
 [source,python]
 ----
@@ -1851,7 +1851,7 @@ str = whoreirc.string_format_size(15200)  # == "15.2 KB"
 
 ==== string_remove_color
 
-文字列から WeeChat 色コードを削除。
+文字列から WhoreIRC 色コードを削除。
 
 プロトタイプ:
 
@@ -1864,8 +1864,8 @@ char *whoreirc_string_remove_color (const char *string,
 引数:
 
 * _string_: 文字列
-* _replacement_: NULL または空文字列でなければ、WeeChat
-  色コードを指定した文字列の 1 文字目で置換、そうでなければ WeeChat
+* _replacement_: NULL または空文字列でなければ、WhoreIRC
+  色コードを指定した文字列の 1 文字目で置換、そうでなければ WhoreIRC
   色コードとそれに続く (色に関連する) 文字を文字列から削除
 
 戻り値:
@@ -1900,7 +1900,7 @@ str = whoreirc.string_remove_color(my_string, "?")
 
 ==== string_base_encode
 
-_WeeChat バージョン 2.4 以上で利用可。_
+_WhoreIRC バージョン 2.4 以上で利用可。_
 
 base 16、32、64 で文字列をエンコード。
 
@@ -1943,7 +1943,7 @@ length = whoreirc_string_base_encode (64, string, strlen (string), result);
 
 ==== string_base_decode
 
-_WeeChat バージョン 2.4 以上で利用可。_
+_WhoreIRC バージョン 2.4 以上で利用可。_
 
 base 16、32、64 でエンコードされた文字列をデコード。
 
@@ -1984,7 +1984,7 @@ length = whoreirc_string_base_decode (64, "YWJjZGVmZ2g=", result);
 
 ==== string_hex_dump
 
-_WeeChat バージョン 1.4 以上で利用可。_
+_WhoreIRC バージョン 1.4 以上で利用可。_
 
 16 進数とアスキーバイトを使ってデータのダンプを表示。
 
@@ -2025,7 +2025,7 @@ char *dump = whoreirc_string_hex_dump (string, strlen (string), 8, " >> ", NULL)
 
 ==== string_is_command_char
 
-_WeeChat バージョン 0.3.2 以上で利用可。_
+_WhoreIRC バージョン 0.3.2 以上で利用可。_
 
 文字列の 1 文字目がコマンド文字か確認 (デフォルトのコマンド文字は `+/+`)。
 
@@ -2066,7 +2066,7 @@ command_char2 = whoreirc.string_is_command_char("test")   # == 0
 
 ==== string_input_for_buffer
 
-_WeeChat バージョン 0.3.2 以上で利用可。_
+_WhoreIRC バージョン 0.3.2 以上で利用可。_
 
 文字列からバッファに入力される部分に対するポインタを返す
 ("string" 引数の内部へのポインタ)、コマンドの場合は NULL。
@@ -2110,13 +2110,13 @@ str3 = whoreirc.string_input_for_buffer("//test")  # "/test"
 
 ==== string_eval_expression
 
-_WeeChat バージョン 0.4.0 以上で利用可、バージョン 0.4.2、0.4.3、1.0、1.1、1.2、1.3、1.6、1.8、2.0 で更新。_
+_WhoreIRC バージョン 0.4.0 以上で利用可、バージョン 0.4.2、0.4.3、1.0、1.1、1.2、1.3、1.6、1.8、2.0 で更新。_
 
 式を評価して文字列として返す。`+${variable}+`
 という書式で書かれた特殊変数は展開されます (以下の表を参照)。
 
 [NOTE]
-WeeChat バージョン 1.0 以上の場合、入れ子変数を使えるようになりました、例:
+WhoreIRC バージョン 1.0 以上の場合、入れ子変数を使えるようになりました、例:
 `+${color:${variable}}+`。
 
 プロトタイプ:
@@ -2136,7 +2136,7 @@ char *whoreirc_string_eval_expression (const char *expr,
 * _pointers_: ポインタを含むハッシュテーブル (キーは文字列、値はポインタ);
   (現在のウィンドウやバッファへのポインタを持つ) ハッシュテーブルが "window" と
   "buffer" ポインタを持たない場合はこれらは自動的に追加される (NULL でも可):
-** _regex_: WeeChat 関数 <<_string_regcomp,string_regcomp>>
+** _regex_: WhoreIRC 関数 <<_string_regcomp,string_regcomp>>
    または regcomp (`man regcomp` を参照) でコンパイル済みの正規表現へのポインタ
    (_regex_t_ 構造体); このオプションは (以下の) ハッシュテーブル構造体 _options_
    メンバの _regex_ とよく似ていますが、より高速に動作します
@@ -2152,7 +2152,7 @@ char *whoreirc_string_eval_expression (const char *expr,
 ** _extra_: デフォルトの挙動では追加変数 (_extra_vars_)
    を単純に置換するだけですが、この挙動を変更します。設定可能な値は以下です:
 *** _eval_: 置換前に追加変数 (_extra_vars_)
-    を評価します (_WeeChat バージョン 1.6 以上で利用可_)
+    を評価します (_WhoreIRC バージョン 1.6 以上で利用可_)
 ** _regex_: _expr_ のテキストを置換する正規表現
    (この場合 _expr_ は評価されません)
 ** _regex_replace_: _regex_ と一緒に使われる置換テキスト、_expr_
@@ -2170,8 +2170,8 @@ C 言語での使用例:
 ----
 /* 条件式の評価 */
 struct t_hashtable *options1 = whoreirc_hashtable_new (8,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
                                                       NULL,
                                                       NULL);
 whoreirc_hashtable_set (options1, "type", "condition");
@@ -2183,8 +2183,8 @@ char *str3 = whoreirc_string_eval_expression ("${buffer.full_name}", NULL, NULL,
 
 /* 正規表現を用いた置換 */
 struct t_hashtable *options2 = whoreirc_hashtable_new (8,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING,
                                                       NULL,
                                                       NULL);
 /* URL に関するブラックリストを追加 */
@@ -2276,7 +2276,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+1+`
 
 | `+=*+` +
-  (_WeeChat バージョン 1.8 以上で利用可_) |
+  (_WhoreIRC バージョン 1.8 以上で利用可_) |
   マスクにマッチ、"*" を指定できます (関数 <<_string_match,string_match>> を確認してください) |
   `+abc def =* a*f+` +
   `+abc def =* y*z+` |
@@ -2284,7 +2284,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+0+`
 
 | `+!*+` +
-  (_WeeChat バージョン 1.8 以上で利用可_) |
+  (_WhoreIRC バージョン 1.8 以上で利用可_) |
   マスクにマッチしない、"*" を指定できます (関数 <<_string_match,string_match>> を確認してください) |
   `+abc def !* a*f+` +
   `+abc def !* y*z+` |
@@ -2353,8 +2353,8 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 浮動小数点数として比較される数値表現の書式は以下です:
 
 * 整数 (例: 5、-7)
-* 浮動小数点数 (例: 5.2、-7.5、2.83e-2) (_WeeChat バージョン 2.0 以上で利用可_)
-* 16 進数 (例: 0xA3、-0xA3) (_WeeChat バージョン 2.0 以上で利用可_)
+* 浮動小数点数 (例: 5.2、-7.5、2.83e-2) (_WhoreIRC バージョン 2.0 以上で利用可_)
+* 16 進数 (例: 0xA3、-0xA3) (_WhoreIRC バージョン 2.0 以上で利用可_)
 
 数値表現を二重引用符で括ることで、文字列として比較されます。例:
 
@@ -2377,7 +2377,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+value+`
 
 | `+${eval:xxx}+` +
-  (_WeeChat バージョン 1.3 以上で利用可_) |
+  (_WhoreIRC バージョン 1.3 以上で利用可_) |
   評価する文字列 |
   `+${eval:${date:${whoreirc.look.buffer_time_format}}}+` |
  `+19:02:45+` (オプション whoreirc.look.buffer_time_format
@@ -2385,7 +2385,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 
 | `+${esc:xxx}+` +
   `+${\xxx}+` +
-  (_WeeChat バージョン 1.0 以上で利用可_) |
+  (_WhoreIRC バージョン 1.0 以上で利用可_) |
   エスケープ文字を含む文字列 |
   `+${esc:prefix\tmessage}+` +
   `+${\ua9}+` |
@@ -2393,14 +2393,14 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+©+`
 
 | `+${hide:x,string}+` +
-  (_WeeChat バージョン 1.1 以上で利用可_) |
+  (_WhoreIRC バージョン 1.1 以上で利用可_) |
   隠す文字を含むテキスト (`string` に含まれる文字をすべて `x` で置換) |
   `+${hide:*,password}+` |
  `+********+`
 
 | `+${cut:max,suffix,string}+` +
   `+${cut:+max,suffix,string}+` +
-  (_WeeChat バージョン 1.8 以上で利用可_) |
+  (_WhoreIRC バージョン 1.8 以上で利用可_) |
   `string` の先頭 `max` 文字とオプションの `suffix` 文字 (`string` の文字数が `max` 文字を超える場合) +
   `+max` を使った場合、`max` 文字にはサフィックスの文字数も含まれます。|
   `+${cut:4,…,this is a test}+` +
@@ -2412,7 +2412,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 
 | `+${cutscr:max,suffix,string}+` +
   `+${cutscr:+max,suffix,string}+` +
-  (_WeeChat バージョン 1.8 以上で利用可_) |
+  (_WhoreIRC バージョン 1.8 以上で利用可_) |
   `string` の先頭 `max` 文字 (半角文字幅換算) とオプションの `suffix` 文字 (`string` の文字数が `max` 文字を超える場合) +
   `+max` を使った場合、`max` 文字にはサフィックスの文字数も含まれます。|
   `+${cutscr:4,…,this is a test}+` +
@@ -2423,22 +2423,22 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+こ>>+`
 
 | `+${rev:xxx}+` +
-  (_WeeChat バージョン 2.2 以上で利用可_) |
+  (_WhoreIRC バージョン 2.2 以上で利用可_) |
   文字順を反転させた文字列。|
   `+${rev:Hello, world!}+` |
   `+!dlrow ,olleH+`
 
 | `+${repeat:count,string}+` +
-  (_WeeChat バージョン 2.3 以上で利用可_) |
+  (_WhoreIRC バージョン 2.3 以上で利用可_) |
   繰り返し文字列。|
   `+${repeat:5,-}+` |
   `+-----+`
 
 | `+${re:N}+` +
-  (_WeeChat バージョン 1.1 以上で利用可_) |
+  (_WhoreIRC バージョン 1.1 以上で利用可_) |
   正規表現のキャプチャグループ: `0` = マッチするすべての文字列、`1` から `99` =
   キャプチャされたグループ、`+++` = 最後にキャプチャされたグループ、
-  `#` = 最後にキャプチャされたグループのインデックス番号 (_WeeChat バージョン 1.8 以上で利用可_) |
+  `#` = 最後にキャプチャされたグループのインデックス番号 (_WhoreIRC バージョン 1.8 以上で利用可_) |
   `+${re:0}+` +
   `+${re:1}+` +
   `+${re:2}+` +
@@ -2451,8 +2451,8 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+2+`
 
 | `+${color:name}+` +
-  (_WeeChat バージョン 0.4.2 以上で利用可_) |
-  WeeChat 色コード (色名部分はオプション属性をとることも可能です),
+  (_WhoreIRC バージョン 0.4.2 以上で利用可_) |
+  WhoreIRC 色コード (色名部分はオプション属性をとることも可能です),
   書式を確認するには関数 <<_color,color>> をご確認ください |
   `+${color:red}red text+` +
   `+${color:*214}bold orange text+` |
@@ -2461,8 +2461,8 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 
 | `+${info:name}+` +
   `+${info:name,arguments}+` +
-  (_WeeChat バージョン 0.4.3 以上で利用可_) |
-  WeeChat またはプラグインのインフォ、<<_info_get,info_get>>
+  (_WhoreIRC バージョン 0.4.3 以上で利用可_) |
+  WhoreIRC またはプラグインのインフォ、<<_info_get,info_get>>
   を参照 |
   `+${info:version}+` +
   `+${info:nick_color_name,foo}+` |
@@ -2471,7 +2471,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 
 | `+${date}+` +
   `+${date:xxx}+` +
-  (_WeeChat バージョン 1.3 以上で利用可_) |
+  (_WhoreIRC バージョン 1.3 以上で利用可_) |
   現在の日付/時刻、カスタム書式を使うことも可能です (`man strftime` を参照)、
   デフォルト書式は `%F %T` |
   `+${date}+` +
@@ -2480,7 +2480,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
   `+19:02:45+`
 
 | `+${env:NAME}+` +
-  (_WeeChat バージョン 1.2 以上で利用可_) |
+  (_WhoreIRC バージョン 1.2 以上で利用可_) |
   環境変数 `NAME` の値 |
   `+${env:HOME}+` |
   `+/home/user+`
@@ -2488,7 +2488,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 | `+${if:condition}+` +
   `+${if:condition?true}+`
   `+${if:condition?true:false}+` +
-  (_WeeChat バージョン 1.8 以上で利用可_) |
+  (_WhoreIRC バージョン 1.8 以上で利用可_) |
   条件、条件が真の場合の値 (任意)、条件が偽の場合の値 (任意)
   からなる三項演算子。値を指定しなかった場合、条件の評価結果に応じて
   "1" または "0" が返されます |
@@ -2522,7 +2522,7 @@ str5 = whoreirc.string_eval_expression("password=abc password=def", {}, {}, opti
 
 ==== string_dyn_alloc
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 可変長の動的文字列を確保します。 +
 内部では、文字列ポインタ、確保されたサイズ、現在の文字列長の情報からなる構造体が確保されます。
@@ -2557,7 +2557,7 @@ char **string = whoreirc_string_dyn_alloc (256);
 
 ==== string_dyn_copy
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 動的文字列内に文字列をコピーします。
 
@@ -2600,7 +2600,7 @@ else
 
 ==== string_dyn_concat
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 動的文字列に文字列を連結します。
 
@@ -2642,7 +2642,7 @@ if (whoreirc_string_dyn_copy (string, "test"))
 
 ==== string_dyn_free
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 動的文字列を解放します。
 
@@ -2722,7 +2722,7 @@ if (whoreirc_utf8_has_8bits (string))
 
 ==== utf8_is_valid
 
-_WeeChat バージョン 1.4 で更新。_
+_WhoreIRC バージョン 1.4 で更新。_
 
 文字列が妥当な UTF-8 表現か確認。
 
@@ -2737,7 +2737,7 @@ int whoreirc_utf8_is_valid (const char *string, int length, char **error);
 
 * _string_: 文字列
 * _length_: 確認する UTF-8 文字の最大文字数; これを 0 以下に設定した場合、文字列中のすべての文字を確認します
-  _(WeeChat バージョン 1.4 以上で利用可)_
+  _(WhoreIRC バージョン 1.4 以上で利用可)_
 * _error_: NULL でない場合は _*error_
   は文字列に含まれる最初の妥当でない UTF-8 文字へのポインタ
 
@@ -2791,7 +2791,7 @@ whoreirc_utf8_normalize (string, '?');
 
 ==== utf8_prev_char
 
-_WeeChat バージョン 1.3 で更新。_
+_WhoreIRC バージョン 1.3 で更新。_
 
 文字列中の 1 つ前の UTF-8 文字へのポインタを返す。
 
@@ -2812,7 +2812,7 @@ const char *whoreirc_utf8_prev_char (const char *string_start,
 戻り値:
 
 * 1 つ前の UTF-8 文字へのポインタ、見つからなければ (文字列の開始位置に到達した場合は) NULL
-  (_WeeChat バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
+  (_WhoreIRC バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
 
 C 言語での使用例:
 
@@ -2826,7 +2826,7 @@ const char *prev_char = whoreirc_utf8_prev_char (string, ptr_in_string);
 
 ==== utf8_next_char
 
-_WeeChat バージョン 1.3 で更新。_
+_WhoreIRC バージョン 1.3 で更新。_
 
 文字列中の 1 つ後の UTF-8 文字へのポインタを返す。
 
@@ -2844,7 +2844,7 @@ const char *whoreirc_utf8_next_char (const char *string);
 戻り値:
 
 * 1 つ後の UTF-8 文字へのポインタ、見つからなければ (文字列の最後に到達した場合は) NULL
-  (_WeeChat バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
+  (_WhoreIRC バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
 
 C 言語での使用例:
 
@@ -3004,7 +3004,7 @@ int length_on_screen = whoreirc_utf8_strlen_screen ("é");  /* == 1 */
 
 ==== utf8_charcmp
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 2 つの UTF-8 文字を比較。
 
@@ -3038,7 +3038,7 @@ int diff = whoreirc_utf8_charcmp ("aaa", "ccc");  /* == -2 */
 
 ==== utf8_charcasecmp
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 大文字小文字の違いを無視して、2 つの UTF-8 文字を比較。
 
@@ -3101,7 +3101,7 @@ int length_on_screen = whoreirc_utf8_char_size_screen ("é");  /* == 1 */
 
 ==== utf8_add_offset
 
-_WeeChat バージョン 1.3 で更新。_
+_WhoreIRC バージョン 1.3 で更新。_
 
 UTF-8 文字列で N 文字前に進む。
 
@@ -3120,7 +3120,7 @@ const char *whoreirc_utf8_add_offset (const char *string, int offset);
 戻り値:
 
 * 文字列の N 文字後に進んだ位置へのポインタ (元文字列の最後より後の位置を指す場合は NULL)
-  (_WeeChat バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
+  (_WhoreIRC バージョン 1.3 以上の場合_: 返されるポインタは _const char *_ であり、_char *_ ではありません)
 
 C 言語での使用例:
 
@@ -3232,7 +3232,7 @@ free (string);
 
 ==== mkdir_home
 
-WeeChat ホームディレクトリの下にディレクトリを作成。
+WhoreIRC ホームディレクトリの下にディレクトリを作成。
 
 プロトタイプ:
 
@@ -3355,7 +3355,7 @@ whoreirc.mkdir_parents("/tmp/my/dir", 0755)
 
 ==== exec_on_files
 
-_WeeChat バージョン 1.5 と 2.0 で更新。_
+_WhoreIRC バージョン 1.5 と 2.0 で更新。_
 
 ディレクトリ中のファイルを探し、各ファイルに対してコールバックを実行。
 
@@ -3374,12 +3374,12 @@ void whoreirc_exec_on_files (const char *directory,
 引数:
 
 * _directory_: ファイルを検索するディレクトリ
-* _recurse_subdirs_: サブディレクトリ内を再帰的に探す場合は 1 (_WeeChat バージョン 2.0 以上で利用可_)
+* _recurse_subdirs_: サブディレクトリ内を再帰的に探す場合は 1 (_WhoreIRC バージョン 2.0 以上で利用可_)
 * _hidden_files_: 検索対象に隠しファイルを含める場合は 1、含めない場合は 0
 * _callback_: 各ファイルに対して呼び出すコールバック関数、引数:
 ** _void *data_: ポインタ
 ** _const char *filename_: 見つかったファイルの名前
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
 
 C 言語での使用例:
 
@@ -3398,7 +3398,7 @@ whoreirc_exec_on_files ("/tmp", 0, 0, &callback, NULL);
 
 ==== file_get_content
 
-_WeeChat バージョン 0.3.1 以上で利用可。_
+_WhoreIRC バージョン 0.3.1 以上で利用可。_
 
 テキストファイルの内容を文字列に代入。
 
@@ -3473,7 +3473,7 @@ if (whoreirc_util_timeval_cmp (&tv1, &tv2) > 0)
 
 ==== util_timeval_diff
 
-_WeeChat バージョン 1.1 で更新。_
+_WhoreIRC バージョン 1.1 で更新。_
 
 2 つの "timeval" 構造体の差を返す (マイクロ秒単位)。
 
@@ -3494,7 +3494,7 @@ long long whoreirc_util_timeval_diff (struct timeval *tv1, struct timeval *tv2);
 * マイクロ秒単位の差
 
 [NOTE]
-WeeChat バージョン 1.0 以前の場合、戻り値の単位はミリ秒でした。
+WhoreIRC バージョン 1.0 以前の場合、戻り値の単位はミリ秒でした。
 
 C 言語での使用例:
 
@@ -3508,7 +3508,7 @@ long long diff = whoreirc_util_timeval_diff (&tv1, &tv2);
 
 ==== util_timeval_add
 
-_WeeChat バージョン 1.1 で更新。_
+_WhoreIRC バージョン 1.1 で更新。_
 
 timeval 構造体に時間間隔を追加 (マイクロ秒単位)。
 
@@ -3525,7 +3525,7 @@ void whoreirc_util_timeval_add (struct timeval *tv, long long interval);
 * _interval_: 時間間隔 (マイクロ秒単位)
 
 [NOTE]
-WeeChat バージョン 1.0 以前の場合、時間間隔の単位はミリ秒でした。
+WhoreIRC バージョン 1.0 以前の場合、時間間隔の単位はミリ秒でした。
 
 C 言語での使用例:
 
@@ -3539,7 +3539,7 @@ whoreirc_util_timeval_add (&tv, 2000000);  /* add 2 seconds */
 
 ==== util_get_time_string
 
-_WeeChat バージョン 0.3.2 以上で利用可、バージョン 1.3 で更新。_
+_WhoreIRC バージョン 0.3.2 以上で利用可、バージョン 1.3 で更新。_
 
 日付/時刻を "strftime" で作った文字列として取得します。書式は
 _whoreirc.look.time_format_ で定義されています。
@@ -3573,9 +3573,9 @@ whoreirc_printf (NULL, "date: %s",
 
 ==== util_version_number
 
-_WeeChat バージョン 0.3.9 以上で利用可。_
+_WhoreIRC バージョン 0.3.9 以上で利用可。_
 
-WeeChat バージョンの文字列を番号に変換。
+WhoreIRC バージョンの文字列を番号に変換。
 
 プロトタイプ:
 
@@ -3586,7 +3586,7 @@ int whoreirc_util_version_number (const char *version);
 
 引数:
 
-* _version_: WeeChat バージョン文字列 (例: "0.3.9" や "0.3.9-dev")
+* _version_: WhoreIRC バージョン文字列 (例: "0.3.9" や "0.3.9-dev")
 
 C 言語での使用例:
 
@@ -3658,9 +3658,9 @@ struct t_weelist_item *whoreirc_list_add (struct t_weelist *weelist,
 * _weelist_: リストへのポインタ
 * _data_: リストに追加するデータ
 * _where_: データを追加する場所:
-** _WEECHAT_LIST_POS_SORT_: リストに追加、リストをソートされた状態を保持
-** _WEECHAT_LIST_POS_BEGINNING_: リストの最初に追加
-** _WEECHAT_LIST_POS_END_: リストの最後に追加
+** _WHOREIRC_LIST_POS_SORT_: リストに追加、リストをソートされた状態を保持
+** _WHOREIRC_LIST_POS_BEGINNING_: リストの最初に追加
+** _WHOREIRC_LIST_POS_END_: リストの最後に追加
 * _user_data_: 任意のポインタ
 
 戻り値:
@@ -3672,7 +3672,7 @@ C 言語での使用例:
 [source,C]
 ----
 struct t_weelist_item *my_item =
-    whoreirc_list_add (list, "my data", WEECHAT_LIST_POS_SORT, NULL);
+    whoreirc_list_add (list, "my data", WHOREIRC_LIST_POS_SORT, NULL);
 ----
 
 スクリプト (Python) での使用例:
@@ -3683,7 +3683,7 @@ struct t_weelist_item *my_item =
 item = whoreirc.list_add(list, data, where, user_data)
 
 # 例
-item = whoreirc.list_add(list, "my data", whoreirc.WEECHAT_LIST_POS_SORT, "")
+item = whoreirc.list_add(list, "my data", whoreirc.WHOREIRC_LIST_POS_SORT, "")
 ----
 
 ==== list_search
@@ -3727,7 +3727,7 @@ item = whoreirc.list_search(list, "my data")
 
 ==== list_search_pos
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 リストから要素の位置を検索。
 
@@ -3807,7 +3807,7 @@ item = whoreirc.list_casesearch(list, "my data")
 
 ==== list_casesearch_pos
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 大文字小文字を無視してリストから要素の位置を検索。
 
@@ -4177,7 +4177,7 @@ whoreirc.list_free(list)
 
 ==== arraylist_new
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 新しい配列リストを作成します。
 
@@ -4215,12 +4215,12 @@ struct t_arraylist *whoreirc_arraylist_new (int initial_size,
 *** 1 番目の要素が 2 番目の要素よりも小さければ負数
 *** 1 番目の要素が 2 番目の要素と同じならばゼロ
 *** 1 番目の要素が 2 番目の要素よりも大きければ正数
-* _callback_cmp_data_: WeeChat がコールバックを呼び出す際に、コールバックに渡すポインタ
+* _callback_cmp_data_: WhoreIRC がコールバックを呼び出す際に、コールバックに渡すポインタ
 * _callback_free_: 要素を解放する際に使われるコールバック (任意)、引数は以下:
 ** _void *data_: ポインタ
 ** _struct t_arraylist *arraylist_: 配列リストポインタ
 ** _void *pointer_: 要素へのポインタ
-* _callback_free_data_: WeeChat がコールバックを呼び出す際に、コールバックに渡すポインタ
+* _callback_free_data_: WhoreIRC がコールバックを呼び出す際に、コールバックに渡すポインタ
 
 戻り値:
 
@@ -4251,7 +4251,7 @@ struct t_arraylist *list = whoreirc_arraylist_new (32, 1, 1,
 
 ==== arraylist_size
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストのサイズ (要素ポインタの数) を返します。
 
@@ -4282,7 +4282,7 @@ whoreirc_printf (NULL, "size of array list: %d", whoreirc_arraylist_size (arrayl
 
 ==== arraylist_get
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 指定された位置の要素ポインタを返します。
 
@@ -4314,7 +4314,7 @@ void *pointer = whoreirc_arraylist_get (arraylist, 0);  /* first item */
 
 ==== arraylist_search
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストから要素を検索します。
 
@@ -4352,7 +4352,7 @@ void *item = whoreirc_arraylist_search (arraylist, pointer, &index, &index_inser
 
 ==== arraylist_insert
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストに要素を挿入します。
 
@@ -4387,7 +4387,7 @@ int index = whoreirc_arraylist_insert (arraylist, -1, pointer);  /* 未ソート
 
 ==== arraylist_add
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストに要素を追加します。
 
@@ -4419,7 +4419,7 @@ int index = whoreirc_arraylist_add (arraylist, pointer);
 
 ==== arraylist_remove
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストから要素を削除します。
 
@@ -4451,7 +4451,7 @@ int index_removed = whoreirc_arraylist_remove (arraylist, index);
 
 ==== arraylist_clear
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストからすべての要素を削除します。
 
@@ -4485,7 +4485,7 @@ if (whoreirc_arraylist_clear (arraylist))
 
 ==== arraylist_free
 
-_WeeChat バージョン 1.8 以上で利用可_
+_WhoreIRC バージョン 1.8 以上で利用可_
 
 配列リストを解放します。
 
@@ -4517,7 +4517,7 @@ whoreirc_arraylist_free (arraylist);
 
 ==== hashtable_new
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 新しいハッシュテーブルを作成。
 
@@ -4541,17 +4541,17 @@ struct t_hashtable *whoreirc_hashtable_new (int size,
   ハッシュキーを保存している内部配列のサイズ、値が大きければ多くのメモリを使う反面パフォーマンスがよくなります
   (これはハッシュテーブルの要素数の上限を決めるもの *ではありません*)
 * _type_keys_: ハッシュテーブルのキーの種類:
-** _WEECHAT_HASHTABLE_INTEGER_
-** _WEECHAT_HASHTABLE_STRING_
-** _WEECHAT_HASHTABLE_POINTER_
-** _WEECHAT_HASHTABLE_BUFFER_
-** _WEECHAT_HASHTABLE_TIME_
+** _WHOREIRC_HASHTABLE_INTEGER_
+** _WHOREIRC_HASHTABLE_STRING_
+** _WHOREIRC_HASHTABLE_POINTER_
+** _WHOREIRC_HASHTABLE_BUFFER_
+** _WHOREIRC_HASHTABLE_TIME_
 * _type_values_: ハッシュテーブルの値の種類:
-** _WEECHAT_HASHTABLE_INTEGER_
-** _WEECHAT_HASHTABLE_STRING_
-** _WEECHAT_HASHTABLE_POINTER_
-** _WEECHAT_HASHTABLE_BUFFER_
-** _WEECHAT_HASHTABLE_TIME_
+** _WHOREIRC_HASHTABLE_INTEGER_
+** _WHOREIRC_HASHTABLE_STRING_
+** _WHOREIRC_HASHTABLE_POINTER_
+** _WHOREIRC_HASHTABLE_BUFFER_
+** _WHOREIRC_HASHTABLE_TIME_
 * _callback_hash_key_: キーを「ハッシュ化」する (キーを整数値にする)
   際のコールバック関数、キーの種類が "buffer" 以外の場合、コールバックは
   NULL でも可 (デフォルトのハッシュ関数を使います)、引数と戻り値:
@@ -4578,8 +4578,8 @@ C 言語での使用例:
 [source,C]
 ----
 struct t_hashtable *hashtable = whoreirc_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 ----
@@ -4589,7 +4589,7 @@ struct t_hashtable *hashtable = whoreirc_hashtable_new (8,
 
 ==== hashtable_set_with_size
 
-_WeeChat バージョン 0.3.3 以上で利用可、バージョン 0.4.2 で更新。_
+_WhoreIRC バージョン 0.3.3 以上で利用可、バージョン 0.4.2 で更新。_
 
 キーと値のサイズを使ってハッシュテーブルの要素を追加または更新。
 
@@ -4629,7 +4629,7 @@ whoreirc_hashtable_set_with_size (hashtable, "my_key", 0,
 
 ==== hashtable_set
 
-_WeeChat バージョン 0.3.3 以上で利用可、バージョン 0.4.2 で更新。_
+_WhoreIRC バージョン 0.3.3 以上で利用可、バージョン 0.4.2 で更新。_
 
 ハッシュテーブルの要素を追加または更新。
 
@@ -4663,7 +4663,7 @@ whoreirc_hashtable_set (hashtable, "my_key", "my_value");
 
 ==== hashtable_get
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルからキーに紐付けられた値を取得。
 
@@ -4695,7 +4695,7 @@ void *value = whoreirc_hashtable_get (hashtable, "my_key");
 
 ==== hashtable_has_key
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ハッシュテーブル内にキーが有るか確認する。
 
@@ -4731,7 +4731,7 @@ if (whoreirc_hashtable_has_key (hashtable, "my_key"))
 
 ==== hashtable_map
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルのすべてのエントリに対して関数を呼び出す。
 
@@ -4775,7 +4775,7 @@ whoreirc_hashtable_map (hashtable, &map_cb, NULL);
 
 ==== hashtable_map_string
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 ハッシュテーブルのすべてのエントリに対して関数を呼び出す、キーと値を文字列として関数に渡す。
 
@@ -4822,7 +4822,7 @@ whoreirc_hashtable_map_string (hashtable, &map_cb, NULL);
 
 ==== hashtable_dup
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
 ハッシュテーブルを複製。
 
@@ -4853,7 +4853,7 @@ struct t_hashtable *new_hashtable = whoreirc_hashtable_dup (hashtable);
 
 ==== hashtable_get_integer
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルプロパティの整数値を返す。
 
@@ -4888,7 +4888,7 @@ int items_count = whoreirc_hashtable_get_integer (hashtable, "items_count");
 
 ==== hashtable_get_string
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ハッシュテーブルプロパティを文字列値で返す。
 
@@ -4943,7 +4943,7 @@ whoreirc_printf (NULL, "list of keys: %s",
 
 ==== hashtable_set_pointer
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ハッシュテーブルのポインタ値を設定。
 
@@ -4960,7 +4960,7 @@ void whoreirc_hashtable_set_pointer (struct t_hashtable *hashtable,
 * _hashtable_: ハッシュテーブルへのポインタ
 * _property_: プロパティ名:
 ** _callback_free_key_: ハッシュテーブルからキーを開放する際のコールバック関数
-   _(WeeChat バージョン 0.4.2 以上で利用可)_
+   _(WhoreIRC バージョン 0.4.2 以上で利用可)_
 ** _callback_free_value_: ハッシュテーブルから値を開放する際のコールバック関数
 * _pointer_: プロパティの新しいポインタ値
 
@@ -4989,7 +4989,7 @@ whoreirc_hashtable_set_pointer (hashtable, "callback_free_key", &my_free_key_cb)
 
 ==== hashtable_add_to_infolist
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルの要素をインフォリスト要素に追加
 
@@ -5034,7 +5034,7 @@ whoreirc_hashtable_add_to_infolist (hashtable, infolist_item, "testhash");
 
 ==== hashtable_remove
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルから要素を削除。
 
@@ -5062,7 +5062,7 @@ whoreirc_hashtable_remove (hashtable, "my_key");
 
 ==== hashtable_remove_all
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルからすべての要素を削除。
 
@@ -5089,7 +5089,7 @@ whoreirc_hashtable_remove_all (hashtable);
 
 ==== hashtable_free
 
-_WeeChat バージョン 0.3.3 以上で利用可。_
+_WhoreIRC バージョン 0.3.3 以上で利用可。_
 
 ハッシュテーブルを開放。
 
@@ -5121,7 +5121,7 @@ whoreirc_hashtable_free (hashtable);
 
 ==== config_new
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 新しい設定ファイルを作成。
 
@@ -5146,12 +5146,12 @@ struct t_config_file *whoreirc_config_new (const char *name,
 ** _void *data_: ポインタ
 ** _struct t_config_file *config_file_: 設定ファイルへのポインタ
 ** 戻り値:
-*** _WEECHAT_CONFIG_READ_OK_
-*** _WEECHAT_CONFIG_READ_MEMORY_ERROR_
-*** _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_
-* _callback_reload_pointer_: WeeChat が _callback_reload_
+*** _WHOREIRC_CONFIG_READ_OK_
+*** _WHOREIRC_CONFIG_READ_MEMORY_ERROR_
+*** _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_
+* _callback_reload_pointer_: WhoreIRC が _callback_reload_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_reload_data_: WeeChat が _callback_reload_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_reload_data_: WhoreIRC が _callback_reload_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成した設定ファイルが開放された時点で自動的に開放されます
 
@@ -5161,7 +5161,7 @@ struct t_config_file *whoreirc_config_new (const char *name,
   を呼び出してください。<<_config_reload,config_reload>> 関数は設定ファイルを削除してはいけません。
 * <<_config_reload,config_reload>>
   関数の前処理や後処理が必要な場合に限り、これらを行うリロードコールバックを指定します。 +
-  リロードコールバックを指定しなかった場合、WeeChat
+  リロードコールバックを指定しなかった場合、WhoreIRC
   は内部リロード関数を呼び出し、常に設定ファイルがリロードされます。
 
 戻り値:
@@ -5185,7 +5185,7 @@ my_config_reload_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_config_file *config_file = whoreirc_config_new ("test",
@@ -5203,14 +5203,14 @@ config_file = whoreirc.config_new(name, callback_reload, callback_reload_data)
 # 例
 def my_config_reload_cb(data, config_file):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 config_file = whoreirc.config_new("test", "my_config_reload_cb", "")
 ----
 
 ==== config_new_section
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 設定ファイルに新しいセクションを作成する。
 
@@ -5278,12 +5278,12 @@ struct t_config_section *whoreirc_config_new_section (
 ** _const char *option_name_: オプションの名前
 ** _const char *value_: 値
 ** 戻り値:
-*** _WEECHAT_CONFIG_READ_OK_
-*** _WEECHAT_CONFIG_READ_MEMORY_ERROR_
-*** _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_
-* _callback_read_pointer_: WeeChat が _callback_read_
+*** _WHOREIRC_CONFIG_READ_OK_
+*** _WHOREIRC_CONFIG_READ_MEMORY_ERROR_
+*** _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_
+* _callback_read_pointer_: WhoreIRC が _callback_read_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_read_data_: WeeChat が _callback_read_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_read_data_: WhoreIRC が _callback_read_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したセクションが開放された時点で自動的に開放されます
 * _callback_write_: セクションをファイルに書き込む際に呼び出すコールバック関数
@@ -5294,12 +5294,12 @@ struct t_config_section *whoreirc_config_new_section (
 ** _struct t_config_file *config_file_: 設定ファイルへのポインタ
 ** _const char *section_name_: セクションの名前
 ** 戻り値:
-*** _WEECHAT_CONFIG_WRITE_OK_
-*** _WEECHAT_CONFIG_WRITE_ERROR_
-*** _WEECHAT_CONFIG_WRITE_MEMORY_ERROR_
-* _callback_write_pointer_: WeeChat が _callback_write_
+*** _WHOREIRC_CONFIG_WRITE_OK_
+*** _WHOREIRC_CONFIG_WRITE_ERROR_
+*** _WHOREIRC_CONFIG_WRITE_MEMORY_ERROR_
+* _callback_write_pointer_: WhoreIRC が _callback_write_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_write_data_: WeeChat が _callback_write_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_write_data_: WhoreIRC が _callback_write_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したセクションが開放された時点で自動的に開放されます
 * _callback_write_default_:
@@ -5309,12 +5309,12 @@ struct t_config_section *whoreirc_config_new_section (
 ** _struct t_config_file *config_file_: 設定ファイルへのポインタ
 ** _const char *section_name_: セクションの名前
 ** 戻り値:
-*** _WEECHAT_CONFIG_WRITE_OK_
-*** _WEECHAT_CONFIG_WRITE_ERROR_
-*** _WEECHAT_CONFIG_WRITE_MEMORY_ERROR_
-* _callback_write_default_pointer_: WeeChat が _callback_write_default_
+*** _WHOREIRC_CONFIG_WRITE_OK_
+*** _WHOREIRC_CONFIG_WRITE_ERROR_
+*** _WHOREIRC_CONFIG_WRITE_MEMORY_ERROR_
+* _callback_write_default_pointer_: WhoreIRC が _callback_write_default_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_write_default_data_: WeeChat が _callback_write_default_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_write_default_data_: WhoreIRC が _callback_write_default_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したセクションが開放された時点で自動的に開放されます
 * _callback_create_option_: セクションに新しいオプションを作成する際に呼び出すコールバック関数
@@ -5327,13 +5327,13 @@ struct t_config_section *whoreirc_config_new_section (
 ** _const char *option_name_: オプションの名前
 ** _const char *value_: 値
 ** 戻り値:
-*** _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_
-*** _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_
-*** _WEECHAT_CONFIG_OPTION_SET_ERROR_
-*** _WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND_
-* _callback_create_option_pointer_: WeeChat が _callback_create_option_
+*** _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_
+*** _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_
+*** _WHOREIRC_CONFIG_OPTION_SET_ERROR_
+*** _WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND_
+* _callback_create_option_pointer_: WhoreIRC が _callback_create_option_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_create_option_data_: WeeChat が _callback_create_option_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_create_option_data_: WhoreIRC が _callback_create_option_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したセクションが開放された時点で自動的に開放されます
 * _callback_delete_option_: セクションからオプションを削除する際に呼び出すコールバック関数
@@ -5345,13 +5345,13 @@ struct t_config_section *whoreirc_config_new_section (
 ** _struct t_config_section *section_: セクションへのポインタ
 ** _struct t_config_option *option_: オプションへのポインタ
 ** 戻り値:
-*** _WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET_
-*** _WEECHAT_CONFIG_OPTION_UNSET_OK_RESET_
-*** _WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED_
-*** _WEECHAT_CONFIG_OPTION_UNSET_ERROR_
-* _callback_delete_option_pointer_: WeeChat が _callback_delete_option_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED_
+*** _WHOREIRC_CONFIG_OPTION_UNSET_ERROR_
+* _callback_delete_option_pointer_: WhoreIRC が _callback_delete_option_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_delete_option_data_: WeeChat が _callback_delete_option_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_delete_option_data_: WhoreIRC が _callback_delete_option_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、ポインタはここで作成したセクションが開放された時点で自動的に開放されます
 
@@ -5372,9 +5372,9 @@ my_section_read_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_READ_OK;
-    /* return WEECHAT_CONFIG_READ_MEMORY_ERROR; */
-    /* return WEECHAT_CONFIG_READ_FILE_NOT_FOUND; */
+    return WHOREIRC_CONFIG_READ_OK;
+    /* return WHOREIRC_CONFIG_READ_MEMORY_ERROR; */
+    /* return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND; */
 }
 
 int
@@ -5384,9 +5384,9 @@ my_section_write_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_WRITE_OK;
-    /* return WEECHAT_CONFIG_WRITE_ERROR; */
-    /* return WEECHAT_CONFIG_WRITE_MEMORY_ERROR; */
+    return WHOREIRC_CONFIG_WRITE_OK;
+    /* return WHOREIRC_CONFIG_WRITE_ERROR; */
+    /* return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR; */
 }
 
 int
@@ -5396,9 +5396,9 @@ my_section_write_default_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_WRITE_OK;
-    /* return WEECHAT_CONFIG_WRITE_ERROR; */
-    /* return WEECHAT_CONFIG_WRITE_MEMORY_ERROR; */
+    return WHOREIRC_CONFIG_WRITE_OK;
+    /* return WHOREIRC_CONFIG_WRITE_ERROR; */
+    /* return WHOREIRC_CONFIG_WRITE_MEMORY_ERROR; */
 }
 
 int
@@ -5410,10 +5410,10 @@ my_section_create_option_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_CHANGED;
-    /* return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE; */
-    /* return WEECHAT_CONFIG_OPTION_SET_ERROR; */
-    /* return WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND; */
+    return WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED;
+    /* return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE; */
+    /* return WHOREIRC_CONFIG_OPTION_SET_ERROR; */
+    /* return WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND; */
 }
 
 int
@@ -5424,10 +5424,10 @@ my_section_delete_option_cb (const void *pointer, void *data,
 {
     /* ... */
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
-    /* return WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET; */
-    /* return WEECHAT_CONFIG_OPTION_UNSET_OK_RESET; */
-    /* return WEECHAT_CONFIG_OPTION_UNSET_ERROR; */
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
+    /* return WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET; */
+    /* return WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET; */
+    /* return WHOREIRC_CONFIG_OPTION_UNSET_ERROR; */
 }
 
 /* standard section, user can not add/delete options */
@@ -5465,26 +5465,26 @@ section = whoreirc.config_new_section(config_file, name,
 # 例
 def my_section_read_cb(data, config_file, section, option_name, value):
     # ...
-    return whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED
-    # return whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE
-    # return whoreirc.WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND
-    # return whoreirc.WEECHAT_CONFIG_OPTION_SET_ERROR
+    return whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED
+    # return whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE
+    # return whoreirc.WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND
+    # return whoreirc.WHOREIRC_CONFIG_OPTION_SET_ERROR
 
 def my_section_write_cb(data, config_file, section_name):
     # ...
-    return whoreirc.WEECHAT_CONFIG_WRITE_OK
+    return whoreirc.WHOREIRC_CONFIG_WRITE_OK
 
 def my_section_write_default_cb(data, config_file, section_name):
     # ...
-    return whoreirc.WEECHAT_CONFIG_WRITE_OK
+    return whoreirc.WHOREIRC_CONFIG_WRITE_OK
 
 def my_section_create_option_cb(data, config_file, section, option_name, value):
     # ...
-    return whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE
+    return whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE
 
 def my_section_delete_option_cb(data, config_file, section, option):
     # ...
-    return whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED
+    return whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED
 
 section = whoreirc.config_new_section(config_file, "section1", 1, 1,
     "my_section_read_cb", "",
@@ -5537,7 +5537,7 @@ section = whoreirc.config_search_section(config_file, "section")
 
 ==== config_new_option
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 設定ファイルのあるセクションに新しいオプションを作成。
 
@@ -5579,7 +5579,7 @@ struct t_config_option *whoreirc_config_new_option (
 
 * _config_file_: 設定ファイルへのポインタ
 * _section_: セクションへのポインタ
-* _name_: オプションの名前; WeeChat バージョン 1.4 以上の場合、名前には親オプションの名前を含めることも可能です
+* _name_: オプションの名前; WhoreIRC バージョン 1.4 以上の場合、名前には親オプションの名前を含めることも可能です
   (このオプションが "null" の場合、親オプションの値が `/set`
   コマンドの出力に表示されます)。以下の構文を使ってください:
   "name << file.section.option"
@@ -5606,9 +5606,9 @@ struct t_config_option *whoreirc_config_new_option (
 ** 戻り値:
 *** 値が有効の場合は 1
 *** 値が無効の場合は 0
-* _callback_check_value_pointer_: WeeChat が _callback_check_value_
+* _callback_check_value_pointer_: WhoreIRC が _callback_check_value_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_check_value_data_: WeeChat が _callback_check_value_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_check_value_data_: WhoreIRC が _callback_check_value_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したオプションが開放された時点で自動的に開放されます
 * _callback_change_: オプションの値を変更した際に呼び出すコールバック関数
@@ -5616,9 +5616,9 @@ struct t_config_option *whoreirc_config_new_option (
 ** _const void *pointer_: ポインタ
 ** _void *data_: ポインタ
 ** _struct t_config_option *option_: オプションへのポインタ
-* _callback_change_pointer_: WeeChat が _callback_change_
+* _callback_change_pointer_: WhoreIRC が _callback_change_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_change_data_: WeeChat が _callback_change_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_change_data_: WhoreIRC が _callback_change_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したオプションが開放された時点で自動的に開放されます
 * _callback_delete_: オプションを削除する前に際に呼び出すコールバック関数
@@ -5626,9 +5626,9 @@ struct t_config_option *whoreirc_config_new_option (
 ** _const void *pointer_: ポインタ
 ** _void *data_: ポインタ
 ** _struct t_config_option *option_: オプションへのポインタ
-* _callback_delete_pointer_: WeeChat が _callback_delete_
+* _callback_delete_pointer_: WhoreIRC が _callback_delete_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_delete_data_: WeeChat が _callback_delete_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_delete_data_: WhoreIRC が _callback_delete_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したオプションが開放された時点で自動的に開放されます
 
@@ -5769,8 +5769,8 @@ option5 = whoreirc.config_new_option(config_file, section, "option5", "color",
 [NOTE]
 Ruby では、3 組のコールバックとデータ (6 つの文字列変数) を渡す際に必ず 6 つの文字列変数の配列を
 1 つ渡してください (これは Ruby が関数に 15 個以上の引数を渡せないことが原因です)、より詳しい内容は
-link:++whoreirc_scripting.ja.html#_ruby++[WeeChat スクリプト作成ガイド]を参照してください
-_(WeeChat バージョン 0.4.1 で修正済み)_。
+link:++whoreirc_scripting.ja.html#_ruby++[WhoreIRC スクリプト作成ガイド]を参照してください
+_(WhoreIRC バージョン 0.4.1 で修正済み)_。
 
 
 ==== config_search_option
@@ -5986,9 +5986,9 @@ int whoreirc_config_option_reset (struct t_config_option *option,
 
 戻り値:
 
-* オプションの値がリセットされた場合は _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_
-* 値が変更されなかった場合は _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_
-* エラーが起きた場合は _WEECHAT_CONFIG_OPTION_SET_ERROR_
+* オプションの値がリセットされた場合は _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_
+* 値が変更されなかった場合は _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_
+* エラーが起きた場合は _WHOREIRC_CONFIG_OPTION_SET_ERROR_
 
 C 言語での使用例:
 
@@ -5996,13 +5996,13 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_option_reset (option, 1))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* .... */
         break;
 }
@@ -6017,11 +6017,11 @@ rc = whoreirc.config_option_reset(option, run_callback)
 
 # 例
 rc = whoreirc.config_option_reset(option, 1)
-if rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
@@ -6052,9 +6052,9 @@ int whoreirc_config_option_set (struct t_config_option *option,
 
 戻り値:
 
-* オプションの値が変更された場合は _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_
-* 値が変更されなかった場合は _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_
-* エラーが起きた場合は _WEECHAT_CONFIG_OPTION_SET_ERROR_
+* オプションの値が変更された場合は _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_
+* 値が変更されなかった場合は _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_
+* エラーが起きた場合は _WHOREIRC_CONFIG_OPTION_SET_ERROR_
 
 C 言語での使用例:
 
@@ -6062,13 +6062,13 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_option_set (option, "new_value", 1))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* .... */
         break;
 }
@@ -6083,11 +6083,11 @@ rc = whoreirc.config_option_set(option, value, run_callback)
 
 # 例
 rc = whoreirc.config_option_set(option, "new_value", 1)
-if rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
@@ -6115,9 +6115,9 @@ int whoreirc_config_option_set_null (struct t_config_option *option,
 
 戻り値:
 
-* オプション値が変更された場合は _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_
-* 値が変更されなかった場合は _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_
-* エラーが起きた場合は _WEECHAT_CONFIG_OPTION_SET_ERROR_
+* オプション値が変更された場合は _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_
+* 値が変更されなかった場合は _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_
+* エラーが起きた場合は _WHOREIRC_CONFIG_OPTION_SET_ERROR_
 
 C 言語での使用例:
 
@@ -6125,13 +6125,13 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_option_set_null (option, 1))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* .... */
         break;
 }
@@ -6146,11 +6146,11 @@ rc = whoreirc.config_option_set_null(option, run_callback)
 
 # 例
 rc = whoreirc.config_option_set_null(option, 1)
-if rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
@@ -6171,10 +6171,10 @@ int whoreirc_config_option_unset (struct t_config_option *option);
 
 戻り値:
 
-* オプションの値がリセットされなかった場合は _WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET_
-* オプションの値がリセットされた場合は _WEECHAT_CONFIG_OPTION_UNSET_OK_RESET_
-* オプションが削除された場合は _WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED_
-* エラーが起きた場合は _WEECHAT_CONFIG_OPTION_UNSET_ERROR_
+* オプションの値がリセットされなかった場合は _WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET_
+* オプションの値がリセットされた場合は _WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET_
+* オプションが削除された場合は _WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED_
+* エラーが起きた場合は _WHOREIRC_CONFIG_OPTION_UNSET_ERROR_
 
 C 言語での使用例:
 
@@ -6182,16 +6182,16 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_option_unset (option))
 {
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
         /* .... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
         /* .... */
         break;
 }
@@ -6206,13 +6206,13 @@ rc = whoreirc.config_option_unset(option)
 
 # 例
 rc = whoreirc.config_option_unset(option)
-if rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+if rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
     # ...
 ----
 
@@ -6253,7 +6253,7 @@ whoreirc.config_option_rename(option, "new_name")
 
 ==== config_option_get_string
 
-_WeeChat バージョン 1.9 以上で利用可。_
+_WhoreIRC バージョン 1.9 以上で利用可。_
 
 オプションプロパティの文字列値を返す。
 
@@ -6313,7 +6313,7 @@ void *whoreirc_config_option_get_pointer (struct t_config_option *option,
 ** _config_file_: 設定ファイルへのポインタ (_struct t_config_file *_)
 ** _section_: セクションへのポインタ (_struct t_config_section *_)
 ** _name_: オプション名 (_char *_)
-** _parent_name_: 親オプションの名前 (_char *_) _(WeeChat バージョン 1.4 以上で利用可)_
+** _parent_name_: 親オプションの名前 (_char *_) _(WhoreIRC バージョン 1.4 以上で利用可)_
 ** _type_: オプションの型 (_int *_)
 ** _description_: オプションの説明 (_char *_)
 ** _string_values_: 文字列値 (_char *_)
@@ -6815,7 +6815,7 @@ my_section_write_cb (const void *pointer, void *data,
 
     whoreirc_config_write_option (config_file, option);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -6830,7 +6830,7 @@ whoreirc.config_write_option(config_file, option)
 def my_section_write_cb(data, config_file, section_name):
     whoreirc.config_write_line(config_file, "my_section", "")
     whoreirc.config_write_option(config_file, option)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 ----
 
 ==== config_write_line
@@ -6868,7 +6868,7 @@ my_section_write_cb (const void *pointer, void *data,
     whoreirc_config_write_line (config_file, "option", "%s;%d",
                                "value", 123);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -6883,7 +6883,7 @@ whoreirc.config_write_line(config_file, option_name, value)
 def my_section_write_cb(data, config_file, section_name):
     whoreirc.config_write_line(config_file, "my_section", "")
     whoreirc.config_write_line(config_file, "option", "value")
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 ----
 
 ==== config_write
@@ -6903,9 +6903,9 @@ int whoreirc_config_write (struct t_config_file *config_file);
 
 戻り値:
 
-* 設定を書き込んだ場合は _WEECHAT_CONFIG_WRITE_OK_
-* メモリ不足の場合は _WEECHAT_CONFIG_WRITE_MEMORY_ERROR_
-* その他のエラーが起きた場合は _WEECHAT_CONFIG_WRITE_ERROR_
+* 設定を書き込んだ場合は _WHOREIRC_CONFIG_WRITE_OK_
+* メモリ不足の場合は _WHOREIRC_CONFIG_WRITE_MEMORY_ERROR_
+* その他のエラーが起きた場合は _WHOREIRC_CONFIG_WRITE_ERROR_
 
 C 言語での使用例:
 
@@ -6913,13 +6913,13 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_write (config_file))
 {
-    case WEECHAT_CONFIG_WRITE_OK:
+    case WHOREIRC_CONFIG_WRITE_OK:
         /* ... */
         break;
-    case WEECHAT_CONFIG_WRITE_MEMORY_ERROR:
+    case WHOREIRC_CONFIG_WRITE_MEMORY_ERROR:
         /* ... */
         break;
-    case WEECHAT_CONFIG_WRITE_ERROR:
+    case WHOREIRC_CONFIG_WRITE_ERROR:
         /* ... */
         break;
 }
@@ -6934,11 +6934,11 @@ rc = whoreirc.config_write(config_file)
 
 # 例
 rc = whoreirc.config_write(config_file)
-if rc == whoreirc.WEECHAT_CONFIG_WRITE_OK:
+if rc == whoreirc.WHOREIRC_CONFIG_WRITE_OK:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_WRITE_MEMORY_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_WRITE_MEMORY_ERROR:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_WRITE_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_WRITE_ERROR:
     # ...
 ----
 
@@ -6959,9 +6959,9 @@ int whoreirc_config_read (struct t_config_file *config_file);
 
 戻り値:
 
-* 設定ファイルを読み込んだ場合は _WEECHAT_CONFIG_READ_OK_
-* メモリ不足の場合は _WEECHAT_CONFIG_READ_MEMORY_ERROR_
-* ファイルが見つからない場合は _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_
+* 設定ファイルを読み込んだ場合は _WHOREIRC_CONFIG_READ_OK_
+* メモリ不足の場合は _WHOREIRC_CONFIG_READ_MEMORY_ERROR_
+* ファイルが見つからない場合は _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_
 
 C 言語での使用例:
 
@@ -6969,13 +6969,13 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_read (config_file))
 {
-    case WEECHAT_CONFIG_READ_OK:
+    case WHOREIRC_CONFIG_READ_OK:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_MEMORY_ERROR:
+    case WHOREIRC_CONFIG_READ_MEMORY_ERROR:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+    case WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
         /* ... */
         break;
 }
@@ -6990,11 +6990,11 @@ rc = whoreirc.config_read(config_file)
 
 # 例
 rc = whoreirc.config_read(config_file)
-if rc == whoreirc.WEECHAT_CONFIG_READ_OK:
+if rc == whoreirc.WHOREIRC_CONFIG_READ_OK:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_READ_MEMORY_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_READ_MEMORY_ERROR:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+elif rc == whoreirc.WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
     # ...
 ----
 
@@ -7015,9 +7015,9 @@ int whoreirc_config_reload (struct t_config_file *config_file);
 
 戻り値:
 
-* 設定をリロードした場合は _WEECHAT_CONFIG_READ_OK_
-* メモリ不足の合は _WEECHAT_CONFIG_READ_MEMORY_ERROR_
-* ファイルが見つからない場合は _WEECHAT_CONFIG_READ_FILE_NOT_FOUND_
+* 設定をリロードした場合は _WHOREIRC_CONFIG_READ_OK_
+* メモリ不足の合は _WHOREIRC_CONFIG_READ_MEMORY_ERROR_
+* ファイルが見つからない場合は _WHOREIRC_CONFIG_READ_FILE_NOT_FOUND_
 
 C 言語での使用例:
 
@@ -7025,13 +7025,13 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_reload (config_file))
 {
-    case WEECHAT_CONFIG_READ_OK:
+    case WHOREIRC_CONFIG_READ_OK:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_MEMORY_ERROR:
+    case WHOREIRC_CONFIG_READ_MEMORY_ERROR:
         /* ... */
         break;
-    case WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+    case WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
         /* ... */
         break;
 }
@@ -7046,11 +7046,11 @@ rc = whoreirc.config_reload(config_file)
 
 # 例
 rc = whoreirc.config_reload(config_file)
-if rc == whoreirc.WEECHAT_CONFIG_READ_OK:
+if rc == whoreirc.WHOREIRC_CONFIG_READ_OK:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_READ_MEMORY_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_READ_MEMORY_ERROR:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_READ_FILE_NOT_FOUND:
+elif rc == whoreirc.WHOREIRC_CONFIG_READ_FILE_NOT_FOUND:
     # ...
 ----
 
@@ -7332,10 +7332,10 @@ int whoreirc_config_set_plugin (const char *option_name, const char *value);
 
 戻り値:
 
-* オプションの値を変更した場合は _WEECHAT_CONFIG_OPTION_SET_OK_CHANGED_
-* 値を変更しなかった場合は _WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE_
-* オプションが見つからない場合は _WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND_
-* その他のエラーが起きた場合は _WEECHAT_CONFIG_OPTION_SET_ERROR_
+* オプションの値を変更した場合は _WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED_
+* 値を変更しなかった場合は _WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE_
+* オプションが見つからない場合は _WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND_
+* その他のエラーが起きた場合は _WHOREIRC_CONFIG_OPTION_SET_ERROR_
 
 C 言語での使用例:
 
@@ -7343,16 +7343,16 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_set_plugin ("option", "test_value"))
 {
-    case WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+    case WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
+    case WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_SET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_SET_ERROR:
         /* ... */
         break;
 }
@@ -7367,19 +7367,19 @@ rc = whoreirc.config_set_plugin(option_name, value)
 
 # 例
 rc = whoreirc.config_set_plugin("option", "test_value")
-if rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_CHANGED:
+if rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_SET_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_SET_ERROR:
     # ...
 ----
 
 ==== config_set_desc_plugin
 
-_WeeChat バージョン 0.3.5 以上で利用可。_
+_WhoreIRC バージョン 0.3.5 以上で利用可。_
 
 プラグイン設定ファイル (plugins.conf) のオプションに関する説明を設定。
 
@@ -7439,10 +7439,10 @@ int whoreirc_config_unset_plugin (const char *option_name);
 
 戻り値:
 
-* オプションの値をリセットしなかった場合は _WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET_
-* オプションの値をリセットした場合は _WEECHAT_CONFIG_OPTION_UNSET_OK_RESET_
-* オプションを削除した場合は _WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED_
-* エラーが起きた場合は _WEECHAT_CONFIG_OPTION_UNSET_ERROR_
+* オプションの値をリセットしなかった場合は _WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET_
+* オプションの値をリセットした場合は _WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET_
+* オプションを削除した場合は _WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED_
+* エラーが起きた場合は _WHOREIRC_CONFIG_OPTION_UNSET_ERROR_
 
 C 言語での使用例:
 
@@ -7450,16 +7450,16 @@ C 言語での使用例:
 ----
 switch (whoreirc_config_unset_plugin ("option"))
 {
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+    case WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
         /* ... */
         break;
-    case WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+    case WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
         /* ... */
         break;
 }
@@ -7474,13 +7474,13 @@ rc = whoreirc.config_unset_plugin(option_name)
 
 # 例
 rc = whoreirc.config_unset_plugin("option")
-if rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET:
+if rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_RESET:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED:
     # ...
-elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_ERROR:
+elif rc == whoreirc.WHOREIRC_CONFIG_OPTION_UNSET_ERROR:
     # ...
 ----
 
@@ -7491,7 +7491,7 @@ elif rc == whoreirc.WEECHAT_CONFIG_OPTION_UNSET_ERROR:
 
 ==== key_bind
 
-_WeeChat バージョン 0.3.6 以上で利用可、バージョン 1.8 で更新。_
+_WhoreIRC バージョン 0.3.6 以上で利用可、バージョン 1.8 で更新。_
 
 新しいキー割り当てを追加。
 
@@ -7518,7 +7518,7 @@ int whoreirc_key_bind (const char *context, struct t_hashtable *keys);
 ** _mouse_: マウスイベント用のキー
 * _keys_: キー割り当てを収めたハッシュテーブル; 以下の特殊キーを収めることが可能です:
 ** _{key_bind_quiet}_: コアバッファに追加されたキーを表示しない
-   _(WeeChat バージョン 1.8 以上で利用可)_
+   _(WhoreIRC バージョン 1.8 以上で利用可)_
 
 戻り値:
 
@@ -7529,8 +7529,8 @@ C 言語での使用例:
 [source,C]
 ----
 struct t_hashtable *keys = whoreirc_hashtable_new (8,
-                                                  WEECHAT_HASHTABLE_STRING,
-                                                  WEECHAT_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING,
+                                                  WHOREIRC_HASHTABLE_STRING,
                                                   NULL,
                                                   NULL);
 if (keys)
@@ -7559,7 +7559,7 @@ whoreirc.key_bind("mouse", keys)
 
 ==== key_unbind
 
-_WeeChat バージョン 0.3.6 以上で利用可、バージョン 2.0 で更新。_
+_WhoreIRC バージョン 0.3.6 以上で利用可、バージョン 2.0 で更新。_
 
 キー割り当てを削除。
 
@@ -7579,7 +7579,7 @@ int whoreirc_key_unbind (const char *context, const char *key);
 * _key_: 削除するキーまたは特殊値 "area:XXX" で1 番目または 2
   番目の領域から _XXX_ をもつすべてのキーを削除しますが、
   キーの先頭に "quiet:" を付けた場合には、削除されたキーを _core_
-  バッファに表示しません (_WeeChat バージョン 2.0 以上で利用可_)。
+  バッファに表示しません (_WhoreIRC バージョン 2.0 以上で利用可_)。
 
 戻り値:
 
@@ -7684,10 +7684,10 @@ const char *whoreirc_color (const char *color_name);
 引数:
 
 * _color_name_: 色の名前、以下の中から 1 つ:
-** WeeChat 色オプション名 (whoreirc.color.xxx の xxx)、例えば
+** WhoreIRC 色オプション名 (whoreirc.color.xxx の xxx)、例えば
    _chat_delimiters_
 ** オプション名 (書式: file.section.option)、例えば
-   _irc.color.message_quit_ (_WeeChat バージョン 1.2 以上で利用可_)
+   _irc.color.message_quit_ (_WhoreIRC バージョン 1.2 以上で利用可_)
 ** 任意で属性や背景色を指定した色 (以下を参照)
 ** 属性:
 *** _bold_: 太字を有効
@@ -7698,16 +7698,16 @@ const char *whoreirc_color (const char *color_name);
 *** _-italic_: イタリックを無効
 *** _underline_: 下線を有効
 *** _-underline_: 下線を無効
-*** _emphasis_: テキストの強調を切り替え (注意: WeeChat
+*** _emphasis_: テキストの強調を切り替え (注意: WhoreIRC
     はテキスト強調をバッファテキストを検索する際に使用するため、バー以外でこれを使わないでください。)
-    _(WeeChat バージョン 0.4.2 以上で利用可)_
+    _(WhoreIRC バージョン 0.4.2 以上で利用可)_
 ** バーの色名:
 *** _bar_fg_: バーのテキストの色
 *** _bar_delim_: バーの区切り文字の色
 *** _bar_bg_: バーの背景色
 ** リセット:
 *** _reset_: 色と属性をリセット
-*** _resetcolor_: 色をリセット (属性はリセットしない) _(WeeChat バージョン 0.3.6 以上で利用可)_
+*** _resetcolor_: 色をリセット (属性はリセットしない) _(WhoreIRC バージョン 0.3.6 以上で利用可)_
 
 色の書式: 属性 (任意) + 色名 + ",background"
 (任意)。以下の属性を使えます:
@@ -7717,7 +7717,7 @@ const char *whoreirc_color (const char *color_name);
 * `+/+` : イタリック
 * `+_+` : 下線
 * `+|+` : 属性を保存: 色を変更する際に太字/色反転/イタリック/下線の状態をリセットしない
-  _(WeeChat バージョン 0.3.6 以上で利用可)_
+  _(WhoreIRC バージョン 0.3.6 以上で利用可)_
 
 例:
 
@@ -7775,7 +7775,7 @@ whoreirc_printf_date_tags (buffer, 0, NULL, "message");
 
 引数:
 
-* _buffer_: バッファへのポインタ、NULL の場合は WeeChat バッファにメッセージを表示
+* _buffer_: バッファへのポインタ、NULL の場合は WhoreIRC バッファにメッセージを表示
 * _message_: 表示するメッセージ
 
 [NOTE]
@@ -7793,7 +7793,7 @@ C 言語での使用例:
 
 [source,C]
 ----
-whoreirc_printf (NULL, "Hello on WeeChat buffer");
+whoreirc_printf (NULL, "Hello on WhoreIRC buffer");
 whoreirc_printf (buffer, "Hello on this buffer");
 whoreirc_printf (buffer, "%sThis is an error!", whoreirc_prefix ("error"));
 whoreirc_printf (buffer, " \tMessage without prefix but with \t some \t tabs");
@@ -7809,7 +7809,7 @@ whoreirc_printf (buffer, "\t\t");  /* empty line (without time) */
 whoreirc.prnt(buffer, message)
 
 # 例
-whoreirc.prnt("", "Hello on WeeChat buffer")
+whoreirc.prnt("", "Hello on WhoreIRC buffer")
 whoreirc.prnt(buffer, "Hello on this buffer")
 whoreirc.prnt(buffer, "%sThis is an error!" % whoreirc.prefix("error"))
 whoreirc.prnt(buffer, " \tMessage without prefix but with \t some \t tabs")
@@ -7834,13 +7834,13 @@ void whoreirc_printf_date_tags (struct t_gui_buffer *buffer, time_t date,
 
 引数:
 
-* _buffer_: バッファへのポインタ、NULL の場合、メッセージは WeeChat バッファに表示
+* _buffer_: バッファへのポインタ、NULL の場合、メッセージは WhoreIRC バッファに表示
 * _date_: メッセージの日付 (0 は現在の日付/時間を意味する)
 * _tags_: タグのコンマ区切りリスト (タグを指定しない場合は NULL)
 * _message_: 表示するメッセージ
 
-WeeChat で共通に使われるタグのリストは
-link:whoreirc_user.ja.html#lines_tags[WeeChat ユーザーズガイド / 行のタグ]を参照してください
+WhoreIRC で共通に使われるタグのリストは
+link:whoreirc_user.ja.html#lines_tags[WhoreIRC ユーザーズガイド / 行のタグ]を参照してください
 
 C 言語での使用例:
 
@@ -7884,7 +7884,7 @@ void whoreirc_printf_y (struct t_gui_buffer *buffer, int y,
 * _y_: 行番号 (1 行目は 0); 負数の場合は表示された最後の行の後に行を追加する:
   _y_ の絶対値で最後の行の後に追加する行数を指定 (例えば
   -1 は最後の行のすぐ後、-2 は 最後の行の 2 行後)
-  _(WeeChat バージョン 1.0 以上で利用可)_
+  _(WhoreIRC バージョン 1.0 以上で利用可)_
 * _message_: 表示するメッセージ
 
 C 言語での使用例:
@@ -7910,7 +7910,7 @@ whoreirc.prnt_y("", 2, "My message on third line")
 
 ==== log_printf
 
-WeeChat ログファイル (whoreirc.log) にメッセージを書き込む。
+WhoreIRC ログファイル (whoreirc.log) にメッセージを書き込む。
 
 プロトタイプ:
 
@@ -7951,7 +7951,7 @@ whoreirc.log_print("My message in log file")
 [float]
 ==== フックの優先度
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 一部のフックに対して優先度を設定することができます。フックリストは優先度の高い順にフックが並べられ、高い優先度を持つフックはそれよりも低い優先度を持つフックが実行される前に実行されます。これは実行順序が重要となる修飾子で便利です。
 
@@ -7975,7 +7975,7 @@ command、command_run、signal、hsignal、config、completion、modifier、info
 
 ==== hook_command
 
-_WeeChat バージョン 1.5 と 1.7 で更新。_
+_WhoreIRC バージョン 1.5 と 1.7 で更新。_
 
 コマンドをフックする。
 
@@ -8015,10 +8015,10 @@ struct t_hook *whoreirc_hook_command (const char *command,
 ** _char **argv_eol_: コマンドに渡す引数
    (最初の引数から各引数までを収めた文字列)
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -8030,7 +8030,7 @@ struct t_hook *whoreirc_hook_command (const char *command,
 
 * _%(name)_: _name_ という補完候補テンプレート
 * _%(name:arguments)_: _arguments_ という引数をつけた _name_
-  という補完候補テンプレートがコールバックに送信されます _(WeeChat バージョン 1.7 以上)_
+  という補完候補テンプレートがコールバックに送信されます _(WhoreIRC バージョン 1.7 以上)_
 * 任意の文字列: 補完候補としてそのまま使われる文字列
 
 例えば `list || add %(filters_names) || del %(filters_names)|-all`
@@ -8065,7 +8065,7 @@ my_command_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
                int argc, char **argv, char **argv_eol)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* this example is inspired by command /filter */
@@ -8112,7 +8112,7 @@ hook = whoreirc.hook_command(command, description, args, args_description,
 # 例
 def my_command_cb(data, buffer, args):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_command("myfilter", "description of myfilter",
     "[list] | [enable|disable|toggle [name]] | [add name plugin.buffer tags regex] | [del name|-all]",
@@ -8128,7 +8128,7 @@ hook = whoreirc.hook_command("myfilter", "description of myfilter",
 
 ==== hook_completion
 
-_WeeChat バージョン 1.5 と 1.7 で更新。_
+_WhoreIRC バージョン 1.5 と 1.7 で更新。_
 
 補完をフック。
 
@@ -8151,29 +8151,29 @@ struct t_hook *whoreirc_hook_completion (const char *completion_item,
 
 * _completion_item_: 補完候補テンプレートの名前、これ以降コマンドフックの
   _completion_ 引数で _%(name)_ という補完候補テンプレートを使えます
-  (WeeChat バージョン 1.7 以上の場合 _%(name:arguments)_ も使えます)
+  (WhoreIRC バージョン 1.7 以上の場合 _%(name:arguments)_ も使えます)
   (優先度の設定が可能、<<hook_priority,フックの優先度>>に関する注意を参照)
 * _description_: 補完候補テンプレートの説明
 * _callback_: 補完候補テンプレート (ユーザはこの関数を使って何かを補完します)
   が使われた場合に呼び出すコールバック関数、引数と戻り値:
 ** _const void *pointer_: ポインタ
 ** _void *data_: ポインタ
-** _const char *completion_item_: 補完候補テンプレートの名前 (WeeChat バージョン 1.7
+** _const char *completion_item_: 補完候補テンプレートの名前 (WhoreIRC バージョン 1.7
    以上の場合、次の書式で引数を含めることも可能です: _name:arguments_)
 ** _struct t_gui_buffer *buffer_: 補完が行われたバッファ
 ** _struct t_gui_completion *completion_:
    補完に際して単語を追加するために使われる構造体
    (<<_hook_completion_list_add,hook_completion_list_add>> を参照)
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
 [NOTE]
-補完名はグローバルです (WeeChat
+補完名はグローバルです (WhoreIRC
 とプラグインで共有されます)。このため、"plugin_xxx" (ここで "xxx" は要素の名前)
 などの一意的なプレフィックスをつけた名前を使うことをおすすめします。
 
@@ -8184,7 +8184,7 @@ struct t_hook *whoreirc_hook_completion (const char *completion_item,
 kbd:[Tab] が押された時にコマンドラインを更新するためには、関数
 <<_hook_command_run,hook_command_run>> を使ってコマンド
 `/input complete_next` をフックしてください (コールバックがコマンドラインを更新する場合は必ず
-_WEECHAT_RC_OK_EAT_ を返してください。そうすれば WeeChat は補完を行いません)。
+_WHOREIRC_RC_OK_EAT_ を返してください。そうすれば WhoreIRC は補完を行いません)。
 
 戻り値:
 
@@ -8200,10 +8200,10 @@ my_completion_cb (const void *pointer, void *data, const char *completion_item,
                   struct t_gui_completion *completion)
 {
     whoreirc_hook_completion_list_add (completion, "word1",
-                                      0, WEECHAT_LIST_POS_SORT);
+                                      0, WHOREIRC_LIST_POS_SORT);
     whoreirc_hook_completion_list_add (completion, "test_word2",
-                                      0, WEECHAT_LIST_POS_SORT);
-    return WEECHAT_RC_OK;
+                                      0, WHOREIRC_LIST_POS_SORT);
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_completion_hook = whoreirc_hook_completion ("plugin_item",
@@ -8220,9 +8220,9 @@ hook = whoreirc.hook_completion(completion_item, description, callback, callback
 
 # 例
 def my_completion_cb(data, completion_item, buffer, completion):
-    whoreirc.hook_completion_list_add(completion, "word1", 0, whoreirc.WEECHAT_LIST_POS_SORT)
-    whoreirc.hook_completion_list_add(completion, "test_word2", 0, whoreirc.WEECHAT_LIST_POS_SORT)
-    return whoreirc.WEECHAT_RC_OK
+    whoreirc.hook_completion_list_add(completion, "word1", 0, whoreirc.WHOREIRC_LIST_POS_SORT)
+    whoreirc.hook_completion_list_add(completion, "test_word2", 0, whoreirc.WHOREIRC_LIST_POS_SORT)
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_completion("plugin_item", "my custom completion!",
                                "my_completion_cb", "")
@@ -8230,7 +8230,7 @@ hook = whoreirc.hook_completion("plugin_item", "my custom completion!",
 
 ==== hook_completion_get_string
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 補完プロパティを文字列で取得。
 
@@ -8265,7 +8265,7 @@ my_completion_cb (const void *pointer, void *data, const char *completion_item,
     /* completion depending on args */
     /* ... */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 ----
 
@@ -8282,7 +8282,7 @@ def my_completion_cb(data, completion_item, buffer, completion):
     args = whoreirc.hook_completion_get_string(completion, "args")
     # completion depending on args
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 ----
 
 ==== hook_completion_list_add
@@ -8305,9 +8305,9 @@ void whoreirc_hook_completion_list_add (struct t_gui_completion *completion,
 * _word_: 追加する単語
 * _nick_completion_: 単語がニックネームの場合は 1、そうでなければ 0
 * _where_: 単語を追加するリスト上での位置:
-** _WEECHAT_LIST_POS_SORT_: リストがソートされた状態になるような位置
-** _WEECHAT_LIST_POS_BEGINNING_: リストの最初
-** _WEECHAT_LIST_POS_END_: リストの最後
+** _WHOREIRC_LIST_POS_SORT_: リストがソートされた状態になるような位置
+** _WHOREIRC_LIST_POS_BEGINNING_: リストの最初
+** _WHOREIRC_LIST_POS_END_: リストの最後
 
 C 言語での使用例: <<_hook_completion,hook_completion>> を参照。
 
@@ -8323,9 +8323,9 @@ whoreirc.hook_completion_list_add(completion, word, nick_completion, where)
 
 ==== hook_command_run
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
-WeeChat がコマンドを実行する際にこれをフック。
+WhoreIRC がコマンドを実行する際にこれをフック。
 
 プロトタイプ:
 
@@ -8350,11 +8350,11 @@ struct t_hook *whoreirc_hook_command_run (const char *command,
 ** _struct t_gui_buffer *buffer_: コマンドを実行するバッファ
 ** _const char *command_: 実行するコマンド、引数付き
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_OK_EAT_: コールバックの後にコマンドを実行しない
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_OK_EAT_: コールバックの後にコマンドを実行しない
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -8371,7 +8371,7 @@ my_command_run_cb (const void *pointer, void *data,
                    struct t_gui_buffer *buffer, const char *command)
 {
     whoreirc_printf (NULL, "I'm eating the completion!");
-    return WEECHAT_RC_OK_EAT;
+    return WHOREIRC_RC_OK_EAT;
 }
 
 struct t_hook *my_command_run_hook =
@@ -8389,14 +8389,14 @@ hook = whoreirc.hook_command_run(command, callback, callback_data)
 # 例
 def my_command_run_cb(data, buffer, command):
     whoreirc.prnt("", "I'm eating the completion!")
-    return whoreirc.WEECHAT_RC_OK_EAT
+    return whoreirc.WHOREIRC_RC_OK_EAT
 
 hook = whoreirc.hook_command_run("/input complete*", "my_command_run_cb", "")
 ----
 
 ==== hook_timer
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 タイマをフックする。
 
@@ -8426,10 +8426,10 @@ struct t_hook *whoreirc_hook_timer (long interval,
 ** _void *data_: ポインタ
 ** _int remaining_calls_: 呼び出し残り回数 (タイマを無限に呼び出す場合は -1)
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -8445,7 +8445,7 @@ int
 my_timer_cb (const void *pointer, void *data, int remaining_calls)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* timer called each 20 seconds */
@@ -8463,7 +8463,7 @@ hook = whoreirc.hook_timer(interval, align_second, max_calls, callback, callback
 # 例
 def my_timer_cb(data, remaining_calls):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # timer called each 20 seconds
 hook = whoreirc.hook_timer(20 * 1000, 0, 0, "my_timer_cb", "")
@@ -8471,7 +8471,7 @@ hook = whoreirc.hook_timer(20 * 1000, 0, 0, "my_timer_cb", "")
 
 ==== hook_fd
 
-_WeeChat バージョン 1.3、1.5、2.0 で更新。_
+_WhoreIRC バージョン 1.3、1.5、2.0 で更新。_
 
 ファイルディスクリプタ (ファイルやソケット) をフック。
 
@@ -8496,17 +8496,17 @@ struct t_hook *whoreirc_hook_fd (int fd,
 * _flag_read_: 1 = ロードイベントをキャッチ、0 = 無視
 * _flag_write_: 1 = 書き込みイベントをキャッチ、0 = 無視
 * _flag_exception_: 1 = 例外イベントをキャッチ、0 = 無視
-  (_WeeChat バージョン 1.3 以上の場合_: この引数は無視され、使われません)
+  (_WhoreIRC バージョン 1.3 以上の場合_: この引数は無視され、使われません)
 * _callback_: ファイル (またはソケット)
   に対してキャッチしたいイベントが発生した場合に実行するコールバック関数、引数と戻り値:
 ** _const void *pointer_: ポインタ
 ** _void *data_: ポインタ
 ** _int fd_: ファイルディスクリプタ
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -8516,7 +8516,7 @@ struct t_hook *whoreirc_hook_fd (int fd,
 
 [IMPORTANT]
 スクリプトにおけるコールバック引数 _fd_  は
-WeeChat バージョン 2.0 以上では整数、バージョン 1.9 以下では文字列です。 +
+WhoreIRC バージョン 2.0 以上では整数、バージョン 1.9 以下では文字列です。 +
 すべてのバージョンで互換性を保つには、使用前にコールバック引数 _fd_
 を整数へ変換することを推奨します (Python の場合 `int(fd)` のように変換してください)。
 
@@ -8528,7 +8528,7 @@ int
 my_fd_cb (const void *pointer, void *data, int fd)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int sock = socket (AF_INET, SOCK_STREAM, 0);
@@ -8547,7 +8547,7 @@ hook = whoreirc.hook_fd(fd, flag_read, flag_write, flag_exception, callback, cal
 # 例
 def my_fd_cb(data, fd):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 sock = ...
 hook = whoreirc.hook_fd(sock, 1, 0, 0, "my_fd_cb", "")
@@ -8555,18 +8555,18 @@ hook = whoreirc.hook_fd(sock, 1, 0, 0, "my_fd_cb", "")
 
 ==== hook_process
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 プロセスをフックして (フォークして実行)、出力を受け取る。
 
 [NOTE]
-WeeChat バージョン 0.3.9.2
-以上の場合、コマンドを実行するためにシェルを使わないようになりました。WeeChat
+WhoreIRC バージョン 0.3.9.2
+以上の場合、コマンドを実行するためにシェルを使わないようになりました。WhoreIRC
 が自動的にコマンドと引数を分割します (シェルがやっているように)。 +
 分割 (引用符に基づくコマンド分割)
 に失敗する場合、またはシェルを使いたい場合は、ハッシュテーブル _options_
 に引数を入れて <<_hook_process_hashtable,hook_process_hashtable>>
-関数を使ってください _(WeeChat バージョン 0.4.0 以上で利用可)_。
+関数を使ってください _(WhoreIRC バージョン 0.4.0 以上で利用可)_。
 
 プロトタイプ:
 
@@ -8587,8 +8587,8 @@ struct t_hook *whoreirc_hook_process (const char *command,
 
 引数:
 
-* _command_: 子プロセスで実行するコマンド、URL _(WeeChat バージョン 0.3.7 以上で利用可)_
-  または関数 _(WeeChat バージョン 1.5 以上で利用可)_ (下記参照)
+* _command_: 子プロセスで実行するコマンド、URL _(WhoreIRC バージョン 0.3.7 以上で利用可)_
+  または関数 _(WhoreIRC バージョン 1.5 以上で利用可)_ (下記参照)
 * _timeout_: コマンドのタイムアウト (ミリ秒):
   このタイムアウトを過ぎたら、子プロセスを kill します (タイムアウトさせない場合は 0)
 * _callback_:
@@ -8604,17 +8604,17 @@ struct t_hook *whoreirc_hook_process (const char *command,
 **** _3_: メモリ不足
 **** _4_: ファイルに関するエラー
 *** _< 0_:
-**** _WEECHAT_HOOK_PROCESS_RUNNING_: データは利用可能だが子プロセスは終了していない
-**** _WEECHAT_HOOK_PROCESS_ERROR_: コマンドの起動中にエラー
-**** _WEECHAT_HOOK_PROCESS_CHILD_: 子プロセスからコールバックが呼び出された
+**** _WHOREIRC_HOOK_PROCESS_RUNNING_: データは利用可能だが子プロセスは終了していない
+**** _WHOREIRC_HOOK_PROCESS_ERROR_: コマンドの起動中にエラー
+**** _WHOREIRC_HOOK_PROCESS_CHILD_: 子プロセスからコールバックが呼び出された
 ** _out_: コマンドの標準出力 (stdout)
 ** _err_: コマンドの標準エラー出力 (stderr)
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
 *** 子プロセスのリターンコード (_command_ に "func:" を指定して関数を実行した場合)
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -8622,24 +8622,24 @@ struct t_hook *whoreirc_hook_process (const char *command,
 
 * 新しいフックへのポインタ、エラーが起きた場合は NULL
 
-コマンドが終了するか、タイムアウトを過ぎた場合、WeeChat は自動的にフックを解除します
+コマンドが終了するか、タイムアウトを過ぎた場合、WhoreIRC は自動的にフックを解除します
 (プロセスが実行中であればプロセスを kill します)。
 
 コマンドを "url:https://www.example.com" の書式に従う URL にすることで、URL
-の内容がダウンロードされます _(WeeChat バージョン 0.3.7 以上で利用可)_。<<_hook_process_hashtable,hook_process_hashtable>>
+の内容がダウンロードされます _(WhoreIRC バージョン 0.3.7 以上で利用可)_。<<_hook_process_hashtable,hook_process_hashtable>>
 関数を使えば URL に対してオプションを与えることもできます。
 
 _command_ には関数名を指定することも可能です。"name" という関数を実行するには "func:name"
-のように指定します _(WeeChat バージョン 1.5 以上で利用可)_。ここで指定した関数 "name" は単独の引数 (_data_)
+のように指定します _(WhoreIRC バージョン 1.5 以上で利用可)_。ここで指定した関数 "name" は単独の引数 (_data_)
 を受け取り、文字列を返すものでなければいけません。関数から返された文字列が _callback_ コールバックに送られます。 +
 C API の場合、_callback_ コールバックが _return_code_ リターンコードに
-_WEECHAT_HOOK_PROCESS_CHILD_ が設定された状態で呼び出されます。すなわち (フォークの後に)
+_WHOREIRC_HOOK_PROCESS_CHILD_ が設定された状態で呼び出されます。すなわち (フォークの後に)
 子プロセスが呼び出すのは関数 "name" ではなく _callback_ コールバックです。 +
 スクリプト API の場合、子プロセスが呼び出すのは関数 "name" であり、関数 "name" の戻り値 (文字列) が
 _callback_ コールバックに送られます (関数の戻り値は外部コマンドを実行した場合の出力と同様に取り扱われます)。
 
 [TIP]
-WeeChat に関する情報 (例えば現在の安定版、最新の git コミット、...)
+WhoreIRC に関する情報 (例えば現在の安定版、最新の git コミット、...)
 が欲しい場合、https://whoreirc.org/dev/info に書かれている URL を使ってください
 
 [NOTE]
@@ -8662,10 +8662,10 @@ int
 my_process_cb (const void *pointer, void *data, const char *command,
                int return_code, const char *out, const char *err)
 {
-    if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+    if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
     {
         whoreirc_printf (NULL, "Error with command '%s'", command);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (return_code >= 0)
@@ -8683,7 +8683,7 @@ my_process_cb (const void *pointer, void *data, const char *command,
         whoreirc_printf (NULL, "stderr: %s", err);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_process_hook = whoreirc_hook_process ("ls", 5000,
@@ -8694,7 +8694,7 @@ int
 my_process_func_cb (const void *pointer, void *data, const char *command,
                     int return_code, const char *out, const char *err)
 {
-    if (return_code == WEECHAT_HOOK_PROCESS_CHILD)
+    if (return_code == WHOREIRC_HOOK_PROCESS_CHILD)
     {
         /* 何かブロックを生じさせるようなことを実行... */
         /* ... */
@@ -8707,10 +8707,10 @@ my_process_func_cb (const void *pointer, void *data, const char *command,
     }
     else
     {
-        if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+        if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
         {
             whoreirc_printf (NULL, "Error with command '%s'", command);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (return_code >= 0)
@@ -8728,7 +8728,7 @@ my_process_func_cb (const void *pointer, void *data, const char *command,
             whoreirc_printf (NULL, "stderr: %s", err);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 }
 
@@ -8745,16 +8745,16 @@ hook = whoreirc.hook_process(command, timeout, callback, callback_data)
 
 # 外部コマンドを実行する例
 def my_process_cb(data, command, return_code, out, err):
-    if return_code == whoreirc.WEECHAT_HOOK_PROCESS_ERROR:
+    if return_code == whoreirc.WHOREIRC_HOOK_PROCESS_ERROR:
         whoreirc.prnt("", "Error with command '%s'" % command)
-        return whoreirc.WEECHAT_RC_OK
+        return whoreirc.WHOREIRC_RC_OK
     if return_code >= 0:
         whoreirc.prnt("", "return_code = %d" % return_code)
     if out != "":
         whoreirc.prnt("", "stdout: %s" % out)
     if err != "":
         whoreirc.prnt("", "stderr: %s" % err)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_process("ls", 5000, "my_process_cb", "")
 
@@ -8765,23 +8765,23 @@ def get_status(data):
     return "this is the result"
 
 def my_process_cb(data, command, return_code, out, err):
-    if return_code == whoreirc.WEECHAT_HOOK_PROCESS_ERROR:
+    if return_code == whoreirc.WHOREIRC_HOOK_PROCESS_ERROR:
         whoreirc.prnt("", "Error with command '%s'" % command)
-        return whoreirc.WEECHAT_RC_OK
+        return whoreirc.WHOREIRC_RC_OK
     if return_code >= 0:
         whoreirc.prnt("", "return_code = %d" % return_code)
     if out != "":
         whoreirc.prnt("", "stdout: %s" % out)
     if err != "":
         whoreirc.prnt("", "stderr: %s" % err)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_process("func:get_status", 5000, "my_process_cb", "")
 ----
 
 ==== hook_process_hashtable
 
-_WeeChat バージョン 0.3.7 以上で利用可、バージョン 1.5 で更新。_
+_WhoreIRC バージョン 0.3.7 以上で利用可、バージョン 1.5 で更新。_
 
 ハッシュテーブルに収めたオプションを使いプロセスをフックする
 (フォークして実行)、出力を受け取る。
@@ -8817,7 +8817,7 @@ struct t_hook *whoreirc_hook_process_hashtable (const char *command,
 | オプション | 値 | デフォルト | 説明
 
 | argN (N は 1 以上) +
-  _(WeeChat バージョン 0.4.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.0 以上で利用可)_ |
   任意の文字列 |
   引数なし |
   コマンドの引数;
@@ -8825,14 +8825,14 @@ struct t_hook *whoreirc_hook_process_hashtable (const char *command,
   (_command_ 引数からコマンド引数をロードします)
 
 | stdin +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ |
   (非使用) |
   標準出力を使用しない |
   データを書き込むためのパイプを子プロセスの標準入力 (stdin)
   に作成します (関数 <<_hook_set,hook_set>> を参照)
 
 | buffer_flush +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   バイト数 |
   65536 |
   標準出力および標準エラー出力をフラッシュ (出力をコールバックヘ送信)
@@ -8840,7 +8840,7 @@ struct t_hook *whoreirc_hook_process_hashtable (const char *command,
   の場合、出力をすぐにコールバックへ送信します。
 
 | detached +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   (非使用) |
   detached モードで実行しない |
   detached モードでプロセスを実行: 標準出力と標準エラー出力を
@@ -8876,10 +8876,10 @@ int
 my_process_cb (const void *pointer, void *data, const char *command,
                int return_code, const char *out, const char *err)
 {
-    if (return_code == WEECHAT_HOOK_PROCESS_ERROR)
+    if (return_code == WHOREIRC_HOOK_PROCESS_ERROR)
     {
         whoreirc_printf (NULL, "Error with command '%s'", command);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (return_code >= 0)
@@ -8897,13 +8897,13 @@ my_process_cb (const void *pointer, void *data, const char *command,
         whoreirc_printf (NULL, "stderr: %s", err);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* 例 1: URL をダウンロード */
 struct t_hashtable *options_url1 = whoreirc_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_url1)
@@ -8918,8 +8918,8 @@ if (options_url1)
 
 /* 例 2: 任意の HTTP ヘッダを付けて URL を開く */
 struct t_hashtable *options_url2 = whoreirc_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_url2)
@@ -8936,8 +8936,8 @@ if (options_url2)
 
 /* 例 3: メッセージを渡して通知プログラムを実行 */
 struct t_hashtable *options_cmd1 = whoreirc_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_cmd1)
@@ -8955,8 +8955,8 @@ if (options_cmd1)
 
 /* 例 4: コマンドを実行するためにシェルを呼び出す (必ず安全なコマンドを実行してください) */
 struct t_hashtable *options_cmd2 = whoreirc_hashtable_new (8,
-                                                          WEECHAT_HASHTABLE_STRING,
-                                                          WEECHAT_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
+                                                          WHOREIRC_HASHTABLE_STRING,
                                                           NULL,
                                                           NULL);
 if (options_cmd2)
@@ -8980,16 +8980,16 @@ hook = whoreirc.hook_process_hashtable(command, options, timeout, callback, call
 
 # 例
 def my_process_cb(data, command, return_code, out, err):
-    if return_code == whoreirc.WEECHAT_HOOK_PROCESS_ERROR:
+    if return_code == whoreirc.WHOREIRC_HOOK_PROCESS_ERROR:
         whoreirc.prnt("", "Error with command '%s'" % command)
-        return whoreirc.WEECHAT_RC_OK
+        return whoreirc.WHOREIRC_RC_OK
     if return_code >= 0:
         whoreirc.prnt("", "return_code = %d" % return_code)
     if out != "":
         whoreirc.prnt("", "stdout: %s" % out)
     if err != "":
         whoreirc.prnt("", "stderr: %s" % err)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # 例 1: URL をダウンロード
 hook1 = whoreirc.hook_process_hashtable("url:https://whoreirc.org/",
@@ -9024,7 +9024,7 @@ hook4 = whoreirc.hook_process_hashtable("sh",
 
 ==== hook_connect
 
-_WeeChat バージョン 1.5 と 2.0 で更新。_
+_WhoreIRC バージョン 1.5 と 2.0 で更新。_
 
 接続をフックする (リモートホストへのバックグラウンド接続)。
 
@@ -9080,26 +9080,26 @@ struct t_hook *whoreirc_hook_connect (const char *proxy,
 ** _const void *pointer_: ポインタ
 ** _void *data_: ポインタ
 ** _int status_: 接続状態:
-*** _WEECHAT_HOOK_CONNECT_OK_: 接続成功
-*** _WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND_: アドレスが見つかりません
-*** _WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND_: IP アドレスが見つかりません
-*** _WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED_: 接続が拒否されました
-*** _WEECHAT_HOOK_CONNECT_PROXY_ERROR_: プロキシに関するエラー
-*** _WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR_: ローカルのホスト名に関するエラー
-*** _WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR_: GnuTLS 初期化エラー
-*** _WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR_: GnuTLS ハンドシェイクエラー
-*** _WEECHAT_HOOK_CONNECT_MEMORY_ERROR_: メモリ不足
-*** _WEECHAT_HOOK_CONNECT_TIMEOUT_: タイムアウト
-*** _WEECHAT_HOOK_CONNECT_SOCKET_ERROR_: ソケットの作成に失敗
+*** _WHOREIRC_HOOK_CONNECT_OK_: 接続成功
+*** _WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND_: アドレスが見つかりません
+*** _WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND_: IP アドレスが見つかりません
+*** _WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED_: 接続が拒否されました
+*** _WHOREIRC_HOOK_CONNECT_PROXY_ERROR_: プロキシに関するエラー
+*** _WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR_: ローカルのホスト名に関するエラー
+*** _WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR_: GnuTLS 初期化エラー
+*** _WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR_: GnuTLS ハンドシェイクエラー
+*** _WHOREIRC_HOOK_CONNECT_MEMORY_ERROR_: メモリ不足
+*** _WHOREIRC_HOOK_CONNECT_TIMEOUT_: タイムアウト
+*** _WHOREIRC_HOOK_CONNECT_SOCKET_ERROR_: ソケットの作成に失敗
 ** _gnutls_rc_: _gnutls_handshake()_ の戻り値
 ** _sock_: 接続に使うソケット
 ** _const char *error_: _gnutls_strerror(gnutls_rc)_ の戻り値
 ** _const char *ip_address_: 見つかった IP アドレス
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -9109,7 +9109,7 @@ struct t_hook *whoreirc_hook_connect (const char *proxy,
 
 [IMPORTANT]
 スクリプトにおけるコールバック引数 _status_、_gnutls_rc_、_sock_  は
-WeeChat バージョン 2.0 以上では整数、バージョン 1.9 以下では文字列です。 +
+WhoreIRC バージョン 2.0 以上では整数、バージョン 1.9 以下では文字列です。 +
 すべてのバージョンで互換性を保つには、使用前にコールバック引数 _status_、_gnutls_rc_、_sock_
 を整数へ変換することを推奨します (Python の場合 `int(sock)` のように変換してください)。
 
@@ -9123,41 +9123,41 @@ my_connect_cb (const void *pointer, void *data, int status, int gnutls_rc,
 {
     switch (status)
     {
-        case WEECHAT_HOOK_CONNECT_OK:
+        case WHOREIRC_HOOK_CONNECT_OK:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND:
+        case WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
+        case WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED:
+        case WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_PROXY_ERROR:
+        case WHOREIRC_HOOK_CONNECT_PROXY_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
+        case WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR:
+        case WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
+        case WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_MEMORY_ERROR:
+        case WHOREIRC_HOOK_CONNECT_MEMORY_ERROR:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_TIMEOUT:
+        case WHOREIRC_HOOK_CONNECT_TIMEOUT:
             /* ... */
             break;
-        case WEECHAT_HOOK_CONNECT_SOCKET_ERROR:
+        case WHOREIRC_HOOK_CONNECT_SOCKET_ERROR:
             /* ... */
             break;
     }
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_connect_hook = whoreirc_hook_connect (NULL,
@@ -9178,29 +9178,29 @@ hook = whoreirc.hook_connect(proxy, address, port, ipv6, retry, local_hostname,
 
 # 例
 def my_connect_cb(data, status, gnutls_rc, sock, error, ip_address):
-    if status == WEECHAT_HOOK_CONNECT_OK:
+    if status == WHOREIRC_HOOK_CONNECT_OK:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND:
+    elif status == WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
+    elif status == WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED:
+    elif status == WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_PROXY_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_PROXY_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_MEMORY_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_MEMORY_ERROR:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_TIMEOUT:
+    elif status == WHOREIRC_HOOK_CONNECT_TIMEOUT:
         # ...
-    elif status == WEECHAT_HOOK_CONNECT_SOCKET_ERROR:
+    elif status == WHOREIRC_HOOK_CONNECT_SOCKET_ERROR:
         # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_connect("", "my.server.org", 1234, 1, 0, "",
                             "my_connect_cb", "")
@@ -9208,7 +9208,7 @@ hook = whoreirc.hook_connect("", "my.server.org", 1234, 1, 0, "",
 
 ==== hook_line
 
-_WeeChat バージョン 2.3 以上で利用可_
+_WhoreIRC バージョン 2.3 以上で利用可_
 
 バッファに対する行表示をフックする。
 
@@ -9260,8 +9260,8 @@ struct t_hook *whoreirc_hook_line (const char *buffer_type,
 ** _struct t_hashtable *line_: 行のインフォを含むハッシュテーブル、キーと値は文字列
    (以下のテーブルを参照してください)
 ** 戻り値: 新しい値のハッシュテーブル (以下のテーブルを参照してください)
-* _callback_pointer_: WeeChat がコールバックを呼び出した際にコールバックに渡したポインタ
-* _callback_data_: WeeChat がコールバックを呼び出した際にコールバックに渡したポインタ;
+* _callback_pointer_: WhoreIRC がコールバックを呼び出した際にコールバックに渡したポインタ
+* _callback_data_: WhoreIRC がコールバックを呼び出した際にコールバックに渡したポインタ;
   NULL 以外の場合、このポインタの指す領域は malloc (もしくは類似の関数)
   で割り当てられたものでなければいけません。加えて、このポインタの指す領域はフックが削除された時点で自動的に解放されます。
 
@@ -9360,7 +9360,7 @@ struct t_hook *whoreirc_hook_line (const char *buffer_type,
 |===
 
 戻り値としては、値すべてのフィールドを含む完全なハッシュテーブルを返す必要もありませんし、無効なフィールドがあっても
-WeeChat はそれらを無視します。
+WhoreIRC はそれらを無視します。
 
 ハッシュテーブルに設定できるキーを以下に挙げます
 (ハッシュテーブル中のキーと値は文字列です)。
@@ -9448,8 +9448,8 @@ my_line_cb (const void *pointer, void *data, struct t_hasbtable *line)
     struct t_hashtable *hashtable;
 
     hashtable = whoreirc_hashtable_new (8,
-                                       WEECHAT_HASHTABLE_STRING,
-                                       WEECHAT_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
                                        NULL,
                                        NULL);
     /* この行のハイライトを強制 */
@@ -9480,7 +9480,7 @@ hook = whoreirc.hook_line("", "", "irc_join", "my_line_cb", "")
 
 ==== hook_print
 
-_WeeChat バージョン 0.4.3、1.0、1.5 で更新。_
+_WhoreIRC バージョン 0.4.3、1.0、1.5 で更新。_
 
 メッセージの表示をフックする。これは行がフォーマット済みバッファに追加された時点で呼び出されます。
 
@@ -9513,10 +9513,10 @@ struct t_hook *whoreirc_hook_print (struct t_gui_buffer *buffer,
 
 * _buffer_: バッファへのポインタ、NULL の場合、任意のバッファからのメッセージをキャッチする
 * _tags_: このタグが付けられたメッセージだけをキャッチする (任意):
-** WeeChat バージョン 0.4.3 以上の場合: メッセージに付けられたタグのコンマ区切りリスト (論理 "or");
+** WhoreIRC バージョン 0.4.3 以上の場合: メッセージに付けられたタグのコンマ区切りリスト (論理 "or");
    複数の条件を論理 "and" で組み合わせる場合は区切りに `+++` を使ってください;
    ワイルドカード `+*+` を使うことができます
-** WeeChat バージョン 0.4.2 以下の場合: 論理 "and"
+** WhoreIRC バージョン 0.4.2 以下の場合: 論理 "and"
    で組み合わせたタグのコンマ区切りリスト
 * _message_: この文字列を含むメッセージだけをキャッチする
   (任意、大文字小文字を区別しない)
@@ -9535,10 +9535,10 @@ struct t_hook *whoreirc_hook_print (struct t_gui_buffer *buffer,
 ** _const char *prefix_: プレフィックス
 ** _const char *message_: メッセージ
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -9548,7 +9548,7 @@ struct t_hook *whoreirc_hook_print (struct t_gui_buffer *buffer,
 
 [IMPORTANT]
 スクリプトにおけるコールバック引数 _displayed_、_highlight_ は
-WeeChat バージョン 1.0 以上では整数、バージョン 0.4.3 以下では文字列です。 +
+WhoreIRC バージョン 1.0 以上では整数、バージョン 0.4.3 以下では文字列です。 +
 すべてのバージョンで互換性を保つには、使用前にコールバック引数 _displayed_、_highlight_
 を整数へ変換することを推奨します (Python の場合 `if int(highlight):` のように変換してください)。
 
@@ -9563,7 +9563,7 @@ my_print_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
              const char *prefix, const char *message)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* catch all messages, on all buffers, without color */
@@ -9582,7 +9582,7 @@ hook = whoreirc.hook_print(buffer, tags, message, strip_colors, callback, callba
 def my_print_cb(data, buffer, date, tags, displayed, highlight, prefix, message):
     if int(highlight):
         # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # catch all messages, on all buffers, without color
 hook = whoreirc.hook_print("", "", "", 1, "my_print_cb", "")
@@ -9590,7 +9590,7 @@ hook = whoreirc.hook_print("", "", "", 1, "my_print_cb", "")
 
 ==== hook_signal
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 シグナルをフックする。
 
@@ -9619,17 +9619,17 @@ struct t_hook *whoreirc_hook_signal (const char *signal,
 ** _void *data_: ポインタ
 ** _const char *signal_: 受信したシグナル
 ** _const char *type_data_: シグナルが送信したデータの型
-*** _WEECHAT_HOOK_SIGNAL_STRING_: 文字列
-*** _WEECHAT_HOOK_SIGNAL_INT_: 整数
-*** _WEECHAT_HOOK_SIGNAL_POINTER_:  ポインタ
+*** _WHOREIRC_HOOK_SIGNAL_STRING_: 文字列
+*** _WHOREIRC_HOOK_SIGNAL_INT_: 整数
+*** _WHOREIRC_HOOK_SIGNAL_POINTER_:  ポインタ
 ** _void *signal_data_: シグナルが送信したデータ
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_OK_EAT_ (直ちにシグナルの送信を止める)
-    _(WeeChat バージョン 0.4.0 以上で利用可)_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_OK_EAT_ (直ちにシグナルの送信を止める)
+    _(WhoreIRC バージョン 0.4.0 以上で利用可)_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -9637,29 +9637,29 @@ struct t_hook *whoreirc_hook_signal (const char *signal,
 
 * 新しいフックへのポインタ、エラーが起きた場合は NULL
 
-WeeChat とプラグインが送信するシグナルのリスト:
+WhoreIRC とプラグインが送信するシグナルのリスト:
 
 [width="100%",cols="^1,^3,4,5",options="header"]
 |===
 | プラグイン | シグナル | 引数 | 説明
 
 | guile | guile_script_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Scheme スクリプトをロード
 
 | guile | guile_script_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Scheme スクリプトをリロード
 
 | guile | guile_script_installed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   Scheme スクリプトをインストール
 
 | guile | guile_script_removed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   Scheme スクリプトを削除
 
@@ -9676,21 +9676,21 @@ WeeChat とプラグインが送信するシグナルのリスト:
   バージョン 2.2 以上ではタグを含めたすべての IRC メッセージが送信されます。
 
 | irc | xxx,irc_raw_in_yyy ^(1)^ +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: メッセージ |
   サーバから IRC メッセージを受信 (メッセージを無視する場合でも irc
   プラグインがメッセージを処理する前に、シグナルが送信される) +
   バージョン 2.2 以上ではタグを含めたすべての IRC メッセージが送信されます。
 
 | irc | xxx,irc_raw_in2_yyy ^(1)^ +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: メッセージ |
   サーバから IRC メッセージを受信 (メッセージを無視する場合でも irc
   プラグインがメッセージを処理した後に、シグナルが送信される) +
   バージョン 2.2 以上ではタグを含めたすべての IRC メッセージが送信されます。
 
 | irc | xxx,irc_out1_yyy ^(1)^ +
-  _(WeeChat バージョン 0.3.7 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.7 以上で利用可)_ |
   String: メッセージ |
   サーバに送信する IRC メッセージ
   (自動分割前、自動分割はデフォルトでメッセージを 512 バイト内に収まるように分割します)。
@@ -9701,7 +9701,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   (自動分割後、自動分割はデフォルトでメッセージを 512 バイト内に収まるように分割します)。
 
 | irc | xxx,irc_outtags_yyy ^(1)^ +
-  _(WeeChat バージョン 0.3.4 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.4 以上で利用可)_ |
   String: タグ  + ";" + メッセージ |
   タグ + サーバに送信する IRC メッセージ
 
@@ -9726,7 +9726,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   プライベートメッセージを開いた
 
 | irc | irc_server_opened +
-  _(WeeChat バージョン 0.3.7 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.7 以上で利用可)_ |
   Pointer: バッファ |
   サーババッファを開いた
 
@@ -9743,7 +9743,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   サーバから切断された
 
 | irc | irc_server_lag_changed +
-  _(WeeChat バージョン 1.8 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.8 以上で利用可)_ |
   String: サーバ名 |
   指定したサーバの遅延時間が変化
 
@@ -9756,47 +9756,47 @@ WeeChat とプラグインが送信するシグナルのリスト:
   無視条件を削除した
 
 | irc | irc_notify_join +
-  _(WeeChat バージョン 0.3.8 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.8 以上で利用可)_ |
   String: サーバ名 + "," + ニックネーム |
   通知リストに入っているニックネームがサーバに参加
 
 | irc | irc_notify_quit +
-  _(WeeChat バージョン 0.3.8 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.8 以上で利用可)_ |
   String: サーバ名 + "," + ニックネーム |
   通知リストに入っているニックネームがサーバから切断
 
 | irc | irc_notify_away +
-  _(WeeChat バージョン 0.3.8 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.8 以上で利用可)_ |
   String: サーバ名 + "," + ニックネーム + "," + 離席メッセージ |
   通知リストに入っているニックネームが離席状態に
 
 | irc | irc_notify_still_away +
-  _(WeeChat バージョン 0.3.8 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.8 以上で利用可)_ |
   String: サーバ名 + "," + ニックネーム + "," + 離席メッセージ |
   通知リストに入っているニックネームはまだ離席状態 (離席メッセージを変更)
 
 | irc | irc_notify_back +
-  _(WeeChat バージョン 0.3.8 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.8 以上で利用可)_ |
   String: サーバ名 + "," + ニックネーム |
   通知リストに入っているニックネームが着席状態に (離席状態を解除)
 
 | javascript | javascript_script_loaded +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   String: スクリプトへのパス |
   JavaScript スクリプトをロード
 
 | javascript | javascript_script_unloaded +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   String: スクリプトへのパス |
   JavaScript スクリプトをリロード
 
 | javascript | javascript_script_installed +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   JavaScript スクリプトをインストール
 
 | javascript | javascript_script_removed +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   JavaScript スクリプトを削除
 
@@ -9813,157 +9813,157 @@ WeeChat とプラグインが送信するシグナルのリスト:
   バッファのバックログを表示
 
 | lua | lua_script_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Lua スクリプトをロード
 
 | lua | lua_script_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Lua スクリプトをリロード
 
 | lua | lua_script_installed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   Lua スクリプトをインストール
 
 | lua | lua_script_removed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   Lua スクリプトを削除
 
 | perl | perl_script_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Perl スクリプトをロード
 
 | perl | perl_script_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Perl スクリプトをリロード
 
 | perl | perl_script_installed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   Perl スクリプトをインストール
 
 | perl | perl_script_removed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   Perl スクリプトを削除
 
 | php | php_script_loaded +
-  _(WeeChat バージョン 2.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.0 以上で利用可)_ |
   String: スクリプトへのパス |
   PHP スクリプトをロード
 
 | php | php_script_unloaded +
-  _(WeeChat バージョン 2.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.0 以上で利用可)_ |
   String: スクリプトへのパス |
   PHP スクリプトをリロード
 
 | php | php_script_installed +
-  _(WeeChat バージョン 2.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.0 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   PHP スクリプトをインストール
 
 | php | php_script_removed +
-  _(WeeChat バージョン 2.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.0 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   PHP スクリプトを削除
 
 | python | python_script_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Python スクリプトをロード
 
 | python | python_script_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Python スクリプトをリロード
 
 | python | python_script_installed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   Python スクリプトをインストール
 
 | python | python_script_removed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   Python スクリプトを削除
 
 | relay | relay_client_connecting +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   Pointer: リレークライアント |
   リレークライアントが接続中
 
 | relay | relay_client_waiting_auth +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   Pointer: リレークライアント |
   リレークライアントからの認証待ち
 
 | relay | relay_client_auth_ok +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   Pointer: リレークライアント |
   リレークライアントからの認証に成功
 
 | relay | relay_client_connected +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   Pointer: リレークライアント |
   リレークライアントが接続
 
 | relay | relay_client_auth_failed +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   Pointer: リレークライアント |
   リレークライアントの認証に失敗
 
 | relay | relay_client_disconnected +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   Pointer: リレークライアント |
   リレークライアントが切断
 
 | ruby | ruby_script_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Ruby スクリプトをロード
 
 | ruby | ruby_script_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Ruby スクリプトをリロード
 
 | ruby | ruby_script_installed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   Ruby スクリプトをインストール
 
 | ruby | ruby_script_removed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   Ruby スクリプトを削除
 
 | spell | spell_suggest +
-  _(WeeChat バージョン 2.4 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.4 以上で利用可)_ |
   Pointer: バッファ |
   スペルの間違っている単語に対する新しい修正候補
 
 | tcl | tcl_script_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Tcl スクリプトをロード
 
 | tcl | tcl_script_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: スクリプトへのパス |
   Tcl スクリプトをリロード
 
 | tcl | tcl_script_installed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: インストールされたスクリプトへのパスのコンマ区切りリスト |
   Tcl スクリプトをインストール
 
 | tcl | tcl_script_removed +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 削除されたスクリプトへのパスのコンマ区切りリスト |
   Tcl スクリプトを削除
 
@@ -9984,12 +9984,12 @@ WeeChat とプラグインが送信するシグナルのリスト:
   バッファをクリア
 
 | whoreirc | buffer_filters_enabled +
-  _(WeeChat バージョン 2.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.0 以上で利用可)_ |
   Pointer: バッファ |
   バッファでフィルタが有効化されています。
 
 | whoreirc | buffer_filters_disabled +
-  _(WeeChat バージョン 2.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 2.0 以上で利用可)_ |
   Pointer: バッファ |
   バッファでフィルタが無効化されています。
 
@@ -10002,7 +10002,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   バッファを隠すことを止める
 
 | whoreirc | buffer_line_added +
-  _(WeeChat バージョン 0.3.7 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.7 以上で利用可)_ |
   Pointer: 行 |
   バッファに行を追加
 
@@ -10051,17 +10051,17 @@ WeeChat とプラグインが送信するシグナルのリスト:
   バッファのタイプを変更
 
 | whoreirc | buffer_zoomed +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ |
   Pointer: バッファ |
   マージされたバッファをズーム
 
 | whoreirc | buffer_unzoomed +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ |
   Pointer: バッファ |
   マージされたバッファをアンズーム
 
 | whoreirc | day_changed +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: 新しい日付、書式: "2010-01-31" |
   システムの日付が変更された
 
@@ -10126,67 +10126,67 @@ WeeChat とプラグインが送信するシグナルのリスト:
   キーが押された
 
 | whoreirc | key_combo_default +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   String: キーの組み合わせ |
   _default_ コンテキスト内のキーの組み合わせ
 
 | whoreirc | key_combo_search +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   String: キーの組み合わせ |
   _search_ コンテキスト内のキーの組み合わせ
 
 | whoreirc | key_combo_cursor +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   String: キーの組み合わせ |
   _cursor_ コンテキスト内のキーの組み合わせ
 
 | whoreirc | mouse_enabled +
-  _(WeeChat バージョン 1.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.1 以上で利用可)_ |
   - |
   マウスが有効化された
 
 | whoreirc | mouse_disabled +
-  _(WeeChat バージョン 1.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.1 以上で利用可)_ |
   - |
   マウスが無効化された
 
 | whoreirc | nicklist_group_added +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: バッファポインタ + "," + グループ名 |
   ニックネームリストにグループを追加
 
 | whoreirc | nicklist_group_changed +
-  _(WeeChat バージョン 0.3.4 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.4 以上で利用可)_ |
   String: バッファポインタ + "," + グループ名 |
   ニックネームリストのグループを変更
 
 | whoreirc | nicklist_group_removing +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   String: バッファポインタ + "," + グループ名 |
   ニックネームリストからグループを削除中
 
 | whoreirc | nicklist_group_removed +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: バッファポインタ + "," + グループ名 |
   ニックネームリストからグループを削除
 
 | whoreirc | nicklist_nick_added +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: バッファポインタ + "," + ニックネーム |
   ニックネームリストにニックネームを追加
 
 | whoreirc | nicklist_nick_changed +
-  _(WeeChat バージョン 0.3.4 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.4 以上で利用可)_ |
   String: バッファポインタ + "," + ニックネーム |
   ニックネームリストのニックネームを変更
 
 | whoreirc | nicklist_nick_removing +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   String: バッファポインタ + "," + ニックネーム |
   ニックネームリストからニックネームを削除中
 
 | whoreirc | nicklist_nick_removed +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   String: バッファポインタ + "," + ニックネーム |
   ニックネームリストからニックネームを削除
 
@@ -10195,12 +10195,12 @@ WeeChat とプラグインが送信するシグナルのリスト:
   部分補完を実行
 
 | whoreirc | plugin_loaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: 読み込んだプラグインへのパス |
   プラグインをロード
 
 | whoreirc | plugin_unloaded +
-  _(WeeChat バージョン 0.3.9 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_ |
   String: リロードしたプラグインの名前 (例: "irc") |
   プラグインをリロード
 
@@ -10209,22 +10209,22 @@ WeeChat とプラグインが送信するシグナルのリスト:
   ユーザがコマンド `/quit` を実行
 
 | whoreirc | signal_sighup +
-  _(WeeChat バージョン 1.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.3 以上で利用可)_ |
   - |
   SIGHUP シグナルを受信
 
 | whoreirc | signal_sigquit +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   - |
   SIGQUIT シグナルを受信 (コアダンプ付きで終了要求)
 
 | whoreirc | signal_sigterm +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   - |
-  SIGTERM シグナルを受信 (WeeChat プロセスを正常に終了させる)
+  SIGTERM シグナルを受信 (WhoreIRC プロセスを正常に終了させる)
 
 | whoreirc | signal_sigwinch +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ |
   - |
   SIGWINCH シグナルを受信しました (端末サイズが変更されました)
 
@@ -10233,7 +10233,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   ユーザがコマンド `/upgrade` を実行
 
 | whoreirc | upgrade_ended +
-  _(WeeChat バージョン 0.3.4 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.4 以上で利用可)_ |
   - |
   アップグレード作業 (コマンド `/upgrade`) が終了
 
@@ -10246,17 +10246,17 @@ WeeChat とプラグインが送信するシグナルのリスト:
   プライベートメッセージの表示
 
 | whoreirc | window_closing +
-  _(WeeChat バージョン 0.3.6 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.6 以上で利用可)_ |
   Pointer: ウィンドウ |
   ウィンドウを閉じています
 
 | whoreirc | window_closed +
-  _(WeeChat バージョン 0.3.6 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.6 以上で利用可)_ |
   Pointer: ウィンドウ |
   ウィンドウを閉じた
 
 | whoreirc | window_opened +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   Pointer: ウィンドウ |
   ウィンドウを開いた
 
@@ -10265,7 +10265,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   ウィンドウをスクロール
 
 | whoreirc | window_switch +
-  _(WeeChat バージョン 0.3.7 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.7 以上で利用可)_ |
   Pointer: ウィンドウ |
   ウィンドウを切り替え
 
@@ -10310,7 +10310,7 @@ WeeChat とプラグインが送信するシグナルのリスト:
   Xfer レジュームの準備完了
 
 | xfer | xfer_ended +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   Pointer: xfer インフォを含むインフォリスト |
   Xfer を終了
 |===
@@ -10327,7 +10327,7 @@ my_signal_cb (const void *pointer, void *data, const char *signal,
               const char *type_data, void *signal_data)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* catch signal "quit" */
@@ -10345,7 +10345,7 @@ hook = whoreirc.hook_signal(signal, callback, callback_data)
 # 例
 def my_signal_cb(data, signal, signal_data):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # catch signal "quit"
 hook = whoreirc.hook_signal("quit", "my_signal_cb", "")
@@ -10353,7 +10353,7 @@ hook = whoreirc.hook_signal("quit", "my_signal_cb", "")
 
 ==== hook_signal_send
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 シグナルを送信。
 
@@ -10372,19 +10372,19 @@ int whoreirc_hook_signal_send (const char *signal, const char *type_data,
   (<<_hook_signal,hook_signal>> を参照)
 * _signal_data_: シグナルと一緒に送信するデータ
 
-戻り値 _(WeeChat バージョン 1.0 以上で利用可)_:
+戻り値 _(WhoreIRC バージョン 1.0 以上で利用可)_:
 
 * 最後に実行したコールバックの戻り値
-  (コールバックを実行しなかった場合は _WEECHAT_RC_OK_):
-** _WEECHAT_RC_OK_
-** _WEECHAT_RC_OK_EAT_
-** _WEECHAT_RC_ERROR_
+  (コールバックを実行しなかった場合は _WHOREIRC_RC_OK_):
+** _WHOREIRC_RC_OK_
+** _WHOREIRC_RC_OK_EAT_
+** _WHOREIRC_RC_ERROR_
 
 C 言語での使用例:
 
 [source,C]
 ----
-int rc = whoreirc_hook_signal_send ("my_signal", WEECHAT_HOOK_SIGNAL_STRING, my_string);
+int rc = whoreirc_hook_signal_send ("my_signal", WHOREIRC_HOOK_SIGNAL_STRING, my_string);
 ----
 
 スクリプト (Python) での使用例:
@@ -10395,7 +10395,7 @@ int rc = whoreirc_hook_signal_send ("my_signal", WEECHAT_HOOK_SIGNAL_STRING, my_
 rc = whoreirc.hook_signal_send(signal, type_data, signal_data)
 
 # 例
-rc = whoreirc.hook_signal_send("my_signal", whoreirc.WEECHAT_HOOK_SIGNAL_STRING, my_string)
+rc = whoreirc.hook_signal_send("my_signal", whoreirc.WHOREIRC_HOOK_SIGNAL_STRING, my_string)
 ----
 
 [[signal_logger_backlog]]
@@ -10410,14 +10410,14 @@ C 言語での使用例:
 
 [source,C]
 ----
-whoreirc_hook_signal_send ("logger_backlog", WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+whoreirc_hook_signal_send ("logger_backlog", WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 ----
 
 スクリプト (Python) での使用例:
 
 [source,python]
 ----
-whoreirc.hook_signal_send("logger_backlog", whoreirc.WEECHAT_HOOK_SIGNAL_POINTER, buffer)
+whoreirc.hook_signal_send("logger_backlog", whoreirc.WHOREIRC_HOOK_SIGNAL_POINTER, buffer)
 ----
 
 [[signals_xxx_script_install]]
@@ -10451,7 +10451,7 @@ C 言語での使用例:
 
 [source,C]
 ----
-whoreirc_hook_signal_send ("python_script_install", WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc_hook_signal_send ("python_script_install", WHOREIRC_HOOK_SIGNAL_STRING,
                           "/home/xxx/.whoreirc/test.py");
 ----
 
@@ -10459,7 +10459,7 @@ whoreirc_hook_signal_send ("python_script_install", WEECHAT_HOOK_SIGNAL_STRING,
 
 [source,python]
 ----
-whoreirc.hook_signal_send("python_script_install", WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc.hook_signal_send("python_script_install", WHOREIRC_HOOK_SIGNAL_STRING,
                          "/home/xxx/.whoreirc/test.py")
 ----
 
@@ -10489,7 +10489,7 @@ C 言語での使用例:
 [source,C]
 ----
 /* unload and remove scripts test.py and script.py */
-whoreirc_hook_signal_send ("python_script_remove", WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc_hook_signal_send ("python_script_remove", WHOREIRC_HOOK_SIGNAL_STRING,
                           "test.py,script.py");
 ----
 
@@ -10498,14 +10498,14 @@ whoreirc_hook_signal_send ("python_script_remove", WEECHAT_HOOK_SIGNAL_STRING,
 [source,python]
 ----
 # unload and remove scripts test.py and script.py
-whoreirc.hook_signal_send("python_script_remove", WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc.hook_signal_send("python_script_remove", WHOREIRC_HOOK_SIGNAL_STRING,
                          "test.py,script.py")
 ----
 
 [[signal_irc_input_send]]
 ===== irc_input_send シグナル
 
-_WeeChat バージョン 0.3.4 以上で利用可、バージョン 1.5 で更新。_
+_WhoreIRC バージョン 0.3.4 以上で利用可、バージョン 1.5 で更新。_
 
 irc バッファ(サーバ、チャンネル、プライベート)
 への入力をシミュレートするにはシグナル "irc_input_send" を送信してください。
@@ -10519,7 +10519,7 @@ irc バッファ(サーバ、チャンネル、プライベート)
 * オプションのコンマ区切りリスト (任意):
 ** _priority_high_: キューに高い優先度を設定 (ユーザメッセージなど);
    特に設定しなければこの優先度が設定されます
-** _priority_low_: キューに低い優先度を設定 (WeeChat
+** _priority_low_: キューに低い優先度を設定 (WhoreIRC
    が自動的に送信するメッセージなど)
 ** _user_message_: 強制的にユーザメッセージ化 (コマンドを実行しません)
 * セミコロン
@@ -10532,11 +10532,11 @@ C 言語での使用例:
 [source,C]
 ----
 /* say "Hello!" on freenode server, #whoreirc channel */
-whoreirc_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc_hook_signal_send ("irc_input_send", WHOREIRC_HOOK_SIGNAL_STRING,
                           "freenode;#whoreirc;priority_high,user_message;;Hello!");
 
 /* send command "/whois FlashCode" on freenode server, with low priority */
-whoreirc_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc_hook_signal_send ("irc_input_send", WHOREIRC_HOOK_SIGNAL_STRING,
                           "freenode;;priority_low;;/whois FlashCode");
 ----
 
@@ -10545,17 +10545,17 @@ whoreirc_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
 [source,python]
 ----
 # say "Hello!" on freenode server, #whoreirc channel
-whoreirc.hook_signal_send("irc_input_send", whoreirc.WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc.hook_signal_send("irc_input_send", whoreirc.WHOREIRC_HOOK_SIGNAL_STRING,
                          "freenode;#whoreirc;priority_high,user_message;;Hello!")
 
 # send command "/whois FlashCode" on freenode server, with low priority
-whoreirc.hook_signal_send("irc_input_send", whoreirc.WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc.hook_signal_send("irc_input_send", whoreirc.WHOREIRC_HOOK_SIGNAL_STRING,
                          "freenode;;priority_low;;/whois FlashCode")
 ----
 
 ==== hook_hsignal
 
-_WeeChat バージョン 0.3.4 以上で利用可、バージョン 1.5 で更新。_
+_WhoreIRC バージョン 0.3.4 以上で利用可、バージョン 1.5 で更新。_
 
 hsignal (ハッシュテーブルを持つシグナル) をフック。
 
@@ -10584,12 +10584,12 @@ struct t_hook *whoreirc_hook_hsignal (const char *signal,
 ** _const char *signal_: 受信したシグナル
 ** _struct t_hashtable *hashtable_: ハッシュテーブル
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_OK_EAT_ (直ちにシグナルの送信を止める)
-    _(WeeChat バージョン 0.4.0 以上で利用可)_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_OK_EAT_ (直ちにシグナルの送信を止める)
+    _(WhoreIRC バージョン 0.4.0 以上で利用可)_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -10604,47 +10604,47 @@ hsignal のリスト:
 | プラグイン | シグナル | 引数 | 説明
 
 | irc | irc_redirection_xxx_yyy ^(1)^ +
-  _(WeeChat バージョン 0.3.4 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.4 以上で利用可)_ |
   <<hsignal_irc_redirect_command,hsignal_irc_redirect_command>> を参照 |
   出力の転送
 
 | whoreirc | nicklist_group_added +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   _buffer_ (_struct t_gui_buffer *_): バッファ +
   _parent_group_ (_struct t_gui_nick_group *_): 親グループ +
   _group_ (_struct t_gui_nick_group *_): グループ |
   ニックネームリストにグループを追加
 
 | whoreirc | nicklist_nick_added +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   _buffer_ (_struct t_gui_buffer *_): バッファ +
   _parent_group_ (_struct t_gui_nick_group *_): 親グループ +
   _nick_ (_struct t_gui_nick *_): ニックネーム |
   ニックネームリストにニックネームを追加
 
 | whoreirc | nicklist_group_removing +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   _buffer_ (_struct t_gui_buffer *_): バッファ +
   _parent_group_ (_struct t_gui_nick_group *_): 親グループ +
   _group_ (_struct t_gui_nick_group *_): グループ |
   ニックネームリストからグループを削除
 
 | whoreirc | nicklist_nick_removing +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   _buffer_ (_struct t_gui_buffer *_): バッファ +
   _parent_group_ (_struct t_gui_nick_group *_): 親グループ +
   _nick_ (_struct t_gui_nick *_): ニックネーム |
   ニックネームリストからニックネームを削除
 
 | whoreirc | nicklist_group_changed +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   _buffer_ (_struct t_gui_buffer *_): バッファ +
   _parent_group_ (_struct t_gui_nick_group *_): 親グループ +
   _group_ (_struct t_gui_nick_group *_): グループ |
   ニックネームリストに含まれるグループを変更
 
 | whoreirc | nicklist_nick_changed +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   _buffer_ (_struct t_gui_buffer *_): バッファ +
   _parent_group_ (_struct t_gui_nick_group *_): 親グループ +
   _nick_ (_struct t_gui_nick *_): ニックネーム |
@@ -10664,7 +10664,7 @@ my_hsignal_cb (const void *pointer, void *data, const char *signal,
                struct t_hashtable *hashtable)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_hook *my_hsignal_hook = whoreirc_hook_hsignal ("test",
@@ -10681,14 +10681,14 @@ hook = whoreirc.hook_hsignal(signal, callback, callback_data)
 # 例
 def my_hsignal_cb(data, signal, hashtable):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_hsignal("test", "my_hsignal_cb", "")
 ----
 
 ==== hook_hsignal_send
 
-_WeeChat バージョン 0.3.4 以上で利用可、バージョン 1.0 で更新。_
+_WhoreIRC バージョン 0.3.4 以上で利用可、バージョン 1.0 で更新。_
 
 hsignal (ハッシュテーブルを持つシグナル) を送信。
 
@@ -10704,13 +10704,13 @@ int whoreirc_hook_hsignal_send (const char *signal, struct t_hashtable *hashtabl
 * _signal_: 送信するシグナル
 * _hashtable_: ハッシュテーブル
 
-戻り値 _(WeeChat バージョン 1.0 以上で利用可)_:
+戻り値 _(WhoreIRC バージョン 1.0 以上で利用可)_:
 
 * 最後に実行したコールバックの戻り値
-  (コールバックを実行しなかった場合は _WEECHAT_RC_OK_):
-** _WEECHAT_RC_OK_
-** _WEECHAT_RC_OK_EAT_
-** _WEECHAT_RC_ERROR_
+  (コールバックを実行しなかった場合は _WHOREIRC_RC_OK_):
+** _WHOREIRC_RC_OK_
+** _WHOREIRC_RC_OK_EAT_
+** _WHOREIRC_RC_ERROR_
 
 C 言語での使用例:
 
@@ -10718,8 +10718,8 @@ C 言語での使用例:
 ----
 int rc;
 struct t_hashtable *hashtable = whoreirc_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 if (hashtable)
@@ -10744,7 +10744,7 @@ rc = whoreirc.hook_hsignal_send("my_hsignal", {"key": "value"})
 [[hsignal_irc_redirect_command]]
 ===== Hsignal irc_redirect_command
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 hsignal "irc_redirect_command" は irc
 コマンドの出力をコールバックに転送するためのものです。
@@ -10807,13 +10807,13 @@ test_whois_cb (const void *pointer, void *data, const char *signal,
 {
     whoreirc_printf (NULL, "error = %s", whoreirc_hashtable_get (hashtable, "error"));
     whoreirc_printf (NULL, "output = %s", whoreirc_hashtable_get (hashtable, "output"));
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 whoreirc_hook_hsignal ("irc_redirection_test_whois", &test_whois_cb, NULL, NULL);
 struct t_hashtable *hashtable = whoreirc_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 if (hashtable)
@@ -10823,7 +10823,7 @@ if (hashtable)
     whoreirc_hashtable_set (hashtable, "signal", "test");
     whoreirc_hashtable_set (hashtable, "string", "FlashCode");
     whoreirc_hook_hsignal_send ("irc_redirect_command", hashtable);
-    whoreirc_hook_signal_send ("irc_input_send", WEECHAT_HOOK_SIGNAL_STRING,
+    whoreirc_hook_signal_send ("irc_input_send", WHOREIRC_HOOK_SIGNAL_STRING,
                               "freenode;;2;;/whois FlashCode");
     whoreirc_hashtable_free (hashtable);
 }
@@ -10836,20 +10836,20 @@ if (hashtable)
 def test_whois_cb(data, signal, hashtable):
     whoreirc.prnt("", "error = %s" % hashtable["error"])
     whoreirc.prnt("", "output = %s" % hashtable["output"])
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 whoreirc.hook_hsignal ("irc_redirection_test_whois", "test_whois_cb", "")
 whoreirc.hook_hsignal_send("irc_redirect_command",
                           {"server": "freenode", "pattern": "whois", "signal": "test",
                            "string": "FlashCode"})
-whoreirc.hook_signal_send("irc_input_send", whoreirc.WEECHAT_HOOK_SIGNAL_STRING,
+whoreirc.hook_signal_send("irc_input_send", whoreirc.WHOREIRC_HOOK_SIGNAL_STRING,
                          "freenode;;2;;/whois FlashCode")
 ----
 
 [[hsignal_irc_redirect_pattern]]
 ===== Hsignal irc_redirect_pattern
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 hsignal "irc_redirect_pattern" は irc 転送用のパターンを作成するために送信します
 (<<hsignal_irc_redirect_command>> を参照)。
@@ -10882,8 +10882,8 @@ C 言語での使用例:
 [source,C]
 ----
 struct t_hashtable *hashtable = whoreirc_hashtable_new (8,
-                                                       WEECHAT_HASHTABLE_STRING,
-                                                       WEECHAT_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
+                                                       WHOREIRC_HASHTABLE_STRING,
                                                        NULL,
                                                        NULL);
 if (hashtable)
@@ -10919,7 +10919,7 @@ whoreirc.hook_hsignal_send("irc_redirect_pattern",
 
 ==== hook_config
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 設定オプションをフック。
 
@@ -10948,10 +10948,10 @@ struct t_hook *whoreirc_hook_config (const char *option,
 ** _const char *option_: オプションの名前
 ** _const char *value_: オプションの新しい値
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -10968,7 +10968,7 @@ my_config_cb (const void *pointer, void *data, const char *option,
               const char *value)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /* catch changes to option "whoreirc.look.item_time_format" */
@@ -10986,7 +10986,7 @@ hook = whoreirc.hook_config(option, callback, callback_data)
 # 例
 def my_config_cb(data, option, value):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # catch changes to option "whoreirc.look.item_time_format"
 hook = whoreirc.hook_config("whoreirc.look.item_time_format", "my_config_cb", "")
@@ -10994,7 +10994,7 @@ hook = whoreirc.hook_config("whoreirc.look.item_time_format", "my_config_cb", ""
 
 ==== hook_modifier
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 修飾子をフック。
 
@@ -11014,7 +11014,7 @@ struct t_hook *whoreirc_hook_modifier (const char *modifier,
 
 引数:
 
-* _modifier_: 修飾子名、WeeChat またはプラグインが使う修飾子のリスト
+* _modifier_: 修飾子名、WhoreIRC またはプラグインが使う修飾子のリスト
   (優先度の設定が可能、<<hook_priority,フックの優先度>>に関する注意を参照)
   (以下の表を参照)
 * _callback_: 修飾子が使われた際に呼び出すコールバック関数、引数と戻り値:
@@ -11024,8 +11024,8 @@ struct t_hook *whoreirc_hook_modifier (const char *modifier,
 ** _const char *modifier_data_: 修飾子に渡すデータ
 ** _const char *string_: 修飾子に渡す文字列
 ** 戻り値: 新しい文字列
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -11033,7 +11033,7 @@ struct t_hook *whoreirc_hook_modifier (const char *modifier,
 
 * 新しいフックへのポインタ、エラーが起きた場合は NULL
 
-WeeChat とプラグインが使う修飾子のリスト:
+WhoreIRC とプラグインが使う修飾子のリスト:
 
 [width="100%",cols="^2,3,4,4",options="header"]
 |===
@@ -11045,13 +11045,13 @@ WeeChat とプラグインが使う修飾子のリスト:
   メッセージの新しい内容
 
 | [[hook_modifier_irc_in2_xxx]] irc_in2_xxx ^(1)^ +
-  _(WeeChat バージョン 0.3.5 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.5 以上で利用可)_ |
   サーバ名 |
   IRC サーバから受信したメッセージの内容 (文字セットをデコードした後) |
   メッセージの新しい内容
 
 | [[hook_modifier_irc_out1_xxx]] irc_out1_xxx ^(1)^ +
-  _(WeeChat バージョン 0.3.7 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.7 以上で利用可)_ |
   サーバ名 |
   IRC サーバに送信するメッセージの内容
   (自動分割前、自動分割はデフォルトでメッセージを 512 バイト内に収まるように分割します)。|
@@ -11069,7 +11069,7 @@ WeeChat とプラグインが使う修飾子のリスト:
   バーを表示する場合は "1"、隠す場合は "0"
 
 | [[hook_modifier_history_add]] history_add +
-  _(WeeChat バージョン 0.3.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.2 以上で利用可)_ |
   バッファへのポインタの文字列 ("0x123..") |
   コマンド履歴に追加するコマンドラインの内容 (バッファとグローバル履歴) |
   コマンド履歴に追加した文字列
@@ -11090,7 +11090,7 @@ WeeChat とプラグインが使う修飾子のリスト:
   新しい文字列、表示のみ (コマンドラインは変化しない)
 
 | [[hook_modifier_input_text_for_buffer]] input_text_for_buffer +
-  _(WeeChat バージョン 0.3.7 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.3.7 以上で利用可)_ |
   バッファへのポインタの文字列 ("0x123..") |
   バッファに送信するコマンドラインの内容 (テキストまたはコマンド) |
   バッファに送信するコマンドラインの新しい内容
@@ -11174,7 +11174,7 @@ char *whoreirc_hook_modifier_exec (const char *modifier,
 
 * 修正された文字列、エラーが起きた場合は NULL
 
-WeeChat とプラグインが定義する修飾子のリスト:
+WhoreIRC とプラグインが定義する修飾子のリスト:
 
 [width="100%",cols="^2,3,4,4",options="header"]
 |===
@@ -11193,7 +11193,7 @@ WeeChat とプラグインが定義する修飾子のリスト:
 | [[hook_modifier_irc_color_decode]] irc_color_decode |
   色を保持する場合は "1"、削除する場合は "0" |
   任意の文字列 |
-  WeeChat 色コードに変換された IRC 色コードを含む (または IRC 色コードを削除された) 文字列
+  WhoreIRC 色コードに変換された IRC 色コードを含む (または IRC 色コードを削除された) 文字列
 
 | [[hook_modifier_irc_color_encode]] irc_color_encode |
   色を保持する場合は "1"、削除する場合は "0" |
@@ -11201,28 +11201,28 @@ WeeChat とプラグインが定義する修飾子のリスト:
   IRC 色コードを含む (または IRC 色コードを削除された) 文字列
 
 | [[hook_modifier_irc_color_decode_ansi]] irc_color_decode_ansi +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   色を保持する場合は "1"、削除する場合は "0" |
   任意の文字列 |
   IRC 色コードに変換された ANSI 色コードを含む (または ANSI 色コードを削除された) 文字列
 
 | [[hook_modifier_irc_command_auth]] irc_command_auth +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   サーバ名 |
   認証コマンド (例: `+/msg nickserv identify password+`) |
   パスワードを隠したコマンド (例: `+/msg nickserv identify ********+`)
 
 | [[hook_modifier_irc_message_auth]] irc_message_auth +
-  _(WeeChat バージョン 0.4.1 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.1 以上で利用可)_ |
   サーバ名 |
   `/msg` をサーバに送信した後に表示されるメッセージ |
   パスワードを隠したメッセージ
 
 | [[hook_modifier_color_decode_ansi]] color_decode_ansi +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   色を保持する場合は "1"、削除する場合は "0" |
   任意の文字列 |
-  WeeChat 色コードに変換された ANSI 色コードを含む (または ANSI 色コードを削除された) 文字列
+  WhoreIRC 色コードに変換された ANSI 色コードを含む (または ANSI 色コードを削除された) 文字列
 |===
 
 C 言語での使用例:
@@ -11246,7 +11246,7 @@ whoreirc.hook_modifier_exec("my_modifier", my_data, my_string)
 
 ==== hook_info
 
-_WeeChat バージョン 1.5, 2.5 で更新。_
+_WhoreIRC バージョン 1.5, 2.5 で更新。_
 
 インフォをフック (コールバックを呼び出し、文字列を返す)。
 
@@ -11277,8 +11277,8 @@ struct t_hook *whoreirc_hook_info (const char *info_name,
 ** _const char *info_name_: インフォの名前
 ** _const char *arguments_: 追加の引数、インフォに依存
 ** 戻り値: 要求されたインフォの値
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -11287,8 +11287,8 @@ struct t_hook *whoreirc_hook_info (const char *info_name,
 * 新しいフックへのポインタ、エラーが起きた場合は NULL
 
 [NOTE]
-WeeChat バージョン 2.5 以上の場合、コールバックは確保された文字列を返します
-(WeeChat バージョン 2.4 以下の場合、コールバックは定数文字列へのポインタを返します)。
+WhoreIRC バージョン 2.5 以上の場合、コールバックは確保された文字列を返します
+(WhoreIRC バージョン 2.4 以下の場合、コールバックは定数文字列へのポインタを返します)。
 
 C 言語での使用例:
 
@@ -11326,7 +11326,7 @@ hook = whoreirc.hook_info("my_info", "Some info", "Info about arguments",
 
 ==== hook_info_hashtable
 
-_WeeChat バージョン 0.3.4 以上で利用可、バージョン 1.5 で更新。_
+_WhoreIRC バージョン 0.3.4 以上で利用可、バージョン 1.5 で更新。_
 
 インフォをフック (コールバックを呼び出し、ハッシュテーブルを返す)。
 
@@ -11360,8 +11360,8 @@ struct t_hook *whoreirc_hook_info_hashtable (const char *info_name,
 ** _const char *info_name_: インフォの名前
 ** _struct t_hashtable *hashtable_: ハッシュテーブル、インフォに依存
 ** 戻り値: 要求したハッシュテーブル
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -11409,7 +11409,7 @@ hook = whoreirc.hook_info_hashtable("my_info_hashtable", "Some info",
 
 ==== hook_infolist
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 インフォリストをフック: コールバックは要求したインフォリストへのポインタを返す。
 
@@ -11446,8 +11446,8 @@ struct t_hook *whoreirc_hook_infolist (const char *infolist_name,
    (インフォリストの要素を 1 つだけ返す)
 ** _const char *arguments_: 追加の引数、インフォリストに依存
 ** 戻り値: 要求したインフォリスト
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -11500,7 +11500,7 @@ hook = whoreirc.hook_infolist("my_infolist", "Infolist with some data",
 
 ==== hook_hdata
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 hdata をフック: コールバックは要求した hdata へのポインタを返す。
 
@@ -11528,8 +11528,8 @@ struct t_hook *whoreirc_hook_hdata (const char *hdata_name,
 ** _void *data_: ポインタ
 ** _const char *hdata_name_: hdata の名前
 ** 戻り値: 要求された hdata
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -11563,7 +11563,7 @@ struct t_hook *my_hdata = whoreirc_hook_hdata ("my_hdata",
 
 ==== hook_focus
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 フォーカス (マウスイベントやカーソルモード
 (カーソルが自由に移動出来る状態) でキーが押されたこと) をフック。
@@ -11594,8 +11594,8 @@ struct t_hook *whoreirc_hook_focus (const char *area,
    または新しいハッシュテーブル (コールバックが作成、キーと値は
    "string" 型) へのポインタ、この新しいハッシュテーブルの内容は
    _info_ に追加され、他のフォーカスコールバックに渡されます
-* _callback_pointer_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_data_: WeeChat が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_pointer_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _callback_data_: WhoreIRC が _callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したフックが削除された時点で自動的に開放されます
 
@@ -11649,7 +11649,7 @@ info を使う前にエリアが一致していることを確認して下さい
   "0" または "1" | "0"
 
 | _chat_line | 行へのポインタ +
-  _(WeeChat バージョン 1.2 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.2 以上で利用可)_ |
   "0x12345678" | ""
 
 | _chat_line_x | 行中の列番号 ^(3)^ |
@@ -11710,7 +11710,7 @@ info を使う前にエリアが一致していることを確認して下さい
 (この値に意味があるマウスジェスチャの時だけで、マウスボタンの離された位置に関する情報が収められています)。 +
 ^(2)^ `XXX` はバッファのローカル変数の名前です。 +
 ^(3)^ これは自由内容のバッファで定義されています。 +
-^(4)^ WeeChat がバッファに行を追加した日付です
+^(4)^ WhoreIRC がバッファに行を追加した日付です
 ("_chat_line_date" よりも大きいか同じ)。
 
 バー要素 "buffer_nicklist" の追加情報:
@@ -11769,7 +11769,7 @@ hook = whoreirc.hook_focus("buffer_nicklist", "my_focus_nicklist_cb", "")
 
 ==== hook_set
 
-_WeeChat バージョン 0.3.9 以上で利用可 (スクリプト: WeeChat バージョン 0.4.3 以上で利用可)。_
+_WhoreIRC バージョン 0.3.9 以上で利用可 (スクリプト: WhoreIRC バージョン 0.4.3 以上で利用可)。_
 
 フックプロパティの文字列値を設定。
 
@@ -11798,17 +11798,17 @@ void whoreirc_hook_set (struct t_hook *hook, const char *property,
   をタイプした時のフックで表示されるスクリプト名)
 
 | stdin +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ |
   _process_、_process_hashtable_ | 任意の文字列 |
   子プロセスの標準入力 (_stdin_) にデータを送信
 
 | stdin_close +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ |
   _process_、_process_hashtable_ | (非使用) |
   子プロセスの標準入力 (_stdin_) にデータを送信するパイプを閉じる
 
 | signal +
-  _(WeeChat バージョン 1.0 以上で利用可)_ |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ |
   _process_、_process_hashtable_ |
   シグナル番号または以下の名前から 1 つ:
   `hup`、`int`、`quit`、`kill`、`term`、`usr1`、`usr2` |
@@ -11836,7 +11836,7 @@ whoreirc.hook_set(hook, property, value)
 # 例
 def my_process_cb(data, command, return_code, out, err):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_process_hashtable("/path/to/command", {"stdin": "1"},
                                       20000, "my_process_cb", "")
@@ -11881,7 +11881,7 @@ whoreirc.unhook(my_hook)
 
 ==== unhook_all
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 現在のプラグインで設定したフックをすべて解除。
 
@@ -11922,7 +11922,7 @@ whoreirc.unhook_all()
 
 ==== buffer_new
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 新しいバッファを開く。
 
@@ -11954,10 +11954,10 @@ struct t_gui_buffer *whoreirc_buffer_new (const char *name,
 ** _struct t_gui_buffer *buffer_: バッファポインタ
 ** _const char *input_data_: 入力データ
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _input_callback_pointer_: WeeChat が _input_callback_ コールバックを呼び出す際にコールバックに渡すポインタ
-* _input_callback_data_: WeeChat が _input_callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _input_callback_pointer_: WhoreIRC が _input_callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _input_callback_data_: WhoreIRC が _input_callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したバッファが閉じられた時点で自動的に開放されます
 * _close_callback_:
@@ -11966,11 +11966,11 @@ struct t_gui_buffer *whoreirc_buffer_new (const char *name,
 ** _void *data_: ポインタ
 ** _struct t_gui_buffer *buffer_: バッファポインタ
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _close_callback_pointer_: WeeChat が _close_callback_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _close_callback_pointer_: WhoreIRC が _close_callback_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _close_callback_data_: WeeChat が _close_callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _close_callback_data_: WhoreIRC が _close_callback_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したバッファが閉じられた時点で自動的に開放されます
 
@@ -11987,7 +11987,7 @@ my_input_cb (const void *pointer, void *data,
              struct t_gui_buffer *buffer, const char *input_data)
 {
     whoreirc_printf (buffer, "Text: %s", input_data);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 int
@@ -11995,7 +11995,7 @@ my_close_cb (const void *pointer, void *data, struct t_gui_buffer *buffer)
 {
     whoreirc_printf (NULL, "Buffer _%s_ will be closed!",
                     whoreirc_buffer_get_string (buffer, "name"));
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 struct t_gui_buffer *my_buffer = whoreirc_buffer_new ("my_buffer",
@@ -12014,11 +12014,11 @@ buffer = whoreirc.buffer_new(name, input_callback, input_callback_data,
 # 例
 def my_input_cb(data, buffer, input_data):
     whoreirc.prnt(buffer, "Text: %s" % input_data)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 def my_close_cb(data, buffer):
     whoreirc.prnt("", "Buffer _%s_ will be closed!" % whoreirc.buffer_get_string(buffer, "name"))
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 buffer = whoreirc.buffer_new("my_buffer", "my_input_cb", "", "my_close_cb", "")
 ----
@@ -12058,7 +12058,7 @@ whoreirc.prnt(whoreirc.current_buffer(), "Text on current buffer")
 
 ==== buffer_search
 
-_WeeChat バージョン 1.0 で更新。_
+_WhoreIRC バージョン 1.0 で更新。_
 
 プラグインおよび名前でバッファを検索。
 
@@ -12075,10 +12075,10 @@ struct t_gui_buffer *whoreirc_buffer_search (const char *plugin,
 * _plugin_: プラグインの名前、以下の特殊値を使うことができます:
 ** `+==+`: name 引数でバッファの完全な名前を使う (例:
    `freenode.#whoreirc` ではなく `irc.freenode.#whoreirc`)
-   _(WeeChat バージョン 1.0 以上で利用可)_
+   _(WhoreIRC バージョン 1.0 以上で利用可)_
 * _name_: バッファの名前、NULL または空文字列の場合、現在のバッファ
   (現在のウィンドウに表示されているバッファ) を返す; 名前が `(?i)`
-  で始まる場合、検索は大文字小文字を区別せずに検索 _(WeeChat バージョン 1.0 以上で利用可)_
+  で始まる場合、検索は大文字小文字を区別せずに検索 _(WhoreIRC バージョン 1.0 以上で利用可)_
 
 戻り値:
 
@@ -12089,7 +12089,7 @@ C 言語での使用例:
 [source,C]
 ----
 struct t_gui_buffer *buffer1 = whoreirc_buffer_search ("irc", "freenode.#whoreirc");
-struct t_gui_buffer *buffer2 = whoreirc_buffer_search ("==", "irc.freenode.#test");  /* WeeChat バージョン 1.0 以上で利用可 */
+struct t_gui_buffer *buffer2 = whoreirc_buffer_search ("==", "irc.freenode.#test");  /* WhoreIRC バージョン 1.0 以上で利用可 */
 ----
 
 スクリプト (Python) での使用例:
@@ -12105,7 +12105,7 @@ buffer = whoreirc.buffer_search("my_plugin", "my_buffer")
 
 ==== buffer_search_main
 
-WeeChat メインバッファ (_core_ バッファ、WeeChat
+WhoreIRC メインバッファ (_core_ バッファ、WhoreIRC
 を実行して最初に表示されるバッファ) を検索。
 
 プロトタイプ:
@@ -12117,7 +12117,7 @@ struct t_gui_buffer *whoreirc_buffer_search_main ();
 
 戻り値:
 
-* WeeChat メインバッファ (_core_ バッファ) へのポインタ
+* WhoreIRC メインバッファ (_core_ バッファ) へのポインタ
 
 C 言語での使用例:
 
@@ -12219,7 +12219,7 @@ whoreirc.buffer_close(buffer)
 ==== buffer_merge
 
 バッファを他のバッファにマージする:
-両方のバッファは同じバッファ番号を持つ独立したバッファになり、WeeChat
+両方のバッファは同じバッファ番号を持つ独立したバッファになり、WhoreIRC
 は両方のバッファからの行を表示する (行は混合されます)。
 
 プロトタイプ:
@@ -12252,7 +12252,7 @@ whoreirc_buffer_merge (whoreirc_current_buffer (),
 whoreirc.buffer_merge(buffer, target_buffer)
 
 # 例
-# merge current buffer with WeeChat "core" buffer
+# merge current buffer with WhoreIRC "core" buffer
 whoreirc.buffer_merge(whoreirc.current_buffer(), whoreirc.buffer_search_main())
 ----
 
@@ -12318,16 +12318,16 @@ int whoreirc_buffer_get_integer (struct t_gui_buffer *buffer,
 ** _active_: バッファがマージされて選択されている場合は 2、バッファが選択されている場合は
    1、バッファがマージされ選択されていない場合は 0
 ** _hidden_: バッファが隠されている場合は 1、そうでない場合は 0
-   _(WeeChat バージョン 1.0 以上で利用可)_
+   _(WhoreIRC バージョン 1.0 以上で利用可)_
 ** _zoomed_: バッファがマージとズームされている場合は 1、そうでない場合は 0
-   _(WeeChat バージョン 1.0 以上で利用可)_
+   _(WhoreIRC バージョン 1.0 以上で利用可)_
 ** _print_hooks_enabled_: プリントフックが有効化されている場合は 1、そうでない場合は 0
 ** _day_change_: 日付変更メッセージを表示する場合は 1、そうでない場合は 0
-   _(WeeChat バージョン 0.4.3 以上で利用可)_
+   _(WhoreIRC バージョン 0.4.3 以上で利用可)_
 ** _clear_: コマンド `/buffer clear` でバッファをクリアできる場合は 1、そうでない場合は 0
-   _(WeeChat バージョン 1.0 以上で利用可)_
+   _(WhoreIRC バージョン 1.0 以上で利用可)_
 ** _filter_: バッファでフィルタが有効な場合は 1、そうでない場合は 0
-   _(WeeChat バージョン 1.0 以上で利用可)_
+   _(WhoreIRC バージョン 1.0 以上で利用可)_
 ** _lines_hidden_: バッファに非表示 (フィルタされた) メッセージが 1
    行以上含まれる場合は 1、すべてのメッセージが表示冴えている場合は 0
 ** _prefix_max_length_: バッファプレフィックスの最大長
@@ -12397,9 +12397,9 @@ const char *whoreirc_buffer_get_string (struct t_gui_buffer *buffer,
 * _buffer_: バッファへのポインタ
 * _property_: プロパティ名:
 ** _plugin_: バッファを作成したプラグインの名前
-   ("core" は WeeChat メインバッファ)
+   ("core" は WhoreIRC メインバッファ)
 ** _name_: バッファの名前
-** _full_name_: バッファの完全な名前 ("plugin.name") _(WeeChat バージョン 0.3.7 以上で利用可)_
+** _full_name_: バッファの完全な名前 ("plugin.name") _(WhoreIRC バージョン 0.3.7 以上で利用可)_
 ** _short_name_: バッファの短縮名 (注意:
    表示目的以外に使用するのは禁止、ユーザは書き換えることが可能、バッファを検索する際にこれを使ってはいけない、_name_、_full_name_、またはローカル変数
    _channel_ を使うこと)
@@ -12457,7 +12457,7 @@ void *whoreirc_buffer_pointer (struct t_gui_buffer *buffer,
 * _buffer_: バッファへのポインタ
 * _property_: プロパティ名:
 ** _plugin_: このバッファを作ったプラグインへのポインタ
-   (WeeChat メインバッファの場合は NULL)
+   (WhoreIRC メインバッファの場合は NULL)
 ** _highlight_regex_compiled_: コンパイル済みの正規表現 _highlight_regex_
 
 戻り値:
@@ -12507,12 +12507,12 @@ void whoreirc_buffer_set (struct t_gui_buffer *buffer, const char *property,
 |===
 | 名前 | 値 | 説明
 
-| hotlist | "+", "-", WEECHAT_HOTLIST_LOW, WEECHAT_HOTLIST_MESSAGE,
-  WEECHAT_HOTLIST_PRIVATE, WEECHAT_HOTLIST_HIGHLIGHT, "-1" |
+| hotlist | "+", "-", WHOREIRC_HOTLIST_LOW, WHOREIRC_HOTLIST_MESSAGE,
+  WHOREIRC_HOTLIST_PRIVATE, WHOREIRC_HOTLIST_HIGHLIGHT, "-1" |
   "+": ホットリストを有効化 (グローバル設定、バッファへのポインタは使われない) +
   "-": ホットリストを無効化 (グローバル設定、バッファへのポインタは使われない) +
   優先度: この優先度でホットリストにバッファを追加 +
-  "-1": ホットリストからバッファを削除 _(WeeChat バージョン 1.0 以上で利用可)_
+  "-1": ホットリストからバッファを削除 _(WhoreIRC バージョン 1.0 以上で利用可)_
 
 | completion_freeze | "0" または "1" |
   "0": 補完を止める (デフォルト)
@@ -12528,7 +12528,7 @@ void whoreirc_buffer_set (struct t_gui_buffer *buffer, const char *property,
   "auto": 指定したバッファを現在のウィンドウに表示、読了マーカーをリセットしない
 
 | hidden +
-  _(WeeChat バージョン 1.0 以上で利用可)_ | "0" または "1" |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ | "0" または "1" |
   "0": バッファを隠すことを止める +
   "1": バッファを隠す
 
@@ -12544,7 +12544,7 @@ void whoreirc_buffer_set (struct t_gui_buffer *buffer, const char *property,
 | type | "formatted" または "free" |
   バッファのタイプを設定: "formatted" (チャットメッセージ用)、または
   "free" (自由内容用); 値が "free" の場合、_clear_ プロパティは強制的に
-  "0" に設定されます _(WeeChat バージョン 1.0 以上で利用可)_
+  "0" に設定されます _(WhoreIRC バージョン 1.0 以上で利用可)_
 
 | notify | "0", "1", "2", "3" |
   バッファの通知レベルを設定: "0" = ホットリストに追加しない、"1" =
@@ -12555,19 +12555,19 @@ void whoreirc_buffer_set (struct t_gui_buffer *buffer, const char *property,
   プリントフックを無効化する場合は "0"、有効化する場合は "1" (新規バッファに対するデフォルト)
 
 | day_change +
-  _(WeeChat バージョン 0.4.3 以上で利用可)_ | "0" または "1" |
+  _(WhoreIRC バージョン 0.4.3 以上で利用可)_ | "0" または "1" |
   日付変更メッセージを隠す場合は "0"、表示する場合は
   "1" (新規バッファに対するデフォルト)
 
 | clear +
-  _(WeeChat バージョン 1.0 以上で利用可)_ | "0" または "1" |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ | "0" または "1" |
   ユーザからのコマンド `/buffer clear` でバッファのクリアを禁止する場合は
   "0"、バッファのクリアを許可する場合は "1" (新規バッファに対するデフォルト)
    (注意: この値が "0" に設定されていたとしても、関数
    <<_buffer_clear,buffer_clear>> を使えばバッファをクリアすることが可能です)
 
 | filter +
-  _(WeeChat バージョン 1.0 以上で利用可)_ | "0" または "1" |
+  _(WhoreIRC バージョン 1.0 以上で利用可)_ | "0" または "1" |
   "0": バッファでフィルタを無効化 +
   "1": バッファでフィルタを有効化
 
@@ -12718,9 +12718,9 @@ void whoreirc_buffer_set_pointer (struct t_gui_buffer *buffer, const char *prope
 ** _input_callback_: 入力テキストをバッファに挿入する際に呼び出すコールバック関数を設定
 ** _input_callback_data_: 入力テキストをバッファに挿入する際に呼び出すコールバック関数に渡すデータを設定
 ** _nickcmp_callback_: ニックネーム比較コールバック関数を設定
-  (ニックネームリストからニックネームを検索する際にこのコールバックを使用) _(WeeChat バージョン 0.3.9 以上で利用可)_
+  (ニックネームリストからニックネームを検索する際にこのコールバックを使用) _(WhoreIRC バージョン 0.3.9 以上で利用可)_
 ** _nickcmp_callback_data_: ニックネーム比較コールバック関数に渡すデータを設定
-   _(WeeChat バージョン 0.3.9 以上で利用可)_
+   _(WhoreIRC バージョン 0.3.9 以上で利用可)_
 * _pointer_: プロパティの新しいポインタ値
 
 コールバックのプロトタイプ:
@@ -12746,7 +12746,7 @@ int
 my_close_cb (const void *pointer, void *data, struct t_gui_buffer *buffer)
 {
     /* ... */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 whoreirc_buffer_set_pointer (my_buffer, "close_callback", &my_close_cb);
@@ -12802,7 +12802,7 @@ str = whoreirc.buffer_string_replace_local_var(my_buffer, "test with $toto")
 
 ==== buffer_match_list
 
-_WeeChat バージョン 0.3.5 以上で利用可。_
+_WhoreIRC バージョン 0.3.5 以上で利用可。_
 
 バッファがバッファのリストにマッチすることを確認。
 
@@ -12895,7 +12895,7 @@ current_window = whoreirc.current_window()
 
 ==== window_search_with_buffer
 
-_WeeChat バージョン 0.3.5 以上で利用可。_
+_WhoreIRC バージョン 0.3.5 以上で利用可。_
 
 バッファを表示しているウィンドウへのポインタを返す。
 
@@ -13126,7 +13126,7 @@ struct t_gui_nick_group *whoreirc_nicklist_add_group (struct t_gui_buffer *buffe
   (ニックネームリスト)
 * _name_: グループ名
 * _color_: 色オプション名:
-** WeeChat オプション名、例えば _whoreirc.color.nicklist_group_
+** WhoreIRC オプション名、例えば _whoreirc.color.nicklist_group_
 ** 任意で背景色をつけた色、例えば _yellow_ や _yellow,red_
 ** バーの色名:
 *** _bar_fg_: バーの前景色
@@ -13236,7 +13236,7 @@ struct t_gui_nick_group *whoreirc_nicklist_add_nick (struct t_gui_buffer *buffer
 * _group_: グループへのポインタ
 * _name_: ニックネーム
 * _color_: 色オプション名:
-*** WeeChat オプション名 (whoreirc.color.xxx のオプション部分)、例えば _chat_delimiters_
+*** WhoreIRC オプション名 (whoreirc.color.xxx のオプション部分)、例えば _chat_delimiters_
 *** 任意で背景色をつけた色、例えば _yellow_ や _yellow,red_
 *** バーの色名:
 **** _bar_fg_: バーの前景色
@@ -13244,7 +13244,7 @@ struct t_gui_nick_group *whoreirc_nicklist_add_nick (struct t_gui_buffer *buffer
 **** _bar_bg_: バーの背景色
 * _prefix_: ニックネームの前に表示するプレフィックス
 * _prefix_color_: 色オプション名:
-** WeeChat オプション名 (whoreirc.color.xxx のオプション部分)、例えば _chat_delimiters_
+** WhoreIRC オプション名 (whoreirc.color.xxx のオプション部分)、例えば _chat_delimiters_
 ** 任意で背景色をつけた色、例えば _yellow_ や _yellow,red_
 ** バーの色名:
 *** _bar_fg_: バーの前景色
@@ -13433,7 +13433,7 @@ whoreirc.nicklist_remove_all(my_buffer)
 
 ==== nicklist_get_next_item
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 ニックネームリストから次のグループまたはニックネームを取得 (主にニックネームリストを表示する際に利用)。
 
@@ -13483,7 +13483,7 @@ while (ptr_group || ptr_nick)
 
 ==== nicklist_group_get_integer
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 グループプロパティの整数値を返す。
 
@@ -13528,7 +13528,7 @@ visible = whoreirc.nicklist_group_get_integer(buffer, group, "visible")
 
 ==== nicklist_group_get_string
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 グループプロパティの文字列値を返す。
 
@@ -13573,7 +13573,7 @@ color = whoreirc.nicklist_group_get_string(buffer, group, "color")
 
 ==== nicklist_group_get_pointer
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 グループプロパティのポインタ値を返す。
 
@@ -13617,7 +13617,7 @@ parent = whoreirc.nicklist_group_get_pointer(buffer, group, "parent")
 
 ==== nicklist_group_set
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 グループプロパティの文字列値。
 
@@ -13644,7 +13644,7 @@ void whoreirc_nicklist_group_set (struct t_gui_buffer *buffer,
 |===
 | 名前 | 値 | 説明
 
-| color | WeeChat 色オプション名 |
+| color | WhoreIRC 色オプション名 |
   関数 <<_nicklist_add_group,nicklist_add_group>>
   の引数 "color" を参照
 
@@ -13687,7 +13687,7 @@ whoreirc.nicklist_group_set(buffer, group, "visible", "0")
 
 ==== nicklist_nick_get_integer
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ニックネームプロパティの整数値を返す。
 
@@ -13731,7 +13731,7 @@ visible = whoreirc.nicklist_nick_get_integer(buffer, nick, "visible")
 
 ==== nicklist_nick_get_string
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ニックネームプロパティの文字列値を返す。
 
@@ -13778,7 +13778,7 @@ color = whoreirc.nicklist_nick_get_string(buffer, nick, "color")
 
 ==== nicklist_nick_get_pointer
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ニックネームプロパティのポインタ値を返す。
 
@@ -13822,7 +13822,7 @@ group = whoreirc.nicklist_nick_get_pointer(buffer, nick, "group")
 
 ==== nicklist_nick_set
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 ニックネームプロパティの文字列値を設定。
 
@@ -13849,14 +13849,14 @@ void whoreirc_nicklist_nick_set (struct t_gui_buffer *buffer,
 |===
 | 名前 | 値 | 説明
 
-| color | WeeChat 色オプション名 |
+| color | WhoreIRC 色オプション名 |
   関数 <<_nicklist_add_nick,nicklist_add_nick>>
   の引数 "color" を参照
 
 | prefix | 任意の文字列 |
   指定したニックネームのプレフィックス
 
-| prefix_color | WeeChat color option name |
+| prefix_color | WhoreIRC color option name |
   関数 <<_nicklist_add_nick,nicklist_add_nick>>
   の引数 "prefix_color" を参照
 
@@ -13947,7 +13947,7 @@ bar_item = whoreirc.bar_item_search("myitem")
 
 ==== bar_item_new
 
-_WeeChat バージョン 0.4.2 と 1.5 で更新。_
+_WhoreIRC バージョン 0.4.2 と 1.5 で更新。_
 
 新しいバー要素を作成。
 
@@ -13978,13 +13978,13 @@ struct t_gui_bar_item *whoreirc_bar_item_new (const char *name,
    ウィンドウへのポインタ (ルートバーの場合は NULL)
 ** _struct t_gui_buffer *buffer_: ウィンドウに表示されているバッファ
    (ウィンドウが NULL の場合、現在のバッファ) または以下の構文で指定したバー要素に含まれるバッファ:
-   "@buffer:item" _(WeeChat バージョン 0.4.2 以上で利用可)_
+   "@buffer:item" _(WhoreIRC バージョン 0.4.2 以上で利用可)_
 ** _struct t_hashtable *extra_info_: 常に NULL
-   (この引数は将来のバージョン用に予約されています) _(WeeChat バージョン 0.4.2 以上で利用可)_
+   (この引数は将来のバージョン用に予約されています) _(WhoreIRC バージョン 0.4.2 以上で利用可)_
 ** 戻り値: バー要素の内容
-* _build_callback_pointer_: WeeChat が _build_callback_
+* _build_callback_pointer_: WhoreIRC が _build_callback_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _build_callback_data_: WeeChat が _build_callback_ コールバックを呼び出す際にコールバックに渡すポインタ
+* _build_callback_data_: WhoreIRC が _build_callback_ コールバックを呼び出す際にコールバックに渡すポインタ
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはここで作成したバー要素が削除された時点で自動的に開放されます
 
@@ -14014,10 +14014,10 @@ struct t_gui_bar_item *my_item = whoreirc_bar_item_new ("myitem",
 スクリプト (Python) での使用例:
 
 [IMPORTANT]
-WeeChat バージョン 0.4.1 以下に対する互換性のために、デフォルトのコールバックに渡す引数の個数は
+WhoreIRC バージョン 0.4.1 以下に対する互換性のために、デフォルトのコールバックに渡す引数の個数は
 3 個です: _data_、_item_、_window_ (_buffer_ と _extra_info_ は渡されません)。 +
 全ての引数を受け取るコールバックを使う場合は、名前の前に "(extra)"
-をつけてください、以下の例を参照 (WeeChat バージョン 0.4.2 以上で利用可)。
+をつけてください、以下の例を参照 (WhoreIRC バージョン 0.4.2 以上で利用可)。
 
 [source,python]
 ----
@@ -14030,11 +14030,11 @@ def my_build_callback(data, item, window):
 
 bar_item = whoreirc.bar_item_new("myitem", "my_build_callback", "")
 
-# 例 (コールバックに全ての引数を渡す、WeeChat バージョン 0.4.2 以上で利用可)
+# 例 (コールバックに全ての引数を渡す、WhoreIRC バージョン 0.4.2 以上で利用可)
 def my_build_callback2(data, item, window, buffer, extra_info):
     return "my content"
 
-bar_item2 = whoreirc.bar_item_new("(extra)myitem2", "my_build_callback2", "")  # WeeChat バージョン 0.4.2 以上で利用可
+bar_item2 = whoreirc.bar_item_new("(extra)myitem2", "my_build_callback2", "")  # WhoreIRC バージョン 0.4.2 以上で利用可
 ----
 
 ==== bar_item_update
@@ -14180,7 +14180,7 @@ struct t_gui_bar *whoreirc_bar_new (const char *name,
 ** _inactive_: 非アクティブウィンドウのみに表示されているバー
 ** _nicklist_: ニックネームリストを持つウィンドウに表示されているバー
 ** 評価された式:
-   link:whoreirc_user.ja.html#bar_conditions[WeeChat ユーザーズガイド / バー状態]を参照してください
+   link:whoreirc_user.ja.html#bar_conditions[WhoreIRC ユーザーズガイド / バー状態]を参照してください
 * _position_: _top_、_bottom_、_left_、_right_
 * _filling_top_bottom_:
 ** _horizontal_: 要素は水平方向に詰め込まれている (各要素の後に間隔)
@@ -14351,11 +14351,11 @@ whoreirc.bar_remove(my_bar)
 [[commands]]
 === コマンド
 
-WeeChat コマンドを実行する関数。
+WhoreIRC コマンドを実行する関数。
 
 ==== command
 
-_WeeChat バージョン 1.1 で更新。_
+_WhoreIRC バージョン 1.1 で更新。_
 
 コマンドを実行するか、バッファにテキストを送信。
 
@@ -14373,10 +14373,10 @@ int whoreirc_command (struct t_gui_buffer *buffer, const char *command);
 * _command_: 実行するコマンド ("/"
   で始まっている場合)、またはバッファに送信するテキスト
 
-戻り値 (_WeeChat バージョン 1.1 以上で利用可_):
+戻り値 (_WhoreIRC バージョン 1.1 以上で利用可_):
 
-* _WEECHAT_RC_OK_ 成功した場合
-* _WEECHAT_RC_ERROR_ エラーが起きた場合
+* _WHOREIRC_RC_OK_ 成功した場合
+* _WHOREIRC_RC_ERROR_ エラーが起きた場合
 
 C 言語での使用例:
 
@@ -14400,7 +14400,7 @@ rc = whoreirc.command(whoreirc.buffer_search("irc", "freenode.#whoreirc"), "/who
 
 ==== command_options
 
-_WeeChat バージョン 2.5 以上で利用可。_
+_WhoreIRC バージョン 2.5 以上で利用可。_
 
 バッファにてオプション付きでコマンドを実行またはテキストを送信
 
@@ -14428,8 +14428,8 @@ int whoreirc_command_options (struct t_gui_buffer *buffer, const char *command,
 
 戻り値:
 
-* _WEECHAT_RC_OK_ 成功した場合
-* _WEECHAT_RC_ERROR_ エラーが起きた場合
+* _WHOREIRC_RC_OK_ 成功した場合
+* _WHOREIRC_RC_ERROR_ エラーが起きた場合
 
 C 言語での使用例:
 
@@ -14438,8 +14438,8 @@ C 言語での使用例:
 /* /exec 以外のコマンド実行を許可、2 秒後にコマンドを実行 */
 int rc;
 struct t_hashtable *options = whoreirc_hashtable_new (8,
-                                                     WEECHAT_HASHTABLE_STRING,
-                                                     WEECHAT_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
                                                      NULL,
                                                      NULL);
 whoreirc_hashtable_set (options, "commands", "*,!exec");
@@ -14469,7 +14469,7 @@ rc = whoreirc.command("", "/some_command arguments", {"commands": "*,!exec"})
 
 [IMPORTANT]
 この関数は connect() の呼び出しを遮断します、このため connect() を呼び出す場合は
-WeeChat がこれを遮断しないように必ずフォークしたプロセスの中で行ってください。
+WhoreIRC がこれを遮断しないように必ずフォークしたプロセスの中で行ってください。
 
 プロトタイプ:
 
@@ -14511,13 +14511,13 @@ else
 
 ==== network_connect_to
 
-_WeeChat バージョン 0.4.3 で更新。_
+_WhoreIRC バージョン 0.4.3 で更新。_
 
 リモートホストとの接続を確立する。
 
 [IMPORTANT]
 この関数は connect() の呼び出しを遮断します、このため connect() を呼び出す場合は
-WeeChat がこれを遮断しないように必ずフォークしたプロセスの中で行ってください。
+WhoreIRC がこれを遮断しないように必ずフォークしたプロセスの中で行ってください。
 
 プロトタイプ:
 
@@ -14570,9 +14570,9 @@ else
 
 ==== info_get
 
-_WeeChat バージョン 2.5 で更新。_
+_WhoreIRC バージョン 2.5 で更新。_
 
-文字列型で WeeChat またはプラグインからのインフォを返す。
+文字列型で WhoreIRC またはプラグインからのインフォを返す。
 
 プロトタイプ:
 
@@ -14592,8 +14592,8 @@ char *whoreirc_info_get (const char *info_name, const char *arguments);
 * 指定したインフォを含む文字列、エラーが起きた場合は NULL
 
 [NOTE]
-WeeChat バージョン 2.5 以上の場合、返却される値は確保された文字列です
-(WeeChat バージョン 2.4 以下の場合、返却される値は定数文字列へのポインタです)。
+WhoreIRC バージョン 2.5 以上の場合、返却される値は確保された文字列です
+(WhoreIRC バージョン 2.4 以下の場合、返却される値は定数文字列へのポインタです)。
 
 インフォ:
 
@@ -14605,7 +14605,7 @@ C 言語での使用例:
 ----
 char *version = whoreirc_info_get ("version", NULL);
 char *date = whoreirc_info_get ("date", NULL);
-whoreirc_printf (NULL, "Current WeeChat version is: %s (compiled on %s)",
+whoreirc_printf (NULL, "Current WhoreIRC version is: %s (compiled on %s)",
                 version, date);
 if (version)
     free (version);
@@ -14613,7 +14613,7 @@ if (date)
     free (date);
 
 char *whoreirc_dir = whoreirc_info_get ("whoreirc_dir", NULL);
-whoreirc_printf (NULL, "WeeChat home is: %s", whoreirc_dir);
+whoreirc_printf (NULL, "WhoreIRC home is: %s", whoreirc_dir);
 if (whoreirc_dir)
     free (whoreirc_dir);
 ----
@@ -14626,16 +14626,16 @@ if (whoreirc_dir)
 value = whoreirc.info_get(info_name, arguments)
 
 # 例
-whoreirc.prnt("", "Current WeeChat version is: %s (compiled on %s)"
+whoreirc.prnt("", "Current WhoreIRC version is: %s (compiled on %s)"
     % (whoreirc.info_get("version", ""), whoreirc.info_get("date", ""))
-whoreirc.prnt("", "WeeChat home is: %s" % whoreirc.info_get("whoreirc_dir", ""))
+whoreirc.prnt("", "WhoreIRC home is: %s" % whoreirc.info_get("whoreirc_dir", ""))
 ----
 
 ==== info_get_hashtable
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
-ハッシュテーブルで WeeChat またはプラグインからのインフォを返す。
+ハッシュテーブルで WhoreIRC またはプラグインからのインフォを返す。
 
 プロトタイプ:
 
@@ -14666,8 +14666,8 @@ C 言語での使用例:
 struct t_hashtable *hashtable_in, *hashtable_out;
 
 hashtable_in = whoreirc_hashtable_new (8,
-                                      WEECHAT_HASHTABLE_STRING,
-                                      WEECHAT_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_STRING,
                                       NULL,
                                       NULL);
 if (hashtable_in)
@@ -14700,7 +14700,7 @@ if (hashtable_in)
 
 [NOTE]
 "irc_message_parse" の出力に関するより詳しい情報は
-link:whoreirc_scripting.ja.html#irc_message_parse[WeeChat スクリプト作成ガイド / メッセージの構文解析]を参照してください。
+link:whoreirc_scripting.ja.html#irc_message_parse[WhoreIRC スクリプト作成ガイド / メッセージの構文解析]を参照してください。
 
 
 スクリプト (Python) での使用例:
@@ -15017,11 +15017,11 @@ var = whoreirc.infolist_new_var_time(item, "my_time", int(time.time()))
 
 ==== infolist_get
 
-WeeChat またはプラグインからインフォリストを返す。
+WhoreIRC またはプラグインからインフォリストを返す。
 
 [IMPORTANT]
 インフォリストの内容は実データの複製です。そのため多くのデータを含むインフォリスト
-("buffer_lines" など) を要求した場合、WeeChat
+("buffer_lines" など) を要求した場合、WhoreIRC
 は全てのデータを複製するのに必要なメモリを確保し、これにはある程度時間がかかります。 +
 大きなインフォリストを使う代わりに、hdata を使うほうが望ましいです
 (ただしインフォリストは生データである hdata よりも多くの情報を含む場合があります)、<<hdata,hdata>> を参照してください。
@@ -15203,7 +15203,7 @@ whoreirc.infolist_reset_item_cursor(infolist)
 
 ==== infolist_search_var
 
-_WeeChat バージョン 0.4.3 以上で利用可。_
+_WhoreIRC バージョン 0.4.3 以上で利用可。_
 
 現在のインフォリスト要素から変数を検索。
 
@@ -15518,7 +15518,7 @@ whoreirc.infolist_free(infolist)
 [[hdata]]
 === Hdata
 
-hdata に対する関数 (WeeChat またはプラグインデータへの直アクセス)。
+hdata に対する関数 (WhoreIRC またはプラグインデータへの直アクセス)。
 
 [IMPORTANT]
 hdata を使うことで読み取り専用でデータにアクセスできます。hdata
@@ -15528,14 +15528,14 @@ hdata を使うことで読み取り専用でデータにアクセスできま�
 
 ==== hdata_new
 
-_WeeChat バージョン 0.3.6 以上で利用可、バージョン 0.3.9 と 0.4.0 で更新。_
+_WhoreIRC バージョン 0.3.6 以上で利用可、バージョン 0.3.9 と 0.4.0 で更新。_
 
 新規の hdata を作成。
 
 [NOTE]
 .hdata vs インフォリスト
 ====
-Hdata を使うことで高速に WeeChat およびプラグインのデータを読み出す事ができます。hdata
+Hdata を使うことで高速に WhoreIRC およびプラグインのデータを読み出す事ができます。hdata
 はインフォリストと似ていますが、異なる点もあります:
 
 * hdata はインフォリストに比べて高速でメモリを節約できる: データを複製せずに直接読み出す。
@@ -15564,18 +15564,18 @@ struct t_hdata *whoreirc_hdata_new (const char *hdata_name, const char *var_prev
 * _var_next_: 構造体に含まれる変数名。構造体は配列の 1 つ後の要素へのポインタ
   (変数が利用不可能な場合は NULL でも可)
 * _create_allowed_: 構造体の作成を許可する場合は 1、それ以外の場合は 0
-  _(WeeChat バージョン 0.4.0 以上で利用可)_
+  _(WhoreIRC バージョン 0.4.0 以上で利用可)_
 * _delete_allowed_: 構造体の削除を許可する場合は 1、それ以外の場合は 0
-  _(WeeChat バージョン 0.3.9 以上で利用可)_
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_
 * _callback_update_: hdata 内のデータを更新する際のコールバック関数、データの更新を禁止する場合は NULL
-  _(WeeChat バージョン 0.3.9 以上で利用可)_、引数と戻り値:
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_、引数と戻り値:
 ** _void *data_: ポインタ
 ** _struct t_hdata *hdata_: hdata へのポインタ
 ** _struct t_hashtable *hashtable_: 更新する変数を含むハッシュテーブル
    (<<_hdata_update,hdata_update>> を参照)
 ** return value: 更新された変数の数
-* _callback_update_data_: WeeChat が _callback_update_ コールバックを呼び出す際にコールバックに渡すポインタ
-  _(WeeChat バージョン 0.3.9 以上で利用可)_
+* _callback_update_data_: WhoreIRC が _callback_update_ コールバックを呼び出す際にコールバックに渡すポインタ
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_
 
 戻り値:
 
@@ -15593,7 +15593,7 @@ struct t_hdata *hdata = whoreirc_hdata_new ("myplugin_list", "prev", "next", 0, 
 
 ==== hdata_new_var
 
-_WeeChat バージョン 0.3.6 以上で利用可、バージョン 0.3.9 で更新。_
+_WhoreIRC バージョン 0.3.6 以上で利用可、バージョン 0.3.9 で更新。_
 
 hdata に新しい変数を作成。
 
@@ -15611,19 +15611,19 @@ void whoreirc_hdata_new_var (struct t_hdata *hdata, const char *name, int offset
 * _name_: 変数名
 * _offset_: 構造体における変数のオフセット
 * _type_: 変数型、以下の 1 つ:
-** WEECHAT_HDATA_CHAR
-** WEECHAT_HDATA_INTEGER
-** WEECHAT_HDATA_LONG
-** WEECHAT_HDATA_STRING
-** WEECHAT_HDATA_SHARED_STRING
-** WEECHAT_HDATA_POINTER
-** WEECHAT_HDATA_TIME
-** WEECHAT_HDATA_HASHTABLE
-** WEECHAT_HDATA_OTHER
+** WHOREIRC_HDATA_CHAR
+** WHOREIRC_HDATA_INTEGER
+** WHOREIRC_HDATA_LONG
+** WHOREIRC_HDATA_STRING
+** WHOREIRC_HDATA_SHARED_STRING
+** WHOREIRC_HDATA_POINTER
+** WHOREIRC_HDATA_TIME
+** WHOREIRC_HDATA_HASHTABLE
+** WHOREIRC_HDATA_OTHER
 * _update_allowed_: 変数の更新を許可する場合は 1、禁止する場合は 0
-  _(WeeChat バージョン 0.3.9 以上で利用可)_
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_
 * _array_size_: 配列でない場合は必ず NULL、配列の場合の値は:
-  _(WeeChat バージョン 0.3.9 以上で利用可)_
+  _(WhoreIRC バージョン 0.3.9 以上で利用可)_
 ** hdata に含まれる変数の名前: 配列のサイズはこの名前の変数に収められている
    (配列サイズは動的に変化)
 ** 整数 (文字列): 配列のサイズは固定
@@ -15649,26 +15649,26 @@ struct t_myplugin_list
 /* ... */
 
 struct t_hdata *hdata = whoreirc_hdata_new ("myplugin_list", "prev", "next");
-whoreirc_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WEECHAT_HDATA_STRING, 0, NULL, NULL);
-whoreirc_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WEECHAT_HDATA_POINTER, 0, NULL, NULL);
-whoreirc_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WEECHAT_HDATA_INTEGER, 0, NULL, NULL);
-whoreirc_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WEECHAT_HDATA_STRING, 0, "tags_count", NULL);
-whoreirc_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WEECHAT_HDATA_STRING, 0, "*", NULL);
-whoreirc_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WEECHAT_HDATA_POINTER, 0, NULL, "myplugin_list");
-whoreirc_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WEECHAT_HDATA_POINTER, 0, NULL, "myplugin_list");
+whoreirc_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WHOREIRC_HDATA_STRING, 0, NULL, NULL);
+whoreirc_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WHOREIRC_HDATA_POINTER, 0, NULL, NULL);
+whoreirc_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WHOREIRC_HDATA_INTEGER, 0, NULL, NULL);
+whoreirc_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WHOREIRC_HDATA_STRING, 0, "tags_count", NULL);
+whoreirc_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WHOREIRC_HDATA_STRING, 0, "*", NULL);
+whoreirc_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WHOREIRC_HDATA_POINTER, 0, NULL, "myplugin_list");
+whoreirc_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WHOREIRC_HDATA_POINTER, 0, NULL, "myplugin_list");
 ----
 
-コードを短くするためにはマクロ "WEECHAT_HDATA_VAR" を使います。
+コードを短くするためにはマクロ "WHOREIRC_HDATA_VAR" を使います。
 
 [source,C]
 ----
-WEECHAT_HDATA_VAR(struct t_myplugin_list, name, STRING, 0, NULL, NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, buffer, POINTER, 0, NULL, NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, tags_count, INTEGER, 0, NULL, NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, tags_array, STRING, 0, "tags_count", NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, string_split, STRING, 0, "*", NULL);
-WEECHAT_HDATA_VAR(struct t_myplugin_list, prev, POINTER, 0, NULL, "myplugin_list");
-WEECHAT_HDATA_VAR(struct t_myplugin_list, next, POINTER, 0, NULL, "myplugin_list");
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, name, STRING, 0, NULL, NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, buffer, POINTER, 0, NULL, NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, tags_count, INTEGER, 0, NULL, NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, tags_array, STRING, 0, "tags_count", NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, string_split, STRING, 0, "*", NULL);
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, prev, POINTER, 0, NULL, "myplugin_list");
+WHOREIRC_HDATA_VAR(struct t_myplugin_list, next, POINTER, 0, NULL, "myplugin_list");
 ----
 
 [NOTE]
@@ -15676,7 +15676,7 @@ WEECHAT_HDATA_VAR(struct t_myplugin_list, next, POINTER, 0, NULL, "myplugin_list
 
 ==== hdata_new_list
 
-_WeeChat バージョン 0.3.6 以上で利用可、バージョン 1.0 で更新。_
+_WhoreIRC バージョン 0.3.6 以上で利用可、バージョン 1.0 で更新。_
 
 hdata に新しいリストへのポインタを作成。
 
@@ -15692,8 +15692,8 @@ void whoreirc_hdata_new_list (struct t_hdata *hdata, const char *name, void *poi
 * _hdata_: hdata へのポインタ
 * _name_: 変数名
 * _pointer_: リストへのポインタ
-* _flags_: 以下の値の組み合わせ: _(WeeChat バージョン 1.0 以上)_
-** _WEECHAT_HDATA_LIST_CHECK_POINTERS_: ポインタをチェックする際に使うリスト
+* _flags_: 以下の値の組み合わせ: _(WhoreIRC バージョン 1.0 以上)_
+** _WHOREIRC_HDATA_LIST_CHECK_POINTERS_: ポインタをチェックする際に使うリスト
 
 C 言語での使用例:
 
@@ -15713,24 +15713,24 @@ struct t_myplugin_list
 /* ... */
 
 struct t_hdata *hdata = whoreirc_hdata_new ("myplugin_list", "prev", "next");
-whoreirc_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WEECHAT_HDATA_STRING, NULL, NULL);
-whoreirc_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WEECHAT_HDATA_POINTER, NULL, NULL);
-whoreirc_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WEECHAT_HDATA_INTEGER, NULL, NULL);
-whoreirc_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WEECHAT_HDATA_STRING, "tags_count", NULL);
-whoreirc_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WEECHAT_HDATA_STRING, "*", NULL);
-whoreirc_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WEECHAT_HDATA_POINTER, NULL, "myplugin_list");
-whoreirc_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WEECHAT_HDATA_POINTER, NULL, "myplugin_list");
+whoreirc_hdata_new_var (hdata, "name", offsetof (struct t_myplugin_list, name), WHOREIRC_HDATA_STRING, NULL, NULL);
+whoreirc_hdata_new_var (hdata, "buffer", offsetof (struct t_myplugin_list, buffer), WHOREIRC_HDATA_POINTER, NULL, NULL);
+whoreirc_hdata_new_var (hdata, "tags_count", offsetof (struct t_myplugin_list, tags_count), WHOREIRC_HDATA_INTEGER, NULL, NULL);
+whoreirc_hdata_new_var (hdata, "tags_array", offsetof (struct t_myplugin_list, tags_array), WHOREIRC_HDATA_STRING, "tags_count", NULL);
+whoreirc_hdata_new_var (hdata, "string_split", offsetof (struct t_myplugin_list, string_split), WHOREIRC_HDATA_STRING, "*", NULL);
+whoreirc_hdata_new_var (hdata, "prev", offsetof (struct t_myplugin_list, prev), WHOREIRC_HDATA_POINTER, NULL, "myplugin_list");
+whoreirc_hdata_new_var (hdata, "next", offsetof (struct t_myplugin_list, next), WHOREIRC_HDATA_POINTER, NULL, "myplugin_list");
 
-whoreirc_hdata_new_list (hdata, "buffers", &buffers, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+whoreirc_hdata_new_list (hdata, "buffers", &buffers, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
 whoreirc_hdata_new_list (hdata, "last_buffer", &last_buffer, 0);
 ----
 
-コードを短くするためにはマクロ "WEECHAT_HDATA_LIST" を使います。
+コードを短くするためにはマクロ "WHOREIRC_HDATA_LIST" を使います。
 
 [source,C]
 ----
-WEECHAT_HDATA_LIST(buffers, WEECHAT_HDATA_LIST_CHECK_POINTERS);
-WEECHAT_HDATA_LIST(last_buffer, 0);
+WHOREIRC_HDATA_LIST(buffers, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
+WHOREIRC_HDATA_LIST(last_buffer, 0);
 ----
 
 [NOTE]
@@ -15738,14 +15738,14 @@ WEECHAT_HDATA_LIST(last_buffer, 0);
 
 ==== hdata_get
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
-WeeChat およびプラグイン構造体に対する hdata を返す。
+WhoreIRC およびプラグイン構造体に対する hdata を返す。
 
 [NOTE]
 hdata はデータを含みません、hdata
 は構造体における変数の位置を含むただのハッシュテーブル。つまりデータを読み出すためには
-hdata と WeeChat およびプラグインへのポインタが必要です。
+hdata と WhoreIRC およびプラグインへのポインタが必要です。
 
 プロトタイプ:
 
@@ -15786,7 +15786,7 @@ hdata = whoreirc.hdata_get("irc_server")
 
 ==== hdata_get_var_offset
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata における変数のオフセットを返す。
 
@@ -15826,7 +15826,7 @@ offset = whoreirc.hdata_get_var_offset(hdata, "name")
 
 ==== hdata_get_var_type
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata 内の変数の型を (整数で) 返す。
 
@@ -15853,31 +15853,31 @@ C 言語での使用例:
 int type = whoreirc_hdata_get_var_type (hdata, "name");
 switch (type)
 {
-    case WEECHAT_HDATA_CHAR:
+    case WHOREIRC_HDATA_CHAR:
         /* ... */
         break;
-    case WEECHAT_HDATA_INTEGER:
+    case WHOREIRC_HDATA_INTEGER:
         /* ... */
         break;
-    case WEECHAT_HDATA_LONG:
+    case WHOREIRC_HDATA_LONG:
         /* ... */
         break;
-    case WEECHAT_HDATA_STRING:
+    case WHOREIRC_HDATA_STRING:
         /* ... */
         break;
-    case WEECHAT_HDATA_SHARED_STRING:
+    case WHOREIRC_HDATA_SHARED_STRING:
         /* ... */
         break;
-    case WEECHAT_HDATA_POINTER:
+    case WHOREIRC_HDATA_POINTER:
         /* ... */
         break;
-    case WEECHAT_HDATA_TIME:
+    case WHOREIRC_HDATA_TIME:
         /* ... */
         break;
-    case WEECHAT_HDATA_HASHTABLE:
+    case WHOREIRC_HDATA_HASHTABLE:
         /* ... */
         break;
-    case WEECHAT_HDATA_OTHER:
+    case WHOREIRC_HDATA_OTHER:
         /* ... */
         break;
     default:
@@ -15891,7 +15891,7 @@ switch (type)
 
 ==== hdata_get_var_type_string
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 変数の型を (文字列で) 返す。
 
@@ -15931,7 +15931,7 @@ whoreirc.prnt("", "type = %s" % whoreirc.hdata_get_var_type_string("name"))
 
 ==== hdata_get_var_array_size
 
-_WeeChat バージョン 0.3.9 以上で利用可。_
+_WhoreIRC バージョン 0.3.9 以上で利用可。_
 
 hdata に含まれる配列変数のサイズを返す。
 
@@ -15945,7 +15945,7 @@ int whoreirc_hdata_get_var_array_size (struct t_hdata *hdata, void *pointer, con
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名
 
 戻り値:
@@ -15972,7 +15972,7 @@ array_size = whoreirc.hdata_get_var_array_size(hdata, pointer, "name")
 
 ==== hdata_get_var_array_size_string
 
-_WeeChat バージョン 0.3.9 以上で利用可。_
+_WhoreIRC バージョン 0.3.9 以上で利用可。_
 
 hdata に含まれる配列変数のサイズを (文字列で) 返す。
 
@@ -15987,7 +15987,7 @@ const char *whoreirc_hdata_get_var_array_size_string (struct t_hdata *hdata, voi
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名
 
 戻り値:
@@ -16015,7 +16015,7 @@ array_size = whoreirc.hdata_get_var_array_size_string(hdata, pointer, "name")
 
 ==== hdata_get_var_hdata
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata に含まれる変数に対応する hdata を返す。
 
@@ -16055,7 +16055,7 @@ whoreirc.prnt("", "hdata = %s" % whoreirc.hdata_get_var_hdata(hdata, "name"))
 
 ==== hdata_get_var
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata に含まれる変数の内容へのポインタを返す。
 
@@ -16069,7 +16069,7 @@ void *whoreirc_hdata_get_var (struct t_hdata *hdata, void *pointer, const char *
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名
 
 戻り値:
@@ -16090,7 +16090,7 @@ void *pointer = whoreirc_hdata_get_var (hdata, buffer, "name");
 
 ==== hdata_get_var_at_offset
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 オフセットを使って hdata に含まれる変数を指定し、この内容へのポインタを返す。
 
@@ -16104,7 +16104,7 @@ void *whoreirc_hdata_get_var_at_offset (struct t_hdata *hdata, void *pointer, in
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名
 
 戻り値:
@@ -16126,7 +16126,7 @@ void *pointer = whoreirc_hdata_get_var_at_offset (hdata, buffer, offset);
 
 ==== hdata_get_list
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata からリストへのポインタを返す。
 
@@ -16168,7 +16168,7 @@ buffers = whoreirc.hdata_get_list(hdata, "gui_buffers")
 
 ==== hdata_check_pointer
 
-_WeeChat バージョン 0.3.7 以上で利用可、バージョン 1.0 で更新。_
+_WhoreIRC バージョン 0.3.7 以上で利用可、バージョン 1.0 で更新。_
 
 hdata とリストへのポインタを使ってポインタの妥当性を確認する。
 
@@ -16182,7 +16182,7 @@ int whoreirc_hdata_check_pointer (struct t_hdata *hdata, void *list, void *point
 引数:
 
 * _hdata_: hdata へのポインタ
-* _list_: リストポインタ; NULL の場合 _(WeeChat バージョン 1.0 以上)_、ポインタは
+* _list_: リストポインタ; NULL の場合 _(WhoreIRC バージョン 1.0 以上)_、ポインタは
    hdata に含まれる "check pointers" フラグを持つリストでチェックされます
   (<<_hdata_new_list,hdata_new_list>>
   を参照)、このフラグを持つリストがない場合、ポインタは妥当とされます。
@@ -16229,7 +16229,7 @@ else:
 
 ==== hdata_move
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 リスト内の他の要素にポインタを移動する。
 
@@ -16243,7 +16243,7 @@ void *whoreirc_hdata_move (struct t_hdata *hdata, void *pointer, int count);
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _count_: 移動を実行する回数
   (負および正の整数、ゼロは禁止)
 
@@ -16288,7 +16288,7 @@ if buffer:
 
 ==== hdata_search
 
-_WeeChat バージョン 0.4.1 以上で利用可。_
+_WhoreIRC バージョン 0.4.1 以上で利用可。_
 
 リストから要素を検索: リスト内の各要素に対して _search_
 の内容を評価し、マッチする要素が見つかるかリストの最後に到達するまでこれを続ける。
@@ -16303,10 +16303,10 @@ void *whoreirc_hdata_search (struct t_hdata *hdata, void *pointer, const char *s
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _search_: 評価する式、式中のデフォルトポインタは hdata の名前
   (デフォルトポインタはリストに含まれる各要素で置換されます); 式に関する詳細は
-  link:whoreirc_user.ja.html#command_whoreirc_eval[WeeChat ユーザーズガイド / WeeChat コマンド / eval] を参照してください
+  link:whoreirc_user.ja.html#command_whoreirc_eval[WhoreIRC ユーザーズガイド / WhoreIRC コマンド / eval] を参照してください
 * _move_: 検索に失敗した後に移動を実行する回数
   (負および正の整数、ゼロは禁止)
 
@@ -16348,7 +16348,7 @@ if server:
 
 ==== hdata_char
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 hdata を使って構造体に含まれる文字型変数の値を返す。
 
@@ -16362,7 +16362,7 @@ char whoreirc_hdata_char (struct t_hdata *hdata, void *pointer, const char *name
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「文字型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16390,7 +16390,7 @@ whoreirc.prnt("", "letter = %c" % whoreirc.hdata_char(hdata, pointer, "letter"))
 
 ==== hdata_integer
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata を使って構造体に含まれる整数型変数の値を返す。
 
@@ -16404,7 +16404,7 @@ int whoreirc_hdata_integer (struct t_hdata *hdata, void *pointer, const char *na
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「整数型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16436,7 +16436,7 @@ whoreirc.prnt("", "number = %d" % whoreirc.hdata_integer(hdata, buffer, "number"
 
 ==== hdata_long
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata を使って構造体に含まれる long 型変数の値を返す。
 
@@ -16450,7 +16450,7 @@ long whoreirc_hdata_long (struct t_hdata *hdata, void *pointer, const char *name
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「long 型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16478,7 +16478,7 @@ whoreirc.prnt("", "longvar = %ld" % whoreirc.hdata_long(hdata, pointer, "longvar
 
 ==== hdata_string
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata を使って構造体に含まれる文字列型変数の値を返す。
 
@@ -16492,7 +16492,7 @@ const char *whoreirc_hdata_string (struct t_hdata *hdata, void *pointer, const c
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「文字列型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16524,7 +16524,7 @@ whoreirc.prnt("", "name = %s" % whoreirc.hdata_string(hdata, buffer, "name"))
 
 ==== hdata_pointer
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata を使って構造体に含まれるポインタ型変数の値を返す。
 
@@ -16538,7 +16538,7 @@ void *whoreirc_hdata_pointer (struct t_hdata *hdata, void *pointer, const char *
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「ポインタ型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16570,7 +16570,7 @@ whoreirc.prnt("", "lines = %lx" % whoreirc.hdata_pointer(hdata, buffer, "lines")
 
 ==== hdata_time
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata を使って構造体に含まれる時刻型変数の値を返す。
 
@@ -16584,7 +16584,7 @@ time_t whoreirc_hdata_time (struct t_hdata *hdata, void *pointer, const char *na
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「時刻型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16638,7 +16638,7 @@ if ptr:
 
 ==== hdata_hashtable
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 hdata を使って構造体に含まれるハッシュテーブル型変数の値を返す。
 
@@ -16652,7 +16652,7 @@ struct t_hashtable *whoreirc_hdata_hashtable (struct t_hdata *hdata, void *point
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (必ず「ハッシュテーブル型」であること); 配列の場合、"N|name"
   のように名前を指定することが可能。ここで N は配列のインデックス (1 番目は 0)、例: "2|name"
 
@@ -16689,7 +16689,7 @@ for key in hash:
 
 ==== hdata_compare
 
-_WeeChat バージョン 1.9 以上で利用可。_
+_WhoreIRC バージョン 1.9 以上で利用可。_
 
 2 つのオブジェクトの hdata 変数を比較。
 
@@ -16703,8 +16703,8 @@ int whoreirc_hdata_compare (struct t_hdata *hdata, void *pointer1, void *pointer
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer1_: 1 番目の WeeChat およびプラグインオブジェクトへのポインタ
-* _pointer2_: 2 番目の WeeChat およびプラグインオブジェクトへのポインタ
+* _pointer1_: 1 番目の WhoreIRC およびプラグインオブジェクトへのポインタ
+* _pointer2_: 2 番目の WhoreIRC およびプラグインオブジェクトへのポインタ
 * _name_: 変数名; 配列の場合、変数名を "N|name" のように指定できます。ここで
   N は配列のインデックス番号です (番号は 0 から始まります)。例: "2|name"
 * _case_sensitive_: 大文字小文字を区別する場合 1、それ以外の場合 0
@@ -16742,7 +16742,7 @@ whoreirc.prnt("", "number comparison = %d" % whoreirc.hdata_compare(hdata, buffe
 
 ==== hdata_set
 
-_WeeChat バージョン 0.3.9 以上で利用可。_
+_WhoreIRC バージョン 0.3.9 以上で利用可。_
 
 hdata の変数に新しい値を設定。
 
@@ -16761,7 +16761,7 @@ int whoreirc_hdata_set (struct t_hdata *hdata, void *pointer, const char *name, 
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _name_: 変数名 (許可されている型: 文字型、整数型、long
   型、文字列型、ポインタ型、時刻型)
 * _value_: 変数の新しい値
@@ -16782,7 +16782,7 @@ whoreirc_hdata_set (hdata, pointer, "message", "test");
 
 ==== hdata_update
 
-_WeeChat バージョン 0.3.9 以上で利用可。_
+_WhoreIRC バージョン 0.3.9 以上で利用可。_
 
 hdata 内のデータを更新。
 
@@ -16796,12 +16796,12 @@ int whoreirc_hdata_update (struct t_hdata *hdata, void *pointer, struct t_hashta
 引数:
 
 * _hdata_: hdata へのポインタ
-* _pointer_: WeeChat および plugin オブジェクトへのポインタ
+* _pointer_: WhoreIRC および plugin オブジェクトへのポインタ
 * _hashtable_: 更新する変数:
   キーは変数の名前、値は変数の新しい値
   (キーと値は文字列)、以下の特別なキーを使うことができます:
 ** キー `__create_allowed` (値は任意): 構造体の作製を許可する場合は
-   1、許可しない場合は 0 を返す _(WeeChat バージョン 0.4.0 以上で利用可)_
+   1、許可しない場合は 0 を返す _(WhoreIRC バージョン 0.4.0 以上で利用可)_
 ** キー `__delete_allowed` (値は任意): 構造体の削除を許可する場合は
    1、許可しない場合は 0 を返す
 ** キー `__update_allowed`、値は変数の名前: この変数の更新を許可する場合は
@@ -16834,8 +16834,8 @@ if (own_lines)
         line_data = whoreirc_hdata_pointer (weechat_hdata_get ("line"), line, "data");
         hdata = weechat_hdata_get ("line_data");
         hashtable = weechat_hashtable_new (8,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL,
                                            NULL);
         if (hashtable)
@@ -16868,7 +16868,7 @@ if own_lines:
 
 ==== hdata_get_string
 
-_WeeChat バージョン 0.3.6 以上で利用可。_
+_WhoreIRC バージョン 0.3.6 以上で利用可。_
 
 hdata プロパティの文字列値を返す。
 
@@ -16927,11 +16927,11 @@ weechat.prnt("", "lists in hdata: %s" % weechat.hdata_get_string(hdata, "list_ke
 [[upgrade]]
 === アップグレード
 
-WeeChat をアップグレードする (コマンド "/upgrade") 関数。
+WhoreIRC をアップグレードする (コマンド "/upgrade") 関数。
 
 ==== upgrade_new
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 アップグレード用のファイルを作成またはロード。
 
@@ -16951,7 +16951,7 @@ struct t_upgrade_file *upgrade_file_new (const char *filename,
 
 引数:
 
-* _filename_: ファイルの名前 (WeeChat
+* _filename_: ファイルの名前 (WhoreIRC
   はこの名前に拡張子 ".upgrade" を追加します)
 * _callback_read_: アップグレードファイル内の各オブジェクトを読み込む際に呼び出すコールバック関数
   引数と戻り値:
@@ -16961,11 +16961,11 @@ struct t_upgrade_file *upgrade_file_new (const char *filename,
 ** _int object_id_: オブジェクトの識別番号
 ** _struct t_infolist *infolist_: オブジェクトの内容を含むインフォリスト
 ** 戻り値:
-*** _WEECHAT_RC_OK_
-*** _WEECHAT_RC_ERROR_
-* _callback_read_pointer_: WeeChat が _callback_read_
+*** _WHOREIRC_RC_OK_
+*** _WHOREIRC_RC_ERROR_
+* _callback_read_pointer_: WhoreIRC が _callback_read_
   コールバックを呼び出す際にコールバックに渡すポインタ
-* _callback_read_data_: WeeChat が _callback_read_ コールバックを呼び出す際にコールバックに渡すポインタ;
+* _callback_read_data_: WhoreIRC が _callback_read_ コールバックを呼び出す際にコールバックに渡すポインタ;
   このポインタが NULL でない場合、このポインタは malloc (または類似の関数)
   によって割り当てられたものでなければいけません。さらに、このポインタはアップグレードファイルが閉じられた時点で自動的に開放されます
 
@@ -17042,7 +17042,7 @@ weechat.upgrade_write_object(upgrade_file, 1, infolist)
 
 ==== upgrade_read
 
-_WeeChat バージョン 1.5 で更新。_
+_WhoreIRC バージョン 1.5 で更新。_
 
 アップグレードファイルを読み込む。
 

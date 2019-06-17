@@ -1,4 +1,4 @@
-= Guide de démarrage rapide WeeChat
+= Guide de démarrage rapide WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: fr
@@ -9,7 +9,7 @@
 
 
 [[start]]
-== Démarrer WeeChat
+== Démarrer WhoreIRC
 
 Un émulateur de terminal recommandé pour X (mais pas obligatoire) est
 rxvt-unicode : il a un bon support UTF-8, et aucun problème avec les
@@ -24,7 +24,7 @@ $ weechat
 [[help]]
 == Aide en ligne
 
-WeeChat dispose d'aide pour toutes les commandes, tapez simplement :
+WhoreIRC dispose d'aide pour toutes les commandes, tapez simplement :
 
 ----
 /help
@@ -56,15 +56,15 @@ Pour modifier des options, tapez :
 /set config.section.option valeur
 ----
 
-WeeChat utilise immédiatement la nouvelle valeur (vous n'avez *jamais*
-besoin de redémarrer WeeChat après avoir changé la configuration).
+WhoreIRC utilise immédiatement la nouvelle valeur (vous n'avez *jamais*
+besoin de redémarrer WhoreIRC après avoir changé la configuration).
 
-Toutes les options sont sauvées quand WeeChat quitte (ou avec la commande
+Toutes les options sont sauvées quand WhoreIRC quitte (ou avec la commande
 `/save` pour forcer une écriture des options).
 
 [IMPORTANT]
 Il n'est *pas recommandé* de modifier les fichiers de configuration à la main
-car WeeChat peut les écrire à tout moment (par exemple sur `/quit`) et après
+car WhoreIRC peut les écrire à tout moment (par exemple sur `/quit`) et après
 chaque changement vous devez lancer la commande `/reload` (avec le risque de
 perdre d'autres changements qui n'auraient pas été sauvés avec `/save`). +
 Vous pouvez utiliser la commande `/set`, qui vérifie la valeur et applique
@@ -73,7 +73,7 @@ les changements immédiatement.
 L'extension _fset_ vous permet de parcourir les options facilement et de les
 modifier.
 
-Par exemple pour afficher les options WeeChat :
+Par exemple pour afficher les options WhoreIRC :
 
 ----
 /fset weechat.*
@@ -95,7 +95,7 @@ Pour plus d'informations sur la commande `/fset` et les touches, voir `/help fse
 [[core_vs_plugins]]
 == Cœur vs extensions
 
-Le cœur de WeeChat ("core") ne fait qu'afficher les données à l'écran et
+Le cœur de WhoreIRC ("core") ne fait qu'afficher les données à l'écran et
 interagir avec l'utilisateur, cela signifie que le cœur sans extension
 n'a pas grand intérêt (utilisateurs fidèles : IRC faisait partie du cœur
 dans les versions ≤ 0.2.6).
@@ -115,7 +115,7 @@ Vous pouvez ajouter un serveur IRC avec la commande `/server`, par exemple :
 ----
 
 Dans cette commande, `freenode` est le nom interne du serveur utilisé par
-WeeChat : vous pourrez vous connecter avec `/connect freenode` et les options
+WhoreIRC : vous pourrez vous connecter avec `/connect freenode` et les options
 du serveur sont _irc.server.freenode.xxx_.
 
 Comme d'habitude, de l'aide est disponible si vous êtes perdus :
@@ -127,12 +127,12 @@ Comme d'habitude, de l'aide est disponible si vous êtes perdus :
 [[irc_server_options]]
 == Définir les options du serveur IRC
 
-WeeChat utilise des valeurs par défaut pour tous les serveurs, si vous ne
+WhoreIRC utilise des valeurs par défaut pour tous les serveurs, si vous ne
 spécifiez pas de valeur spécifique pour une option de serveur.
 Ces options par défaut sont "irc.server_default.*".
 
-Pour chaque option d'un serveur, WeeChat utilise sa valeur si elle est
-définie (non "null"). Sinon WeeChat utilise la valeur par défaut
+Pour chaque option d'un serveur, WhoreIRC utilise sa valeur si elle est
+définie (non "null"). Sinon WhoreIRC utilise la valeur par défaut
 ("irc.server_default.xxx").
 
 Par exemple il y a des pseudos par défaut (basés sur votre login un*x), et
@@ -242,7 +242,7 @@ Cette commande peut aussi être utilisée pour créer et se connecter au serveur
 sans utiliser la commande `/server` (voir `/help connect`).
 
 Par défaut, les tampons des serveurs sont mélangés avec le tampon _core_
-WeeChat. Pour basculer entre le tampon _core_ et les tampons des serveurs, il
+WhoreIRC. Pour basculer entre le tampon _core_ et les tampons des serveurs, il
 faut utiliser la touche kbd:[Ctrl+x].
 
 Il est possible de désactiver le mélange des tampons serveurs pour avoir un
@@ -331,7 +331,7 @@ Pour supprimer le découpage :
 [[key_bindings]]
 == Raccourcis clavier
 
-WeeChat utilise un certain nombre de touches par défaut. Toutes ces
+WhoreIRC utilise un certain nombre de touches par défaut. Toutes ces
 touches sont dans la documentation, mais vous devriez connaître au moins
 les touches vitales :
 
@@ -372,10 +372,10 @@ Pour enlever la touche :
 Sur certaines distributions comme Debian, les extensions sont disponibles
 via un paquet séparé (par exemple weechat-plugins).
 Les extensions sont automatiquement chargées lorsqu'elles sont trouvées
-(merci de regarder la documentation WeeChat pour charger/décharger des
+(merci de regarder la documentation WhoreIRC pour charger/décharger des
 extensions ou des scripts).
 
-De nombreux scripts externes (de contributeurs) sont disponibles pour WeeChat,
+De nombreux scripts externes (de contributeurs) sont disponibles pour WhoreIRC,
 vous pouvez télécharger et installer les scripts avec la commande `/script`,
 par exemple :
 
@@ -391,7 +391,7 @@ https://weechat.org/scripts
 [[more_doc]]
 == Plus de documentation
 
-Vous pouvez maintenant utiliser WeeChat et lire la FAQ/documentation pour
+Vous pouvez maintenant utiliser WhoreIRC et lire la FAQ/documentation pour
 toute autre question : https://weechat.org/doc
 
-Bon WeeChat !
+Bon WhoreIRC !

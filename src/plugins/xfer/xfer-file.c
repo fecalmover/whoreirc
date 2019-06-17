@@ -129,7 +129,7 @@ xfer_file_find_filename (struct t_xfer *xfer)
         if (!xfer_config_file_auto_rename)
         {
             xfer_close (xfer, XFER_STATUS_FAILED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             return;
         }
 
@@ -138,7 +138,7 @@ xfer_file_find_filename (struct t_xfer *xfer)
         if (!filename2)
         {
             xfer_close (xfer, XFER_STATUS_FAILED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             return;
         }
         xfer->filename_suffix = 0;

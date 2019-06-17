@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2013-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -57,10 +57,10 @@ secure_config_get_passphrase_from_user (const char *error)
     char passphrase[SECURE_PASSPHRASE_MAX_LENGTH + 1];
 
     prompt[0] = _("Please enter your passphrase to decrypt the data secured "
-                  "by WeeChat:");
+                  "by WhoreIRC:");
     prompt[1] = _("(enter just one space to skip the passphrase, but this "
                   "will DISABLE all secured data!)");
-    prompt[2] = _("(press ctrl-C to exit WeeChat now)");
+    prompt[2] = _("(press ctrl-C to exit WhoreIRC now)");
     prompt[3] = error;
     prompt[4] = NULL;
 
@@ -178,9 +178,9 @@ secure_config_check_crypt_passphrase_file (const void *pointer, void *data,
  * Reloads secured data configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -198,7 +198,7 @@ secure_config_reload_cb (const void *pointer, void *data,
                            "because there is still encrypted data (use /secure "
                            "decrypt, see /help secure)"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR]);
-        return WEECHAT_CONFIG_READ_FILE_NOT_FOUND;
+        return WHOREIRC_CONFIG_READ_FILE_NOT_FOUND;
     }
 
     secure_data_encrypted = 0;
@@ -230,7 +230,7 @@ secure_config_data_read_cb (const void *pointer, void *data,
 
     if (!option_name || !value || !value[0])
     {
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
     }
 
     /* special line indicating if a passphrase must be used to decrypt data */
@@ -248,14 +248,14 @@ secure_config_data_read_cb (const void *pointer, void *data,
             if (!secure_passphrase)
                 secure_config_get_passphrase_from_user ("");
         }
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
     }
 
     if (!secure_data_encrypted)
     {
         /* clear data: just store value in hashtable */
         hashtable_set (secure_hashtable_data, option_name, value);
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
     }
 
     /* check that passphrase is set */
@@ -266,13 +266,13 @@ secure_config_data_read_cb (const void *pointer, void *data,
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          option_name);
         hashtable_set (secure_hashtable_data_encrypted, option_name, value);
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
     }
 
     /* decrypt data */
     buffer = malloc (strlen (value) + 1);
     if (!buffer)
-        return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
     length_buffer = string_base16_decode (value, buffer);
     while (1)
@@ -329,7 +329,7 @@ secure_config_data_read_cb (const void *pointer, void *data,
     }
     free (buffer);
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*
@@ -431,7 +431,7 @@ secure_config_data_write_cb (const void *pointer, void *data,
 
     /* write name of section */
     if (!config_file_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     if (secure_hashtable_data->items_count > 0)
     {
@@ -443,7 +443,7 @@ secure_config_data_write_cb (const void *pointer, void *data,
                                      SECURE_DATA_PASSPHRASE_FLAG,
                                      (secure_passphrase) ? "on" : "off"))
         {
-            return WEECHAT_CONFIG_WRITE_ERROR;
+            return WHOREIRC_CONFIG_WRITE_ERROR;
         }
         /* encrypt and write secured data */
         hashtable_map (secure_hashtable_data,
@@ -459,13 +459,13 @@ secure_config_data_write_cb (const void *pointer, void *data,
         if (!config_file_write_line (config_file,
                                      SECURE_DATA_PASSPHRASE_FLAG, "on"))
         {
-            return WEECHAT_CONFIG_WRITE_ERROR;
+            return WHOREIRC_CONFIG_WRITE_ERROR;
         }
         hashtable_map (secure_hashtable_data_encrypted,
                        &secure_config_data_write_map_encrypted_cb, config_file);
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
@@ -520,10 +520,10 @@ secure_config_init_options ()
         N_("path to a file containing the passphrase to encrypt/decrypt secured "
            "data; this option is used only when reading file sec.conf; only "
            "first line of file is used; this file is used only if the "
-           "environment variable \"WEECHAT_PASSPHRASE\" is not set (the "
+           "environment variable \"WHOREIRC_PASSPHRASE\" is not set (the "
            "environment variable has higher priority); security note: it is "
            "recommended to keep this file readable only by you and store it "
-           "outside WeeChat home (for example in your home); example: "
+           "outside WhoreIRC home (for example in your home); example: "
            "\"~/.weechat-passphrase\""),
         NULL, 0, 0, "", NULL, 0,
         &secure_config_check_crypt_passphrase_file, NULL, NULL,
@@ -563,9 +563,9 @@ secure_config_init_options ()
  * Reads secured data configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_READ_OK: OK
- *   WEECHAT_CONFIG_READ_MEMORY_ERROR: not enough memory
- *   WEECHAT_CONFIG_READ_FILE_NOT_FOUND: file not found
+ *   WHOREIRC_CONFIG_READ_OK: OK
+ *   WHOREIRC_CONFIG_READ_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_READ_FILE_NOT_FOUND: file not found
  */
 
 int
@@ -584,9 +584,9 @@ secure_config_read ()
  * Writes secured data configuration file.
  *
  * Returns:
- *   WEECHAT_CONFIG_WRITE_OK: OK
- *   WEECHAT_CONFIG_WRITE_ERROR: error
- *   WEECHAT_CONFIG_WRITE_MEMORY_ERROR: not enough memory
+ *   WHOREIRC_CONFIG_WRITE_OK: OK
+ *   WHOREIRC_CONFIG_WRITE_ERROR: error
+ *   WHOREIRC_CONFIG_WRITE_MEMORY_ERROR: not enough memory
  */
 
 int

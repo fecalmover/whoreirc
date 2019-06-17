@@ -268,7 +268,7 @@ hook_process_child (struct t_hook *hook_process)
             (hook_process->callback_pointer,
              hook_process->callback_data,
              HOOK_PROCESS(hook_process, command),
-             WEECHAT_HOOK_PROCESS_CHILD,
+             WHOREIRC_HOOK_PROCESS_CHILD,
              NULL, NULL);
     }
     else
@@ -397,7 +397,7 @@ hook_process_add_to_buffer (struct t_hook *hook_process, int index_buffer,
                             const char *buffer, int size)
 {
     if (HOOK_PROCESS(hook_process, buffer_size[index_buffer]) + size > HOOK_PROCESS_BUFFER_SIZE)
-        hook_process_send_buffers (hook_process, WEECHAT_HOOK_PROCESS_RUNNING);
+        hook_process_send_buffers (hook_process, WHOREIRC_HOOK_PROCESS_RUNNING);
 
     memcpy (HOOK_PROCESS(hook_process, buffer[index_buffer]) +
             HOOK_PROCESS(hook_process, buffer_size[index_buffer]),
@@ -428,7 +428,7 @@ hook_process_child_read (struct t_hook *hook_process, int fd,
             HOOK_PROCESS(hook_process, buffer_flush))
         {
             hook_process_send_buffers (hook_process,
-                                       WEECHAT_HOOK_PROCESS_RUNNING);
+                                       WHOREIRC_HOOK_PROCESS_RUNNING);
         }
     }
     else if (num_read == 0)
@@ -454,7 +454,7 @@ hook_process_child_read_stdout_cb (const void *pointer, void *data, int fd)
 
     hook_process_child_read (hook_process, fd, HOOK_PROCESS_STDOUT,
                              &(HOOK_PROCESS(hook_process, hook_fd[HOOK_PROCESS_STDOUT])));
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -473,7 +473,7 @@ hook_process_child_read_stderr_cb (const void *pointer, void *data, int fd)
 
     hook_process_child_read (hook_process, fd, HOOK_PROCESS_STDERR,
                              &(HOOK_PROCESS(hook_process, hook_fd[HOOK_PROCESS_STDERR])));
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -569,11 +569,11 @@ hook_process_timer_cb (const void *pointer, void *data, int remaining_calls)
     hook_process = (struct t_hook *)pointer;
 
     if (hook_process->deleted)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (remaining_calls == 0)
     {
-        hook_process_send_buffers (hook_process, WEECHAT_HOOK_PROCESS_ERROR);
+        hook_process_send_buffers (hook_process, WHOREIRC_HOOK_PROCESS_ERROR);
         if (weechat_debug_core >= 1)
         {
             gui_chat_printf (NULL,
@@ -603,13 +603,13 @@ hook_process_timer_cb (const void *pointer, void *data, int remaining_calls)
                 /* child terminated by a signal */
                 hook_process_child_read_until_eof (hook_process);
                 hook_process_send_buffers (hook_process,
-                                           WEECHAT_HOOK_PROCESS_ERROR);
+                                           WHOREIRC_HOOK_PROCESS_ERROR);
                 unhook (hook_process);
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -667,7 +667,7 @@ hook_process_run (struct t_hook *hook_process)
                 (hook_process->callback_pointer,
                  hook_process->callback_data,
                  HOOK_PROCESS(hook_process, command),
-                 WEECHAT_HOOK_PROCESS_ERROR,
+                 WHOREIRC_HOOK_PROCESS_ERROR,
                  NULL, str_error);
             unhook (hook_process);
             return;
@@ -756,7 +756,7 @@ error:
         (hook_process->callback_pointer,
          hook_process->callback_data,
          HOOK_PROCESS(hook_process, command),
-         WEECHAT_HOOK_PROCESS_ERROR,
+         WHOREIRC_HOOK_PROCESS_ERROR,
          NULL, NULL);
     unhook (hook_process);
 }

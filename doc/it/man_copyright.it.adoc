@@ -1,10 +1,10 @@
 // TRANSLATION MISSING
-WeeChat is written by Sébastien Helleu and contributors (complete list is in
+WhoreIRC is written by Sébastien Helleu and contributors (complete list is in
 the AUTHORS.adoc file).
 
 Copyright (C) 2003-2019 {author}
 
-WeeChat is free software; you can redistribute it and/or modify
+WhoreIRC is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 3 of the License, or
 (at your option) any later version.

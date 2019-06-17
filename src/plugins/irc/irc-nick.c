@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -95,7 +95,7 @@ irc_nick_is_nick (const char *string)
 /*
  * Finds a color code for a nick (according to nick letters).
  *
- * Returns a WeeChat color code (that can be used for display).
+ * Returns a WhoreIRC color code (that can be used for display).
  */
 
 char *
@@ -889,7 +889,7 @@ irc_nick_as_prefix (struct t_irc_server *server, struct t_irc_nick *nick,
 }
 
 /*
- * Returns WeeChat color code for a nick.
+ * Returns WhoreIRC color code for a nick.
  */
 
 const char *
@@ -1025,16 +1025,16 @@ irc_nick_hdata_nick_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_nick, name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, host, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, prefixes, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, prefix, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, away, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, account, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, realname, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, color, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, prev_nick, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_nick, next_nick, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, host, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, prefixes, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, prefix, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, away, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, account, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, realname, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, color, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, prev_nick, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_nick, next_nick, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -1081,7 +1081,7 @@ irc_nick_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints nick infos in WeeChat log file (usually for crash dump).
+ * Prints nick infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

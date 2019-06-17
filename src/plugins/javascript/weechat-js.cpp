@@ -34,12 +34,12 @@ extern "C"
 #include "weechat-js-api.h"
 #include "weechat-js-v8.h"
 
-WEECHAT_PLUGIN_NAME(JS_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION("Support of javascript scripts");
-WEECHAT_PLUGIN_AUTHOR("Koka El Kiwi <kokakiwi@kokakiwi.net>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(JS_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION("Support of javascript scripts");
+WHOREIRC_PLUGIN_AUTHOR("Koka El Kiwi <kokakiwi@kokakiwi.net>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_js_plugin = NULL;
 
@@ -152,11 +152,11 @@ weechat_js_object_to_hashtable (v8::Handle<v8::Object> obj,
         value = obj->Get(key);
         v8::String::Utf8Value str_key(key);
         v8::String::Utf8Value str_value(value);
-        if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+        if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
         {
             weechat_hashtable_set (hashtable, *str_key, *str_value);
         }
-        else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+        else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
         {
             weechat_hashtable_set (hashtable, *str_key,
                                    plugin_script_str2ptr (weechat_js_plugin,
@@ -225,12 +225,12 @@ weechat_js_exec (struct t_plugin_script *script,
 
     if (!ret_js.IsEmpty())
     {
-        if ((ret_type == WEECHAT_SCRIPT_EXEC_STRING) && (ret_js->IsString()))
+        if ((ret_type == WHOREIRC_SCRIPT_EXEC_STRING) && (ret_js->IsString()))
         {
             v8::String::Utf8Value temp_str(ret_js);
             ret_value = (*temp_str) ? strdup(*temp_str) : NULL;
         }
-        else if ((ret_type == WEECHAT_SCRIPT_EXEC_POINTER) && (ret_js->IsString()))
+        else if ((ret_type == WHOREIRC_SCRIPT_EXEC_POINTER) && (ret_js->IsString()))
         {
             v8::String::Utf8Value temp_str(ret_js);
             if (*temp_str)
@@ -244,25 +244,25 @@ weechat_js_exec (struct t_plugin_script *script,
                 ret_value = NULL;
             }
         }
-        else if ((ret_type == WEECHAT_SCRIPT_EXEC_INT) && (ret_js->IsInt32()))
+        else if ((ret_type == WHOREIRC_SCRIPT_EXEC_INT) && (ret_js->IsInt32()))
         {
             ret_int = (int *)malloc (sizeof (*ret_int));
             if (ret_int)
                 *ret_int = (int)(ret_js->IntegerValue());
             ret_value = ret_int;
         }
-        else if ((ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+        else if ((ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
                  && (ret_js->IsObject()))
         {
             ret_value = (struct t_hashtable *)weechat_js_object_to_hashtable (
                 ret_js->ToObject(),
-                WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                WEECHAT_HASHTABLE_STRING,
-                WEECHAT_HASHTABLE_STRING);
+                WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                WHOREIRC_HASHTABLE_STRING,
+                WHOREIRC_HASHTABLE_STRING);
         }
         else
         {
-            if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+            if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
             {
                 weechat_printf (NULL,
                                 weechat_gettext ("%s%s: function \"%s\" must "
@@ -273,7 +273,7 @@ weechat_js_exec (struct t_plugin_script *script,
         }
     }
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -404,7 +404,7 @@ weechat_js_load (const char *filename, const char *code)
                                         &weechat_js_api_buffer_close_cb);
 
     weechat_hook_signal_send ("javascript_script_loaded",
-                              WEECHAT_HOOK_SIGNAL_STRING,
+                              WHOREIRC_HOOK_SIGNAL_STRING,
                               js_current_script->filename);
 
     return js_current_script;
@@ -443,7 +443,7 @@ weechat_js_unload (struct t_plugin_script *script)
 
     if (script->shutdown_func && script->shutdown_func[0])
     {
-        rc = (int *)weechat_js_exec (script, WEECHAT_SCRIPT_EXEC_INT,
+        rc = (int *)weechat_js_exec (script, WHOREIRC_SCRIPT_EXEC_INT,
                                      script->shutdown_func, NULL, NULL);
         if (rc)
             free (rc);
@@ -465,7 +465,7 @@ weechat_js_unload (struct t_plugin_script *script)
         delete((WeechatJsV8 *)interpreter);
 
     (void) weechat_hook_signal_send ("javascript_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -618,7 +618,7 @@ weechat_js_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_js_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -680,7 +680,7 @@ weechat_js_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -688,7 +688,7 @@ weechat_js_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -699,7 +699,7 @@ weechat_js_command_cb (const void *pointer, void *data,
             }
             if (!weechat_js_eval (buffer, send_to_buffer_as_input,
                                   exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             /* TODO: implement /javascript eval */
             weechat_printf (NULL,
                             _("%sCommand \"/%s eval\" is not yet implemented"),
@@ -707,10 +707,10 @@ weechat_js_command_cb (const void *pointer, void *data,
                             weechat_js_plugin->name);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -731,7 +731,7 @@ weechat_js_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_js_plugin, completion, js_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -818,7 +818,7 @@ weechat_js_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_js_plugin, js_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -860,7 +860,7 @@ weechat_js_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -878,7 +878,7 @@ weechat_js_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "javascript_script_install") == 0)
         {
@@ -906,7 +906,7 @@ weechat_js_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -949,7 +949,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
 
     plugin_script_display_short_list (weechat_js_plugin, js_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -977,5 +977,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (js_action_autoload_list);
     /* weechat_string_dyn_free (js_buffer_output, 1); */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

@@ -1,31 +1,31 @@
 /*
  * Copyright (C) 2011-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_HDATA_H
-#define WEECHAT_HDATA_H
+#ifndef WHOREIRC_HDATA_H
+#define WHOREIRC_HDATA_H
 
 #include <time.h>
 
 #define HDATA_VAR(__struct, __name, __type, __update_allowed,           \
                   __array_size, __hdata_name)                           \
     hdata_new_var (hdata, #__name, offsetof (__struct, __name),         \
-                   WEECHAT_HDATA_##__type, __update_allowed,            \
+                   WHOREIRC_HDATA_##__type, __update_allowed,            \
                    __array_size, __hdata_name)
 #define HDATA_LIST(__name, __flags)                                     \
     hdata_new_list (hdata, #__name, &(__name), __flags);
@@ -49,7 +49,7 @@ struct t_hdata
 {
     char *name;                        /* name of hdata                     */
     struct t_weechat_plugin *plugin;   /* plugin which created this hdata   */
-                                       /* (NULL if created by WeeChat)      */
+                                       /* (NULL if created by WhoreIRC)      */
     char *var_prev;                    /* name of var with pointer to       */
                                        /* previous element in list          */
     char *var_next;                    /* name of var with pointer to       */
@@ -141,4 +141,4 @@ extern void hdata_print_log ();
 extern void hdata_init ();
 extern void hdata_end ();
 
-#endif /* WEECHAT_HDATA_H */
+#endif /* WHOREIRC_HDATA_H */

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -334,8 +334,8 @@ gui_bar_check_conditions (struct t_gui_bar *bar,
     else if (conditions[0])
     {
         pointers = hashtable_new (32,
-                                  WEECHAT_HASHTABLE_STRING,
-                                  WEECHAT_HASHTABLE_POINTER,
+                                  WHOREIRC_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_POINTER,
                                   NULL, NULL);
         if (pointers)
         {
@@ -344,8 +344,8 @@ gui_bar_check_conditions (struct t_gui_bar *bar,
                 hashtable_set (pointers, "buffer", window->buffer);
         }
         extra_vars = hashtable_new (32,
-                                    WEECHAT_HASHTABLE_STRING,
-                                    WEECHAT_HASHTABLE_STRING,
+                                    WHOREIRC_HASHTABLE_STRING,
+                                    WHOREIRC_HASHTABLE_STRING,
                                     NULL, NULL);
         if (extra_vars)
         {
@@ -357,8 +357,8 @@ gui_bar_check_conditions (struct t_gui_bar *bar,
                            (window && window->buffer && window->buffer->nicklist) ? "1" : "0");
         }
         options = hashtable_new (32,
-                                 WEECHAT_HASHTABLE_STRING,
-                                 WEECHAT_HASHTABLE_STRING,
+                                 WHOREIRC_HASHTABLE_STRING,
+                                 WHOREIRC_HASHTABLE_STRING,
                                  NULL, NULL);
         if (options)
             hashtable_set (options, "type", "condition");
@@ -705,9 +705,9 @@ gui_bar_set_items_array (struct t_gui_bar *bar, const char *items)
     if (items && items[0])
     {
         tmp_array = string_split (items, ",", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &count);
         if (count > 0)
         {
@@ -724,9 +724,9 @@ gui_bar_set_items_array (struct t_gui_bar *bar, const char *items)
                     tmp_array[i],
                     "+",
                     NULL,
-                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                     0,
                     &(bar->items_subcount[i]));
                 if (bar->items_subcount[i] > 0)
@@ -2264,7 +2264,7 @@ gui_bar_hdata_bar_cb (const void *pointer, void *data, const char *hdata_name)
         HDATA_VAR(struct t_gui_bar, bar_refresh_needed, INTEGER, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_bar, prev_bar, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_bar, next_bar, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_bars, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_bars, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_bar, 0);
     }
     return hdata;
@@ -2358,7 +2358,7 @@ gui_bar_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints bar infos in WeeChat log file (usually for crash dump).
+ * Prints bar infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

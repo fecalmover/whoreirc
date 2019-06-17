@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -96,7 +96,7 @@ plugin_config_set_internal (const char *option, const char *value)
             option, "string", NULL,
             NULL, 0, 0, "", value, 0,
             NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-        rc = (ptr_option) ? WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+        rc = (ptr_option) ? WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
     }
 
     return rc;
@@ -113,7 +113,7 @@ plugin_config_set (const char *plugin_name, const char *option_name,
     int length, rc;
     char *option_full_name;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     length = strlen (plugin_name) + 1 + strlen (option_name) + 1;
     option_full_name = malloc (length);
@@ -261,7 +261,7 @@ plugin_config_create_option (const void *pointer, void *data,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
     return (ptr_option) ?
-        WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+        WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 /*
@@ -303,7 +303,7 @@ plugin_config_create_desc (const void *pointer, void *data,
         NULL, NULL, NULL);
 
     return (ptr_option) ?
-        WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+        WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
 }
 
 /*
@@ -337,7 +337,7 @@ plugin_config_delete_desc (const void *pointer, void *data,
 
     config_file_option_free (option, 1);
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*

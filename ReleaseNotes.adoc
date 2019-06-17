@@ -1,4 +1,4 @@
-= WeeChat Release Notes
+= WhoreIRC Release Notes
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en
@@ -38,7 +38,7 @@ Consequently, the following things have been renamed as well:
 * info _aspell_dict_ renamed to _spell_dict_
 
 If you are upgrading from a previous release, you can copy the config file
-before doing `/upgrade`, in WeeChat:
+before doing `/upgrade`, in WhoreIRC:
 
 ----
 /save aspell
@@ -46,7 +46,7 @@ before doing `/upgrade`, in WeeChat:
 /upgrade
 ----
 
-If you already upgraded WeeChat:
+If you already upgraded WhoreIRC:
 
 ----
 /exec -sh cp ~/.whoreirc/aspell.conf ~/.whoreirc/spell.conf
@@ -197,7 +197,7 @@ in the IRC signals).
 See issue #787 for more information.
 
 [NOTE]
-It is recommended for plugins and scripts to use the WeeChat IRC parser:
+It is recommended for plugins and scripts to use the WhoreIRC IRC parser:
 see the function "info_get_hashtable" in the Plugin API reference.
 
 Now the whole IRC message is received by the signal callback, for example:
@@ -316,7 +316,7 @@ The package _whoreirc-plugins_ has been split into 9 packages:
 
 If you are using the packages from whoreirc.org, you will have to install
 manually the scripting packages (according to the languages you'll use
-in WeeChat), for example Python/Perl only:
+in WhoreIRC), for example Python/Perl only:
 
 ----
 sudo apt-get install whoreirc-python whoreirc-perl
@@ -609,13 +609,13 @@ UTF-8, like ISO charset), you should turn on a new option:
 /set irc.network.channel_encode on
 ----
 
-This will force WeeChat to decode/encode the channel name
-(like WeeChat 1.2 or older did).
+This will force WhoreIRC to decode/encode the channel name
+(like WhoreIRC 1.2 or older did).
 
 See these issues for more information: issue #482, issue #218.
 
 [NOTE]
-It is *highly recommended* to use only UTF-8 in WeeChat (wherever you can),
+It is *highly recommended* to use only UTF-8 in WhoreIRC (wherever you can),
 because everything is stored as UTF-8 internally.
 
 [[v1.3_alias_command]]
@@ -718,17 +718,17 @@ You can restore the default "beep" trigger with the following command:
 The API function _whoreirc_command_ now sends the value returned return by
 command callback.
 
-WeeChat does not display any more an error when a command returns
-_WEECHAT_RC_ERROR_. Consequently, all plugins/scripts should display an
-explicit error message before returning _WEECHAT_RC_ERROR_.
+WhoreIRC does not display any more an error when a command returns
+_WHOREIRC_RC_ERROR_. Consequently, all plugins/scripts should display an
+explicit error message before returning _WHOREIRC_RC_ERROR_.
 
 For C plugins, two macros have been added in whoreirc-plugin.h:
-_WEECHAT_COMMAND_MIN_ARGS_ and _WEECHAT_COMMAND_ERROR_.
+_WHOREIRC_COMMAND_MIN_ARGS_ and _WHOREIRC_COMMAND_ERROR_.
 
 [[v1.1_inline_commands_completion]]
 === Completion of inline commands
 
-WeeChat now completes by default inline commands (not only at beginning of
+WhoreIRC now completes by default inline commands (not only at beginning of
 line).
 
 When this feature is enabled, there is no more automatic completion of
@@ -867,7 +867,7 @@ Default triggers have same features as default rmodifiers (to hide passwords
 in commands and output).
 
 If you added some custom rmodifiers, you must create similar triggers, see
-`/help trigger` and the complete trigger doc in the _WeeChat User's guide_.
+`/help trigger` and the complete trigger doc in the _WhoreIRC User's guide_.
 
 [NOTE]
 If on startup you have an error about API mismatch in plugin _rmodifier.so_,
@@ -881,7 +881,7 @@ A bare display mode has been added (for easy text selection and click on URLs),
 the new default key is kbd:[Alt+l] (`L`).
 
 Use command `/key missing` to add the key or `/key listdiff` to see differences
-between your current keys and WeeChat default keys.
+between your current keys and WhoreIRC default keys.
 
 [[v1.0_hook_print]]
 === Function hook_print
@@ -897,12 +897,12 @@ to integer before testing it, for example in Python: `if int(highlight):`.
 [[v0.4.3_colors_messages]]
 === Colors in messages
 
-The color code for "reverse video" in IRC message has been fixed: now WeeChat
+The color code for "reverse video" in IRC message has been fixed: now WhoreIRC
 uses 0x16 like other clients (and not 0x12 any more). +
 The code 0x12 is not decoded any more, so if it is received (for example from
-an old WeeChat version), it is not displayed as reverse video.
+an old WhoreIRC version), it is not displayed as reverse video.
 
-The color code for "underlined text" in input line has been fixed: now WeeChat
+The color code for "underlined text" in input line has been fixed: now WhoreIRC
 uses 0x1F, the same code sent to IRC server.
 
 The default keys for "reverse video" and "underlined text" have changed:
@@ -924,7 +924,7 @@ You can remove the old keys and add the new ones with these commands:
 The boolean option _whoreirc.look.set_title_ has been renamed to
 _whoreirc.look.window_title_ and is now a string.
 
-The content is evaluated and the default value is `WeeChat ${info:version}`.
+The content is evaluated and the default value is `WhoreIRC ${info:version}`.
 
 [NOTE]
 Only static content should be used in this option, because the title is
@@ -1027,7 +1027,7 @@ To view keys in search context:
 /key list search
 ----
 
-For more information, see the chapter about keys in the _WeeChat User's guide_.
+For more information, see the chapter about keys in the _WhoreIRC User's guide_.
 
 [[v0.4.2_rmodifier]]
 === New rmodifier
@@ -1064,7 +1064,7 @@ Example:
 [[v0.4.2_binary_man_page]]
 === Binary and man page
 
-WeeChat binary and man page have been renamed from `whoreirc-curses` to
+WhoreIRC binary and man page have been renamed from `whoreirc-curses` to
 `whoreirc`.
 
 A symbolic link has been added for binary: `whoreirc-curses` -> `whoreirc`
@@ -1102,13 +1102,13 @@ If you changed the value of this option, you must set it again after upgrade.
 [[v0.4.1_relay_nicklist_diff]]
 === Nicklist diff in relay
 
-A new message with identifier "_nicklist_diff" has been added in relay (WeeChat
-protocol). WeeChat may decide to send full nicklist or this nicklist diff at
+A new message with identifier "_nicklist_diff" has been added in relay (WhoreIRC
+protocol). WhoreIRC may decide to send full nicklist or this nicklist diff at
 any time (depending on size of message, the smaller is sent).
 
 Clients using nicklist must implement it.
 
-For more info about content of message, see document _WeeChat Relay Protocol_.
+For more info about content of message, see document _WhoreIRC Relay Protocol_.
 
 [[v0.4.1_dynamic_nick_prefix_suffix]]
 === Dynamic nick prefix/suffix
@@ -1222,14 +1222,14 @@ The old syntax was:
 
 [source,lua]
 ----
-return whoreirc.WEECHAT_RC_OK()
+return whoreirc.WHOREIRC_RC_OK()
 ----
 
 The new syntax is:
 
 [source,lua]
 ----
-return whoreirc.WEECHAT_RC_OK
+return whoreirc.WHOREIRC_RC_OK
 ----
 
 [[v0.4.1_guile_callbacks]]
@@ -1239,7 +1239,7 @@ The way to give arguments for guile callbacks has been fixed: now arguments are
 sent individually (instead of a list with all arguments inside).
 
 Therefore, existing guile scripts must be modified accordingly. Moreover,
-WeeChat now requires Guile ≥ 2.0 to compile.
+WhoreIRC now requires Guile ≥ 2.0 to compile.
 
 [[v0.4.0]]
 == Version 0.4.0 (2013-01-20)
@@ -1251,7 +1251,7 @@ Conditions in bars have changed, and now an expression is evaluated.
 
 If you have a value with many conditions in a bar, like: `nicklist,active`, you
 must now use an expression like: `${nicklist} && ${active}` (see the chapter
-about bars in the _WeeChat User's guide_).
+about bars in the _WhoreIRC User's guide_).
 
 [[v0.4.0_ipv6_default]]
 === IPv6 by default
@@ -1339,7 +1339,7 @@ have been added to toggle separators (both are enabled by default):
 === New keys
 
 New keys were added, use command `/key missing` to add them or `/key listdiff`
-to see differences between your current keys and WeeChat default keys.
+to see differences between your current keys and WhoreIRC default keys.
 
 [[v0.3.8]]
 == Version 0.3.8 (2012-06-03)
@@ -1482,7 +1482,7 @@ that:
 === New keys
 
 New keys were added, use command `/key missing` to add them or `/key listdiff`
-to see differences between your current keys and WeeChat default keys.
+to see differences between your current keys and WhoreIRC default keys.
 
 [[v0.3.4]]
 == Version 0.3.4 (2011-01-16)
@@ -1552,7 +1552,7 @@ value: your current value multiplied by 1000 (new default value is 500).
 
 If you are using `/upgrade` from a previous release, then you must execute this
 command on all IRC servers/channels/private buffers and xfer DCC chats (not
-needed on WeeChat core buffer or buffers from other plugins/scripts):
+needed on WhoreIRC core buffer or buffers from other plugins/scripts):
 
 ----
 /buffer set highlight_words $nick
@@ -1590,16 +1590,16 @@ plugin API and is not compatible with previous versions.
 Major differences:
 
 * It is *NOT POSSIBLE* to use command `/upgrade` from a version 0.2.x to 0.3.x;
-  you have to quit your old WeeChat, then run new version.
+  you have to quit your old WhoreIRC, then run new version.
 * New configuration files (`*.conf`) are not compatible with old files
   (`*.rc`).
 * Name of options is similar to old versions, but there is now one
-  configuration file by plugin, and one file for WeeChat core; there is
+  configuration file by plugin, and one file for WhoreIRC core; there is
   *no automatic conversion* for your old options to new configuration files,
   so you'll have to setup again your IRC servers and all other options.
 * Plugin API has been rewritten and is not compatible with previous versions;
   accordingly, scripts and plugins must have been designed for version 0.3.x to
-  be loaded into WeeChat.
+  be loaded into WhoreIRC.
 
 [[v0.2.6.3]]
 == Version 0.2.6.3 (2009-06-13)
@@ -1672,8 +1672,8 @@ For server encode (on server buffer):
 
 New keys for topic scroll: kbd:[F9]/kbd:[F10].
 
-Key kbd:[F10] was used for `infobar_clear` in previous WeeChat versions, you
-have to manually rebind this key (except for new WeeChat users):
+Key kbd:[F10] was used for `infobar_clear` in previous WhoreIRC versions, you
+have to manually rebind this key (except for new WhoreIRC users):
 
 ----
 /key <press alt+"k" then F10> scroll_topic_right
@@ -1696,14 +1696,14 @@ No release note.
 [[v0.2.0_after_upgrade]]
 === After /upgrade
 
-If you upgraded with `/upgrade` in WeeChat, you should `/disconnect` and then
+If you upgraded with `/upgrade` in WhoreIRC, you should `/disconnect` and then
 `/reconnect` on each server, to display properly channel/user modes.
 
 [[v0.2.0_plugins]]
 === Plugins
 
 If you're using plugins, you should remove some old plugins libraries in
-WeeChat system library directory (commonly _/usr/local/lib/whoreirc/plugins_):
+WhoreIRC system library directory (commonly _/usr/local/lib/whoreirc/plugins_):
 remove `lib*` files (like `libperl.*`, `libpython.*`, ..) and keep only new
 libraries (`perl.*`, `python.*`, ..).
 
@@ -1737,7 +1737,7 @@ redefine these keys (kbd:[Alt+Home] / kbd:[Alt+End]):
 /key unbind meta-meta2-4~
 ----
 
-Then launch again WeeChat (or issue `/upgrade`).
+Then launch again WhoreIRC (or issue `/upgrade`).
 
 [[v0.1.8_configuration_files]]
 === Configuration files
@@ -1748,7 +1748,7 @@ in setup file (_~/.whoreirc/whoreirc.rc_):
 * option: log_path: replace _~/.whoreirc/logs_ by _%h/logs_
 * option: plugins_path: replace _~/.whoreirc/plugins_ by _%h/plugins_
 
-The string _%h_ is replaced by WeeChat home (default: _~/.whoreirc_, may be
+The string _%h_ is replaced by WhoreIRC home (default: _~/.whoreirc_, may be
 overridden by new command line argument `--dir`).
 
 [[v0.1.8_keys]]
@@ -1795,8 +1795,8 @@ the plugins names are ending by _.so.0.0_ and not _.so_.
 
 With new and full UTF-8 support, the option _look_charset_internal_ should be
 set to blank for most cases. Forces it only if your locale is not properly
-detected by WeeChat (you can set _UTF-8_ or _ISO-8859-15_ for example,
-depending on your locale). WeeChat is looking for _UTF-8_ in your locale name
+detected by WhoreIRC (you can set _UTF-8_ or _ISO-8859-15_ for example,
+depending on your locale). WhoreIRC is looking for _UTF-8_ in your locale name
 at startup.
 
 [[v0.1.5]]

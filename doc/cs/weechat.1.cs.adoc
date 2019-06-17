@@ -4,8 +4,8 @@
 :email: flashcode@flashtux.org
 :lang: cs
 // TRANSLATION MISSING
-:man manual: WeeChat Manual
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC Manual
+:man source: WhoreIRC {revnumber}
 
 == JMÉNO
 
@@ -23,7 +23,7 @@ weechat - the extensible chat client
 
 == POPIS
 
-WeeChat (Wee Enhanced Environment for Chat) je svobodný chatovací klient.
+WhoreIRC (Wee Enhanced Environment for Chat) je svobodný chatovací klient.
 Je lehký, plně konfigurovatelný a lehce rozšiřitelný pomocí pluginů a scriptů
 v obvyklých sciptovacích jazycích.
 

@@ -1,22 +1,22 @@
 /*
- * wee-upgrade.c - save/restore session data of WeeChat core
+ * wee-upgrade.c - save/restore session data of WhoreIRC core
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -55,7 +55,7 @@ struct t_gui_layout *upgrade_layout = NULL;
 
 
 /*
- * Saves history in WeeChat upgrade file (from last to first, to restore it in
+ * Saves history in WhoreIRC upgrade file (from last to first, to restore it in
  * good order).
  *
  * Returns:
@@ -99,7 +99,7 @@ upgrade_weechat_save_history (struct t_upgrade_file *upgrade_file,
     }
 
     rc = upgrade_file_write_object (upgrade_file,
-                                    UPGRADE_WEECHAT_TYPE_HISTORY,
+                                    UPGRADE_WHOREIRC_TYPE_HISTORY,
                                     ptr_infolist);
     infolist_free (ptr_infolist);
     if (!rc)
@@ -109,7 +109,7 @@ upgrade_weechat_save_history (struct t_upgrade_file *upgrade_file,
 }
 
 /*
- * Saves buffers in WeeChat upgrade file.
+ * Saves buffers in WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -137,7 +137,7 @@ upgrade_weechat_save_buffers (struct t_upgrade_file *upgrade_file)
             return 0;
         }
         rc = upgrade_file_write_object (upgrade_file,
-                                        UPGRADE_WEECHAT_TYPE_BUFFER,
+                                        UPGRADE_WHOREIRC_TYPE_BUFFER,
                                         ptr_infolist);
         infolist_free (ptr_infolist);
         if (!rc)
@@ -155,7 +155,7 @@ upgrade_weechat_save_buffers (struct t_upgrade_file *upgrade_file)
                 return 0;
             }
             rc = upgrade_file_write_object (upgrade_file,
-                                            UPGRADE_WEECHAT_TYPE_NICKLIST,
+                                            UPGRADE_WHOREIRC_TYPE_NICKLIST,
                                             ptr_infolist);
             infolist_free (ptr_infolist);
             if (!rc)
@@ -177,7 +177,7 @@ upgrade_weechat_save_buffers (struct t_upgrade_file *upgrade_file)
                 return 0;
             }
             rc = upgrade_file_write_object (upgrade_file,
-                                            UPGRADE_WEECHAT_TYPE_BUFFER_LINE,
+                                            UPGRADE_WHOREIRC_TYPE_BUFFER_LINE,
                                             ptr_infolist);
             infolist_free (ptr_infolist);
             if (!rc)
@@ -198,7 +198,7 @@ upgrade_weechat_save_buffers (struct t_upgrade_file *upgrade_file)
 }
 
 /*
- * Saves miscellaneous info in WeeChat upgrade file.
+ * Saves miscellaneous info in WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -239,7 +239,7 @@ upgrade_weechat_save_misc (struct t_upgrade_file *upgrade_file)
     }
 
     rc = upgrade_file_write_object (upgrade_file,
-                                    UPGRADE_WEECHAT_TYPE_MISC,
+                                    UPGRADE_WHOREIRC_TYPE_MISC,
                                     ptr_infolist);
     infolist_free (ptr_infolist);
 
@@ -247,7 +247,7 @@ upgrade_weechat_save_misc (struct t_upgrade_file *upgrade_file)
 }
 
 /*
- * Saves hotlist in WeeChat upgrade file.
+ * Saves hotlist in WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -273,7 +273,7 @@ upgrade_weechat_save_hotlist (struct t_upgrade_file *upgrade_file)
             return 0;
         }
         rc = upgrade_file_write_object (upgrade_file,
-                                        UPGRADE_WEECHAT_TYPE_HOTLIST,
+                                        UPGRADE_WHOREIRC_TYPE_HOTLIST,
                                         ptr_infolist);
         infolist_free (ptr_infolist);
         if (!rc)
@@ -284,7 +284,7 @@ upgrade_weechat_save_hotlist (struct t_upgrade_file *upgrade_file)
 }
 
 /*
- * Saves tree with layout for windows in WeeChat upgrade file.
+ * Saves tree with layout for windows in WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -309,7 +309,7 @@ upgrade_weechat_save_layout_window_tree (struct t_upgrade_file *upgrade_file,
     }
 
     rc = upgrade_file_write_object (upgrade_file,
-                                    UPGRADE_WEECHAT_TYPE_LAYOUT_WINDOW,
+                                    UPGRADE_WHOREIRC_TYPE_LAYOUT_WINDOW,
                                     ptr_infolist);
 
     infolist_free (ptr_infolist);
@@ -334,7 +334,7 @@ upgrade_weechat_save_layout_window_tree (struct t_upgrade_file *upgrade_file,
 }
 
 /*
- * Saves layout for windows in WeeChat upgrade file.
+ * Saves layout for windows in WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -366,7 +366,7 @@ upgrade_weechat_save_layout_window (struct t_upgrade_file *upgrade_file)
 }
 
 /*
- * Saves WeeChat upgrade file.
+ * Saves WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -379,7 +379,7 @@ upgrade_weechat_save ()
     int rc;
     struct t_upgrade_file *upgrade_file;
 
-    upgrade_file = upgrade_file_new (WEECHAT_UPGRADE_FILENAME,
+    upgrade_file = upgrade_file_new (WHOREIRC_UPGRADE_FILENAME,
                                      NULL, NULL, NULL);
     if (!upgrade_file)
         return 0;
@@ -417,7 +417,7 @@ upgrade_weechat_read_buffer (struct t_infolist *infolist)
     main_buffer = gui_buffer_is_main (plugin_name, name);
     if (main_buffer)
     {
-        /* use WeeChat main buffer */
+        /* use WhoreIRC main buffer */
         upgrade_current_buffer = gui_buffers;
     }
     else
@@ -458,7 +458,7 @@ upgrade_weechat_read_buffer (struct t_infolist *infolist)
     /* notify level */
     ptr_buffer->notify = infolist_integer (infolist, "notify");
 
-    /* "hidden" is new in WeeChat 1.0 */
+    /* "hidden" is new in WhoreIRC 1.0 */
     if (infolist_search_var (infolist, "hidden"))
         ptr_buffer->hidden = infolist_integer (infolist, "hidden");
     else
@@ -470,13 +470,13 @@ upgrade_weechat_read_buffer (struct t_infolist *infolist)
     else
         ptr_buffer->day_change = 1;
 
-    /* "clear" is new in WeeChat 1.0 */
+    /* "clear" is new in WhoreIRC 1.0 */
     if (infolist_search_var (infolist, "clear"))
         ptr_buffer->clear = infolist_integer (infolist, "clear");
     else
         ptr_buffer->clear = (ptr_buffer->type == GUI_BUFFER_TYPE_FREE) ? 0 : 1;
 
-    /* "filter" is new in WeeChat 1.0 */
+    /* "filter" is new in WhoreIRC 1.0 */
     if (infolist_search_var (infolist, "filter"))
         ptr_buffer->filter = infolist_integer (infolist, "filter");
     else
@@ -553,7 +553,7 @@ upgrade_weechat_read_buffer (struct t_infolist *infolist)
     if (infolist_search_var (infolist,
                              "highlight_tags_restrict"))
     {
-        /* WeeChat >= 0.4.3 */
+        /* WhoreIRC >= 0.4.3 */
         gui_buffer_set_highlight_tags_restrict (
             ptr_buffer, infolist_string (infolist, "highlight_tags_restrict"));
         gui_buffer_set_highlight_tags (
@@ -561,7 +561,7 @@ upgrade_weechat_read_buffer (struct t_infolist *infolist)
     }
     else
     {
-        /* WeeChat <= 0.4.2 */
+        /* WhoreIRC <= 0.4.2 */
         gui_buffer_set_highlight_tags_restrict (
             ptr_buffer, infolist_string (infolist, "highlight_tags"));
     }
@@ -765,7 +765,7 @@ upgrade_weechat_read_hotlist (struct t_infolist *infolist)
 }
 
 /*
- * Reads WeeChat upgrade file.
+ * Reads WhoreIRC upgrade file.
  */
 
 int
@@ -784,7 +784,7 @@ upgrade_weechat_read_cb (const void *pointer, void *data,
     {
         switch (object_id)
         {
-            case UPGRADE_WEECHAT_TYPE_HISTORY:
+            case UPGRADE_WHOREIRC_TYPE_HISTORY:
                 if (upgrade_current_buffer)
                 {
                     gui_history_buffer_add (upgrade_current_buffer,
@@ -795,24 +795,24 @@ upgrade_weechat_read_cb (const void *pointer, void *data,
                     gui_history_global_add (infolist_string (infolist, "text"));
                 }
                 break;
-            case UPGRADE_WEECHAT_TYPE_BUFFER:
+            case UPGRADE_WHOREIRC_TYPE_BUFFER:
                 upgrade_weechat_read_buffer (infolist);
                 break;
-            case UPGRADE_WEECHAT_TYPE_BUFFER_LINE:
+            case UPGRADE_WHOREIRC_TYPE_BUFFER_LINE:
                 upgrade_weechat_read_buffer_line (infolist);
                 break;
-            case UPGRADE_WEECHAT_TYPE_NICKLIST:
+            case UPGRADE_WHOREIRC_TYPE_NICKLIST:
                 upgrade_weechat_read_nicklist (infolist);
                 break;
-            case UPGRADE_WEECHAT_TYPE_MISC:
+            case UPGRADE_WHOREIRC_TYPE_MISC:
                 weechat_first_start_time = infolist_time (infolist, "start_time");
                 weechat_upgrade_count = infolist_integer (infolist, "upgrade_count");
                 upgrade_set_current_window = infolist_integer (infolist, "current_window_number");
                 break;
-            case UPGRADE_WEECHAT_TYPE_HOTLIST:
+            case UPGRADE_WHOREIRC_TYPE_HOTLIST:
                 upgrade_weechat_read_hotlist (infolist);
                 break;
-            case UPGRADE_WEECHAT_TYPE_LAYOUT_WINDOW:
+            case UPGRADE_WHOREIRC_TYPE_LAYOUT_WINDOW:
                 gui_layout_window_add (&upgrade_layout->layout_windows,
                                        infolist_integer (infolist, "internal_id"),
                                        gui_layout_window_search_by_id (upgrade_layout->layout_windows,
@@ -825,11 +825,11 @@ upgrade_weechat_read_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Loads WeeChat upgrade file.
+ * Loads WhoreIRC upgrade file.
  *
  * Returns:
  *   1: OK
@@ -844,7 +844,7 @@ upgrade_weechat_load ()
 
     upgrade_layout = gui_layout_alloc (GUI_LAYOUT_UPGRADE);
 
-    upgrade_file = upgrade_file_new (WEECHAT_UPGRADE_FILENAME,
+    upgrade_file = upgrade_file_new (WHOREIRC_UPGRADE_FILENAME,
                                      &upgrade_weechat_read_cb, NULL, NULL);
     if (!upgrade_file)
         return 0;
@@ -887,7 +887,7 @@ upgrade_weechat_load ()
 }
 
 /*
- * Removes a .upgrade file (callback called for each .upgrade file in WeeChat
+ * Removes a .upgrade file (callback called for each .upgrade file in WhoreIRC
  * home directory).
  */
 
@@ -932,5 +932,5 @@ upgrade_weechat_end ()
     weechat_upgrading = 0;
 
     /* send signal for end of /upgrade */
-    (void) hook_signal_send ("upgrade_ended", WEECHAT_HOOK_SIGNAL_STRING, NULL);
+    (void) hook_signal_send ("upgrade_ended", WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }

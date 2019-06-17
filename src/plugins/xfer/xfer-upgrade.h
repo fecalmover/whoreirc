@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_XFER_UPGRADE_H
-#define WEECHAT_PLUGIN_XFER_UPGRADE_H
+#ifndef WHOREIRC_PLUGIN_XFER_UPGRADE_H
+#define WHOREIRC_PLUGIN_XFER_UPGRADE_H
 
 #define XFER_UPGRADE_FILENAME "xfer"
 
@@ -32,4 +32,4 @@ enum t_xfer_upgrade_type
 extern int xfer_upgrade_save ();
 extern int xfer_upgrade_load ();
 
-#endif /* WEECHAT_PLUGIN_XFER_UPGRADE_H */
+#endif /* WHOREIRC_PLUGIN_XFER_UPGRADE_H */

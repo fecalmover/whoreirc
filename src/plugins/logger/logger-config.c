@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -157,7 +157,7 @@ logger_config_level_delete_option (const void *pointer, void *data,
 
     logger_start_buffer_all (1);
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
@@ -178,7 +178,7 @@ logger_config_level_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -191,7 +191,7 @@ logger_config_level_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -208,10 +208,10 @@ logger_config_level_create_option (const void *pointer, void *data,
                     &logger_config_level_change, NULL,  NULL,
                     NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
@@ -284,7 +284,7 @@ logger_config_mask_delete_option (const void *pointer, void *data,
 
     logger_adjust_log_filenames ();
 
-    return WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED;
+    return WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED;
 }
 
 /*
@@ -305,7 +305,7 @@ logger_config_mask_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -318,7 +318,7 @@ logger_config_mask_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -335,10 +335,10 @@ logger_config_mask_create_option (const void *pointer, void *data,
                     &logger_config_mask_change, NULL, NULL,
                     NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
@@ -523,8 +523,8 @@ logger_config_init ()
     logger_config_file_path = weechat_config_new_option (
         logger_config_file, ptr_section,
         "path", "string",
-        N_("path for WeeChat log files; \"%h\" at beginning of string is "
-           "replaced by WeeChat home (\"~/.weechat\" by default); date "
+        N_("path for WhoreIRC log files; \"%h\" at beginning of string is "
+           "replaced by WhoreIRC home (\"~/.weechat\" by default); date "
            "specifiers are permitted (see man strftime) "
            "(note: content is evaluated, see /help eval)"),
         NULL, 0, 0, "%h/logs/", NULL, 0,

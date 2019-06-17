@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -60,7 +60,7 @@ char **gui_chat_lines_waiting_buffer = NULL;    /* lines waiting for core   */
 
 
 /*
- * Initializes some variables for chat area (called before reading WeeChat
+ * Initializes some variables for chat area (called before reading WhoreIRC
  * configuration file).
  */
 
@@ -91,7 +91,7 @@ gui_chat_init ()
 }
 
 /*
- * Builds prefix with colors (called after reading WeeChat configuration file).
+ * Builds prefix with colors (called after reading WhoreIRC configuration file).
  */
 
 void
@@ -871,7 +871,7 @@ no_print:
 }
 
 /*
- * Adds a line when WeeChat is waiting for the core buffer.
+ * Adds a line when WhoreIRC is waiting for the core buffer.
  *
  * The line is stored in an internal buffer area and will be displayed later
  * in the core buffer.
@@ -911,9 +911,9 @@ gui_chat_print_lines_waiting_buffer (FILE *f)
     if (gui_chat_lines_waiting_buffer)
     {
         lines = string_split (*gui_chat_lines_waiting_buffer, "\n", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, &num_lines);
         if (lines)
         {
@@ -1129,7 +1129,7 @@ gui_chat_hsignal_quote_line_cb (const void *pointer, void *data,
     (void) data;
 
     if (!gui_current_window->buffer->input)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* get time */
     str_time[0] = '\0';
@@ -1180,7 +1180,7 @@ gui_chat_hsignal_quote_line_cb (const void *pointer, void *data,
     message = hashtable_get (hashtable, "_chat_line_message");
 
     if (!message)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     length_time = strlen (str_time);
     length_nick_prefix = strlen (CONFIG_STRING(config_look_quote_nick_prefix));
@@ -1209,7 +1209,7 @@ gui_chat_hsignal_quote_line_cb (const void *pointer, void *data,
         free (str);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

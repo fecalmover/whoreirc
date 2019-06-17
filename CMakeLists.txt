@@ -3,20 +3,20 @@
 # Copyright (C) 2007-2008 Julien Louis <ptitlouis@sysif.net>
 # Copyright (C) 2008-2009 Emmanuel Bouthenot <kolter@openics.org>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 
 cmake_minimum_required(VERSION 3.0)
@@ -49,9 +49,9 @@ set(LICENSE "GPL3")
 # add definitions for version and license
 if(COMMAND cmake_policy)
   cmake_policy(SET CMP0005 NEW)
-  add_definitions(-DWEECHAT_VERSION="${VERSION}" -DWEECHAT_LICENSE="${LICENSE}")
+  add_definitions(-DWHOREIRC_VERSION="${VERSION}" -DWHOREIRC_LICENSE="${LICENSE}")
 else()
-  add_definitions(-DWEECHAT_VERSION='"${VERSION}"' -DWEECHAT_LICENSE='"${LICENSE}"')
+  add_definitions(-DWHOREIRC_VERSION='"${VERSION}"' -DWHOREIRC_LICENSE='"${LICENSE}"')
 endif()
 
 # package string
@@ -62,8 +62,8 @@ if(NOT DEFINED LIBDIR)
   set(LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 endif()
 
-if(NOT DEFINED WEECHAT_LIBDIR)
-  set(WEECHAT_LIBDIR ${LIBDIR}/${PROJECT_NAME})
+if(NOT DEFINED WHOREIRC_LIBDIR)
+  set(WHOREIRC_LIBDIR ${LIBDIR}/${PROJECT_NAME})
 endif()
 
 if(NOT DEFINED SHAREDIR)
@@ -130,14 +130,14 @@ if(ENABLE_TESTS AND NOT ENABLE_HEADLESS)
   message(FATAL_ERROR "Headless mode is required for tests.")
 endif()
 
-# option WEECHAT_HOME
-if(NOT DEFINED WEECHAT_HOME OR "${WEECHAT_HOME}" STREQUAL "")
-  set(WEECHAT_HOME "~/.whoreirc")
+# option WHOREIRC_HOME
+if(NOT DEFINED WHOREIRC_HOME OR "${WHOREIRC_HOME}" STREQUAL "")
+  set(WHOREIRC_HOME "~/.whoreirc")
 endif()
-set(WEECHAT_HOME "${WEECHAT_HOME}" CACHE
-  STRING "WeeChat home directory for config, logs, scripts.. (default is \"~/.whoreirc\")"
+set(WHOREIRC_HOME "${WHOREIRC_HOME}" CACHE
+  STRING "WhoreIRC home directory for config, logs, scripts.. (default is \"~/.whoreirc\")"
   FORCE)
-mark_as_advanced(CLEAR WEECHAT_HOME)
+mark_as_advanced(CLEAR WHOREIRC_HOME)
 
 # option CA_FILE
 if(NOT DEFINED CA_FILE OR "${CA_FILE}" STREQUAL "")

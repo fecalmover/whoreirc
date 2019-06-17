@@ -1,22 +1,22 @@
 /*
- * fset.c - Fast set of WeeChat and plugins options
+ * fset.c - Fast set of WhoreIRC and plugins options
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -35,12 +35,12 @@
 #include "fset-option.h"
 
 
-WEECHAT_PLUGIN_NAME(FSET_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Fast set of WeeChat and plugins options"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(2000);
+WHOREIRC_PLUGIN_NAME(FSET_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Fast set of WhoreIRC and plugins options"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(2000);
 
 struct t_weechat_plugin *weechat_fset_plugin = NULL;
 
@@ -79,7 +79,7 @@ fset_debug_dump_cb (const void *pointer, void *data,
                             weechat_plugin->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -121,12 +121,12 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     fset_option_init ();
 
     if (!fset_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     fset_config_read ();
 
     if (!fset_bar_item_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     fset_command_init ();
 
@@ -155,7 +155,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
         fset_option_filter_options (ptr_filter);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -179,5 +179,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     fset_config_write ();
     fset_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

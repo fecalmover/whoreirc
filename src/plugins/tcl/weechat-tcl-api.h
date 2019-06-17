@@ -18,8 +18,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_TCL_API_H
-#define WEECHAT_PLUGIN_TCL_API_H
+#ifndef WHOREIRC_PLUGIN_TCL_API_H
+#define WHOREIRC_PLUGIN_TCL_API_H
 
 extern int weechat_tcl_api_buffer_input_data_cb (const void *pointer,
                                                  void *data,
@@ -30,4 +30,4 @@ extern int weechat_tcl_api_buffer_close_cb (const void *pointer,
                                             struct t_gui_buffer *buffer);
 extern void weechat_tcl_api_init (Tcl_Interp *interp);
 
-#endif /* WEECHAT_PLUGIN_TCL_API_H */
+#endif /* WHOREIRC_PLUGIN_TCL_API_H */

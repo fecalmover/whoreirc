@@ -6,7 +6,7 @@
  * ##          __ |/ |/ / /  __/  __/ /___  _  / / / /_/ // /_             ##
  * ##          ____/|__/  \___/\___/\____/  /_/ /_/\__,_/ \__/             ##
  * ##                                                                      ##
- * ##             WeeChat - Wee Enhanced Environment for Chat              ##
+ * ##             WhoreIRC - Wee Enhanced Environment for Chat              ##
  * ##                 Fast, light, extensible chat client                  ##
  * ##                                                                      ##
  * ##             By Sébastien Helleu <flashcode@flashtux.org>             ##
@@ -15,24 +15,24 @@
  * ##                                                                      ##
  * ##########################################################################
  *
- * weechat.c - WeeChat main functions
+ * weechat.c - WhoreIRC main functions
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -89,16 +89,16 @@
 
 int weechat_headless = 0;              /* 1 if running headless (no GUI)    */
 int weechat_debug_core = 0;            /* debug level for core              */
-char *weechat_argv0 = NULL;            /* WeeChat binary file name (argv[0])*/
-int weechat_upgrading = 0;             /* =1 if WeeChat is upgrading        */
-int weechat_first_start = 0;           /* first start of WeeChat?           */
+char *weechat_argv0 = NULL;            /* WhoreIRC binary file name (argv[0])*/
+int weechat_upgrading = 0;             /* =1 if WhoreIRC is upgrading        */
+int weechat_first_start = 0;           /* first start of WhoreIRC?           */
 time_t weechat_first_start_time = 0;   /* start time (used by /uptime cmd)  */
 int weechat_upgrade_count = 0;         /* number of /upgrade done           */
 struct timeval weechat_current_start_timeval; /* start time used to display */
                                        /* duration of /upgrade              */
 volatile sig_atomic_t weechat_quit = 0;   /* = 1 if quit request from user  */
 volatile sig_atomic_t weechat_quit_signal = 0; /* signal received,          */
-                                       /* WeeChat must quit                 */
+                                       /* WhoreIRC must quit                 */
 char *weechat_home = NULL;             /* home dir. (default: ~/.weechat)   */
 int weechat_home_temp = 0;             /* 1 if using a temporary home       */
 int weechat_home_delete_on_exit = 0;   /* 1 if home is deleted on exit      */
@@ -117,7 +117,7 @@ struct t_weelist *weechat_startup_commands = NULL; /* startup commands      */
 
 
 /*
- * Displays WeeChat copyright on standard output.
+ * Displays WhoreIRC copyright on standard output.
  */
 
 void
@@ -127,19 +127,19 @@ weechat_display_copyright ()
     string_fprintf (
         stdout,
         /* TRANSLATORS: "%s %s" after "compiled on" is date and time */
-        _("WeeChat %s Copyright %s, compiled on %s %s\n"
+        _("WhoreIRC %s Copyright %s, compiled on %s %s\n"
           "Developed by Sébastien Helleu <flashcode@flashtux.org> "
           "- %s"),
         version_get_version_with_git (),
-        WEECHAT_COPYRIGHT_DATE,
+        WHOREIRC_COPYRIGHT_DATE,
         version_get_compilation_date (),
         version_get_compilation_time (),
-        WEECHAT_WEBSITE);
+        WHOREIRC_WEBSITE);
     string_fprintf (stdout, "\n");
 }
 
 /*
- * Displays WeeChat usage on standard output.
+ * Displays WhoreIRC usage on standard output.
  */
 
 void
@@ -156,15 +156,15 @@ weechat_display_usage ()
         _("  -a, --no-connect         disable auto-connect to servers at "
           "startup\n"
           "  -c, --colors             display default colors in terminal\n"
-          "  -d, --dir <path>         set WeeChat home directory "
+          "  -d, --dir <path>         set WhoreIRC home directory "
           "(default: ~/.weechat)\n"
-          "                           (environment variable WEECHAT_HOME is "
+          "                           (environment variable WHOREIRC_HOME is "
           "read if this option is not given)\n"
-          "  -t, --temp-dir           create a temporary WeeChat home"
+          "  -t, --temp-dir           create a temporary WhoreIRC home"
           "directory and delete it on exit\n"
           "                           (incompatible with option \"-d\")\n"
           "  -h, --help               display this help\n"
-          "  -l, --license            display WeeChat license\n"
+          "  -l, --license            display WhoreIRC license\n"
           "  -p, --no-plugin          don't load any plugin at startup\n"
           "  -P, --plugins <plugins>  load only these plugins at startup\n"
           "                           (see /help weechat.plugin.autoload)\n"
@@ -174,9 +174,9 @@ weechat_display_usage ()
           "                           this option can be given multiple "
           "times\n"
           "  -s, --no-script          don't load any script at startup\n"
-          "      --upgrade            upgrade WeeChat using session files "
-          "(see /help upgrade in WeeChat)\n"
-          "  -v, --version            display WeeChat version\n"
+          "      --upgrade            upgrade WhoreIRC using session files "
+          "(see /help upgrade in WhoreIRC)\n"
+          "  -v, --version            display WhoreIRC version\n"
           "  plugin:option            option for plugin (see man weechat)\n"));
     string_fprintf (stdout, "\n");
 
@@ -186,12 +186,12 @@ weechat_display_usage ()
         string_fprintf (stdout, _("Extra options in headless mode:\n"));
         string_fprintf (
             stdout,
-            _("      --daemon             run WeeChat as a daemon (fork, "
+            _("      --daemon             run WhoreIRC as a daemon (fork, "
               "new process group, file descriptors closed);\n"));
         string_fprintf (
             stdout,
             _("                           (by default in headless mode "
-              "WeeChat is blocking and does not run in background)\n"));
+              "WhoreIRC is blocking and does not run in background)\n"));
         string_fprintf (stdout, "\n");
     }
 
@@ -283,7 +283,7 @@ weechat_parse_args (int argc, char *argv[])
             case 'l': /* -l / --license */
                 weechat_display_copyright ();
                 string_fprintf (stdout, "\n");
-                string_fprintf (stdout, "%s%s", WEECHAT_LICENSE_TEXT);
+                string_fprintf (stdout, "%s%s", WHOREIRC_LICENSE_TEXT);
                 weechat_shutdown (EXIT_SUCCESS, 0);
                 break;
             case 'p': /* -p / --no-plugin */
@@ -300,7 +300,7 @@ weechat_parse_args (int argc, char *argv[])
                 if (!weechat_startup_commands)
                     weechat_startup_commands = weelist_new ();
                 weelist_add (weechat_startup_commands, optarg,
-                             WEECHAT_LIST_POS_END, NULL);
+                             WHOREIRC_LIST_POS_END, NULL);
                 break;
             case 's': /* -s / --no-script */
                 /* option ignored, it will be used by the scripting plugins */
@@ -403,9 +403,9 @@ weechat_set_home_path (char *home_path)
 }
 
 /*
- * Creates WeeChat home directory (by default ~/.weechat).
+ * Creates WhoreIRC home directory (by default ~/.weechat).
  *
- * Any error in this function is fatal: WeeChat can not run without a home
+ * Any error in this function is fatal: WhoreIRC can not run without a home
  * directory.
  */
 
@@ -417,7 +417,7 @@ weechat_create_home_dir ()
     int length, add_separator;
     struct stat statinfo;
 
-    /* temporary WeeChat home */
+    /* temporary WhoreIRC home */
     if (weechat_home_temp)
     {
         temp_dir = util_get_temp_dir ();
@@ -468,11 +468,11 @@ weechat_create_home_dir ()
 
     /*
      * weechat_home is not set yet: look for environment variable
-     * "WEECHAT_HOME"
+     * "WHOREIRC_HOME"
      */
     if (!weechat_home)
     {
-        ptr_weechat_home = getenv ("WEECHAT_HOME");
+        ptr_weechat_home = getenv ("WHOREIRC_HOME");
         if (ptr_weechat_home && ptr_weechat_home[0])
             weechat_set_home_path (ptr_weechat_home);
     }
@@ -480,11 +480,11 @@ weechat_create_home_dir ()
     /* weechat_home is still not set: try to use compile time default */
     if (!weechat_home)
     {
-        config_weechat_home = WEECHAT_HOME;
+        config_weechat_home = WHOREIRC_HOME;
         if (!config_weechat_home[0])
         {
             string_fprintf (stderr,
-                            _("Error: WEECHAT_HOME is undefined, check build "
+                            _("Error: WHOREIRC_HOME is undefined, check build "
                               "options\n"));
             weechat_shutdown (EXIT_FAILURE, 0);
             /* make C static analyzer happy (never executed) */
@@ -520,7 +520,7 @@ weechat_create_home_dir ()
 }
 
 /*
- * Displays WeeChat startup message.
+ * Displays WhoreIRC startup message.
  */
 
 void
@@ -529,7 +529,7 @@ weechat_startup_message ()
     if (weechat_headless)
     {
         string_fprintf (stdout,
-                        _("WeeChat is running in headless mode "
+                        _("WhoreIRC is running in headless mode "
                           "(Ctrl-C to quit)."));
         string_fprintf (stdout, "\n");
     }
@@ -567,16 +567,16 @@ weechat_startup_message ()
         gui_chat_printf (NULL, "");
         gui_chat_printf (
             NULL,
-            _("Welcome to WeeChat!\n"
+            _("Welcome to WhoreIRC!\n"
               "\n"
-              "If you are discovering WeeChat, it is recommended to read at "
+              "If you are discovering WhoreIRC, it is recommended to read at "
               "least the quickstart guide, and the user's guide if you have "
-              "some time; they explain main WeeChat concepts.\n"
-              "All WeeChat docs are available at: https://weechat.org/doc\n"
+              "some time; they explain main WhoreIRC concepts.\n"
+              "All WhoreIRC docs are available at: https://weechat.org/doc\n"
               "\n"
               "Moreover, there is inline help with /help on all commands and "
               "options (use Tab key to complete the name).\n"
-              "The command /fset can help to customize WeeChat.\n"
+              "The command /fset can help to customize WhoreIRC.\n"
               "\n"
               "You can add and connect to an IRC server with /server and "
               "/connect commands (see /help server)."));
@@ -635,7 +635,7 @@ weechat_term_check ()
                 0,
                 "term_warning",
                 /* TRANSLATORS: the "under %s" can be "under screen" or "under tmux" */
-                _("%sWarning: WeeChat is running under %s and $TERM is \"%s\", "
+                _("%sWarning: WhoreIRC is running under %s and $TERM is \"%s\", "
                   "which can cause display bugs; $TERM should be set to one "
                   "of these values: %s"),
                 gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
@@ -675,7 +675,7 @@ weechat_locale_check ()
 }
 
 /*
- * Callback for system signal SIGHUP: quits WeeChat.
+ * Callback for system signal SIGHUP: quits WhoreIRC.
  */
 
 void
@@ -685,7 +685,7 @@ weechat_sighup ()
 }
 
 /*
- * Callback for system signal SIGQUIT: quits WeeChat.
+ * Callback for system signal SIGQUIT: quits WhoreIRC.
  */
 
 void
@@ -695,7 +695,7 @@ weechat_sigquit ()
 }
 
 /*
- * Callback for system signal SIGTERM: quits WeeChat.
+ * Callback for system signal SIGTERM: quits WhoreIRC.
  */
 
 void
@@ -705,7 +705,7 @@ weechat_sigterm ()
 }
 
 /*
- * Shutdowns WeeChat.
+ * Shutdowns WhoreIRC.
  */
 
 void
@@ -763,7 +763,7 @@ weechat_init_gettext ()
 }
 
 /*
- * Initializes WeeChat.
+ * Initializes WhoreIRC.
  */
 
 void
@@ -776,16 +776,16 @@ weechat_init (int argc, char *argv[], void (*gui_init_cb)())
     util_catch_signal (SIGINT, SIG_IGN);           /* signal ignored        */
     util_catch_signal (SIGPIPE, SIG_IGN);          /* signal ignored        */
     util_catch_signal (SIGSEGV, &debug_sigsegv);   /* crash dump            */
-    util_catch_signal (SIGHUP, &weechat_sighup);   /* exit WeeChat          */
-    util_catch_signal (SIGQUIT, &weechat_sigquit); /* exit WeeChat          */
-    util_catch_signal (SIGTERM, &weechat_sigterm); /* exit WeeChat          */
+    util_catch_signal (SIGHUP, &weechat_sighup);   /* exit WhoreIRC          */
+    util_catch_signal (SIGQUIT, &weechat_sigquit); /* exit WhoreIRC          */
+    util_catch_signal (SIGTERM, &weechat_sigterm); /* exit WhoreIRC          */
 
     hdata_init ();                      /* initialize hdata                 */
     hook_init ();                       /* initialize hooks                 */
     debug_init ();                      /* hook signals for debug           */
     gui_color_init ();                  /* initialize colors                */
     gui_chat_init ();                   /* initialize chat                  */
-    command_init ();                    /* initialize WeeChat commands      */
+    command_init ();                    /* initialize WhoreIRC commands      */
     completion_init ();                 /* add core completion hooks        */
     gui_key_init ();                    /* init keys                        */
     network_init_gcrypt ();             /* init gcrypt                      */
@@ -793,25 +793,25 @@ weechat_init (int argc, char *argv[], void (*gui_init_cb)())
         weechat_shutdown (EXIT_FAILURE, 0);
     if (!secure_config_init ())         /* init secured data options (sec.*)*/
         weechat_shutdown (EXIT_FAILURE, 0);
-    if (!config_weechat_init ())        /* init WeeChat options (weechat.*) */
+    if (!config_weechat_init ())        /* init WhoreIRC options (weechat.*) */
         weechat_shutdown (EXIT_FAILURE, 0);
     weechat_parse_args (argc, argv);    /* parse command line args          */
-    weechat_create_home_dir ();         /* create WeeChat home directory    */
+    weechat_create_home_dir ();         /* create WhoreIRC home directory    */
     log_init ();                        /* init log file                    */
     plugin_api_init ();                 /* create some hooks (info,hdata,..)*/
     secure_config_read ();              /* read secured data options        */
-    config_weechat_read ();             /* read WeeChat options             */
+    config_weechat_read ();             /* read WhoreIRC options             */
     network_init_gnutls ();             /* init GnuTLS                      */
 
     if (gui_init_cb)
-        (*gui_init_cb) ();              /* init WeeChat interface           */
+        (*gui_init_cb) ();              /* init WhoreIRC interface           */
 
     if (weechat_upgrading)
     {
         upgrade_weechat_load ();        /* upgrade with session file        */
         weechat_upgrade_count++;        /* increase /upgrade count          */
     }
-    weechat_startup_message ();         /* display WeeChat startup message  */
+    weechat_startup_message ();         /* display WhoreIRC startup message  */
     gui_chat_print_lines_waiting_buffer (NULL); /* display lines waiting    */
     weechat_term_check ();              /* warning about wrong $TERM        */
     weechat_locale_check ();            /* warning about wrong locale       */
@@ -826,7 +826,7 @@ weechat_init (int argc, char *argv[], void (*gui_init_cb)())
 }
 
 /*
- * Ends WeeChat.
+ * Ends WhoreIRC.
  */
 
 void
@@ -835,14 +835,14 @@ weechat_end (void (*gui_end_cb)(int clean_exit))
     gui_layout_store_on_exit ();        /* store layout                     */
     plugin_end ();                      /* end plugin interface(s)          */
     if (CONFIG_BOOLEAN(config_look_save_config_on_exit))
-        (void) config_weechat_write (); /* save WeeChat config file         */
+        (void) config_weechat_write (); /* save WhoreIRC config file         */
     (void) secure_config_write ();      /* save secured data                */
 
     if (gui_end_cb)
-        (*gui_end_cb) (1);              /* shut down WeeChat GUI            */
+        (*gui_end_cb) (1);              /* shut down WhoreIRC GUI            */
 
     proxy_free_all ();                  /* free all proxies                 */
-    config_weechat_free ();             /* free WeeChat options             */
+    config_weechat_free ();             /* free WhoreIRC options             */
     secure_config_free ();              /* free secured data options        */
     config_file_free_all ();            /* free all configuration files     */
     gui_key_end ();                     /* remove all keys                  */

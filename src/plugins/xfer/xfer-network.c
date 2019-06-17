@@ -62,7 +62,7 @@ xfer_network_create_pipe (struct t_xfer *xfer)
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         errno, strerror (errno));
         xfer_close (xfer, XFER_STATUS_FAILED);
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
         return 0;
     }
 
@@ -172,7 +172,7 @@ xfer_network_child_read_cb (const void *pointer, void *data, int fd)
         {
             case XFER_STATUS_CONNECTING:
                 xfer->status = XFER_STATUS_CONNECTING;
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
                 break;
             case XFER_STATUS_ACTIVE:
                 if (xfer->status == XFER_STATUS_CONNECTING)
@@ -181,32 +181,32 @@ xfer_network_child_read_cb (const void *pointer, void *data, int fd)
                     xfer->status = XFER_STATUS_ACTIVE;
                     xfer->start_transfer = time (NULL);
                     xfer->last_check_time = time (NULL);
-                    xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                    xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
                 }
                 else
-                    xfer_buffer_refresh (WEECHAT_HOTLIST_LOW);
+                    xfer_buffer_refresh (WHOREIRC_HOTLIST_LOW);
                 break;
             case XFER_STATUS_DONE:
                 xfer_close (xfer, XFER_STATUS_DONE);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
                 break;
             case XFER_STATUS_FAILED:
                 xfer_close (xfer, XFER_STATUS_FAILED);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
                 break;
             case XFER_STATUS_HASHING:
                 xfer->status = XFER_STATUS_HASHING;
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
                 break;
             case XFER_STATUS_HASHED:
                 if (bufpipe[1] - '0' == XFER_NO_ERROR)
                     xfer->hash_status = XFER_HASH_STATUS_MATCH;
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
                 break;
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -233,7 +233,7 @@ xfer_network_send_file_fork (struct t_xfer *xfer)
                             XFER_PLUGIN_NAME,
                             strerror (errno));
             xfer_close (xfer, XFER_STATUS_FAILED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             return;
         case 0:  /* child process */
             rc = setuid (getuid ());
@@ -306,7 +306,7 @@ xfer_network_recv_file_fork (struct t_xfer *xfer)
                             XFER_PLUGIN_NAME,
                             strerror (errno));
             xfer_close (xfer, XFER_STATUS_FAILED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             return;
         case 0:  /* child process */
             rc = setuid (getuid ());
@@ -405,8 +405,8 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
                                 weechat_prefix ("error"), XFER_PLUGIN_NAME,
                                 error, strerror (error));
                 xfer_close (xfer, XFER_STATUS_FAILED);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
-                return WEECHAT_RC_OK;
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
+                return WHOREIRC_RC_OK;
             }
             xfer->sock = sock;
             flags = fcntl (xfer->sock, F_GETFL);
@@ -420,8 +420,8 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
                                 weechat_prefix ("error"), XFER_PLUGIN_NAME,
                                 errno, strerror (errno));
                 xfer_close (xfer, XFER_STATUS_FAILED);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
-                return WEECHAT_RC_OK;
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
+                return WHOREIRC_RC_OK;
             }
             error = getnameinfo ((struct sockaddr *)&addr, length, str_address,
                                  sizeof (str_address), NULL, 0, NI_NUMERICHOST);
@@ -434,7 +434,7 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
                                      str_address);
             xfer->status = XFER_STATUS_ACTIVE;
             xfer->start_transfer = time (NULL);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             xfer_network_send_file_fork (xfer);
         }
     }
@@ -458,8 +458,8 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
                                 weechat_prefix ("error"), XFER_PLUGIN_NAME,
                                 error, strerror (error));
                 xfer_close (xfer, XFER_STATUS_FAILED);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
-                return WEECHAT_RC_OK;
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
+                return WHOREIRC_RC_OK;
             }
             xfer->sock = sock;
             flags = fcntl (xfer->sock, F_GETFL);
@@ -473,8 +473,8 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
                                 weechat_prefix ("error"), XFER_PLUGIN_NAME,
                                 errno, strerror (errno));
                 xfer_close (xfer, XFER_STATUS_FAILED);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
-                return WEECHAT_RC_OK;
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
+                return WHOREIRC_RC_OK;
             }
             error = getnameinfo ((struct sockaddr *)&addr, length, str_address,
                                  sizeof (str_address), NULL, 0, NI_NUMERICHOST);
@@ -486,7 +486,7 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
             xfer_set_remote_address (xfer, (struct sockaddr *)&addr, length,
                                      str_address);
             xfer->status = XFER_STATUS_ACTIVE;
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             xfer->hook_fd = weechat_hook_fd (xfer->sock,
                                              1, 0, 0,
                                              &xfer_chat_recv_cb,
@@ -495,7 +495,7 @@ xfer_network_fd_cb (const void *pointer, void *data, int fd)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -522,10 +522,10 @@ xfer_network_timer_cb (const void *pointer, void *data, int remaining_calls)
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         xfer->filename, xfer->remote_nick);
         xfer_close (xfer, XFER_STATUS_FAILED);
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -552,7 +552,7 @@ xfer_network_connect_chat_recv_cb (const void *pointer, void *data,
     xfer->hook_connect = NULL;
 
     /* connection OK? */
-    if (status == WEECHAT_HOOK_CONNECT_OK)
+    if (status == WHOREIRC_HOOK_CONNECT_OK)
     {
         xfer->sock = sock;
 
@@ -569,8 +569,8 @@ xfer_network_connect_chat_recv_cb (const void *pointer, void *data,
             close (xfer->sock);
             xfer->sock = -1;
             xfer_close (xfer, XFER_STATUS_FAILED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
-            return WEECHAT_RC_OK;
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
+            return WHOREIRC_RC_OK;
         }
 
         xfer->hook_fd = weechat_hook_fd (xfer->sock,
@@ -580,15 +580,15 @@ xfer_network_connect_chat_recv_cb (const void *pointer, void *data,
 
         xfer_chat_open_buffer (xfer);
         xfer->status = XFER_STATUS_ACTIVE;
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* connection error */
     switch (status)
     {
-        case WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND:
+        case WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND:
             weechat_printf (NULL,
                             (xfer->proxy && xfer->proxy[0]) ?
                             _("%s%s: proxy address \"%s\" not found") :
@@ -596,44 +596,44 @@ xfer_network_connect_chat_recv_cb (const void *pointer, void *data,
                             weechat_prefix ("error"), XFER_PLUGIN_NAME,
                             xfer->remote_address_str);
             break;
-        case WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
+        case WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND:
             weechat_printf (NULL,
                             (xfer->proxy && xfer->proxy[0]) ?
                             _("%s%s: proxy IP address not found") :
                             _("%s%s: IP address not found"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME);
             break;
-        case WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED:
+        case WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED:
             weechat_printf (NULL,
                             (xfer->proxy && xfer->proxy[0]) ?
                             _("%s%s: proxy connection refused") :
                             _("%s%s: connection refused"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME);
             break;
-        case WEECHAT_HOOK_CONNECT_PROXY_ERROR:
+        case WHOREIRC_HOOK_CONNECT_PROXY_ERROR:
             weechat_printf (NULL,
                             _("%s%s: proxy fails to establish connection to "
                               "server (check username/password if used and if "
                               "server address/port is allowed by proxy)"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME);
             break;
-        case WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
+        case WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR:
             weechat_printf (NULL,
                             _("%s%s: unable to set local hostname/IP"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME);
             break;
-        case WEECHAT_HOOK_CONNECT_MEMORY_ERROR:
+        case WHOREIRC_HOOK_CONNECT_MEMORY_ERROR:
             weechat_printf (NULL,
                             _("%s%s: not enough memory (%s)"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME,
                             (error) ? error : "-");
             break;
-        case WEECHAT_HOOK_CONNECT_TIMEOUT:
+        case WHOREIRC_HOOK_CONNECT_TIMEOUT:
             weechat_printf (NULL,
                             _("%s%s: timeout"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME);
             break;
-        case WEECHAT_HOOK_CONNECT_SOCKET_ERROR:
+        case WHOREIRC_HOOK_CONNECT_SOCKET_ERROR:
             weechat_printf (NULL,
                             _("%s%s: unable to create socket"),
                             weechat_prefix ("error"), XFER_PLUGIN_NAME);
@@ -653,9 +653,9 @@ xfer_network_connect_chat_recv_cb (const void *pointer, void *data,
     }
 
     xfer_close (xfer, XFER_STATUS_FAILED);
-    xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+    xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -748,7 +748,7 @@ xfer_network_connect_init (struct t_xfer *xfer)
 
         xfer->status = XFER_STATUS_CONNECTING;
     }
-    xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+    xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
 }
 
 /*
@@ -762,7 +762,7 @@ xfer_network_accept (struct t_xfer *xfer)
     {
         xfer->status = XFER_STATUS_CONNECTING;
         xfer_send_signal (xfer, "xfer_resume_ready");
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
     }
     else
         xfer_network_connect_init (xfer);

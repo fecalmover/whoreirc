@@ -3,8 +3,8 @@
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
-:man manual: WeeChat マニュアル
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC マニュアル
+:man source: WhoreIRC {revnumber}
 
 == 名前
 
@@ -21,12 +21,12 @@ whoreirc-headless - 拡張可能なチャットクライアント (ヘッドレ�
 
 == 説明
 
-WeeChat (Wee Enhanced Environment for Chat) はフリーのチャットクライアントです。
+WhoreIRC (Wee Enhanced Environment for Chat) はフリーのチャットクライアントです。
 高速で軽量、多くのオペレーティングシステムで動くように設計されています。
 スクリプトを使って高度にカスタマイズと拡張可能です。
 
-*whoreirc-headless* コマンドを使うことで、WeeChat をヘッドレスモード (インターフェースなし) で実行できます。
-ヘッドレスモードはテストや WeeChat をデーモン化する (オプション "--daemon" を使います) ために使われます。
+*whoreirc-headless* コマンドを使うことで、WhoreIRC をヘッドレスモード (インターフェースなし) で実行できます。
+ヘッドレスモードはテストや WhoreIRC をデーモン化する (オプション "--daemon" を使います) ために使われます。
 
 == オプション
 

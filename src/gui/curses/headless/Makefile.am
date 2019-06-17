@@ -17,7 +17,7 @@
 # along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-AM_CPPFLAGS = -DLOCALEDIR=\"$(datadir)/locale\" -DWEECHAT_HEADLESS
+AM_CPPFLAGS = -DLOCALEDIR=\"$(datadir)/locale\" -DWHOREIRC_HEADLESS
 
 noinst_LIBRARIES = lib_weechat_ncurses_fake.a lib_weechat_gui_headless.a
 

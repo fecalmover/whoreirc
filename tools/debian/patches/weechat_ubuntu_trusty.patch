@@ -75,7 +75,7 @@ index d3a1dad8b..718ae26b5 100644
 -    libphp-embed
 -Conflicts: weechat-php
 -Description: Fast, light and extensible chat client - PHP plugin
-- WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
+- WhoreIRC (Wee Enhanced Environment for Chat) is a fast and light chat client
 - for many operating systems. Everything can be done with a keyboard.
 - .
 - This package provides the PHP scripting API plugin.
@@ -175,7 +175,7 @@ index 8fbf582b3..f08af5ea6 100644
 -    weechat-curses (= ${binary:Version}) | weechat-headless (= ${binary:Version}),
 -    libphp-embed
 -Description: Fast, light and extensible chat client - PHP plugin
-- WeeChat (Wee Enhanced Environment for Chat) is a fast and light chat client
+- WhoreIRC (Wee Enhanced Environment for Chat) is a fast and light chat client
 - for many operating systems. Everything can be done with a keyboard.
 - .
 - This package provides the PHP scripting API plugin.

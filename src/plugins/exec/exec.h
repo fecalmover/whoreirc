@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_EXEC_H
-#define WEECHAT_PLUGIN_EXEC_H
+#ifndef WHOREIRC_PLUGIN_EXEC_H
+#define WHOREIRC_PLUGIN_EXEC_H
 
 #include <unistd.h>
 #include <time.h>
@@ -34,7 +34,7 @@ enum t_exec_color
     EXEC_COLOR_ANSI = 0,
     EXEC_COLOR_AUTO,
     EXEC_COLOR_IRC,
-    EXEC_COLOR_WEECHAT,
+    EXEC_COLOR_WHOREIRC,
     EXEC_COLOR_STRIP,
     /* number of color actions */
     EXEC_NUM_COLORS,
@@ -88,4 +88,4 @@ extern int exec_process_cb (const void *pointer, void *data,
 extern void exec_free (struct t_exec_cmd *exec_cmd);
 extern void exec_free_all ();
 
-#endif /* WEECHAT_PLUGIN_EXEC_H */
+#endif /* WHOREIRC_PLUGIN_EXEC_H */

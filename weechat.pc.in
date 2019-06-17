@@ -4,6 +4,6 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: whoreirc
-Description: WeeChat plugins headers
+Description: WhoreIRC plugins headers
 Version: @VERSION@
 Cflags: -I${includedir}/@PACKAGE@

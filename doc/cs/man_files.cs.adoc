@@ -1,5 +1,5 @@
 $HOME/.weechat/weechat.conf::
-    hlavní konfigurační soubor WeeChatu
+    hlavní konfigurační soubor WhoreIRCu
 
 $HOME/.weechat/plugins.conf::
     soubor konfigurace pluginů
@@ -71,4 +71,4 @@ $HOME/.weechat/xfer.conf::
     konfigurační soubor pro _xfer_ plugin
 
 $HOME/.weechat/weechat.log::
-    soubor záznamů WeeChatu
+    soubor záznamů WhoreIRCu

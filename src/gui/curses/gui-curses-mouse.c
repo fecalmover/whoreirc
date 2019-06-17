@@ -92,7 +92,7 @@ gui_mouse_enable ()
     fflush (stderr);
 
     (void) hook_signal_send ("mouse_enabled",
-                             WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                             WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }
 
 /*
@@ -107,7 +107,7 @@ gui_mouse_disable ()
     fflush (stderr);
 
     (void) hook_signal_send ("mouse_disabled",
-                             WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                             WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }
 
 /*
@@ -227,7 +227,7 @@ gui_mouse_event_timer_cb (const void *pointer, void *data, int remaining_calls)
 
     gui_mouse_event_end ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

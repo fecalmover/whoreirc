@@ -1,24 +1,24 @@
 *-a*, *--no-connect*::
-    deaktiviert das automatische Verbinden mit den Servern beim Start von WeeChat.
+    deaktiviert das automatische Verbinden mit den Servern beim Start von WhoreIRC.
 
 *-c*, *--colors*::
     zeigt die Standardfarben im Terminal an.
 
 *--daemon*::
-    startet WeeChat im Hintergrund, als Deamon (funktioniert nur mit
+    startet WhoreIRC im Hintergrund, als Deamon (funktioniert nur mit
     dem Befehl *weechat-headless*).
 
 *-d*, *--dir* _<path>_::
-    legt den Konfigurationsordner für WeeChat fest in welchem die Erweiterungen,
+    legt den Konfigurationsordner für WhoreIRC fest in welchem die Erweiterungen,
     Skripten, Protokolldateien etc.pp. gesichert werden (Voreinstellung: "~/.weechat").
     Sollte das Verzeichnis nicht existieren wird es beim Start angelegt.
-    Wird diese Option nicht genutzt, wird die Umgebungsvariable WEECHAT_HOME genutzt
+    Wird diese Option nicht genutzt, wird die Umgebungsvariable WHOREIRC_HOME genutzt
     (sofern diese vorhanden ist).
 
 *-t*, *--temp-dir*::
-    Erstellt ein temporäres WeeChat Heimatverzeichnis welches beim Beenden gelöscht wird
+    Erstellt ein temporäres WhoreIRC Heimatverzeichnis welches beim Beenden gelöscht wird
     (nicht nutzbar mit Option "-d"). +
-    Der Name des Verzeichnisses wird automatisch durch WeeChat vergeben, die Vorgabe für
+    Der Name des Verzeichnisses wird automatisch durch WhoreIRC vergeben, die Vorgabe für
     den Namen lautet: "weechat_temp_XXXXXX" ("XXXXXX" ist dabei ein zufälliger Wert).
     Dieses Verzeichnis wird dann im ersten möglichen Verzeichnis angelegt und anhand folgender
     Reihenfolge bestimmt: Umgebungsvariable "TMPDIR", "/tmp" (kann abweichend sein, abhängig
@@ -30,7 +30,7 @@
     zeigt einen Hilfstext an.
 
 *-l*, *--license*::
-    zeigt die Lizenz von WeeChat an.
+    zeigt die Lizenz von WhoreIRC an.
 
 *-p*, *--no-plugin*::
     unterbindet das Laden der Erweiterungen beim Programmstart.
@@ -47,10 +47,10 @@
     Skripten werden beim Programmstart nicht geladen.
 
 *--upgrade*::
-    führt ein WeeChat Upgrade mit Sitzungsdateien durch, die mittels dem Befehl `/upgrade -quit` erstellt wurden.
+    führt ein WhoreIRC Upgrade mit Sitzungsdateien durch, die mittels dem Befehl `/upgrade -quit` erstellt wurden.
 
 *-v*, *--version*::
-    zeigt die Version von WeeChat an.
+    zeigt die Version von WhoreIRC an.
 
 *plugin:option*::
     Option für Erweiterung.

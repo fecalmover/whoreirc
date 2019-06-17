@@ -179,7 +179,7 @@ relay_buffer_input_cb (const void *pointer, void *data,
             if (client && !RELAY_CLIENT_HAS_ENDED(client))
             {
                 relay_client_disconnect (client);
-                relay_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                relay_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             }
         }
         /* purge old clients */
@@ -193,7 +193,7 @@ relay_buffer_input_cb (const void *pointer, void *data,
                     relay_client_free (ptr_client);
                 ptr_client = next_client;
             }
-            relay_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            relay_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
         }
         /* quit relay buffer (close it) */
         else if (weechat_strcasecmp (input_data, "q") == 0)
@@ -206,12 +206,12 @@ relay_buffer_input_cb (const void *pointer, void *data,
             if (client && RELAY_CLIENT_HAS_ENDED(client))
             {
                 relay_client_free (client);
-                relay_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                relay_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             }
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -235,7 +235,7 @@ relay_buffer_close_cb (const void *pointer, void *data,
         relay_buffer = NULL;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

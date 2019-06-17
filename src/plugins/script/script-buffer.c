@@ -440,7 +440,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                                             "filename"),
                       weechat_hdata_string (hdata_config, ptr_config,
                                             "name"));
-            weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+            weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
             config_files++;
         }
         ptr_config = weechat_hdata_move (hdata_config, ptr_config, 1);
@@ -460,7 +460,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                           _("command /%s"),
                           weechat_infolist_string (infolist,
                                                    "command"));
-                weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+                weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
             }
         }
         weechat_infolist_free (infolist);
@@ -480,7 +480,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                           _("completion %%(%s)"),
                           weechat_infolist_string (infolist,
                                                    "completion_item"));
-                weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+                weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
             }
         }
         weechat_infolist_free (infolist);
@@ -500,7 +500,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                           "info \"%s\"",
                           weechat_infolist_string (infolist,
                                                    "info_name"));
-                weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+                weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
             }
         }
         weechat_infolist_free (infolist);
@@ -520,7 +520,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                           "info_hashtable \"%s\"",
                           weechat_infolist_string (infolist,
                                                    "info_name"));
-                weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+                weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
             }
         }
         weechat_infolist_free (infolist);
@@ -540,7 +540,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                           "infolist \"%s\"",
                           weechat_infolist_string (infolist,
                                                    "infolist_name"));
-                weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+                weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
             }
         }
         weechat_infolist_free (infolist);
@@ -560,7 +560,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                       weechat_hdata_string (hdata_bar_item,
                                             ptr_bar_item,
                                             "name"));
-            weechat_list_add (list, str_info, WEECHAT_LIST_POS_END, NULL);
+            weechat_list_add (list, str_info, WHOREIRC_LIST_POS_END, NULL);
         }
         ptr_bar_item = weechat_hdata_move (hdata_bar_item, ptr_bar_item, 1);
     }
@@ -581,7 +581,7 @@ script_buffer_get_script_usage (struct t_script_repo *script)
                       (config_files > 0) ? " " : "",
                       (config_files > 0) ? _("(old options?)") : "");
             weechat_list_add (list, str_info,
-                              WEECHAT_LIST_POS_END, NULL);
+                              WHOREIRC_LIST_POS_END, NULL);
         }
         weechat_infolist_free (infolist);
     }
@@ -942,11 +942,11 @@ script_buffer_window_scrolled_cb (const void *pointer, void *data,
 
     /* scrolled another window/buffer? then just ignore */
     if (weechat_window_get_pointer (signal_data, "buffer") != script_buffer)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* ignore if detail of a script is displayed */
     if (script_buffer_detail_script)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     script_buffer_get_window_info (signal_data, &start_line_y, &chat_height);
 
@@ -965,7 +965,7 @@ script_buffer_window_scrolled_cb (const void *pointer, void *data,
         line = script_repo_count_displayed - 1;
     script_buffer_set_current_line (line);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -998,7 +998,7 @@ script_buffer_input_cb (const void *pointer, void *data,
     if (strcmp (input_data, "q") == 0)
     {
         weechat_buffer_close (buffer);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (!script_buffer_detail_script)
@@ -1010,7 +1010,7 @@ script_buffer_input_cb (const void *pointer, void *data,
                 weechat_config_option_set (script_config_look_sort, input_data + 2, 1);
             else
                 weechat_config_option_reset (script_config_look_sort, 1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* refresh buffer */
@@ -1021,7 +1021,7 @@ script_buffer_input_cb (const void *pointer, void *data,
             script_repo_remove_all ();
             script_repo_file_read (1);
             script_buffer_refresh (1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -1033,7 +1033,7 @@ script_buffer_input_cb (const void *pointer, void *data,
             snprintf (str_command, sizeof (str_command),
                       "/script %s", actions[i][1]);
             weechat_command (buffer, str_command);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -1041,7 +1041,7 @@ script_buffer_input_cb (const void *pointer, void *data,
     if (!script_buffer_detail_script)
         script_repo_filter_scripts (input_data);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1061,7 +1061,7 @@ script_buffer_close_cb (const void *pointer, void *data,
     script_buffer_selected_line = 0;
     script_buffer_detail_script = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

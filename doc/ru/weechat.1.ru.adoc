@@ -4,8 +4,8 @@
 :email: flashcode@flashtux.org
 :lang: ru
 // TRANSLATION MISSING
-:man manual: WeeChat Manual
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC Manual
+:man source: WhoreIRC {revnumber}
 
 == НАЗВАНИЕ
 
@@ -23,7 +23,7 @@ weechat - расширяемый чат-клиент
 
 == ОПИСАНИЕ
 
-WeeChat (Wee Enhanced Environment for Chat) это свободный чат-клиент - быстрый и легкий,
+WhoreIRC (Wee Enhanced Environment for Chat) это свободный чат-клиент - быстрый и легкий,
 он подходит для большинства операционных систем.
 Его легко настроить, кроме того, вы можете расширить его функицонал при помощи скриптов.
 

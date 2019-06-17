@@ -1,4 +1,4 @@
-= WeeChat Quickstart Anleitung
+= WhoreIRC Quickstart Anleitung
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: de
@@ -16,7 +16,7 @@
 
 
 [[start]]
-== Start von WeeChat
+== Start von WhoreIRC
 
 Die bevorzugte Terminal-Emulation für X (aber nicht obligatorisch) ist
 rxvt-unicode: rxvt verfügt über eine gute UTF-8 Unterstützung und hat
@@ -31,7 +31,7 @@ $ weechat
 [[help]]
 == Online-Hilfe
 
-Für jeden Befehl bietet WeeChat eine Hilfe an:
+Für jeden Befehl bietet WhoreIRC eine Hilfe an:
 
 ----
 /help
@@ -63,14 +63,14 @@ Um Optionen zu setzen benutzt man:
 /set config.section.option Wert
 ----
 
-WeeChat verwendet umgehend einen neu eingestellten Wert (WeeChat muss also zu *keinem* Zeitpunkt
+WhoreIRC verwendet umgehend einen neu eingestellten Wert (WhoreIRC muss also zu *keinem* Zeitpunkt
 neu gestartet werden, nach dem die Konfiguration verändert wurde).
 
-Beim Beenden von WeeChat werden alle Einstellungen gespeichert (mittels des
+Beim Beenden von WhoreIRC werden alle Einstellungen gespeichert (mittels des
 Befehls `/save` kann das Sichern der Optionen manuell durchgeführt werden).
 
 [IMPORTANT]
-Es wird *nicht empfohlen* die Konfigurationsdateien manuell zu editieren, da WeeChat
+Es wird *nicht empfohlen* die Konfigurationsdateien manuell zu editieren, da WhoreIRC
 diese Dateien zu jeder Zeit überschreiben kann (zum Beispiel: `/quit`).
 Außerdem muß eine veränderte Datei manuell mit dem Befehl `/reload` neu
 geladen werden (mit dem Risiko von Datenverlust da Optionen kommentarlos überschrieben werden,
@@ -81,7 +81,7 @@ zusätzlich auch die Eingabe auf Plausibilität geprüft wird und Änderungen so
 Mit der _fset_ Erweiterung kann man sehr einfach Optionen finden und diese
 den eigenen Bedürfnissen anpassen.
 
-Um zum Beispiel alle WeeChat Optionen anzuzeigen:
+Um zum Beispiel alle WhoreIRC Optionen anzuzeigen:
 
 ----
 /fset weechat.*
@@ -104,9 +104,9 @@ siehe `/help fset`.
 [[core_vs_plugins]]
 == Kern (Core) vs Erweiterungen
 
-Der Kern (core) von WeeChat dient ausschließlich dazu um Daten auf dem Bildschirm
-auszugeben und um mit dem Benutzer zu interagieren. Dies bedeutet das WeeChat,
--also der WeeChat core-, ohne jedwede Erweiterung, unbrauchbar ist.
+Der Kern (core) von WhoreIRC dient ausschließlich dazu um Daten auf dem Bildschirm
+auszugeben und um mit dem Benutzer zu interagieren. Dies bedeutet das WhoreIRC,
+-also der WhoreIRC core-, ohne jedwede Erweiterung, unbrauchbar ist.
 (an die treuen User: IRC war Teil des Kerns in den Versionen ≤ 0.2.6)
 
 Alle Netzwerkprotokolle, z.B. IRC, werden als separate Erweiterung bereit gestellt.
@@ -124,7 +124,7 @@ Um eine Verbindung zu einem IRC Server herzustellen wird der
 /server add freenode chat.freenode.net
 ----
 
-In dieser Zeile ist `freenode` der interne Servername der von WeeChat genutzt wird:
+In dieser Zeile ist `freenode` der interne Servername der von WhoreIRC genutzt wird:
 Damit ist es möglich sich mit dem Server zu verbinden `/connect freenode` und um
 die Server relevanten Optionen anzupassen _irc.server.freenode.xxx_.
 
@@ -137,12 +137,12 @@ Falls noch Fragen offen sein sollten, einfach die Hilfe verwenden:
 [[irc_server_options]]
 == Setzen eigener IRC-Server Optionen
 
-WeeChat verwendet Vorgabewerte für alle Server (so genannte "fall backs"), sofern
+WhoreIRC verwendet Vorgabewerte für alle Server (so genannte "fall backs"), sofern
 keine individuellen Werte für die entsprechenden Server-Optionen gesetzt worden sind.
 Die Vorgabewerte sind in "irc.server_default.*" hinterlegt.
 
-Für jede Server-Option benutzt WeeChat den individuellen Wert - falls einer
-definiert ist (nicht "null"). Andernfalls verwendet WeeChat die Vorgabewerte
+Für jede Server-Option benutzt WhoreIRC den individuellen Wert - falls einer
+definiert ist (nicht "null"). Andernfalls verwendet WhoreIRC die Vorgabewerte
 ("irc.server_default.xxx").
 
 Beispielsweise werden Standard Nicks verwendet (basierend auf dem  Un*x Login). Um
@@ -159,7 +159,7 @@ Um den User- und realen Namen anzupassen:
 /set irc.server.freenode.realname "Mein wirklicher Name"
 ----
 
-Um beim Start von WeeChat automatisch eine Verbindung zu einem Server
+Um beim Start von WhoreIRC automatisch eine Verbindung zu einem Server
 herzustellen:
 
 ----
@@ -254,7 +254,7 @@ Dieser Befehl kann dazu benutzt werden um einen neuen Server zu erstellen und
 sich mit diesem zu verbinden, ohne den Befehl `/server` zu benutzen
 (siehe `/help connect`).
 
-Alle Server-Buffer und der WeeChat Kernbuffer, der sogenannte -core-Buffer-, werden
+Alle Server-Buffer und der WhoreIRC Kernbuffer, der sogenannte -core-Buffer-, werden
 standardmäßig zusammengelegt. Um zwischen dem core-Buffer und den Server-Buffern
 zu wechseln, kannst Du kbd:[Ctrl+x] benutzen.
 
@@ -320,7 +320,7 @@ Ein Buffer ist einer Erweiterung zugeordnet und besitzt eine Buffer-Nummer,
 einen Buffer-Namen und beinhaltet die auf dem Bildschirm dargestellten
 Zeilen.
 
-Ein Fenster ist die Ansicht eines Buffers. Standardmäßig nutzt WeeChat ein
+Ein Fenster ist die Ansicht eines Buffers. Standardmäßig nutzt WhoreIRC ein
 Fenster, in welchem ein Buffer darstellt wird. Wird der Bildschirm in
 mehrere Fenster aufgeteilt, kann man sich entsprechend der Anzahl der
 geteilten Fenster einen Buffer pro Fenster anzeigen lassen.
@@ -348,7 +348,7 @@ Um die Teilung des Bildschirms rückgängig zu machen:
 [[key_bindings]]
 == Tastaturbelegung
 
-WeeChat verwendet viele Standardtasten. Alle Tastenbelegungen sind in der
+WhoreIRC verwendet viele Standardtasten. Alle Tastenbelegungen sind in der
 Dokumentation beschrieben. Im folgenden werden die wichtigsten Tastenbelegungen
 kurz erläutert:
 
@@ -393,7 +393,7 @@ erhältlich (z.B. weechat-plugins).
 Erweiterungen werden -sofern welche gefunden worden sind- automatisch geladen (Bitte beachte
 die Dokumentation zum installieren/entfernen von Erweiterungen und/oder Skripten).
 
-Viele externe Skripten (von Drittprogrammierern) sind für WeeChat verfügbar. Diese
+Viele externe Skripten (von Drittprogrammierern) sind für WhoreIRC verfügbar. Diese
 Skripten können mittels des `/script` Befehls heruntergeladen und installiert werden:
 
 ----
@@ -402,14 +402,14 @@ Skripten können mittels des `/script` Befehls heruntergeladen und installiert w
 
 siehe `/help script` für weitere Informationen.
 
-Eine Liste aller verfügbaren Skripten kann man sich in WeeChat mittels
+Eine Liste aller verfügbaren Skripten kann man sich in WhoreIRC mittels
 `/script` anzeigen lassen oder man besucht folgende Webseite:
 https://weechat.org/scripts
 
 [[more_doc]]
 == Weitere Dokumentation
 
-Nun kannst Du WeeChat nutzen, für weitere Fragen lese die FAQ und/oder Dokumentation:
+Nun kannst Du WhoreIRC nutzen, für weitere Fragen lese die FAQ und/oder Dokumentation:
 https://weechat.org/doc
 
-Viel Spass mit WeeChat!
+Viel Spass mit WhoreIRC!

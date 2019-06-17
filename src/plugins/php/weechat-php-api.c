@@ -4,20 +4,20 @@
  * Copyright (C) 2006-2017 Adam Saponara <as@php.net>
  * Copyright (C) 2017-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  *
  * OpenSSL licensing:
  *
@@ -51,13 +51,13 @@
     if (__init                                                          \
         && (!php_current_script || !php_current_script->name))          \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_NOT_INIT(PHP_CURRENT_SCRIPT_NAME,            \
+        WHOREIRC_SCRIPT_MSG_NOT_INIT(PHP_CURRENT_SCRIPT_NAME,            \
                                     php_function_name);                 \
         __ret;                                                          \
     }
 #define API_WRONG_ARGS(__ret)                                           \
     {                                                                   \
-        WEECHAT_SCRIPT_MSG_WRONG_ARGS(PHP_CURRENT_SCRIPT_NAME,          \
+        WHOREIRC_SCRIPT_MSG_WRONG_ARGS(PHP_CURRENT_SCRIPT_NAME,          \
                                       php_function_name);               \
         __ret;                                                          \
     }
@@ -211,12 +211,12 @@ weechat_php_cb (const void *pointer, void *data, void **func_argv,
         goto weechat_php_cb_err;
     }
 
-    if (func_type == WEECHAT_SCRIPT_EXEC_INT)
+    if (func_type == WHOREIRC_SCRIPT_EXEC_INT)
     {
         *((int *)rc) = *((int *)ret);
         free (ret);
     }
-    else if (func_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+    else if (func_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
     {
         *((struct t_hashtable **)rc) = (struct t_hashtable *)ret;
     }
@@ -227,11 +227,11 @@ weechat_php_cb (const void *pointer, void *data, void **func_argv,
     return;
 
 weechat_php_cb_err:
-    if (func_type == WEECHAT_SCRIPT_EXEC_INT)
+    if (func_type == WHOREIRC_SCRIPT_EXEC_INT)
     {
-        *((int *)rc) = WEECHAT_RC_ERROR;
+        *((int *)rc) = WHOREIRC_RC_ERROR;
     }
-    else if (func_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+    else if (func_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
     {
         *((struct t_hashtable **)rc) = NULL;
     }
@@ -244,7 +244,7 @@ weechat_php_cb_err:
 /*
  * Wrappers for functions in scripting API.
  *
- * For more info about these functions, look at their implementation in WeeChat
+ * For more info about these functions, look at their implementation in WhoreIRC
  * core.
  */
 
@@ -551,19 +551,19 @@ API_FUNC(string_eval_expression)
     expr = ZSTR_VAL(z_expr);
     pointers = weechat_php_array_to_hashtable (
         z_pointers,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER);
     extra_vars = weechat_php_array_to_hashtable (
         z_extra_vars,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     options = weechat_php_array_to_hashtable (
         z_options,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_expression ((const char *)expr,
                                              pointers,
@@ -596,19 +596,19 @@ API_FUNC(string_eval_path_home)
     path = ZSTR_VAL(z_path);
     pointers = weechat_php_array_to_hashtable (
         z_pointers,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER);
     extra_vars = weechat_php_array_to_hashtable (
         z_extra_vars,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     options = weechat_php_array_to_hashtable (
         z_options,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_string_eval_path_home ((const char *)path,
                                             pointers,
@@ -968,7 +968,7 @@ weechat_php_api_config_reload_cb (const void *pointer, void *data,
     func_argv[1] = (char *)API_PTR2STR(config_file);
 
     weechat_php_cb (pointer, data, func_argv, "ss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1018,7 +1018,7 @@ weechat_php_api_config_section_read_cb (const void *pointer, void *data,
     func_argv[4] = value ? (char *)value : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sssss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1035,7 +1035,7 @@ weechat_php_api_config_section_write_cb (const void *pointer, void *data,
     func_argv[2] = section_name ? (char *)section_name : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1053,7 +1053,7 @@ weechat_php_api_config_section_write_default_cb (const void *pointer,
     func_argv[2] = section_name ? (char *)section_name : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1075,7 +1075,7 @@ weechat_php_api_config_section_create_option_cb (const void *pointer,
     func_argv[4] = value ? (char *)value : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sssss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1095,7 +1095,7 @@ weechat_php_api_config_section_delete_option_cb (const void *pointer,
     func_argv[3] = (char *)API_PTR2STR(option);
 
     weechat_php_cb (pointer, data, func_argv, "ssss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1205,7 +1205,7 @@ weechat_php_api_config_option_check_value_cb (const void *pointer,
     func_argv[2] = value ? (char *)value : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -1221,7 +1221,7 @@ weechat_php_api_config_option_change_cb (const void *pointer,
     func_argv[1] = (char *)API_PTR2STR(option);
 
     weechat_php_cb (pointer, data, func_argv, "ss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 }
 
 static void
@@ -1235,7 +1235,7 @@ weechat_php_api_config_option_delete_cb (const void *pointer,
     func_argv[1] = (char *)API_PTR2STR(option);
 
     weechat_php_cb (pointer, data, func_argv, "ss",
-                   WEECHAT_SCRIPT_EXEC_INT, &rc);
+                   WHOREIRC_SCRIPT_EXEC_INT, &rc);
 }
 
 API_FUNC(config_new_option)
@@ -1356,10 +1356,10 @@ API_FUNC(config_option_reset)
     struct t_config_option *option;
     int run_callback, result;
 
-    API_INIT_FUNC(1, "config_option_reset", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_reset", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "Sl",
                                &z_option, &z_run_callback) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = (struct t_config_option *)API_STR2PTR(ZSTR_VAL(z_option));
     run_callback = (int)z_run_callback;
@@ -1376,11 +1376,11 @@ API_FUNC(config_option_set)
     char *value;
     int run_callback, result;
 
-    API_INIT_FUNC(1, "config_option_set",  API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set",  API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "SSl",
                                &z_option, &z_value,
                                &z_run_callback) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = (struct t_config_option *)API_STR2PTR(ZSTR_VAL(z_option));
     value = ZSTR_VAL(z_value);
@@ -1398,10 +1398,10 @@ API_FUNC(config_option_set_null)
     struct t_config_option *option;
     int run_callback, result;
 
-    API_INIT_FUNC(1, "config_option_set_null", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_option_set_null", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "Sl",
                                &z_option, &z_run_callback) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = (struct t_config_option *)API_STR2PTR(ZSTR_VAL(z_option));
     run_callback = (int)z_run_callback;
@@ -1416,9 +1416,9 @@ API_FUNC(config_option_unset)
     struct t_config_option *option;
     int result;
 
-    API_INIT_FUNC(1, "config_option_unset", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_option_unset", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "S", &z_option) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     option = (struct t_config_option *)API_STR2PTR(ZSTR_VAL(z_option));
     result = weechat_config_option_unset (option);
@@ -1651,10 +1651,10 @@ API_FUNC(config_write)
     struct t_config_file *config_file;
     int result;
 
-    API_INIT_FUNC(1, "config_write", API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+    API_INIT_FUNC(1, "config_write", API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "S",
                                &z_config_file) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_WRITE_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_WRITE_ERROR));
 
     config_file = (struct t_config_file *)API_STR2PTR(ZSTR_VAL(z_config_file));
     result = weechat_config_write (config_file);
@@ -1668,10 +1668,10 @@ API_FUNC(config_read)
     struct t_config_file *config_file;
     int result;
 
-    API_INIT_FUNC(1, "config_read", API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+    API_INIT_FUNC(1, "config_read", API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "S",
                                &z_config_file) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
 
     config_file = (struct t_config_file *)API_STR2PTR(ZSTR_VAL(z_config_file));
     result = weechat_config_read (config_file);
@@ -1685,10 +1685,10 @@ API_FUNC(config_reload)
     struct t_config_file *config_file;
     int result;
 
-    API_INIT_FUNC(1, "config_reload", API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+    API_INIT_FUNC(1, "config_reload", API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "S",
                                &z_config_file) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
 
     config_file = (struct t_config_file *)API_STR2PTR(ZSTR_VAL(z_config_file));
     result = weechat_config_reload (config_file);
@@ -1819,10 +1819,10 @@ API_FUNC(config_set_plugin)
     char *option, *value;
     int result;
 
-    API_INIT_FUNC(1, "config_set_plugin", API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+    API_INIT_FUNC(1, "config_set_plugin", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "SS", &z_option,
                                &z_value) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_SET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_SET_ERROR));
 
     option = ZSTR_VAL(z_option);
     value = ZSTR_VAL(z_value);
@@ -1860,9 +1860,9 @@ API_FUNC(config_unset_plugin)
     char *option;
     int result;
 
-    API_INIT_FUNC(1, "config_unset_plugin", API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    API_INIT_FUNC(1, "config_unset_plugin", API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "S", &z_option) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
     option = ZSTR_VAL(z_option);
     result = plugin_script_api_config_unset_plugin (weechat_php_plugin,
@@ -1887,9 +1887,9 @@ API_FUNC(key_bind)
 
     context = ZSTR_VAL(z_context);
     keys = weechat_php_array_to_hashtable (z_keys,
-                                           WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING);
+                                           WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_key_bind ((const char *)context, keys);
 
@@ -2053,7 +2053,7 @@ weechat_php_api_hook_command_cb (const void *pointer, void *data,
     func_argv[2] = (argc > 1) ? argv_eol[1] : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2110,7 +2110,7 @@ weechat_php_api_hook_completion_cb (const void *pointer, void *data,
     func_argv[3] = (char *)API_PTR2STR(completion);
 
     weechat_php_cb (pointer, data, func_argv, "ssss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2203,7 +2203,7 @@ weechat_php_api_hook_command_run_cb (const void *pointer, void *data,
     func_argv[2] = command ? (char *)command : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2246,7 +2246,7 @@ weechat_php_api_hook_timer_cb (const void *pointer, void *data,
     func_argv[1] = &remaining_calls;
 
     weechat_php_cb (pointer, data, func_argv, "si",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2296,7 +2296,7 @@ weechat_php_api_hook_fd_cb (const void *pointer, void *data,
     func_argv[1] = &fd;
 
     weechat_php_cb (pointer, data, func_argv, "si",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2351,7 +2351,7 @@ weechat_php_api_hook_process_cb (const void *pointer, void *data,
     func_argv[4] = err ? (char *)err : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "ssiss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2403,7 +2403,7 @@ weechat_php_api_hook_process_hashtable_cb (const void *pointer, void *data,
     func_argv[4] = err ? (char *)err : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "ssiss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2427,9 +2427,9 @@ API_FUNC(hook_process_hashtable)
     command = ZSTR_VAL(z_command);
     options = weechat_php_array_to_hashtable (
         z_options,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
     timeout = (int)z_timeout;
     weechat_php_get_function_name (z_callback, callback_name);
     data = ZSTR_VAL(z_data);
@@ -2466,7 +2466,7 @@ weechat_php_api_hook_connect_cb (const void *pointer, void *data, int status,
     func_argv[5] = ip_address ? (char *)ip_address : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "siiiss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2535,7 +2535,7 @@ weechat_php_api_hook_line_cb (const void *pointer, void *data,
     func_argv[1] = line;
 
     weechat_php_cb (pointer, data, func_argv, "sh",
-                    WEECHAT_SCRIPT_EXEC_HASHTABLE, &rc);
+                    WHOREIRC_SCRIPT_EXEC_HASHTABLE, &rc);
 
     return rc;
 }
@@ -2593,7 +2593,7 @@ weechat_php_api_hook_print_cb (const void *pointer, void *data,
     func_argv[8] = message ? (char *)message : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "ssiisiiss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2649,7 +2649,7 @@ weechat_php_api_hook_signal_cb (const void *pointer, void *data,
     func_argv[3] = signal_data ? (char *)signal_data : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "ssss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2689,10 +2689,10 @@ API_FUNC(hook_signal_send)
     void *signal_data;
     int result;
 
-    API_INIT_FUNC(1, "hook_signal_send", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_signal_send", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "SSS", &z_signal, &z_type_data,
                                &z_signal_data) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     signal = ZSTR_VAL(z_signal);
     type_data = ZSTR_VAL(z_type_data);
@@ -2715,7 +2715,7 @@ weechat_php_api_hook_hsignal_cb (const void *pointer, void *data,
     func_argv[2] = hashtable;
 
     weechat_php_cb (pointer, data, func_argv, "ssh",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2756,17 +2756,17 @@ API_FUNC(hook_hsignal_send)
     struct t_hashtable *hashtable;
     int result;
 
-    API_INIT_FUNC(1, "hook_hsignal_send", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "hook_hsignal_send", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "Sa", &z_signal,
                                &z_hashtable) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     signal = ZSTR_VAL(z_signal);
     hashtable = weechat_php_array_to_hashtable (
         z_hashtable,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_hook_hsignal_send ((const char *)signal, hashtable);
 
@@ -2787,7 +2787,7 @@ weechat_php_api_hook_config_cb (const void *pointer, void *data,
     func_argv[2] = value ? (char *)value : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -2834,7 +2834,7 @@ weechat_php_api_hook_modifier_cb (const void *pointer, void *data,
     func_argv[3] = string ? (char *)string : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "ssss",
-                    WEECHAT_SCRIPT_EXEC_STRING, &rc);
+                    WHOREIRC_SCRIPT_EXEC_STRING, &rc);
 
     return rc;
 }
@@ -2900,7 +2900,7 @@ weechat_php_api_hook_info_cb (const void *pointer,
     func_argv[2] = arguments ? (char *)arguments : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_STRING, &rc);
+                    WHOREIRC_SCRIPT_EXEC_STRING, &rc);
 
     return rc;
 }
@@ -2950,7 +2950,7 @@ weechat_php_api_hook_info_hashtable_cb (const void *pointer, void *data,
     func_argv[2] = hashtable;
 
     weechat_php_cb (pointer, data, func_argv, "ssh",
-                    WEECHAT_SCRIPT_EXEC_HASHTABLE, &rc);
+                    WHOREIRC_SCRIPT_EXEC_HASHTABLE, &rc);
 
     return rc;
 }
@@ -3007,7 +3007,7 @@ weechat_php_api_hook_infolist_cb (const void *pointer, void *data,
     func_argv[3] = (arguments) ? (char *)arguments : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "ssss",
-                    WEECHAT_SCRIPT_EXEC_POINTER, &rc);
+                    WHOREIRC_SCRIPT_EXEC_POINTER, &rc);
 
     return rc;
 }
@@ -3060,7 +3060,7 @@ weechat_php_api_hook_focus_cb (const void *pointer, void *data,
     func_argv[1] = info;
 
     weechat_php_cb (pointer, data, func_argv, "sh",
-                    WEECHAT_SCRIPT_EXEC_HASHTABLE, &rc);
+                    WHOREIRC_SCRIPT_EXEC_HASHTABLE, &rc);
 
     return rc;
 }
@@ -3154,7 +3154,7 @@ weechat_php_api_buffer_input_data_cb (const void *pointer, void *data,
     func_argv[2] = input_data ? (char *)input_data : weechat_php_empty_arg;
 
     weechat_php_cb (pointer, data, func_argv, "sss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -3169,7 +3169,7 @@ weechat_php_api_buffer_close_cb (const void *pointer, void *data,
     func_argv[1] = (char *)API_PTR2STR(buffer);
 
     weechat_php_cb (pointer, data, func_argv, "ss",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }
@@ -3933,7 +3933,7 @@ weechat_php_api_bar_item_new_build_cb (const void *pointer, void *data,
     func_argv[4] = extra_info;
 
     weechat_php_cb (pointer, data, func_argv, "ssssh",
-                    WEECHAT_SCRIPT_EXEC_STRING, &rc);
+                    WHOREIRC_SCRIPT_EXEC_STRING, &rc);
 
     return rc;
 }
@@ -4127,10 +4127,10 @@ API_FUNC(command)
     char *command;
     int result;
 
-    API_INIT_FUNC(1, "command", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "SS", &z_buffer,
                                &z_command) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     buffer = (struct t_gui_buffer *)API_STR2PTR(ZSTR_VAL(z_buffer));
     command = ZSTR_VAL(z_command);
@@ -4151,18 +4151,18 @@ API_FUNC(command_options)
     struct t_hashtable *options;
     int result;
 
-    API_INIT_FUNC(1, "command", API_RETURN_INT(WEECHAT_RC_ERROR));
+    API_INIT_FUNC(1, "command", API_RETURN_INT(WHOREIRC_RC_ERROR));
     if (zend_parse_parameters (ZEND_NUM_ARGS(), "SSa", &z_buffer,
                                &z_command, &z_options) == FAILURE)
-        API_WRONG_ARGS(API_RETURN_INT(WEECHAT_RC_ERROR));
+        API_WRONG_ARGS(API_RETURN_INT(WHOREIRC_RC_ERROR));
 
     buffer = (struct t_gui_buffer *)API_STR2PTR(ZSTR_VAL(z_buffer));
     command = ZSTR_VAL(z_command);
     options = weechat_php_array_to_hashtable (
         z_options,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = plugin_script_api_command_options (weechat_php_plugin,
                                                 php_current_script,
@@ -4209,9 +4209,9 @@ API_FUNC(info_get_hashtable)
     info_name = ZSTR_VAL(z_info_name);
     hashtable = weechat_php_array_to_hashtable (
         z_hashtable,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_info_get_hashtable ((const char *)info_name, hashtable);
 
@@ -4953,9 +4953,9 @@ API_FUNC(hdata_update)
     pointer = (void *)API_STR2PTR(ZSTR_VAL(z_pointer));
     hashtable = weechat_php_array_to_hashtable (
         z_hashtable,
-        WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING);
+        WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING);
 
     result = weechat_hdata_update (hdata, pointer, hashtable);
 
@@ -4998,7 +4998,7 @@ weechat_php_api_upgrade_read_cb (const void *pointer, void *data,
     func_argv[3] = (char *)API_PTR2STR(infolist);
 
     weechat_php_cb (pointer, data, func_argv, "ssis",
-                    WEECHAT_SCRIPT_EXEC_INT, &rc);
+                    WHOREIRC_SCRIPT_EXEC_INT, &rc);
 
     return rc;
 }

@@ -17,11 +17,11 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_XFER_CHAT_H
-#define WEECHAT_PLUGIN_XFER_CHAT_H
+#ifndef WHOREIRC_PLUGIN_XFER_CHAT_H
+#define WHOREIRC_PLUGIN_XFER_CHAT_H
 
 extern void xfer_chat_sendf (struct t_xfer *xfer, const char *format, ...);
 extern int xfer_chat_recv_cb (const void *pointer, void *data, int fd);
 extern void xfer_chat_open_buffer (struct t_xfer *xfer);
 
-#endif /* WEECHAT_PLUGIN_XFER_CHAT_H */
+#endif /* WHOREIRC_PLUGIN_XFER_CHAT_H */

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -495,7 +495,7 @@ trigger_command_trigger (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_RC_OK;
+    rc = WHOREIRC_RC_OK;
     sargv = NULL;
 
     /* list all triggers */
@@ -685,9 +685,9 @@ trigger_command_trigger (const void *pointer, void *data,
         items = weechat_string_split (trigger_hook_default_rc[type],
                                       ",",
                                       NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0,
                                       &num_items);
         snprintf (input, sizeof (input),
@@ -1115,14 +1115,14 @@ trigger_command_trigger (const void *pointer, void *data,
     }
 
 error:
-    rc = WEECHAT_RC_ERROR;
+    rc = WHOREIRC_RC_ERROR;
 
 end:
     if (sargv)
         weechat_string_free_split (sargv);
 
-    if (rc == WEECHAT_RC_ERROR)
-        WEECHAT_COMMAND_ERROR;
+    if (rc == WHOREIRC_RC_ERROR)
+        WHOREIRC_COMMAND_ERROR;
 
     return rc;
 }
@@ -1136,7 +1136,7 @@ trigger_command_init ()
 {
     weechat_hook_command (
         "trigger",
-        N_("manage triggers, the Swiss Army knife for WeeChat"),
+        N_("manage triggers, the Swiss Army knife for WhoreIRC"),
         N_("list|listfull|listdefault"
            " || add|addoff|addreplace <name> <hook> [\"<arguments>\" "
            "[\"<conditions>\" [\"<regex>\" [\"<command>\" "

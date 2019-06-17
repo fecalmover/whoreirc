@@ -29,4 +29,4 @@ if(ICONV_FOUND)
   endif()
 endif()
 
-install(TARGETS charset LIBRARY DESTINATION ${WEECHAT_LIBDIR}/plugins)
+install(TARGETS charset LIBRARY DESTINATION ${WHOREIRC_LIBDIR}/plugins)

@@ -1,5 +1,5 @@
 $HOME/.whoreirc/whoreirc.conf::
-    WeeChat の主要設定ファイル
+    WhoreIRC の主要設定ファイル
 
 $HOME/.whoreirc/plugins.conf::
     プラグイン設定ファイル
@@ -71,4 +71,4 @@ $HOME/.whoreirc/xfer.conf::
     _xfer_ プラグイン用の設定ファイル
 
 $HOME/.whoreirc/whoreirc.log::
-    WeeChat ログファイル
+    WhoreIRC ログファイル

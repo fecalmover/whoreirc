@@ -3,8 +3,8 @@
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: de
-:man manual: WeeChat Manual
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC Manual
+:man source: WhoreIRC {revnumber}
 
 == NAME
 
@@ -21,7 +21,7 @@ weechat - der erweiterbare Chat Client
 
 == BESCHREIBUNG
 
-WeeChat (Wee Enhanced Environment for Chat) ist ein freier, schneller und
+WhoreIRC (Wee Enhanced Environment for Chat) ist ein freier, schneller und
 schlanker Chat-Client der für unterschiedliche Betriebssysteme entwickelt wird.
 Durch Skripten ist das Hauptprogramm äußerst flexibel und erweiterbar.
 

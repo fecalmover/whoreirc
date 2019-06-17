@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_XFER_CONFIG_H
-#define WEECHAT_PLUGIN_XFER_CONFIG_H
+#ifndef WHOREIRC_PLUGIN_XFER_CONFIG_H
+#define WHOREIRC_PLUGIN_XFER_CONFIG_H
 
 #define XFER_CONFIG_NAME "xfer"
 
@@ -59,4 +59,4 @@ extern int xfer_config_init ();
 extern int xfer_config_read ();
 extern int xfer_config_write ();
 
-#endif /* WEECHAT_PLUGIN_XFER_CONFIG_H */
+#endif /* WHOREIRC_PLUGIN_XFER_CONFIG_H */

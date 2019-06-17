@@ -17,14 +17,14 @@
 # along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-add_definitions(-DWEECHAT_HEADLESS)
+add_definitions(-DWHOREIRC_HEADLESS)
 
 # fake ncurses lib (for headless mode and tests)
-set(LIB_WEECHAT_NCURSES_FAKE_SRC
+set(LIB_WHOREIRC_NCURSES_FAKE_SRC
   ncurses-fake.h
   ncurses-fake.c
 )
-add_library(weechat_ncurses_fake STATIC ${LIB_WEECHAT_NCURSES_FAKE_SRC})
+add_library(weechat_ncurses_fake STATIC ${LIB_WHOREIRC_NCURSES_FAKE_SRC})
 
 set(LIB_GUI_CURSES_SRC
   ../gui-curses.h
@@ -42,11 +42,11 @@ include_directories(. .. ../../core ../../plugins)
 
 add_library(weechat_gui_headless STATIC ${LIB_GUI_CURSES_SRC})
 
-set(WEECHAT_CURSES_MAIN_HEADLESS_SRC main.c)
+set(WHOREIRC_CURSES_MAIN_HEADLESS_SRC main.c)
 
 set(EXECUTABLE weechat-headless)
 
-add_executable(${EXECUTABLE} ${WEECHAT_CURSES_MAIN_HEADLESS_SRC})
+add_executable(${EXECUTABLE} ${WHOREIRC_CURSES_MAIN_HEADLESS_SRC})
 
 add_dependencies(${EXECUTABLE} weechat_gui_headless weechat_ncurses_fake)
 

@@ -46,11 +46,11 @@ include_directories(.. ../../core ../../plugins ${NCURSES_INCLUDE_PATH})
 
 add_library(weechat_gui_curses_normal STATIC ${LIB_GUI_CURSES_SRC})
 
-set(WEECHAT_CURSES_MAIN_SRC main.c)
+set(WHOREIRC_CURSES_MAIN_SRC main.c)
 
 set(EXECUTABLE weechat)
 
-add_executable(${EXECUTABLE} ${WEECHAT_CURSES_MAIN_SRC})
+add_executable(${EXECUTABLE} ${WHOREIRC_CURSES_MAIN_SRC})
 
 add_dependencies(${EXECUTABLE} weechat_gui_curses_normal)
 

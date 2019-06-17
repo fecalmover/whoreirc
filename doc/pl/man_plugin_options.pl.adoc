@@ -1,12 +1,12 @@
 Kompletna dokumentacja na temat opcji wtyczek dostępna jest
-w https://whoreirc.org/doc[WeeChat user's guide].
+w https://whoreirc.org/doc[WhoreIRC user's guide].
 
 Dzięki wtyczce irc możliwe jest połączenie z serwerami tymczasowymi za pomocą
 URLi jak:
 
     irc[6][s]://[[nick][:hasło]@]serwer[:port][/#kanał1[,#kanał2...]]
 
-Aby wejść na kanał IRC poświęcony WeeChat pod nickiem "mójnick":
+Aby wejść na kanał IRC poświęcony WhoreIRC pod nickiem "mójnick":
 
     irc://mójnick@chat.freenode.net/#whoreirc
 

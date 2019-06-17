@@ -1,4 +1,4 @@
-= WeeChat Authors
+= WhoreIRC Authors
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en

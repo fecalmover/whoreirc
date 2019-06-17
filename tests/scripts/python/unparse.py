@@ -47,7 +47,7 @@ class UnparsePython(object):
     https://github.com/python/cpython/blob/master/Tools/parser/unparse.py
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -308,7 +308,7 @@ class UnparsePerl(UnparsePython):
     Unparse AST to generate Perl script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -479,7 +479,7 @@ class UnparseRuby(UnparsePython):
     Unparse AST to generate Ruby script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -488,7 +488,7 @@ class UnparseRuby(UnparsePython):
         """Add an AST Attribute in output."""
         self.add(
             node.value,
-            '::' if node.attr.startswith('WEECHAT_') else '.',
+            '::' if node.attr.startswith('WHOREIRC_') else '.',
             node.attr,
         )
 
@@ -557,7 +557,7 @@ class UnparseLua(UnparsePython):
     Unparse AST to generate Lua script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -647,7 +647,7 @@ class UnparseTcl(UnparsePython):
     Unparse AST to generate Tcl script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -672,7 +672,7 @@ class UnparseTcl(UnparsePython):
         """Add an AST Attribute in output."""
         saved_prefix = self._prefix
         self._prefix = []
-        if node.attr.startswith('WEECHAT_'):
+        if node.attr.startswith('WHOREIRC_'):
             self.add('$::')
         self.add(node.value, '::', node.attr)
         self._prefix = saved_prefix
@@ -807,7 +807,7 @@ class UnparseGuile(UnparsePython):
     Unparse AST to generate Guile script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -985,7 +985,7 @@ class UnparseJavascript(UnparsePython):
     Unparse AST to generate Javascript script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -1047,7 +1047,7 @@ class UnparsePhp(UnparsePython):
     Unparse AST to generate PHP script code.
 
     Note: only part of AST types are supported (just the types used by
-    the script to test WeeChat scripting API).
+    the script to test WhoreIRC scripting API).
     """
 
     __lineno__ = inspect.currentframe().f_lineno
@@ -1067,7 +1067,7 @@ class UnparsePhp(UnparsePython):
         """Add an AST Attribute in output."""
         saved_prefix = self._prefix
         self._prefix = []
-        if not node.attr.startswith('WEECHAT_'):
+        if not node.attr.startswith('WHOREIRC_'):
             self.add(node.value, '_')
         self.add(node.attr)
         self._prefix = saved_prefix

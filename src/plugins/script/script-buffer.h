@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_SCRIPT_BUFFER_H
-#define WEECHAT_PLUGIN_SCRIPT_BUFFER_H
+#ifndef WHOREIRC_PLUGIN_SCRIPT_BUFFER_H
+#define WHOREIRC_PLUGIN_SCRIPT_BUFFER_H
 
 #define SCRIPT_BUFFER_NAME "scripts"
 
@@ -50,4 +50,4 @@ extern void script_buffer_set_keys ();
 extern void script_buffer_set_localvar_filter ();
 extern void script_buffer_open ();
 
-#endif /* WEECHAT_PLUGIN_SCRIPT_BUFFER_H */
+#endif /* WHOREIRC_PLUGIN_SCRIPT_BUFFER_H */

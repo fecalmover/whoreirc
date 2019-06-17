@@ -1,4 +1,4 @@
-= WeeChat quick start guide
+= WhoreIRC quick start guide
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: cs
@@ -8,7 +8,7 @@
 
 
 [[start]]
-== Spuštění WeeChatu
+== Spuštění WhoreIRCu
 
 Doporučený terminálový emulátor pro X (ale ne vyžadovaný) je rxvt-unicode:
 má dobrou podporu pro UTF-8, a nemá problémy s výchozím nastavením
@@ -23,7 +23,7 @@ $ weechat
 [[help]]
 == On-line nápověda
 
-WeeChat má nápovědů pro všechny příkazy, postě vložte:
+WhoreIRC má nápovědů pro všechny příkazy, postě vložte:
 
 ----
 /help
@@ -55,15 +55,15 @@ K nastavení voleb napište:
 /set config.section.option value
 ----
 
-WeeChat okamžitě použije novou hodnotu (*nikdy* nebudete potřebovat restart
-WeeChatu po změně konfigurace).
+WhoreIRC okamžitě použije novou hodnotu (*nikdy* nebudete potřebovat restart
+WhoreIRCu po změně konfigurace).
 
-Všechna nastavení jsou uložena při ukončení WeeChatu (nebo použitím příkazu
+Všechna nastavení jsou uložena při ukončení WhoreIRCu (nebo použitím příkazu
 `/save` k vynucení zapsaní voleb).
 
 // TRANSLATION MISSING
 [IMPORTANT]
-It is *not recommended* to edit configuration files by hand because WeeChat
+It is *not recommended* to edit configuration files by hand because WhoreIRC
 may write them at any time (for example on `/quit`) and after any change
 you must run the command `/reload` (with the risk of losing other changes
 that were not yet saved with `/save`). +
@@ -74,7 +74,7 @@ the changes.
 The plugin _fset_ allows you to easily browse options and change them.
 
 // TRANSLATION MISSING
-For example to display WeeChat options:
+For example to display WhoreIRC options:
 
 ----
 /fset weechat.*
@@ -98,7 +98,7 @@ For more information about `/fset` command and keys, see `/help fset`.
 [[core_vs_plugins]]
 == Jádro versus pluginy
 
-"Jádro" WeeChatu je použito pouze k zobrazení dat na obrazovce a k interakci
+"Jádro" WhoreIRCu je použito pouze k zobrazení dat na obrazovce a k interakci
 s uživatelem, což znamená že jádro weechatu je nepoužitelné bez pluginů.
 (pro věrné uživatele: IRC bylo částí jádra ve verzích ≤ 0.2.6).
 
@@ -117,7 +117,7 @@ Můžete přidat irc server příkazem `/server`, například:
 ----
 
 // TRANSLATION MISSING
-In this command, `freenode` is the internal server name used by WeeChat:
+In this command, `freenode` is the internal server name used by WhoreIRC:
 you'll be able to connect with `/connect freenode` and the server options
 are _irc.server.freenode.xxx_.
 
@@ -130,12 +130,12 @@ Jako obvykle je poskytována nápověda pokud se ztratíte:
 [[irc_server_options]]
 == Nastavení vlastních voleb IRC serveru
 
-WeeChat používá bezpečné výchozí volby pro všechny servery, pokud nenastavíte
+WhoreIRC používá bezpečné výchozí volby pro všechny servery, pokud nenastavíte
 specifické hodnoty pro volby serveru,
 Výchozí volby jsou "irc.server_default.*"
 
-Pro každou serverovou volbu WeeChat použije její hodnotu pokud je definována
-(není "prázdná"). Jinak WeeChat použije výchozí hodnotu ("irc.server_default.xxx).
+Pro každou serverovou volbu WhoreIRC použije její hodnotu pokud je definována
+(není "prázdná"). Jinak WhoreIRC použije výchozí hodnotu ("irc.server_default.xxx).
 
 Například, je zde výchozí přezdívka (založena na vašem un*x loginu), můžete
 ji přepsat pro freenode s následujícím příkazem:
@@ -246,7 +246,7 @@ název volby):
 Tento příkaz může být použit k vytvoření nového připojení k serveru bez
 použití příkazu `/server` (see `/help connect`).
 
-Ve výchozím nastavení jsou serverové bufery spojen s WeeChat _core_ buferem.
+Ve výchozím nastavení jsou serverové bufery spojen s WhoreIRC _core_ buferem.
 K přepnutí mezi _core_ a server bufery můžete použít klávesu kbd:[Ctrl+x].
 
 Je možné vypnout automatické sloučení serverových buferů a mít nezávislé
@@ -339,7 +339,7 @@ To remove the split:
 [[key_bindings]]
 == Předvoblby klávesových zkratek
 
-WeeChat používá ve výchozím nastavení mnoho klávesových zkratek, Všechny
+WhoreIRC používá ve výchozím nastavení mnoho klávesových zkratek, Všechny
 najdete v dokumentaci, ale je dobré znát alespoň pár těchto důležitých:
 
 - kbd:[Alt+←] / kbd:[Alt+→] nebo kbd:[F5] / kbd:[F6]: přepnout na předchozí/další bufer
@@ -380,9 +380,9 @@ K smazání klávesové zkratky:
 Na mnoha distribucích, například Debian, jsou pluginy dostupné přes oddělený
 balíček (něco jako weechat-plugins).
 Pluginy jsou automaticky nahrány při nálezení (prosím nahlédněte do
-dokumentace WeeChatu jak nahrát/odebrat plugin nebo skript)
+dokumentace WhoreIRCu jak nahrát/odebrat plugin nebo skript)
 
-Mnoho externích skriptů (od přispěvovatelů) je dostupných pro WeeChat. můžete
+Mnoho externích skriptů (od přispěvovatelů) je dostupných pro WhoreIRC. můžete
 stáhnout a nainstalovat scripty z repozitáře pomocí příkazu `/script`,
 například:
 
@@ -393,13 +393,13 @@ například:
 Zkuste `/help script` pro více informací.
 
 
-A seznam skriptů je dostupný v WeeChatu s příkazem `/script` nebo na této
+A seznam skriptů je dostupný v WhoreIRCu s příkazem `/script` nebo na této
 adrese https://weechat.org/scripts
 
 [[more_doc]]
 == Další dokumentace
 
-Nyní jste schopni používat WeeChat a můžete si přečíst FAQ/dokumentaci pro
+Nyní jste schopni používat WhoreIRC a můžete si přečíst FAQ/dokumentaci pro
 jakékoliv další otázky: https://weechat.org/doc
 
-Ať máte radost z použití WeeChatu!
+Ať máte radost z použití WhoreIRCu!

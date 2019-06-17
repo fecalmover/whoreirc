@@ -254,10 +254,10 @@ xfer_chat_recv_cb (const void *pointer, void *data, int fd)
     else
     {
         xfer_close (xfer, XFER_STATUS_ABORTED);
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -309,7 +309,7 @@ xfer_chat_buffer_input_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -334,13 +334,13 @@ xfer_chat_buffer_close_cb (const void *pointer, void *data,
             if (!XFER_HAS_ENDED(ptr_xfer->status))
             {
                 xfer_close (ptr_xfer, XFER_STATUS_ABORTED);
-                xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+                xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             }
             ptr_xfer->buffer = NULL;
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

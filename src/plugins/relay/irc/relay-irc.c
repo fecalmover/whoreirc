@@ -156,8 +156,8 @@ relay_irc_message_parse (const char *message)
     hash_parsed = NULL;
 
     hash_msg = weechat_hashtable_new (32,
-                                      WEECHAT_HASHTABLE_STRING,
-                                      WEECHAT_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_STRING,
+                                      WHOREIRC_HASHTABLE_STRING,
                                       NULL, NULL);
     if (!hash_msg)
     {
@@ -211,8 +211,8 @@ relay_irc_sendf (struct t_relay_client *client, const char *format, ...)
         pos[0] = '\0';
 
     hashtable_in = weechat_hashtable_new (32,
-                                          WEECHAT_HASHTABLE_STRING,
-                                          WEECHAT_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_STRING,
                                           NULL, NULL);
     if (hashtable_in)
     {
@@ -316,7 +316,7 @@ relay_irc_signal_irc_in2_cb (const void *pointer, void *data,
         weechat_hashtable_free (hash_parsed);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -338,9 +338,9 @@ relay_irc_tag_relay_client_id (const char *tags)
     if (tags && tags[0])
     {
         argv = weechat_string_split (tags, ",", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &argc);
         if (argv)
         {
@@ -479,7 +479,7 @@ end:
     if (tags)
         free (tags);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -514,7 +514,7 @@ relay_irc_signal_irc_disc_cb (const void *pointer, void *data,
         relay_client_set_status (client, RELAY_STATUS_DISCONNECTED);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -551,24 +551,24 @@ relay_irc_hsignal_irc_redir_cb (const void *pointer, void *data,
     rc = sscanf (signal, "irc_redirection_relay_%d_%s",
                  &client_id, pattern);
     if (rc != 2)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* check that client id found in signal exists */
     if (!relay_client_search_by_id (client_id))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* ignore redirection if it is for another relay client */
     if (client->id != client_id)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     output = weechat_hashtable_get (hashtable, "output");
     if (!output)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     messages = weechat_string_split (output, "\n", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &num_messages);
     if (messages)
     {
@@ -579,7 +579,7 @@ relay_irc_hsignal_irc_redir_cb (const void *pointer, void *data,
         weechat_string_free_split (messages);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1172,7 +1172,7 @@ relay_irc_input_send (struct t_relay_client *client, const char *irc_channel,
         }
 
         (void) weechat_hook_signal_send ("irc_input_send",
-                                         WEECHAT_HOOK_SIGNAL_STRING, buf);
+                                         WHOREIRC_HOOK_SIGNAL_STRING, buf);
         free (buf);
     }
     free (vbuffer);
@@ -1360,19 +1360,19 @@ relay_irc_recv (struct t_relay_client *client, const char *data)
             irc_args,
             " ",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &irc_argc);
         irc_argv_eol = weechat_string_split (
             irc_args,
             " ",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-            | WEECHAT_STRING_SPLIT_KEEP_EOL,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+            | WHOREIRC_STRING_SPLIT_KEEP_EOL,
             0,
             NULL);
     }
@@ -1428,7 +1428,7 @@ relay_irc_recv (struct t_relay_client *client, const char *data)
                         {
                             RELAY_IRC_DATA(client, password_ok) = 1;
                             weechat_hook_signal_send ("relay_client_auth_ok",
-                                                      WEECHAT_HOOK_SIGNAL_POINTER,
+                                                      WHOREIRC_HOOK_SIGNAL_POINTER,
                                                       client);
                         }
                         free (password);
@@ -1665,8 +1665,8 @@ relay_irc_recv (struct t_relay_client *client, const char *data)
         else if (!relay_irc_command_ignored (irc_command))
         {
             hash_redirect = weechat_hashtable_new (32,
-                                                   WEECHAT_HASHTABLE_STRING,
-                                                   WEECHAT_HASHTABLE_STRING,
+                                                   WHOREIRC_HASHTABLE_STRING,
+                                                   WHOREIRC_HASHTABLE_STRING,
                                                    NULL, NULL);
             if (hash_redirect)
             {

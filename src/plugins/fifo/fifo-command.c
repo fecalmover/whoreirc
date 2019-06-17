@@ -55,21 +55,21 @@ fifo_command_fifo (const void *pointer, void *data,
             weechat_printf (NULL,
                             _("%s: pipe is disabled"), FIFO_PLUGIN_NAME);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* enable pipe */
     if (weechat_strcasecmp (argv[1], "enable") == 0)
     {
         weechat_config_option_set (fifo_config_file_enabled, "on", 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* disable pipe */
     if (weechat_strcasecmp (argv[1], "disable") == 0)
     {
         weechat_config_option_set (fifo_config_file_enabled, "off", 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* toggle pipe */
@@ -79,10 +79,10 @@ fifo_command_fifo (const void *pointer, void *data,
             fifo_config_file_enabled,
             (weechat_config_boolean (fifo_config_file_enabled)) ? "off" : "on",
             1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*

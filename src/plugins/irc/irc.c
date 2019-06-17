@@ -1,22 +1,22 @@
 /*
- * irc.c - IRC (Internet Relay Chat) plugin for WeeChat
+ * irc.c - IRC (Internet Relay Chat) plugin for WhoreIRC
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -45,12 +45,12 @@
 #include "irc-upgrade.h"
 
 
-WEECHAT_PLUGIN_NAME(IRC_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("IRC (Internet Relay Chat) protocol"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(6000);
+WHOREIRC_PLUGIN_NAME(IRC_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("IRC (Internet Relay Chat) protocol"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(6000);
 
 struct t_weechat_plugin *weechat_irc_plugin = NULL;
 
@@ -75,7 +75,7 @@ irc_signal_quit_cb (const void *pointer, void *data,
     (void) data;
     (void) signal;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         for (ptr_server = irc_servers; ptr_server;
              ptr_server = ptr_server->next_server)
@@ -86,7 +86,7 @@ irc_signal_quit_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -133,7 +133,7 @@ irc_signal_upgrade_cb (const void *pointer, void *data,
             }
             irc_server_disconnect (ptr_server, 0, 0);
             /*
-             * schedule reconnection: WeeChat will reconnect to this server
+             * schedule reconnection: WhoreIRC will reconnect to this server
              * after restart
              */
             ptr_server->index_current_address = 0;
@@ -154,7 +154,7 @@ irc_signal_upgrade_cb (const void *pointer, void *data,
             NG_("server", "servers", ssl_disconnected));
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -169,7 +169,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_plugin = plugin;
 
     if (!irc_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     irc_config_read ();
 
@@ -249,7 +249,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
             weechat_printf (
                 NULL,
                 _("%s%s: WARNING: some network connections may still be "
-                  "opened and not visible, you should restart WeeChat now "
+                  "opened and not visible, you should restart WhoreIRC now "
                   "(with /quit)."),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
         }
@@ -263,7 +263,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                          &irc_server_timer_cb,
                                          NULL, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -304,5 +304,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
 
     irc_color_end ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

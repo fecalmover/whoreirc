@@ -1,22 +1,22 @@
 /*
- * wee-version.c - functions for WeeChat version
+ * wee-version.c - functions for WhoreIRC version
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -38,7 +38,7 @@ version_get_name ()
 }
 
 /*
- * Returns the WeeChat version.
+ * Returns the WhoreIRC version.
  *
  * Examples:
  *   0.3.9-dev
@@ -53,7 +53,7 @@ version_get_version ()
 }
 
 /*
- * Returns the package name ("weechat") + WeeChat version.
+ * Returns the package name ("weechat") + WhoreIRC version.
  *
  * Examples:
  *   weechat 0.3.9-dev
@@ -82,7 +82,7 @@ version_get_git ()
 }
 
 /*
- * Returns the WeeChat version + the git version (between brackets, and only if
+ * Returns the WhoreIRC version + the git version (between brackets, and only if
  * it is not empty).
  *
  * Examples:
@@ -110,7 +110,7 @@ version_get_version_with_git ()
 }
 
 /*
- * Returns date of WeeChat compilation.
+ * Returns date of WhoreIRC compilation.
  *
  * Example:
  *   Dec 16 2012
@@ -123,7 +123,7 @@ version_get_compilation_date ()
 }
 
 /*
- * Returns time of WeeChat compilation.
+ * Returns time of WhoreIRC compilation.
  *
  * Example:
  *   18:10:22
@@ -136,7 +136,7 @@ version_get_compilation_time ()
 }
 
 /*
- * Returns date/time of WeeChat compilation.
+ * Returns date/time of WhoreIRC compilation.
  *
  * Example:
  *   Dec 16 2012 18:10:22

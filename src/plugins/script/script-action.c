@@ -463,7 +463,7 @@ script_action_autoload (const char *name, int quiet, int autoload)
                   "%s_script_autoload",
                   script_language[ptr_script->language]);
         (void) weechat_hook_signal_send (str_signal,
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          filename);
         free (filename);
     }
@@ -492,7 +492,7 @@ script_action_installnext_timer_cb (const void *pointer, void *data,
 
     script_action_install ((pointer) ? 1 : 0);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -527,7 +527,7 @@ script_action_install_process_cb (const void *pointer, void *data,
                             SCRIPT_PLUGIN_NAME,
                             (pos) ? pos + 1 : "?",
                             err);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (pos)
@@ -562,7 +562,7 @@ script_action_install_process_cb (const void *pointer, void *data,
                                   "%s_script_install",
                                   script_language[ptr_script->language]);
                         (void) weechat_hook_signal_send (str_signal,
-                                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                                          filename2);
                         free (filename2);
                     }
@@ -578,7 +578,7 @@ script_action_install_process_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -646,8 +646,8 @@ script_action_install (int quiet)
     if (filename)
     {
         options = weechat_hashtable_new (32,
-                                         WEECHAT_HASHTABLE_STRING,
-                                         WEECHAT_HASHTABLE_STRING,
+                                         WHOREIRC_HASHTABLE_STRING,
+                                         WHOREIRC_HASHTABLE_STRING,
                                          NULL, NULL);
         if (options)
         {
@@ -749,7 +749,7 @@ script_action_remove (const char *name, int quiet)
                   "%s_script_remove",
                   script_language[ptr_script->language]);
         (void) weechat_hook_signal_send (str_signal,
-                                         WEECHAT_HOOK_SIGNAL_STRING,
+                                         WHOREIRC_HOOK_SIGNAL_STRING,
                                          filename);
         free (filename);
     }
@@ -828,14 +828,14 @@ script_action_show_diff_process_cb (const void *pointer, void *data,
     (void) command;
 
     if (script_buffer && script_buffer_detail_script
-        && ((return_code == WEECHAT_HOOK_PROCESS_RUNNING) || (return_code >= 0)))
+        && ((return_code == WHOREIRC_HOOK_PROCESS_RUNNING) || (return_code >= 0)))
     {
         if (out)
         {
             lines = weechat_string_split (out, "\n", NULL,
-                                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                           0, &num_lines);
             if (lines)
             {
@@ -872,9 +872,9 @@ script_action_show_diff_process_cb (const void *pointer, void *data,
         else if (err)
         {
             lines = weechat_string_split (err, "\n", NULL,
-                                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                           0, &num_lines);
             if (lines)
             {
@@ -898,7 +898,7 @@ script_action_show_diff_process_cb (const void *pointer, void *data,
         }
     }
 
-    if ((return_code == WEECHAT_HOOK_PROCESS_ERROR) || (return_code >= 0))
+    if ((return_code == WHOREIRC_HOOK_PROCESS_ERROR) || (return_code >= 0))
     {
         /* last call to this callback: delete temporary file */
         filename = (char *)pointer;
@@ -906,7 +906,7 @@ script_action_show_diff_process_cb (const void *pointer, void *data,
         free (filename);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -943,7 +943,7 @@ script_action_show_source_process_cb (const void *pointer, void *data,
                             SCRIPT_PLUGIN_NAME,
                             (pos) ? pos + 1 : "?",
                             err);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (pos)
@@ -1044,7 +1044,7 @@ script_action_show_source_process_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1087,8 +1087,8 @@ script_action_show (const char *name, int quiet)
                 if (filename)
                 {
                     options = weechat_hashtable_new (32,
-                                                     WEECHAT_HASHTABLE_STRING,
-                                                     WEECHAT_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
                                                      NULL, NULL);
                     if (options)
                     {
@@ -1182,9 +1182,9 @@ script_action_run ()
     script_get_loaded_plugins ();
 
     actions = weechat_string_split (script_actions, "\n", NULL,
-                                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                     0, &num_actions);
     if (actions)
     {
@@ -1218,19 +1218,19 @@ script_action_run ()
                 ptr_action,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &argc);
             argv_eol = weechat_string_split (
                 ptr_action,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                 0,
                 &argc);
             if (argv && argv_eol)

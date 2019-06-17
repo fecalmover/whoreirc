@@ -1,5 +1,5 @@
 $HOME/.weechat/weechat.conf::
-    WeeChats Konfigurationsdatei
+    WhoreIRCs Konfigurationsdatei
 
 $HOME/.weechat/plugins.conf::
     Konfigurationsdatei für Erweiterungen
@@ -71,4 +71,4 @@ $HOME/.weechat/xfer.conf::
     Konfigurationsdatei für _xfer_ Erweiterung
 
 $HOME/.weechat/weechat.log::
-    WeeChat Protokolldatei
+    WhoreIRC Protokolldatei

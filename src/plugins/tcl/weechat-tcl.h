@@ -18,8 +18,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_TCL_H
-#define WEECHAT_PLUGIN_TCL_H
+#ifndef WHOREIRC_PLUGIN_TCL_H
+#define WHOREIRC_PLUGIN_TCL_H
 
 #define weechat_plugin weechat_tcl_plugin
 #define TCL_PLUGIN_NAME "tcl"
@@ -48,4 +48,4 @@ extern void *weechat_tcl_exec (struct t_plugin_script *script,
                                int ret_type, const char *function,
                                const char *format, void **argv);
 
-#endif /* WEECHAT_PLUGIN_TCL_H */
+#endif /* WHOREIRC_PLUGIN_TCL_H */

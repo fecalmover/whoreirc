@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -708,7 +708,7 @@ string_expand_home (const char *path)
 
 /*
  * Evaluate a path by replacing (in this order):
- *   1. "%h" (at beginning of string) by WeeChat home directory.
+ *   1. "%h" (at beginning of string) by WhoreIRC home directory.
  *   2. "~" by user home directory (call to string_expand_home)
  *   3. evaluated variables (see /help eval)
  *
@@ -733,7 +733,7 @@ string_eval_path_home (const char *path,
     path2 = NULL;
     path3 = NULL;
 
-    /* replace "%h" by WeeChat home */
+    /* replace "%h" by WhoreIRC home */
     if (strncmp (path, "%h", 2) == 0)
     {
         length = strlen (weechat_home) + strlen (path + 2) + 1;
@@ -1664,7 +1664,7 @@ string_replace_regex_get_replace (const char *string, regmatch_t *regex_match,
 /*
  * Replaces text in a string using a regular expression and replacement text.
  *
- * The argument "regex" is a pointer to a regex compiled with WeeChat function
+ * The argument "regex" is a pointer to a regex compiled with WhoreIRC function
  * string_regcomp (or function regcomp).
  *
  * The argument "replace" can contain references to matches:
@@ -1809,13 +1809,13 @@ string_replace_regex (const char *string, void *regex, const char *replace,
  *           string_share_get), otherwise 0 for allocated strings
  *
  * The flags is a combination of flags:
- *   - WEECHAT_STRING_SPLIT_STRIP_LEFT: strip separators on the left
+ *   - WHOREIRC_STRING_SPLIT_STRIP_LEFT: strip separators on the left
  *     (beginning of string)
- *   - WEECHAT_STRING_SPLIT_STRIP_RIGHT: strip separators on the right
+ *   - WHOREIRC_STRING_SPLIT_STRIP_RIGHT: strip separators on the right
  *     (end of string)
- *   - WEECHAT_STRING_SPLIT_COLLAPSE_SEPS: collapse multiple consecutive
+ *   - WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS: collapse multiple consecutive
  *     separators into a single one
- *   - WEECHAT_STRING_SPLIT_KEEP_EOL: keep end of line for each value
+ *   - WHOREIRC_STRING_SPLIT_KEEP_EOL: keep end of line for each value
  *
  * Examples:
  *
@@ -1829,9 +1829,9 @@ string_replace_regex (const char *string, void *regex, const char *replace,
  *         argc == 5
  *
  *   string_split ("abc de  fghi ", " ", NULL,
- *                 WEECHAT_STRING_SPLIT_STRIP_LEFT
- *                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
- *                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+ *                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+ *                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+ *                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
  *                 0, &argc)
  *     ==> array[0] == "abc"
  *         array[1] == "de"
@@ -1840,10 +1840,10 @@ string_replace_regex (const char *string, void *regex, const char *replace,
  *         argc == 3
  *
  *   string_split ("abc de  fghi ", " ", NULL,
- *                 WEECHAT_STRING_SPLIT_STRIP_LEFT
- *                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
- *                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
- *                 | WEECHAT_STRING_SPLIT_KEEP_EOL,
+ *                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+ *                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+ *                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+ *                 | WHOREIRC_STRING_SPLIT_KEEP_EOL,
  *                 0, &argc)
  *     ==> array[0] == "abc de  fghi"
  *         array[1] == "de  fghi"
@@ -1852,9 +1852,9 @@ string_replace_regex (const char *string, void *regex, const char *replace,
  *         argc == 3
  *
  *   string_split ("abc de  fghi ", " ", NULL,
- *                 WEECHAT_STRING_SPLIT_STRIP_LEFT
- *                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
- *                 | WEECHAT_STRING_SPLIT_KEEP_EOL,
+ *                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+ *                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+ *                 | WHOREIRC_STRING_SPLIT_KEEP_EOL,
  *                 0, &argc)
  *     ==> array[0] == "abc de  fghi "
  *         array[1] == "de  fghi "
@@ -1863,10 +1863,10 @@ string_replace_regex (const char *string, void *regex, const char *replace,
  *         argc == 3
  *
  *   string_split (",abc , de , fghi,", ",", NULL,
- *                 WEECHAT_STRING_SPLIT_STRIP_LEFT
- *                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
- *                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
- *                 | WEECHAT_STRING_SPLIT_KEEP_EOL,
+ *                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+ *                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+ *                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+ *                 | WHOREIRC_STRING_SPLIT_KEEP_EOL,
  *                 0, &argc)
  *     ==> array[0] == "abc "
  *         array[1] == " de "
@@ -1875,9 +1875,9 @@ string_replace_regex (const char *string, void *regex, const char *replace,
  *         argc == 3
  *
  *   string_split (",abc ,, de , fghi,", ",", " ",
- *                 WEECHAT_STRING_SPLIT_STRIP_LEFT
- *                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
- *                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+ *                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+ *                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+ *                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
  *                 0, &argc)
  *     ==> array[0] == "abc"
  *         array[1] == "de"
@@ -1903,8 +1903,8 @@ string_split_internal (const char *string, const char *separators,
 
     string2 = string_strip (
         string,
-        (flags & WEECHAT_STRING_SPLIT_STRIP_LEFT) ? 1 : 0,
-        (flags & WEECHAT_STRING_SPLIT_STRIP_RIGHT) ? 1 : 0,
+        (flags & WHOREIRC_STRING_SPLIT_STRIP_LEFT) ? 1 : 0,
+        (flags & WHOREIRC_STRING_SPLIT_STRIP_RIGHT) ? 1 : 0,
         separators);
     if (!string2)
         return NULL;
@@ -1919,7 +1919,7 @@ string_split_internal (const char *string, const char *separators,
     i = 1;
     while ((ptr = strpbrk (ptr, separators)))
     {
-        if (flags & WEECHAT_STRING_SPLIT_COLLAPSE_SEPS)
+        if (flags & WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS)
         {
             while (ptr[0] && strchr (separators, ptr[0]))
             {
@@ -1954,7 +1954,7 @@ string_split_internal (const char *string, const char *separators,
 
     for (i = 0; i < count_items; i++)
     {
-        if (flags & WEECHAT_STRING_SPLIT_COLLAPSE_SEPS)
+        if (flags & WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS)
         {
             /* skip separators to find the beginning of item */
             while (ptr1[0] && strchr (separators, ptr1[0]))
@@ -1991,7 +1991,7 @@ string_split_internal (const char *string, const char *separators,
         {
             if (ptr2 > ptr1)
             {
-                if (flags & WEECHAT_STRING_SPLIT_KEEP_EOL)
+                if (flags & WHOREIRC_STRING_SPLIT_KEEP_EOL)
                 {
                     if (shared)
                     {
@@ -2041,7 +2041,7 @@ string_split_internal (const char *string, const char *separators,
                         array[i] = (char *)str_shared;
                     }
                 }
-                if (!(flags & WEECHAT_STRING_SPLIT_COLLAPSE_SEPS)
+                if (!(flags & WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS)
                     && strchr (separators, ptr2[0]))
                 {
                     ptr2++;
@@ -2517,9 +2517,9 @@ string_split_tags (const char *tags, int *num_tags)
     if (tags)
     {
         tags_array_temp = string_split (tags, ",", NULL,
-                                        WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                         0, &tags_count);
         if (tags_array_temp && (tags_count > 0))
         {
@@ -2682,7 +2682,7 @@ string_iconv (int from_utf8, const char *from_code, const char *to_code,
 }
 
 /*
- * Converts a string to WeeChat internal storage charset (UTF-8).
+ * Converts a string to WhoreIRC internal storage charset (UTF-8).
  *
  * Note: result must be freed after use.
  */
@@ -2712,7 +2712,7 @@ string_iconv_to_internal (const char *charset, const char *string)
     output = string_iconv (0,
                            (charset && charset[0]) ?
                            charset : weechat_local_charset,
-                           WEECHAT_INTERNAL_CHARSET,
+                           WHOREIRC_INTERNAL_CHARSET,
                            input);
     if (!output)
         return input;
@@ -2748,7 +2748,7 @@ string_iconv_from_internal (const char *charset, const char *string)
 
     utf8_normalize (input, '?');
     output = string_iconv (1,
-                           WEECHAT_INTERNAL_CHARSET,
+                           WHOREIRC_INTERNAL_CHARSET,
                            (charset && charset[0]) ?
                            charset : weechat_local_charset,
                            input);
@@ -3698,8 +3698,8 @@ string_shared_get (const char *string)
          * which would slow down search of a string in the hashtable
          */
         string_hashtable_shared = hashtable_new (1024,
-                                                 WEECHAT_HASHTABLE_POINTER,
-                                                 WEECHAT_HASHTABLE_POINTER,
+                                                 WHOREIRC_HASHTABLE_POINTER,
+                                                 WHOREIRC_HASHTABLE_POINTER,
                                                  &string_shared_hash_key,
                                                  &string_shared_keycmp);
         if (!string_hashtable_shared)

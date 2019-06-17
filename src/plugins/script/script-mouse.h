@@ -17,10 +17,10 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_SCRIPT_MOUSE_H
-#define WEECHAT_PLUGIN_SCRIPT_MOUSE_H
+#ifndef WHOREIRC_PLUGIN_SCRIPT_MOUSE_H
+#define WHOREIRC_PLUGIN_SCRIPT_MOUSE_H
 
 extern int script_mouse_init ();
 extern void script_mouse_end ();
 
-#endif /* WEECHAT_PLUGIN_SCRIPT_MOUSE_H */
+#endif /* WHOREIRC_PLUGIN_SCRIPT_MOUSE_H */

@@ -47,12 +47,12 @@
 #include "xfer-upgrade.h"
 
 
-WEECHAT_PLUGIN_NAME(XFER_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("DCC file transfer and direct chat"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(7000);
+WHOREIRC_PLUGIN_NAME(XFER_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("DCC file transfer and direct chat"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(7000);
 
 struct t_weechat_plugin *weechat_xfer_plugin = NULL;
 
@@ -133,7 +133,7 @@ xfer_signal_upgrade_cb (const void *pointer, void *data,
     if (signal_data && (strcmp (signal_data, "quit") == 0))
         xfer_disconnect_all ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 
@@ -440,7 +440,7 @@ xfer_send_signal (struct t_xfer *xfer, const char *signal)
         if (xfer_add_to_infolist (infolist, xfer))
         {
             (void) weechat_hook_signal_send (signal,
-                                             WEECHAT_HOOK_SIGNAL_POINTER,
+                                             WHOREIRC_HOOK_SIGNAL_POINTER,
                                              infolist);
         }
         weechat_infolist_free (infolist);
@@ -542,9 +542,9 @@ xfer_nick_auto_accepted (const char *server, const char *nick)
         weechat_config_string (xfer_config_file_auto_accept_nicks),
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &num_nicks);
     if (nicks)
@@ -759,7 +759,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
                             filename,
                             size,
                             xfer_protocol_string[protocol]);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             break;
         case XFER_TYPE_FILE_SEND:
             weechat_printf (NULL,
@@ -773,7 +773,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
                             local_filename,
                             size,
                             xfer_protocol_string[protocol]);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             break;
         case XFER_TYPE_CHAT_RECV:
             weechat_printf (NULL,
@@ -784,7 +784,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
                             str_address,
                             plugin_name,
                             plugin_id);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             break;
         case XFER_TYPE_CHAT_SEND:
             weechat_printf (NULL,
@@ -793,7 +793,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
                             remote_nick,
                             plugin_name,
                             plugin_id);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             break;
         case XFER_NUM_TYPES:
             break;
@@ -802,7 +802,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
     if (XFER_IS_FILE(type) && (!new_xfer->local_filename))
     {
         xfer_close (new_xfer, XFER_STATUS_FAILED);
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
         return NULL;
     }
 
@@ -815,7 +815,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
                         new_xfer->filename,
                         new_xfer->local_filename,
                         new_xfer->start_resume);
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
     }
 
     /* connect if needed and display again xfer buffer */
@@ -824,7 +824,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
         if (!xfer_network_connect (new_xfer))
         {
             xfer_close (new_xfer, XFER_STATUS_FAILED);
-            xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+            xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
             return NULL;
         }
     }
@@ -844,7 +844,7 @@ xfer_new (const char *plugin_name, const char *plugin_id,
     }
     else
     {
-        xfer_buffer_refresh (WEECHAT_HOTLIST_PRIVATE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_PRIVATE);
     }
 
     return new_xfer;
@@ -1043,7 +1043,7 @@ xfer_add_cb (const void *pointer, void *data,
         weechat_printf (NULL,
                         _("%s%s: missing arguments (%s)"),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME, "xfer_add");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     infolist = (struct t_infolist *)signal_data;
@@ -1053,7 +1053,7 @@ xfer_add_cb (const void *pointer, void *data,
         weechat_printf (NULL,
                         _("%s%s: missing arguments (%s)"),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME, "xfer_add");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     filename2 = NULL;
@@ -1381,7 +1381,7 @@ xfer_add_cb (const void *pointer, void *data,
     if (short_filename)
         free (short_filename);
     weechat_infolist_reset_item_cursor (infolist);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 
 error:
     if (filename2)
@@ -1389,7 +1389,7 @@ error:
     if (short_filename)
         free (short_filename);
     weechat_infolist_reset_item_cursor (infolist);
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -1419,7 +1419,7 @@ xfer_start_resume_cb (const void *pointer, void *data,
                         _("%s%s: missing arguments (%s)"),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         "xfer_start_resume");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     infolist = (struct t_infolist *)signal_data;
@@ -1430,7 +1430,7 @@ xfer_start_resume_cb (const void *pointer, void *data,
                         _("%s%s: missing arguments (%s)"),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         "xfer_start_resume");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     plugin_name = weechat_infolist_string (infolist, "plugin_name");
@@ -1471,11 +1471,11 @@ xfer_start_resume_cb (const void *pointer, void *data,
     }
 
     weechat_infolist_reset_item_cursor (infolist);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 
 error:
     weechat_infolist_reset_item_cursor (infolist);
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -1505,7 +1505,7 @@ xfer_accept_resume_cb (const void *pointer, void *data,
                         _("%s%s: missing arguments (%s)"),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         "xfer_accept_resume");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     infolist = (struct t_infolist *)signal_data;
@@ -1516,7 +1516,7 @@ xfer_accept_resume_cb (const void *pointer, void *data,
                         _("%s%s: missing arguments (%s)"),
                         weechat_prefix ("error"), XFER_PLUGIN_NAME,
                         "xfer_accept_resume");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     plugin_name = weechat_infolist_string (infolist, "plugin_name");
@@ -1551,7 +1551,7 @@ xfer_accept_resume_cb (const void *pointer, void *data,
                         XFER_PLUGIN_NAME,
                         ptr_xfer->filename,
                         ptr_xfer->start_resume);
-        xfer_buffer_refresh (WEECHAT_HOTLIST_MESSAGE);
+        xfer_buffer_refresh (WHOREIRC_HOTLIST_MESSAGE);
     }
     else
     {
@@ -1564,11 +1564,11 @@ xfer_accept_resume_cb (const void *pointer, void *data,
     }
 
     weechat_infolist_reset_item_cursor (infolist);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 
 error:
     weechat_infolist_reset_item_cursor (infolist);
-    return WEECHAT_RC_ERROR;
+    return WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -1795,7 +1795,7 @@ xfer_debug_dump_cb (const void *pointer, void *data,
                             weechat_plugin->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1810,7 +1810,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_plugin = plugin;
 
     if (!xfer_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     xfer_config_read ();
 
@@ -1846,7 +1846,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     if (upgrading)
         xfer_upgrade_load ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1866,5 +1866,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     else
         xfer_disconnect_all ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

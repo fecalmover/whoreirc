@@ -57,13 +57,13 @@ relay_weechat_msg_new (const char *id)
         return NULL;
 
     new_msg->id = (id) ? strdup (id) : NULL;
-    new_msg->data = malloc (RELAY_WEECHAT_MSG_INITIAL_ALLOC);
+    new_msg->data = malloc (RELAY_WHOREIRC_MSG_INITIAL_ALLOC);
     if (!new_msg->data)
     {
         free (new_msg);
         return NULL;
     }
-    new_msg->data_alloc = RELAY_WEECHAT_MSG_INITIAL_ALLOC;
+    new_msg->data_alloc = RELAY_WHOREIRC_MSG_INITIAL_ALLOC;
     new_msg->data_size = 0;
 
     /* add size and compression flag (they will be set later) */
@@ -270,15 +270,15 @@ relay_weechat_msg_hashtable_map_cb (void *data,
     for (i = 0; i < 2; i++)
     {
         type = weechat_hashtable_get_string (hashtable, types[i]);
-        if (strcmp (type, WEECHAT_HASHTABLE_INTEGER) == 0)
+        if (strcmp (type, WHOREIRC_HASHTABLE_INTEGER) == 0)
             relay_weechat_msg_add_int (msg, *((int *)pointers[i]));
-        else if (strcmp (type, WEECHAT_HASHTABLE_STRING) == 0)
+        else if (strcmp (type, WHOREIRC_HASHTABLE_STRING) == 0)
             relay_weechat_msg_add_string (msg, (const char *)pointers[i]);
-        else if (strcmp (type, WEECHAT_HASHTABLE_POINTER) == 0)
+        else if (strcmp (type, WHOREIRC_HASHTABLE_POINTER) == 0)
             relay_weechat_msg_add_pointer (msg, (void *)pointers[i]);
-        else if (strcmp (type, WEECHAT_HASHTABLE_BUFFER) == 0)
+        else if (strcmp (type, WHOREIRC_HASHTABLE_BUFFER) == 0)
             relay_weechat_msg_add_pointer (msg, (void *)pointers[i]);
-        else if (strcmp (type, WEECHAT_HASHTABLE_TIME) == 0)
+        else if (strcmp (type, WHOREIRC_HASHTABLE_TIME) == 0)
             relay_weechat_msg_add_time (msg, *((time_t *)pointers[i]));
     }
 }
@@ -298,16 +298,16 @@ relay_weechat_msg_add_hashtable (struct t_relay_weechat_msg *msg,
     for (i = 0; i < 2; i++)
     {
         type = weechat_hashtable_get_string (hashtable, types[i]);
-        if (strcmp (type, WEECHAT_HASHTABLE_INTEGER) == 0)
-            relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INT);
-        else if (strcmp (type, WEECHAT_HASHTABLE_STRING) == 0)
-            relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
-        else if (strcmp (type, WEECHAT_HASHTABLE_POINTER) == 0)
-            relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_POINTER);
-        else if (strcmp (type, WEECHAT_HASHTABLE_BUFFER) == 0)
-            relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_POINTER);
-        else if (strcmp (type, WEECHAT_HASHTABLE_TIME) == 0)
-            relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_TIME);
+        if (strcmp (type, WHOREIRC_HASHTABLE_INTEGER) == 0)
+            relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INT);
+        else if (strcmp (type, WHOREIRC_HASHTABLE_STRING) == 0)
+            relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
+        else if (strcmp (type, WHOREIRC_HASHTABLE_POINTER) == 0)
+            relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_POINTER);
+        else if (strcmp (type, WHOREIRC_HASHTABLE_BUFFER) == 0)
+            relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_POINTER);
+        else if (strcmp (type, WHOREIRC_HASHTABLE_TIME) == 0)
+            relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_TIME);
     }
 
     /* number of items */
@@ -414,7 +414,7 @@ relay_weechat_msg_add_hdata_path (struct t_relay_weechat_msg *msg,
             for (i = 0; list_keys[i]; i++)
             {
                 var_type = weechat_hdata_get_var_type (hdata, list_keys[i]);
-                if ((var_type >= 0) && (var_type != WEECHAT_HDATA_OTHER))
+                if ((var_type >= 0) && (var_type != WHOREIRC_HDATA_OTHER))
                 {
                     max_array_size = 1;
                     array_size = weechat_hdata_get_var_array_size (hdata,
@@ -424,27 +424,27 @@ relay_weechat_msg_add_hdata_path (struct t_relay_weechat_msg *msg,
                     {
                         switch (var_type)
                         {
-                            case WEECHAT_HDATA_CHAR:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_CHAR);
+                            case WHOREIRC_HDATA_CHAR:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_CHAR);
                                 break;
-                            case WEECHAT_HDATA_INTEGER:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INT);
+                            case WHOREIRC_HDATA_INTEGER:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INT);
                                 break;
-                            case WEECHAT_HDATA_LONG:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_LONG);
+                            case WHOREIRC_HDATA_LONG:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_LONG);
                                 break;
-                            case WEECHAT_HDATA_STRING:
-                            case WEECHAT_HDATA_SHARED_STRING:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+                            case WHOREIRC_HDATA_STRING:
+                            case WHOREIRC_HDATA_SHARED_STRING:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
                                 break;
-                            case WEECHAT_HDATA_POINTER:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_POINTER);
+                            case WHOREIRC_HDATA_POINTER:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_POINTER);
                                 break;
-                            case WEECHAT_HDATA_TIME:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_TIME);
+                            case WHOREIRC_HDATA_TIME:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_TIME);
                                 break;
-                            case WEECHAT_HDATA_HASHTABLE:
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_HASHTABLE);
+                            case WHOREIRC_HDATA_HASHTABLE:
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_HASHTABLE);
                                 break;
                         }
                         relay_weechat_msg_add_int (msg, array_size);
@@ -459,44 +459,44 @@ relay_weechat_msg_add_hdata_path (struct t_relay_weechat_msg *msg,
                             snprintf (name, length, "%d|%s", j, list_keys[i]);
                             switch (var_type)
                             {
-                                case WEECHAT_HDATA_CHAR:
+                                case WHOREIRC_HDATA_CHAR:
                                     relay_weechat_msg_add_char (msg,
                                                                 weechat_hdata_char (hdata,
                                                                                     pointer,
                                                                                     name));
                                     break;
-                                case WEECHAT_HDATA_INTEGER:
+                                case WHOREIRC_HDATA_INTEGER:
                                     relay_weechat_msg_add_int (msg,
                                                                weechat_hdata_integer (hdata,
                                                                                       pointer,
                                                                                       name));
                                     break;
-                                case WEECHAT_HDATA_LONG:
+                                case WHOREIRC_HDATA_LONG:
                                     relay_weechat_msg_add_long (msg,
                                                                 weechat_hdata_long (hdata,
                                                                                     pointer,
                                                                                     name));
                                     break;
-                                case WEECHAT_HDATA_STRING:
-                                case WEECHAT_HDATA_SHARED_STRING:
+                                case WHOREIRC_HDATA_STRING:
+                                case WHOREIRC_HDATA_SHARED_STRING:
                                     relay_weechat_msg_add_string (msg,
                                                                   weechat_hdata_string (hdata,
                                                                                         pointer,
                                                                                         name));
                                     break;
-                                case WEECHAT_HDATA_POINTER:
+                                case WHOREIRC_HDATA_POINTER:
                                     relay_weechat_msg_add_pointer (msg,
                                                                    weechat_hdata_pointer (hdata,
                                                                                           pointer,
                                                                                           name));
                                     break;
-                                case WEECHAT_HDATA_TIME:
+                                case WHOREIRC_HDATA_TIME:
                                     relay_weechat_msg_add_time (msg,
                                                                 weechat_hdata_time (hdata,
                                                                                     pointer,
                                                                                     name));
                                     break;
-                                case WEECHAT_HDATA_HASHTABLE:
+                                case WHOREIRC_HDATA_HASHTABLE:
                                     relay_weechat_msg_add_hashtable (msg,
                                                                      weechat_hdata_hashtable (hdata,
                                                                                               pointer,
@@ -584,9 +584,9 @@ relay_weechat_msg_add_hdata (struct t_relay_weechat_msg *msg,
 
     /* split path */
     list_path = weechat_string_split (pos + 1, "/", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_path);
     if (!list_path)
         goto end;
@@ -654,9 +654,9 @@ relay_weechat_msg_add_hdata (struct t_relay_weechat_msg *msg,
     if (!keys)
         keys = weechat_hdata_get_string (ptr_hdata, "var_keys");
     list_keys = weechat_string_split (keys, ",", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_keys);
     if (!list_keys)
         goto end;
@@ -669,7 +669,7 @@ relay_weechat_msg_add_hdata (struct t_relay_weechat_msg *msg,
     for (i = 0; i < num_keys; i++)
     {
         type = weechat_hdata_get_var_type (ptr_hdata, list_keys[i]);
-        if ((type >= 0) && (type != WEECHAT_HDATA_OTHER))
+        if ((type >= 0) && (type != WHOREIRC_HDATA_OTHER))
         {
             if (keys_types[0])
                 strcat (keys_types, ",");
@@ -679,32 +679,32 @@ relay_weechat_msg_add_hdata (struct t_relay_weechat_msg *msg,
                                                                   NULL,
                                                                   list_keys[i]);
             if (array_size)
-                strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_ARRAY);
+                strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_ARRAY);
             else
             {
                 switch (type)
                 {
-                    case WEECHAT_HDATA_CHAR:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_CHAR);
+                    case WHOREIRC_HDATA_CHAR:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_CHAR);
                         break;
-                    case WEECHAT_HDATA_INTEGER:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_INT);
+                    case WHOREIRC_HDATA_INTEGER:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_INT);
                         break;
-                    case WEECHAT_HDATA_LONG:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_LONG);
+                    case WHOREIRC_HDATA_LONG:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_LONG);
                         break;
-                    case WEECHAT_HDATA_STRING:
-                    case WEECHAT_HDATA_SHARED_STRING:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_STRING);
+                    case WHOREIRC_HDATA_STRING:
+                    case WHOREIRC_HDATA_SHARED_STRING:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_STRING);
                         break;
-                    case WEECHAT_HDATA_POINTER:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_POINTER);
+                    case WHOREIRC_HDATA_POINTER:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_POINTER);
                         break;
-                    case WEECHAT_HDATA_TIME:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_TIME);
+                    case WHOREIRC_HDATA_TIME:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_TIME);
                         break;
-                    case WEECHAT_HDATA_HASHTABLE:
-                        strcat (keys_types, RELAY_WEECHAT_MSG_OBJ_HASHTABLE);
+                    case WHOREIRC_HDATA_HASHTABLE:
+                        strcat (keys_types, RELAY_WHOREIRC_MSG_OBJ_HASHTABLE);
                         break;
                 }
             }
@@ -714,7 +714,7 @@ relay_weechat_msg_add_hdata (struct t_relay_weechat_msg *msg,
         goto end;
 
     /* start hdata in message */
-    relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_HDATA);
+    relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_HDATA);
     relay_weechat_msg_add_string (msg, path_returned);
     relay_weechat_msg_add_string (msg, keys_types);
 
@@ -777,7 +777,7 @@ relay_weechat_msg_add_infolist (struct t_relay_weechat_msg *msg,
         return;
 
     /* start infolist in message */
-    relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INFOLIST);
+    relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INFOLIST);
     relay_weechat_msg_add_string (msg, name);
 
     /* count of items will be set later, with number of items in infolist */
@@ -794,9 +794,9 @@ relay_weechat_msg_add_infolist (struct t_relay_weechat_msg *msg,
                 fields,
                 ",",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_fields);
             if (list_fields)
@@ -814,32 +814,32 @@ relay_weechat_msg_add_infolist (struct t_relay_weechat_msg *msg,
                         switch (list_fields[i][0])
                         {
                             case 'i':
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_INT);
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_INT);
                                 relay_weechat_msg_add_int (msg,
                                                            weechat_infolist_integer (ptr_infolist,
                                                                                      list_fields[i] + 2));
                                 break;
                             case 's':
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_STRING);
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_STRING);
                                 relay_weechat_msg_add_string (msg,
                                                               weechat_infolist_string (ptr_infolist,
                                                                                        list_fields[i] + 2));
                                 break;
                             case 'p':
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_POINTER);
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_POINTER);
                                 relay_weechat_msg_add_pointer (msg,
                                                                weechat_infolist_pointer (ptr_infolist,
                                                                                          list_fields[i] + 2));
                                 break;
                             case 'b':
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_BUFFER);
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_BUFFER);
                                 buf_ptr = weechat_infolist_buffer (ptr_infolist,
                                                                    list_fields[i] + 2,
                                                                    &buf_size);
                                 relay_weechat_msg_add_buffer (msg, buf_ptr, buf_size);
                                 break;
                             case 't':
-                                relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_TIME);
+                                relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_TIME);
                                 relay_weechat_msg_add_time (msg,
                                                             weechat_infolist_time (ptr_infolist,
                                                                                    list_fields[i] + 2));
@@ -998,7 +998,7 @@ relay_weechat_msg_add_nicklist (struct t_relay_weechat_msg *msg,
               "prefix:str,prefix_color:str",
               (nicklist) ? "_diff:chr," : "");
 
-    relay_weechat_msg_add_type (msg, RELAY_WEECHAT_MSG_OBJ_HDATA);
+    relay_weechat_msg_add_type (msg, RELAY_WHOREIRC_MSG_OBJ_HDATA);
     relay_weechat_msg_add_string (msg, "buffer/nicklist_item");
     relay_weechat_msg_add_string (msg, str_vars);
 
@@ -1044,9 +1044,9 @@ relay_weechat_msg_send (struct t_relay_client *client,
 
     if (weechat_config_integer (relay_config_network_compression_level) > 0)
     {
-        switch (RELAY_WEECHAT_DATA(client, compression))
+        switch (RELAY_WHOREIRC_DATA(client, compression))
         {
-            case RELAY_WEECHAT_COMPRESSION_ZLIB:
+            case RELAY_WHOREIRC_COMPRESSION_ZLIB:
                 dest_size = compressBound (msg->data_size - 5);
                 dest = malloc (dest_size + 5);
                 if (dest)
@@ -1062,7 +1062,7 @@ relay_weechat_msg_send (struct t_relay_client *client,
                         /* set size and compression flag */
                         size32 = htonl ((uint32_t)(dest_size + 5));
                         memcpy (dest, &size32, 4);
-                        dest[4] = RELAY_WEECHAT_COMPRESSION_ZLIB;
+                        dest[4] = RELAY_WHOREIRC_COMPRESSION_ZLIB;
 
                         /* display message in raw buffer */
                         snprintf (raw_message, sizeof (raw_message),
@@ -1094,7 +1094,7 @@ relay_weechat_msg_send (struct t_relay_client *client,
     /* set size and compression flag */
     size32 = htonl ((uint32_t)msg->data_size);
     relay_weechat_msg_set_bytes (msg, 0, &size32, 4);
-    compression = RELAY_WEECHAT_COMPRESSION_OFF;
+    compression = RELAY_WHOREIRC_COMPRESSION_OFF;
     relay_weechat_msg_set_bytes (msg, 4, &compression, 1);
 
     /* send uncompressed data */

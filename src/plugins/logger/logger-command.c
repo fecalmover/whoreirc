@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -99,7 +99,7 @@ logger_set_buffer (struct t_gui_buffer *buffer, const char *value)
     if (!name)
         return;
 
-    if (logger_config_set_level (name, value) != WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (logger_config_set_level (name, value) != WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         ptr_option = logger_config_get_level (name);
         if (ptr_option)
@@ -131,29 +131,29 @@ logger_command_cb (const void *pointer, void *data,
         || ((argc == 2) && (weechat_strcasecmp (argv[1], "list") == 0)))
     {
         logger_list ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "set") == 0)
     {
         if (argc > 2)
             logger_set_buffer (buffer, argv[2]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "flush") == 0)
     {
         logger_flush ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "disable") == 0)
     {
         logger_set_buffer (buffer, "0");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*
@@ -195,7 +195,7 @@ logger_command_init ()
            "    /logger disable\n"
            "  set level to 3 for all IRC buffers:\n"
            "    /set logger.level.irc 3\n"
-           "  disable logging for main WeeChat buffer:\n"
+           "  disable logging for main WhoreIRC buffer:\n"
            "    /set logger.level.core.weechat 0\n"
            "  use a directory per IRC server and a file per channel inside:\n"
            "    /set logger.mask.irc \"$server/$channel.weechatlog\""),

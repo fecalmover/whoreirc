@@ -120,7 +120,7 @@ xfer_upgrade_read_cb (const void *pointer, void *data,
     (void) infolist;
 
     /* TODO: write xfer read cb */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

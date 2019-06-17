@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2010-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -423,35 +423,35 @@ irc_redirect_new_with_commands (struct t_irc_server *server,
     }
     if (cmd_start)
         items[0] = weechat_string_split (cmd_start, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &num_items[0]);
     if (cmd_stop)
         items[1] = weechat_string_split (cmd_stop, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &num_items[1]);
     if (cmd_extra)
         items[2] = weechat_string_split (cmd_extra, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &num_items[2]);
     if (cmd_filter)
         items[3] = weechat_string_split (cmd_filter, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &num_items[3]);
     for (i = 0; i < 4; i++)
     {
         if (items[i])
         {
             hash_cmd[i] = weechat_hashtable_new (32,
-                                                 WEECHAT_HASHTABLE_STRING,
-                                                 WEECHAT_HASHTABLE_INTEGER,
+                                                 WHOREIRC_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_INTEGER,
                                                  NULL, NULL);
             for (j = 0; j < num_items[i]; j++)
             {
@@ -745,8 +745,8 @@ irc_redirect_stop (struct t_irc_redirect *redirect, const char *error)
          * redirect
          */
         hashtable = weechat_hashtable_new (32,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL, NULL);
         if (hashtable)
         {
@@ -813,9 +813,9 @@ irc_redirect_message (struct t_irc_server *server, const char *message,
             arguments,
             " ",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &arguments_argc);
     }
@@ -1027,16 +1027,16 @@ irc_redirect_hdata_redirect_pattern_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, temp_pattern, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, timeout, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, cmd_start, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, cmd_stop, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, cmd_extra, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, prev_redirect, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect_pattern, next_redirect, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_LIST(irc_redirect_patterns, WEECHAT_HDATA_LIST_CHECK_POINTERS);
-        WEECHAT_HDATA_LIST(last_irc_redirect_pattern, 0);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, temp_pattern, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, timeout, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, cmd_start, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, cmd_stop, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, cmd_extra, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, prev_redirect, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect_pattern, next_redirect, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_LIST(irc_redirect_patterns, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
+        WHOREIRC_HDATA_LIST(last_irc_redirect_pattern, 0);
     }
     return hdata;
 }
@@ -1059,26 +1059,26 @@ irc_redirect_hdata_redirect_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, server, POINTER, 0, NULL, "irc_server");
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, pattern, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, signal, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, count, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, current_count, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, string, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, timeout, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, command, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, assigned_to_command, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, start_time, TIME, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, cmd_start, HASHTABLE, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, cmd_stop, HASHTABLE, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, cmd_extra, HASHTABLE, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, cmd_start_received, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, cmd_stop_received, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, cmd_filter, HASHTABLE, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, output, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, output_size, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, prev_redirect, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_redirect, next_redirect, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, server, POINTER, 0, NULL, "irc_server");
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, pattern, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, signal, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, count, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, current_count, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, string, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, timeout, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, command, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, assigned_to_command, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, start_time, TIME, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, cmd_start, HASHTABLE, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, cmd_stop, HASHTABLE, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, cmd_extra, HASHTABLE, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, cmd_start_received, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, cmd_stop_received, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, cmd_filter, HASHTABLE, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, output, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, output_size, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, prev_redirect, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_redirect, next_redirect, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -1184,7 +1184,7 @@ irc_redirect_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints redirect infos in WeeChat log file (usually for crash dump).
+ * Prints redirect infos in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1209,7 +1209,7 @@ irc_redirect_pattern_print_log ()
 }
 
 /*
- * Prints redirect infos in WeeChat log file (usually for crash dump).
+ * Prints redirect infos in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1276,7 +1276,7 @@ irc_redirect_pattern_hsignal_cb (const void *pointer, void *data,
     (void) signal;
 
     if (!hashtable)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     pattern = weechat_hashtable_get (hashtable, "pattern");
     str_timeout = weechat_hashtable_get (hashtable, "timeout");
@@ -1290,7 +1290,7 @@ irc_redirect_pattern_hsignal_cb (const void *pointer, void *data,
             NULL,
             _("%s%s: missing argument \"%s\" for redirect pattern"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "pattern");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     if (!cmd_stop || !cmd_stop[0])
@@ -1299,7 +1299,7 @@ irc_redirect_pattern_hsignal_cb (const void *pointer, void *data,
             NULL,
             _("%s%s: missing argument \"%s\" for redirect pattern"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "cmd_stop");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     timeout = 0;
@@ -1317,7 +1317,7 @@ irc_redirect_pattern_hsignal_cb (const void *pointer, void *data,
     irc_redirect_pattern_new (pattern, 1, timeout,
                               cmd_start, cmd_stop, cmd_extra);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1344,7 +1344,7 @@ irc_redirect_command_hsignal_cb (const void *pointer, void *data,
     (void) signal;
 
     if (!hashtable)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     server = weechat_hashtable_get (hashtable, "server");
     pattern = weechat_hashtable_get (hashtable, "pattern");
@@ -1360,7 +1360,7 @@ irc_redirect_command_hsignal_cb (const void *pointer, void *data,
             NULL,
             _("%s%s: missing argument \"%s\" for redirect"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "server");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
     ptr_server = irc_server_search (server);
     if (!ptr_server)
@@ -1369,7 +1369,7 @@ irc_redirect_command_hsignal_cb (const void *pointer, void *data,
             NULL,
             _("%s%s: server \"%s\" not found for redirect"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, server);
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     count = 1;
@@ -1391,7 +1391,7 @@ irc_redirect_command_hsignal_cb (const void *pointer, void *data,
     irc_redirect_new (ptr_server, pattern, redirect_signal,
                       count, string, timeout, cmd_filter);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

@@ -1,27 +1,27 @@
 *-a*, *--no-connect*::
-    Zakaž automatické pripojení k serverům když WeeChat startuje.
+    Zakaž automatické pripojení k serverům když WhoreIRC startuje.
 
 *-c*, *--colors*::
     Zobraz defaultní barvy v terminálu.
 
 // TRANSLATION MISSING
 *--daemon*::
-    Run WeeChat in background, as a daemon (works only with the command
+    Run WhoreIRC in background, as a daemon (works only with the command
     *weechat-headless*).
 
 *-d*, *--dir* _<path>_::
-    Nastav cestu jako dovmský adresář pro WeeChat (použitou pro konfigurační
+    Nastav cestu jako dovmský adresář pro WhoreIRC (použitou pro konfigurační
     soubory, logy, uživatelské pluginy a skripty), výchozí hodnota je
     "~/.weechat" (poznámka: složka bude vytvořena pokud nebude nalezena
     Weechatem)
-    Pokud tato volba není zadána, použije se promněná prostředí WEECHAT_HOME
+    Pokud tato volba není zadána, použije se promněná prostředí WHOREIRC_HOME
     (pokud není prázdná)
 
 // TRANSLATION MISSING
 *-t*, *--temp-dir*::
-    Create a temporary WeeChat home directory and delete it on exit
+    Create a temporary WhoreIRC home directory and delete it on exit
     (incompatible with option "-d"). +
-    The name of the directory is automatically built by WeeChat, with this
+    The name of the directory is automatically built by WhoreIRC, with this
     template: "weechat_temp_XXXXXX" (where "XXXXXX" is random). It it created
     in the first available directory in this list: environment variable "TMPDIR",
     "/tmp" (may be different according to the operating system), environment
@@ -33,7 +33,7 @@
     Zobrazí nápovědu.
 
 *-l*, *--license*::
-    Zobrazí licenci WeeChatu.
+    Zobrazí licenci WhoreIRCu.
 
 *-p*, *--no-plugin*::
     Vypne automatické nahrání pluginů.
@@ -52,11 +52,11 @@
     Vypni automatické nahrání scriptů.
 
 *--upgrade*::
-    Aktualizuj WeeChat použitím souborů relací generovaných
+    Aktualizuj WhoreIRC použitím souborů relací generovaných
     příkazem `/upgrade -quit`.
 
 *-v*, *--version*::
-    Zobraz verzi WeeChatu.
+    Zobraz verzi WhoreIRCu.
 
 *plugin:option*::
    Nastavení pluginů.

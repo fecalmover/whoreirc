@@ -1,23 +1,23 @@
 /*
- * wee-log.c - WeeChat log file (weechat.log)
+ * wee-log.c - WhoreIRC log file (weechat.log)
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -46,13 +46,13 @@
 
 
 char *weechat_log_filename = NULL; /* log name (~/.weechat/weechat.log)     */
-FILE *weechat_log_file = NULL;     /* WeeChat log file                      */
+FILE *weechat_log_file = NULL;     /* WhoreIRC log file                      */
 int weechat_log_use_time = 1;      /* 0 to temporary disable time in log,   */
                                    /* for example when dumping data         */
 
 
 /*
- * Opens the WeeChat log file.
+ * Opens the WhoreIRC log file.
  *
  * Returns:
  *   1: OK
@@ -75,7 +75,7 @@ log_open (const char *filename, const char *mode)
         filename_length = strlen (weechat_home) + 64;
         weechat_log_filename = malloc (filename_length);
         snprintf (weechat_log_filename, filename_length,
-                  "%s/%s", weechat_home, WEECHAT_LOG_NAME);
+                  "%s/%s", weechat_home, WHOREIRC_LOG_NAME);
     }
 
     weechat_log_file = fopen (weechat_log_filename, mode);
@@ -104,7 +104,7 @@ log_open (const char *filename, const char *mode)
 }
 
 /*
- * Initializes the WeeChat log file.
+ * Initializes the WhoreIRC log file.
  */
 
 void
@@ -114,11 +114,11 @@ log_init ()
     {
         string_fprintf (stderr,
                         _("Error: unable to create/append to log file (weechat.log)\n"
-                          "If another WeeChat process is using this file, try to run WeeChat\n"
+                          "If another WhoreIRC process is using this file, try to run WhoreIRC\n"
                           "with another home using the \"--dir\" command line option.\n"));
         exit (1);
     }
-    log_printf ("WeeChat %s (%s %s %s)",
+    log_printf ("WhoreIRC %s (%s %s %s)",
                 version_get_version_with_git (),
                 _("compiled on"),
                 version_get_compilation_date (),
@@ -126,7 +126,7 @@ log_init ()
 }
 
 /*
- * Writes a message in WeeChat log file.
+ * Writes a message in WhoreIRC log file.
  */
 
 void
@@ -179,7 +179,7 @@ log_printf (const char *message, ...)
 }
 
 /*
- * Dumps a string as hexa data in WeeChat log file.
+ * Dumps a string as hexa data in WhoreIRC log file.
  */
 
 void
@@ -213,7 +213,7 @@ log_printf_hexa (const char *spaces, const char *string)
 }
 
 /*
- * Closes the WeeChat log file.
+ * Closes the WhoreIRC log file.
  */
 
 void
@@ -238,10 +238,10 @@ log_close ()
 }
 
 /*
- * Renames the WeeChat log file (when crashing).
+ * Renames the WhoreIRC log file (when crashing).
  *
  * The file "weechat.log" is renamed to "weechat_crash_YYYYMMDD_NNNN.log",
- * where YYYYMMDD is the current date and NNNN the PID of WeeChat process.
+ * where YYYYMMDD is the current date and NNNN the PID of WhoreIRC process.
  */
 
 int

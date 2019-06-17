@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -69,8 +69,8 @@ input_exec_data (struct t_gui_buffer *buffer, const char *data)
  * Executes a command.
  *
  * Returns:
- *   WEECHAT_RC_OK: command executed
- *   WEECHAT_RC_ERROR: error, command not executed
+ *   WHOREIRC_RC_OK: command executed
+ *   WHOREIRC_RC_ERROR: error, command not executed
  */
 
 int
@@ -85,9 +85,9 @@ input_exec_command (struct t_gui_buffer *buffer,
     int rc;
 
     if ((!string) || (!string[0]))
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
-    rc = WEECHAT_RC_OK;
+    rc = WHOREIRC_RC_OK;
 
     command = NULL;
     command_name = NULL;
@@ -98,7 +98,7 @@ input_exec_command (struct t_gui_buffer *buffer,
     command = strdup (string);
     if (!command)
     {
-        rc = WEECHAT_RC_ERROR;
+        rc = WHOREIRC_RC_ERROR;
         goto end;
     }
 
@@ -108,9 +108,9 @@ input_exec_command (struct t_gui_buffer *buffer,
             commands_allowed,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             NULL);
         input_commands_allowed = new_commands_allowed;
@@ -131,7 +131,7 @@ input_exec_command (struct t_gui_buffer *buffer,
         string_strndup (command, pos - command) : strdup (command);
     if (!command_name)
     {
-        rc = WEECHAT_RC_ERROR;
+        rc = WHOREIRC_RC_ERROR;
         goto end;
     }
 
@@ -150,7 +150,7 @@ input_exec_command (struct t_gui_buffer *buffer,
                 command,
                 buffer->full_name);
         }
-        rc = WEECHAT_RC_ERROR;
+        rc = WHOREIRC_RC_ERROR;
         goto end;
     }
 
@@ -162,7 +162,7 @@ input_exec_command (struct t_gui_buffer *buffer,
             break;
         case HOOK_COMMAND_EXEC_ERROR:
             /* command hooked, error */
-            rc = WEECHAT_RC_ERROR;
+            rc = WHOREIRC_RC_ERROR;
             break;
         case HOOK_COMMAND_EXEC_NOT_FOUND:
             /*
@@ -181,7 +181,7 @@ input_exec_command (struct t_gui_buffer *buffer,
                                              "(type /help for help)"),
                                            gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                            command_name);
-                rc = WEECHAT_RC_ERROR;
+                rc = WHOREIRC_RC_ERROR;
             }
             break;
         case HOOK_COMMAND_EXEC_AMBIGUOUS_PLUGINS:
@@ -193,7 +193,7 @@ input_exec_command (struct t_gui_buffer *buffer,
                                        gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                        command_name,
                                        plugin_get_name (plugin));
-            rc = WEECHAT_RC_ERROR;
+            rc = WHOREIRC_RC_ERROR;
             break;
         case HOOK_COMMAND_EXEC_AMBIGUOUS_INCOMPLETE:
             /*
@@ -206,7 +206,7 @@ input_exec_command (struct t_gui_buffer *buffer,
                                          "this name"),
                                        gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                        command_name);
-            rc = WEECHAT_RC_ERROR;
+            rc = WHOREIRC_RC_ERROR;
             break;
         case HOOK_COMMAND_EXEC_RUNNING:
             /* command is running */
@@ -215,7 +215,7 @@ input_exec_command (struct t_gui_buffer *buffer,
                                          "\"%s\" (looping)"),
                                        gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                                        command_name);
-            rc = WEECHAT_RC_ERROR;
+            rc = WHOREIRC_RC_ERROR;
             break;
         default:
             break;
@@ -238,8 +238,8 @@ end:
  * Sends data to a buffer's callback.
  *
  * Returns:
- *   WEECHAT_RC_OK: data properly sent (or command executed successfully)
- *   WEECHAT_RC_ERROR: error
+ *   WHOREIRC_RC_OK: data properly sent (or command executed successfully)
+ *   WHOREIRC_RC_ERROR: error
  */
 
 int
@@ -251,9 +251,9 @@ input_data (struct t_gui_buffer *buffer, const char *data,
     int length, char_size, first_command, rc;
 
     if (!buffer || !gui_buffer_valid (buffer) || !data)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
-    rc = WEECHAT_RC_OK;
+    rc = WHOREIRC_RC_OK;
 
     buffer_full_name = NULL;
     new_data = NULL;
@@ -261,7 +261,7 @@ input_data (struct t_gui_buffer *buffer, const char *data,
     buffer_full_name = strdup (buffer->full_name);
     if (!buffer_full_name)
     {
-        rc = WEECHAT_RC_ERROR;
+        rc = WHOREIRC_RC_ERROR;
         goto end;
     }
 
@@ -371,7 +371,7 @@ input_data_timer_cb (const void *pointer, void *data, int remaining_calls)
     timer_args = (char **)pointer;
 
     if (!timer_args)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     if (timer_args[0] && timer_args[1])
     {
@@ -387,7 +387,7 @@ input_data_timer_cb (const void *pointer, void *data, int remaining_calls)
     }
     free (timer_args);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -397,8 +397,8 @@ input_data_timer_cb (const void *pointer, void *data, int remaining_calls)
  * If delay >= 1, the command is scheduled for execution in this number of ms.
  *
  * Returns:
- *   WEECHAT_RC_OK: data properly sent or scheduled for execution
- *   WEECHAT_RC_ERROR: error
+ *   WHOREIRC_RC_OK: data properly sent or scheduled for execution
+ *   WHOREIRC_RC_ERROR: error
  */
 
 int
@@ -417,7 +417,7 @@ input_data_delayed (struct t_gui_buffer *buffer, const char *data,
                          _("%sNot enough memory (%s)"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          "/wait");
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     if (commands_allowed)
@@ -446,5 +446,5 @@ input_data_delayed (struct t_gui_buffer *buffer, const char *data,
                 &input_data_timer_cb,
                 timer_args, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

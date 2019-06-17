@@ -17,25 +17,25 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_WEECHAT_PROTOCOL_H
-#define WEECHAT_PLUGIN_RELAY_WEECHAT_PROTOCOL_H
+#ifndef WHOREIRC_PLUGIN_RELAY_WHOREIRC_PROTOCOL_H
+#define WHOREIRC_PLUGIN_RELAY_WHOREIRC_PROTOCOL_H
 
-#define RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER   (1 << 0)
-#define RELAY_WEECHAT_PROTOCOL_SYNC_NICKLIST (1 << 1)
-#define RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS  (1 << 2)
-#define RELAY_WEECHAT_PROTOCOL_SYNC_UPGRADE  (1 << 3)
+#define RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER   (1 << 0)
+#define RELAY_WHOREIRC_PROTOCOL_SYNC_NICKLIST (1 << 1)
+#define RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS  (1 << 2)
+#define RELAY_WHOREIRC_PROTOCOL_SYNC_UPGRADE  (1 << 3)
 
-#define RELAY_WEECHAT_PROTOCOL_SYNC_ALL         \
-    (RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER |       \
-     RELAY_WEECHAT_PROTOCOL_SYNC_NICKLIST |     \
-     RELAY_WEECHAT_PROTOCOL_SYNC_BUFFERS |      \
-     RELAY_WEECHAT_PROTOCOL_SYNC_UPGRADE)
+#define RELAY_WHOREIRC_PROTOCOL_SYNC_ALL         \
+    (RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER |       \
+     RELAY_WHOREIRC_PROTOCOL_SYNC_NICKLIST |     \
+     RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFERS |      \
+     RELAY_WHOREIRC_PROTOCOL_SYNC_UPGRADE)
 
-#define RELAY_WEECHAT_PROTOCOL_SYNC_FOR_BUFFER  \
-    (RELAY_WEECHAT_PROTOCOL_SYNC_BUFFER |       \
-     RELAY_WEECHAT_PROTOCOL_SYNC_NICKLIST)
+#define RELAY_WHOREIRC_PROTOCOL_SYNC_FOR_BUFFER  \
+    (RELAY_WHOREIRC_PROTOCOL_SYNC_BUFFER |       \
+     RELAY_WHOREIRC_PROTOCOL_SYNC_NICKLIST)
 
-#define RELAY_WEECHAT_PROTOCOL_CALLBACK(__command)                      \
+#define RELAY_WHOREIRC_PROTOCOL_CALLBACK(__command)                      \
     int                                                                 \
     relay_weechat_protocol_cb_##__command (                             \
         struct t_relay_client *client,                                  \
@@ -45,7 +45,7 @@
         char **argv,                                                    \
         char **argv_eol)
 
-#define RELAY_WEECHAT_PROTOCOL_MIN_ARGS(__min_args)                     \
+#define RELAY_WHOREIRC_PROTOCOL_MIN_ARGS(__min_args)                     \
     (void) id;                                                          \
     (void) command;                                                     \
     (void) argv;                                                        \
@@ -68,7 +68,7 @@
                             argc,                                       \
                             __min_args);                                \
         }                                                               \
-        return WEECHAT_RC_ERROR;                                        \
+        return WHOREIRC_RC_ERROR;                                        \
     }
 
 typedef int (t_relay_weechat_cmd_func)(struct t_relay_client *client,
@@ -101,4 +101,4 @@ extern int relay_weechat_protocol_timer_nicklist_cb (const void *pointer,
 extern void relay_weechat_protocol_recv (struct t_relay_client *client,
                                          const char *data);
 
-#endif /* WEECHAT_PLUGIN_RELAY_WEECHAT_PROTOCOL_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_WHOREIRC_PROTOCOL_H */

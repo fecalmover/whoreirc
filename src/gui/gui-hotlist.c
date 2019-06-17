@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -62,7 +62,7 @@ void
 gui_hotlist_changed_signal (struct t_gui_buffer *buffer)
 {
     (void) hook_signal_send ("hotlist_changed",
-                             WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
 }
 
 /*
@@ -320,8 +320,8 @@ gui_hotlist_add (struct t_gui_buffer *buffer,
     {
         gui_hotlist_hashtable_add_conditions_pointers = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_POINTER,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_POINTER,
             NULL, NULL);
         if (!gui_hotlist_hashtable_add_conditions_pointers)
             return NULL;
@@ -330,8 +330,8 @@ gui_hotlist_add (struct t_gui_buffer *buffer,
     {
         gui_hotlist_hashtable_add_conditions_vars = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
         if (!gui_hotlist_hashtable_add_conditions_vars)
             return NULL;
@@ -340,8 +340,8 @@ gui_hotlist_add (struct t_gui_buffer *buffer,
     {
         gui_hotlist_hashtable_add_conditions_options = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
         if (!gui_hotlist_hashtable_add_conditions_options)
             return NULL;
@@ -590,7 +590,7 @@ gui_hotlist_hdata_hotlist_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_hotlist, count, INTEGER, 0, GUI_HOTLIST_NUM_PRIORITIES_STR, NULL);
         HDATA_VAR(struct t_gui_hotlist, prev_hotlist, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_hotlist, next_hotlist, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_hotlist, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_hotlist, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_hotlist, 0);
     }
     return hdata;
@@ -671,7 +671,7 @@ gui_hotlist_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints hotlist in WeeChat log file (usually for crash dump).
+ * Prints hotlist in WhoreIRC log file (usually for crash dump).
  */
 
 void

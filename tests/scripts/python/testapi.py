@@ -17,12 +17,12 @@
 #
 
 """
-This script contains WeeChat scripting API tests
-(it can not be run directly and can not be loaded in WeeChat).
+This script contains WhoreIRC scripting API tests
+(it can not be run directly and can not be loaded in WhoreIRC).
 
 It is parsed by testapigen.py, using Python AST (Abstract Syntax Trees),
 to generate scripts in all supported languages (Python, Perl, Ruby, ...).
-The resulting scripts can be loaded in WeeChat to test the scripting API.
+The resulting scripts can be loaded in WhoreIRC to test the scripting API.
 """
 
 # pylint: disable=line-too-long,no-value-for-parameter
@@ -89,9 +89,9 @@ def test_lists():
     ptr_list = weechat.list_new()
     check(ptr_list != '')
     check(weechat.list_size(ptr_list) == 0)
-    item_def = weechat.list_add(ptr_list, 'def', weechat.WEECHAT_LIST_POS_SORT, '')
+    item_def = weechat.list_add(ptr_list, 'def', weechat.WHOREIRC_LIST_POS_SORT, '')
     check(weechat.list_size(ptr_list) == 1)
-    item_abc = weechat.list_add(ptr_list, 'abc', weechat.WEECHAT_LIST_POS_SORT, '')
+    item_abc = weechat.list_add(ptr_list, 'abc', weechat.WHOREIRC_LIST_POS_SORT, '')
     check(weechat.list_size(ptr_list) == 2)
     check(weechat.list_search(ptr_list, 'abc') == item_abc)
     check(weechat.list_search(ptr_list, 'def') == item_def)
@@ -162,22 +162,22 @@ def completion_cb(data, completion_item, buf, completion):
     check(completion_item == 'SCRIPT_NAME')
     check(weechat.hook_completion_get_string(completion, 'args') == 'w')
     weechat.hook_completion_list_add(completion, 'word_completed',
-                                     0, weechat.WEECHAT_LIST_POS_END)
-    return weechat.WEECHAT_RC_OK
+                                     0, weechat.WHOREIRC_LIST_POS_END)
+    return weechat.WHOREIRC_RC_OK
 
 
 def command_cb(data, buf, args):
     """Command callback."""
     check(data == 'command_data')
     check(args == 'word_completed')
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 
 def command_run_cb(data, buf, command):
     """Command_run callback."""
     check(data == 'command_run_data')
     check(command == '/cmd' + 'SCRIPT_NAME' + ' word_completed')
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 
 def test_hooks():
@@ -254,7 +254,7 @@ def cmd_test_cb(data, buf, args):
     test_command()
     test_infolist()
     weechat.prnt('', '  > TESTS END')
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 
 def weechat_init():

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2012-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -182,38 +182,38 @@ eval_hdata_get_value (struct t_hdata *hdata, void *pointer, const char *path)
     /* build a string with the value or variable */
     switch (type)
     {
-        case WEECHAT_HDATA_CHAR:
+        case WHOREIRC_HDATA_CHAR:
             snprintf (str_value, sizeof (str_value),
                       "%c", hdata_char (hdata, pointer, var_name));
             value = strdup (str_value);
             break;
-        case WEECHAT_HDATA_INTEGER:
+        case WHOREIRC_HDATA_INTEGER:
             snprintf (str_value, sizeof (str_value),
                       "%d", hdata_integer (hdata, pointer, var_name));
             value = strdup (str_value);
             break;
-        case WEECHAT_HDATA_LONG:
+        case WHOREIRC_HDATA_LONG:
             snprintf (str_value, sizeof (str_value),
                       "%ld", hdata_long (hdata, pointer, var_name));
             value = strdup (str_value);
             break;
-        case WEECHAT_HDATA_STRING:
-        case WEECHAT_HDATA_SHARED_STRING:
+        case WHOREIRC_HDATA_STRING:
+        case WHOREIRC_HDATA_SHARED_STRING:
             ptr_value = hdata_string (hdata, pointer, var_name);
             value = (ptr_value) ? strdup (ptr_value) : NULL;
             break;
-        case WEECHAT_HDATA_POINTER:
+        case WHOREIRC_HDATA_POINTER:
             pointer = hdata_pointer (hdata, pointer, var_name);
             snprintf (str_value, sizeof (str_value),
                       "0x%lx", (unsigned long)pointer);
             value = strdup (str_value);
             break;
-        case WEECHAT_HDATA_TIME:
+        case WHOREIRC_HDATA_TIME:
             snprintf (str_value, sizeof (str_value),
                       "%lld", (long long)hdata_time (hdata, pointer, var_name));
             value = strdup (str_value);
             break;
-        case WEECHAT_HDATA_HASHTABLE:
+        case WHOREIRC_HDATA_HASHTABLE:
             pointer = hdata_hashtable (hdata, pointer, var_name);
             if (pos)
             {
@@ -264,7 +264,7 @@ eval_hdata_get_value (struct t_hdata *hdata, void *pointer, const char *path)
      * if we are on a pointer and that something else is in path (after "."),
      * go on with this pointer and remaining path
      */
-    if ((type == WEECHAT_HDATA_POINTER) && pos)
+    if ((type == WHOREIRC_HDATA_POINTER) && pos)
     {
         hdata_name = hdata_get_var_hdata (hdata, var_name);
         if (!hdata_name)
@@ -306,7 +306,7 @@ end:
  *  16. a hdata variable (format: hdata.var1.var2 or hdata[list].var1.var2
  *                        or hdata[ptr].var1.var2)
  *
- * See /help in WeeChat for examples.
+ * See /help in WhoreIRC for examples.
  *
  * Note: result must be freed after use.
  */
@@ -1104,7 +1104,7 @@ end:
 /*
  * Replaces text in a string using a regular expression and replacement text.
  *
- * The argument "regex" is a pointer to a regex compiled with WeeChat function
+ * The argument "regex" is a pointer to a regex compiled with WhoreIRC function
  * string_regcomp (or function regcomp).
  *
  * The argument "replace" is evaluated and can contain any valid expression,
@@ -1305,8 +1305,8 @@ eval_expression (const char *expr, struct t_hashtable *pointers,
     {
         /* create hashtable pointers if it's NULL */
         pointers = hashtable_new (32,
-                                  WEECHAT_HASHTABLE_STRING,
-                                  WEECHAT_HASHTABLE_POINTER,
+                                  WHOREIRC_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_POINTER,
                                   NULL,
                                   NULL);
         if (!pointers)

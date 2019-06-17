@@ -3,14 +3,14 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -284,7 +284,7 @@ irc_config_change_nick_colors_cb (const void *pointer, void *data,
 
     irc_config_compute_nick_colors ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -350,8 +350,8 @@ irc_config_change_look_display_join_message (const void *pointer, void *data,
     {
         irc_config_hashtable_display_join_message = weechat_hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
     }
     else
@@ -361,9 +361,9 @@ irc_config_change_look_display_join_message (const void *pointer, void *data,
         weechat_config_string (irc_config_look_display_join_message),
         ",",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &num_items);
     if (items)
@@ -591,9 +591,9 @@ irc_config_change_look_nicks_hide_password (const void *pointer, void *data,
             nicks_hide_password,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &irc_config_num_nicks_hide_password);
     }
@@ -713,8 +713,8 @@ irc_config_change_color_mirc_remap (const void *pointer, void *data,
     {
         irc_config_hashtable_color_mirc_remap = weechat_hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
     }
     else
@@ -724,9 +724,9 @@ irc_config_change_color_mirc_remap (const void *pointer, void *data,
         weechat_config_string (irc_config_color_mirc_remap),
         ";",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &num_items);
     if (items)
@@ -766,8 +766,8 @@ irc_config_change_color_nick_prefixes (const void *pointer, void *data,
     {
         irc_config_hashtable_nick_prefixes = weechat_hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
     }
     else
@@ -777,9 +777,9 @@ irc_config_change_color_nick_prefixes (const void *pointer, void *data,
         weechat_config_string (irc_config_color_nick_prefixes),
         ";",
         NULL,
-        WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+        WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
         0,
         &num_items);
     if (items)
@@ -1048,24 +1048,24 @@ irc_config_check_autojoin (const char *autojoin)
         goto end;
 
     items = weechat_string_split (string, " ", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &num_items);
     if (!items || (num_items < 1) || (num_items > 2))
         goto end;
 
     channels = weechat_string_split (items[0], ",", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &num_channels);
 
     if (num_items == 2)
         keys = weechat_string_split (items[1], ",", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                      0, &num_keys);
 
     /* error if there are more keys than channels to join */
@@ -1357,7 +1357,7 @@ irc_config_msgbuffer_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -1370,7 +1370,7 @@ irc_config_msgbuffer_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -1385,15 +1385,15 @@ irc_config_msgbuffer_create_option (const void *pointer, void *data,
                     "weechat|server|current|private", 0, 0, value, value, 0,
                     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE :
-                    WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE :
+                    WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (
             NULL,
@@ -1424,7 +1424,7 @@ irc_config_ctcp_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -1437,7 +1437,7 @@ irc_config_ctcp_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -1467,15 +1467,15 @@ irc_config_ctcp_create_option (const void *pointer, void *data,
                     NULL, 0, 0, default_value, value, 0,
                     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
                 rc = (ptr_option) ?
-                    WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE :
-                    WEECHAT_CONFIG_OPTION_SET_ERROR;
+                    WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE :
+                    WHOREIRC_CONFIG_OPTION_SET_ERROR;
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (
             NULL,
@@ -1517,19 +1517,19 @@ irc_config_ignore_read_cb (const void *pointer, void *data,
                 value,
                 ";",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &argc);
             argv_eol = weechat_string_split (
                 value,
                 ";",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                 0,
                 NULL);
             if (argv && argv_eol && (argc >= 3))
@@ -1562,7 +1562,7 @@ irc_config_ignore_write_cb (const void *pointer, void *data,
     (void) data;
 
     if (!weechat_config_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (ptr_ignore = irc_ignore_list; ptr_ignore;
          ptr_ignore = ptr_ignore->next_ignore)
@@ -1573,10 +1573,10 @@ irc_config_ignore_write_cb (const void *pointer, void *data,
                                         (ptr_ignore->server) ? ptr_ignore->server : "*",
                                         (ptr_ignore->channel) ? ptr_ignore->channel : "*",
                                         ptr_ignore->mask))
-            return WEECHAT_CONFIG_WRITE_ERROR;
+            return WHOREIRC_CONFIG_WRITE_ERROR;
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
@@ -2421,7 +2421,7 @@ irc_config_server_read_cb (const void *pointer, void *data,
     (void) config_file;
     (void) section;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -2468,7 +2468,7 @@ irc_config_server_read_cb (const void *pointer, void *data,
         }
     }
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (
             NULL,
@@ -2496,7 +2496,7 @@ irc_config_server_write_cb (const void *pointer, void *data,
     (void) data;
 
     if (!weechat_config_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (ptr_server = irc_servers; ptr_server;
          ptr_server = ptr_server->next_server)
@@ -2507,12 +2507,12 @@ irc_config_server_write_cb (const void *pointer, void *data,
             {
                 if (!weechat_config_write_option (config_file,
                                                   ptr_server->options[i]))
-                    return WEECHAT_CONFIG_WRITE_ERROR;
+                    return WHOREIRC_CONFIG_WRITE_ERROR;
             }
         }
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
@@ -2610,18 +2610,18 @@ irc_config_init ()
 
     irc_config_hashtable_display_join_message = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     irc_config_hashtable_nick_prefixes = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     irc_config_hashtable_color_mirc_remap = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
 
     irc_config_file = weechat_config_new (IRC_CONFIG_NAME,
@@ -3487,7 +3487,7 @@ irc_config_read ()
     rc = weechat_config_read (irc_config_file);
     irc_config_loading = 0;
 
-    if (rc == WEECHAT_CONFIG_READ_OK)
+    if (rc == WHOREIRC_CONFIG_READ_OK)
     {
         irc_notify_new_for_all_servers ();
         irc_config_change_look_display_join_message (NULL, NULL, NULL);

@@ -404,7 +404,7 @@ gui_window_set_custom_color_fg (WINDOW *window, int fg)
                                   fg & GUI_COLOR_EXTENDED_MASK,
                                   current_bg);
         }
-        else if ((fg & GUI_COLOR_EXTENDED_MASK) < GUI_CURSES_NUM_WEECHAT_COLORS)
+        else if ((fg & GUI_COLOR_EXTENDED_MASK) < GUI_CURSES_NUM_WHOREIRC_COLORS)
         {
             if (!(fg & GUI_COLOR_EXTENDED_KEEPATTR_FLAG))
                 gui_window_remove_color_style (window, A_ALL_ATTR);
@@ -447,7 +447,7 @@ gui_window_set_custom_color_bg (WINDOW *window, int bg)
                                   current_fg,
                                   bg & GUI_COLOR_EXTENDED_MASK);
         }
-        else if ((bg & GUI_COLOR_EXTENDED_MASK) < GUI_CURSES_NUM_WEECHAT_COLORS)
+        else if ((bg & GUI_COLOR_EXTENDED_MASK) < GUI_CURSES_NUM_WHOREIRC_COLORS)
         {
             bg &= GUI_COLOR_EXTENDED_MASK;
             gui_window_set_color (window, current_fg,
@@ -489,7 +489,7 @@ gui_window_set_custom_color_fg_bg (WINDOW *window, int fg, int bg,
                 gui_window_remove_color_style (window, A_UNDERLINE);
             fg &= GUI_COLOR_EXTENDED_MASK;
         }
-        else if ((fg & GUI_COLOR_EXTENDED_MASK) < GUI_CURSES_NUM_WEECHAT_COLORS)
+        else if ((fg & GUI_COLOR_EXTENDED_MASK) < GUI_CURSES_NUM_WHOREIRC_COLORS)
         {
             if (reset_attributes && !(fg & GUI_COLOR_EXTENDED_KEEPATTR_FLAG))
                 gui_window_remove_color_style (window, A_ALL_ATTR);
@@ -1279,7 +1279,7 @@ gui_window_switch_to_buffer (struct t_gui_window *window,
     if (old_buffer != buffer)
     {
         (void) hook_signal_send ("buffer_switch",
-                                 WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                                 WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
     }
 }
 
@@ -1319,7 +1319,7 @@ gui_window_switch (struct t_gui_window *window)
     gui_input_move_to_buffer (old_window->buffer, window->buffer);
 
     (void) hook_signal_send ("window_switch",
-                             WEECHAT_HOOK_SIGNAL_POINTER, gui_current_window);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, gui_current_window);
 }
 
 /*
@@ -1362,7 +1362,7 @@ gui_window_page_up (struct t_gui_window *window)
                           num_lines + 1);
                 gui_window_scroll (window, scroll);
                 (void) hook_signal_send ("window_scrolled",
-                                         WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                         WHOREIRC_HOOK_SIGNAL_POINTER, window);
             }
             break;
         case GUI_BUFFER_NUM_TYPES:
@@ -1419,7 +1419,7 @@ gui_window_page_down (struct t_gui_window *window)
                       num_lines + 1);
             gui_window_scroll (window, scroll);
             (void) hook_signal_send ("window_scrolled",
-                                     WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                     WHOREIRC_HOOK_SIGNAL_POINTER, window);
             break;
         case GUI_BUFFER_NUM_TYPES:
             break;
@@ -1459,7 +1459,7 @@ gui_window_scroll_up (struct t_gui_window *window)
                           CONFIG_INTEGER(config_look_scroll_amount));
                 gui_window_scroll (window, scroll);
                 (void) hook_signal_send ("window_scrolled",
-                                         WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                         WHOREIRC_HOOK_SIGNAL_POINTER, window);
             }
             break;
         case GUI_BUFFER_NUM_TYPES:
@@ -1510,7 +1510,7 @@ gui_window_scroll_down (struct t_gui_window *window)
                       CONFIG_INTEGER(config_look_scroll_amount));
             gui_window_scroll (window, scroll);
             (void) hook_signal_send ("window_scrolled",
-                                     WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                     WHOREIRC_HOOK_SIGNAL_POINTER, window);
             break;
         case GUI_BUFFER_NUM_TYPES:
             break;
@@ -1543,7 +1543,7 @@ gui_window_scroll_top (struct t_gui_window *window)
                 window->scroll->start_line = NULL;
                 gui_buffer_ask_chat_refresh (window->buffer, 2);
                 (void) hook_signal_send ("window_scrolled",
-                                         WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                         WHOREIRC_HOOK_SIGNAL_POINTER, window);
             }
             break;
         case GUI_BUFFER_NUM_TYPES:
@@ -1583,7 +1583,7 @@ gui_window_scroll_bottom (struct t_gui_window *window)
                 gui_buffer_ask_chat_refresh (window->buffer, 2);
             }
             (void) hook_signal_send ("window_scrolled",
-                                     WEECHAT_HOOK_SIGNAL_POINTER, window);
+                                     WHOREIRC_HOOK_SIGNAL_POINTER, window);
             break;
         case GUI_BUFFER_NUM_TYPES:
             break;
@@ -2369,7 +2369,7 @@ gui_window_bare_display_timer_cb (const void *pointer, void *data,
     if (remaining_calls == 0)
         gui_window_bare_display_timer = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

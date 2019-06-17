@@ -1,4 +1,4 @@
-= WeeChat Quick Start Guide
+= WhoreIRC Quick Start Guide
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: es
@@ -14,7 +14,7 @@ Translators:
 
 
 [[start]]
-== Iniciar WeeChat
+== Iniciar WhoreIRC
 
 Es recomendable una terminal emulada para X (pero no indispensable)
 rxvt-unicode: tiene un buen soporte para UTF-8, y no da problemas con
@@ -30,7 +30,7 @@ $ weechat
 [[help]]
 == Ayuda en linea
 
-WeeChat tiene ayuda para todos los comandos, solo teclee:
+WhoreIRC tiene ayuda para todos los comandos, solo teclee:
 
 ----
 /help
@@ -63,16 +63,16 @@ Para configurar una opción, use:
 /set config.section.option valor
 ----
 
-WeeChat usará inmediatamente el nuevo valor asignado (*no* es necesario
-reiniciar WeeChat después de aplicar cambios a la configuración).
+WhoreIRC usará inmediatamente el nuevo valor asignado (*no* es necesario
+reiniciar WhoreIRC después de aplicar cambios a la configuración).
 
 Todas las opciones se salvarán de manera automática cuando cierre
-WeeChat o usando el comando `/save` para forzar la forzar a WeeChat a
+WhoreIRC o usando el comando `/save` para forzar la forzar a WhoreIRC a
 guardar todos los archivos de configuración.
 
 // TRANSLATION MISSING
 [IMPORTANT]
-It is *not recommended* to edit configuration files by hand because WeeChat
+It is *not recommended* to edit configuration files by hand because WhoreIRC
 may write them at any time (for example on `/quit`) and after any change
 you must run the command `/reload` (with the risk of losing other changes
 that were not yet saved with `/save`). +
@@ -83,7 +83,7 @@ the changes.
 The plugin _fset_ allows you to easily browse options and change them.
 
 // TRANSLATION MISSING
-For example to display WeeChat options:
+For example to display WhoreIRC options:
 
 ----
 /fset weechat.*
@@ -107,9 +107,9 @@ For more information about `/fset` command and keys, see `/help fset`.
 [[core_vs_plugins]]
 == Núcleo vs Plugins
 
-Llamaremos "Núcleo de WeeChat" a la aplicación que solo se usa para
+Llamaremos "Núcleo de WhoreIRC" a la aplicación que solo se usa para
 mostrar información en pantalla e interactuar con el usuario, eso es lo
-único que hace el núcleo de WeeChat sin no tiene plugins. (para los
+único que hace el núcleo de WhoreIRC sin no tiene plugins. (para los
 fieles seguidores: IRC fue parte del núcleo para las versiones ≤
 0.2.6).
 
@@ -130,7 +130,7 @@ You can add an IRC server with `/server` command, for example:
 ----
 
 // TRANSLATION MISSING
-In this command, `freenode` is the internal server name used by WeeChat:
+In this command, `freenode` is the internal server name used by WhoreIRC:
 you'll be able to connect with `/connect freenode` and the server options
 are _irc.server.freenode.xxx_.
 
@@ -143,14 +143,14 @@ La ayuda está disponible; si te pierdes:
 [[irc_server_options]]
 == Personalizar las opciones de un servidor IRC
 
-WeeChat usa las opciones por defecto para todos los servidores
+WhoreIRC usa las opciones por defecto para todos los servidores
 ("predeterminado") si no le especifica un valor individual a un servidor
 en específico. Esas opciones por defectos son las que se muestran en
 "irc.server_default.*"
 
-Para cada opción de "server", WeeChat usa estos valores previamente
+Para cada opción de "server", WhoreIRC usa estos valores previamente
 asignados siempre y cuando no sean Nulos. Si no hay nada asignado,
-WeeChat usara los valores predeterminados ("irc.server_default.xxx")
+WhoreIRC usara los valores predeterminados ("irc.server_default.xxx")
 
 Por ejemplo, tenemos el nick por defecto (que se basa en su login) pero
 usted puedes sobreescribirlo para el servidor identificado como freenode
@@ -167,7 +167,7 @@ También para configurar el nombre de usuario y el nombre real:
 /set irc.server.freenode.realname "Mi nombre real"
 ----
 
-Para que el servidor se conecte cuando WeeChat inicie:
+Para que el servidor se conecte cuando WhoreIRC inicie:
 
 ----
 /set irc.server.freenode.autoconnect on
@@ -363,7 +363,7 @@ To remove the split:
 [[key_bindings]]
 == Atajos de teclado
 
-WeeChat usa muchas teclas por defecto. Las mismas, están bien
+WhoreIRC usa muchas teclas por defecto. Las mismas, están bien
 explicadas en la documentación pero debe conocer al menos la mas
 importantes.
 
@@ -407,12 +407,12 @@ Para eliminar una combinación:
 
 En algunas distribuciones como Debian, los plugins están disponibles en
 un paquete separado (como weechat-plugin).
-Los plugins se cargan de manera automática cuando son encontrados por WeeChat
-(por favor, refierase a la documentación de WeeChat para ver como cargar/descargar
+Los plugins se cargan de manera automática cuando son encontrados por WhoreIRC
+(por favor, refierase a la documentación de WhoreIRC para ver como cargar/descargar
 plugins y scripts).
 
 // TRANSLATION MISSING
-Many external scripts (from contributors) are available for WeeChat, you can
+Many external scripts (from contributors) are available for WhoreIRC, you can
 download and install scripts from the repository with the `/script` command,
 for example:
 
@@ -424,13 +424,13 @@ for example:
 See `/help script` for more info.
 
 // TRANSLATION MISSING
-A list of scripts is available in WeeChat with `/script` or at this URL:
+A list of scripts is available in WhoreIRC with `/script` or at this URL:
 https://weechat.org/scripts
 
 [[more_doc]]
 == Más documentación
 
-Ahora puede usar WeeChat y leer las FAQ/documentación para cada pregunta
+Ahora puede usar WhoreIRC y leer las FAQ/documentación para cada pregunta
 en: https://weechat.org/doc
 
-Disfrute de WeeChat!
+Disfrute de WhoreIRC!

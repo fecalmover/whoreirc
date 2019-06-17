@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -101,9 +101,9 @@ weelist_insert (struct t_weelist *weelist, struct t_weelist_item *item,
     {
         /* search position for new element, according to pos asked */
         pos_item = NULL;
-        if (string_strcasecmp (where, WEECHAT_LIST_POS_BEGINNING) == 0)
+        if (string_strcasecmp (where, WHOREIRC_LIST_POS_BEGINNING) == 0)
             pos_item = weelist->items;
-        else if (string_strcasecmp (where, WEECHAT_LIST_POS_END) == 0)
+        else if (string_strcasecmp (where, WHOREIRC_LIST_POS_END) == 0)
             pos_item = NULL;
         else
             pos_item = weelist_find_pos (weelist, item->data);
@@ -428,7 +428,7 @@ weelist_free (struct t_weelist *weelist)
 }
 
 /*
- * Prints list in WeeChat log file (usually for crash dump).
+ * Prints list in WhoreIRC log file (usually for crash dump).
  */
 
 void

@@ -1,4 +1,4 @@
-= WeeChat スクリプト作成ガイド
+= WhoreIRC スクリプト作成ガイド
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
@@ -14,7 +14,7 @@
 * Ryuunosuke Ayanokouzi <i38w7i3@yahoo.co.jp>, 2012-2019
 
 
-このマニュアルは WeeChat チャットクライアントについて説明しており、WeeChat の一部です。
+このマニュアルは WhoreIRC チャットクライアントについて説明しており、WhoreIRC の一部です。
 
 このマニュアルの最新版は以下のページを参照してください:
 https://weechat.org/doc
@@ -23,10 +23,10 @@ https://weechat.org/doc
 [[introduction]]
 == イントロダクション
 
-WeeChat (Wee Enhanced Environment for Chat)
+WhoreIRC (Wee Enhanced Environment for Chat)
 はフリー、高速、軽量な多くのオペレーティングシステムで動くチャットクライアントです。
 
-このマニュアル文書は以下のスクリプト言語を利用して WeeChat
+このマニュアル文書は以下のスクリプト言語を利用して WhoreIRC
 用のスクリプトを製作する方法を解説しています:
 
 * Python
@@ -43,29 +43,29 @@ WeeChat (Wee Enhanced Environment for Chat)
 で書かれていますが API は他の言語でも共通です。
 
 [[scripts_in_weechat]]
-== WeeChat のスクリプト
+== WhoreIRC のスクリプト
 
 [[weechat_architecture]]
-=== WeeChat のアーキテクチャ
+=== WhoreIRC のアーキテクチャ
 
-WeeChat はシングルスレッドで、この点はスクリプトも同じです。
+WhoreIRC はシングルスレッドで、この点はスクリプトも同じです。
 
 スクリプトのコードは以下の場合に実行されます:
 
 * スクリプトを読み込んだ時: 通常これは
   <<register_function,register function>> 関数を呼び出すことを意味します。
-* WeeChat がフックコールバックを呼び出した時 (<<hooks,フック>>を参照してください)。
+* WhoreIRC がフックコールバックを呼び出した時 (<<hooks,フック>>を参照してください)。
 
-スクリプトのコードが実行されると、WeeChat
+スクリプトのコードが実行されると、WhoreIRC
 は一時停止し、実行の完了を待ってから再開します。このため、スクリプトは操作をブロックしては
 *絶対にいけません*。ネットワークを呼び出す等の場合には、`hook_process` 等の専用 API 関数を使ってください。
 
 [IMPORTANT]
-WeeChat がクラッシュするため、スクリプトで fork したりスレッドを作ることは *禁止*
+WhoreIRC がクラッシュするため、スクリプトで fork したりスレッドを作ることは *禁止*
 されています。これが必要な場合には専用 API 関数を使ってください。 +
 どうしてもバックグラウンド実行を避けられない場合には `hook_process`
 関数を使ってください。<<hook_process,バックグラウンドプロセスの実行>>の例および
-link:weechat_plugin_api.ja.html#_hook_process[WeeChat プラグイン API リファレンス]内の
+link:weechat_plugin_api.ja.html#_hook_process[WhoreIRC プラグイン API リファレンス]内の
 `hook_process` 関数の文書を参照してください。
 
 [[languages_specificities]]
@@ -125,7 +125,7 @@ Weechat.config_new_option(config, section, "name", "string", "description of opt
 [[register_function]]
 === 関数の登録
 
-全ての WeeChat スクリプトは WeeChat
+全ての WhoreIRC スクリプトは WhoreIRC
 に自分自身を「登録」し、登録はスクリプトの最初で行われなければいけません。
 
 プロトタイプ:
@@ -174,7 +174,7 @@ weechat::print("", "Hello, from perl script!");
 def weechat_init
   Weechat.register("test_ruby", "FlashCode", "1.0", "GPL3", "Test script", "", "")
   Weechat.print("", "Hello, from ruby script!")
-  return Weechat::WEECHAT_RC_OK
+  return Weechat::WHOREIRC_RC_OK
 end
 ----
 
@@ -247,7 +247,7 @@ weechat_print('', 'Hello, from PHP script!');
 /php load script.php
 ----
 
-WeeChat の開始時にスクリプトを自動ロードするには
+WhoreIRC の開始時にスクリプトを自動ロードするには
 _language/autoload_ ディレクトリ内にリンクを作ってください。
 
 例えば Python の場合:
@@ -266,31 +266,31 @@ $ ln -s ../script.py
 
 スクリプト API は C 言語プラグイン API とほぼ同じです。API
 に含まれる各関数の詳細 (プロトタイプ、引数、戻り値、例) については
-link:weechat_plugin_api.ja.html[WeeChat プラグイン API リファレンス]を参照してください。
+link:weechat_plugin_api.ja.html[WhoreIRC プラグイン API リファレンス]を参照してください。
 
 _プラグイン_ と _スクリプト_ の違いを理解することは重要です:
 _プラグイン_ とはコンパイル済みバイナリファイルで `/plugin` コマンドを使ってロードします、これに対して
 _スクリプト_ とはテキストファイルで例えば _python_ プラグインであれば `/python`
 コマンドを使ってロードします。
 
-例えば _test.py_ スクリプトが WeeChat API 関数を呼び出す場合、以下の順に呼び出されます:
+例えば _test.py_ スクリプトが WhoreIRC API 関数を呼び出す場合、以下の順に呼び出されます:
 
 // PLEASE DO NOT TRANSLATE
 ....
                ┌──────────────────────┐        ╔══════════════════╗
-               │     python plugin    │        ║  WeeChat "core"  ║
+               │     python plugin    │        ║  WhoreIRC "core"  ║
                ├────────────┬─────────┤        ╟─────────┐        ║
 test.py ─────► │ script API │  C API  │ ─────► ║  C API  │        ║
                └────────────┴─────────┘        ╚═════════╧════════╝
 ....
 
-WeeChat が _test.py_
+WhoreIRC が _test.py_
 スクリプトで定義されたコールバックを呼び出す場合、順番は逆になります:
 
 // PLEASE DO NOT TRANSLATE
 ....
 ╔══════════════════╗        ┌──────────────────────┐
-║  WeeChat "core"  ║        │     python plugin    │
+║  WhoreIRC "core"  ║        │     python plugin    │
 ║        ┌─────────╢        ├─────────┬────────────┤
 ║        │  C API  ║ ─────► │  C API  │ script API │ ─────► test.py
 ╚════════╧═════════╝        └─────────┴────────────┘
@@ -310,7 +310,7 @@ API 関数の引数にポインタを与える場合、スクリプトではポ�
 言語プラグインがこれを本来のポインタ型に変換します。
 
 空文字列や "0x0" を使うことも許されています。これらは C 言語で言うところの NULL
-と解釈されます。例えば、データをコアバッファ (WeeChat メインバッファ) に表示する場合、以下のようになります:
+と解釈されます。例えば、データをコアバッファ (WhoreIRC メインバッファ) に表示する場合、以下のようになります:
 
 [source,python]
 ----
@@ -318,14 +318,14 @@ weechat.prnt("", "hi!")
 ----
 
 [WARNING]
-WeeChat の多くのスクリプト API
+WhoreIRC の多くのスクリプト API
 関数は計算量を減らすために、ポインタの値が正当なものか否かの確認を行いません。ポインタの正当性を確認することはプログラマが行わなければいけません。不正なポインタを利用した場合、細かなクラッシュレポートを目にすることになるでしょう
 ;)
 
 [[callbacks]]
 === コールバック
 
-ほとんど全ての WeeChat コールバックは WEECHAT_RC_OK または WEECHAT_RC_ERROR
+ほとんど全ての WhoreIRC コールバックは WHOREIRC_RC_OK または WHOREIRC_RC_ERROR
 を返さなければいけません (modifier コールバックは例外で、これは文字列を返します)。
 
 C 言語コールバックはポインタ型の "data" 引数を利用します。スクリプト API
@@ -339,7 +339,7 @@ C 言語コールバックはポインタ型の "data" 引数を利用します�
 ----
 def timer_cb(data, remaining_calls):
     weechat.prnt("", "timer! data=%s" % data)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
@@ -351,7 +351,7 @@ weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
 sub timer_cb {
     my ($data, $remaining_calls) = @_;
     weechat::print("", "timer! data=$data");
-    return weechat::WEECHAT_RC_OK;
+    return weechat::WHOREIRC_RC_OK;
 }
 
 weechat::hook_timer(1000, 0, 1, "timer_cb", "test");
@@ -363,7 +363,7 @@ weechat::hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 def timer_cb(data, remaining_calls)
   Weechat.print("", "timer! data=#{data}");
-  return Weechat::WEECHAT_RC_OK
+  return Weechat::WHOREIRC_RC_OK
 end
 
 Weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
@@ -375,7 +375,7 @@ Weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 function timer_cb(data, remaining_calls)
     weechat.print("", "timer! data="..data)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 end
 
 weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
@@ -387,7 +387,7 @@ weechat.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
 proc timer_cb { data remaining_calls } {
     weechat::print {} "timer! data=$data"
-    return $::weechat::WEECHAT_RC_OK
+    return $::weechat::WHOREIRC_RC_OK
 }
 
 weechat::hook_timer 1000 0 1 timer_cb test
@@ -399,7 +399,7 @@ weechat::hook_timer 1000 0 1 timer_cb test
 ----
 (define (timer_cb data remaining_calls)
   (weechat:print "" (string-append "timer! data=" data))
-  weechat:WEECHAT_RC_OK
+  weechat:WHOREIRC_RC_OK
 )
 
 (weechat:hook_timer 1000 0 1 "timer_cb" "test")
@@ -411,7 +411,7 @@ weechat::hook_timer 1000 0 1 timer_cb test
 ----
 function timer_cb(data, remaining_calls) {
     weechat.print("", "timer! data=" + data);
-    return weechat.WEECHAT_RC_OK;
+    return weechat.WHOREIRC_RC_OK;
 }
 
 weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
@@ -423,7 +423,7 @@ weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 $timer_cb = function ($data, $remaining_calls) {
     weechat_print('', 'timer! data=' . $data);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 };
 
 weechat_hook_timer(1000, 0, 1, $timer_cb, 'test');
@@ -433,7 +433,7 @@ weechat_hook_timer(1000, 0, 1, $timer_cb, 'test');
 == スクリプト API
 
 API に含まれる関数の詳しい情報は
-link:weechat_plugin_api.ja.html[WeeChat プラグイン API リファレンス]を参照してください。
+link:weechat_plugin_api.ja.html[WhoreIRC プラグイン API リファレンス]を参照してください。
 
 [[script_api_functions]]
 === 関数
@@ -687,58 +687,58 @@ link:weechat_plugin_api.ja.html[WeeChat プラグイン API リファレンス]�
 | カテゴリ            | 定数
 
 | リターンコード |
-  WEECHAT_RC_OK +
-  WEECHAT_RC_OK_EAT +
-  WEECHAT_RC_ERROR
+  WHOREIRC_RC_OK +
+  WHOREIRC_RC_OK_EAT +
+  WHOREIRC_RC_ERROR
 
 | 設定ファイル |
-  WEECHAT_CONFIG_READ_OK +
-  WEECHAT_CONFIG_READ_MEMORY_ERROR +
-  WEECHAT_CONFIG_READ_FILE_NOT_FOUND +
-  WEECHAT_CONFIG_WRITE_OK +
-  WEECHAT_CONFIG_WRITE_ERROR +
-  WEECHAT_CONFIG_WRITE_MEMORY_ERROR +
-  WEECHAT_CONFIG_OPTION_SET_OK_CHANGED +
-  WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE +
-  WEECHAT_CONFIG_OPTION_SET_ERROR +
-  WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND +
-  WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET +
-  WEECHAT_CONFIG_OPTION_UNSET_OK_RESET +
-  WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED +
-  WEECHAT_CONFIG_OPTION_UNSET_ERROR
+  WHOREIRC_CONFIG_READ_OK +
+  WHOREIRC_CONFIG_READ_MEMORY_ERROR +
+  WHOREIRC_CONFIG_READ_FILE_NOT_FOUND +
+  WHOREIRC_CONFIG_WRITE_OK +
+  WHOREIRC_CONFIG_WRITE_ERROR +
+  WHOREIRC_CONFIG_WRITE_MEMORY_ERROR +
+  WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED +
+  WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE +
+  WHOREIRC_CONFIG_OPTION_SET_ERROR +
+  WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND +
+  WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET +
+  WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET +
+  WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED +
+  WHOREIRC_CONFIG_OPTION_UNSET_ERROR
 
 | ソート済みリスト |
-  WEECHAT_LIST_POS_SORT +
-  WEECHAT_LIST_POS_BEGINNING +
-  WEECHAT_LIST_POS_END
+  WHOREIRC_LIST_POS_SORT +
+  WHOREIRC_LIST_POS_BEGINNING +
+  WHOREIRC_LIST_POS_END
 
 | ホットリスト |
-  WEECHAT_HOTLIST_LOW +
-  WEECHAT_HOTLIST_MESSAGE +
-  WEECHAT_HOTLIST_PRIVATE +
-  WEECHAT_HOTLIST_HIGHLIGHT
+  WHOREIRC_HOTLIST_LOW +
+  WHOREIRC_HOTLIST_MESSAGE +
+  WHOREIRC_HOTLIST_PRIVATE +
+  WHOREIRC_HOTLIST_HIGHLIGHT
 
 | プロセスのフック |
-  WEECHAT_HOOK_PROCESS_RUNNING +
-  WEECHAT_HOOK_PROCESS_ERROR
+  WHOREIRC_HOOK_PROCESS_RUNNING +
+  WHOREIRC_HOOK_PROCESS_ERROR
 
 | 接続のフック |
-  WEECHAT_HOOK_CONNECT_OK +
-  WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND +
-  WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND +
-  WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED +
-  WEECHAT_HOOK_CONNECT_PROXY_ERROR +
-  WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR +
-  WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR +
-  WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR +
-  WEECHAT_HOOK_CONNECT_MEMORY_ERROR +
-  WEECHAT_HOOK_CONNECT_TIMEOUT +
-  WEECHAT_HOOK_CONNECT_SOCKET_ERROR
+  WHOREIRC_HOOK_CONNECT_OK +
+  WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND +
+  WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND +
+  WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED +
+  WHOREIRC_HOOK_CONNECT_PROXY_ERROR +
+  WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR +
+  WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR +
+  WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR +
+  WHOREIRC_HOOK_CONNECT_MEMORY_ERROR +
+  WHOREIRC_HOOK_CONNECT_TIMEOUT +
+  WHOREIRC_HOOK_CONNECT_SOCKET_ERROR
 
 | シグナルのフック |
-  WEECHAT_HOOK_SIGNAL_STRING +
-  WEECHAT_HOOK_SIGNAL_INT +
-  WEECHAT_HOOK_SIGNAL_POINTER
+  WHOREIRC_HOOK_SIGNAL_STRING +
+  WHOREIRC_HOOK_SIGNAL_INT +
+  WHOREIRC_HOOK_SIGNAL_POINTER
 |===
 
 [[common_tasks]]
@@ -746,7 +746,7 @@ link:weechat_plugin_api.ja.html[WeeChat プラグイン API リファレンス]�
 
 この章ではいくつかの良くあるタスクを例を交えて紹介します。ここでは
 API の一部の機能を使っています。完全なリファレンスは
-link:weechat_plugin_api.ja.html[WeeChat プラグイン API リファレンス]を参照してください。
+link:weechat_plugin_api.ja.html[WhoreIRC プラグイン API リファレンス]を参照してください。
 
 [[buffers]]
 === バッファ
@@ -754,7 +754,7 @@ link:weechat_plugin_api.ja.html[WeeChat プラグイン API リファレンス]�
 [[buffers_display_messages]]
 ==== メッセージの表示
 
-WeeChat コアバッファに対して操作する場合、空文字列を使うことが多いです。他のバッファに対して操作する場合には、ポインタ
+WhoreIRC コアバッファに対して操作する場合、空文字列を使うことが多いです。他のバッファに対して操作する場合には、ポインタ
 (文字列型、<<pointers,ポインタ>> を参照) を与える必要があります。
 
 例:
@@ -765,7 +765,7 @@ WeeChat コアバッファに対して操作する場合、空文字列を使う
 weechat.prnt("", "hello")
 
 # "hello" をコアバッファに表示するが、ログファイルには書き込まない
-# (WeeChat バージョン 0.3.3 以上で利用可)
+# (WhoreIRC バージョン 0.3.3 以上で利用可)
 weechat.prnt_date_tags("", 0, "no_log", "hello")
 
 # プレフィックス "==>" とメッセージ "hello" を現在のバッファに表示
@@ -826,12 +826,12 @@ weechat.command(buffer, "hello")
 # データの入力時に呼び出されるコールバック
 def buffer_input_cb(data, buffer, input_data):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # バッファが閉じられた時に呼び出されるコールバック
 def buffer_close_cb(data, buffer):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # バッファの作成
 buffer = weechat.buffer_new("mybuffer", "buffer_input_cb", "", "buffer_close_cb", "")
@@ -873,7 +873,7 @@ myvar = weechat.buffer_get_string(buffer, "localvar_myvar")
 weechat.buffer_set(buffer, "localvar_del_myvar", "")
 ----
 
-バッファに対するローカル変数を見るには、WeeChat で以下のコマンドを実行してください:
+バッファに対するローカル変数を見るには、WhoreIRC で以下のコマンドを実行してください:
 
 ----
 /buffer localvar
@@ -894,7 +894,7 @@ weechat.buffer_set(buffer, "localvar_del_myvar", "")
 ----
 def my_command_cb(data, buffer, args):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 hook = weechat.hook_command("myfilter", "description of myfilter",
     "[list] | [enable|disable|toggle [name]] | [add name plugin.buffer tags regex] | [del name|-all]",
@@ -908,7 +908,7 @@ hook = weechat.hook_command("myfilter", "description of myfilter",
     "my_command_cb", "")
 ----
 
-上で定義したコマンドを WeeChat で以下のように使うことができます:
+上で定義したコマンドを WhoreIRC で以下のように使うことができます:
 
 ----
 /help myfilter
@@ -927,7 +927,7 @@ hook = weechat.hook_command("myfilter", "description of myfilter",
 ----
 def timer_cb(data, remaining_calls):
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # 1 分毎に (秒が 00 になった時に) 呼び出されるタイマー
 weechat.hook_timer(60 * 1000, 60, 0, "timer_cb", "")
@@ -954,7 +954,7 @@ def my_process_cb(data, command, rc, out, err):
         process_output += out
     if int(rc) >= 0:
         weechat.prnt("", process_output)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 weechat.hook_process("/bin/ls -l /etc", 10 * 1000, "my_process_cb", "")
 ----
@@ -962,7 +962,7 @@ weechat.hook_process("/bin/ls -l /etc", 10 * 1000, "my_process_cb", "")
 [[url_transfer]]
 ==== URL 転送
 
-_WeeChat バージョン 0.3.7 以上で利用可。_
+_WhoreIRC バージョン 0.3.7 以上で利用可。_
 
 URL をダウンロードする (または URL にポストする) には、関数 `hook_process` または URL
 転送にオプションが必要な場合は `hook_process_hashtable` を使わなければいけません。
@@ -972,7 +972,7 @@ URL をダウンロードする (または URL にポストする) には、関�
 
 [source,python]
 ----
-# 現在の WeeChat 安定版のバージョンを表示。
+# 現在の WhoreIRC 安定版のバージョンを表示。
 weechat_version = ""
 
 def weechat_process_cb(data, command, rc, out, err):
@@ -980,17 +980,17 @@ def weechat_process_cb(data, command, rc, out, err):
     if out != "":
         weechat_version += out
     if int(rc) >= 0:
-        weechat.prnt("", "Current WeeChat stable is: %s" % weechat_version)
-    return weechat.WEECHAT_RC_OK
+        weechat.prnt("", "Current WhoreIRC stable is: %s" % weechat_version)
+    return weechat.WHOREIRC_RC_OK
 
 weechat.hook_process("url:https://weechat.org/dev/info/stable/",
                      30 * 1000, "weechat_process_cb", "")
 ----
 
 [TIP]
-WeeChat に関して利用できる情報は全て https://weechat.org/dev/info にあります
+WhoreIRC に関して利用できる情報は全て https://weechat.org/dev/info にあります
 
-オプション有りの URL 転送の例: 最新の WeeChat 開発パッケージをファイル
+オプション有りの URL 転送の例: 最新の WhoreIRC 開発パッケージをファイル
 _/tmp/weechat-devel.tar.gz_ にダウンロード:
 
 [source,python]
@@ -998,7 +998,7 @@ _/tmp/weechat-devel.tar.gz_ にダウンロード:
 def my_process_cb(data, command, rc, out, err):
     if int(rc) >= 0:
         weechat.prnt("", "End of transfer (rc=%s)" % rc)
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 weechat.hook_process_hashtable("url:https://weechat.org/files/src/weechat-devel.tar.gz",
                                {"file_out": "/tmp/weechat-devel.tar.gz"},
@@ -1006,7 +1006,7 @@ weechat.hook_process_hashtable("url:https://weechat.org/files/src/weechat-devel.
 ----
 
 URL 転送に関するより詳しい情報と利用可能なオプションは
-link:weechat_plugin_api.ja.html#_hook_process[WeeChat プラグイン API リファレンス]の
+link:weechat_plugin_api.ja.html#_hook_process[WhoreIRC プラグイン API リファレンス]の
 `hook_process` と `hook_process_hashtable` を参照してください。
 
 [[config_options]]
@@ -1049,7 +1049,7 @@ def config_cb(data, option, value):
     """スクリプトオプションが変更されたときに呼び出されるコールバック"""
     # 例えば、スクリプト変数に対する全てのスクリプトオプションを読み込む等...
     # ...
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # ...
 
@@ -1058,7 +1058,7 @@ weechat.hook_config("plugins.var.python." + SCRIPT_NAME + ".*", "config_cb", "")
 ----
 
 [[config_options_weechat]]
-==== WeeChat オプションのロード
+==== WhoreIRC オプションのロード
 
 `config_get` 関数はオプションへのポインタを返します。オプションの型に従って
 `config_string`、`config_boolean`、`config_integer`、`config_color`
@@ -1108,7 +1108,7 @@ def join_cb(data, signal, signal_data):
     buffer = weechat.info_get("irc_buffer", "%s,%s" % (server, msg["channel"]))
     if buffer:
         weechat.prnt(buffer, "%s (%s) has joined this channel!" % (msg["nick"], msg["host"]))
-    return weechat.WEECHAT_RC_OK
+    return weechat.WHOREIRC_RC_OK
 
 # 全ての IRC サーバに対する JOIN メッセージをキャッチするにはサーバの指定に
 # "*" を使うと便利です。
@@ -1132,12 +1132,12 @@ weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
 ----
 
 [WARNING]
-不正なメッセージは WeeChat をクラッシュさせ、深刻な問題を引き起こします!
+不正なメッセージは WhoreIRC をクラッシュさせ、深刻な問題を引き起こします!
 
 [[irc_message_parse]]
 ==== メッセージの構文解析
 
-_WeeChat バージョン 0.3.4 以上で利用可。_
+_WhoreIRC バージョン 0.3.4 以上で利用可。_
 
 "irc_message_parse" と呼ばれる info_hashtable を使って IRC メッセージを構文解析できます。
 
@@ -1147,7 +1147,7 @@ _WeeChat バージョン 0.3.4 以上で利用可。_
 
 [width="100%",cols="1,^2,10,8",options="header"]
 |===
-| キー | WeeChat バージョン | 説明 | 例
+| キー | WhoreIRC バージョン | 説明 | 例
 
 | tags | 0.4.0 以上 |
   メッセージに付けられたタグ (空にすることも可) |
@@ -1224,7 +1224,7 @@ dict = weechat.info_get_hashtable(
 === 情報
 
 [[infos_weechat_version]]
-==== WeeChat のバージョン
+==== WhoreIRC のバージョン
 
 バージョンを確認する最良の方法は "version_number"
 を参照し、16 進数のバージョン番号と整数値比較することです。
@@ -1235,9 +1235,9 @@ dict = weechat.info_get_hashtable(
 ----
 version = weechat.info_get("version_number", "") or 0
 if int(version) >= 0x00030200:
-    weechat.prnt("", "This is WeeChat 0.3.2 or newer")
+    weechat.prnt("", "This is WhoreIRC 0.3.2 or newer")
 else:
-    weechat.prnt("", "This is WeeChat 0.3.1 or older")
+    weechat.prnt("", "This is WhoreIRC 0.3.1 or older")
 ----
 
 [NOTE]
@@ -1257,8 +1257,8 @@ weechat.prnt("", "Version %s" % weechat.info_get("version", ""))
 
 [source,python]
 ----
-# WeeChat ホームディレクトリ、例えば: "/home/xxxx/.weechat"
-weechat.prnt("", "WeeChat home dir: %s" % weechat.info_get("weechat_dir", ""))
+# WhoreIRC ホームディレクトリ、例えば: "/home/xxxx/.weechat"
+weechat.prnt("", "WhoreIRC home dir: %s" % weechat.info_get("weechat_dir", ""))
 
 # キーボードの不使用時間
 weechat.prnt("", "Inactivity since %s seconds" % weechat.info_get("inactivity", ""))
@@ -1270,7 +1270,7 @@ weechat.prnt("", "Inactivity since %s seconds" % weechat.info_get("inactivity", 
 [[infolists_read]]
 ==== インフォリストのロード
 
-WeeChat や他のプラグインによって作られたインフォリストを読み込むことができます。
+WhoreIRC や他のプラグインによって作られたインフォリストを読み込むことができます。
 
 例:
 
@@ -1286,5 +1286,5 @@ if infolist:
 ----
 
 [IMPORTANT]
-WeeChat は自動的にメモリを解放しません、インフォリストによって使われたメモリを解放するには、`infolist_free`
+WhoreIRC は自動的にメモリを解放しません、インフォリストによって使われたメモリを解放するには、`infolist_free`
 を呼び出すことを忘れないでください。

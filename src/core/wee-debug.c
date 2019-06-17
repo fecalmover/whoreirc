@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -67,7 +67,7 @@ int debug_dump_active = 0;
 
 
 /*
- * Writes dump of data to WeeChat log file.
+ * Writes dump of data to WhoreIRC log file.
  */
 
 void
@@ -80,15 +80,15 @@ debug_dump (int crash)
     if (crash)
     {
         debug_dump_active = 1;
-        log_printf ("Very bad, WeeChat is crashing (SIGSEGV received)...");
+        log_printf ("Very bad, WhoreIRC is crashing (SIGSEGV received)...");
         weechat_log_use_time = 0;
     }
 
     log_printf ("");
     if (crash)
-        log_printf ("****** WeeChat CRASH DUMP ******");
+        log_printf ("****** WhoreIRC CRASH DUMP ******");
     else
-        log_printf ("****** WeeChat dump request ******");
+        log_printf ("****** WhoreIRC dump request ******");
 
     gui_window_print_log ();
     gui_buffer_print_log ();
@@ -112,14 +112,14 @@ debug_dump (int crash)
     plugin_print_log ();
 
     log_printf ("");
-    log_printf ("****** End of WeeChat dump ******");
+    log_printf ("****** End of WhoreIRC dump ******");
     log_printf ("");
 }
 
 /*
  * Callback for signal "debug_dump".
  *
- * This function is called when WeeChat is crashing or when command
+ * This function is called when WhoreIRC is crashing or when command
  * "/debug dump" is issued.
  */
 
@@ -137,13 +137,13 @@ debug_dump_cb (const void *pointer, void *data,
     if (!signal_data || (string_strcasecmp ((char *)signal_data, "core") == 0))
         debug_dump (0);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
  * Callback for system signal SIGSEGV handler.
  *
- * Writes dump of data and backtrace to WeeChat log file, then exit.
+ * Writes dump of data and backtrace to WhoreIRC log file, then exit.
  */
 
 void
@@ -154,7 +154,7 @@ debug_sigsegv ()
     gui_main_end (0);
 
     string_fprintf (stderr,
-                    "\n*** Very bad! WeeChat is crashing (SIGSEGV received)"
+                    "\n*** Very bad! WhoreIRC is crashing (SIGSEGV received)"
                     "\n");
     if (!log_crash_rename ())
     {
@@ -166,7 +166,7 @@ debug_sigsegv ()
     string_fprintf (
         stderr,
         "***\n"
-        "*** Please help WeeChat developers to fix this bug:\n"
+        "*** Please help WhoreIRC developers to fix this bug:\n"
         "***\n"
         "***   1. If you have a core file, please run: gdb /path/to/weechat core\n"
         "***      then issue command: \"bt full\" and send result to developers.\n"
@@ -299,7 +299,7 @@ debug_hdata_hash_var_map_cb (void *data,
     var = (struct t_hdata_var *)value;
 
     snprintf (str_offset, sizeof (str_offset), "%12d", var->offset);
-    weelist_add (list, str_offset, WEECHAT_LIST_POS_SORT, (void *)key);
+    weelist_add (list, str_offset, WHOREIRC_LIST_POS_SORT, (void *)key);
 }
 
 /*
@@ -437,7 +437,7 @@ debug_infolists ()
     gui_chat_printf (NULL, "%d infolists in memory (%s)", count,
                      (count == 0) ?
                      "this is OK!" :
-                     "WARNING: this is probably a memory leak in WeeChat or "
+                     "WARNING: this is probably a memory leak in WhoreIRC or "
                      "plugins/scripts!");
 
     if (count > 0)
@@ -506,7 +506,7 @@ debug_infolists ()
  * Callback for signal "debug_libs": displays infos about external libraries
  * used (called when command "/debug libs" is issued).
  *
- * Note: this function displays libraries for WeeChat core only: plugins can
+ * Note: this function displays libraries for WhoreIRC core only: plugins can
  * catch this signal to display their external libraries.
  */
 
@@ -565,11 +565,11 @@ debug_libs_cb (const void *pointer, void *data,
     gui_chat_printf (NULL, "    zlib: (?)");
 #endif /* ZLIB_VERSION */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Displays WeeChat directories.
+ * Displays WhoreIRC directories.
  */
 
 void
@@ -577,7 +577,7 @@ debug_directories ()
 {
     char *extra_libdir;
 
-    extra_libdir = getenv (WEECHAT_EXTRA_LIBDIR);
+    extra_libdir = getenv (WHOREIRC_EXTRA_LIBDIR);
 
     gui_chat_printf (NULL, "");
     gui_chat_printf (NULL, _("Directories:"));
@@ -586,11 +586,11 @@ debug_directories ()
                      (weechat_home_temp) ? " " : "",
                      (weechat_home_temp) ? _("(TEMPORARY, deleted on exit)") : "");
     gui_chat_printf (NULL, _("        (default: %s)"),
-                     WEECHAT_HOME);
-    gui_chat_printf (NULL, "  lib: %s", WEECHAT_LIBDIR);
+                     WHOREIRC_HOME);
+    gui_chat_printf (NULL, "  lib: %s", WHOREIRC_LIBDIR);
     gui_chat_printf (NULL, "  lib (extra): %s",
                      (extra_libdir && extra_libdir[0]) ? extra_libdir : "-");
-    gui_chat_printf (NULL, "  share: %s", WEECHAT_SHAREDIR);
+    gui_chat_printf (NULL, "  share: %s", WHOREIRC_SHAREDIR);
     gui_chat_printf (NULL, "  locale: %s", LOCALEDIR);
 }
 

@@ -1,8 +1,8 @@
 Document: whoreirc-plugin-it
-Title: WeeChat plugin API reference (Italian)
+Title: WhoreIRC plugin API reference (Italian)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create plugins
- for WeeChat (Italian version).
+ for WhoreIRC (Italian version).
 Section: Network/Communication
 
 Format: HTML

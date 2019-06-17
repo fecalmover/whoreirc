@@ -1,4 +1,4 @@
-= Contributing to WeeChat
+= Contributing to WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en
@@ -25,9 +25,9 @@ email to <security@whoreirc.org> instead.
 When reporting https://github.com/whoreirc/whoreirc/issues[issues] on GitHub,
 please include:
 
-* Your *WeeChat version*: the output of `/v` in WeeChat, for example:
-  _WeeChat 1.7-dev (git: v1.6-6-g997f47f)_. +
-  If WeeChat does not start at all, please include the version displayed by
+* Your *WhoreIRC version*: the output of `/v` in WhoreIRC, for example:
+  _WhoreIRC 1.7-dev (git: v1.6-6-g997f47f)_. +
+  If WhoreIRC does not start at all, please include the version displayed by
   `whoreirc --help` (or the version installed with your package manager).
 * Your *operating system*: its name and version (examples: Linux Debian Wheezy,
   FreeBSD 10.0, Windows/Cygwin 64-bit, Windows/Ubuntu 64-bit...).
@@ -44,7 +44,7 @@ please include:
 * The *expected result*: the correct result you are expecting.
 
 [IMPORTANT]
-Most of times, the WeeChat crash log file (_whoreirc_crash_YYYYMMDD_xxx.log_) is
+Most of times, the WhoreIRC crash log file (_whoreirc_crash_YYYYMMDD_xxx.log_) is
 *NOT USEFUL* to fix the bug, so please report this file *ONLY* if a developer
 asked you to send it (and be extremely careful, this file can contain personal
 data like passwords and contents of your chats).
@@ -56,7 +56,7 @@ problem is related to one script, try to unload them one by one (using
 command `/script unload <name>`).
 
 Many issues reported are in fact related to bugs in scripts, so please first
-check that before reporting any issue on WeeChat itself.
+check that before reporting any issue on WhoreIRC itself.
 
 If you think the problem comes from a specific script, please report the issue
 in the https://github.com/whoreirc/scripts/issues[scripts git repository]
@@ -65,7 +65,7 @@ instead.
 == Translations
 
 Pull requests on GitHub for fixes or new translations are welcome at any
-time, for https://github.com/whoreirc/whoreirc[WeeChat] and the website
+time, for https://github.com/whoreirc/whoreirc[WhoreIRC] and the website
 https://github.com/whoreirc/whoreirc.org[whoreirc.org].
 
 To start a translation in a new language (not yet supported), please look at
@@ -74,7 +74,7 @@ in Developer's guide.
 
 == Feature requests
 
-WeeChat is under active development, so your idea may already have been
+WhoreIRC is under active development, so your idea may already have been
 implemented, or scheduled for a future version (you can check in
 https://whoreirc.org/dev[roadmap] or
 https://github.com/whoreirc/whoreirc/milestones[milestones] on GitHub.

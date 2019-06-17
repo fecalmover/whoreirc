@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_H
-#define WEECHAT_PLUGIN_RELAY_H
+#ifndef WHOREIRC_PLUGIN_RELAY_H
+#define WHOREIRC_PLUGIN_RELAY_H
 
 #define weechat_plugin weechat_relay_plugin
 #define RELAY_PLUGIN_NAME "relay"
@@ -31,7 +31,7 @@ extern int relay_signal_upgrade_received;
 
 enum t_relay_protocol
 {
-    RELAY_PROTOCOL_WEECHAT = 0,        /* WeeChat protocol                  */
+    RELAY_PROTOCOL_WHOREIRC = 0,        /* WeeChat protocol                  */
     RELAY_PROTOCOL_IRC,                /* IRC protocol (IRC proxy)          */
     /* number of relay protocols */
     RELAY_NUM_PROTOCOLS,
@@ -46,4 +46,4 @@ extern char *relay_protocol_string[];
 
 extern int relay_protocol_search (const char *name);
 
-#endif /* WEECHAT_PLUGIN_RELAY_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_H */

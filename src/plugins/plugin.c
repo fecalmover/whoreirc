@@ -1,22 +1,22 @@
 /*
- * plugin.c - WeeChat plugins management (load/unload dynamic C libraries)
+ * plugin.c - WhoreIRC plugins management (load/unload dynamic C libraries)
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -263,7 +263,7 @@ plugin_check_autoload (const char *filename)
 
 /*
  * Returns arguments for plugins (only the relevant arguments for plugins,
- * arguments for WeeChat core not returned).
+ * arguments for WhoreIRC core not returned).
  *
  * Note: plugin_argv must be freed after use.
  */
@@ -347,7 +347,7 @@ plugin_call_init (struct t_weechat_plugin *plugin, int argc, char **argv)
     }
     rc = ((t_weechat_init_func *)init_func) (plugin,
                                              plugin_argc, plugin_argv);
-    if (rc == WEECHAT_RC_OK)
+    if (rc == WHOREIRC_RC_OK)
     {
         plugin->initialized = 1;
     }
@@ -363,16 +363,16 @@ plugin_call_init (struct t_weechat_plugin *plugin, int argc, char **argv)
     if (plugin_argv)
         free (plugin_argv);
 
-    return (rc == WEECHAT_RC_OK) ? 1 : 0;
+    return (rc == WHOREIRC_RC_OK) ? 1 : 0;
 }
 
 /*
- * Loads a WeeChat plugin (a dynamic library).
+ * Loads a WhoreIRC plugin (a dynamic library).
  *
  * If init_plugin == 1, then the init() function in plugin is called
  * (with argc/argv), otherwise the plugin is just loaded but not initialized.
  *
- * Returns a pointer to new WeeChat plugin, NULL if error.
+ * Returns a pointer to new WhoreIRC plugin, NULL if error.
  */
 
 struct t_weechat_plugin *
@@ -392,7 +392,7 @@ plugin_load (const char *filename, int init_plugin, int argc, char **argv)
     /*
      * if plugin must not be autoloaded, then return immediately
      * Note: the "plugin_autoload_array" variable is set only during auto-load,
-     * ie when WeeChat is starting or when doing /plugin autoload
+     * ie when WhoreIRC is starting or when doing /plugin autoload
      */
     if (plugin_autoload_array && !plugin_check_autoload (filename))
         return NULL;
@@ -444,14 +444,14 @@ plugin_load (const char *filename, int init_plugin, int argc, char **argv)
         dlclose (handle);
         return NULL;
     }
-    if (strcmp (api_version, WEECHAT_PLUGIN_API_VERSION) != 0)
+    if (strcmp (api_version, WHOREIRC_PLUGIN_API_VERSION) != 0)
     {
         gui_chat_printf (NULL,
                          _("%sError: API mismatch for plugin \"%s\" (current "
                            "API: \"%s\", plugin API: \"%s\"), failed to load"),
                          gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                          filename,
-                         WEECHAT_PLUGIN_API_VERSION,
+                         WHOREIRC_PLUGIN_API_VERSION,
                          api_version);
         gui_chat_printf (NULL,
                          _("%sIf plugin \"%s\" is old/obsolete, you can "
@@ -574,7 +574,7 @@ plugin_load (const char *filename, int init_plugin, int argc, char **argv)
         new_plugin->debug = (ptr_option) ? CONFIG_INTEGER(ptr_option) : 0;
         new_plugin->variables = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING, WEECHAT_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_STRING, WHOREIRC_HASHTABLE_STRING,
             NULL, NULL);
 
         /* functions */
@@ -932,7 +932,7 @@ plugin_load (const char *filename, int init_plugin, int argc, char **argv)
     }
 
     (void) hook_signal_send ("plugin_loaded",
-                             WEECHAT_HOOK_SIGNAL_STRING, (char *)filename);
+                             WHOREIRC_HOOK_SIGNAL_STRING, (char *)filename);
 
     return new_plugin;
 }
@@ -976,7 +976,7 @@ plugin_arraylist_cmp_cb (void *data,
 }
 
 /*
- * Auto-loads WeeChat plugins, from user and system directories.
+ * Auto-loads WhoreIRC plugins, from user and system directories.
  */
 
 void
@@ -1008,9 +1008,9 @@ plugin_auto_load (char *force_plugin_autoload,
             ptr_plugin_autoload,
             ",",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &plugin_autoload_count);
     }
@@ -1036,10 +1036,10 @@ plugin_auto_load (char *force_plugin_autoload,
             free (plugin_path2);
     }
 
-    /* auto-load plugins in WEECHAT_EXTRA_LIBDIR environment variable */
+    /* auto-load plugins in WHOREIRC_EXTRA_LIBDIR environment variable */
     if (load_from_extra_lib_dir)
     {
-        extra_libdir = getenv (WEECHAT_EXTRA_LIBDIR);
+        extra_libdir = getenv (WHOREIRC_EXTRA_LIBDIR);
         if (extra_libdir && extra_libdir[0])
         {
             length = strlen (extra_libdir) + 16 + 1;
@@ -1051,14 +1051,14 @@ plugin_auto_load (char *force_plugin_autoload,
         }
     }
 
-    /* auto-load plugins in WeeChat global lib dir */
+    /* auto-load plugins in WhoreIRC global lib dir */
     if (load_from_lib_dir)
     {
-        length = strlen (WEECHAT_LIBDIR) + 16 + 1;
+        length = strlen (WHOREIRC_LIBDIR) + 16 + 1;
         dir_name = malloc (length);
         if (dir_name)
         {
-            snprintf (dir_name, length, "%s/plugins", WEECHAT_LIBDIR);
+            snprintf (dir_name, length, "%s/plugins", WHOREIRC_LIBDIR);
             util_exec_on_files (dir_name, 1, 0,
                                 &plugin_auto_load_file, &plugin_args);
             free (dir_name);
@@ -1105,7 +1105,7 @@ plugin_auto_load (char *force_plugin_autoload,
 }
 
 /*
- * Removes a WeeChat plugin.
+ * Removes a WhoreIRC plugin.
  */
 
 void
@@ -1180,7 +1180,7 @@ plugin_remove (struct t_weechat_plugin *plugin)
 }
 
 /*
- * Unloads a WeeChat plugin.
+ * Unloads a WhoreIRC plugin.
  */
 
 void
@@ -1207,13 +1207,13 @@ plugin_unload (struct t_weechat_plugin *plugin)
                          (name) ? name : "???");
     }
     (void) hook_signal_send ("plugin_unloaded",
-                             WEECHAT_HOOK_SIGNAL_STRING, name);
+                             WHOREIRC_HOOK_SIGNAL_STRING, name);
     if (name)
         free (name);
 }
 
 /*
- * Unloads a WeeChat plugin by name.
+ * Unloads a WhoreIRC plugin by name.
  */
 
 void
@@ -1234,7 +1234,7 @@ plugin_unload_name (const char *name)
 }
 
 /*
- * Unloads all WeeChat plugins.
+ * Unloads all WhoreIRC plugins.
  */
 
 void
@@ -1258,7 +1258,7 @@ plugin_unload_all ()
 }
 
 /*
- * Reloads a WeeChat plugin by name.
+ * Reloads a WhoreIRC plugin by name.
  */
 
 void
@@ -1314,7 +1314,7 @@ plugin_display_short_list ()
                  ptr_plugin = ptr_plugin->next_plugin)
             {
                 length += strlen (ptr_plugin->name) + 2;
-                weelist_add (list, ptr_plugin->name, WEECHAT_LIST_POS_SORT, NULL);
+                weelist_add (list, ptr_plugin->name, WHOREIRC_LIST_POS_SORT, NULL);
             }
             length++;
 
@@ -1405,7 +1405,7 @@ plugin_hdata_plugin_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_weechat_plugin, variables, HASHTABLE, 0, NULL, NULL);
         HDATA_VAR(struct t_weechat_plugin, prev_plugin, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_weechat_plugin, next_plugin, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(weechat_plugins, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(weechat_plugins, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_weechat_plugin, 0);
     }
     return hdata;
@@ -1467,7 +1467,7 @@ plugin_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints plugins in WeeChat log file (usually for crash dump).
+ * Prints plugins in WhoreIRC log file (usually for crash dump).
  */
 
 void

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -82,7 +82,7 @@ plugin_script_signal_debug_libs_cb (const void *pointer, void *data,
 
     plugin_script_display_interpreter (plugin, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -134,7 +134,7 @@ plugin_script_info_version_cb (const void *pointer, void *data,
 }
 
 /*
- * Creates directories for plugin in WeeChat home:
+ * Creates directories for plugin in WhoreIRC home:
  * - ~/.weechat/XXX/
  * - ~/.weechat/XXX/autoload/
  */
@@ -160,7 +160,7 @@ plugin_script_create_dirs (struct t_weechat_plugin *weechat_plugin)
  * Initializes script plugin:
  *   - reads configuration
  *   - hooks config
- *   - creates directories in WeeChat home
+ *   - creates directories in WhoreIRC home
  *   - hooks command, completion, hdata, infolist, signals
  *   - parses arguments
  *   - auto-loads scripts.
@@ -181,7 +181,7 @@ plugin_script_init (struct t_weechat_plugin *weechat_plugin,
     /* read configuration file */
     weechat_config_read (*plugin_data->config_file);
 
-    /* create directories in WeeChat home */
+    /* create directories in WhoreIRC home */
     plugin_script_create_dirs (weechat_plugin);
 
     /* add command */
@@ -464,7 +464,7 @@ plugin_script_auto_load (struct t_weechat_plugin *weechat_plugin,
     char *dir_home, *dir_name;
     int dir_length;
 
-    /* build directory, adding WeeChat home */
+    /* build directory, adding WhoreIRC home */
     dir_home = weechat_info_get ("weechat_dir", "");
     if (!dir_home)
         return;
@@ -552,7 +552,7 @@ plugin_script_search_path (struct t_weechat_plugin *weechat_plugin,
     dir_home = weechat_info_get ("weechat_dir", "");
     if (dir_home)
     {
-        /* try WeeChat user's autoload dir */
+        /* try WhoreIRC user's autoload dir */
         length = strlen (dir_home) + strlen (weechat_plugin->name) + 8 +
             strlen (filename) + 16;
         final_name = malloc (length);
@@ -569,7 +569,7 @@ plugin_script_search_path (struct t_weechat_plugin *weechat_plugin,
             free (final_name);
         }
 
-        /* try WeeChat language user's dir */
+        /* try WhoreIRC language user's dir */
         length = strlen (dir_home) + strlen (weechat_plugin->name) +
             strlen (filename) + 16;
         final_name = malloc (length);
@@ -585,7 +585,7 @@ plugin_script_search_path (struct t_weechat_plugin *weechat_plugin,
             free (final_name);
         }
 
-        /* try WeeChat user's dir */
+        /* try WhoreIRC user's dir */
         length = strlen (dir_home) + strlen (filename) + 16;
         final_name = malloc (length);
         if (final_name)
@@ -602,7 +602,7 @@ plugin_script_search_path (struct t_weechat_plugin *weechat_plugin,
         free (dir_home);
     }
 
-    /* try WeeChat system dir */
+    /* try WhoreIRC system dir */
     dir_system = weechat_info_get ("weechat_sharedir", "");
     if (dir_system)
     {
@@ -774,7 +774,7 @@ plugin_script_add (struct t_weechat_plugin *weechat_plugin,
     }
 
     /* add script to the list (except the internal "eval" fake script) */
-    if (strcmp (new_script->name, WEECHAT_SCRIPT_EVAL_NAME) != 0)
+    if (strcmp (new_script->name, WHOREIRC_SCRIPT_EVAL_NAME) != 0)
     {
         plugin_script_insert_sorted (weechat_plugin,
                                      plugin_data->scripts,
@@ -1088,7 +1088,7 @@ plugin_script_completion (struct t_weechat_plugin *weechat_plugin,
          ptr_script = ptr_script->next_script)
     {
         weechat_hook_completion_list_add (completion, ptr_script->name,
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 }
 
@@ -1252,9 +1252,9 @@ plugin_script_action_install (struct t_weechat_plugin *weechat_plugin,
     }
 
     argv = weechat_string_split (ptr_list, ",", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     if (argv)
     {
@@ -1360,7 +1360,7 @@ plugin_script_action_install (struct t_weechat_plugin *weechat_plugin,
 
     snprintf (str_signal, sizeof (str_signal),
               "%s_script_installed", weechat_plugin->name);
-    (void) weechat_hook_signal_send (str_signal, WEECHAT_HOOK_SIGNAL_STRING,
+    (void) weechat_hook_signal_send (str_signal, WHOREIRC_HOOK_SIGNAL_STRING,
                                      ptr_list);
 
     free (*list);
@@ -1401,9 +1401,9 @@ plugin_script_action_remove (struct t_weechat_plugin *weechat_plugin,
     }
 
     argv = weechat_string_split (ptr_list, ",", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     if (argv)
     {
@@ -1425,7 +1425,7 @@ plugin_script_action_remove (struct t_weechat_plugin *weechat_plugin,
 
     snprintf (str_signal, sizeof (str_signal),
               "%s_script_removed", weechat_plugin->name);
-    (void) weechat_hook_signal_send (str_signal, WEECHAT_HOOK_SIGNAL_STRING,
+    (void) weechat_hook_signal_send (str_signal, WHOREIRC_HOOK_SIGNAL_STRING,
                                      ptr_list);
 
     free (*list);
@@ -1475,9 +1475,9 @@ plugin_script_action_autoload (struct t_weechat_plugin *weechat_plugin,
     }
 
     argv = weechat_string_split (ptr_list, ",", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     if (argv)
     {
@@ -1651,20 +1651,20 @@ plugin_script_hdata_script (struct t_weechat_plugin *weechat_plugin,
     {
         snprintf (str_hdata_callback, sizeof (str_hdata_callback),
                   "%s_callback", weechat_plugin->name);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, filename, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, interpreter, POINTER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, author, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, version, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, license, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, description, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, shutdown_func, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, charset, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, unloading, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, prev_script, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_plugin_script, next_script, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, filename, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, interpreter, POINTER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, author, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, version, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, license, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, description, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, shutdown_func, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, charset, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, unloading, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, prev_script, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_plugin_script, next_script, POINTER, 0, NULL, hdata_name);
         weechat_hdata_new_list (hdata, "scripts", scripts,
-                                WEECHAT_HDATA_LIST_CHECK_POINTERS);
+                                WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         weechat_hdata_new_list (hdata, "last_script", last_script, 0);
     }
     return hdata;
@@ -1797,7 +1797,7 @@ plugin_script_end (struct t_weechat_plugin *weechat_plugin,
 }
 
 /*
- * Prints scripts in WeeChat log file (usually for crash dump).
+ * Prints scripts in WhoreIRC log file (usually for crash dump).
  */
 
 void

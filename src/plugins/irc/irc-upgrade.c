@@ -1,22 +1,22 @@
 /*
- * irc-upgrade.c - save/restore IRC plugin data when upgrading WeeChat
+ * irc-upgrade.c - save/restore IRC plugin data when upgrading WhoreIRC
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -426,7 +426,7 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                     /*
                      * "cap_ls" and "cap_list" replace "cap_away_notify",
                      * "cap_account_notify" and "cap_extended_join"
-                     * in WeeChat 2.2
+                     * in WhoreIRC 2.2
                      */
                     if (weechat_infolist_integer (infolist, "cap_away_notify"))
                     {
@@ -453,13 +453,13 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                         irc_upgrade_current_server->isupport = strdup (str);
                     /*
                      * "prefix" is not any more in this infolist (since
-                     * WeeChat 0.3.4), but we read it to keep compatibility
-                     * with old WeeChat versions, on /upgrade)
+                     * WhoreIRC 0.3.4), but we read it to keep compatibility
+                     * with old WhoreIRC versions, on /upgrade)
                      */
                     str = weechat_infolist_string (infolist, "prefix");
                     if (str)
                         irc_server_set_prefix_modes_chars (irc_upgrade_current_server, str);
-                    /* "prefix_modes" is new in WeeChat 0.3.4 */
+                    /* "prefix_modes" is new in WhoreIRC 0.3.4 */
                     str = weechat_infolist_string (infolist, "prefix_modes");
                     if (str)
                     {
@@ -467,7 +467,7 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                             free (irc_upgrade_current_server->prefix_modes);
                         irc_upgrade_current_server->prefix_modes = strdup (str);
                     }
-                    /* "prefix_chars" is new in WeeChat 0.3.4 */
+                    /* "prefix_chars" is new in WhoreIRC 0.3.4 */
                     str = weechat_infolist_string (infolist, "prefix_chars");
                     if (str)
                     {
@@ -490,14 +490,14 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                         if (str)
                             irc_upgrade_current_server->chanmodes = strdup (str);
                     }
-                    /* "monitor" is new in WeeChat 0.4.3 */
+                    /* "monitor" is new in WhoreIRC 0.4.3 */
                     if (weechat_infolist_search_var (infolist, "monitor"))
                     {
                         irc_upgrade_current_server->monitor = weechat_infolist_integer (infolist, "monitor");
                     }
                     else
                     {
-                        /* WeeChat <= 0.4.2 */
+                        /* WhoreIRC <= 0.4.2 */
                         str = irc_server_get_isupport_value (irc_upgrade_current_server,
                                                              "MONITOR");
                         if (str)
@@ -556,9 +556,9 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                                 str,
                                 ",",
                                 NULL,
-                                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                 0,
                                 &num_items);
                             if (items)
@@ -619,9 +619,9 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                                 str,
                                 ",",
                                 NULL,
-                                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                 0,
                                 &nicks_count);
                             if (nicks)
@@ -669,8 +669,8 @@ irc_upgrade_read_cb (const void *pointer, void *data,
                     {
                         /*
                          * "flags" is not any more in this infolist (since
-                         * WeeChat 0.3.4), but we read it to keep compatibility
-                         * with old WeeChat versions, on /upgrade)
+                         * WhoreIRC 0.3.4), but we read it to keep compatibility
+                         * with old WhoreIRC versions, on /upgrade)
                          * We try to restore prefixes with old flags, but
                          * this is approximation, it's not sure we will
                          * restore good prefixes here (a /names on channel
@@ -830,7 +830,7 @@ irc_upgrade_read_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

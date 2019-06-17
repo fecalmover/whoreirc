@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "CppUTest/TestHarness.h"
@@ -609,9 +609,9 @@ TEST(CoreString, EvalPathHome)
     STRCMP_EQUAL(result + length_weechat_home, "/test");
     free (result);
 
-    setenv ("WEECHAT_TEST_PATH", "path1", 1);
+    setenv ("WHOREIRC_TEST_PATH", "path1", 1);
 
-    result = string_eval_path_home ("%h/${env:WEECHAT_TEST_PATH}/path2",
+    result = string_eval_path_home ("%h/${env:WHOREIRC_TEST_PATH}/path2",
                                     NULL, NULL, NULL);
     CHECK(strncmp (result, weechat_home, length_weechat_home) == 0);
     LONGS_EQUAL(length_weechat_home + 12, strlen (result));
@@ -619,13 +619,13 @@ TEST(CoreString, EvalPathHome)
     free (result);
 
     extra_vars = hashtable_new (32,
-                                WEECHAT_HASHTABLE_STRING,
-                                WEECHAT_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
+                                WHOREIRC_HASHTABLE_STRING,
                                 NULL, NULL);
     CHECK(extra_vars);
     hashtable_set (extra_vars, "path2", "value");
 
-    result = string_eval_path_home ("%h/${env:WEECHAT_TEST_PATH}/${path2}",
+    result = string_eval_path_home ("%h/${env:WHOREIRC_TEST_PATH}/${path2}",
                                     NULL, extra_vars, NULL);
     CHECK(strncmp (result, weechat_home, length_weechat_home) == 0);
     LONGS_EQUAL(length_weechat_home + 12, strlen (result));
@@ -1016,9 +1016,9 @@ TEST(CoreString, Split)
     POINTERS_EQUAL(NULL, string_split ("", NULL, NULL, 0, 0, NULL));
     POINTERS_EQUAL(NULL, string_split ("", "", NULL, 0, 0, NULL));
 
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
 
     argc = -1;
     POINTERS_EQUAL(NULL, string_split (NULL, NULL, NULL, flags, 0, &argc));
@@ -1040,9 +1040,9 @@ TEST(CoreString, Split)
     string_free_split (NULL);
 
     /* standard split */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split ("abc de  fghi", " ", NULL, flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1054,9 +1054,9 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* standard split */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1068,9 +1068,9 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* max 2 items */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 2, &argc);
     LONGS_EQUAL(2, argc);
@@ -1081,10 +1081,10 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* strip left/right, keep eol for each value */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-        | WEECHAT_STRING_SPLIT_KEEP_EOL;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+        | WHOREIRC_STRING_SPLIT_KEEP_EOL;
     argc = -1;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1096,10 +1096,10 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* strip left/right, keep eol for each value, max 2 items */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-        | WEECHAT_STRING_SPLIT_KEEP_EOL;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+        | WHOREIRC_STRING_SPLIT_KEEP_EOL;
     argc = -1;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 2, &argc);
     LONGS_EQUAL(2, argc);
@@ -1110,9 +1110,9 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* strip left, keep eol for each value */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-        | WEECHAT_STRING_SPLIT_KEEP_EOL;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+        | WHOREIRC_STRING_SPLIT_KEEP_EOL;
     argc = -1;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1124,9 +1124,9 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* strip left, keep eol for each value, max 2 items */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-        | WEECHAT_STRING_SPLIT_KEEP_EOL;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+        | WHOREIRC_STRING_SPLIT_KEEP_EOL;
     argc = -1;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 2, &argc);
     LONGS_EQUAL(2, argc);
@@ -1137,9 +1137,9 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* standard split with comma separator */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split ("abc,de,fghi", ",", NULL, flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1154,9 +1154,9 @@ TEST(CoreString, Split)
      * standard split with comma separator,
      * strip_items set to empty string (ignored)
      */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split (" abc ,, de ,fghi ,,", ",", "", flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1171,9 +1171,9 @@ TEST(CoreString, Split)
      * standard split with comma separator,
      * strip spaces in items (left/right)
      */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split (" abc ,, de ,fghi ,,", ",", " ", flags, 0, &argc);
     LONGS_EQUAL(3, argc);
@@ -1188,9 +1188,9 @@ TEST(CoreString, Split)
      * standard split with comma separator,
      * strip spaces and parentheses in items (left/right)
      */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split (" abc ,, (de) ,(f(g)hi) ,,", ",", " ()",
                          flags, 0, &argc);
@@ -1203,9 +1203,9 @@ TEST(CoreString, Split)
     string_free_split (argv);
 
     /* standard split with comma separator and empty item (ignore this item) */
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argc = -1;
     argv = string_split ("abc,,fghi", ",", NULL, flags, 0, &argc);
     LONGS_EQUAL(2, argc);
@@ -1298,9 +1298,9 @@ TEST(CoreString, SplitShared)
     char **argv;
     int argc, flags;
 
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
 
     POINTERS_EQUAL(NULL, string_split_shared (NULL, NULL, NULL,
                                               flags, 0, NULL));
@@ -1311,9 +1311,9 @@ TEST(CoreString, SplitShared)
     POINTERS_EQUAL(NULL, string_split_shared ("", "", NULL,
                                               flags, 0, NULL));
 
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argv = string_split_shared (" abc de  abc ", " ", NULL, flags, 0, &argc);
     LONGS_EQUAL(3, argc);
     CHECK(argv);
@@ -1494,9 +1494,9 @@ TEST(CoreString, SplitBuildWithSplitString)
     str = string_build_with_split_string (NULL, NULL);
     POINTERS_EQUAL(NULL, str);
 
-    flags = WEECHAT_STRING_SPLIT_STRIP_LEFT
-        | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-        | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS;
+    flags = WHOREIRC_STRING_SPLIT_STRIP_LEFT
+        | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+        | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS;
     argv = string_split (" abc de  fghi ", " ", NULL, flags, 0, &argc);
 
     str = string_build_with_split_string ((const char **)argv, NULL);

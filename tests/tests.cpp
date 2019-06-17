@@ -1,22 +1,22 @@
 /*
- * tests.cpp - run WeeChat tests
+ * tests.cpp - run WhoreIRC tests
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <iostream>
@@ -51,10 +51,10 @@ extern "C"
 
 #define LOCALE_TESTS "en_US.UTF-8"
 
-#define WEECHAT_TESTS_HOME "./tmp_whoreirc_test"
+#define WHOREIRC_TESTS_HOME "./tmp_whoreirc_test"
 
 /* lib with tests on plugins when autotools is used to compile */
-#define WEECHAT_TESTS_PLUGINS_LIB_DEFAULT                       \
+#define WHOREIRC_TESTS_PLUGINS_LIB_DEFAULT                       \
     "./tests/.libs/lib_whoreirc_unit_tests_plugins.so.0.0.0"
 
 /* import tests from libs */
@@ -81,7 +81,7 @@ struct t_gui_buffer *ptr_core_buffer = NULL;
 
 
 /*
- * Callback for exec_on_files (to remove all files in WeeChat home directory).
+ * Callback for exec_on_files (to remove all files in WhoreIRC home directory).
  */
 
 void
@@ -94,7 +94,7 @@ exec_on_files_cb (void *data, const char *filename)
 }
 
 /*
- * Callback for any message displayed by WeeChat or a plugin.
+ * Callback for any message displayed by WhoreIRC or a plugin.
  */
 
 int
@@ -116,7 +116,7 @@ test_print_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
     if (strcmp (gui_buffer_get_string (buffer, "full_name"),
                 "core.whoreirc") != 0)
     {
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     printf ("%s%s%s\n",  /* with color: "\33[34m%s%s%s\33[0m\n" */
@@ -124,7 +124,7 @@ test_print_cb (const void *pointer, void *data, struct t_gui_buffer *buffer,
             (prefix && prefix[0]) ? " " : "",
             (message && message[0]) ? message : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -166,7 +166,7 @@ run_cmd (const char *command)
 }
 
 /*
- * Runs tests in WeeChat environment.
+ * Runs tests in WhoreIRC environment.
  */
 
 int
@@ -174,7 +174,7 @@ main (int argc, char *argv[])
 {
     int rc, length, whoreirc_argc;
     char *whoreirc_tests_args, *args, **whoreirc_argv, *tests_plugins_lib;
-    const char *tests_plugins_lib_default = WEECHAT_TESTS_PLUGINS_LIB_DEFAULT;
+    const char *tests_plugins_lib_default = WHOREIRC_TESTS_PLUGINS_LIB_DEFAULT;
     const char *ptr_path;
     void *handle;
 
@@ -186,17 +186,17 @@ main (int argc, char *argv[])
     if (!setlocale (LC_ALL, ""))
     {
         fprintf (stderr,
-                 "ERROR: the locale %s must be installed to run WeeChat "
+                 "ERROR: the locale %s must be installed to run WhoreIRC "
                  "tests.\n",
                  LOCALE_TESTS);
         return 1;
     }
 
-    /* clean WeeChat home */
-    util_exec_on_files (WEECHAT_TESTS_HOME, 1, 1, &exec_on_files_cb, NULL);
+    /* clean WhoreIRC home */
+    util_exec_on_files (WHOREIRC_TESTS_HOME, 1, 1, &exec_on_files_cb, NULL);
 
-    /* build arguments for WeeChat */
-    whoreirc_tests_args = getenv ("WEECHAT_TESTS_ARGS");
+    /* build arguments for WhoreIRC */
+    whoreirc_tests_args = getenv ("WHOREIRC_TESTS_ARGS");
     length = strlen (argv[0]) +
         64 +  /* --dir ... */
         ((whoreirc_tests_args) ? 1 + strlen (whoreirc_tests_args) : 0) +
@@ -210,13 +210,13 @@ main (int argc, char *argv[])
     snprintf (args, length,
               "%s --dir %s%s%s",
               argv[0],
-              WEECHAT_TESTS_HOME,
+              WHOREIRC_TESTS_HOME,
               (whoreirc_tests_args) ? " " : "",
               (whoreirc_tests_args) ? whoreirc_tests_args : "");
     whoreirc_argv = string_split_shell (args, &whoreirc_argc);
-    printf ("WeeChat arguments: \"%s\"\n", args);
+    printf ("WhoreIRC arguments: \"%s\"\n", args);
 
-    /* init WeeChat */
+    /* init WhoreIRC */
     whoreirc_init_gettext ();
     whoreirc_init (whoreirc_argc, whoreirc_argv, &test_gui_init);
     if (whoreirc_argv)
@@ -225,18 +225,18 @@ main (int argc, char *argv[])
 
     ptr_core_buffer = gui_buffer_search_main ();
 
-    /* auto-load plugins from WEECHAT_EXTRA_LIBDIR if no plugin were loaded */
+    /* auto-load plugins from WHOREIRC_EXTRA_LIBDIR if no plugin were loaded */
     if (!whoreirc_plugins)
     {
         gui_chat_printf (NULL,
                          "Auto-loading plugins from path in "
-                         "environment variable WEECHAT_EXTRA_LIBDIR (\"%s\")",
-                         getenv ("WEECHAT_EXTRA_LIBDIR"));
+                         "environment variable WHOREIRC_EXTRA_LIBDIR (\"%s\")",
+                         getenv ("WHOREIRC_EXTRA_LIBDIR"));
         plugin_auto_load (NULL, 0, 1, 0, 0, NULL);
     }
 
     /* load plugins tests */
-    tests_plugins_lib = getenv ("WEECHAT_TESTS_PLUGINS_LIB");
+    tests_plugins_lib = getenv ("WHOREIRC_TESTS_PLUGINS_LIB");
     ptr_path = (tests_plugins_lib && tests_plugins_lib[0]) ?
         tests_plugins_lib : tests_plugins_lib_default;
     printf ("Loading tests on plugins: \"%s\"\n", ptr_path);
@@ -248,7 +248,7 @@ main (int argc, char *argv[])
         return 1;
     }
 
-    /* display WeeChat version and directories */
+    /* display WhoreIRC version and directories */
     run_cmd ("/command core version");
     run_cmd ("/debug dirs");
     run_cmd ("/debug libs");
@@ -257,7 +257,7 @@ main (int argc, char *argv[])
     printf ("\n");
     rc = CommandLineTestRunner::RunAllTests (argc, argv);
 
-    /* end WeeChat */
+    /* end WhoreIRC */
     gui_chat_mute = GUI_CHAT_MUTE_ALL_BUFFERS;
     whoreirc_end (&gui_main_end);
 

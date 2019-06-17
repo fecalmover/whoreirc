@@ -3,8 +3,8 @@
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: pl
-:man manual: WeeChat Manual
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC Manual
+:man source: WhoreIRC {revnumber}
 
 == NAZWA
 
@@ -21,12 +21,12 @@ whoreirc-headless - rozszerzalny klient rozmów (wersja headless)
 
 == OPIS
 
-WeeChat (Wee Enhanced Environment for Chat) to darmowy klient rozmów, szybki
+WhoreIRC (Wee Enhanced Environment for Chat) to darmowy klient rozmów, szybki
 i lekki, przeznaczony dla wielu systemów operacyjnych.
 Posiada dużo opcji konfiguracyjnych i dodatkowych wtyczek.
 
-Komenda *whoreirc-headless* uruchamia WeeChat w trybie headless (bez interfejsu).
-Może być używana do testów lub do uruchamiania WeeChat w trybie demona za pomocą
+Komenda *whoreirc-headless* uruchamia WhoreIRC w trybie headless (bez interfejsu).
+Może być używana do testów lub do uruchamiania WhoreIRC w trybie demona za pomocą
 opcji "--daemon".
 
 == OPCJE

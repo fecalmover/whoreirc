@@ -1,24 +1,24 @@
 *-a*, *--no-connect*::
-    Disable auto-connect to servers when WeeChat is starting.
+    Disable auto-connect to servers when WhoreIRC is starting.
 
 *-c*, *--colors*::
     Display default colors in terminal.
 
 *--daemon*::
-    Run WeeChat in background, as a daemon (works only with the command
+    Run WhoreIRC in background, as a daemon (works only with the command
     *weechat-headless*).
 
 *-d*, *--dir* _<path>_::
-    Set path as home for WeeChat (used for configuration files, logs, user
+    Set path as home for WhoreIRC (used for configuration files, logs, user
     plugins and scripts), default value is "~/.weechat" (note: directory is
-    created if not found by WeeChat).
-    If this option is not given, the environment variable WEECHAT_HOME is used
+    created if not found by WhoreIRC).
+    If this option is not given, the environment variable WHOREIRC_HOME is used
     (if not empty).
 
 *-t*, *--temp-dir*::
-    Create a temporary WeeChat home directory and delete it on exit
+    Create a temporary WhoreIRC home directory and delete it on exit
     (incompatible with option "-d"). +
-    The name of the directory is automatically built by WeeChat, with this
+    The name of the directory is automatically built by WhoreIRC, with this
     template: "weechat_temp_XXXXXX" (where "XXXXXX" is random). It it created
     in the first available directory in this list: environment variable "TMPDIR",
     "/tmp" (may be different according to the operating system), environment
@@ -30,7 +30,7 @@
     Display help.
 
 *-l*, *--license*::
-    Display WeeChat license.
+    Display WhoreIRC license.
 
 *-p*, *--no-plugin*::
     Disable plugins auto-load.
@@ -47,10 +47,10 @@
     Disable scripts auto-load.
 
 *--upgrade*::
-    Upgrade WeeChat using session files generated with command `/upgrade -quit`.
+    Upgrade WhoreIRC using session files generated with command `/upgrade -quit`.
 
 *-v*, *--version*::
-    Display WeeChat version.
+    Display WhoreIRC version.
 
 *plugin:option*::
     Option for a plugin.

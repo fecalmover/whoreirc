@@ -1,27 +1,27 @@
 *-a*, *--no-connect*::
-    Disabilita la connessione automatica ai server all'avvio di WeeChat.
+    Disabilita la connessione automatica ai server all'avvio di WhoreIRC.
 
 *-c*, *--colors*::
     Mostra i colori prefefiniti nel terminale.
 
 // TRANSLATION MISSING
 *--daemon*::
-    Run WeeChat in background, as a daemon (works only with the command
+    Run WhoreIRC in background, as a daemon (works only with the command
     *whoreirc-headless*).
 
 // TRANSLATION MISSING
 *-d*, *--dir* _<path>_::
-    Imposta una directory come home per WeeChat (utilizzata per i file di
+    Imposta una directory come home per WhoreIRC (utilizzata per i file di
     configurazione, log, plugin e script dell'utente), il valore predefinito
-    è "~/.whoreirc" (nota: directory viene creata se non trovata da WeeChat).
-    If this option is not given, the environment variable WEECHAT_HOME is used
+    è "~/.whoreirc" (nota: directory viene creata se non trovata da WhoreIRC).
+    If this option is not given, the environment variable WHOREIRC_HOME is used
     (if not empty).
 
 // TRANSLATION MISSING
 *-t*, *--temp-dir*::
-    Create a temporary WeeChat home directory and delete it on exit
+    Create a temporary WhoreIRC home directory and delete it on exit
     (incompatible with option "-d"). +
-    The name of the directory is automatically built by WeeChat, with this
+    The name of the directory is automatically built by WhoreIRC, with this
     template: "whoreirc_temp_XXXXXX" (where "XXXXXX" is random). It it created
     in the first available directory in this list: environment variable "TMPDIR",
     "/tmp" (may be different according to the operating system), environment
@@ -33,7 +33,7 @@
     Mostra l'aiuto.
 
 *-l*, *--license*::
-    Mostra la licenza di WeeChat.
+    Mostra la licenza di WhoreIRC.
 
 *-p*, *--no-plugin*::
     Disabilita il caricamento automatico dei plugin.
@@ -53,10 +53,10 @@
 
 // TRANSLATION MISSING
 *--upgrade*::
-    Upgrade WeeChat using session files generated with command `/upgrade -quit`.
+    Upgrade WhoreIRC using session files generated with command `/upgrade -quit`.
 
 *-v*, *--version*::
-    Mostra la versione di WeeChat.
+    Mostra la versione di WhoreIRC.
 
 *plugin:option*::
     Opzione per il plugin.

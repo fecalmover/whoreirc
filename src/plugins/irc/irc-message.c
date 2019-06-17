@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -347,8 +347,8 @@ irc_message_parse_to_hashtable (struct t_irc_server *server,
                        &pos_command, &pos_arguments, &pos_channel, &pos_text);
 
     hashtable = weechat_hashtable_new (32,
-                                       WEECHAT_HASHTABLE_STRING,
-                                       WEECHAT_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
                                        NULL, NULL);
     if (!hashtable)
         return NULL;
@@ -780,9 +780,9 @@ irc_message_split_join (struct t_hashtable *hashtable,
         if (!str)
             return 0;
         channels = weechat_string_split (str, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &channels_count);
         free (str);
         while (pos[0] == ' ')
@@ -791,17 +791,17 @@ irc_message_split_join (struct t_hashtable *hashtable,
         }
         if (pos[0])
             keys = weechat_string_split (pos, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &keys_count);
     }
     else
     {
         channels = weechat_string_split (arguments, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &channels_count);
     }
 
@@ -1035,8 +1035,8 @@ irc_message_split (struct t_irc_server *server, const char *message)
     }
 
     hashtable = weechat_hashtable_new (32,
-                                       WEECHAT_HASHTABLE_STRING,
-                                       WEECHAT_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
+                                       WHOREIRC_HASHTABLE_STRING,
                                        NULL, NULL);
     if (!hashtable)
         return NULL;
@@ -1055,14 +1055,14 @@ irc_message_split (struct t_irc_server *server, const char *message)
     }
 
     argv = weechat_string_split (message, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     argv_eol = weechat_string_split (message, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                                     | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                                     | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                                      0, NULL);
 
     if (argc < 2)

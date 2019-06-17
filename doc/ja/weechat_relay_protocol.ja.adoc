@@ -1,4 +1,4 @@
-= WeeChat リレープロトコル
+= WhoreIRC リレープロトコル
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
@@ -14,7 +14,7 @@
 * Ryuunosuke Ayanokouzi <i38w7i3@yahoo.co.jp>, 2014-2019
 
 
-この文書は WeeChat リレープロトコルについて述べたものです: リレープロトコルとは、WeeChat
+この文書は WhoreIRC リレープロトコルについて述べたものです: リレープロトコルとは、WhoreIRC
 データをクライアントに中継するためのもので、多くの場合クライアントはリモートインターフェースを指します。
 
 
@@ -26,7 +26,7 @@
 
 この文書では以下の用語を利用します:
 
-* _リレー_: これは relay プラグインを備えた WeeChat を指し、"サーバ"
+* _リレー_: これは relay プラグインを備えた WhoreIRC を指し、"サーバ"
   のように振る舞い、_クライアント_ からの接続を受け付けます
 * _クライアント_: これは他のソフトウェアのことを指し、ネットワークを介して _リレー_
   に接続します; 多くの場合、_クライアント_ はリモートインターフェースのことを指します。
@@ -41,7 +41,7 @@
  ┌────────┐                                ┌───┤ クライアント 1 │ (Linux、Windows、
  │  irc   │◄──┐  ╔═══════════╤════════╗    │   └────────────────┘ BSD、macOS ...)
  └────────┘   └──╢           │        ║◄───┘   ┌────────────────┐
-   ......        ║  WeeChat  │ リレー ║◄───────┤ クライアント 2 │ 携帯デバイス
+   ......        ║  WhoreIRC  │ リレー ║◄───────┤ クライアント 2 │ 携帯デバイス
  ┌────────┐   ┌──╢           │        ║◄───┐   └────────────────┘ (Android、iPhone ...)
  │ jabber │◄──┘  ╚═══════════╧════════╝    │      ......
  └────────┘                                │   ┌────────────────┐
@@ -84,7 +84,7 @@ _リレー_ プラグインは _IRC プロキシ_ のように振舞います (�
 
 * _id_: _リレー_ からの応答に含まれる任意指定のメッセージ識別子;
   識別子は必ず括弧で括り、アンダースコアを最初につけるのは禁止されています
-  (アンダースコアが最初についている識別子は WeeChat _event_ メッセージ用に予約されています)
+  (アンダースコアが最初についている識別子は WhoreIRC _event_ メッセージ用に予約されています)
 * _command_: コマンド (以下のテーブルを参照)
 * _arguments_: コマンドに対する任意指定の引数
   (複数の引数を渡す場合は空白で区切ってください)。
@@ -122,29 +122,29 @@ init [<option>=<value>,[<option>=<value>,...]]
 
 * _option_: 以下のうちの 1 つ:
 ** _password_: _リレー_ の認証用パスワード
-   (WeeChat の _relay.network.password_ オプション)
+   (WhoreIRC の _relay.network.password_ オプション)
 ** _totp_: パスワードに加えた二要素認証で利用する時間ベースのワンタイムパスワード (TOTP)
-   (WeeChat の _relay.network.totp_secret_ オプション)
-   _(WeeChat バージョン 2.4 で利用可能)_
+   (WhoreIRC の _relay.network.totp_secret_ オプション)
+   _(WhoreIRC バージョン 2.4 で利用可能)_
 ** _compression_: 圧縮タイプ:
 *** _zlib_: _リレー_ から受信するメッセージに対して _zlib_ 圧縮を使う
     (_リレー_ が _zlib_ 圧縮をサポートしている場合、デフォルトで有効化されます)
 *** _off_: 圧縮を使わない
 
 [NOTE]
-WeeChat バージョン 1.6 以上の場合、コンマをエスケープすることで value にコンマを設定可能です。例えば
+WhoreIRC バージョン 1.6 以上の場合、コンマをエスケープすることで value にコンマを設定可能です。例えば
 "foo,bar" というパスワードを送信するには `init password=foo\,bar` のように設定してください。
 
 例:
 
 ----
-# デフォルト設定の zlib を使用する例 (WeeChat がサポートする場合)
+# デフォルト設定の zlib を使用する例 (WhoreIRC がサポートする場合)
 init password=mypass
 
-# パスワードにコンマを含む値を設定する例 (WeeChat バージョン 1.6 以上の場合)
+# パスワードにコンマを含む値を設定する例 (WhoreIRC バージョン 1.6 以上の場合)
 init password=mypass\,with\,commas
 
-# パスワードと TOTP を初期化する例 (WeeChat バージョン 2.4 以上の場合)
+# パスワードと TOTP を初期化する例 (WhoreIRC バージョン 2.4 以上の場合)
 init password=mypass,totp=123456
 
 # 圧縮を使わない例
@@ -182,7 +182,7 @@ _hdata_ を要求。
 * _*_: 最後の要素まで、次の要素への反復を繰り返す
 
 [NOTE]
-WeeChat バージョン 1.6 以上では、hdata へのパスが無効または NULL ポインタが見つかった場合、空の
+WhoreIRC バージョン 1.6 以上では、hdata へのパスが無効または NULL ポインタが見つかった場合、空の
 hdata が返されます (<<object_hdata,hdata オブジェクト>>の例を参照してください)。 +
 1.6 よりも古いバージョンでは、何も返されません。
 
@@ -307,7 +307,7 @@ input irc.freenode.#whoreirc hello!
 [[command_sync]]
 === sync
 
-_WeeChat バージョン 0.4.1 で更新。_
+_WhoreIRC バージョン 0.4.1 で更新。_
 
 更新を取得して 1 つまたは複数のバッファを同期。
 
@@ -331,13 +331,13 @@ sync [<buffer>[,<buffer>...] <option>[,<option>...]]
   _buffers,upgrade,buffer,nicklist_、バッファに対するデフォルトは _buffer,nicklist_):
 ** _buffers_: バッファに関するシグナルを受け取る
    (オープン/クローズ、移動、リネーム、マージ/アンマージ、隠す/隠さない); これは名前が "*" の場合のみ利用可能
-   _(WeeChat バージョン 0.4.1 以上で利用可)_
-** _upgrade_: WeeChat アップグレードに関するシグナルを受信 (アップグレード、アップグレードの終了);
+   _(WhoreIRC バージョン 0.4.1 以上で利用可)_
+** _upgrade_: WhoreIRC アップグレードに関するシグナルを受信 (アップグレード、アップグレードの終了);
    名前が "*" のバッファに対してのみ利用可能
-   _(WeeChat バージョン 0.4.1 以上で利用可)_
+   _(WhoreIRC バージョン 0.4.1 以上で利用可)_
 ** _buffer_: バッファに関するシグナルを受信
    (新しい行、型の変更、タイトルの変更、ローカル変数の追加/削除、_buffers_
-   と同じバッファに関するシグナル) _(WeeChat バージョン 0.4.1 で更新)_
+   と同じバッファに関するシグナル) _(WhoreIRC バージョン 0.4.1 で更新)_
 ** _nicklist_: 変更後にニックネームリストを受信
 
 例:
@@ -364,7 +364,7 @@ sync irc.freenode.#whoreirc
 [[command_desync]]
 === desync
 
-_WeeChat バージョン 0.4.1 で更新。_
+_WhoreIRC バージョン 0.4.1 で更新。_
 
 更新を中止して 1 つまたは複数のバッファの同期を中止。
 
@@ -389,7 +389,7 @@ desync [<buffer>[,<buffer>...] <option>[,<option>...]]
 
 [NOTE]
 buffer に "*" を指定した場合、(名前を使って) 同期されている他のバッファは同期状態が保存されます。 +
-このため "sync *"、"sync irc.freenode.#whoreirc"、"desync *" の順に送信した場合、WeeChat
+このため "sync *"、"sync irc.freenode.#whoreirc"、"desync *" の順に送信した場合、WhoreIRC
 は #whoreirc チャンネルに対するアップデートを送信し続けます
 (アップデートを止めるには、明示してこれを中止しなければいけません)。
 
@@ -413,14 +413,14 @@ desync irc.freenode.#whoreirc
 [[command_test]]
 === test
 
-テストコマンド: WeeChat は様々な種類のオブジェクトを返します。
+テストコマンド: WhoreIRC は様々な種類のオブジェクトを返します。
 
-このコマンドは WeeChat
+このコマンドは WhoreIRC
 が返すバイナリオブジェクトのデコーディングをテストする際に便利です。
 
 [IMPORTANT]
 このコマンドが返したポインタ値を絶対に使ってはいけません、ポインタ値は無効です。このコマンドを
-WeeChat
+WhoreIRC
 が返すメッセージのデコーディングをテストする場合以外に使わないでください。
 
 構文:
@@ -460,11 +460,11 @@ test
 [[command_ping]]
 === ping
 
-_WeeChat バージョン 0.4.2 以上で利用可。_
+_WhoreIRC バージョン 0.4.2 以上で利用可。_
 
-WeeChat にメッセージ "_pong" と同じ引数を持つ返信 ping を送信。
+WhoreIRC にメッセージ "_pong" と同じ引数を持つ返信 ping を送信。
 
-このコマンドは WeeChat
+このコマンドは WhoreIRC
 との接続がまだ保持されいることの確認と応答時間を計測する場合に便利です。
 
 構文:
@@ -539,7 +539,7 @@ _compression_ フラグが 0x01 の場合、これ以降の *全ての* デー�
 * イベントの _id_: 一部のイベントで、_リレー_ は _クライアント_ に向けて特別な、アンダースコアで始まる、_id_
   を含むメッセージを送信します (以下の表を参照)
 
-WeeChat の予約識別子:
+WhoreIRC の予約識別子:
 
 [width="100%",cols="5m,5,3,4,7",options="header"]
 |===
@@ -601,16 +601,16 @@ WeeChat の予約識別子:
   "ping" に対する応答 | 応答時間の測定
 
 | _upgrade | upgrade | (空) |
-  WeeChat のアップグレード中 | WeeChat との同期を中止 (または切断)
+  WhoreIRC のアップグレード中 | WhoreIRC との同期を中止 (または切断)
 
 | _upgrade_ended | upgrade | (空) |
-  WeeChat のアップグレード終了 | WeeChat との同期および再同期
+  WhoreIRC のアップグレード終了 | WhoreIRC との同期および再同期
 |===
 
 [[message_buffer_opened]]
 ==== _buffer_opened
 
-このメッセージは WeeChat が "buffer_opened"
+このメッセージは WhoreIRC が "buffer_opened"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -653,7 +653,7 @@ hda:
 [[message_buffer_moved]]
 ==== _buffer_moved
 
-このメッセージは WeeChat が "buffer_moved"
+このメッセージは WhoreIRC が "buffer_moved"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -686,7 +686,7 @@ hda:
 [[message_buffer_merged]]
 ==== _buffer_merged
 
-このメッセージは WeeChat が "buffer_merged"
+このメッセージは WhoreIRC が "buffer_merged"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -719,7 +719,7 @@ hda:
 [[message_buffer_unmerged]]
 ==== _buffer_unmerged
 
-このメッセージは WeeChat が "buffer_unmerged"
+このメッセージは WhoreIRC が "buffer_unmerged"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -752,9 +752,9 @@ hda:
 [[message_buffer_hidden]]
 ==== _buffer_hidden
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
-このメッセージは WeeChat が "buffer_hidden"
+このメッセージは WhoreIRC が "buffer_hidden"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -787,9 +787,9 @@ hda:
 [[message_buffer_unhidden]]
 ==== _buffer_unhidden
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
-このメッセージは WeeChat が "buffer_unhidden"
+このメッセージは WhoreIRC が "buffer_unhidden"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -822,7 +822,7 @@ hda:
 [[message_buffer_renamed]]
 ==== _buffer_renamed
 
-このメッセージは WeeChat が "buffer_renamed"
+このメッセージは WhoreIRC が "buffer_renamed"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -856,7 +856,7 @@ hda:
 [[message_buffer_title_changed]]
 ==== _buffer_title_changed
 
-このメッセージは WeeChat が "buffer_title_changed"
+このメッセージは WhoreIRC が "buffer_title_changed"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -887,9 +887,9 @@ hda:
 [[message_buffer_cleared]]
 ==== _buffer_cleared
 
-_WeeChat バージョン 1.0 以上で利用可。_
+_WhoreIRC バージョン 1.0 以上で利用可。_
 
-このメッセージは WeeChat が "buffer_cleared"
+このメッセージは WhoreIRC が "buffer_cleared"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -918,7 +918,7 @@ hda:
 [[message_buffer_type_changed]]
 ==== _buffer_type_changed
 
-このメッセージは WeeChat が "buffer_type_changed"
+このメッセージは WhoreIRC が "buffer_type_changed"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -950,7 +950,7 @@ hda:
 [[message_buffer_localvar_added]]
 ==== _buffer_localvar_added
 
-このメッセージは WeeChat が "buffer_localvar_added"
+このメッセージは WhoreIRC が "buffer_localvar_added"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -983,7 +983,7 @@ hda:
 [[message_buffer_localvar_changed]]
 ==== _buffer_localvar_changed
 
-このメッセージは WeeChat が "buffer_localvar_changed"
+このメッセージは WhoreIRC が "buffer_localvar_changed"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -1016,7 +1016,7 @@ hda:
 [[message_buffer_localvar_removed]]
 ==== _buffer_localvar_removed
 
-このメッセージは WeeChat が "buffer_localvar_removed"
+このメッセージは WhoreIRC が "buffer_localvar_removed"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -1048,7 +1048,7 @@ hda:
 [[message_buffer_line_added]]
 ==== _buffer_line_added
 
-このメッセージは WeeChat が "buffer_line_added"
+このメッセージは WhoreIRC が "buffer_line_added"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -1058,7 +1058,7 @@ hdata として送られるデータ:
 | 名前         | 型               | 説明
 | buffer       | pointer          | バッファへのポインタ
 | date         | time             | メッセージの日付
-| date_printed | time             | WeeChat メッセージを表示した日付
+| date_printed | time             | WhoreIRC メッセージを表示した日付
 | displayed    | char             | メッセージが表示される場合は 1、メッセージがフィルタされる (隠される) 場合は 0
 | highlight    | char             | 行がハイライト部分を含む場合は 1、それ以外は 0
 | tags_array   | string の配列    | 行に対するタグのリスト
@@ -1090,7 +1090,7 @@ hda:
 [[message_buffer_closing]]
 ==== _buffer_closing
 
-このメッセージは WeeChat が "buffer_closing"
+このメッセージは WhoreIRC が "buffer_closing"
 シグナルを送信する際にクライアントに送られます。
 
 hdata として送られるデータ:
@@ -1102,7 +1102,7 @@ hdata として送られるデータ:
 | full_name | string  | 完全な名前 (例: _irc.freenode.#whoreirc_)
 |===
 
-例: WeeChat がバッファ _irc.freenode.#whoreirc_ を閉じる:
+例: WhoreIRC がバッファ _irc.freenode.#whoreirc_ を閉じる:
 
 [source,python]
 ----
@@ -1207,7 +1207,7 @@ hda:
 [[message_nicklist_diff]]
 ==== _nicklist_diff
 
-_WeeChat バージョン 0.4.1 以上で利用可。_
+_WhoreIRC バージョン 0.4.1 以上で利用可。_
 
 このメッセージはニックネームリストに対して小さな更新 (グループおよびニックネームの追加/更新/変更)
 が行われた場合にクライアントに送られます。このメッセージにはニックネームリストの差分が含まれます
@@ -1302,7 +1302,7 @@ hda:
 [[message_pong]]
 ==== _pong
 
-_WeeChat バージョン 0.4.2 以上で利用可。_
+_WhoreIRC バージョン 0.4.2 以上で利用可。_
 
 このメッセージは _リレー_ が "ping" メッセージを受信する際にクライアントに送られます。
 
@@ -1313,31 +1313,31 @@ _WeeChat バージョン 0.4.2 以上で利用可。_
 [[message_upgrade]]
 ==== _upgrade
 
-_WeeChat バージョン 0.3.8 以上で利用可。_
+_WhoreIRC バージョン 0.3.8 以上で利用可。_
 
-このメッセージは WeeChat がアップグレード処理を始める際にクライアントに送られます。
+このメッセージは WhoreIRC がアップグレード処理を始める際にクライアントに送られます。
 
 メッセージにデータは含まれません。
 
-クライアントは WeeChat との同期を中止するか
-(_desync_ コマンドを送信)、WeeChat から切断することを推奨します
+クライアントは WhoreIRC との同期を中止するか
+(_desync_ コマンドを送信)、WhoreIRC から切断することを推奨します
 (これはアップグレードの後はすべてのポインタが変わるからです)。
 
 [NOTE]
-WeeChat のアップグレード中、ソケットは開いたままです
+WhoreIRC のアップグレード中、ソケットは開いたままです
 (ただし SSL を使っている場合は閉じられます)。
 
 [[message_upgrade_ended]]
 ==== _upgrade_ended
 
-_WeeChat バージョン 0.3.8 以上で利用可。_
+_WhoreIRC バージョン 0.3.8 以上で利用可。_
 
-このメッセージは WeeChat
+このメッセージは WhoreIRC
 がアップグレード処理を終えた際にクライアントに送られます。
 
 メッセージにデータは含まれません。
 
-クライアントは WeeChat との同期を再開することを推奨します:
+クライアントは WhoreIRC との同期を再開することを推奨します:
 クライアントを開始して _init_ 以降に送信したすべてのコマンドを再送信。
 
 [[objects]]
@@ -1642,7 +1642,7 @@ nicklist
                                nick (@ChanServ)
 ....
 
-空の hdata の例 (WeeChat のホットリストが空の場合):
+空の hdata の例 (WhoreIRC のホットリストが空の場合):
 
 ....
 # コマンド
@@ -1674,7 +1674,7 @@ _version_ インフォの例:
 
 ....
 ┌─────────┬───────────────────┐
-│ version │ WeeChat 0.3.7-dev │
+│ version │ WhoreIRC 0.3.7-dev │
 └─────────┴───────────────────┘
 ....
 
@@ -1778,7 +1778,7 @@ _NULL_ 配列:
 
 ....
     ┌──────────────┐                  ┌────────┐                  ┌─────────┐
-    │ クライアント ├ ─(ネットワーク)─ ┤ リレー ├──────────────────┤ WeeChat │
+    │ クライアント ├ ─(ネットワーク)─ ┤ リレー ├──────────────────┤ WhoreIRC │
     └──────────────┘                  └────────┘                  └─────────┘
          ║                                 ║                           ║
          ╟───────────────────────────────► ║                           ║

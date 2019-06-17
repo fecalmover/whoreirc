@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2013-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -457,9 +457,9 @@ secure_decrypt_data_not_decrypted (const char *passphrase)
                                                "keys"),
                          ",",
                          NULL,
-                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                          0,
                          &num_keys);
     if (keys)
@@ -705,7 +705,7 @@ secure_init ()
 {
     char *ptr_phrase;
 
-    /* try to read passphrase (if not set) from env var "WEECHAT_PASSPHRASE" */
+    /* try to read passphrase (if not set) from env var "WHOREIRC_PASSPHRASE" */
     if (!secure_passphrase)
     {
         ptr_phrase = getenv (SECURE_ENV_PASSPHRASE);
@@ -718,15 +718,15 @@ secure_init ()
     }
 
     secure_hashtable_data = hashtable_new (32,
-                                           WEECHAT_HASHTABLE_STRING,
-                                           WEECHAT_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
+                                           WHOREIRC_HASHTABLE_STRING,
                                            NULL, NULL);
     if (!secure_hashtable_data)
         return 0;
 
     secure_hashtable_data_encrypted = hashtable_new (32,
-                                                     WEECHAT_HASHTABLE_STRING,
-                                                     WEECHAT_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
+                                                     WHOREIRC_HASHTABLE_STRING,
                                                      NULL, NULL);
     if (!secure_hashtable_data_encrypted)
     {

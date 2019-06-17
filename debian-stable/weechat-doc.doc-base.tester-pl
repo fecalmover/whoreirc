@@ -1,8 +1,8 @@
 Document: whoreirc-tester-pl
-Title: WeeChat tester's guide (Polish)
+Title: WhoreIRC tester's guide (Polish)
 Author: Sébastien Helleu
 Abstract: This document describes how to test and report
- bugs against the WeeChat IRC Client (Polish version).
+ bugs against the WhoreIRC IRC Client (Polish version).
 Section: Network/Communication
 
 Format: HTML

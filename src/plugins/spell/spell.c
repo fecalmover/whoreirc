@@ -1,24 +1,24 @@
 /*
- * spell.c - spell checker plugin for WeeChat
+ * spell.c - spell checker plugin for WhoreIRC
  *
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  * Copyright (C) 2006-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2012 Nils Görs <weechatter@arcor.de>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -42,12 +42,12 @@
 #include "spell-speller.h"
 
 
-WEECHAT_PLUGIN_NAME(SPELL_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Spell checker for input"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(11000);
+WHOREIRC_PLUGIN_NAME(SPELL_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Spell checker for input"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(11000);
 
 struct t_weechat_plugin *weechat_spell_plugin = NULL;
 
@@ -183,7 +183,7 @@ char *spell_url_prefix[] =
 
 
 /*
- * Displays a warning if the file aspell.conf is still present in WeeChat
+ * Displays a warning if the file aspell.conf is still present in WhoreIRC
  * home directory and spell.conf not yet created (upgrade from a version ≤ 2.4
  * to a version ≥ 2.5).
  */
@@ -981,7 +981,7 @@ spell_modifier_cb (const void *pointer, void *data,
     {
         weechat_bar_item_update ("spell_suggest");
         (void) weechat_hook_signal_send ("spell_suggest",
-                                         WEECHAT_HOOK_SIGNAL_POINTER, buffer);
+                                         WHOREIRC_HOOK_SIGNAL_POINTER, buffer);
     }
     if (old_suggestions)
         free (old_suggestions);
@@ -1013,7 +1013,7 @@ spell_buffer_switch_cb (const void *pointer, void *data, const char *signal,
     weechat_bar_item_update ("spell_dict");
     weechat_bar_item_update ("spell_suggest");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1035,7 +1035,7 @@ spell_window_switch_cb (const void *pointer, void *data, const char *signal,
     weechat_bar_item_update ("spell_dict");
     weechat_bar_item_update ("spell_suggest");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1055,7 +1055,7 @@ spell_buffer_closed_cb (const void *pointer, void *data, const char *signal,
 
     weechat_hashtable_remove (spell_speller_buffer, signal_data);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1089,7 +1089,7 @@ spell_debug_libs_cb (const void *pointer, void *data, const char *signal,
 #endif /* HAVE_ASPELL_VERSION_STRING */
 #endif /* USE_ENCHANT */
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1112,7 +1112,7 @@ spell_config_change_nick_completer_cb (const void *pointer, void *data,
     spell_len_nick_completer =
         (spell_nick_completer) ? strlen (spell_nick_completer) : 0;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1134,14 +1134,14 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     /* acquire enchant broker */
     broker = enchant_broker_init ();
     if (!broker)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 #endif /* USE_ENCHANT */
 
     if (!spell_speller_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     if (!spell_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     spell_config_read ();
 
@@ -1179,7 +1179,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
         weechat_config_string (
             weechat_config_get ("weechat.completion.nick_completer")));
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1205,5 +1205,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     if (spell_nick_completer)
         free (spell_nick_completer);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

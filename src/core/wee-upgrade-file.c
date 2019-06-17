@@ -1,22 +1,22 @@
 /*
- * wee-upgrade-file.c - save/restore data for upgrading WeeChat
+ * wee-upgrade-file.c - save/restore data for upgrading WhoreIRC
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -54,7 +54,7 @@ upgrade_file_error (struct t_upgrade_file *upgrade_file, char *message1,
                     char *message2, char *file, int line)
 {
     gui_chat_printf (NULL,
-                     _("%sError upgrading WeeChat with file \"%s\":"),
+                     _("%sError upgrading WhoreIRC with file \"%s\":"),
                      gui_chat_prefix[GUI_CHAT_PREFIX_ERROR],
                      upgrade_file->filename);
     gui_chat_printf (NULL,
@@ -292,9 +292,9 @@ upgrade_file_write_object (struct t_upgrade_file *upgrade_file, int object_id,
         if (fields)
         {
             argv = string_split (fields, ",", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
             if (argv && (argc > 0))
             {
@@ -703,7 +703,7 @@ upgrade_file_read_object (struct t_upgrade_file *upgrade_file)
                 upgrade_file->callback_read_data,
                 upgrade_file,
                 object_id,
-                infolist) == WEECHAT_RC_ERROR)
+                infolist) == WHOREIRC_RC_ERROR)
         {
             rc = 0;
         }

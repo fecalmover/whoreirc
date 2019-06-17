@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_TRIGGER_CALLBACK_H
-#define WEECHAT_PLUGIN_TRIGGER_CALLBACK_H
+#ifndef WHOREIRC_PLUGIN_TRIGGER_CALLBACK_H
+#define WHOREIRC_PLUGIN_TRIGGER_CALLBACK_H
 
 #include <time.h>
 
@@ -47,8 +47,8 @@
 #define TRIGGER_CALLBACK_CB_NEW_POINTERS                        \
     pointers = weechat_hashtable_new (                          \
         32,                                                     \
-        WEECHAT_HASHTABLE_STRING,                               \
-        WEECHAT_HASHTABLE_POINTER,                              \
+        WHOREIRC_HASHTABLE_STRING,                               \
+        WHOREIRC_HASHTABLE_POINTER,                              \
         NULL, NULL);                                            \
     if (!pointers)                                              \
         goto end;
@@ -56,8 +56,8 @@
 #define TRIGGER_CALLBACK_CB_NEW_EXTRA_VARS                      \
     extra_vars = weechat_hashtable_new (                        \
         32,                                                     \
-        WEECHAT_HASHTABLE_STRING,                               \
-        WEECHAT_HASHTABLE_STRING,                               \
+        WHOREIRC_HASHTABLE_STRING,                               \
+        WHOREIRC_HASHTABLE_STRING,                               \
         NULL, NULL);                                            \
     if (!extra_vars)                                            \
         goto end;
@@ -138,4 +138,4 @@ extern struct t_hashtable *trigger_callback_info_hashtable_cb (const void *point
 extern void trigger_callback_init ();
 extern void trigger_callback_end ();
 
-#endif /* WEECHAT_PLUGIN_TRIGGER_CALLBACK_H */
+#endif /* WHOREIRC_PLUGIN_TRIGGER_CALLBACK_H */

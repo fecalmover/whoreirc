@@ -2,24 +2,24 @@
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2005-2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_CONFIG_FILE_H
-#define WEECHAT_CONFIG_FILE_H
+#ifndef WHOREIRC_CONFIG_FILE_H
+#define WHOREIRC_CONFIG_FILE_H
 
 #include <stdio.h>
 
@@ -309,4 +309,4 @@ extern int config_file_add_to_infolist (struct t_infolist *infolist,
                                         const char *option_name);
 extern void config_file_print_log ();
 
-#endif /* WEECHAT_CONFIG_FILE_H */
+#endif /* WHOREIRC_CONFIG_FILE_H */

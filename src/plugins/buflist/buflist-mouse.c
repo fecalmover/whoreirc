@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -88,9 +88,9 @@ end:
     /* get list of keys */
     keys = weechat_hdata_get_string (buflist_hdata_buffer, "var_keys");
     list_keys = weechat_string_split (keys, ",", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_keys);
     if (!list_keys)
         return info;
@@ -101,14 +101,14 @@ end:
         type = weechat_hdata_get_var_type (buflist_hdata_buffer, list_keys[i]);
         switch (type)
         {
-            case WEECHAT_HDATA_CHAR:
+            case WHOREIRC_HDATA_CHAR:
                 snprintf (str_value, sizeof (str_value),
                           "%c",
                           weechat_hdata_char (buflist_hdata_buffer,
                                               ptr_buffer, list_keys[i]));
                 weechat_hashtable_set (info, list_keys[i], str_value);
                 break;
-            case WEECHAT_HDATA_INTEGER:
+            case WHOREIRC_HDATA_INTEGER:
                 snprintf (str_value, sizeof (str_value),
                           "%d",
                           (ptr_buffer) ?
@@ -116,7 +116,7 @@ end:
                                                  ptr_buffer, list_keys[i]) : -1);
                 weechat_hashtable_set (info, list_keys[i], str_value);
                 break;
-            case WEECHAT_HDATA_LONG:
+            case WHOREIRC_HDATA_LONG:
                 snprintf (str_value, sizeof (str_value),
                           "%ld",
                           (ptr_buffer) ?
@@ -124,15 +124,15 @@ end:
                                               ptr_buffer, list_keys[i]) : -1);
                 weechat_hashtable_set (info, list_keys[i], str_value);
                 break;
-            case WEECHAT_HDATA_STRING:
-            case WEECHAT_HDATA_SHARED_STRING:
+            case WHOREIRC_HDATA_STRING:
+            case WHOREIRC_HDATA_SHARED_STRING:
                 ptr_value = weechat_hdata_string (buflist_hdata_buffer,
                                                   ptr_buffer,
                                                   list_keys[i]);
                 weechat_hashtable_set (info, list_keys[i],
                                        (ptr_value) ? ptr_value : "");
                 break;
-            case WEECHAT_HDATA_TIME:
+            case WHOREIRC_HDATA_TIME:
                 snprintf (str_value, sizeof (str_value),
                           "%lld",
                           (ptr_buffer) ?
@@ -242,20 +242,20 @@ buflist_hsignal_cb (const void *pointer, void *data, const char *signal,
     if (!ptr_key || !ptr_pointer || !ptr_number || !ptr_number2
         || !ptr_full_name)
     {
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     rc = sscanf (ptr_pointer, "%lx", &value);
     if ((rc == EOF) || (rc == 0))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     ptr_buffer = (struct t_gui_buffer *)value;
 
     number = strtol (ptr_number, &error, 10);
     if (!error || error[0])
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     number2 = strtol (ptr_number2, &error, 10);
     if (!error || error[0])
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     current_buffer_number = weechat_buffer_get_integer (
         weechat_current_buffer (), "number");
@@ -313,7 +313,7 @@ buflist_hsignal_cb (const void *pointer, void *data, const char *signal,
         buflist_mouse_move_buffer (ptr_key, ptr_buffer, number2);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*

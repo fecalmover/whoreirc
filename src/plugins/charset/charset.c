@@ -32,12 +32,12 @@
 
 #define CHARSET_PLUGIN_NAME "charset"
 
-WEECHAT_PLUGIN_NAME(CHARSET_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Charset conversions"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(15000);
+WHOREIRC_PLUGIN_NAME(CHARSET_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Charset conversions"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(15000);
 
 #define CHARSET_CONFIG_NAME "charset"
 
@@ -138,7 +138,7 @@ charset_config_create_option (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    rc = WEECHAT_CONFIG_OPTION_SET_ERROR;
+    rc = WHOREIRC_CONFIG_OPTION_SET_ERROR;
 
     if (option_name)
     {
@@ -151,7 +151,7 @@ charset_config_create_option (const void *pointer, void *data,
             else
             {
                 weechat_config_option_free (ptr_option);
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
             }
         }
         else
@@ -169,15 +169,15 @@ charset_config_create_option (const void *pointer, void *data,
                         NULL, NULL, NULL,
                         NULL, NULL, NULL);
                     rc = (ptr_option) ?
-                        WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+                        WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
                 }
             }
             else
-                rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+                rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
         }
     }
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (NULL,
                         _("%s%s: error creating charset \"%s\" => \"%s\""),
@@ -496,7 +496,7 @@ charset_command_cb (const void *pointer, void *data,
     if (argc < 2)
     {
         charset_display_charsets ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     ptr_section = NULL;
@@ -513,7 +513,7 @@ charset_command_cb (const void *pointer, void *data,
         length = strlen (plugin_name) + 1 + strlen (name) + 1;
         option_name = malloc (length);
         if (!option_name)
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
 
         snprintf (option_name, length, "%s.%s", plugin_name, name);
     }
@@ -547,7 +547,7 @@ charset_command_cb (const void *pointer, void *data,
                                 weechat_prefix ("error"), CHARSET_PLUGIN_NAME);
                 if (option_name)
                     free (option_name);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
         else
@@ -561,7 +561,7 @@ charset_command_cb (const void *pointer, void *data,
                             ptr_charset);
             if (option_name)
                 free (option_name);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (ptr_section)
         {
@@ -578,7 +578,7 @@ charset_command_cb (const void *pointer, void *data,
 
     free (option_name);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -603,7 +603,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
         charset_display_charsets ();
 
     if (!charset_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     charset_config_read ();
 
@@ -624,7 +624,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_hook_modifier ("charset_decode", &charset_decode_cb, NULL, NULL);
     weechat_hook_modifier ("charset_encode", &charset_encode_cb, NULL, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -646,5 +646,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     if (charset_internal)
         free (charset_internal);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

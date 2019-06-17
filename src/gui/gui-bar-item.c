@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -1174,7 +1174,7 @@ gui_bar_item_buffer_short_name_cb (const void *pointer, void *data,
 /*
  * Bar item with modes of buffer.
  *
- * Note: this bar item is empty for WeeChat core, this is used only by plugins
+ * Note: this bar item is empty for WhoreIRC core, this is used only by plugins
  * like irc to display channel modes.
  */
 
@@ -2034,7 +2034,7 @@ gui_bar_item_timer_cb (const void *pointer, void *data, int remaining_calls)
         gui_bar_item_update ((char *)pointer);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2054,7 +2054,7 @@ gui_bar_item_signal_cb (const void *pointer, void *data,
 
     gui_bar_item_update ((char *)pointer);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2078,7 +2078,7 @@ gui_bar_item_hook_signal (const char *signal, const char *item)
 }
 
 /*
- * Initializes default items in WeeChat.
+ * Initializes default items in WhoreIRC.
  */
 
 void
@@ -2387,7 +2387,7 @@ gui_bar_item_hdata_bar_item_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_bar_item, build_callback_data, POINTER, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_bar_item, prev_item, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_bar_item, next_item, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_bar_items, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_bar_items, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_bar_item, 0);
     }
     return hdata;
@@ -2429,7 +2429,7 @@ gui_bar_item_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints bar items infos in WeeChat log file (usually for crash dump).
+ * Prints bar items infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

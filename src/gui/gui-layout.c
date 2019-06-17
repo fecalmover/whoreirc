@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -801,7 +801,7 @@ gui_layout_store_on_exit ()
             break;
     }
 
-    /* use layout, so it will be used after restart of WeeChat */
+    /* use layout, so it will be used after restart of WhoreIRC */
     gui_layout_current = ptr_layout;
 }
 
@@ -960,7 +960,7 @@ gui_layout_hdata_layout_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_layout, internal_id_current_window, INTEGER, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_layout, prev_layout, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_gui_layout, next_layout, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(gui_layouts, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(gui_layouts, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_gui_layout, 0);
         HDATA_LIST(gui_layout_current, 0);
     }
@@ -1078,7 +1078,7 @@ gui_layout_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints windows layout infos in WeeChat log file (usually for crash dump).
+ * Prints windows layout infos in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1108,7 +1108,7 @@ gui_layout_print_log_window (struct t_gui_layout_window *layout_window,
 }
 
 /*
- * Prints layouts in WeeChat log file (usually for crash dump).
+ * Prints layouts in WhoreIRC log file (usually for crash dump).
  */
 
 void

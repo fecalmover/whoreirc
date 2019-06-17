@@ -1,24 +1,24 @@
 #
 # Copyright (C) 2013 Hasan Kiran <sunder67@hotmail.com>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WeeChat\n"
+"Project-Id-Version: WhoreIRC\n"
 "Report-Msgid-Bugs-To: flashcode@flashtux.org\n"
 "POT-Creation-Date: 2019-06-15 08:06+0200\n"
 "PO-Revision-Date: 2019-05-13 21:32+0200\n"
@@ -41,7 +41,7 @@ msgid "max chars"
 msgstr ""
 
 msgid ""
-"a WeeChat color name (default, black, (dark)gray, white, (light)red, "
+"a WhoreIRC color name (default, black, (dark)gray, white, (light)red, "
 "(light)green, brown, yellow, (light)blue, (light)magenta, (light)cyan), a "
 "terminal color number or an alias; attributes are allowed before color (for "
 "text color only, not background): \"*\" for bold, \"!\" for reverse, \"/\" "
@@ -77,8 +77,8 @@ msgstr "derlenme"
 msgid "IRC color"
 msgstr "İRC rengi"
 
-msgid "WeeChat color"
-msgstr "WeeChat rengi"
+msgid "WhoreIRC color"
+msgstr "WhoreIRC rengi"
 
 msgid "Plugin"
 msgstr "Eklenti"
@@ -138,7 +138,7 @@ msgstr ""
 #. TRANSLATORS: "%s %s" after "compiled on" is date and time
 #, c-format
 msgid ""
-"WeeChat %s Copyright %s, compiled on %s %s\n"
+"WhoreIRC %s Copyright %s, compiled on %s %s\n"
 "Developed by Sébastien Helleu <flashcode@flashtux.org> - %s"
 msgstr ""
 
@@ -149,14 +149,14 @@ msgstr "Kullanım: %s [seçenek...] [eklenti:seçenek...]\n"
 msgid ""
 "  -a, --no-connect         disable auto-connect to servers at startup\n"
 "  -c, --colors             display default colors in terminal\n"
-"  -d, --dir <path>         set WeeChat home directory (default: ~/.whoreirc)\n"
-"                           (environment variable WEECHAT_HOME is read if "
+"  -d, --dir <path>         set WhoreIRC home directory (default: ~/.whoreirc)\n"
+"                           (environment variable WHOREIRC_HOME is read if "
 "this option is not given)\n"
-"  -t, --temp-dir           create a temporary WeeChat homedirectory and "
+"  -t, --temp-dir           create a temporary WhoreIRC homedirectory and "
 "delete it on exit\n"
 "                           (incompatible with option \"-d\")\n"
 "  -h, --help               display this help\n"
-"  -l, --license            display WeeChat license\n"
+"  -l, --license            display WhoreIRC license\n"
 "  -p, --no-plugin          don't load any plugin at startup\n"
 "  -P, --plugins <plugins>  load only these plugins at startup\n"
 "                           (see /help whoreirc.plugin.autoload)\n"
@@ -164,9 +164,9 @@ msgid ""
 "                           many commands can be separated by semicolons,\n"
 "                           this option can be given multiple times\n"
 "  -s, --no-script          don't load any script at startup\n"
-"      --upgrade            upgrade WeeChat using session files (see /help "
-"upgrade in WeeChat)\n"
-"  -v, --version            display WeeChat version\n"
+"      --upgrade            upgrade WhoreIRC using session files (see /help "
+"upgrade in WhoreIRC)\n"
+"  -v, --version            display WhoreIRC version\n"
 "  plugin:option            option for plugin (see man whoreirc)\n"
 msgstr ""
 
@@ -174,12 +174,12 @@ msgid "Extra options in headless mode:\n"
 msgstr ""
 
 msgid ""
-"      --daemon             run WeeChat as a daemon (fork, new process group, "
+"      --daemon             run WhoreIRC as a daemon (fork, new process group, "
 "file descriptors closed);\n"
 msgstr ""
 
 msgid ""
-"                           (by default in headless mode WeeChat is blocking "
+"                           (by default in headless mode WhoreIRC is blocking "
 "and does not run in background)\n"
 msgstr ""
 
@@ -206,7 +206,7 @@ msgid ""
 "Error: unable to create a temporary home directory (using template: \"%s\")\n"
 msgstr ""
 
-msgid "Error: WEECHAT_HOME is undefined, check build options\n"
+msgid "Error: WHOREIRC_HOME is undefined, check build options\n"
 msgstr ""
 
 #, c-format
@@ -217,20 +217,20 @@ msgstr ""
 msgid "Error: cannot create directory \"%s\"\n"
 msgstr "Hata: \"%s\" dizini oluşturulamaz\n"
 
-msgid "WeeChat is running in headless mode (Ctrl-C to quit)."
+msgid "WhoreIRC is running in headless mode (Ctrl-C to quit)."
 msgstr ""
 
 msgid ""
-"Welcome to WeeChat!\n"
+"Welcome to WhoreIRC!\n"
 "\n"
-"If you are discovering WeeChat, it is recommended to read at least the "
+"If you are discovering WhoreIRC, it is recommended to read at least the "
 "quickstart guide, and the user's guide if you have some time; they explain "
-"main WeeChat concepts.\n"
-"All WeeChat docs are available at: https://whoreirc.org/doc\n"
+"main WhoreIRC concepts.\n"
+"All WhoreIRC docs are available at: https://whoreirc.org/doc\n"
 "\n"
 "Moreover, there is inline help with /help on all commands and options (use "
 "Tab key to complete the name).\n"
-"The command /fset can help to customize WeeChat.\n"
+"The command /fset can help to customize WhoreIRC.\n"
 "\n"
 "You can add and connect to an IRC server with /server and /connect commands "
 "(see /help server)."
@@ -239,7 +239,7 @@ msgstr ""
 #. TRANSLATORS: the "under %s" can be "under screen" or "under tmux"
 #, c-format
 msgid ""
-"%sWarning: WeeChat is running under %s and $TERM is \"%s\", which can cause "
+"%sWarning: WhoreIRC is running under %s and $TERM is \"%s\", which can cause "
 "display bugs; $TERM should be set to one of these values: %s"
 msgstr ""
 
@@ -355,7 +355,7 @@ msgid "  %s[%s%d%s]%s %s%s.%s%s%s (notify: %s)%s%s"
 msgstr "  %s[%s%d%s]%s (%s) %s%s%s (notify: %s)"
 
 #, c-format
-msgid "%sError: name \"%s\" is reserved for WeeChat"
+msgid "%sError: name \"%s\" is reserved for WhoreIRC"
 msgstr ""
 
 #, c-format
@@ -373,7 +373,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%sError: WeeChat main buffer can't be closed"
+msgid "%sError: WhoreIRC main buffer can't be closed"
 msgstr ""
 
 #, fuzzy, c-format
@@ -942,12 +942,12 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%sCan't upgrade: WeeChat binary \"%s\" does not exist"
+msgid "%sCan't upgrade: WhoreIRC binary \"%s\" does not exist"
 msgstr ""
 
 #, c-format
 msgid ""
-"%sCan't upgrade: WeeChat binary \"%s\" does not have execute permissions"
+"%sCan't upgrade: WhoreIRC binary \"%s\" does not have execute permissions"
 msgstr ""
 
 #, c-format
@@ -955,7 +955,7 @@ msgid "%sNo binary specified"
 msgstr ""
 
 #, c-format
-msgid "Upgrading WeeChat with binary file: \"%s\"..."
+msgid "Upgrading WhoreIRC with binary file: \"%s\"..."
 msgstr ""
 
 #, c-format
@@ -963,12 +963,12 @@ msgid "%sError: unable to save session in file"
 msgstr ""
 
 #, c-format
-msgid "***** Error: exec failed (program: \"%s\"), exiting WeeChat"
+msgid "***** Error: exec failed (program: \"%s\"), exiting WhoreIRC"
 msgstr ""
 
 #. TRANSLATORS: "%s" after "started on" is a date
 #, c-format
-msgid "WeeChat uptime: %d %s %02d:%02d:%02d, started on %s"
+msgid "WhoreIRC uptime: %d %s %02d:%02d:%02d, started on %s"
 msgstr ""
 
 msgid "day"
@@ -977,7 +977,7 @@ msgstr[0] "gün"
 
 #. TRANSLATORS: "%s%s" after "started on" is a date
 #, c-format
-msgid "WeeChat uptime: %s%d %s%s %s%02d%s:%s%02d%s:%s%02d%s, started on %s%s"
+msgid "WhoreIRC uptime: %s%d %s%s %s%02d%s:%s%02d%s:%s%02d%s, started on %s%s"
 msgstr ""
 
 msgid "compiled on"
@@ -1190,7 +1190,7 @@ msgid ""
 "    /color unalias 214"
 msgstr ""
 
-msgid "launch explicit WeeChat or plugin command"
+msgid "launch explicit WhoreIRC or plugin command"
 msgstr ""
 
 #, fuzzy
@@ -1199,7 +1199,7 @@ msgstr "<eklenti> <komut>"
 
 msgid ""
 "-buffer: execute the command on this buffer\n"
-" plugin: execute the command from this plugin; 'core' for a WeeChat command, "
+" plugin: execute the command from this plugin; 'core' for a WhoreIRC command, "
 "'*' for automatic plugin (it depends on the buffer where the command is "
 "executed)\n"
 "command: command to execute (a '/' is automatically added if not found at "
@@ -1258,10 +1258,10 @@ msgstr ""
 msgid ""
 "     list: list plugins with debug levels\n"
 "      set: set debug level for plugin\n"
-"   plugin: name of plugin (\"core\" for WeeChat core)\n"
+"   plugin: name of plugin (\"core\" for WhoreIRC core)\n"
 "    level: debug level for plugin (0 = disable debug)\n"
-"     dump: save memory dump in WeeChat log file (same dump is written when "
-"WeeChat crashes)\n"
+"     dump: save memory dump in WhoreIRC log file (same dump is written when "
+"WhoreIRC crashes)\n"
 "   buffer: dump buffer content with hexadecimal values in log file\n"
 "    color: display infos about current color pairs\n"
 "   cursor: toggle debug for cursor mode\n"
@@ -1464,8 +1464,8 @@ msgid ""
 "    /filter add toto * nick_toto+irc_join,nick_toto+irc_action *\n"
 "  filter lines containing \"whoreirc sucks\" on IRC channel #whoreirc:\n"
 "    /filter add sucks irc.freenode.#whoreirc * whoreirc sucks\n"
-"  filter lines that are strictly equal to \"WeeChat sucks\" on all buffers:\n"
-"    /filter add sucks2 * * (?-i)^WeeChat sucks$"
+"  filter lines that are strictly equal to \"WhoreIRC sucks\" on all buffers:\n"
+"    /filter add sucks2 * * (?-i)^WhoreIRC sucks$"
 msgstr ""
 
 msgid "display help about commands and options"
@@ -1593,7 +1593,7 @@ msgid ""
 "   resetall: restore bindings to the default values and delete ALL personal "
 "bindings (use carefully!)\n"
 "    missing: add missing keys (using default bindings), useful after "
-"installing new WeeChat version\n"
+"installing new WhoreIRC version\n"
 "\n"
 "When binding a command to a key, it is recommended to use key alt+k (or Esc "
 "then k), and then press the key to bind: this will insert key code in "
@@ -1688,7 +1688,7 @@ msgid "[-core | -current | -buffer <name>] <command>"
 msgstr ""
 
 msgid ""
-"   -core: no output on WeeChat core buffer\n"
+"   -core: no output on WhoreIRC core buffer\n"
 "-current: no output on current buffer\n"
 " -buffer: no output on specified buffer\n"
 "    name: full buffer name (examples: \"irc.server.freenode\", \"irc."
@@ -1825,7 +1825,7 @@ msgid ""
 "    /proxy del myproxy"
 msgstr ""
 
-msgid "quit WeeChat"
+msgid "quit WhoreIRC"
 msgstr ""
 
 msgid "[-yes] [<arguments>]"
@@ -1851,7 +1851,7 @@ msgstr "[<dosya> [<dosya>...]]"
 msgid ""
 "file: configuration file to reload (without extension \".conf\")\n"
 "\n"
-"Without argument, all files (WeeChat and plugins) are reloaded."
+"Without argument, all files (WhoreIRC and plugins) are reloaded."
 msgstr ""
 
 msgid "execute a command several times"
@@ -1886,7 +1886,7 @@ msgstr "yapılandırma dosyalarını diske kaydet"
 msgid ""
 "file: configuration file to save (without extension \".conf\")\n"
 "\n"
-"Without argument, all files (WeeChat and plugins) are saved.\n"
+"Without argument, all files (WhoreIRC and plugins) are saved.\n"
 "\n"
 "By default all configuration files are saved to disk on /quit command (see "
 "option \"whoreirc.look.save_config_on_exit\")."
@@ -1916,10 +1916,10 @@ msgid ""
 "Keys on secure buffer:\n"
 "  alt+v  toggle values\n"
 "\n"
-"When a passphrase is used (data encrypted), it is asked by WeeChat on "
+"When a passphrase is used (data encrypted), it is asked by WhoreIRC on "
 "startup.\n"
-"It is possible to set environment variable \"WEECHAT_PASSPHRASE\" to prevent "
-"the prompt (this same variable is used by WeeChat on /upgrade), or to set "
+"It is possible to set environment variable \"WHOREIRC_PASSPHRASE\" to prevent "
+"the prompt (this same variable is used by WhoreIRC on /upgrade), or to set "
 "option sec.crypt.passphrase_file to read the passphrase from a file (see /"
 "help sec.crypt.passphrase_file).\n"
 "\n"
@@ -2008,7 +2008,7 @@ msgid ""
 "    /unset -mask whoreirc.color.*"
 msgstr ""
 
-msgid "reload the WeeChat binary without disconnecting from servers"
+msgid "reload the WhoreIRC binary without disconnecting from servers"
 msgstr ""
 
 msgid "[-yes] [<path_to_binary>|-quit]"
@@ -2017,13 +2017,13 @@ msgstr ""
 msgid ""
 "          -yes: required if option \"whoreirc.look.confirm_upgrade\" is "
 "enabled\n"
-"path_to_binary: path to WeeChat binary (default is current binary)\n"
+"path_to_binary: path to WhoreIRC binary (default is current binary)\n"
 "        -dummy: do nothing (option used to prevent accidental completion "
 "with \"-quit\")\n"
-"         -quit: close *ALL* connections, save session and quit WeeChat, "
+"         -quit: close *ALL* connections, save session and quit WhoreIRC, "
 "which makes possible a delayed restoration (see below)\n"
 "\n"
-"This command upgrades and reloads a running WeeChat session. The new WeeChat "
+"This command upgrades and reloads a running WhoreIRC session. The new WhoreIRC "
 "binary must have been compiled or installed with a package manager before "
 "running this command.\n"
 "\n"
@@ -2034,23 +2034,23 @@ msgid ""
 "Upgrade process has 4 steps:\n"
 "  1. save session into files for core and plugins (buffers, history, ..)\n"
 "  2. unload all plugins (configuration files (*.conf) are written on disk)\n"
-"  3. save WeeChat configuration (whoreirc.conf)\n"
-"  4. execute new WeeChat binary and reload session.\n"
+"  3. save WhoreIRC configuration (whoreirc.conf)\n"
+"  4. execute new WhoreIRC binary and reload session.\n"
 "\n"
 "With option \"-quit\", the process is slightly different:\n"
 "  1. close *ALL* connections (irc, xfer, relay, ...)\n"
 "  2. save session into files (*.upgrade)\n"
 "  3. unload all plugins\n"
-"  4. save WeeChat configuration\n"
-"  5. quit WeeChat\n"
+"  4. save WhoreIRC configuration\n"
+"  5. quit WhoreIRC\n"
 "Then later you can restore session with command: whoreirc --upgrade\n"
 "IMPORTANT: you must restore the session with exactly same configuration "
 "(files *.conf).\n"
-"It is possible to restore WeeChat session on another machine if you copy the "
+"It is possible to restore WhoreIRC session on another machine if you copy the "
 "content of directory \"~/.whoreirc\"."
 msgstr ""
 
-msgid "show WeeChat uptime"
+msgid "show WhoreIRC uptime"
 msgstr ""
 
 msgid ""
@@ -2058,7 +2058,7 @@ msgid ""
 "-ol: send uptime to current buffer as input (translated string)"
 msgstr ""
 
-msgid "show WeeChat version and compilation date"
+msgid "show WhoreIRC version and compilation date"
 msgstr ""
 
 msgid ""
@@ -2318,7 +2318,7 @@ msgid ""
 "%sWarning: proxy \"%s\" does not exist (you can add it with command /proxy)"
 msgstr ""
 
-msgid "debug level for plugin (\"core\" for WeeChat core)"
+msgid "debug level for plugin (\"core\" for WhoreIRC core)"
 msgstr ""
 
 msgid "alias for color"
@@ -2336,23 +2336,23 @@ msgid "Notify level for buffer"
 msgstr ""
 
 msgid ""
-"command executed when WeeChat starts, after loading plugins (note: content "
+"command executed when WhoreIRC starts, after loading plugins (note: content "
 "is evaluated, see /help eval)"
 msgstr ""
 
 msgid ""
-"command executed when WeeChat starts, before loading plugins (note: content "
+"command executed when WhoreIRC starts, before loading plugins (note: content "
 "is evaluated, see /help eval)"
 msgstr ""
 
-msgid "display WeeChat logo at startup"
+msgid "display WhoreIRC logo at startup"
 msgstr ""
 
-msgid "display WeeChat version at startup"
+msgid "display WhoreIRC version at startup"
 msgstr ""
 
 msgid ""
-"set resource limits for WeeChat process, format is: \"res1:limit1,res2:"
+"set resource limits for WhoreIRC process, format is: \"res1:limit1,res2:"
 "limit2\"; resource name is the end of constant (RLIMIT_XXX) in lower case "
 "(see man setrlimit for values); limit -1 means \"unlimited\"; example: set "
 "unlimited size for core file and max 1GB of virtual memory: \"core:-1,"
@@ -2404,7 +2404,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"default notify level for buffers (used to tell WeeChat if buffer must be "
+"default notify level for buffers (used to tell WhoreIRC if buffer must be "
 "displayed in hotlist or not, according to importance of message): all=all "
 "messages (default), message=messages+highlights, highlight=highlights only, "
 "none=never display in hotlist"
@@ -2546,7 +2546,7 @@ msgstr ""
 msgid ""
 "if set, the eat_newline_glitch will be set to 0; this is used to not add new "
 "line char at end of each line, and then not break text when you copy/paste "
-"text from WeeChat to another application (this option is disabled by default "
+"text from WhoreIRC to another application (this option is disabled by default "
 "because it can cause serious display bugs)"
 msgstr ""
 
@@ -2709,7 +2709,7 @@ msgid "enable mouse support"
 msgstr "fare desteğini etkinleştir"
 
 msgid ""
-"delay (in milliseconds) to grab a mouse event: WeeChat will wait this delay "
+"delay (in milliseconds) to grab a mouse event: WhoreIRC will wait this delay "
 "before processing event"
 msgstr ""
 
@@ -2749,7 +2749,7 @@ msgstr ""
 msgid ""
 "enable terminal \"bracketed paste mode\" (not supported in all terminals/"
 "multiplexers): in this mode, pasted text is bracketed with control sequences "
-"so that WeeChat can differentiate pasted text from typed-in text (\"ESC[200~"
+"so that WhoreIRC can differentiate pasted text from typed-in text (\"ESC[200~"
 "\", followed by the pasted text, followed by \"ESC[201~\")"
 msgstr ""
 
@@ -2926,7 +2926,7 @@ msgstr ""
 msgid ""
 "title for window (terminal for Curses GUI), set on startup; an empty string "
 "will keep title unchanged (note: content is evaluated, see /help eval); "
-"example: \"WeeChat ${info:version}\""
+"example: \"WhoreIRC ${info:version}\""
 msgstr ""
 
 msgid ""
@@ -3269,7 +3269,7 @@ msgstr ""
 
 msgid ""
 "file containing the certificate authorities (\"%h\" will be replaced by "
-"WeeChat home, \"~/.whoreirc\" by default)"
+"WhoreIRC home, \"~/.whoreirc\" by default)"
 msgstr ""
 
 msgid "timeout (in seconds) for gnutls handshake"
@@ -3297,7 +3297,7 @@ msgid "comma separated list of file name extensions for plugins"
 msgstr ""
 
 msgid ""
-"path for searching plugins (\"%h\" will be replaced by WeeChat home, \"~/."
+"path for searching plugins (\"%h\" will be replaced by WhoreIRC home, \"~/."
 "whoreirc\" by default)"
 msgstr ""
 
@@ -3414,7 +3414,7 @@ msgstr ""
 
 msgid ""
 "Error: unable to create/append to log file (whoreirc.log)\n"
-"If another WeeChat process is using this file, try to run WeeChat\n"
+"If another WhoreIRC process is using this file, try to run WhoreIRC\n"
 "with another home using the \"--dir\" command line option.\n"
 msgstr ""
 
@@ -3442,7 +3442,7 @@ msgstr ""
 msgid "password for proxy server (note: content is evaluated, see /help eval)"
 msgstr ""
 
-msgid "WeeChat secured data (sec.conf) | Keys: [alt-v] Toggle values"
+msgid "WhoreIRC secured data (sec.conf) | Keys: [alt-v] Toggle values"
 msgstr ""
 
 msgid "on"
@@ -3463,7 +3463,7 @@ msgstr ""
 msgid "No secured data set"
 msgstr ""
 
-msgid "Please enter your passphrase to decrypt the data secured by WeeChat:"
+msgid "Please enter your passphrase to decrypt the data secured by WhoreIRC:"
 msgstr ""
 
 msgid ""
@@ -3471,7 +3471,7 @@ msgid ""
 "secured data!)"
 msgstr ""
 
-msgid "(press ctrl-C to exit WeeChat now)"
+msgid "(press ctrl-C to exit WhoreIRC now)"
 msgstr ""
 
 msgid ""
@@ -3516,9 +3516,9 @@ msgid ""
 "path to a file containing the passphrase to encrypt/decrypt secured data; "
 "this option is used only when reading file sec.conf; only first line of file "
 "is used; this file is used only if the environment variable "
-"\"WEECHAT_PASSPHRASE\" is not set (the environment variable has higher "
+"\"WHOREIRC_PASSPHRASE\" is not set (the environment variable has higher "
 "priority); security note: it is recommended to keep this file readable only "
-"by you and store it outside WeeChat home (for example in your home); "
+"by you and store it outside WhoreIRC home (for example in your home); "
 "example: \"~/.whoreirc-passphrase\""
 msgstr ""
 
@@ -3561,7 +3561,7 @@ msgid "Upgrade done (%.02fs)"
 msgstr ""
 
 #, c-format
-msgid "%sError upgrading WeeChat with file \"%s\":"
+msgid "%sError upgrading WhoreIRC with file \"%s\":"
 msgstr ""
 
 #, c-format
@@ -3667,12 +3667,12 @@ msgid "Terminal colors:"
 msgstr ""
 
 msgid ""
-"WeeChat colors | Actions: [e] Display extra infos [r] Refresh [z] Reset "
+"WhoreIRC colors | Actions: [e] Display extra infos [r] Refresh [z] Reset "
 "colors [q] Close buffer | Keys: [alt-c] Temporarily switch to terminal colors"
 msgstr ""
 
 #, c-format
-msgid "WeeChat color pairs auto-allocated (in use: %d, left: %d):"
+msgid "WhoreIRC color pairs auto-allocated (in use: %d, left: %d):"
 msgstr ""
 
 msgid "(press alt-c to see the colors you can use in options)"
@@ -3682,8 +3682,8 @@ msgstr ""
 msgid "Last auto reset of pairs: %s"
 msgstr ""
 
-msgid "WeeChat basic colors:"
-msgstr "WeeChat temel renkler:"
+msgid "WhoreIRC basic colors:"
+msgstr "WhoreIRC temel renkler:"
 
 msgid "Nick colors:"
 msgstr "Rumuz renkleri:"
@@ -3695,14 +3695,14 @@ msgid "Content of colors (r/g/b):"
 msgstr ""
 
 #, c-format
-msgid "WeeChat colors (in use: %d, left: %d):"
+msgid "WhoreIRC colors (in use: %d, left: %d):"
 msgstr ""
 
-msgid "Terminal lost, exiting WeeChat..."
+msgid "Terminal lost, exiting WhoreIRC..."
 msgstr ""
 
 #, c-format
-msgid "Signal %s received, exiting WeeChat..."
+msgid "Signal %s received, exiting WhoreIRC..."
 msgstr ""
 
 msgid "Mouse is enabled"
@@ -3716,7 +3716,7 @@ msgid "  TERM='%s', size: %dx%d"
 msgstr ""
 
 #, c-format
-msgid "Running WeeChat in background..."
+msgid "Running WhoreIRC in background..."
 msgstr ""
 
 #, fuzzy, c-format
@@ -4007,7 +4007,7 @@ msgid ""
 "%sbuflist: warning: the script buffers.pl is loaded and provides a bar with "
 "list of buffers similar to the buflist plugin; you may want to uninstall the "
 "script buffers.pl (/script remove buffers.pl) or disable/unload the buflist "
-"plugin; see WeeChat release notes for more information"
+"plugin; see WhoreIRC release notes for more information"
 msgstr ""
 
 msgid "bar item with list of buffers"
@@ -4240,7 +4240,7 @@ msgstr ""
 
 msgid ""
 "global encoding charset: charset used to encode outgoing messages (if empty, "
-"default is UTF-8 because it is the WeeChat internal charset)"
+"default is UTF-8 because it is the WhoreIRC internal charset)"
 msgstr ""
 
 #, c-format
@@ -4272,7 +4272,7 @@ msgid ""
 "  reset: reset charsets for current buffer"
 msgstr ""
 
-msgid "Execution of external commands in WeeChat"
+msgid "Execution of external commands in WhoreIRC"
 msgstr ""
 
 #, c-format
@@ -4390,15 +4390,15 @@ msgid ""
 "-noflush: display output of command after its end\n"
 "  -color: action on ANSI colors in output:\n"
 "             ansi: keep ANSI codes as-is\n"
-"             auto: convert ANSI colors to WeeChat/IRC (default)\n"
+"             auto: convert ANSI colors to WhoreIRC/IRC (default)\n"
 "              irc: convert ANSI colors to IRC colors\n"
-"          whoreirc: convert ANSI colors to WeeChat colors\n"
+"          whoreirc: convert ANSI colors to WhoreIRC colors\n"
 "            strip: remove ANSI colors\n"
 "     -rc: display return code (default)\n"
 "   -norc: don't display return code\n"
 "-timeout: set a timeout for the command (in seconds)\n"
 "   -name: set a name for the command (to name it later with /exec)\n"
-"   -pipe: send the output to a WeeChat/plugin command (line by line); if "
+"   -pipe: send the output to a WhoreIRC/plugin command (line by line); if "
 "there are spaces in command/arguments, enclose them with double quotes; "
 "variable $line is replaced by the line (by default the line is added after "
 "the command, separated by a space) (not compatible with options -bg/-o/-oc/-"
@@ -4524,7 +4524,7 @@ msgid ""
 "disable: disable FIFO pipe\n"
 " toggle: toggle FIFO pipe\n"
 "\n"
-"FIFO pipe is used as remote control of WeeChat: you can send commands or "
+"FIFO pipe is used as remote control of WhoreIRC: you can send commands or "
 "text to the FIFO pipe from your shell.\n"
 "By default the FIFO pipe is in ~/.whoreirc/whoreirc_fifo\n"
 "\n"
@@ -4545,8 +4545,8 @@ msgid "enable FIFO pipe"
 msgstr ""
 
 msgid ""
-"path for FIFO file; \"%h\" at beginning of string is replaced by WeeChat "
-"home (\"~/.whoreirc\" by default); WeeChat PID can be used in path with "
+"path for FIFO file; \"%h\" at beginning of string is replaced by WhoreIRC "
+"home (\"~/.whoreirc\" by default); WhoreIRC PID can be used in path with "
 "${info:pid} (note: content is evaluated, see /help eval)"
 msgstr ""
 
@@ -4582,7 +4582,7 @@ msgstr ""
 msgid "%s%s: there are no options displayed, unable to export."
 msgstr ""
 
-msgid "fast set WeeChat and plugins options"
+msgid "fast set WhoreIRC and plugins options"
 msgstr ""
 
 msgid ""
@@ -5097,7 +5097,7 @@ msgstr ""
 msgid "fset options"
 msgstr "seçeneklerin listesi"
 
-msgid "Fast set of WeeChat and plugins options"
+msgid "Fast set of WhoreIRC and plugins options"
 msgstr ""
 
 #, c-format
@@ -5185,7 +5185,7 @@ msgstr ""
 #, c-format
 msgid ""
 "%s%s: WARNING: some network connections may still be opened and not visible, "
-"you should restart WeeChat now (with /quit)."
+"you should restart WhoreIRC now (with /quit)."
 msgstr ""
 
 #, c-format
@@ -5484,7 +5484,7 @@ msgstr "%s: sunucu %s%s%s oluşturuldu"
 #, c-format
 msgid ""
 "%s: messages outqueue DELETED for all servers. Some messages from you or "
-"WeeChat may have been lost!"
+"WhoreIRC may have been lost!"
 msgstr ""
 
 #, c-format
@@ -5612,7 +5612,7 @@ msgid ""
 "\n"
 "Without argument, \"ls\" and \"list\" are sent.\n"
 "\n"
-"Capabilities supported by WeeChat are: account-notify, away-notify, cap-"
+"Capabilities supported by WhoreIRC are: account-notify, away-notify, cap-"
 "notify, chghost, extended-join, invite-notify, multi-prefix, server-time, "
 "userhost-in-names.\n"
 "\n"
@@ -6258,7 +6258,7 @@ msgid ""
 "    open: open the server buffer without connecting\n"
 "    keep: keep server in config file (for temporary servers only)\n"
 "     del: delete a server\n"
-" deloutq: delete messages out queue for all servers (all messages WeeChat is "
+" deloutq: delete messages out queue for all servers (all messages WhoreIRC is "
 "currently sending)\n"
 "    jump: jump to server buffer\n"
 "     raw: open buffer with raw IRC data\n"
@@ -6288,7 +6288,7 @@ msgstr ""
 "  rename: sunucuyu yeniden adlandır\n"
 "    keep: yapılandırma dosyasında sunucu tut (sadece geçici sunucular için)\n"
 "     del: bir sunucu sil\n"
-" deloutq: delete messages out queue for all servers (all messages WeeChat is "
+" deloutq: delete messages out queue for all servers (all messages WhoreIRC is "
 "currently sending)\n"
 "    jump: jump to server buffer\n"
 "     raw: open buffer with raw IRC data\n"
@@ -6614,9 +6614,9 @@ msgstr ""
 
 msgid ""
 "format for CTCP reply or empty string for blocking CTCP (no reply), "
-"following variables are replaced: $version (WeeChat version), $compilation "
-"(compilation date), $osinfo (info about OS), $site (WeeChat site), $download "
-"(WeeChat site, download page), $time (current date and time as text), "
+"following variables are replaced: $version (WhoreIRC version), $compilation "
+"(compilation date), $osinfo (info about OS), $site (WhoreIRC site), $download "
+"(WhoreIRC site, download page), $time (current date and time as text), "
 "$username (username on server), $realname (realname on server)"
 msgstr ""
 
@@ -6645,7 +6645,7 @@ msgstr ""
 
 msgid ""
 "SSL certificate file used to automatically identify your nick (\"%h\" will "
-"be replaced by WeeChat home, \"~/.whoreirc\" by default)"
+"be replaced by WhoreIRC home, \"~/.whoreirc\" by default)"
 msgstr ""
 
 msgid ""
@@ -6679,7 +6679,7 @@ msgstr ""
 #. TRANSLATORS: please keep words "client capabilities" between brackets if translation is different (see fr.po)
 msgid ""
 "comma-separated list of client capabilities to enable for server if they are "
-"available (see /help cap for a list of capabilities supported by WeeChat) "
+"available (see /help cap for a list of capabilities supported by WhoreIRC) "
 "(example: \"away-notify,multi-prefix\")"
 msgstr ""
 
@@ -6707,7 +6707,7 @@ msgstr ""
 
 msgid ""
 "file with ECC private key for mechanism \"ecdsa-nist256p-challenge\" (\"%h\" "
-"will be replaced by WeeChat home, \"~/.whoreirc\" by default)"
+"will be replaced by WhoreIRC home, \"~/.whoreirc\" by default)"
 msgstr ""
 
 msgid "timeout (in seconds) before giving up SASL authentication"
@@ -6720,7 +6720,7 @@ msgid ""
 "network.sasl_fail_unavailable)"
 msgstr ""
 
-msgid "automatically connect to server when WeeChat is starting"
+msgid "automatically connect to server when WhoreIRC is starting"
 msgstr ""
 
 msgid "automatically reconnect to server when disconnected"
@@ -6804,7 +6804,7 @@ msgstr ""
 
 msgid ""
 "timeout (in seconds) between TCP connection to server and message 001 "
-"received, if this timeout is reached before 001 message is received, WeeChat "
+"received, if this timeout is reached before 001 message is received, WhoreIRC "
 "will disconnect from server"
 msgstr ""
 
@@ -6834,14 +6834,14 @@ msgstr ""
 msgid ""
 "default part message (leaving channel) (note: content is evaluated, see /"
 "help eval; special variables ${nick}, ${channel} and ${server} are replaced "
-"by their value; \"%v\" is replaced by WeeChat version if there is no ${...} "
+"by their value; \"%v\" is replaced by WhoreIRC version if there is no ${...} "
 "in string)"
 msgstr ""
 
 msgid ""
 "default quit message (disconnecting from server) (note: content is "
 "evaluated, see /help eval; special variables ${nick}, ${channel} and "
-"${server} are replaced by their value; \"%v\" is replaced by WeeChat version "
+"${server} are replaced by their value; \"%v\" is replaced by WhoreIRC version "
 "if there is no ${...} in string)"
 msgstr ""
 
@@ -6913,7 +6913,7 @@ msgstr ""
 msgid "display CTCP message even if it is blocked"
 msgstr ""
 
-msgid "display CTCP reply sent by WeeChat"
+msgid "display CTCP reply sent by WhoreIRC"
 msgstr ""
 
 msgid "display CTCP message even if it is unknown CTCP"
@@ -7170,13 +7170,13 @@ msgstr "Bağlanma iletisi metni için renk"
 msgid "color for text in part/quit messages"
 msgstr "ayrılma/çıkış iletisindeki metin için renk"
 
-#. TRANSLATORS: please do not translate the list of WeeChat color names at the end of string
+#. TRANSLATORS: please do not translate the list of WhoreIRC color names at the end of string
 msgid ""
 "remap mirc colors in messages using a hashtable: keys are \"fg,bg\" as "
-"integers between -1 (not specified) and 15, values are WeeChat color names "
+"integers between -1 (not specified) and 15, values are WhoreIRC color names "
 "or numbers (format is: \"1,-1:color1;2,7:color2\"), example: \"1,-1:"
 "darkgray;1,2:white,blue\" to remap black to \"darkgray\" and black on blue "
-"to \"white,blue\"; default WeeChat colors for IRC codes: 0=white, 1=black, "
+"to \"white,blue\"; default WhoreIRC colors for IRC codes: 0=white, 1=black, "
 "2=blue, 3=green, 4=lightred, 5=red, 6=magenta, 7=brown, 8=yellow, "
 "9=lightgreen, 10=cyan, 11=lightcyan, 12=lightblue, 13=lightmagenta, "
 "14=darkgray, 15=gray"
@@ -7184,7 +7184,7 @@ msgstr ""
 
 msgid ""
 "color for nick prefixes using mode char (o=op, h=halfop, v=voice, ..), "
-"format is: \"o:color1;h:color2;v:color3\" (if a mode is not found, WeeChat "
+"format is: \"o:color1;h:color2;v:color3\" (if a mode is not found, WhoreIRC "
 "will try with next modes received from server (\"PREFIX\"); a special mode "
 "\"*\" can be used as default color if no mode has been found in list)"
 msgstr ""
@@ -7217,7 +7217,7 @@ msgid ""
 "default ban mask for commands /ban, /unban and /kickban; variables $nick, "
 "$user, $ident and $host are replaced by their values (extracted from \"nick!"
 "user@host\"); $ident is the same as $user if $user does not start with \"~"
-"\", otherwise it is set to \"*\"; this default mask is used only if WeeChat "
+"\", otherwise it is set to \"*\"; this default mask is used only if WhoreIRC "
 "knows the host for the nick"
 msgstr ""
 
@@ -7241,7 +7241,7 @@ msgid "interval between two checks for lag (in seconds, 0 = never check)"
 msgstr ""
 
 msgid ""
-"maximum lag (in seconds): if this lag is reached, WeeChat will consider that "
+"maximum lag (in seconds): if this lag is reached, WhoreIRC will consider that "
 "the answer from server (pong) will never be received and will give up "
 "counting the lag (0 = never give up)"
 msgstr ""
@@ -7456,7 +7456,7 @@ msgstr ""
 msgid "notify pointer (optional)"
 msgstr ""
 
-msgid "mapping between IRC color codes and WeeChat color names"
+msgid "mapping between IRC color codes and WhoreIRC color names"
 msgstr ""
 
 msgid "irc nick"
@@ -8206,7 +8206,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"%s%s: cannot connect with SSL because WeeChat was not built with GnuTLS "
+"%s%s: cannot connect with SSL because WhoreIRC was not built with GnuTLS "
 "support"
 msgstr ""
 
@@ -8342,7 +8342,7 @@ msgid ""
 "    /logger disable\n"
 "  set level to 3 for all IRC buffers:\n"
 "    /set logger.level.irc 3\n"
-"  disable logging for main WeeChat buffer:\n"
+"  disable logging for main WhoreIRC buffer:\n"
 "    /set logger.level.core.whoreirc 0\n"
 "  use a directory per IRC server and a file per channel inside:\n"
 "    /set logger.mask.irc \"$server/$channel.whoreirclog\""
@@ -8410,8 +8410,8 @@ msgid "text to write after nick in prefix of message, example: \">\""
 msgstr ""
 
 msgid ""
-"path for WeeChat log files; \"%h\" at beginning of string is replaced by "
-"WeeChat home (\"~/.whoreirc\" by default); date specifiers are permitted (see "
+"path for WhoreIRC log files; \"%h\" at beginning of string is replaced by "
+"WhoreIRC home (\"~/.whoreirc\" by default); date specifiers are permitted (see "
 "man strftime) (note: content is evaluated, see /help eval)"
 msgstr ""
 
@@ -8552,51 +8552,51 @@ msgstr ""
 msgid "tree of windows"
 msgstr ""
 
-msgid "WeeChat version"
-msgstr "WeeChat sürüm"
+msgid "WhoreIRC version"
+msgstr "WhoreIRC sürüm"
 
-msgid "WeeChat version (as number)"
+msgid "WhoreIRC version (as number)"
 msgstr ""
 
 msgid ""
-"WeeChat git version (output of command \"git describe\" for a development "
+"WhoreIRC git version (output of command \"git describe\" for a development "
 "version only, empty for a stable release)"
 msgstr ""
 
-msgid "WeeChat compilation date/time"
+msgid "WhoreIRC compilation date/time"
 msgstr ""
 
-msgid "WeeChat PID (process ID)"
+msgid "WhoreIRC PID (process ID)"
 msgstr ""
 
 msgid "directory separator"
 msgstr ""
 
-msgid "WeeChat directory"
-msgstr "WeeChat dizini"
+msgid "WhoreIRC directory"
+msgstr "WhoreIRC dizini"
 
-msgid "WeeChat \"lib\" directory"
-msgstr "WeeChat \"lib\" dizini"
+msgid "WhoreIRC \"lib\" directory"
+msgstr "WhoreIRC \"lib\" dizini"
 
-msgid "WeeChat \"share\" directory"
-msgstr "WeeChat \"share\" dizini"
+msgid "WhoreIRC \"share\" directory"
+msgstr "WhoreIRC \"share\" dizini"
 
-msgid "WeeChat \"locale\" directory"
-msgstr "WeeChat \"locale\" dizini"
+msgid "WhoreIRC \"locale\" directory"
+msgstr "WhoreIRC \"locale\" dizini"
 
-msgid "WeeChat site"
-msgstr "WeeChat site"
+msgid "WhoreIRC site"
+msgstr "WhoreIRC site"
 
-msgid "WeeChat site, download page"
+msgid "WhoreIRC site, download page"
 msgstr ""
 
-msgid "1 if WeeChat is upgrading (command `/upgrade`)"
+msgid "1 if WhoreIRC is upgrading (command `/upgrade`)"
 msgstr ""
 
 msgid "terminal charset"
 msgstr ""
 
-msgid "WeeChat internal charset"
+msgid "WhoreIRC internal charset"
 msgstr ""
 
 msgid "locale used for translating messages"
@@ -8638,7 +8638,7 @@ msgstr "rumuz renk kodu al"
 msgid "get nick color name"
 msgstr "rumuz renk ismi al"
 
-msgid "WeeChat uptime (format: \"days:hh:mm:ss\")"
+msgid "WhoreIRC uptime (format: \"days:hh:mm:ss\")"
 msgstr ""
 
 msgid "\"days\" (number of days) or \"seconds\" (number of seconds) (optional)"
@@ -8969,7 +8969,7 @@ msgid "Support of python scripts"
 msgstr "Python betik desteği"
 
 #, c-format
-msgid "%s%s: unable to initialize WeeChat module"
+msgid "%s%s: unable to initialize WhoreIRC module"
 msgstr ""
 
 #, c-format
@@ -9025,7 +9025,7 @@ msgstr ""
 msgid "List of clients for relay"
 msgstr ""
 
-msgid "Relay WeeChat data to remote application (irc/whoreirc protocols)"
+msgid "Relay WhoreIRC data to remote application (irc/whoreirc protocols)"
 msgstr ""
 
 #, c-format
@@ -9183,7 +9183,7 @@ msgid ""
 "         name: relay name (see format below)\n"
 "         port: port used for relay\n"
 "         path: path used for relay (for UNIX domain socket only); \"%h\" at "
-"beginning of string is replaced by WeeChat home (\"~/.whoreirc\" by default), "
+"beginning of string is replaced by WhoreIRC home (\"~/.whoreirc\" by default), "
 "content is evaluated (see /help eval)\n"
 "          raw: open buffer with raw Relay data\n"
 "   sslcertkey: set SSL certificate/key using path in option relay.network."
@@ -9201,7 +9201,7 @@ msgid ""
 "with format: \"PASS server:password\")\n"
 "                 - protocol \"whoreirc\" (name is not used)\n"
 "\n"
-"The \"irc\" protocol allows any IRC client (including WeeChat itself) to "
+"The \"irc\" protocol allows any IRC client (including WhoreIRC itself) to "
 "connect on the port.\n"
 "The \"whoreirc\" protocol allows a remote interface to connect on the port, "
 "see the list here: https://whoreirc.org/about/interfaces\n"
@@ -9261,7 +9261,7 @@ msgid "%s%s: error: path \"%s\" is already used"
 msgstr "Filtre \"%s\" etkin"
 
 #, c-format
-msgid "%s%s: cannot use SSL because WeeChat was not built with GnuTLS support"
+msgid "%s%s: cannot use SSL because WhoreIRC was not built with GnuTLS support"
 msgstr ""
 
 #, c-format
@@ -9277,7 +9277,7 @@ msgid "%s%s: error: relay for \"%s\" already exists"
 msgstr ""
 
 msgid ""
-"path to a socket file; \"%h\" at beginning of string is replaced by WeeChat "
+"path to a socket file; \"%h\" at beginning of string is replaced by WhoreIRC "
 "home (\"~/.whoreirc\" by default), content is evaluated (see /help eval)"
 msgstr ""
 
@@ -9336,7 +9336,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"compression level for packets sent to client with WeeChat protocol (0 = "
+"compression level for packets sent to client with WhoreIRC protocol (0 = "
 "disable compression, 1 = low compression ... 9 = best compression)"
 msgstr ""
 
@@ -9579,7 +9579,7 @@ msgid "%s%s: unable to eval function \"whoreirc_init\" in file \"%s\""
 msgstr ""
 
 #, c-format
-msgid "%s%s: unable to eval WeeChat ruby internal code"
+msgid "%s%s: unable to eval WhoreIRC ruby internal code"
 msgstr ""
 
 msgid "Scripts loaded:"
@@ -9716,10 +9716,10 @@ msgstr ""
 msgid "Requires"
 msgstr ""
 
-msgid "Min WeeChat"
+msgid "Min WhoreIRC"
 msgstr ""
 
-msgid "Max WeeChat"
+msgid "Max WhoreIRC"
 msgstr ""
 
 #, fuzzy
@@ -9748,8 +9748,8 @@ msgid "Script manager"
 msgstr "Betik yöneticisi"
 
 #, fuzzy
-msgid "WeeChat script manager"
-msgstr "WeeChat betik yöneticisi"
+msgid "WhoreIRC script manager"
+msgstr "WhoreIRC betik yöneticisi"
 
 msgid ""
 "list [-o|-i] || search <text> || show <script> || load|unload|reload "
@@ -9993,7 +9993,7 @@ msgstr ""
 
 msgid ""
 "local cache directory for scripts; \"%h\" at beginning of string is replaced "
-"by WeeChat home (\"~/.whoreirc\" by default) (note: content is evaluated, "
+"by WhoreIRC home (\"~/.whoreirc\" by default) (note: content is evaluated, "
 "see /help eval)"
 msgstr ""
 
@@ -10041,7 +10041,7 @@ msgid "%s%s: error reading list of scripts"
 msgstr ""
 
 #, c-format
-msgid "%s: %d scripts for WeeChat %s"
+msgid "%s: %d scripts for WhoreIRC %s"
 msgstr ""
 
 #, c-format
@@ -10277,7 +10277,7 @@ msgid "%s%s: error occurred while parsing file \"%s\": %s"
 msgstr ""
 
 msgid ""
-"Text replacement and command execution on events triggered by WeeChat/plugins"
+"Text replacement and command execution on events triggered by WhoreIRC/plugins"
 msgstr ""
 
 #, fuzzy, c-format
@@ -10445,7 +10445,7 @@ msgid ""
 "reason)"
 msgstr ""
 
-msgid "manage triggers, the Swiss Army knife for WeeChat"
+msgid "manage triggers, the Swiss Army knife for WhoreIRC"
 msgstr ""
 
 msgid ""
@@ -10953,7 +10953,7 @@ msgstr ""
 
 msgid ""
 "send acks when receiving files; if disabled, the transfer may freeze if the "
-"sender is waiting for acks (for example a WeeChat sending a file with option "
+"sender is waiting for acks (for example a WhoreIRC sending a file with option "
 "xfer.network.fast_send set to off); on the other hand, disabling send of "
 "acks may prevent a freeze if the acks are not sent immediately to the sender"
 msgstr ""
@@ -10998,13 +10998,13 @@ msgstr ""
 
 msgid ""
 "path for writing incoming files: \"%h\" at beginning of string is replaced "
-"by WeeChat home (\"~/.whoreirc\" by default) (note: content is evaluated, "
+"by WhoreIRC home (\"~/.whoreirc\" by default) (note: content is evaluated, "
 "see /help eval)"
 msgstr ""
 
 msgid ""
 "path for reading files when sending (when no path is specified by user): \"%h"
-"\" at beginning of string is replaced by WeeChat home (\"~/.whoreirc\" by "
+"\" at beginning of string is replaced by WhoreIRC home (\"~/.whoreirc\" by "
 "default) (note: content is evaluated, see /help eval)"
 msgstr ""
 

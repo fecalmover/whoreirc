@@ -4,27 +4,27 @@
 # Copyright (C) 2005-2006 Julien Louis <ptitlouis@sysif.net>
 # Copyright (C) 2005-2009 Emmanuel Bouthenot <kolter@openics.org>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.56)
-AC_INIT(WeeChat, m4_esyscmd([./version.sh devel-full | tr -d '\n']), flashcode@flashtux.org)
+AC_INIT(WhoreIRC, m4_esyscmd([./version.sh devel-full | tr -d '\n']), flashcode@flashtux.org)
 AC_CONFIG_SRCDIR([configure.ac])
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE([foreign])
@@ -99,8 +99,8 @@ AC_CHECK_FUNCS([mallinfo])
 # Variables in config.h
 
 AH_VERBATIM([PREFIX], [#undef PREFIX])
-AH_VERBATIM([WEECHAT_LIBDIR], [#undef WEECHAT_LIBDIR])
-AH_VERBATIM([WEECHAT_SHAREDIR], [#undef WEECHAT_SHAREDIR])
+AH_VERBATIM([WHOREIRC_LIBDIR], [#undef WHOREIRC_LIBDIR])
+AH_VERBATIM([WHOREIRC_SHAREDIR], [#undef WHOREIRC_SHAREDIR])
 AH_VERBATIM([HAVE_GNUTLS], [#undef HAVE_GNUTLS])
 AH_VERBATIM([HAVE_FLOCK], [#undef HAVE_FLOCK])
 AH_VERBATIM([HAVE_EAT_NEWLINE_GLITCH], [#undef HAVE_EAT_NEWLINE_GLITCH])
@@ -131,7 +131,7 @@ AH_VERBATIM([PLUGIN_XFER], [#undef PLUGIN_XFER])
 AH_VERBATIM([TESTS], [#undef TESTS])
 AH_VERBATIM([MAN], [#undef MAN])
 AH_VERBATIM([DOC], [#undef DOC])
-AH_VERBATIM([WEECHAT_HOME], [#define WEECHAT_HOME "~/.whoreirc"])
+AH_VERBATIM([WHOREIRC_HOME], [#define WHOREIRC_HOME "~/.whoreirc"])
 AH_VERBATIM([CA_FILE], [#define CA_FILE "/etc/ssl/certs/ca-certificates.crt"])
 
 # Arguments for ./configure
@@ -170,13 +170,13 @@ AC_ARG_ENABLE(tests,        [  --enable-tests          turn on build of tests (d
 AC_ARG_ENABLE(man,          [  --enable-man            turn on build of man page (default=not built)],enable_man=$enableval,enable_man=no)
 AC_ARG_ENABLE(doc,          [  --enable-doc            turn on build of documentation (default=not built)],enable_doc=$enableval,enable_doc=no)
 
-AC_ARG_VAR(WEECHAT_HOME, [WeeChat home directory for config, logs, scripts.. (default is "~/.whoreirc")])
+AC_ARG_VAR(WHOREIRC_HOME, [WhoreIRC home directory for config, logs, scripts.. (default is "~/.whoreirc")])
 AC_ARG_VAR(CA_FILE, [File containing the certificate authorities (default is "/etc/ssl/certs/ca-certificates.crt"). This is the default value of option "whoreirc.network.gnutls_ca_file".])
 
-if test "x$WEECHAT_HOME" = "x" ; then
-    WEECHAT_HOME="~/.whoreirc"
+if test "x$WHOREIRC_HOME" = "x" ; then
+    WHOREIRC_HOME="~/.whoreirc"
 fi
-AC_DEFINE_UNQUOTED(WEECHAT_HOME, "$WEECHAT_HOME")
+AC_DEFINE_UNQUOTED(WHOREIRC_HOME, "$WHOREIRC_HOME")
 
 if test "x$CA_FILE" = "x" ; then
     CA_FILE="/etc/ssl/certs/ca-certificates.crt"
@@ -228,7 +228,7 @@ if test "x$enable_ncurses" = "xyes" ; then
         if test "$LIBNCURSES_FOUND" = "0" ; then
             AC_MSG_WARN([
 *** ncurses library not found!
-*** WeeChat will be built without ncurses support.])
+*** WhoreIRC will be built without ncurses support.])
             enable_ncurses="no"
             not_found="$not_found ncurses"
         else
@@ -292,7 +292,7 @@ if test "x$iconv_found" = "xno" ; then
    AC_MSG_ERROR([
 *** Iconv headers and/or libraries couldn't be found on your system.
 *** Try to install them with your software package manager.
-*** WeeChat can't be built without Iconv support.])
+*** WhoreIRC can't be built without Iconv support.])
 fi
 
 # ------------------------------------------------------------------------------
@@ -424,7 +424,7 @@ if test "x$enable_perl" = "xyes" ; then
         AC_MSG_WARN([
 *** Perl must be installed on your system but perl interpreter couldn't be found in path.
 *** Please check that perl is in path, or install it with your software package manager.
-*** WeeChat will be built without Perl support.])
+*** WhoreIRC will be built without Perl support.])
         enable_perl="no"
         not_found="$not_found perl"
     else
@@ -445,7 +445,7 @@ if test "x$enable_perl" = "xyes" ; then
                 AC_MSG_WARN([
 *** Perl library couldn't be found on your system.
 *** Try to install it with your software package manager.
-*** WeeChat will be built without Perl support.])
+*** WhoreIRC will be built without Perl support.])
                 enable_perl="no"
                 not_found="$not_found perl"
             fi
@@ -453,7 +453,7 @@ if test "x$enable_perl" = "xyes" ; then
             AC_MSG_WARN([
 *** Perl headers couldn't be found on your system.
 *** Try to install it with your software package manager.
-*** WeeChat will be built without Perl support.])
+*** WhoreIRC will be built without Perl support.])
             enable_perl="no"
             not_found="$not_found perl"
         fi
@@ -482,7 +482,7 @@ if test "x$enable_python" = "xyes" ; then
         AC_MSG_WARN([
 *** Python must be installed on your system but python interpreter couldn't be found in path.
 *** Please check that python is in path, or install it with your software package manager.
-*** WeeChat will be built without Python support.])
+*** WhoreIRC will be built without Python support.])
         enable_python="no"
         not_found="$not_found python"
     else
@@ -493,7 +493,7 @@ if test "x$enable_python" = "xyes" ; then
         if test "x$PYTHON_OLD_VERSION" = "xTrue" ; then
             AC_MSG_WARN([
 *** Python >= 2.5 is needed to build Python plugin, version found: $PYTHON_VERSION.
-*** WeeChat will be built without Python support.])
+*** WhoreIRC will be built without Python support.])
             enable_python="no"
             not_found="$not_found python"
         else
@@ -520,7 +520,7 @@ if test "x$enable_python" = "xyes" ; then
                     AC_MSG_WARN([
 *** Python library couldn't be found on your system.
 *** Try to install it with your software package manager.
-*** WeeChat will be built without Python support.])
+*** WhoreIRC will be built without Python support.])
                     enable_python="no"
                     not_found="$not_found python"
                 fi
@@ -528,7 +528,7 @@ if test "x$enable_python" = "xyes" ; then
                 AC_MSG_WARN([
 *** Python header files couldn't be found on your system.
 *** Try to install them with your software package manager.
-*** WeeChat will be built without Python support.])
+*** WhoreIRC will be built without Python support.])
                 enable_python="no"
                 not_found="$not_found python"
             fi
@@ -568,7 +568,7 @@ if test "x$enable_ruby" = "xyes" ; then
             AC_MSG_WARN([
 *** Ruby must be installed on your system but ruby interpreter couldn't be found in path.
 *** Please check that ruby is in path, or install it with your software package manager.
-*** WeeChat will be built without Ruby support.])
+*** WhoreIRC will be built without Ruby support.])
             enable_ruby="no"
             not_found="$not_found ruby"
         else
@@ -582,7 +582,7 @@ if test "x$enable_ruby" = "xyes" ; then
                 AC_MSG_WARN([
 *** Ruby header files couldn't be found on your system.
 *** Try to install them with your software package manager.
-*** WeeChat will be built without Ruby support.])
+*** WhoreIRC will be built without Ruby support.])
                 enable_ruby="no"
                 not_found="$not_found ruby"
             fi
@@ -700,7 +700,7 @@ if test "x$enable_lua" = "xyes" ; then
             AC_MSG_WARN([
 *** Lua (>=5.0) headers and/or libraries couldn't be found on your system.
 *** Try to install liblua, liblualib and liblua-dev with your software package manager.
-*** WeeChat will be built without Lua support.])
+*** WhoreIRC will be built without Lua support.])
             enable_lua="no"
             not_found="$not_found lua"
         else
@@ -749,7 +749,7 @@ if test "x$enable_tcl" = "xyes" ; then
     if test "x$tcl_found" = "xno" ; then
         AC_MSG_WARN([
 *** Script tclConfig.sh couldn't be found on your system.
-*** WeeChat will be built without Tcl support.])
+*** WhoreIRC will be built without Tcl support.])
         enable_tcl="no"
         not_found="$not_found tcl"
     fi
@@ -804,7 +804,7 @@ if test "x$enable_guile" = "xyes" ; then
     else
         AC_MSG_WARN([
 *** Guile >= 2.0 couldn't be found on your system.
-*** WeeChat will be built without Guile (scheme) support.])
+*** WhoreIRC will be built without Guile (scheme) support.])
         enable_guile="no"
         not_found="$not_found guile"
     fi
@@ -849,14 +849,14 @@ if test "x$enable_javascript" = "xyes" ; then
             AC_MSG_RESULT(no)
             AC_MSG_WARN([
 *** V8 library couldn't be found on your system.
-*** WeeChat will be built without JavaScript support.])
+*** WhoreIRC will be built without JavaScript support.])
             enable_javascript="no"
             not_found="$not_found javascript/v8"
         fi
     else
         AC_MSG_WARN([
 *** V8 header files couldn't be found on your system.
-*** WeeChat will be built without JavaScript support.])
+*** WhoreIRC will be built without JavaScript support.])
         enable_javascript="no"
         not_found="$not_found javascript/v8"
     fi
@@ -960,7 +960,7 @@ if test "x$enable_php" = "xyes" ; then
         AC_MSG_WARN([
 *** PHP (>=7.0) headers and/or libraries couldn't be found on your system.
 *** Try to install libphp-embed with your software package manager.
-*** WeeChat will be built without PHP support.])
+*** WhoreIRC will be built without PHP support.])
         enable_php="no"
         not_found="$not_found php"
     else
@@ -1020,7 +1020,7 @@ if test "x$enable_spell" = "xyes" ; then
             AC_MSG_WARN([
 *** Aspell headers and/or libraries couldn't be found on your system.
 *** Try to install them with your software package manager.
-*** WeeChat will be built without Aspell support.])
+*** WhoreIRC will be built without Aspell support.])
             enable_spell="no"
             not_found="$not_found spell"
         else
@@ -1111,7 +1111,7 @@ if test "x$enable_gnutls" = "xyes" ; then
         AC_MSG_RESULT(no)
         AC_MSG_WARN([
 *** libgnutls was not found. You may want to get it from ftp://ftp.gnutls.org/pub/gnutls/
-*** WeeChat will be built without GnuTLS support.])
+*** WhoreIRC will be built without GnuTLS support.])
         enable_gnutls="no"
         not_found="$not_found gnutls"
     else
@@ -1247,7 +1247,7 @@ if test "x$enable_tests" = "xyes" ; then
     else
         AC_MSG_WARN([
 *** CppUTest couldn't be found on your system.
-*** WeeChat will be built without tests.])
+*** WhoreIRC will be built without tests.])
         enable_tests="no"
         not_found="$not_found tests"
     fi
@@ -1321,11 +1321,11 @@ fi
 
 AC_DEFINE_UNQUOTED(PREFIX, "${prefix}")
 
-WEECHAT_LIBDIR=`eval eval echo ${libdir}/whoreirc`
-AC_DEFINE_UNQUOTED(WEECHAT_LIBDIR, "$WEECHAT_LIBDIR")
+WHOREIRC_LIBDIR=`eval eval echo ${libdir}/whoreirc`
+AC_DEFINE_UNQUOTED(WHOREIRC_LIBDIR, "$WHOREIRC_LIBDIR")
 
-WEECHAT_SHAREDIR=`eval eval echo ${datadir}/whoreirc`
-AC_DEFINE_UNQUOTED(WEECHAT_SHAREDIR, "$WEECHAT_SHAREDIR")
+WHOREIRC_SHAREDIR=`eval eval echo ${datadir}/whoreirc`
+AC_DEFINE_UNQUOTED(WHOREIRC_SHAREDIR, "$WHOREIRC_SHAREDIR")
 
 whoreirc_libdir=${libdir}/whoreirc
 AC_SUBST(whoreirc_libdir)
@@ -1377,8 +1377,8 @@ gnu*)
         ;;
 esac
 
-CFLAGS="$CFLAGS -DWEECHAT_VERSION=\\\"$VERSION\\\" -DWEECHAT_LICENSE=\\\"$LICENSE\\\""
-CPPFLAGS="$CPPFLAGS -DWEECHAT_VERSION=\\\"$VERSION\\\" -DWEECHAT_LICENSE=\\\"$LICENSE\\\""
+CFLAGS="$CFLAGS -DWHOREIRC_VERSION=\\\"$VERSION\\\" -DWHOREIRC_LICENSE=\\\"$LICENSE\\\""
+CPPFLAGS="$CPPFLAGS -DWHOREIRC_VERSION=\\\"$VERSION\\\" -DWHOREIRC_LICENSE=\\\"$LICENSE\\\""
 
 # ------------------------------------------------------------------------------
 #                                output Makefiles
@@ -1598,9 +1598,9 @@ if test "x$not_asked" != "x" || test "x$not_found" != "x"; then
 fi
 
 echo ""
-echo "WeeChat home directory is ${WEECHAT_HOME}"
+echo "WhoreIRC home directory is ${WHOREIRC_HOME}"
 echo ""
-eval echo "WeeChat will be installed in $bindir"
+eval echo "WhoreIRC will be installed in $bindir"
 echo ""
-echo "configure complete, now type 'make' to build WeeChat $VERSION"
+echo "configure complete, now type 'make' to build WhoreIRC $VERSION"
 echo ""

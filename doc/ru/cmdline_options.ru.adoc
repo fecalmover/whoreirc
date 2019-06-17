@@ -1,27 +1,27 @@
 *-a*, *--no-connect*::
-    Отключить автоподключение к серверу при старте WeeChat.
+    Отключить автоподключение к серверу при старте WhoreIRC.
 
 *-c*, *--colors*::
     Вывести в терминал умолчальные цвета.
 
 // TRANSLATION MISSING
 *--daemon*::
-    Run WeeChat in background, as a daemon (works only with the command
+    Run WhoreIRC in background, as a daemon (works only with the command
     *weechat-headless*).
 
 *-d*, *--dir* _<путь>_::
-    Установить <путь> как домашнюю директорию для WeeChat (используется для
+    Установить <путь> как домашнюю директорию для WhoreIRC (используется для
     конфигурационных файлов, логов, пользовательских плагинов и скриптов).
     Значение по-умолчанию: "~/.weechat" (замечание: директория будет создана,
-    если WeeChat не найдет ее).
-    Если эта опция не задана, будет использована переменная окружения WEECHAT_HOME
+    если WhoreIRC не найдет ее).
+    Если эта опция не задана, будет использована переменная окружения WHOREIRC_HOME
     (если такая переменная задана).
 
 // TRANSLATION MISSING
 *-t*, *--temp-dir*::
-    Create a temporary WeeChat home directory and delete it on exit
+    Create a temporary WhoreIRC home directory and delete it on exit
     (incompatible with option "-d"). +
-    The name of the directory is automatically built by WeeChat, with this
+    The name of the directory is automatically built by WhoreIRC, with this
     template: "weechat_temp_XXXXXX" (where "XXXXXX" is random). It it created
     in the first available directory in this list: environment variable "TMPDIR",
     "/tmp" (may be different according to the operating system), environment
@@ -33,7 +33,7 @@
     Вывести справку.
 
 *-l*, *--license*::
-    Вывести лицензию WeeChat.
+    Вывести лицензию WhoreIRC.
 
 *-p*, *--no-plugin*::
     Отключить автозагрузку плагинов.
@@ -52,11 +52,11 @@
     Отключить автозагрузку скриптов.
 
 *--upgrade*::
-    Обновить WeeChat с использованием сеансовых файлов, сгенерированных
+    Обновить WhoreIRC с использованием сеансовых файлов, сгенерированных
     командой `/upgrade -quit`.
 
 *-v*, *--version*::
-    Вывести версию WeeChat.
+    Вывести версию WhoreIRC.
 
 *<плагин>:<параметр>*::
     Задать параметр плагина.

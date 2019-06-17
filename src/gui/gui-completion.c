@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -227,7 +227,7 @@ gui_completion_stop (struct t_gui_completion *completion)
     {
         arraylist_clear (completion->partial_list);
         (void) hook_signal_send ("partial_completion",
-                                 WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                 WHOREIRC_HOOK_SIGNAL_STRING, NULL);
     }
 }
 
@@ -413,12 +413,12 @@ gui_completion_list_add (struct t_gui_completion *completion, const char *word,
             completion_word->count = 0;
 
             index = -1;
-            if (strcmp (where, WEECHAT_LIST_POS_BEGINNING) == 0)
+            if (strcmp (where, WHOREIRC_LIST_POS_BEGINNING) == 0)
             {
                 completion->list->sorted = 0;
                 index = 0;
             }
-            else if (strcmp (where, WEECHAT_LIST_POS_END) == 0)
+            else if (strcmp (where, WHOREIRC_LIST_POS_END) == 0)
             {
                 completion->list->sorted = 0;
                 index = -1;
@@ -484,7 +484,7 @@ gui_completion_build_list_template (struct t_gui_completion *completion,
                 {
                     word[word_offset] = '\0';
                     gui_completion_list_add (completion, word,
-                                             0, WEECHAT_LIST_POS_SORT);
+                                             0, WHOREIRC_LIST_POS_SORT);
                 }
                 word_offset = 0;
                 break;
@@ -563,9 +563,9 @@ gui_completion_get_matching_template (struct t_gui_completion *completion,
         items = string_split (HOOK_COMMAND(hook_command, cplt_templates_static)[i],
                               "|",
                               NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0,
                               &num_items);
         if (items)
@@ -1201,13 +1201,13 @@ gui_completion_complete (struct t_gui_completion *completion)
                     gui_completion_partial_build_list (completion,
                                                        common_prefix_size);
                     (void) hook_signal_send ("partial_completion",
-                                             WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                             WHOREIRC_HOOK_SIGNAL_STRING, NULL);
                     return;
                 }
 
                 arraylist_clear (completion->partial_list);
                 (void) hook_signal_send ("partial_completion",
-                                        WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                        WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 
                 return;
             }
@@ -1253,7 +1253,7 @@ gui_completion_command (struct t_gui_completion *completion)
             {
                 gui_completion_list_add (completion,
                                          HOOK_COMMAND(ptr_hook, command),
-                                         0, WEECHAT_LIST_POS_SORT);
+                                         0, WHOREIRC_LIST_POS_SORT);
             }
         }
     }
@@ -1420,7 +1420,7 @@ gui_completion_hdata_completion_cb (const void *pointer, void *data,
 }
 
 /*
- * Prints list of completion words in WeeChat log file (usually for crash dump).
+ * Prints list of completion words in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1441,7 +1441,7 @@ gui_completion_list_words_print_log (struct t_arraylist *list,
 }
 
 /*
- * Prints completion list in WeeChat log file (usually for crash dump).
+ * Prints completion list in WhoreIRC log file (usually for crash dump).
  */
 
 void

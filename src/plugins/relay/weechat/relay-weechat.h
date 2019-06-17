@@ -17,20 +17,20 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_WEECHAT_H
-#define WEECHAT_PLUGIN_RELAY_WEECHAT_H
+#ifndef WHOREIRC_PLUGIN_RELAY_WHOREIRC_H
+#define WHOREIRC_PLUGIN_RELAY_WHOREIRC_H
 
 struct t_relay_client;
 
-#define RELAY_WEECHAT_DATA(client, var)                          \
+#define RELAY_WHOREIRC_DATA(client, var)                          \
     (((struct t_relay_weechat_data *)client->protocol_data)->var)
 
 enum t_relay_weechat_compression
 {
-    RELAY_WEECHAT_COMPRESSION_OFF = 0, /* no compression of binary objects  */
-    RELAY_WEECHAT_COMPRESSION_ZLIB,    /* zlib compression                  */
+    RELAY_WHOREIRC_COMPRESSION_OFF = 0, /* no compression of binary objects  */
+    RELAY_WHOREIRC_COMPRESSION_ZLIB,    /* zlib compression                  */
     /* number of compressions */
-    RELAY_WEECHAT_NUM_COMPRESSIONS,
+    RELAY_WHOREIRC_NUM_COMPRESSIONS,
 };
 
 struct t_relay_weechat_data
@@ -64,4 +64,4 @@ extern int relay_weechat_add_to_infolist (struct t_infolist_item *item,
                                           struct t_relay_client *client);
 extern void relay_weechat_print_log (struct t_relay_client *client);
 
-#endif /* WEECHAT_PLUGIN_RELAY_WEECHAT_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_WHOREIRC_H */

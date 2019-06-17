@@ -1,4 +1,4 @@
-= WeeChat quick start guide
+= WhoreIRC quick start guide
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: en
@@ -8,10 +8,10 @@
 
 
 [[start]]
-== Start WeeChat
+== Start WhoreIRC
 
-A recommended (but not mandatory) X terminal emulator for running WeeChat is rxvt-unicode.
-It has good UTF-8 support and works well with WeeChat's default key bindings.
+A recommended (but not mandatory) X terminal emulator for running WhoreIRC is rxvt-unicode.
+It has good UTF-8 support and works well with WhoreIRC's default key bindings.
 
 Run from your shell:
 
@@ -22,7 +22,7 @@ $ weechat
 [[help]]
 == Online help
 
-WeeChat has help for all commands, just issue:
+WhoreIRC has help for all commands, just issue:
 
 ----
 /help
@@ -53,14 +53,14 @@ To set options, issue:
 /set config.section.option value
 ----
 
-WeeChat immediately uses the new value (you *never* need to restart WeeChat
+WhoreIRC immediately uses the new value (you *never* need to restart WhoreIRC
 after changes to configuration).
 
-All settings are saved when WeeChat ends (or with the `/save` command to force
+All settings are saved when WhoreIRC ends (or with the `/save` command to force
 a write of the options).
 
 [IMPORTANT]
-It is *not recommended* to edit configuration files by hand because WeeChat
+It is *not recommended* to edit configuration files by hand because WhoreIRC
 may write them at any time (for example on `/quit`) and after any change
 you must run the command `/reload` (with the risk of losing other changes
 that were not yet saved with `/save`). +
@@ -69,7 +69,7 @@ the changes.
 
 The plugin _fset_ allows you to easily browse options and change them.
 
-For example to display WeeChat options:
+For example to display WhoreIRC options:
 
 ----
 /fset weechat.*
@@ -90,7 +90,7 @@ For more information about the `/fset` command and keys, see `/help fset`.
 [[core_vs_plugins]]
 == Core vs plugins
 
-WeeChat "core" is only used to display data on screen and interact with
+WhoreIRC "core" is only used to display data on screen and interact with
 the user, that means weechat core without plugins is useless
 (faithful users: IRC was part of core for versions ≤ 0.2.6).
 
@@ -108,7 +108,7 @@ You can add an IRC server with the `/server` command, for example:
 /server add freenode chat.freenode.net
 ----
 
-In this command, `freenode` is the internal server name used by WeeChat:
+In this command, `freenode` is the internal server name used by WhoreIRC:
 you'll be able to connect with `/connect freenode` and the server options
 are _irc.server.freenode.xxx_.
 
@@ -121,12 +121,12 @@ As usual, help is available if you're lost:
 [[irc_server_options]]
 == Set custom IRC server options
 
-WeeChat uses default values for all servers ("fall backs"), if you
+WhoreIRC uses default values for all servers ("fall backs"), if you
 don't specify a specific value for a server option.
 These default options are "irc.server_default.*".
 
-For each server option, WeeChat uses its value if it is defined (not
-"null"). Otherwise WeeChat uses default value ("irc.server_default.xxx").
+For each server option, WhoreIRC uses its value if it is defined (not
+"null"). Otherwise WhoreIRC uses default value ("irc.server_default.xxx").
 
 For example there are default nicks (based on your un*x login), and you can
 override them for the freenode server with following command:
@@ -231,7 +231,7 @@ option name):
 This command can be used to create and connect to a new server without using the
 `/server` command (see `/help connect`).
 
-By default, server buffers are merged with WeeChat _core_ buffer. To switch
+By default, server buffers are merged with WhoreIRC _core_ buffer. To switch
 between the _core_ buffer and server buffers, you can use kbd:[Ctrl+x].
 
 It is possible to disable auto merge of server buffers to have independent
@@ -321,7 +321,7 @@ To remove the split:
 [[key_bindings]]
 == Key bindings
 
-WeeChat uses many keys by default. All these keys are in the documentation,
+WhoreIRC uses many keys by default. All these keys are in the documentation,
 but you should know at least some vital keys:
 
 - kbd:[Alt+←] / kbd:[Alt+→] or kbd:[F5] / kbd:[F6]: switch to previous/next
@@ -361,10 +361,10 @@ To remove key:
 
 On some distros like Debian, plugins are available via a separate package
 (like weechat-plugins).
-Plugins are automatically loaded when found (please look at the WeeChat
+Plugins are automatically loaded when found (please look at the WhoreIRC
 documentation to load/unload plugins or scripts).
 
-Many external scripts (from contributors) are available for WeeChat, you can
+Many external scripts (from contributors) are available for WhoreIRC, you can
 download and install scripts from the repository with the `/script` command,
 for example:
 
@@ -374,13 +374,13 @@ for example:
 
 See `/help script` for more info.
 
-A list of scripts is available in WeeChat with `/script` or at this URL:
+A list of scripts is available in WhoreIRC with `/script` or at this URL:
 https://weechat.org/scripts
 
 [[more_doc]]
 == More documentation
 
-You can now use WeeChat and read FAQ/documentation for any other questions:
+You can now use WhoreIRC and read FAQ/documentation for any other questions:
 https://weechat.org/doc
 
-Enjoy using WeeChat!
+Enjoy using WhoreIRC!

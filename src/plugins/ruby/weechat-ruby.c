@@ -56,12 +56,12 @@
 #endif
 
 
-WEECHAT_PLUGIN_NAME(RUBY_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of ruby scripts"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(RUBY_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of ruby scripts"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_ruby_plugin = NULL;
 
@@ -81,9 +81,9 @@ int ruby_eval_exec_commands = 0;
 struct t_gui_buffer *ruby_eval_buffer = NULL;
 #define RUBY_EVAL_SCRIPT                                                \
     "def weechat_init\n"                                                \
-    "  Weechat.register('" WEECHAT_SCRIPT_EVAL_NAME "', '', '1.0', "    \
-    "'" WEECHAT_LICENSE "', 'Evaluation of source code', '', '')\n"     \
-    "  return Weechat::WEECHAT_RC_OK\n"                                 \
+    "  Weechat.register('" WHOREIRC_SCRIPT_EVAL_NAME "', '', '1.0', "    \
+    "'" WHOREIRC_LICENSE "', 'Evaluation of source code', '', '')\n"     \
+    "  return Weechat::WHOREIRC_RC_OK\n"                                 \
     "end\n"                                                             \
     "\n"                                                                \
     "def script_ruby_eval(code)\n"                                      \
@@ -189,12 +189,12 @@ weechat_ruby_hash_foreach_cb (VALUE key, VALUE value, void *arg)
     if ((TYPE(key) == T_STRING) && (TYPE(value) == T_STRING))
     {
         type_values = weechat_hashtable_get_string (hashtable, "type_values");
-        if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+        if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
         {
             weechat_hashtable_set (hashtable, StringValuePtr (key),
                                    StringValuePtr (value));
         }
-        else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+        else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
         {
             weechat_hashtable_set (hashtable, StringValuePtr (key),
                                    plugin_script_str2ptr (
@@ -525,14 +525,14 @@ weechat_ruby_exec (struct t_plugin_script *script,
         return NULL;
     }
 
-    if ((TYPE(rc) == T_STRING) && (ret_type == WEECHAT_SCRIPT_EXEC_STRING))
+    if ((TYPE(rc) == T_STRING) && (ret_type == WHOREIRC_SCRIPT_EXEC_STRING))
     {
         if (StringValuePtr (rc))
             ret_value = strdup (StringValuePtr (rc));
         else
             ret_value = NULL;
     }
-    else if ((TYPE(rc) == T_STRING) && (ret_type == WEECHAT_SCRIPT_EXEC_POINTER))
+    else if ((TYPE(rc) == T_STRING) && (ret_type == WHOREIRC_SCRIPT_EXEC_POINTER))
     {
         if (StringValuePtr (rc))
         {
@@ -545,23 +545,23 @@ weechat_ruby_exec (struct t_plugin_script *script,
             ret_value = NULL;
         }
     }
-    else if ((TYPE(rc) == T_FIXNUM) && (ret_type == WEECHAT_SCRIPT_EXEC_INT))
+    else if ((TYPE(rc) == T_FIXNUM) && (ret_type == WHOREIRC_SCRIPT_EXEC_INT))
     {
         ret_i = malloc (sizeof (*ret_i));
         if (ret_i)
             *ret_i = NUM2INT(rc);
         ret_value = ret_i;
     }
-    else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+    else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
     {
         ret_value = weechat_ruby_hash_to_hashtable (rc,
-                                                    WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                    WEECHAT_HASHTABLE_STRING,
-                                                    WEECHAT_HASHTABLE_STRING);
+                                                    WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                    WHOREIRC_HASHTABLE_STRING,
+                                                    WHOREIRC_HASHTABLE_STRING);
     }
     else
     {
-        if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+        if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
         {
             weechat_printf (NULL,
                             weechat_gettext ("%s%s: function \"%s\" must "
@@ -571,7 +571,7 @@ weechat_ruby_exec (struct t_plugin_script *script,
         }
     }
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -726,7 +726,7 @@ weechat_ruby_load (const char *filename, const char *code)
                                         &weechat_ruby_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("ruby_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      ruby_current_script->filename);
 
     return ruby_current_script;
@@ -766,7 +766,7 @@ weechat_ruby_unload (struct t_plugin_script *script)
     if (script->shutdown_func && script->shutdown_func[0])
     {
         rc = (int *)weechat_ruby_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        script->shutdown_func,
                                        0, NULL);
         if (rc)
@@ -787,7 +787,7 @@ weechat_ruby_unload (struct t_plugin_script *script)
         rb_gc_unregister_address (interpreter);
 
     (void) weechat_hook_signal_send ("ruby_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -886,7 +886,7 @@ weechat_ruby_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
     if (!ruby_script_eval)
     {
         ruby_quiet = 1;
-        ruby_script_eval = weechat_ruby_load (WEECHAT_SCRIPT_EVAL_NAME,
+        ruby_script_eval = weechat_ruby_load (WHOREIRC_SCRIPT_EVAL_NAME,
                                               RUBY_EVAL_SCRIPT);
         ruby_quiet = 0;
         if (!ruby_script_eval)
@@ -902,7 +902,7 @@ weechat_ruby_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
 
     func_argv[0] = (code) ? (char *)code : empty_arg;
     result = weechat_ruby_exec (ruby_script_eval,
-                                WEECHAT_SCRIPT_EXEC_IGNORE,
+                                WHOREIRC_SCRIPT_EXEC_IGNORE,
                                 "script_ruby_eval",
                                 "s", func_argv);
     /* result is ignored */
@@ -978,7 +978,7 @@ weechat_ruby_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_ruby_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -1040,7 +1040,7 @@ weechat_ruby_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -1048,7 +1048,7 @@ weechat_ruby_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -1059,13 +1059,13 @@ weechat_ruby_command_cb (const void *pointer, void *data,
             }
             if (!weechat_ruby_eval (buffer, send_to_buffer_as_input,
                                     exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1086,7 +1086,7 @@ weechat_ruby_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_ruby_plugin, completion, ruby_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1176,7 +1176,7 @@ weechat_ruby_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_ruby_plugin, ruby_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1218,7 +1218,7 @@ weechat_ruby_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1235,7 +1235,7 @@ weechat_ruby_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "ruby_script_install") == 0)
         {
@@ -1263,7 +1263,7 @@ weechat_ruby_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1356,7 +1356,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     /* init stdout/stderr buffer */
     ruby_buffer_output = weechat_string_dyn_alloc (256);
     if (!ruby_buffer_output)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
 #if (defined(RUBY_API_VERSION_MAJOR) && defined(RUBY_API_VERSION_MINOR)) && (RUBY_API_VERSION_MAJOR >= 2 || (RUBY_API_VERSION_MAJOR == 1 && RUBY_API_VERSION_MINOR >= 9))
     RUBY_INIT_STACK;
@@ -1390,7 +1390,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
         err = rb_gv_get ("$!");
         weechat_ruby_print_exception (err);
         weechat_string_dyn_free (ruby_buffer_output, 1);
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     ruby_init_loadpath ();
@@ -1418,7 +1418,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                       ruby_scripts);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1449,5 +1449,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (ruby_action_autoload_list);
     weechat_string_dyn_free (ruby_buffer_output, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

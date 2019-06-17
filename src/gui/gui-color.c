@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -462,7 +462,7 @@ gui_color_get_custom (const char *color_name)
         if (color_fg[0] && color_bg[0])
         {
             /*
-             * note: until WeeChat 2.5, the separator was a comma, and it has
+             * note: until WhoreIRC 2.5, the separator was a comma, and it has
              * been changed to a tilde (to prevent problems with /eval and
              * ${color:FF,BB}
              */
@@ -563,7 +563,7 @@ gui_color_convert_rgb_to_term (int rgb, int limit)
 }
 
 /*
- * Removes WeeChat color codes from a message.
+ * Removes WhoreIRC color codes from a message.
  *
  * If replacement is not NULL and not empty, it is used to replace color codes
  * by first char of replacement (and next chars in string are NOT removed).
@@ -666,7 +666,7 @@ gui_color_decode (const char *string, const char *replacement)
                         }
                         /*
                          * note: the comma is an old separator not used any
-                         * more (since WeeChat 2.6), but we still use it here
+                         * more (since WhoreIRC 2.6), but we still use it here
                          * so in case of/upgrade this will not break colors in
                          * old messages
                          */
@@ -762,7 +762,7 @@ gui_color_decode (const char *string, const char *replacement)
 }
 
 /*
- * Converts ANSI color codes to WeeChat colors (or removes them).
+ * Converts ANSI color codes to WhoreIRC colors (or removes them).
  *
  * This callback is called by gui_color_decode_ansi, it must not be called
  * directly.
@@ -799,9 +799,9 @@ gui_color_decode_ansi_cb (void *data, const char *text)
         goto end;
 
     items = string_split (text2, ";", NULL,
-                          WEECHAT_STRING_SPLIT_STRIP_LEFT
-                          | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                          | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                          WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                          | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                          | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                           0, &num_items);
     if (!items)
         goto end;
@@ -968,7 +968,7 @@ end:
 }
 
 /*
- * Converts ANSI color codes to WeeChat colors (or removes them).
+ * Converts ANSI color codes to WhoreIRC colors (or removes them).
  *
  * Note: result must be freed after use.
  */
@@ -1202,8 +1202,8 @@ gui_color_palette_alloc_structs ()
     {
         gui_color_hash_palette_color = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_POINTER,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_POINTER,
             NULL, NULL);
         gui_color_hash_palette_color->callback_free_value = &gui_color_palette_free_value_cb;
     }
@@ -1211,8 +1211,8 @@ gui_color_palette_alloc_structs ()
     {
         gui_color_hash_palette_alias = hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_INTEGER,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_INTEGER,
             NULL, NULL);
     }
     if (!gui_color_list_with_alias)

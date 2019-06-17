@@ -1,23 +1,23 @@
 /*
- * weechat-perl.c - perl plugin for WeeChat
+ * weechat-perl.c - perl plugin for WhoreIRC
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2005-2008 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #undef _
@@ -32,12 +32,12 @@
 #include "weechat-perl-api.h"
 
 
-WEECHAT_PLUGIN_NAME(PERL_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of perl scripts"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(PERL_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of perl scripts"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_perl_plugin = NULL;
 
@@ -58,8 +58,8 @@ struct t_gui_buffer *perl_eval_buffer = NULL;
     "sub script_perl_eval {\n"                                          \
     "    eval \"$_[0]\";\n"                                             \
     "}\n"                                                               \
-    "weechat::register('" WEECHAT_SCRIPT_EVAL_NAME "', '', '1.0', "     \
-    "'" WEECHAT_LICENSE "', 'Evaluation of source code', '', '');\n"
+    "weechat::register('" WHOREIRC_SCRIPT_EVAL_NAME "', '', '1.0', "     \
+    "'" WHOREIRC_LICENSE "', 'Evaluation of source code', '', '');\n"
 
 struct t_plugin_script *perl_scripts = NULL;
 struct t_plugin_script *last_perl_script = NULL;
@@ -152,7 +152,7 @@ weechat_perl_hashtable_map_cb (void *data,
 }
 
 /*
- * Converts a WeeChat hashtable to a perl hash.
+ * Converts a WhoreIRC hashtable to a perl hash.
  */
 
 HV *
@@ -171,7 +171,7 @@ weechat_perl_hashtable_to_hash (struct t_hashtable *hashtable)
 }
 
 /*
- * Converts a perl hash to a WeeChat hashtable.
+ * Converts a perl hash to a WhoreIRC hashtable.
  *
  * Note: hashtable must be freed after use.
  */
@@ -198,12 +198,12 @@ weechat_perl_hash_to_hashtable (SV *hash, int size, const char *type_keys,
         hv_iterinit (hash2);
         while ((value = hv_iternextsv (hash2, &str_key, &retlen)))
         {
-            if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+            if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
             {
                 weechat_hashtable_set (hashtable, str_key,
                                        SvPV (value, PL_na));
             }
-            else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+            else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
             {
                 weechat_hashtable_set (hashtable, str_key,
                                        plugin_script_str2ptr (
@@ -400,7 +400,7 @@ weechat_perl_exec (struct t_plugin_script *script,
     {
         if (count != 1)
         {
-            if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+            if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
             {
                 weechat_printf (NULL,
                                 weechat_gettext ("%s%s: function \"%s\" must "
@@ -412,13 +412,13 @@ weechat_perl_exec (struct t_plugin_script *script,
         }
         else
         {
-            if (ret_type == WEECHAT_SCRIPT_EXEC_STRING)
+            if (ret_type == WHOREIRC_SCRIPT_EXEC_STRING)
             {
                 ret_s = newSVsv (POPs);
                 ret_value = strdup (SvPV_nolen (ret_s));
                 SvREFCNT_dec (ret_s);
             }
-            else if (ret_type == WEECHAT_SCRIPT_EXEC_POINTER)
+            else if (ret_type == WHOREIRC_SCRIPT_EXEC_POINTER)
             {
                 ret_s = newSVsv (POPs);
                 ret_value = plugin_script_str2ptr (weechat_perl_plugin,
@@ -426,23 +426,23 @@ weechat_perl_exec (struct t_plugin_script *script,
                                                    SvPV_nolen (ret_s));
                 SvREFCNT_dec (ret_s);
             }
-            else if (ret_type == WEECHAT_SCRIPT_EXEC_INT)
+            else if (ret_type == WHOREIRC_SCRIPT_EXEC_INT)
             {
                 ret_i = malloc (sizeof (*ret_i));
                 if (ret_i)
                     *ret_i = POPi;
                 ret_value = ret_i;
             }
-            else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+            else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
             {
                 ret_value = weechat_perl_hash_to_hashtable (POPs,
-                                                            WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                            WEECHAT_HASHTABLE_STRING,
-                                                            WEECHAT_HASHTABLE_STRING);
+                                                            WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                            WHOREIRC_HASHTABLE_STRING,
+                                                            WHOREIRC_HASHTABLE_STRING);
             }
             else
             {
-                if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+                if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
                 {
                     weechat_printf (
                         NULL,
@@ -456,7 +456,7 @@ weechat_perl_exec (struct t_plugin_script *script,
         }
     }
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -651,7 +651,7 @@ weechat_perl_load (const char *filename, const char *code)
                                         &weechat_perl_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("perl_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      perl_current_script->filename);
 
     return perl_current_script;
@@ -695,7 +695,7 @@ weechat_perl_unload (struct t_plugin_script *script)
     if (script->shutdown_func && script->shutdown_func[0])
     {
         rc = (int *)weechat_perl_exec (script,
-                                       WEECHAT_SCRIPT_EXEC_INT,
+                                       WHOREIRC_SCRIPT_EXEC_INT,
                                        script->shutdown_func,
                                        NULL, NULL);
         if (rc)
@@ -730,7 +730,7 @@ weechat_perl_unload (struct t_plugin_script *script)
 #endif /* MULTIPLICITY */
 
     (void) weechat_hook_signal_send ("perl_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -828,7 +828,7 @@ weechat_perl_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
     if (!perl_script_eval)
     {
         perl_quiet = 1;
-        perl_script_eval = weechat_perl_load (WEECHAT_SCRIPT_EVAL_NAME,
+        perl_script_eval = weechat_perl_load (WHOREIRC_SCRIPT_EVAL_NAME,
                                               PERL_EVAL_SCRIPT);
         perl_quiet = 0;
         if (!perl_script_eval)
@@ -844,7 +844,7 @@ weechat_perl_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
 
     func_argv[0] = (char *)code;
     result = weechat_perl_exec (perl_script_eval,
-                                WEECHAT_SCRIPT_EXEC_IGNORE,
+                                WHOREIRC_SCRIPT_EXEC_IGNORE,
                                 "script_perl_eval",
                                 "s", func_argv);
     /* result is ignored */
@@ -920,7 +920,7 @@ weechat_perl_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_perl_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -982,7 +982,7 @@ weechat_perl_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -990,7 +990,7 @@ weechat_perl_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -1001,13 +1001,13 @@ weechat_perl_command_cb (const void *pointer, void *data,
             }
             if (!weechat_perl_eval (buffer, send_to_buffer_as_input,
                                     exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1028,7 +1028,7 @@ weechat_perl_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_perl_plugin, completion, perl_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1098,7 +1098,7 @@ weechat_perl_infolist_cb (const void *pointer, void *data,
 }
 
 /*
- * Dumps perl plugin data in WeeChat log file.
+ * Dumps perl plugin data in WhoreIRC log file.
  */
 
 int
@@ -1118,7 +1118,7 @@ weechat_perl_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_perl_plugin, perl_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1160,7 +1160,7 @@ weechat_perl_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1177,7 +1177,7 @@ weechat_perl_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "perl_script_install") == 0)
         {
@@ -1205,11 +1205,11 @@ weechat_perl_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
- * Callback called when exiting or upgrading WeeChat.
+ * Callback called when exiting or upgrading WhoreIRC.
  */
 
 int
@@ -1227,7 +1227,7 @@ weechat_perl_signal_quit_upgrade_cb (const void *pointer, void *data,
 
     perl_quit_or_upgrade = 1;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1263,7 +1263,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     /* init stdout/stderr buffer */
     perl_buffer_output = weechat_string_dyn_alloc (256);
     if (!perl_buffer_output)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
 #ifndef MULTIPLICITY
     perl_main = perl_alloc ();
@@ -1274,7 +1274,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                         weechat_gettext ("%s%s: unable to initialize %s"),
                         weechat_prefix ("error"), PERL_PLUGIN_NAME,
                         PERL_PLUGIN_NAME);
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     perl_construct (perl_main);
@@ -1310,7 +1310,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                          &weechat_perl_signal_quit_upgrade_cb, NULL, NULL);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1358,5 +1358,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (perl_action_autoload_list);
     weechat_string_dyn_free (perl_buffer_output, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

@@ -37,12 +37,12 @@
 #include "fifo-info.h"
 
 
-WEECHAT_PLUGIN_NAME(FIFO_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("FIFO pipe for remote control"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(8000);
+WHOREIRC_PLUGIN_NAME(FIFO_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("FIFO pipe for remote control"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(8000);
 
 struct t_weechat_plugin *weechat_fifo_plugin = NULL;
 #define weechat_plugin weechat_fifo_plugin
@@ -316,7 +316,7 @@ fifo_fd_cb (const void *pointer, void *data, int fd)
             check_error = check_error || (errno == ECOMM);
 #endif /* __CYGWIN__ */
             if (check_error)
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
 
             weechat_printf (NULL,
                             _("%s%s: error reading pipe (%d %s), closing it"),
@@ -345,7 +345,7 @@ fifo_fd_cb (const void *pointer, void *data, int fd)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -362,7 +362,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_plugin = plugin;
 
     if (!fifo_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     fifo_config_read ();
 
@@ -375,7 +375,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
 
     fifo_quiet = 0;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -393,5 +393,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
     fifo_config_write ();
     fifo_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

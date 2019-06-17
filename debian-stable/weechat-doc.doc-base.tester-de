@@ -1,8 +1,8 @@
 Document: whoreirc-tester-de
-Title: WeeChat tester's guide (German)
+Title: WhoreIRC tester's guide (German)
 Author: Sébastien Helleu
 Abstract: This document describes how to test and report
- bugs against the WeeChat IRC Client (German version).
+ bugs against the WhoreIRC IRC Client (German version).
 Section: Network/Communication
 
 Format: HTML

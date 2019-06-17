@@ -1,4 +1,4 @@
-= Guida allo Scripting di WeeChat
+= Guida allo Scripting di WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: it
@@ -15,7 +15,7 @@ Translators:
 * Marco Paolone <marcopaolone@gmail.com>, 2010-2013
 
 
-Questo manuale documenta il client di chat WeeChat, ed è parte
+Questo manuale documenta il client di chat WhoreIRC, ed è parte
 del programma stesso.
 
 La versione più recente di questo documento si trova qui:
@@ -25,10 +25,10 @@ https://whoreirc.org/doc
 [[introduction]]
 == Introduzione
 
-WeeChat (Wee Enhanced Environment for Chat) è un client di chat libero,
+WhoreIRC (Wee Enhanced Environment for Chat) è un client di chat libero,
 veloce e leggero, realizzato per molti sistemi operativi.
 
-Questo manuale documenta come scrivere script per WeeChat, usando uno dei
+Questo manuale documenta come scrivere script per WhoreIRC, usando uno dei
 linguaggi di scripting supportati:
 
 * Python
@@ -45,31 +45,31 @@ Quasi tutti gli esempi in questo manuale sono scritti in Python, ma l'API
 è identica per gli altri linguaggi.
 
 [[scripts_in_whoreirc]]
-== Script in WeeChat
+== Script in WhoreIRC
 
 // TRANSLATION MISSING
 [[whoreirc_architecture]]
-=== WeeChat architecture
+=== WhoreIRC architecture
 
-WeeChat is single-threaded, and this applies to scripts as well.
+WhoreIRC is single-threaded, and this applies to scripts as well.
 
 The code of a script is executed:
 
 * when the script is loaded: typically a call to the
   <<register_function,register function>>
-* when a hook callback is called by WeeChat (see the chapter <<hooks,Hooks>>).
+* when a hook callback is called by WhoreIRC (see the chapter <<hooks,Hooks>>).
 
-When the code of a script is executed, WeeChat waits for the end of execution
+When the code of a script is executed, WhoreIRC waits for the end of execution
 before going on. Therefore the script must *NOT* do blocking operations like
 network calls without using a dedicated API function like `hook_process`.
 
 [IMPORTANT]
 A script must *NEVER* fork or create threads without using a dedicated API
-function, this can crash WeeChat. +
+function, this can crash WhoreIRC. +
 If something must be run in background, the function `hook_process` can be used.
 See example in the chapter <<hook_process,Eseguire un processo in background>>
 and the documentation on the function `hook_process` in the
-link:whoreirc_plugin_api.it.html#_hook_process[WeeChat plugin API reference].
+link:whoreirc_plugin_api.it.html#_hook_process[WhoreIRC plugin API reference].
 
 [[languages_specificities]]
 === Specifiche per i linguaggi
@@ -90,7 +90,7 @@ link:whoreirc_plugin_api.it.html#_hook_process[WeeChat plugin API reference].
 * E necessario definire _whoreirc_init_ e chiamare _register_ all'interno
 * Le funzioni sono chiamate con `Weechat.xxx(arg1, arg2, ...)`
 * A causa di una limitazione di Ruby (massimo 15 argomenti per funzione), la
-  funzione `WeeChat.config_new_option` riceve le callback in un array di 6
+  funzione `WhoreIRC.config_new_option` riceve le callback in un array di 6
   stringhe (3 callback + 3 stringhe di dati), così che una chiamata a questa
   funzione appare come:
 
@@ -129,8 +129,8 @@ Weechat.config_new_option(config, section, "name", "string", "description of opt
 [[register_function]]
 === Registrare una funzione
 
-Tutti gli script WeeChat devono "registrare" loro stessi in WeeChat, e questo
-deve essere la prima funzione chiamata nello script di WeeChat.
+Tutti gli script WhoreIRC devono "registrare" loro stessi in WhoreIRC, e questo
+deve essere la prima funzione chiamata nello script di WhoreIRC.
 
 Prototipo:
 
@@ -178,7 +178,7 @@ whoreirc::print("", "Hello, from perl script!");
 def whoreirc_init
   Weechat.register("test_ruby", "FlashCode", "1.0", "GPL3", "Test script", "", "")
   Weechat.print("", "Hello, from ruby script!")
-  return Weechat::WEECHAT_RC_OK
+  return Weechat::WHOREIRC_RC_OK
 end
 ----
 
@@ -252,7 +252,7 @@ Ogni linguaggio ha anche il suo comando specifico:
 ----
 
 È possibile creare un link nella directory _linguaggio/autoload_ per caricare
-automaticamente gli script all'avvio di WeeChat.
+automaticamente gli script all'avvio di WhoreIRC.
 
 Ad esempio con Python:
 
@@ -270,7 +270,7 @@ directory _autoload_ viene creato automaticamente'.
 
 // TRANSLATION MISSING
 Script API is almost the same as C plugin API.
-You can look at link:whoreirc_plugin_api.it.html[WeeChat plugin API reference]
+You can look at link:whoreirc_plugin_api.it.html[WhoreIRC plugin API reference]
 for detail about each function in API: prototype, arguments, return values, examples.
 
 È importante fare la differenza tra un _plugin_ ed uno _script_:
@@ -279,22 +279,22 @@ un plugin è un file binario compilato e caricato con il comando
 un plugin come _python_ con il comando `python`.
 
 Quando il proprio script _test.py_ chiama una funzione delle API di
-WeeChat, il path è simile a questo:
+WhoreIRC, il path è simile a questo:
 
 ....
                ┌──────────────────────┐        ╔══════════════════╗
-               │     python plugin    │        ║  WeeChat "core"  ║
+               │     python plugin    │        ║  WhoreIRC "core"  ║
                ├────────────┬─────────┤        ╟─────────┐        ║
 test.py ─────► │ script API │  C API  │ ─────► ║  C API  │        ║
                └────────────┴─────────┘        ╚═════════╧════════╝
 ....
 
-Quando WeeChat chiama una callback nel proprio script _test.py_, è
+Quando WhoreIRC chiama una callback nel proprio script _test.py_, è
 l'opposto del path precedente:
 
 ....
 ╔══════════════════╗        ┌──────────────────────┐
-║  WeeChat "core"  ║        │     python plugin    │
+║  WhoreIRC "core"  ║        │     python plugin    │
 ║        ┌─────────╢        ├─────────┬────────────┤
 ║        │  C API  ║ ─────► │  C API  │ script API │ ─────► test.py
 ╚════════╧═════════╝        └─────────┴────────────┘
@@ -316,7 +316,7 @@ prima di chiamare la funzione API in C.
 
 Sono consentite stringhe vuote oppure "0x0", valgono come NULL in C.
 Ad esempio, per stampare dei dati sul buffer core (il buffer principale di
-WeeChat), è possibile fare questo:
+WhoreIRC), è possibile fare questo:
 
 [source,python]
 ----
@@ -324,7 +324,7 @@ whoreirc.prnt("", "hi!")
 ----
 
 [WARNING]
-In molte funzioni, per motivi legati alla velocità, WeeChat non verifica se
+In molte funzioni, per motivi legati alla velocità, WhoreIRC non verifica se
 il puntatore è corretto oppure no. È il proprio lavoro controllare che si
 stia fornendo un puntatore valido, altrimenti potrebbe comparire una
 bella segnalazione per un errore ;)
@@ -332,8 +332,8 @@ bella segnalazione per un errore ;)
 [[callbacks]]
 === Callback
 
-Quasi tutte le callback di WeeChat devono restituire WEECHAT_RC_OK
-oppure WEECHAT_RC_ERROR (l'eccezione è la callback modifier, che
+Quasi tutte le callback di WhoreIRC devono restituire WHOREIRC_RC_OK
+oppure WHOREIRC_RC_ERROR (l'eccezione è la callback modifier, che
 restituisce una stringa).
 
 Le callback in C utilizzano un argomento "data", che è un puntatore.
@@ -348,7 +348,7 @@ Esempio di callback, per ogni linguaggio:
 ----
 def timer_cb(data, remaining_calls):
     whoreirc.prnt("", "timer! data=%s" % data)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
@@ -360,7 +360,7 @@ whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test")
 sub timer_cb {
     my ($data, $remaining_calls) = @_;
     whoreirc::print("", "timer! data=$data");
-    return whoreirc::WEECHAT_RC_OK;
+    return whoreirc::WHOREIRC_RC_OK;
 }
 
 whoreirc::hook_timer(1000, 0, 1, "timer_cb", "test");
@@ -372,7 +372,7 @@ whoreirc::hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 def timer_cb(data, remaining_calls)
   Weechat.print("", "timer! data=#{data}");
-  return Weechat::WEECHAT_RC_OK
+  return Weechat::WHOREIRC_RC_OK
 end
 
 Weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
@@ -384,7 +384,7 @@ Weechat.hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 function timer_cb(data, remaining_calls)
     whoreirc.print("", "timer! data="..data)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 end
 
 whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test")
@@ -396,7 +396,7 @@ whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test")
 ----
 proc timer_cb { data remaining_calls } {
     whoreirc::print {} "timer! data=$data"
-    return $::whoreirc::WEECHAT_RC_OK
+    return $::whoreirc::WHOREIRC_RC_OK
 }
 
 whoreirc::hook_timer 1000 0 1 timer_cb test
@@ -408,7 +408,7 @@ whoreirc::hook_timer 1000 0 1 timer_cb test
 ----
 (define (timer_cb data remaining_calls)
   (whoreirc:print "" (string-append "timer! data=" data))
-  whoreirc:WEECHAT_RC_OK
+  whoreirc:WHOREIRC_RC_OK
 )
 
 (whoreirc:hook_timer 1000 0 1 "timer_cb" "test")
@@ -420,7 +420,7 @@ whoreirc::hook_timer 1000 0 1 timer_cb test
 ----
 function timer_cb(data, remaining_calls) {
     whoreirc.print("", "timer! data=" + data);
-    return whoreirc.WEECHAT_RC_OK;
+    return whoreirc.WHOREIRC_RC_OK;
 }
 
 whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test");
@@ -432,7 +432,7 @@ whoreirc.hook_timer(1000, 0, 1, "timer_cb", "test");
 ----
 $timer_cb = function ($data, $remaining_calls) {
     whoreirc_print('', 'timer! data=' . $data);
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 };
 
 whoreirc_hook_timer(1000, 0, 1, $timer_cb, 'test');
@@ -443,7 +443,7 @@ whoreirc_hook_timer(1000, 0, 1, $timer_cb, 'test');
 
 // TRANSLATION MISSING
 For more information about functions in API, please read the
-link:whoreirc_plugin_api.it.html[WeeChat plugin API reference].
+link:whoreirc_plugin_api.it.html[WhoreIRC plugin API reference].
 
 [[script_api_functions]]
 === Funzioni
@@ -700,58 +700,58 @@ Elenco di costanti nelle API per gli script:
 | Categoria | Costanti
 
 | codici restituiti |
-  WEECHAT_RC_OK +
-  WEECHAT_RC_OK_EAT +
-  WEECHAT_RC_ERROR
+  WHOREIRC_RC_OK +
+  WHOREIRC_RC_OK_EAT +
+  WHOREIRC_RC_ERROR
 
 | file di configurazione |
-  WEECHAT_CONFIG_READ_OK +
-  WEECHAT_CONFIG_READ_MEMORY_ERROR +
-  WEECHAT_CONFIG_READ_FILE_NOT_FOUND +
-  WEECHAT_CONFIG_WRITE_OK +
-  WEECHAT_CONFIG_WRITE_ERROR +
-  WEECHAT_CONFIG_WRITE_MEMORY_ERROR +
-  WEECHAT_CONFIG_OPTION_SET_OK_CHANGED +
-  WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE +
-  WEECHAT_CONFIG_OPTION_SET_ERROR +
-  WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND +
-  WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET +
-  WEECHAT_CONFIG_OPTION_UNSET_OK_RESET +
-  WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED +
-  WEECHAT_CONFIG_OPTION_UNSET_ERROR
+  WHOREIRC_CONFIG_READ_OK +
+  WHOREIRC_CONFIG_READ_MEMORY_ERROR +
+  WHOREIRC_CONFIG_READ_FILE_NOT_FOUND +
+  WHOREIRC_CONFIG_WRITE_OK +
+  WHOREIRC_CONFIG_WRITE_ERROR +
+  WHOREIRC_CONFIG_WRITE_MEMORY_ERROR +
+  WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED +
+  WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE +
+  WHOREIRC_CONFIG_OPTION_SET_ERROR +
+  WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND +
+  WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET +
+  WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET +
+  WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED +
+  WHOREIRC_CONFIG_OPTION_UNSET_ERROR
 
 | liste ordinate |
-  WEECHAT_LIST_POS_SORT +
-  WEECHAT_LIST_POS_BEGINNING +
-  WEECHAT_LIST_POS_END
+  WHOREIRC_LIST_POS_SORT +
+  WHOREIRC_LIST_POS_BEGINNING +
+  WHOREIRC_LIST_POS_END
 
 | hotlist |
-  WEECHAT_HOTLIST_LOW +
-  WEECHAT_HOTLIST_MESSAGE +
-  WEECHAT_HOTLIST_PRIVATE +
-  WEECHAT_HOTLIST_HIGHLIGHT
+  WHOREIRC_HOTLIST_LOW +
+  WHOREIRC_HOTLIST_MESSAGE +
+  WHOREIRC_HOTLIST_PRIVATE +
+  WHOREIRC_HOTLIST_HIGHLIGHT
 
 | hook su processo |
-  WEECHAT_HOOK_PROCESS_RUNNING +
-  WEECHAT_HOOK_PROCESS_ERROR
+  WHOREIRC_HOOK_PROCESS_RUNNING +
+  WHOREIRC_HOOK_PROCESS_ERROR
 
 | hook su connessione |
-  WEECHAT_HOOK_CONNECT_OK +
-  WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND +
-  WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND +
-  WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED +
-  WEECHAT_HOOK_CONNECT_PROXY_ERROR +
-  WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR +
-  WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR +
-  WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR +
-  WEECHAT_HOOK_CONNECT_MEMORY_ERROR +
-  WEECHAT_HOOK_CONNECT_TIMEOUT +
-  WEECHAT_HOOK_CONNECT_SOCKET_ERROR
+  WHOREIRC_HOOK_CONNECT_OK +
+  WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND +
+  WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND +
+  WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED +
+  WHOREIRC_HOOK_CONNECT_PROXY_ERROR +
+  WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR +
+  WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR +
+  WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR +
+  WHOREIRC_HOOK_CONNECT_MEMORY_ERROR +
+  WHOREIRC_HOOK_CONNECT_TIMEOUT +
+  WHOREIRC_HOOK_CONNECT_SOCKET_ERROR
 
 | hook su segnale |
-  WEECHAT_HOOK_SIGNAL_STRING +
-  WEECHAT_HOOK_SIGNAL_INT +
-  WEECHAT_HOOK_SIGNAL_POINTER
+  WHOREIRC_HOOK_SIGNAL_STRING +
+  WHOREIRC_HOOK_SIGNAL_INT +
+  WHOREIRC_HOOK_SIGNAL_POINTER
 |===
 
 [[common_tasks]]
@@ -760,7 +760,7 @@ Elenco di costanti nelle API per gli script:
 // TRANSLATION MISSING
 This chapter shows some common tasks, with examples.
 Only partial things in API are used here, for full reference, see the
-link:whoreirc_plugin_api.it.html[WeeChat plugin API reference].
+link:whoreirc_plugin_api.it.html[WhoreIRC plugin API reference].
 
 [[buffers]]
 === Buffer
@@ -769,7 +769,7 @@ link:whoreirc_plugin_api.it.html[WeeChat plugin API reference].
 ==== Visualizzare messaggi
 
 Una stringa vuota è utilizzata spesso per lavorare con il buffer core di
-WeeChat. Per gli altri buffer, è necessario fornire un puntatore (come
+WhoreIRC. Per gli altri buffer, è necessario fornire un puntatore (come
 stringa, consultare <<pointers,pointers>>).
 
 Esempi:
@@ -844,12 +844,12 @@ Esempio:
 # callback per i dati ricevuti in input
 def buffer_input_cb(data, buffer, input_data):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # callback chiamata alla chiusura del buffer
 def buffer_close_cb(data, buffer):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # crea un buffer
 buffer = whoreirc.buffer_new("mybuffer", "buffer_input_cb", "", "buffer_close_cb", "")
@@ -892,7 +892,7 @@ whoreirc.buffer_set(buffer, "localvar_del_myvar", "")
 ----
 
 Per impostare le variabili locali di un buffer, digitare questo comando
-in WeeChat:
+in WhoreIRC:
 
 ----
 /buffer localvar
@@ -914,7 +914,7 @@ Esempio:
 ----
 def my_command_cb(data, buffer, args):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 hook = whoreirc.hook_command("myfilter", "descrizione di myfilter",
     "[list] | [enable|disable|toggle [name]] | [add name plugin.buffer tags regex] | [del name|-all]",
@@ -928,7 +928,7 @@ hook = whoreirc.hook_command("myfilter", "descrizione di myfilter",
     "my_command_cb", "")
 ----
 
-E poi in WeeChat:
+E poi in WhoreIRC:
 
 ----
 /help myfilter
@@ -947,7 +947,7 @@ Esempio:
 ----
 def timer_cb(data, remaining_calls):
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # timer chiamato ogni minuto quandi i secondi sono 00
 whoreirc.hook_timer(60 * 1000, 60, 0, "timer_cb", "")
@@ -975,7 +975,7 @@ def my_process_cb(data, command, rc, out, err):
         process_output += out
     if int(rc) >= 0:
         whoreirc.prnt("", process_output)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 whoreirc.hook_process("/bin/ls -l /etc", 10 * 1000, "my_process_cb", "")
 ----
@@ -994,7 +994,7 @@ ricevuta come "out" nella callback (output standard di un processo):
 
 [source,python]
 ----
-# Mostra la versione stabile corrente di WeeChat.
+# Mostra la versione stabile corrente di WhoreIRC.
 whoreirc_version = ""
 
 def whoreirc_process_cb(data, command, rc, out, err):
@@ -1002,26 +1002,26 @@ def whoreirc_process_cb(data, command, rc, out, err):
     if out != "":
         whoreirc_version += out
     if int(rc) >= 0:
-        whoreirc.prnt("", "Current WeeChat stable is: %s" % whoreirc_version)
-    return whoreirc.WEECHAT_RC_OK
+        whoreirc.prnt("", "Current WhoreIRC stable is: %s" % whoreirc_version)
+    return whoreirc.WHOREIRC_RC_OK
 
 whoreirc.hook_process("url:https://whoreirc.org/dev/info/stable/",
                      30 * 1000, "whoreirc_process_cb", "")
 ----
 
 [TIP]
-Tutte le informazioni disponibili su WeeChat sono sulla pagina
+Tutte le informazioni disponibili su WhoreIRC sono sulla pagina
 https://whoreirc.org/dev/info
 
 Esempio di trasferimento di un URL con un'opzione: scaricare l'ultimo pacchetto
-di sviluppo di WeeChat nel file _/tmp/whoreirc-devel.tar.gz_:
+di sviluppo di WhoreIRC nel file _/tmp/whoreirc-devel.tar.gz_:
 
 [source,python]
 ----
 def my_process_cb(data, command, rc, out, err):
     if int(rc) >= 0:
         whoreirc.prnt("", "End of transfer (rc=%s)" % rc)
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 whoreirc.hook_process_hashtable("url:https://whoreirc.org/files/src/whoreirc-devel.tar.gz",
                                {"file_out": "/tmp/whoreirc-devel.tar.gz"},
@@ -1031,7 +1031,7 @@ whoreirc.hook_process_hashtable("url:https://whoreirc.org/files/src/whoreirc-dev
 // TRANSLATION MISSING
 For more information about URL transfer and available options, see functions
 `hook_process` and `hook_process_hashtable` in
-link:whoreirc_plugin_api.it.html#_hook_process[WeeChat plugin API reference].
+link:whoreirc_plugin_api.it.html#_hook_process[WhoreIRC plugin API reference].
 
 [[config_options]]
 === Configurazione / opzioni
@@ -1074,7 +1074,7 @@ def config_cb(data, option, value):
     """Callback called when a script option is changed."""
     # for example, read all script options to script variables...
     # ...
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # ...
 
@@ -1083,7 +1083,7 @@ whoreirc.hook_config("plugins.var.python." + SCRIPT_NAME + ".*", "config_cb", ""
 ----
 
 [[config_options_whoreirc]]
-==== Leggere le opzioni di WeeChat
+==== Leggere le opzioni di WhoreIRC
 
 La funzione `config_get` restituisce il puntatore all'opzione. Poi, in base al tipo
 di opzione, è necessario chiamare `config_string`, `config_boolean`,
@@ -1134,7 +1134,7 @@ def join_cb(data, signal, signal_data):
     buffer = whoreirc.info_get("irc_buffer", "%s,%s" % (server, msg["channel"]))
     if buffer:
         whoreirc.prnt(buffer, "%s (%s) has joined this channel!" % (msg["nick"], msg["host"]))
-    return whoreirc.WEECHAT_RC_OK
+    return whoreirc.WHOREIRC_RC_OK
 
 # può essere utile qui utilizzare "*" come server, per catturare
 # i messaggi JOIN su tutti i server IRC
@@ -1158,8 +1158,8 @@ whoreirc.hook_modifier("irc_in_privmsg", "modifier_cb", "")
 ----
 
 [WARNING]
-A malformed message could crash WeeChat or cause severe problems!
-Un messaggio errato può mandare in crash WeeChat o causare seri problemi!
+A malformed message could crash WhoreIRC or cause severe problems!
+Un messaggio errato può mandare in crash WhoreIRC o causare seri problemi!
 
 [[irc_message_parse]]
 ==== Verifica messaggio
@@ -1176,7 +1176,7 @@ The result is a hashtable with following keys
 
 [width="100%",cols="1,^2,10,8",options="header"]
 |===
-| Key | WeeChat version | Description | Example
+| Key | WhoreIRC version | Description | Example
 
 | tags | ≥ 0.4.0 |
   The tags in message (can be empty). |
@@ -1253,7 +1253,7 @@ dict = whoreirc.info_get_hashtable(
 === Info
 
 [[infos_whoreirc_version]]
-==== Versione di WeeChat
+==== Versione di WhoreIRC
 
 Il modo migliore per verificare la versione è richiedere "version_number" e
 comparare l'intero con il numero di versione esadecimale.
@@ -1264,9 +1264,9 @@ Esempio:
 ----
 version = whoreirc.info_get("version_number", "") or 0
 if int(version) >= 0x00030200:
-    whoreirc.prnt("", "This is WeeChat 0.3.2 or newer")
+    whoreirc.prnt("", "This is WhoreIRC 0.3.2 or newer")
 else:
-    whoreirc.prnt("", "This is WeeChat 0.3.1 or older")
+    whoreirc.prnt("", "This is WhoreIRC 0.3.1 or older")
 ----
 
 [NOTE]
@@ -1287,8 +1287,8 @@ whoreirc.prnt("", "Version %s" % whoreirc.info_get("version", ""))
 
 [source,python]
 ----
-# la directory home di WeeChat, ad esempio: "/home/xxxx/.whoreirc"
-whoreirc.prnt("", "WeeChat home dir: %s" % whoreirc.info_get("whoreirc_dir", ""))
+# la directory home di WhoreIRC, ad esempio: "/home/xxxx/.whoreirc"
+whoreirc.prnt("", "WhoreIRC home dir: %s" % whoreirc.info_get("whoreirc_dir", ""))
 
 # inattività della tastiera
 whoreirc.prnt("", "Inactivity since %s seconds" % whoreirc.info_get("inactivity", ""))
@@ -1300,7 +1300,7 @@ whoreirc.prnt("", "Inactivity since %s seconds" % whoreirc.info_get("inactivity"
 [[infolists_read]]
 ==== Leggere una lista info
 
-È possibile leggere una lista info compilata da WeeChat
+È possibile leggere una lista info compilata da WhoreIRC
 o da altri plugin.
 
 Esempio:
@@ -1318,5 +1318,5 @@ if infolist:
 
 [IMPORTANT]
 Non dimenticare di chiamare `infolist_free` per liberare la memoria
-utilizzata dalla lista info, perché WeeChat non libererà automaticamente
+utilizzata dalla lista info, perché WhoreIRC non libererà automaticamente
 la memoria.

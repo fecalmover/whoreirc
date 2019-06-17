@@ -18,8 +18,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_JS_V8_H
-#define WEECHAT_PLUGIN_JS_V8_H
+#ifndef WHOREIRC_PLUGIN_JS_V8_H
+#define WHOREIRC_PLUGIN_JS_V8_H
 
 #include <cstdio>
 #include <v8.h>
@@ -51,4 +51,4 @@ private:
     v8::Handle<v8::String> source;
 };
 
-#endif /* WEECHAT_PLUGIN_JS_V8_H */
+#endif /* WHOREIRC_PLUGIN_JS_V8_H */

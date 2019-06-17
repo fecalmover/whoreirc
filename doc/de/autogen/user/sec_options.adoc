@@ -15,7 +15,7 @@
 ** Standardwert: `+sha256+`
 
 * [[option_sec.crypt.passphrase_file]] *sec.crypt.passphrase_file*
-** Beschreibung: pass:none[Pfad zu einer Datei die die Passphrase enthält um damit schutzwürdige Daten zu ver- und entschlüsseln. Diese Einstellung findet nur Anwendung, wenn die Datei sec.conf gelesen wird. Es wird auch nur die erste Zeile eingelesen. Diese Datei wird nur verwendet, falls die Umgebungsvariable "WEECHAT_PASSPHRASE" nicht genutzt wird (die Umgebungsvariable besitzt eine höhere Priorität). Sicherheitshinweis: Es ist anzuraten dieser Datei nur für die eigene Person Leserechte zu gewähren und die Datei nicht im Heimatverzeichnis von WeeChat zu sichern (zum Beispiel im /home/ Order); Beispiel: "~/.weechat-passphrase"]
+** Beschreibung: pass:none[Pfad zu einer Datei die die Passphrase enthält um damit schutzwürdige Daten zu ver- und entschlüsseln. Diese Einstellung findet nur Anwendung, wenn die Datei sec.conf gelesen wird. Es wird auch nur die erste Zeile eingelesen. Diese Datei wird nur verwendet, falls die Umgebungsvariable "WHOREIRC_PASSPHRASE" nicht genutzt wird (die Umgebungsvariable besitzt eine höhere Priorität). Sicherheitshinweis: Es ist anzuraten dieser Datei nur für die eigene Person Leserechte zu gewähren und die Datei nicht im Heimatverzeichnis von WeeChat zu sichern (zum Beispiel im /home/ Order); Beispiel: "~/.weechat-passphrase"]
 ** Typ: Zeichenkette
 ** Werte: beliebige Zeichenkette
 ** Standardwert: `+""+`

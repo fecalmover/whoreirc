@@ -2,24 +2,24 @@
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_H
-#define WEECHAT_H
+#ifndef WHOREIRC_H
+#define WHOREIRC_H
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,28 +53,28 @@
 #endif /* !defined(_) */
 
 
-#define WEECHAT_COPYRIGHT_DATE   "(C) 2003-2019"
-#define WEECHAT_WEBSITE          "https://weechat.org/"
-#define WEECHAT_WEBSITE_DOWNLOAD "https://weechat.org/download"
+#define WHOREIRC_COPYRIGHT_DATE   "(C) 2003-2019"
+#define WHOREIRC_WEBSITE          "https://weechat.org/"
+#define WHOREIRC_WEBSITE_DOWNLOAD "https://weechat.org/download"
 
 /* log file */
-#define WEECHAT_LOG_NAME "weechat.log"
+#define WHOREIRC_LOG_NAME "weechat.log"
 
 /* license */
-#define WEECHAT_LICENSE_TEXT \
-    "WeeChat is free software; you can redistribute it and/or modify\n" \
+#define WHOREIRC_LICENSE_TEXT \
+    "WhoreIRC is free software; you can redistribute it and/or modify\n" \
     "it under the terms of the GNU General Public License as published by\n" \
     "the Free Software Foundation; either version 3 of the License, or\n" \
     "(at your option) any later version.\n" \
     "\n", \
     \
-    "WeeChat is distributed in the hope that it will be useful,\n" \
+    "WhoreIRC is distributed in the hope that it will be useful,\n" \
     "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" \
     "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" \
     "GNU General Public License for more details.\n" \
     "\n" \
     "You should have received a copy of the GNU General Public License\n" \
-    "along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.\n\n"
+    "along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.\n\n"
 
 /* directory separator, depending on OS */
 #ifdef _WIN32
@@ -91,10 +91,10 @@
 #endif /* PATH_MAX */
 
 /* internal charset */
-#define WEECHAT_INTERNAL_CHARSET "UTF-8"
+#define WHOREIRC_INTERNAL_CHARSET "UTF-8"
 
 /* name of environment variable with an extra lib dir */
-#define WEECHAT_EXTRA_LIBDIR "WEECHAT_EXTRA_LIBDIR"
+#define WHOREIRC_EXTRA_LIBDIR "WHOREIRC_EXTRA_LIBDIR"
 
 struct t_weelist;
 
@@ -123,4 +123,4 @@ extern void weechat_init_gettext ();
 extern void weechat_init (int argc, char *argv[], void (*gui_init_cb)());
 extern void weechat_end (void (*gui_end_cb)(int clean_exit));
 
-#endif /* WEECHAT_H */
+#endif /* WHOREIRC_H */

@@ -1,4 +1,4 @@
-= Guide du testeur WeeChat
+= Guide du testeur WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: fr
@@ -11,7 +11,7 @@
 [[purpose]]
 == Objet
 
-Beaucoup d'utilisateurs nous demandent comment aider WeeChat. La façon
+Beaucoup d'utilisateurs nous demandent comment aider WhoreIRC. La façon
 la plus facile (et aussi la plus rusée) consiste à le tester !
 
 Le test est une partie très importante du développement de logiciel et
@@ -20,14 +20,14 @@ sont implémentées, elles doivent être testées, mais pour certaines
 fonctionnalités il y a trop de cas à tester et les développeurs ne
 peuvent pas tout tester.
 
-Par exemple : l'extension charset introduite dans WeeChat WeeChat 0.2.2 : aucun
+Par exemple : l'extension charset introduite dans WhoreIRC WhoreIRC 0.2.2 : aucun
 de nous (développeurs, contributeurs et testeurs) n'utilisait de canaux avec
 des caractères spéciaux dans leurs noms et quand la version 0.2.2 a été rendue
 disponible, nous avons reçu de nombreuses remontées d'utilisateurs russes.
 Si nous avons plus de testeurs, cela ne devrait pas arriver à nouveau dans le
 futur.
 
-Tester les versions stables de WeeChat est inutile car les
+Tester les versions stables de WhoreIRC est inutile car les
 développeurs sont constamment occupés à implémenter de nouvelles
 fonctionnalités (et à corriger des anciens bugs).
 
@@ -36,9 +36,9 @@ fonctionnalités (et à corriger des anciens bugs).
 == Préparez votre système
 
 Cela nous aiderait beaucoup si vous activiez les fichiers _core_ Linux : si
-WeeChat se plante, Linux écrit un fichier _core_. Ce fichier contient des
+WhoreIRC se plante, Linux écrit un fichier _core_. Ce fichier contient des
 informations importantes pour le debug, pour savoir exactement où le problème
-se situe dans WeeChat).
+se situe dans WhoreIRC).
 
 Si vous utilisez le shell _bash_, ajoutez cette ligne dans votre _~/.bashrc_ :
 
@@ -58,7 +58,7 @@ Vous pouvez décider de le construire manuellement (méthode recommandée) :
 * La version GIT peut être construite et installée en parallèle de la version
   stable,
 * Vous n'avez pas besoin d'accès root ni de sacrifier votre version stable de
-  WeeChat.
+  WhoreIRC.
 
 [[get_sources]]
 === Obtenir et compiler les sources
@@ -94,7 +94,7 @@ Pour compiler les sources, CMake est recommandé :
 ----
 $ mkdir build
 $ cd build
-$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/weechat-git -DWEECHAT_HOME=~/.weechat-dev -DCMAKE_BUILD_TYPE=Debug
+$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/weechat-git -DWHOREIRC_HOME=~/.weechat-dev -DCMAKE_BUILD_TYPE=Debug
 $ make
 $ make install
 ----
@@ -103,7 +103,7 @@ Si vous n'avez pas CMake, il est toujours possible d'utiliser les autotools :
 
 ----
 $ ./autogen.sh
-$ ./configure --prefix=$HOME/weechat-git WEECHAT_HOME=~/.weechat-dev
+$ ./configure --prefix=$HOME/weechat-git WHOREIRC_HOME=~/.weechat-dev
 $ make
 $ make install
 ----
@@ -120,7 +120,7 @@ Selon votre distribution Linux :
 
 
 [[run]]
-== Lancer WeeChat
+== Lancer WhoreIRC
 
 La commande est :
 
@@ -129,7 +129,7 @@ $ ~/weechat-git/bin/weechat
 ----
 
 Si vous êtes encore éveillé, vous devriez voir une interface familière et
-pouvoir vous vanter d'utiliser la version la plus récente possible de WeeChat ;)
+pouvoir vous vanter d'utiliser la version la plus récente possible de WhoreIRC ;)
 
 Maintenant si vous obtenez un comportement étrange ou un plantage, n'hésitez
 pas à nous en avertir sur _#weechat_, serveur _chat.freenode.net_.

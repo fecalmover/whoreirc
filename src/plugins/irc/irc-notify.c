@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2010-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -374,9 +374,9 @@ irc_notify_new_for_server (struct t_irc_server *server)
         return;
 
     items = weechat_string_split (notify, ",", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &num_items);
     if (items)
     {
@@ -396,9 +396,9 @@ irc_notify_new_for_server (struct t_irc_server *server)
                     pos_params,
                     "/",
                     NULL,
-                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                     0,
                     &num_params);
                 if (params)
@@ -449,7 +449,7 @@ irc_notify_free (struct t_irc_server *server, struct t_irc_notify *notify,
         return;
 
     (void) weechat_hook_signal_send ("irc_notify_removing",
-                                     WEECHAT_HOOK_SIGNAL_POINTER, notify);
+                                     WHOREIRC_HOOK_SIGNAL_POINTER, notify);
 
     /* free data */
     if (notify->nick)
@@ -483,7 +483,7 @@ irc_notify_free (struct t_irc_server *server, struct t_irc_notify *notify,
         server->notify_count--;
 
     (void) weechat_hook_signal_send ("irc_notify_removed",
-                                     WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }
 
 /*
@@ -664,7 +664,7 @@ irc_notify_send_signal (struct t_irc_notify *notify,
                   (away_message && away_message[0]) ? away_message : "");
     }
 
-    (void) weechat_hook_signal_send (signal, WEECHAT_HOOK_SIGNAL_STRING, data);
+    (void) weechat_hook_signal_send (signal, WHOREIRC_HOOK_SIGNAL_STRING, data);
 
     if (data)
         free (data);
@@ -811,28 +811,28 @@ irc_notify_hsignal_cb (const void *pointer, void *data, const char *signal,
 
     /* if there is an error on redirection, just ignore result */
     if (error && error[0])
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* missing things in redirection */
     if (!server || !pattern || !command || !output)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* search server */
     ptr_server = irc_server_search (server);
     if (!ptr_server)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* search for start of arguments in command sent to server */
     ptr_args = strchr (command, ' ');
     if (!ptr_args)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     ptr_args++;
     while ((ptr_args[0] == ' ') || (ptr_args[0] == ':'))
     {
         ptr_args++;
     }
     if (!ptr_args[0])
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     /* read output of command */
     if (strcmp (pattern, "ison") == 0)
@@ -842,9 +842,9 @@ irc_notify_hsignal_cb (const void *pointer, void *data, const char *signal,
             output,
             "\n",
             NULL,
-            WEECHAT_STRING_SPLIT_STRIP_LEFT
-            | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-            | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+            WHOREIRC_STRING_SPLIT_STRIP_LEFT
+            | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+            | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
             0,
             &num_messages);
         if (messages)
@@ -853,13 +853,13 @@ irc_notify_hsignal_cb (const void *pointer, void *data, const char *signal,
                 ptr_args,
                 " ",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_nicks_sent);
             if (!nicks_sent)
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             for (ptr_notify = ptr_server->notify_list;
                  ptr_notify;
                  ptr_notify = ptr_notify->next_notify)
@@ -887,9 +887,9 @@ irc_notify_hsignal_cb (const void *pointer, void *data, const char *signal,
                                 pos,
                                 " ",
                                 NULL,
-                                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                 0,
                                 &num_nicks_recv);
                             if (nicks_recv)
@@ -957,9 +957,9 @@ irc_notify_hsignal_cb (const void *pointer, void *data, const char *signal,
                 output,
                 "\n",
                 NULL,
-                WEECHAT_STRING_SPLIT_STRIP_LEFT
-                | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                 0,
                 &num_messages);
             if (messages)
@@ -1003,7 +1003,7 @@ irc_notify_hsignal_cb (const void *pointer, void *data, const char *signal,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1063,7 +1063,7 @@ irc_notify_timer_ison_cb (const void *pointer, void *data, int remaining_calls)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1111,7 +1111,7 @@ irc_notify_timer_whois_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1132,14 +1132,14 @@ irc_notify_hdata_notify_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_notify, server, POINTER, 0, NULL, "irc_server");
-        WEECHAT_HDATA_VAR(struct t_irc_notify, nick, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_notify, check_away, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_notify, is_on_server, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_notify, away_message, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_notify, ison_received, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_notify, prev_notify, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_notify, next_notify, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, server, POINTER, 0, NULL, "irc_server");
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, nick, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, check_away, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, is_on_server, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, away_message, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, ison_received, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, prev_notify, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_notify, next_notify, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -1182,7 +1182,7 @@ irc_notify_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints notify infos in WeeChat log file (usually for crash dump).
+ * Prints notify infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

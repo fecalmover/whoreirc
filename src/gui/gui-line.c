@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -1591,7 +1591,7 @@ gui_line_add (struct t_gui_line *line)
                 if (message_for_signal)
                 {
                     (void) hook_signal_send ("weechat_highlight",
-                                             WEECHAT_HOOK_SIGNAL_STRING,
+                                             WHOREIRC_HOOK_SIGNAL_STRING,
                                              message_for_signal);
                     free (message_for_signal);
                 }
@@ -1606,7 +1606,7 @@ gui_line_add (struct t_gui_line *line)
                 if (message_for_signal)
                 {
                     (void) hook_signal_send ("weechat_pv",
-                                             WEECHAT_HOOK_SIGNAL_STRING,
+                                             WHOREIRC_HOOK_SIGNAL_STRING,
                                              message_for_signal);
                     free (message_for_signal);
                 }
@@ -1621,7 +1621,7 @@ gui_line_add (struct t_gui_line *line)
     else
     {
         (void) hook_signal_send ("buffer_lines_hidden",
-                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                  line->data->buffer);
     }
 
@@ -1650,7 +1650,7 @@ gui_line_add (struct t_gui_line *line)
     }
 
     (void) hook_signal_send ("buffer_line_added",
-                             WEECHAT_HOOK_SIGNAL_POINTER, line);
+                             WHOREIRC_HOOK_SIGNAL_POINTER, line);
 }
 
 /*
@@ -1730,7 +1730,7 @@ gui_line_add_y (struct t_gui_line *line)
     {
         (ptr_line->data->buffer->own_lines->lines_hidden)++;
         (void) hook_signal_send ("buffer_lines_hidden",
-                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                  ptr_line->data->buffer);
     }
     else if (!old_line_displayed && ptr_line->data->displayed)
@@ -2115,7 +2115,7 @@ gui_line_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints lines structure infos in WeeChat log file (usually for crash dump).
+ * Prints lines structure infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

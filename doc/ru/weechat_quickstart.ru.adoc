@@ -1,4 +1,4 @@
-= Краткое введение в WeeChat
+= Краткое введение в WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ru
@@ -16,7 +16,7 @@
 
 
 [[start]]
-== Запуск WeeChat
+== Запуск WhoreIRC
 
 В качестве эмулятора терминала для X рекомендуется rxvt-unicode: в нём хорошая
 поддержка UTF-8 и нет проблем с сочетаниями клавиш.
@@ -31,7 +31,7 @@ $ weechat
 [[help]]
 == Online help
 
-В WeeChat есть справка по всем командам, просто наберите:
+В WhoreIRC есть справка по всем командам, просто наберите:
 
 ----
 /help
@@ -63,15 +63,15 @@ Help is available for options as well:
 /set config.section.option value
 ----
 
-WeeChat немедленно применяет все изменения (вам *никогда* не потребуется
-перезапускать WeeChat после изменений в параметрах).
+WhoreIRC немедленно применяет все изменения (вам *никогда* не потребуется
+перезапускать WhoreIRC после изменений в параметрах).
 
-Все параметры сохраняются при выходе из WeeChat (или путём принудительной
+Все параметры сохраняются при выходе из WhoreIRC (или путём принудительной
 записи с помощью команды `/save`).
 
 // TRANSLATION MISSING
 [IMPORTANT]
-It is *not recommended* to edit configuration files by hand because WeeChat
+It is *not recommended* to edit configuration files by hand because WhoreIRC
 may write them at any time (for example on `/quit`) and after any change
 you must run the command `/reload` (with the risk of losing other changes
 that were not yet saved with `/save`). +
@@ -82,7 +82,7 @@ the changes.
 The plugin _fset_ allows you to easily browse options and change them.
 
 // TRANSLATION MISSING
-For example to display WeeChat options:
+For example to display WhoreIRC options:
 
 ----
 /fset weechat.*
@@ -106,7 +106,7 @@ For more information about `/fset` command and keys, see `/help fset`.
 [[core_vs_plugins]]
 == Ядро и плагины
 
-«Ядро» WeeChat используется только для вывода информации на экран и
+«Ядро» WhoreIRC используется только для вывода информации на экран и
 взаимодействия с пользователем, так что ядро без плагинов бесполезно.
 (преданные пользователи: IRC был частью ядра в версиях ⩽ 0.2.6).
 
@@ -125,7 +125,7 @@ For more information about `/fset` command and keys, see `/help fset`.
 ----
 
 // TRANSLATION MISSING
-In this command, `freenode` is the internal server name used by WeeChat:
+In this command, `freenode` is the internal server name used by WhoreIRC:
 you'll be able to connect with `/connect freenode` and the server options
 are _irc.server.freenode.xxx_.
 
@@ -138,11 +138,11 @@ are _irc.server.freenode.xxx_.
 [[irc_server_options]]
 == Установка дополнительных параметров для сервера
 
-Для всех значений, которые не были установлены вручную, WeeChat использует
+Для всех значений, которые не были установлены вручную, WhoreIRC использует
 общие для всех серверов значения по умолчанию ("fall backs"). Посмотреть эти
 значения можно, набрав "irc.server_default.*".
 
-Для каждого параметра в группе _server_ WeeChat использует установленное
+Для каждого параметра в группе _server_ WhoreIRC использует установленное
 значение, если оно определено (не "null"). В противном случае используется
 значение по умолчанию ("irc.server_default.xxx").
 
@@ -253,7 +253,7 @@ the name of option).
 Эту команду можно использовать для добавления нового сервера и подключения к
 нему без команды `/server` (see `/help connect`).
 
-По умолчанию буфер сервера совмещён с _core_-буфером WeeChat. Для переключения
+По умолчанию буфер сервера совмещён с _core_-буфером WhoreIRC. Для переключения
 между _core_-буфером и буферами сервера можно использовать kbd:[Ctrl+x].
 
 Автоматическое совмещение буферов сервера можно отключить, чтобы работать с
@@ -343,7 +343,7 @@ _foo_):
 [[key_bindings]]
 == Сочетания клавиш
 
-В WeeChat по умолчанию определено немало горячих клавиш. Все они
+В WhoreIRC по умолчанию определено немало горячих клавиш. Все они
 задокументированны, но вам обязательно нужно знать несколько жизненно
 необходимых:
 
@@ -388,7 +388,7 @@ _foo_):
 Плагины загружаются автоматически, если найдены (можете посмотреть
 документацию о загрузке и выгрузке плагинов или скиптов).
 
-Множество внешних скриптов (написанных контрибьюторами) доступно для WeeChat,
+Множество внешних скриптов (написанных контрибьюторами) доступно для WhoreIRC,
 вы можете скачать и установить скрипты из репозитория с помощью команды `/script`,
 например:
 
@@ -398,14 +398,14 @@ _foo_):
 
 Для получения дополнительной информации введите команду `/help script`.
 
-Список скриптов, доступных в WeeChat, можно просмотреть, введя команду `/script`, или на сайте:
+Список скриптов, доступных в WhoreIRC, можно просмотреть, введя команду `/script`, или на сайте:
 https://weechat.org/scripts
 
 [[more_doc]]
 == Документация для дальнейшего чтения
 
-Теперь вы можете пользоваться WeeChat и консультироваться с FAQ/documentation
+Теперь вы можете пользоваться WhoreIRC и консультироваться с FAQ/documentation
 по возникающим вопросам:
 https://weechat.org/doc
 
-Приятной работы с WeeChat!
+Приятной работы с WhoreIRC!

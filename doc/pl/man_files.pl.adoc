@@ -1,5 +1,5 @@
 $HOME/.whoreirc/whoreirc.conf::
-    główny plik konfiguracyjny WeeChat
+    główny plik konfiguracyjny WhoreIRC
 
 $HOME/.whoreirc/plugins.conf::
     plik konfiguracyjny wtyczek
@@ -71,4 +71,4 @@ $HOME/.whoreirc/xfer.conf::
     plik konfiguracyjny wtyczki _xfer_
 
 $HOME/.whoreirc/whoreirc.log::
-    plik z logami WeeChat
+    plik z logami WhoreIRC

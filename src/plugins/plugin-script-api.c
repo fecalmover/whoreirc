@@ -4,20 +4,20 @@
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2012 Simon Arlott
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -65,9 +65,9 @@ plugin_script_api_string_match_list (struct t_weechat_plugin *weechat_plugin,
 
     list_masks = (masks && masks[0]) ?
         weechat_string_split (masks, ",", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, NULL) : NULL;
 
     match = weechat_string_match_list (string,
@@ -378,7 +378,7 @@ plugin_script_api_printf_y (struct t_weechat_plugin *weechat_plugin,
 }
 
 /*
- * Prints a message in WeeChat log file.
+ * Prints a message in WhoreIRC log file.
  */
 
 void
@@ -447,7 +447,7 @@ plugin_script_api_hook_command (struct t_weechat_plugin *weechat_plugin,
 }
 
 /*
- * Hooks a command when it's run by WeeChat.
+ * Hooks a command when it's run by WhoreIRC.
  *
  * Returns pointer to new hook, NULL if error.
  */
@@ -733,7 +733,7 @@ plugin_script_api_hook_line (struct t_weechat_plugin *weechat_plugin,
 }
 
 /*
- * Hooks a message printed by WeeChat.
+ * Hooks a message printed by WhoreIRC.
  *
  * Returns pointer to new hook, NULL if error.
  */

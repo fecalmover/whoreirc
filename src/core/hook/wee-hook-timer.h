@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_HOOK_TIMER_H
-#define WEECHAT_HOOK_TIMER_H
+#ifndef WHOREIRC_HOOK_TIMER_H
+#define WHOREIRC_HOOK_TIMER_H
 
 #include <time.h>
 
@@ -56,4 +56,4 @@ extern int hook_timer_add_to_infolist (struct t_infolist_item *item,
                                        struct t_hook *hook);
 extern void hook_timer_print_log (struct t_hook *hook);
 
-#endif /* WEECHAT_HOOK_TIMER_H */
+#endif /* WHOREIRC_HOOK_TIMER_H */

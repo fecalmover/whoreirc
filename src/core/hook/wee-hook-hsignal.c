@@ -87,7 +87,7 @@ hook_hsignal_send (const char *signal, struct t_hashtable *hashtable)
     struct t_hook *ptr_hook, *next_hook;
     int rc;
 
-    rc = WEECHAT_RC_OK;
+    rc = WHOREIRC_RC_OK;
 
     hook_exec_start ();
 
@@ -108,7 +108,7 @@ hook_hsignal_send (const char *signal, struct t_hashtable *hashtable)
                  hashtable);
             ptr_hook->running = 0;
 
-            if (rc == WEECHAT_RC_OK_EAT)
+            if (rc == WHOREIRC_RC_OK_EAT)
                 break;
         }
 

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -83,7 +83,7 @@ int gui_key_buffer_alloc = 0;       /* input buffer allocated size          */
 int gui_key_buffer_size = 0;        /* input buffer size in bytes           */
 
 int gui_key_paste_pending = 0;      /* 1 is big paste was detected and      */
-                                    /* WeeChat is asking user what to do    */
+                                    /* WhoreIRC is asking user what to do    */
 int gui_key_paste_bracketed = 0;    /* bracketed paste mode detected        */
 struct t_hook *gui_key_paste_bracketed_timer = NULL;
                                     /* timer for bracketed paste            */
@@ -259,7 +259,7 @@ gui_key_grab_end_timer_cb (const void *pointer, void *data,
     gui_key_grab_command = 0;
     gui_key_combo_buffer[0] = '\0';
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -676,7 +676,7 @@ gui_key_new (struct t_gui_buffer *buffer, int context, const char *key,
     expanded_name = gui_key_get_expanded_name (new_key->key);
 
     (void) hook_signal_send ("key_bind",
-                             WEECHAT_HOOK_SIGNAL_STRING, expanded_name);
+                             WHOREIRC_HOOK_SIGNAL_STRING, expanded_name);
 
     if (gui_key_verbose)
     {
@@ -903,7 +903,7 @@ gui_key_unbind (struct t_gui_buffer *buffer, int context, const char *key)
                           &gui_keys_count[context], ptr_key);
         }
         (void) hook_signal_send ("key_unbind",
-                                 WEECHAT_HOOK_SIGNAL_STRING, (char *)key);
+                                 WHOREIRC_HOOK_SIGNAL_STRING, (char *)key);
         return 1;
     }
 
@@ -1377,10 +1377,10 @@ gui_key_pressed (const char *key_str)
             snprintf (signal_name, sizeof (signal_name),
                       "key_combo_%s", gui_key_context_string[context]);
             rc = hook_signal_send (signal_name,
-                                   WEECHAT_HOOK_SIGNAL_STRING,
+                                   WHOREIRC_HOOK_SIGNAL_STRING,
                                    gui_key_combo_buffer);
             gui_key_combo_buffer[0] = '\0';
-            if ((rc != WEECHAT_RC_OK_EAT) && ptr_key->command)
+            if ((rc != WHOREIRC_RC_OK_EAT) && ptr_key->command)
             {
                 commands = string_split_command (ptr_key->command, ';');
                 if (commands)
@@ -1402,8 +1402,8 @@ gui_key_pressed (const char *key_str)
         snprintf (signal_name, sizeof (signal_name),
                   "key_combo_%s", gui_key_context_string[context]);
         if (hook_signal_send (signal_name,
-                              WEECHAT_HOOK_SIGNAL_STRING,
-                              gui_key_combo_buffer) == WEECHAT_RC_OK_EAT)
+                              WHOREIRC_HOOK_SIGNAL_STRING,
+                              gui_key_combo_buffer) == WHOREIRC_RC_OK_EAT)
         {
             gui_key_combo_buffer[0] = '\0';
             return 0;
@@ -1420,8 +1420,8 @@ gui_key_pressed (const char *key_str)
         snprintf (signal_name, sizeof (signal_name),
                   "key_combo_%s", gui_key_context_string[context]);
         if (hook_signal_send (signal_name,
-                              WEECHAT_HOOK_SIGNAL_STRING,
-                              gui_key_combo_buffer) == WEECHAT_RC_OK_EAT)
+                              WHOREIRC_HOOK_SIGNAL_STRING,
+                              gui_key_combo_buffer) == WHOREIRC_RC_OK_EAT)
         {
             gui_key_combo_buffer[0] = '\0';
             return 0;
@@ -1771,7 +1771,7 @@ gui_key_paste_bracketed_timer_cb (const void *pointer, void *data,
     if (gui_key_paste_bracketed)
         gui_key_paste_bracketed_stop ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1993,7 +1993,7 @@ gui_key_add_to_infolist (struct t_infolist *infolist, struct t_gui_key *key)
 }
 
 /*
- * Prints a key info in WeeChat log file (usually for crash dump).
+ * Prints a key info in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -2019,7 +2019,7 @@ gui_key_print_log_key (struct t_gui_key *key, const char *prefix)
 }
 
 /*
- * Prints key infos in WeeChat log file (usually for crash dump).
+ * Prints key infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

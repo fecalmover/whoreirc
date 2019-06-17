@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -105,13 +105,13 @@ fset_command_fset (const void *pointer, void *data,
             fset_buffer_refresh (1);
         }
         weechat_buffer_set (fset_buffer, "display", "1");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-bar") == 0)
     {
         fset_add_bar ();
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-refresh") == 0)
@@ -119,7 +119,7 @@ fset_command_fset (const void *pointer, void *data,
         fset_option_get_options ();
         fset_buffer_refresh (0);
         weechat_command (NULL, "/window refresh");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-up") == 0)
@@ -140,7 +140,7 @@ fset_command_fset (const void *pointer, void *data,
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-down") == 0)
@@ -161,7 +161,7 @@ fset_command_fset (const void *pointer, void *data,
                 }
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-left") == 0)
@@ -185,7 +185,7 @@ fset_command_fset (const void *pointer, void *data,
                 weechat_command (fset_buffer, str_command);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-right") == 0)
@@ -209,7 +209,7 @@ fset_command_fset (const void *pointer, void *data,
                 weechat_command (fset_buffer, str_command);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "-go") == 0)
@@ -217,7 +217,7 @@ fset_command_fset (const void *pointer, void *data,
         if (fset_buffer)
         {
             if (argc < 3)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             if (weechat_strcasecmp (argv[2], "end") == 0)
                 line = weechat_arraylist_size (fset_options) - 1;
             else
@@ -228,7 +228,7 @@ fset_command_fset (const void *pointer, void *data,
                 fset_buffer_check_line_outside_window ();
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argv[1][0] == '-')
@@ -254,14 +254,14 @@ fset_command_fset (const void *pointer, void *data,
                 fset_command_get_option (&ptr_fset_option, &ptr_option);
                 fset_option_toggle_value (ptr_fset_option, ptr_option);
             }
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-add") == 0)
         {
             value = fset_command_get_int_arg (argc, argv, 2, 0);
             if (value == 0)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
 
             if (fset_option_count_marked > 0)
             {
@@ -292,7 +292,7 @@ fset_command_fset (const void *pointer, void *data,
                                      (value > 0) ? 1 : 0);
                 }
             }
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-reset") == 0)
@@ -316,7 +316,7 @@ fset_command_fset (const void *pointer, void *data,
                 fset_command_get_option (&ptr_fset_option, &ptr_option);
                 fset_option_reset_value (ptr_fset_option, ptr_option);
             }
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-unset") == 0)
@@ -340,35 +340,35 @@ fset_command_fset (const void *pointer, void *data,
                 fset_command_get_option (&ptr_fset_option, &ptr_option);
                 fset_option_unset_value (ptr_fset_option, ptr_option);
             }
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-set") == 0)
         {
             fset_command_get_option (&ptr_fset_option, &ptr_option);
             fset_option_set (ptr_fset_option, ptr_option, buffer, 0);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-setnew") == 0)
         {
             fset_command_get_option (&ptr_fset_option, &ptr_option);
             fset_option_set (ptr_fset_option, ptr_option, buffer, -1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-append") == 0)
         {
             fset_command_get_option (&ptr_fset_option, &ptr_option);
             fset_option_set (ptr_fset_option, ptr_option, buffer, 1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-mark") == 0)
         {
             fset_command_get_option (&ptr_fset_option, &ptr_option);
             fset_option_toggle_mark (ptr_fset_option, ptr_option);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-format") == 0)
@@ -385,27 +385,27 @@ fset_command_fset (const void *pointer, void *data,
             snprintf (str_number, sizeof (str_number), "%d", format_number);
             weechat_config_option_set (fset_config_look_format_number,
                                        str_number, 1);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[1], "-export") == 0)
         {
             if (argc < 3)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             with_help = weechat_config_boolean (fset_config_look_export_help_default);
             ptr_filename = argv_eol[2];
             if (weechat_strcasecmp (argv[2], "-help") == 0)
             {
                 with_help = 1;
                 if (argc < 4)
-                    WEECHAT_COMMAND_ERROR;
+                    WHOREIRC_COMMAND_ERROR;
                 ptr_filename = argv_eol[3];
             }
             else if (weechat_strcasecmp (argv[2], "-nohelp") == 0)
             {
                 with_help = 0;
                 if (argc < 4)
-                    WEECHAT_COMMAND_ERROR;
+                    WHOREIRC_COMMAND_ERROR;
                 ptr_filename = argv_eol[3];
             }
             num_options = weechat_arraylist_size (fset_options);
@@ -415,14 +415,14 @@ fset_command_fset (const void *pointer, void *data,
                                 _("%s%s: there are no options displayed, "
                                   "unable to export."),
                                 weechat_prefix ("error"), FSET_PLUGIN_NAME);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             if (!fset_option_export (ptr_filename, with_help))
-                WEECHAT_COMMAND_ERROR;
-            return WEECHAT_RC_OK;
+                WHOREIRC_COMMAND_ERROR;
+            return WHOREIRC_RC_OK;
         }
 
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -433,7 +433,7 @@ fset_command_fset (const void *pointer, void *data,
         fset_option_filter_options (argv_eol[1]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -458,21 +458,21 @@ fset_command_run_set_cb (const void *pointer, void *data,
 
     /* ignore /set command if issued on fset buffer */
     if (fset_buffer && (buffer == fset_buffer))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (strncmp (command, "/set", 4) != 0)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     ptr_condition = weechat_config_string (fset_config_look_condition_catch_set);
     if (!ptr_condition || !ptr_condition[0])
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
-    rc = WEECHAT_RC_OK;
+    rc = WHOREIRC_RC_OK;
 
     argv = weechat_string_split (command, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
 
     if (argc > 2)
@@ -506,14 +506,14 @@ fset_command_run_set_cb (const void *pointer, void *data,
     condition_ok = 0;
     eval_extra_vars = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL,
         NULL);
     eval_options = weechat_hashtable_new (
         32,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL, NULL);
     if (eval_extra_vars && eval_options)
     {
@@ -553,7 +553,7 @@ fset_command_run_set_cb (const void *pointer, void *data,
         fset_buffer_refresh (1);
         weechat_buffer_set (fset_buffer, "display", "1");
 
-        rc = WEECHAT_RC_OK_EAT;
+        rc = WHOREIRC_RC_OK_EAT;
     }
     else
     {
@@ -584,7 +584,7 @@ fset_command_init ()
 {
     weechat_hook_command (
         "fset",
-        N_("fast set WeeChat and plugins options"),
+        N_("fast set WhoreIRC and plugins options"),
         N_("-bar"
            " || -refresh"
            " || -up|-down [<number>]"

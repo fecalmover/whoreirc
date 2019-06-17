@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "CppUTest/TestHarness.h"
@@ -46,9 +46,9 @@ test_list_new ()
 
     list = weelist_new ();
 
-    weelist_add (list, LIST_VALUE_ZZZ, WEECHAT_LIST_POS_END, NULL);
-    weelist_add (list, LIST_VALUE_TEST, WEECHAT_LIST_POS_BEGINNING, NULL);
-    weelist_add (list, LIST_VALUE_XYZ, WEECHAT_LIST_POS_SORT, NULL);
+    weelist_add (list, LIST_VALUE_ZZZ, WHOREIRC_LIST_POS_END, NULL);
+    weelist_add (list, LIST_VALUE_TEST, WHOREIRC_LIST_POS_BEGINNING, NULL);
+    weelist_add (list, LIST_VALUE_XYZ, WHOREIRC_LIST_POS_SORT, NULL);
 
     return list;
 }
@@ -91,14 +91,14 @@ TEST(CoreList, Add)
     POINTERS_EQUAL(NULL, weelist_add (NULL, NULL, NULL, NULL));
     POINTERS_EQUAL(NULL, weelist_add (list, NULL, NULL, NULL));
     POINTERS_EQUAL(NULL, weelist_add (NULL, LIST_VALUE_TEST, NULL, NULL));
-    POINTERS_EQUAL(NULL, weelist_add (NULL, NULL, WEECHAT_LIST_POS_END, NULL));
+    POINTERS_EQUAL(NULL, weelist_add (NULL, NULL, WHOREIRC_LIST_POS_END, NULL));
     POINTERS_EQUAL(NULL, weelist_add (list, LIST_VALUE_TEST, NULL, NULL));
-    POINTERS_EQUAL(NULL, weelist_add (list, NULL, WEECHAT_LIST_POS_END, NULL));
+    POINTERS_EQUAL(NULL, weelist_add (list, NULL, WHOREIRC_LIST_POS_END, NULL));
     POINTERS_EQUAL(NULL, weelist_add (NULL, LIST_VALUE_TEST,
-                                      WEECHAT_LIST_POS_END, NULL));
+                                      WHOREIRC_LIST_POS_END, NULL));
 
     /* add an element at the end */
-    item1 = weelist_add (list, LIST_VALUE_ZZZ, WEECHAT_LIST_POS_END,
+    item1 = weelist_add (list, LIST_VALUE_ZZZ, WHOREIRC_LIST_POS_END,
                          (void *)str_user_data);
     CHECK(item1);
     CHECK(item1->data);
@@ -109,7 +109,7 @@ TEST(CoreList, Add)
     POINTERS_EQUAL(item1, list->items);
 
     /* add an element at the beginning */
-    item2 = weelist_add (list, LIST_VALUE_TEST, WEECHAT_LIST_POS_BEGINNING,
+    item2 = weelist_add (list, LIST_VALUE_TEST, WHOREIRC_LIST_POS_BEGINNING,
                          (void *)str_user_data);
     CHECK(item2);
     CHECK(item2->data);
@@ -121,7 +121,7 @@ TEST(CoreList, Add)
     POINTERS_EQUAL(item1, list->items->next_item);
 
     /* add an element, using sort */
-    item3 = weelist_add (list, LIST_VALUE_XYZ, WEECHAT_LIST_POS_SORT,
+    item3 = weelist_add (list, LIST_VALUE_XYZ, WHOREIRC_LIST_POS_SORT,
                          (void *)str_user_data);
     CHECK(item3);
     CHECK(item3->data);

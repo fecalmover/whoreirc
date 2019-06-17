@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -605,7 +605,7 @@ proxy_hdata_proxy_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_proxy, options, POINTER, 0, NULL, NULL);
         HDATA_VAR(struct t_proxy, prev_proxy, POINTER, 0, NULL, hdata_name);
         HDATA_VAR(struct t_proxy, next_proxy, POINTER, 0, NULL, hdata_name);
-        HDATA_LIST(weechat_proxies, WEECHAT_HDATA_LIST_CHECK_POINTERS);
+        HDATA_LIST(weechat_proxies, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
         HDATA_LIST(last_weechat_proxy, 0);
     }
     return hdata;
@@ -652,7 +652,7 @@ proxy_add_to_infolist (struct t_infolist *infolist, struct t_proxy *proxy)
 }
 
 /*
- * Prints proxies in WeeChat log file (usually for crash dump).
+ * Prints proxies in WhoreIRC log file (usually for crash dump).
  */
 
 void

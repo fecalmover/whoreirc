@@ -1,22 +1,22 @@
 /*
- * wee-hdata.c - direct access to WeeChat data using hashtables
+ * wee-hdata.c - direct access to WhoreIRC data using hashtables
  *
  * Copyright (C) 2011-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -116,14 +116,14 @@ hdata_new (struct t_weechat_plugin *plugin, const char *hdata_name,
         new_hdata->var_prev = (var_prev) ? strdup (var_prev) : NULL;
         new_hdata->var_next = (var_next) ? strdup (var_next) : NULL;
         new_hdata->hash_var = hashtable_new (32,
-                                             WEECHAT_HASHTABLE_STRING,
-                                             WEECHAT_HASHTABLE_POINTER,
+                                             WHOREIRC_HASHTABLE_STRING,
+                                             WHOREIRC_HASHTABLE_POINTER,
                                              NULL,
                                              NULL);
         new_hdata->hash_var->callback_free_value = &hdata_free_var;
         new_hdata->hash_list = hashtable_new (32,
-                                              WEECHAT_HASHTABLE_STRING,
-                                              WEECHAT_HASHTABLE_POINTER,
+                                              WHOREIRC_HASHTABLE_STRING,
+                                              WHOREIRC_HASHTABLE_POINTER,
                                               NULL,
                                               NULL);
         new_hdata->hash_list->callback_free_value = &hdata_free_list;
@@ -278,10 +278,10 @@ hdata_get_var_array_size (struct t_hdata *hdata, void *pointer,
          * (this automatic size is possible only with pointers, so with
          * types: string, pointer, hashtable)
          */
-        if ((var->type == WEECHAT_HDATA_STRING)
-            || (var->type == WEECHAT_HDATA_SHARED_STRING)
-            || (var->type == WEECHAT_HDATA_POINTER)
-            || (var->type == WEECHAT_HDATA_HASHTABLE))
+        if ((var->type == WHOREIRC_HDATA_STRING)
+            || (var->type == WHOREIRC_HDATA_SHARED_STRING)
+            || (var->type == WHOREIRC_HDATA_POINTER)
+            || (var->type == WHOREIRC_HDATA_HASHTABLE))
         {
             if (!(*((void **)(pointer + var->offset))))
                 return 0;
@@ -291,14 +291,14 @@ hdata_get_var_array_size (struct t_hdata *hdata, void *pointer,
                 ptr_value = NULL;
                 switch (var->type)
                 {
-                    case WEECHAT_HDATA_STRING:
-                    case WEECHAT_HDATA_SHARED_STRING:
+                    case WHOREIRC_HDATA_STRING:
+                    case WHOREIRC_HDATA_SHARED_STRING:
                         ptr_value = (*((char ***)(pointer + var->offset)))[i];
                         break;
-                    case WEECHAT_HDATA_POINTER:
+                    case WHOREIRC_HDATA_POINTER:
                         ptr_value = (*((void ***)(pointer + var->offset)))[i];
                         break;
-                    case WEECHAT_HDATA_HASHTABLE:
+                    case WHOREIRC_HDATA_HASHTABLE:
                         ptr_value = (*((struct t_hashtable ***)(pointer + var->offset)))[i];
                         break;
                 }
@@ -318,11 +318,11 @@ hdata_get_var_array_size (struct t_hdata *hdata, void *pointer,
             /* size is the name of a variable in hdata, read it */
             switch (hdata_get_var_type (hdata, ptr_size))
             {
-                case WEECHAT_HDATA_CHAR:
+                case WHOREIRC_HDATA_CHAR:
                     return (int)(*((char *)(pointer + offset)));
-                case WEECHAT_HDATA_INTEGER:
+                case WHOREIRC_HDATA_INTEGER:
                     return *((int *)(pointer + offset));
-                case WEECHAT_HDATA_LONG:
+                case WHOREIRC_HDATA_LONG:
                     return (int)(*((long *)(pointer + offset)));
                 default:
                     break;
@@ -493,7 +493,7 @@ hdata_check_pointer_map_cb (void *data, struct t_hashtable *hashtable,
         return;
 
     ptr_list = (struct t_hdata_list *)value;
-    if (!ptr_list || !(ptr_list->flags & WEECHAT_HDATA_LIST_CHECK_POINTERS))
+    if (!ptr_list || !(ptr_list->flags & WHOREIRC_HDATA_LIST_CHECK_POINTERS))
         return;
 
     *found = (void *)((unsigned long)hdata_check_pointer_in_list (
@@ -592,8 +592,8 @@ hdata_search (struct t_hdata *hdata, void *pointer, const char *search, int move
     else
     {
         hdata_search_pointers = hashtable_new (32,
-                                               WEECHAT_HASHTABLE_STRING,
-                                               WEECHAT_HASHTABLE_POINTER,
+                                               WHOREIRC_HASHTABLE_STRING,
+                                               WHOREIRC_HASHTABLE_POINTER,
                                                NULL,
                                                NULL);
     }
@@ -606,8 +606,8 @@ hdata_search (struct t_hdata *hdata, void *pointer, const char *search, int move
     if (!hdata_search_extra_vars)
     {
         hdata_search_extra_vars = hashtable_new (32,
-                                                 WEECHAT_HASHTABLE_STRING,
-                                                 WEECHAT_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_STRING,
+                                                 WHOREIRC_HASHTABLE_STRING,
                                                  NULL,
                                                  NULL);
     }
@@ -615,8 +615,8 @@ hdata_search (struct t_hdata *hdata, void *pointer, const char *search, int move
     if (!hdata_search_options)
     {
         hdata_search_options = hashtable_new (32,
-                                              WEECHAT_HASHTABLE_STRING,
-                                              WEECHAT_HASHTABLE_STRING,
+                                              WHOREIRC_HASHTABLE_STRING,
+                                              WHOREIRC_HASHTABLE_STRING,
                                               NULL,
                                               NULL);
         if (hdata_search_options)
@@ -910,26 +910,26 @@ hdata_compare (struct t_hdata *hdata, void *pointer1, void *pointer2,
     hdata_get_index_and_name (name, NULL, &ptr_name);
     switch (hdata_get_var_type (hdata, ptr_name))
     {
-        case WEECHAT_HDATA_CHAR:
+        case WHOREIRC_HDATA_CHAR:
             char_value1 = hdata_char (hdata, pointer1, name);
             char_value2 = hdata_char (hdata, pointer2, name);
             rc = (char_value1 < char_value2) ?
                 -1 : ((char_value1 > char_value2) ? 1 : 0);
             break;
-        case WEECHAT_HDATA_INTEGER:
+        case WHOREIRC_HDATA_INTEGER:
             int_value1 = hdata_integer (hdata, pointer1, name);
             int_value2 = hdata_integer (hdata, pointer2, name);
             rc = (int_value1 < int_value2) ?
                 -1 : ((int_value1 > int_value2) ? 1 : 0);
             break;
-        case WEECHAT_HDATA_LONG:
+        case WHOREIRC_HDATA_LONG:
             long_value1 = hdata_long (hdata, pointer1, name);
             long_value2 = hdata_long (hdata, pointer2, name);
             rc = (long_value1 < long_value2) ?
                 -1 : ((long_value1 > long_value2) ? 1 : 0);
             break;
-        case WEECHAT_HDATA_STRING:
-        case WEECHAT_HDATA_SHARED_STRING:
+        case WHOREIRC_HDATA_STRING:
+        case WHOREIRC_HDATA_SHARED_STRING:
             str_value1 = hdata_string (hdata, pointer1, name);
             str_value2 = hdata_string (hdata, pointer2, name);
             if (!str_value1 && !str_value2)
@@ -950,23 +950,23 @@ hdata_compare (struct t_hdata *hdata, void *pointer1, void *pointer2,
                     rc = 1;
             }
             break;
-        case WEECHAT_HDATA_POINTER:
+        case WHOREIRC_HDATA_POINTER:
             ptr_value1 = hdata_pointer (hdata, pointer1, name);
             ptr_value2 = hdata_pointer (hdata, pointer2, name);
             rc = (ptr_value1 < ptr_value2) ?
                 -1 : ((ptr_value1 > ptr_value2) ? 1 : 0);
             break;
-        case WEECHAT_HDATA_TIME:
+        case WHOREIRC_HDATA_TIME:
             time_value1 = hdata_time (hdata, pointer1, name);
             time_value2 = hdata_time (hdata, pointer2, name);
             rc = (time_value1 < time_value2) ?
                 -1 : ((time_value1 > time_value2) ? 1 : 0);
             break;
-        case WEECHAT_HDATA_HASHTABLE:
+        case WHOREIRC_HDATA_HASHTABLE:
             /* no comparison for hashtables */
             rc = 0;
             break;
-        case WEECHAT_HDATA_OTHER:
+        case WHOREIRC_HDATA_OTHER:
             /* no comparison for other types */
             rc = 0;
             break;
@@ -1009,13 +1009,13 @@ hdata_set (struct t_hdata *hdata, void *pointer, const char *name,
 
     switch (var->type)
     {
-        case WEECHAT_HDATA_OTHER:
+        case WHOREIRC_HDATA_OTHER:
             break;
-        case WEECHAT_HDATA_CHAR:
+        case WHOREIRC_HDATA_CHAR:
             *((char *)(pointer + var->offset)) = (value) ? value[0] : '\0';
             return 1;
             break;
-        case WEECHAT_HDATA_INTEGER:
+        case WHOREIRC_HDATA_INTEGER:
             error = NULL;
             number = strtol (value, &error, 10);
             if (error && !error[0])
@@ -1024,7 +1024,7 @@ hdata_set (struct t_hdata *hdata, void *pointer, const char *name,
                 return 1;
             }
             break;
-        case WEECHAT_HDATA_LONG:
+        case WHOREIRC_HDATA_LONG:
             error = NULL;
             number = strtol (value, &error, 10);
             if (error && !error[0])
@@ -1033,21 +1033,21 @@ hdata_set (struct t_hdata *hdata, void *pointer, const char *name,
                 return 1;
             }
             break;
-        case WEECHAT_HDATA_STRING:
+        case WHOREIRC_HDATA_STRING:
             ptr_string = (char **)(pointer + var->offset);
             if (*ptr_string)
                 free (*ptr_string);
             *ptr_string = (value) ? strdup (value) : NULL;
             return 1;
             break;
-        case WEECHAT_HDATA_SHARED_STRING:
+        case WHOREIRC_HDATA_SHARED_STRING:
             ptr_string = (char **)(pointer + var->offset);
             if (*ptr_string)
                 string_shared_free (*ptr_string);
             *ptr_string = (value) ? (char *)string_shared_get (value) : NULL;
             return 1;
             break;
-        case WEECHAT_HDATA_POINTER:
+        case WHOREIRC_HDATA_POINTER:
             rc = sscanf (value, "%lx", &ptr);
             if ((rc != EOF) && (rc != 0))
             {
@@ -1055,7 +1055,7 @@ hdata_set (struct t_hdata *hdata, void *pointer, const char *name,
                 return 1;
             }
             break;
-        case WEECHAT_HDATA_TIME:
+        case WHOREIRC_HDATA_TIME:
             error = NULL;
             number = strtol (value, &error, 10);
             if (error && !error[0])
@@ -1064,7 +1064,7 @@ hdata_set (struct t_hdata *hdata, void *pointer, const char *name,
                 return 1;
             }
             break;
-        case WEECHAT_HDATA_HASHTABLE:
+        case WHOREIRC_HDATA_HASHTABLE:
             break;
     }
     return 0;
@@ -1237,7 +1237,7 @@ hdata_free_all ()
 }
 
 /*
- * Prints variable of a hdata in WeeChat log file (callback called for each
+ * Prints variable of a hdata in WhoreIRC log file (callback called for each
  * variable in hdata).
  */
 
@@ -1263,7 +1263,7 @@ hdata_print_log_var_map_cb (void *data, struct t_hashtable *hashtable,
 }
 
 /*
- * Prints hdata in WeeChat log file (callback called for each hdata in memory).
+ * Prints hdata in WhoreIRC log file (callback called for each hdata in memory).
  */
 
 void
@@ -1300,7 +1300,7 @@ hdata_print_log_map_cb (void *data, struct t_hashtable *hashtable,
 }
 
 /*
- * Prints hdata in WeeChat log file (usually for crash dump).
+ * Prints hdata in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -1317,8 +1317,8 @@ void
 hdata_init ()
 {
     weechat_hdata = hashtable_new (32,
-                                   WEECHAT_HASHTABLE_STRING,
-                                   WEECHAT_HASHTABLE_POINTER,
+                                   WHOREIRC_HASHTABLE_STRING,
+                                   WHOREIRC_HASHTABLE_POINTER,
                                    NULL,
                                    NULL);
 }

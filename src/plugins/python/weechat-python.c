@@ -1,24 +1,24 @@
 /*
- * weechat-python.c - python plugin for WeeChat
+ * weechat-python.c - python plugin for WhoreIRC
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2005-2007 Emmanuel Bouthenot <kolter@openics.org>
  * Copyright (C) 2012 Simon Arlott
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #undef _
@@ -35,12 +35,12 @@
 #include "weechat-python-api.h"
 
 
-WEECHAT_PLUGIN_NAME(PYTHON_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Support of python scripts"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(4000);
+WHOREIRC_PLUGIN_NAME(PYTHON_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Support of python scripts"));
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(4000);
 
 struct t_weechat_plugin *weechat_python_plugin = NULL;
 
@@ -63,8 +63,8 @@ struct t_gui_buffer *python_eval_buffer = NULL;
     "def script_python_eval(code):\n"                                   \
     "    exec(code)\n"                                                  \
     "\n"                                                                \
-    "weechat.register('" WEECHAT_SCRIPT_EVAL_NAME "', '', '1.0', "      \
-    "'" WEECHAT_LICENSE "', 'Evaluation of source code', '', '')\n"
+    "weechat.register('" WHOREIRC_SCRIPT_EVAL_NAME "', '', '1.0', "      \
+    "'" WHOREIRC_LICENSE "', 'Evaluation of source code', '', '')\n"
 
 struct t_plugin_script *python_scripts = NULL;
 struct t_plugin_script *last_python_script = NULL;
@@ -156,9 +156,9 @@ weechat_python_get_python2_bin ()
     if (dir_separator && path)
     {
         paths = weechat_string_split (path, ":", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_paths);
         if (paths)
         {
@@ -244,7 +244,7 @@ weechat_python_hashtable_map_cb (void *data,
 }
 
 /*
- * Converts a WeeChat hashtable to a python dictionary.
+ * Converts a WhoreIRC hashtable to a python dictionary.
  */
 
 PyObject *
@@ -266,7 +266,7 @@ weechat_python_hashtable_to_dict (struct t_hashtable *hashtable)
 }
 
 /*
- * Converts a python dictionary to a WeeChat hashtable.
+ * Converts a python dictionary to a WhoreIRC hashtable.
  *
  * Note: hashtable must be freed after use.
  */
@@ -312,11 +312,11 @@ weechat_python_dict_to_hashtable (PyObject *dict, int size,
 
         if (str_key)
         {
-            if (strcmp (type_values, WEECHAT_HASHTABLE_STRING) == 0)
+            if (strcmp (type_values, WHOREIRC_HASHTABLE_STRING) == 0)
             {
                 weechat_hashtable_set (hashtable, str_key, str_value);
             }
-            else if (strcmp (type_values, WEECHAT_HASHTABLE_POINTER) == 0)
+            else if (strcmp (type_values, WHOREIRC_HASHTABLE_POINTER) == 0)
             {
                 weechat_hashtable_set (hashtable, str_key,
                                        plugin_script_str2ptr (weechat_python_plugin,
@@ -505,8 +505,8 @@ weechat_python_exec (struct t_plugin_script *script,
     weechat_python_output_flush ();
 
     /*
-     * ugly hack : rc = NULL while 'return weechat.WEECHAT_RC_OK ....
-     * because of '#define WEECHAT_RC_OK 0'
+     * ugly hack : rc = NULL while 'return weechat.WHOREIRC_RC_OK ....
+     * because of '#define WHOREIRC_RC_OK 0'
      */
     if (rc ==  NULL)
         rc = PyLong_FromLong ((long)0);
@@ -516,12 +516,12 @@ weechat_python_exec (struct t_plugin_script *script,
         PyErr_Print ();
         Py_XDECREF(rc);
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_STRING) && (PyUnicode_Check (rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_STRING) && (PyUnicode_Check (rc)))
     {
         ret_value = weechat_python_unicode_to_string (rc);
         Py_XDECREF(rc);
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_STRING) && (PyBytes_Check (rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_STRING) && (PyBytes_Check (rc)))
     {
         if (PyBytes_AsString (rc))
             ret_value = strdup (PyBytes_AsString (rc));
@@ -529,7 +529,7 @@ weechat_python_exec (struct t_plugin_script *script,
             ret_value = NULL;
         Py_XDECREF(rc);
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_POINTER) && (PyUnicode_Check (rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_POINTER) && (PyUnicode_Check (rc)))
     {
         ret_temp = weechat_python_unicode_to_string (rc);
         if (ret_temp)
@@ -545,7 +545,7 @@ weechat_python_exec (struct t_plugin_script *script,
         }
         Py_XDECREF(rc);
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_POINTER) && (PyBytes_Check (rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_POINTER) && (PyBytes_Check (rc)))
     {
         if (PyBytes_AsString (rc))
         {
@@ -559,7 +559,7 @@ weechat_python_exec (struct t_plugin_script *script,
         }
         Py_XDECREF(rc);
     }
-    else if ((ret_type == WEECHAT_SCRIPT_EXEC_INT) && (PY_INTEGER_CHECK(rc)))
+    else if ((ret_type == WHOREIRC_SCRIPT_EXEC_INT) && (PY_INTEGER_CHECK(rc)))
     {
         ret_int = malloc (sizeof (*ret_int));
         if (ret_int)
@@ -567,17 +567,17 @@ weechat_python_exec (struct t_plugin_script *script,
         ret_value = ret_int;
         Py_XDECREF(rc);
     }
-    else if (ret_type == WEECHAT_SCRIPT_EXEC_HASHTABLE)
+    else if (ret_type == WHOREIRC_SCRIPT_EXEC_HASHTABLE)
     {
         ret_value = weechat_python_dict_to_hashtable (rc,
-                                                      WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE,
-                                                      WEECHAT_HASHTABLE_STRING,
-                                                      WEECHAT_HASHTABLE_STRING);
+                                                      WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE,
+                                                      WHOREIRC_HASHTABLE_STRING,
+                                                      WHOREIRC_HASHTABLE_STRING);
         Py_XDECREF(rc);
     }
     else
     {
-        if (ret_type != WEECHAT_SCRIPT_EXEC_IGNORE)
+        if (ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE)
         {
             weechat_printf (NULL,
                             weechat_gettext ("%s%s: function \"%s\" must "
@@ -588,7 +588,7 @@ weechat_python_exec (struct t_plugin_script *script,
         Py_XDECREF(rc);
     }
 
-    if ((ret_type != WEECHAT_SCRIPT_EXEC_IGNORE) && !ret_value)
+    if ((ret_type != WHOREIRC_SCRIPT_EXEC_IGNORE) && !ret_value)
     {
         weechat_printf (NULL,
                         weechat_gettext ("%s%s: error in function \"%s\""),
@@ -630,7 +630,7 @@ void weechat_python_init_module_weechat ()
     if (!weechat_module)
     {
         weechat_printf (NULL,
-                        weechat_gettext ("%s%s: unable to initialize WeeChat "
+                        weechat_gettext ("%s%s: unable to initialize WhoreIRC "
                                          "module"),
                         weechat_prefix ("error"), PYTHON_PLUGIN_NAME);
 #if PY_MAJOR_VERSION >= 3
@@ -642,52 +642,52 @@ void weechat_python_init_module_weechat ()
 
     /* define some constants */
     weechat_dict = PyModule_GetDict (weechat_module);
-    PyDict_SetItemString (weechat_dict, "WEECHAT_RC_OK", PyLong_FromLong ((long)WEECHAT_RC_OK));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_RC_OK_EAT", PyLong_FromLong ((long)WEECHAT_RC_OK_EAT));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_RC_ERROR", PyLong_FromLong ((long)WEECHAT_RC_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_RC_OK", PyLong_FromLong ((long)WHOREIRC_RC_OK));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_RC_OK_EAT", PyLong_FromLong ((long)WHOREIRC_RC_OK_EAT));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_RC_ERROR", PyLong_FromLong ((long)WHOREIRC_RC_ERROR));
 
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_READ_OK", PyLong_FromLong ((long)WEECHAT_CONFIG_READ_OK));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_READ_MEMORY_ERROR", PyLong_FromLong ((long)WEECHAT_CONFIG_READ_MEMORY_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_READ_FILE_NOT_FOUND", PyLong_FromLong ((long)WEECHAT_CONFIG_READ_FILE_NOT_FOUND));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_WRITE_OK", PyLong_FromLong ((long)WEECHAT_CONFIG_WRITE_OK));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_WRITE_ERROR", PyLong_FromLong ((long)WEECHAT_CONFIG_WRITE_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_WRITE_MEMORY_ERROR", PyLong_FromLong ((long)WEECHAT_CONFIG_WRITE_MEMORY_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_SET_OK_CHANGED", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_SET_OK_CHANGED));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_SET_ERROR", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_SET_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_SET_OPTION_NOT_FOUND));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_UNSET_OK_NO_RESET));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_UNSET_OK_RESET", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_UNSET_OK_RESET));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_UNSET_OK_REMOVED));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_CONFIG_OPTION_UNSET_ERROR", PyLong_FromLong ((long)WEECHAT_CONFIG_OPTION_UNSET_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_READ_OK", PyLong_FromLong ((long)WHOREIRC_CONFIG_READ_OK));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_READ_MEMORY_ERROR", PyLong_FromLong ((long)WHOREIRC_CONFIG_READ_MEMORY_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_READ_FILE_NOT_FOUND", PyLong_FromLong ((long)WHOREIRC_CONFIG_READ_FILE_NOT_FOUND));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_WRITE_OK", PyLong_FromLong ((long)WHOREIRC_CONFIG_WRITE_OK));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_WRITE_ERROR", PyLong_FromLong ((long)WHOREIRC_CONFIG_WRITE_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_WRITE_MEMORY_ERROR", PyLong_FromLong ((long)WHOREIRC_CONFIG_WRITE_MEMORY_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_SET_OK_CHANGED));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_SET_ERROR", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_SET_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_SET_OPTION_NOT_FOUND));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_UNSET_OK_NO_RESET));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_UNSET_OK_RESET));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_UNSET_OK_REMOVED));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_CONFIG_OPTION_UNSET_ERROR", PyLong_FromLong ((long)WHOREIRC_CONFIG_OPTION_UNSET_ERROR));
 
-    PyDict_SetItemString (weechat_dict, "WEECHAT_LIST_POS_SORT", PyUnicode_FromString (WEECHAT_LIST_POS_SORT));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_LIST_POS_BEGINNING", PyUnicode_FromString (WEECHAT_LIST_POS_BEGINNING));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_LIST_POS_END", PyUnicode_FromString (WEECHAT_LIST_POS_END));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_LIST_POS_SORT", PyUnicode_FromString (WHOREIRC_LIST_POS_SORT));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_LIST_POS_BEGINNING", PyUnicode_FromString (WHOREIRC_LIST_POS_BEGINNING));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_LIST_POS_END", PyUnicode_FromString (WHOREIRC_LIST_POS_END));
 
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOTLIST_LOW", PyUnicode_FromString (WEECHAT_HOTLIST_LOW));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOTLIST_MESSAGE", PyUnicode_FromString (WEECHAT_HOTLIST_MESSAGE));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOTLIST_PRIVATE", PyUnicode_FromString (WEECHAT_HOTLIST_PRIVATE));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOTLIST_HIGHLIGHT", PyUnicode_FromString (WEECHAT_HOTLIST_HIGHLIGHT));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOTLIST_LOW", PyUnicode_FromString (WHOREIRC_HOTLIST_LOW));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOTLIST_MESSAGE", PyUnicode_FromString (WHOREIRC_HOTLIST_MESSAGE));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOTLIST_PRIVATE", PyUnicode_FromString (WHOREIRC_HOTLIST_PRIVATE));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOTLIST_HIGHLIGHT", PyUnicode_FromString (WHOREIRC_HOTLIST_HIGHLIGHT));
 
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_PROCESS_RUNNING", PyLong_FromLong ((long)WEECHAT_HOOK_PROCESS_RUNNING));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_PROCESS_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_PROCESS_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_PROCESS_RUNNING", PyLong_FromLong ((long)WHOREIRC_HOOK_PROCESS_RUNNING));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_PROCESS_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_PROCESS_ERROR));
 
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_OK", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_OK));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_ADDRESS_NOT_FOUND));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_CONNECTION_REFUSED));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_PROXY_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_PROXY_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_GNUTLS_INIT_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_MEMORY_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_MEMORY_ERROR));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_TIMEOUT", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_TIMEOUT));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_CONNECT_SOCKET_ERROR", PyLong_FromLong ((long)WEECHAT_HOOK_CONNECT_SOCKET_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_OK", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_OK));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_ADDRESS_NOT_FOUND));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_IP_ADDRESS_NOT_FOUND));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_CONNECTION_REFUSED));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_PROXY_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_PROXY_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_LOCAL_HOSTNAME_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_GNUTLS_INIT_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_GNUTLS_HANDSHAKE_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_MEMORY_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_MEMORY_ERROR));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_TIMEOUT", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_TIMEOUT));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_CONNECT_SOCKET_ERROR", PyLong_FromLong ((long)WHOREIRC_HOOK_CONNECT_SOCKET_ERROR));
 
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_SIGNAL_STRING", PyUnicode_FromString (WEECHAT_HOOK_SIGNAL_STRING));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_SIGNAL_INT", PyUnicode_FromString (WEECHAT_HOOK_SIGNAL_INT));
-    PyDict_SetItemString (weechat_dict, "WEECHAT_HOOK_SIGNAL_POINTER", PyUnicode_FromString (WEECHAT_HOOK_SIGNAL_POINTER));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_SIGNAL_STRING", PyUnicode_FromString (WHOREIRC_HOOK_SIGNAL_STRING));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_SIGNAL_INT", PyUnicode_FromString (WHOREIRC_HOOK_SIGNAL_INT));
+    PyDict_SetItemString (weechat_dict, "WHOREIRC_HOOK_SIGNAL_POINTER", PyUnicode_FromString (WHOREIRC_HOOK_SIGNAL_POINTER));
 
 #if PY_MAJOR_VERSION >= 3
     return weechat_module;
@@ -695,7 +695,7 @@ void weechat_python_init_module_weechat ()
 }
 
 /*
- * Sets weechat output (to redirect stdout/stderr to WeeChat buffer).
+ * Sets weechat output (to redirect stdout/stderr to WhoreIRC buffer).
  */
 
 void
@@ -945,7 +945,7 @@ weechat_python_load (const char *filename, const char *code)
                                         &weechat_python_api_buffer_close_cb);
 
     (void) weechat_hook_signal_send ("python_script_loaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING,
+                                     WHOREIRC_HOOK_SIGNAL_STRING,
                                      python_current_script->filename);
 
     return python_current_script;
@@ -984,7 +984,7 @@ weechat_python_unload (struct t_plugin_script *script)
 
     if (script->shutdown_func && script->shutdown_func[0])
     {
-        rc = (int *) weechat_python_exec (script, WEECHAT_SCRIPT_EXEC_INT,
+        rc = (int *) weechat_python_exec (script, WHOREIRC_SCRIPT_EXEC_INT,
                                           script->shutdown_func, NULL, NULL);
         if (rc)
             free (rc);
@@ -1012,7 +1012,7 @@ weechat_python_unload (struct t_plugin_script *script)
         PyThreadState_Swap (python_current_script->interpreter);
 
     (void) weechat_hook_signal_send ("python_script_unloaded",
-                                     WEECHAT_HOOK_SIGNAL_STRING, filename);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, filename);
     if (filename)
         free (filename);
 }
@@ -1110,7 +1110,7 @@ weechat_python_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
     if (!python_script_eval)
     {
         python_quiet = 1;
-        python_script_eval = weechat_python_load (WEECHAT_SCRIPT_EVAL_NAME,
+        python_script_eval = weechat_python_load (WHOREIRC_SCRIPT_EVAL_NAME,
                                                   PYTHON_EVAL_SCRIPT);
         python_quiet = 0;
         if (!python_script_eval)
@@ -1126,7 +1126,7 @@ weechat_python_eval (struct t_gui_buffer *buffer, int send_to_buffer_as_input,
 
     func_argv[0] = (char *)code;
     result = weechat_python_exec (python_script_eval,
-                                  WEECHAT_SCRIPT_EXEC_IGNORE,
+                                  WHOREIRC_SCRIPT_EXEC_IGNORE,
                                   "script_python_eval",
                                   "s", func_argv);
     /* result is ignored */
@@ -1202,7 +1202,7 @@ weechat_python_command_cb (const void *pointer, void *data,
             plugin_script_display_interpreter (weechat_python_plugin, 0);
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
     else
     {
@@ -1264,7 +1264,7 @@ weechat_python_command_cb (const void *pointer, void *data,
                     if (strcmp (argv[i], "-o") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 0;
                         ptr_code = argv_eol[i + 1];
@@ -1272,7 +1272,7 @@ weechat_python_command_cb (const void *pointer, void *data,
                     else if (strcmp (argv[i], "-oc") == 0)
                     {
                         if (i + 1 >= argc)
-                            WEECHAT_COMMAND_ERROR;
+                            WHOREIRC_COMMAND_ERROR;
                         send_to_buffer_as_input = 1;
                         exec_commands = 1;
                         ptr_code = argv_eol[i + 1];
@@ -1283,13 +1283,13 @@ weechat_python_command_cb (const void *pointer, void *data,
             }
             if (!weechat_python_eval (buffer, send_to_buffer_as_input,
                                       exec_commands, ptr_code))
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
         }
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1310,7 +1310,7 @@ weechat_python_completion_cb (const void *pointer, void *data,
 
     plugin_script_completion (weechat_python_plugin, completion, python_scripts);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1411,7 +1411,7 @@ weechat_python_infolist_cb (const void *pointer, void *data,
 }
 
 /*
- * Dumps python plugin data in WeeChat log file.
+ * Dumps python plugin data in WhoreIRC log file.
  */
 
 int
@@ -1431,7 +1431,7 @@ weechat_python_signal_debug_dump_cb (const void *pointer, void *data,
         plugin_script_print_log (weechat_python_plugin, python_scripts);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1473,7 +1473,7 @@ weechat_python_timer_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1491,7 +1491,7 @@ weechat_python_signal_script_action_cb (const void *pointer, void *data,
     (void) pointer;
     (void) data;
 
-    if (strcmp (type_data, WEECHAT_HOOK_SIGNAL_STRING) == 0)
+    if (strcmp (type_data, WHOREIRC_HOOK_SIGNAL_STRING) == 0)
     {
         if (strcmp (signal, "python_script_install") == 0)
         {
@@ -1519,7 +1519,7 @@ weechat_python_signal_script_action_cb (const void *pointer, void *data,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1545,7 +1545,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     /* init stdout/stderr buffer */
     python_buffer_output = weechat_string_dyn_alloc (256);
     if (!python_buffer_output)
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     /*
      * hook info to get path to python 2.x interpreter
@@ -1568,7 +1568,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                          "interpreter"),
                         weechat_prefix ("error"), PYTHON_PLUGIN_NAME);
         weechat_string_dyn_free (python_buffer_output, 1);
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     /* PyEval_InitThreads(); */
@@ -1587,7 +1587,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                          "interpreter state"),
                         weechat_prefix ("error"), PYTHON_PLUGIN_NAME);
         weechat_string_dyn_free (python_buffer_output, 1);
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
     }
 
     python_data.config_file = &python_config_file;
@@ -1613,7 +1613,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
                                       python_scripts);
 
     /* init OK */
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1661,5 +1661,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
         free (python_action_autoload_list);
     weechat_string_dyn_free (python_buffer_output, 1);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

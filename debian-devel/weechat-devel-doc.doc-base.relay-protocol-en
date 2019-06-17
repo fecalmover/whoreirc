@@ -1,7 +1,7 @@
 Document: whoreirc-relay-protocol-en
-Title: WeeChat Relay protocol (English)
+Title: WhoreIRC Relay protocol (English)
 Author: Sébastien Helleu
-Abstract: This manual describes WeeChat Relay Protocol, used by
+Abstract: This manual describes WhoreIRC Relay Protocol, used by
  remote GUI to communicate with Relay plugin (English version).
 Section: Network/Communication
 

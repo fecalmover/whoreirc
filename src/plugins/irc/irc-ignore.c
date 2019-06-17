@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -255,7 +255,7 @@ irc_ignore_free (struct t_irc_ignore *ignore)
         return;
 
     (void) weechat_hook_signal_send ("irc_ignore_removing",
-                                     WEECHAT_HOOK_SIGNAL_POINTER, ignore);
+                                     WHOREIRC_HOOK_SIGNAL_POINTER, ignore);
 
     /* decrement number for all ignore after this one */
     for (ptr_ignore = ignore->next_ignore; ptr_ignore;
@@ -290,7 +290,7 @@ irc_ignore_free (struct t_irc_ignore *ignore)
     free (ignore);
 
     (void) weechat_hook_signal_send ("irc_ignore_removed",
-                                     WEECHAT_HOOK_SIGNAL_STRING, NULL);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, NULL);
 }
 
 /*
@@ -324,15 +324,15 @@ irc_ignore_hdata_ignore_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, number, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, mask, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, regex_mask, POINTER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, server, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, channel, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, prev_ignore, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_ignore, next_ignore, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_LIST(irc_ignore_list, WEECHAT_HDATA_LIST_CHECK_POINTERS);
-        WEECHAT_HDATA_LIST(last_irc_ignore, 0);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, number, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, mask, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, regex_mask, POINTER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, server, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, channel, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, prev_ignore, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_ignore, next_ignore, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_LIST(irc_ignore_list, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
+        WHOREIRC_HDATA_LIST(last_irc_ignore, 0);
     }
     return hdata;
 }
@@ -369,7 +369,7 @@ irc_ignore_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints ignore infos in WeeChat log file (usually for crash dump).
+ * Prints ignore infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

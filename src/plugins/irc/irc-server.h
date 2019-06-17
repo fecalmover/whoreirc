@@ -2,24 +2,24 @@
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2012 Simon Arlott
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_IRC_SERVER_H
-#define WEECHAT_PLUGIN_IRC_SERVER_H
+#ifndef WHOREIRC_PLUGIN_IRC_SERVER_H
+#define WHOREIRC_PLUGIN_IRC_SERVER_H
 
 #include <time.h>
 #include <sys/time.h>
@@ -175,7 +175,7 @@ struct t_irc_server
     struct t_hook *hook_fd;         /* hook for server socket                */
     struct t_hook *hook_timer_connection; /* timer for connection            */
     struct t_hook *hook_timer_sasl; /* timer for SASL authentication         */
-    int is_connected;               /* 1 if WeeChat is connected to server   */
+    int is_connected;               /* 1 if WhoreIRC is connected to server   */
     int ssl_connected;              /* = 1 if connected with SSL             */
     int disconnected;               /* 1 if server has been disconnected     */
 #ifdef HAVE_GNUTLS
@@ -389,4 +389,4 @@ extern int irc_server_add_to_infolist (struct t_infolist *infolist,
                                        struct t_irc_server *server);
 extern void irc_server_print_log ();
 
-#endif /* WEECHAT_PLUGIN_IRC_SERVER_H */
+#endif /* WHOREIRC_PLUGIN_IRC_SERVER_H */

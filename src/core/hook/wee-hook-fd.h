@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_HOOK_FD_H
-#define WEECHAT_HOOK_FD_H
+#ifndef WHOREIRC_HOOK_FD_H
+#define WHOREIRC_HOOK_FD_H
 
 struct t_weechat_plugin;
 struct t_infolist_item;
@@ -55,4 +55,4 @@ extern int hook_fd_add_to_infolist (struct t_infolist_item *item,
                                     struct t_hook *hook);
 extern void hook_fd_print_log (struct t_hook *hook);
 
-#endif /* WEECHAT_HOOK_FD_H */
+#endif /* WHOREIRC_HOOK_FD_H */

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -199,21 +199,21 @@ fset_mouse_hsignal_cb (const void *pointer, void *data, const char *signal,
     (void) signal;
 
     if (!fset_buffer)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     ptr_key = weechat_hashtable_get (hashtable, "_key");
     ptr_chat_line_y = weechat_hashtable_get (hashtable, "_chat_line_y");
     ptr_fset_option_pointer = weechat_hashtable_get (hashtable, "fset_option");
 
     if (!ptr_key || !ptr_chat_line_y || !ptr_fset_option_pointer)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     rc = sscanf (ptr_fset_option_pointer, "%lx", &value);
     if ((rc == EOF) || (rc == 0))
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     ptr_fset_option = (struct t_fset_option *)value;
     if (!ptr_fset_option)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     snprintf (str_command, sizeof (str_command),
               "/fset -go %s",
@@ -299,7 +299,7 @@ fset_mouse_hsignal_cb (const void *pointer, void *data, const char *signal,
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -316,8 +316,8 @@ fset_mouse_init ()
     struct t_hashtable *keys;
 
     keys = weechat_hashtable_new (4,
-                                  WEECHAT_HASHTABLE_STRING,
-                                  WEECHAT_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_STRING,
+                                  WHOREIRC_HASHTABLE_STRING,
                                   NULL, NULL);
     if (!keys)
         return 0;

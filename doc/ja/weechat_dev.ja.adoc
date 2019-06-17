@@ -1,4 +1,4 @@
-= WeeChat 開発者ガイド
+= WhoreIRC 開発者ガイド
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: ja
@@ -14,7 +14,7 @@
 * Ryuunosuke Ayanokouzi <i38w7i3@yahoo.co.jp>, 2014-2019
 
 
-このマニュアルは WeeChat チャットクライアントについての文書で、これは WeeChat の一部です。
+このマニュアルは WhoreIRC チャットクライアントについての文書で、これは WhoreIRC の一部です。
 
 この文書の最新版は以下のページにあります:
 https://whoreirc.org/doc
@@ -23,21 +23,21 @@ https://whoreirc.org/doc
 [[introduction]]
 == はじめに
 
-WeeChat (Wee Enhanced Environment for Chat)
+WhoreIRC (Wee Enhanced Environment for Chat)
 は無料のチャットクライアントで、高速、軽量、多くのオペレーティングシステムで動くように設計されています。
 
-このマニュアルは WeeChat の内部構造について書かれています:
+このマニュアルは WhoreIRC の内部構造について書かれています:
 
 * リポジトリ
 * コーディングルール
 * 中核部の内部構造
 * プラグインの内部構造
-* WeeChat に貢献する方法
+* WhoreIRC に貢献する方法
 
 [[repositories]]
 == リポジトリ
 
-WeeChat リポジトリは GitHub organization の "whoreirc" にあります:
+WhoreIRC リポジトリは GitHub organization の "whoreirc" にあります:
 https://github.com/whoreirc
 
 リポジトリのリスト:
@@ -49,20 +49,20 @@ scripts::
     whoreirc.org に投稿された _公式_ スクリプト
 
 whoreirc.org::
-    WeeChat ウェブサイトのソースコード: https://whoreirc.org/
+    WhoreIRC ウェブサイトのソースコード: https://whoreirc.org/
 
 weercd::
     IRC テストサーバ
 
 qwhoreirc::
-    WeeChat の Qt リモート GUI。
+    WhoreIRC の Qt リモート GUI。
 
 このマニュアルは _whoreirc_ リポジトリだけを説明しています。
 
 [[overview]]
 === 概要
 
-主な WeeChat ディレクトリは:
+主な WhoreIRC ディレクトリは:
 
 [width="100%",cols="1m,3",options="header"]
 |===
@@ -79,7 +79,7 @@ qwhoreirc::
 |       buflist/     | buflist プラグイン
 |       charset/     | charset プラグイン
 |       exec/        | exec プラグイン
-|       fifo/        | fifo プラグイン (WeeChat にコマンドを送信する FIFO パイプ)
+|       fifo/        | fifo プラグイン (WhoreIRC にコマンドを送信する FIFO パイプ)
 |       fset/        | fset (高速設定) プラグイン
 |       guile/       | guile (scheme) スクリプト用 API
 |       irc/         | IRC (Internet Relay Chat) プラグイン
@@ -115,7 +115,7 @@ qwhoreirc::
 [[sources_core]]
 ==== コア
 
-WeeChat "core" は以下のディレクトリに配置されています:
+WhoreIRC "core" は以下のディレクトリに配置されています:
 
 * _src/core/_: コア関数 (データ操作用)
 * _src/gui/_: インターフェースの関数 (バッファ、ウィンドウ、...)
@@ -126,10 +126,10 @@ WeeChat "core" は以下のディレクトリに配置されています:
 | core/                           | コア関数: エントリポイント、内部構造体
 |    wee-arraylist.c              | 配列リスト
 |    wee-backtrace.c              | クラッシュした際にバックトレースを表示
-|    wee-command.c                | WeeChat コアコマンド
+|    wee-command.c                | WhoreIRC コアコマンド
 |    wee-completion.c             | デフォルト補完
 |    wee-config-file.c            | 設定ファイル管理
-|    wee-config.c                 | WeeChat コアの設定オプション (whoreirc.conf ファイル)
+|    wee-config.c                 | WhoreIRC コアの設定オプション (whoreirc.conf ファイル)
 |    wee-debug.c                  | デバッグ用関数
 |    wee-eval.c                   | 内部変数へのリファレンスを含む式を評価
 |    wee-hashtable.c              | ハッシュテーブル
@@ -138,7 +138,7 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |    wee-infolist.c               | インフォリスト (オブジェクトに関するデータを含むリスト)
 |    wee-input.c                  | コマンドおよびテキストの入力
 |    wee-list.c                   | ソート済みリスト
-|    wee-log.c                    | WeeChat ログファイル (whoreirc.log) に書き込む
+|    wee-log.c                    | WhoreIRC ログファイル (whoreirc.log) に書き込む
 |    wee-network.c                | ネットワーク関数 (サーバやプロキシへの接続)
 |    wee-proxy.c                  | プロキシ管理
 |    wee-secure.c                 | データ保護用の関数
@@ -146,11 +146,11 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |    wee-secure-config.c          | 安全なデータオプション (sec.conf ファイル)
 |    wee-string.c                 | 文字列関数
 |    wee-upgrade-file.c           | 内部アップグレードシステム
-|    wee-upgrade.c                | WeeChat コアのアップグレード (バッファ、行、履歴、...)
+|    wee-upgrade.c                | WhoreIRC コアのアップグレード (バッファ、行、履歴、...)
 |    wee-url.c                    | URL 転送 (libcurl を使う)
 |    wee-utf8.c                   | UTF-8 関数
 |    wee-util.c                   | その他の関数
-|    wee-version.c                | WeeChat バージョンについての関数
+|    wee-version.c                | WhoreIRC バージョンについての関数
 |    whoreirc.c                    | 主要関数: コマンドラインオプション、起動
 |    hook/                        | フック関数
 |       wee-hook-command-run.c    | "command_run" フック
@@ -197,7 +197,7 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |       gui-curses-chat.c         | チャットエリアへの表示 (メッセージ)
 |       gui-curses-color.c        | 色関数
 |       gui-curses-key.c          | キーボード関数 (デフォルトキー、入力の読み取り)
-|       gui-curses-main.c         | WeeChat メインループ (キーボードやネットワークイベントの待ち受け)
+|       gui-curses-main.c         | WhoreIRC メインループ (キーボードやネットワークイベントの待ち受け)
 |       gui-curses-mouse.c        | マウス
 |       gui-curses-term.c         | 端末についての関数
 |       gui-curses-window.c       | ウィンドウ
@@ -216,13 +216,13 @@ WeeChat "core" は以下のディレクトリに配置されています:
 | パス/ファイル名                   | 説明
 | plugins/                          | プラグインのルートディレクトリ
 |    plugin.c                       | プラグイン管理 (動的 C 言語ライブラリのロード/アンロード)
-|    plugin-api.c                   | プラグイン API の追加関数 (WeeChat コア関数のラッパー)
+|    plugin-api.c                   | プラグイン API の追加関数 (WhoreIRC コア関数のラッパー)
 |    plugin-api-info.c              | プラグイン API 用のインフォ/インフォリストに関する追加関数
 |    plugin-config.c                | プラグイン設定オプション (plugins.conf ファイル)
 |    plugin-script.c                | スクリプトプラグインの共用関数
 |    plugin-script-api.c            | スクリプト API 関数: 一部のプラグイン API 関数のラッパー
 |    plugin-script-config.c         | スクリプトプラグインの設定オプション (python.conf、perl.conf 等のファイル)
-|    whoreirc-plugin.h               | WeeChat プラグインと一緒に配布されるヘッダファイル、プラグインのコンパイルに必要
+|    whoreirc-plugin.h               | WhoreIRC プラグインと一緒に配布されるヘッダファイル、プラグインのコンパイルに必要
 |    alias/                         | alias プラグイン
 |       alias.c                     | alias の主要関数
 |       alias-command.c             | alias コマンド
@@ -294,7 +294,7 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |       irc-redirect.c              | IRC コマンド出力のリダイレクト
 |       irc-sasl.c                  | IRC サーバに対する SASL 認証
 |       irc-server.c                | IRC サーバとの入出力通信
-|       irc-upgrade.c               | WeeChat をアップグレードする際の IRC データの保存およびロード
+|       irc-upgrade.c               | WhoreIRC をアップグレードする際の IRC データの保存およびロード
 |    javascript/                    | JavaScript プラグイン
 |       whoreirc-js.cpp              | JavaScript の主要関数 (スクリプトのロード/アンロード、JavaScript コードの実行)
 |       whoreirc-js-api.cpp          | JavaScript スクリプト作成 API 関数
@@ -329,7 +329,7 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |       relay-network.c             | relay 用のネットワーク関数
 |       relay-raw.c                 | relay 生バッファ
 |       relay-server.c              | relay サーバ
-|       relay-upgrade.c             | WeeChat をアップグレードする際にデータを保存/回復
+|       relay-upgrade.c             | WhoreIRC をアップグレードする際にデータを保存/回復
 |       relay-websocket.c           | リレー用の websocket サーバ関数 (RFC 6455)
 |       irc/                        | IRC プロキシ
 |          relay-irc.c              | IRC プロキシの主要関数
@@ -372,7 +372,7 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |       xfer-file.c                 | xfer のファイル関数
 |       xfer-info.c                 | xfer の情報/インフォリスト/hdata
 |       xfer-network.c              | xfer のネットワーク関数
-|       xfer-upgrade.c              | WeeChat をアップグレードする際の xfer データの保存および回復
+|       xfer-upgrade.c              | WhoreIRC をアップグレードする際の xfer データの保存および回復
 |===
 
 [[sources_tests]]
@@ -440,7 +440,7 @@ WeeChat "core" は以下のディレクトリに配置されています:
 |          plugin_api/                 | プラグイン API 用の自動生成ファイル (手作業による編集は *禁止*!)
 |===
 
-WeeChat とプラグインの翻訳は gettext で行います、ファイルは _po/_ ディレクトリに含まれています:
+WhoreIRC とプラグインの翻訳は gettext で行います、ファイルは _po/_ ディレクトリに含まれています:
 
 [width="100%",cols="1m,3",options="header"]
 |===
@@ -468,24 +468,24 @@ WeeChat とプラグインの翻訳は gettext で行います、ファイルは
 [source,C]
 ----
 /*
- * whoreirc.c - core functions for WeeChat
+ * whoreirc.c - core functions for WhoreIRC
  *
  * Copyright (C) 2019 Your Name <your@email.com>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 ----
 
@@ -800,16 +800,16 @@ gui_window_new (struct t_gui_window *parent_window, struct t_gui_buffer *buffer,
 [[single_thread]]
 === シングルスレッド
 
-WeeChat はシングルスレッドです。これはつまり、コードの全ての部分を非常に高速に実行する必要があり、`sleep`
+WhoreIRC はシングルスレッドです。これはつまり、コードの全ての部分を非常に高速に実行する必要があり、`sleep`
 などの関数を呼び出すことは *厳格に禁止* されているということです (この点は
-WeeChat コアだけでなく、C 言語プラグインとスクリプトでも同じことが言えます)。
+WhoreIRC コアだけでなく、C 言語プラグインとスクリプトでも同じことが言えます)。
 
 何らかの理由でしばらく sleep したい場合は、`hook_timer` をコールバックと併せて使ってください。
 
 [[doubly_linked_lists]]
 === 双方向連結リスト
 
-WeeChat のほとんどの連結リストは双方向連結リストです: 各ノードは
+WhoreIRC のほとんどの連結リストは双方向連結リストです: 各ノードは
 1 つ前と 1 つ後のノードへのポインタを持っています。
 
 例: バッファのリスト (_src/gui/gui-buffer.h_ より):
@@ -838,7 +838,7 @@ struct t_gui_buffer *last_gui_buffer = NULL;       /* last buffer           */
 [[color_codes_in_strings]]
 === 文字列中の色コード
 
-WeeChat は文字列中に独自の色コードを使うことで、属性
+WhoreIRC は文字列中に独自の色コードを使うことで、属性
 (太字、下線、...) と画面上の色を表現します。
 
 文字列にある文字を含め、その後に属性および色を指定します、これは:
@@ -876,19 +876,19 @@ WeeChat は文字列中に独自の色コードを使うことで、属性
 | コード                                     | 例                           | エリア      | 説明
 | [hex]#19# + STD                            | [hex]#19# `+01+`             | chat + bars | オプションを使って属性と色を指定、色コードは以下の表を参照
 | [hex]#19# + EXT                            | [hex]#19# `+@00001+`         | chat        | ncurses ペアを使って色を指定 (`/color` バッファのみ有効)
-| [hex]#19# + "F" + (A)STD                   | [hex]#19# `+F*05+`           | chat + bars | 文字色 (WeeChat 色) を設定
+| [hex]#19# + "F" + (A)STD                   | [hex]#19# `+F*05+`           | chat + bars | 文字色 (WhoreIRC 色) を設定
 | [hex]#19# + "F" + (A)EXT                   | [hex]#19# `+F@00214+`        | chat + bars | 文字色 (拡張色) を設定
-| [hex]#19# + "B" + STD                      | [hex]#19# `+B05+`            | chat + bars | 背景色 (WeeChat 色) を設定
+| [hex]#19# + "B" + STD                      | [hex]#19# `+B05+`            | chat + bars | 背景色 (WhoreIRC 色) を設定
 | [hex]#19# + "B" + EXT                      | [hex]#19# `+B@00124+`        | chat + bars | 背景色 (拡張色) を設定
-| [hex]#19# + "*" + (A)STD                   | [hex]#19# `+*05+`            | chat + bars | 文字色(WeeChat 色) を設定
+| [hex]#19# + "*" + (A)STD                   | [hex]#19# `+*05+`            | chat + bars | 文字色(WhoreIRC 色) を設定
 | [hex]#19# + "*" + (A)EXT                   | [hex]#19# `+*@00214+`        | chat + bars | 文字色 (拡張色) を設定
-| [hex]#19# + "*" + (A)STD + "," + STD ^(1)^ | [hex]#19# `+*08,05+`         | chat + bars | 文字色および背景色 (WeeChat 色) を設定
-| [hex]#19# + "*" + (A)STD + "," + EXT ^(1)^ | [hex]#19# `+*01,@00214+`     | chat + bars | 文字色 (WeeChat 色) と背景色 (拡張色) を設定
-| [hex]#19# + "*" + (A)EXT + "," + STD ^(1)^ | [hex]#19# `+*@00214,05+`     | chat + bars | 文字色 (拡張色) と背景色 (WeeChat 色) を設定
+| [hex]#19# + "*" + (A)STD + "," + STD ^(1)^ | [hex]#19# `+*08,05+`         | chat + bars | 文字色および背景色 (WhoreIRC 色) を設定
+| [hex]#19# + "*" + (A)STD + "," + EXT ^(1)^ | [hex]#19# `+*01,@00214+`     | chat + bars | 文字色 (WhoreIRC 色) と背景色 (拡張色) を設定
+| [hex]#19# + "*" + (A)EXT + "," + STD ^(1)^ | [hex]#19# `+*@00214,05+`     | chat + bars | 文字色 (拡張色) と背景色 (WhoreIRC 色) を設定
 | [hex]#19# + "*" + (A)EXT + "," + EXT ^(1)^ | [hex]#19# `+*@00214,@00017+` | chat + bars | 文字色および背景色 (拡張色) を設定
-| [hex]#19# + "*" + (A)STD + "~" + STD       | [hex]#19# `+*08~05+`         | chat + bars | 文字色および背景色 (WeeChat 色) を設定
-| [hex]#19# + "*" + (A)STD + "~" + EXT       | [hex]#19# `+*01~@00214+`     | chat + bars | 文字色 (WeeChat 色) と背景色 (拡張色) を設定
-| [hex]#19# + "*" + (A)EXT + "~" + STD       | [hex]#19# `+*@00214~05+`     | chat + bars | 文字色 (拡張色) と背景色 (WeeChat 色) を設定
+| [hex]#19# + "*" + (A)STD + "~" + STD       | [hex]#19# `+*08~05+`         | chat + bars | 文字色および背景色 (WhoreIRC 色) を設定
+| [hex]#19# + "*" + (A)STD + "~" + EXT       | [hex]#19# `+*01~@00214+`     | chat + bars | 文字色 (WhoreIRC 色) と背景色 (拡張色) を設定
+| [hex]#19# + "*" + (A)EXT + "~" + STD       | [hex]#19# `+*@00214~05+`     | chat + bars | 文字色 (拡張色) と背景色 (WhoreIRC 色) を設定
 | [hex]#19# + "*" + (A)EXT + "~" + EXT       | [hex]#19# `+*@00214~@00017+` | chat + bars | 文字色および背景色 (拡張色) を設定
 | [hex]#19# + "b" + "F"                      | [hex]#19# `+bF+`             | bars        | バーの文字色を設定
 | [hex]#19# + "b" + "D"                      | [hex]#19# `+bD+`             | bars        | バーの区切り文字色を設定
@@ -898,7 +898,7 @@ WeeChat は文字列中に独自の色コードを使うことで、属性
 | [hex]#19# + "b" + "#"                      | [hex]#19# `+b#+`             | input bar   | カーソル文字を移動 ("input_text" 要素のみで利用可)
 | [hex]#19# + "b" + "i"                      | [hex]#19# `+bi+`             | bars        | 要素を開始
 | [hex]#19# + "b" + "l" (小文字の L)         | [hex]#19# `+bl+`             | bars        | 行要素を開始
-| [hex]#19# + "E"                            | [hex]#19# `+E+`              | chat + bars | テキストを強調 _(WeeChat バージョン 0.4.2 以上で利用可)_
+| [hex]#19# + "E"                            | [hex]#19# `+E+`              | chat + bars | テキストを強調 _(WhoreIRC バージョン 0.4.2 以上で利用可)_
 | [hex]#19# + [hex]#1C#                      | [hex]#19# [hex]#1C#          | chat + bars | 色をリセット (属性は保存)
 | [hex]#1A# + ATTR                           | [hex]#1A# `+*+`              | chat + bars | 属性を設定
 | [hex]#1B# + ATTR                           | [hex]#1B# `+*+`              | chat + bars | 属性を削除
@@ -907,11 +907,11 @@ WeeChat は文字列中に独自の色コードを使うことで、属性
 
 // TRANSLATION MISSING
 [NOTE]
-^(1)^ The use of comma as separator was used until WeeChat 2.5. +
-With WeeChat ≥ 2.6, a tilde is used to separate foreground from background
-color. If you are developing a WeeChat relay client and want to be compatible
-with all WeeChat versions, you should support both separators (for example if a
-user with WeeChat ≤ 2.5 runs `/upgrade` to a version ≥ 2.6, both separators
+^(1)^ The use of comma as separator was used until WhoreIRC 2.5. +
+With WhoreIRC ≥ 2.6, a tilde is used to separate foreground from background
+color. If you are developing a WhoreIRC relay client and want to be compatible
+with all WhoreIRC versions, you should support both separators (for example if a
+user with WhoreIRC ≤ 2.5 runs `/upgrade` to a version ≥ 2.6, both separators
 could be used at same time in buffers).
 
 オプションを使う色コード
@@ -937,16 +937,16 @@ could be used at same time in buffers).
 | 14   | whoreirc.color.chat_nick
 | 15   | whoreirc.color.chat_nick_self
 | 16   | whoreirc.color.chat_nick_other
-| 17   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 18   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 19   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 20   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 21   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 22   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 23   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 24   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 25   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
-| 26   | _(WeeChat バージョン 0.3.4 以上で利用不可)_
+| 17   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 18   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 19   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 20   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 21   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 22   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 23   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 24   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 25   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
+| 26   | _(WhoreIRC バージョン 0.3.4 以上で利用不可)_
 | 27   | whoreirc.color.chat_host
 | 28   | whoreirc.color.chat_delimiters
 | 29   | whoreirc.color.chat_highlight
@@ -954,20 +954,20 @@ could be used at same time in buffers).
 | 31   | whoreirc.color.chat_text_found
 | 32   | whoreirc.color.chat_value
 | 33   | whoreirc.color.chat_prefix_buffer
-| 34   | whoreirc.color.chat_tags _(WeeChat バージョン 0.3.6 以上で利用可)_
-| 35   | whoreirc.color.chat_inactive_window _(WeeChat バージョン 0.3.6 以上で利用可)_
-| 36   | whoreirc.color.chat_inactive_buffer _(WeeChat バージョン 0.3.6 以上で利用可)_
-| 37   | whoreirc.color.chat_prefix_buffer_inactive_buffer _(WeeChat バージョン 0.3.6 以上で利用可)_
-| 38   | whoreirc.color.chat_nick_offline _(WeeChat バージョン 0.3.9 以上で利用可)_
-| 39   | whoreirc.color.chat_nick_offline_highlight _(WeeChat バージョン 0.3.9 以上で利用可)_
-| 40   | whoreirc.color.chat_nick_prefix _(WeeChat バージョン 0.4.1 以上で利用可)_
-| 41   | whoreirc.color.chat_nick_suffix _(WeeChat バージョン 0.4.1 以上で利用可)_
-| 42   | whoreirc.color.emphasized _(WeeChat バージョン 0.4.2 以上で利用可)_
-| 43   | whoreirc.color.chat_day_change _(WeeChat バージョン 0.4.2 以上で利用可)_
-| 44   | whoreirc.color.chat_value_null _(WeeChat バージョン 1.4 以上で利用可)_
+| 34   | whoreirc.color.chat_tags _(WhoreIRC バージョン 0.3.6 以上で利用可)_
+| 35   | whoreirc.color.chat_inactive_window _(WhoreIRC バージョン 0.3.6 以上で利用可)_
+| 36   | whoreirc.color.chat_inactive_buffer _(WhoreIRC バージョン 0.3.6 以上で利用可)_
+| 37   | whoreirc.color.chat_prefix_buffer_inactive_buffer _(WhoreIRC バージョン 0.3.6 以上で利用可)_
+| 38   | whoreirc.color.chat_nick_offline _(WhoreIRC バージョン 0.3.9 以上で利用可)_
+| 39   | whoreirc.color.chat_nick_offline_highlight _(WhoreIRC バージョン 0.3.9 以上で利用可)_
+| 40   | whoreirc.color.chat_nick_prefix _(WhoreIRC バージョン 0.4.1 以上で利用可)_
+| 41   | whoreirc.color.chat_nick_suffix _(WhoreIRC バージョン 0.4.1 以上で利用可)_
+| 42   | whoreirc.color.emphasized _(WhoreIRC バージョン 0.4.2 以上で利用可)_
+| 43   | whoreirc.color.chat_day_change _(WhoreIRC バージョン 0.4.2 以上で利用可)_
+| 44   | whoreirc.color.chat_value_null _(WhoreIRC バージョン 1.4 以上で利用可)_
 |===
 
-WeeChat 色は:
+WhoreIRC 色は:
 
 [width="70%",cols="^1m,10",options="header"]
 |===
@@ -1053,7 +1053,7 @@ server->hook_timer_sasl = whoreirc_hook_timer (timeout * 1000,
 ----
 
 [[contribute]]
-== WeeChat への貢献
+== WhoreIRC への貢献
 
 [[git_repository]]
 === Git リポジトリ
@@ -1078,7 +1078,7 @@ component: fix a problem (bug #12345)
 
 _component_ には以下から 1 つ選んで記入してください:
 
-* WeeChat コア: _core_ (ルートディレクトリ、_po/_ ディレクトリ、_src/_
+* WhoreIRC コア: _core_ (ルートディレクトリ、_po/_ ディレクトリ、_src/_
   ディレクトリに含まれるファイル、ただし _src/plugins/_ 内のファイルを除く)
 * 文書ファイル: _doc_ (_doc/_ ディレクトリに含まれるファイル)
 * プラグインの名前: _irc_、_python_、_relay_、... (_src/plugins/_ ディレクトリに含まれるファイル)
@@ -1118,7 +1118,7 @@ $ cd po
 $ msginit -i whoreirc.pot -l nl_NL -o nl.po
 ----
 
-WeeChat
+WhoreIRC
 の翻訳元言語は英語です、翻訳する場合は必ず英語から翻訳してください
 
 ソースに変更があった際は、以下のコマンドを Cmake の "build"
@@ -1137,7 +1137,7 @@ $ make translations && make update-po
 $ msgcheck.py xx.po
 ----
 
-新しい翻訳を使うには WeeChat を再コンパイルしてください。
+新しい翻訳を使うには WhoreIRC を再コンパイルしてください。
 
 [[build_autogen_files]]
 ===== 自動生成ファイルを作成する
@@ -1145,7 +1145,7 @@ $ msgcheck.py xx.po
 _doc/XX/autogen/_ ディレクトリに含まれるファイルは _doc/docgen.py_ スクリプトが自動生成するファイルです。
 
 この python スクリプトを自分の python ディレクトリ (例えば _~/.whoreirc/python_)
-にコピーしてください。WeeChat からこのスクリプトをロードして、_/doc_ ディレクトリへのパスを設定してください:
+にコピーしてください。WhoreIRC からこのスクリプトをロードして、_/doc_ ディレクトリへのパスを設定してください:
 
 ----
 /python load docgen.py

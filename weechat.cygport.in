@@ -1,20 +1,20 @@
 #
 # Copyright (C) 2013-2019 Sébastien Helleu <flashcode@flashtux.org>
 #
-# This file is part of WeeChat, the extensible chat client.
+# This file is part of WhoreIRC, the extensible chat client.
 #
-# WeeChat is free software; you can redistribute it and/or modify
+# WhoreIRC is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# WeeChat is distributed in the hope that it will be useful,
+# WhoreIRC is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+# along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
 #
 
 #
@@ -30,7 +30,7 @@
 #      $ gem install -n /usr/local/bin asciidoctor
 #
 #   2. execute these commands inside your build directory, after running cmake
-#      or configure script (replace X.Y by WeeChat version):
+#      or configure script (replace X.Y by WhoreIRC version):
 #
 #      $ cygport whoreirc-X.Y-1.cygport fetch
 #      $ cygport whoreirc-X.Y-1.cygport almostall
@@ -56,7 +56,7 @@ libcurl-devel libgcrypt-devel libncurses-devel lua perl pkg-config \
 python2-devel ruby tcl-devel libguile2.0-devel php-devel zlib-devel"
 
 #
-# CMake compilation of WeeChat:
+# CMake compilation of WhoreIRC:
 #   1. set prefix to /usr
 #   2. enable build of man pages and documentation
 #   3. disable javascript plugin because libv8 is not available in Cygwin
@@ -88,7 +88,7 @@ PKG_HINTS="setup python perl ruby lua tcl guile php devel doc"
 # translations, icon, man pages
 #
 whoreirc_SUMMARY="Fast, light and extensible chat client"
-whoreirc_DESCRIPTION="WeeChat (Wee Enhanced Environment for Chat) is a fast, \
+whoreirc_DESCRIPTION="WhoreIRC (Wee Enhanced Environment for Chat) is a fast, \
 light and extensible chat client. Everything can be done with a keyboard, \
 it is customizable and extensible with plugins/scripts."
 whoreirc_CONTENTS="
@@ -120,56 +120,56 @@ whoreirc_CONTENTS="
 #
 # Package "whoreirc-python": python scripting plugin
 #
-whoreirc_python_SUMMARY="Python scripting plugin for WeeChat"
-whoreirc_python_DESCRIPTION="Python scripting plugin for WeeChat"
+whoreirc_python_SUMMARY="Python scripting plugin for WhoreIRC"
+whoreirc_python_DESCRIPTION="Python scripting plugin for WhoreIRC"
 whoreirc_python_CONTENTS="usr/lib/whoreirc/plugins/python.dll"
 whoreirc_python_REQUIRES="whoreirc"
 
 #
 # Package "whoreirc-perl": perl scripting plugin
 #
-whoreirc_perl_SUMMARY="Perl scripting plugin for WeeChat"
-whoreirc_perl_DESCRIPTION="Perl scripting plugin for WeeChat"
+whoreirc_perl_SUMMARY="Perl scripting plugin for WhoreIRC"
+whoreirc_perl_DESCRIPTION="Perl scripting plugin for WhoreIRC"
 whoreirc_perl_CONTENTS="usr/lib/whoreirc/plugins/perl.dll"
 whoreirc_perl_REQUIRES="whoreirc"
 
 #
 # Package "whoreirc-ruby": ruby scripting plugin
 #
-whoreirc_ruby_SUMMARY="Ruby scripting plugin for WeeChat"
-whoreirc_ruby_DESCRIPTION="Ruby scripting plugin for WeeChat"
+whoreirc_ruby_SUMMARY="Ruby scripting plugin for WhoreIRC"
+whoreirc_ruby_DESCRIPTION="Ruby scripting plugin for WhoreIRC"
 whoreirc_ruby_CONTENTS="usr/lib/whoreirc/plugins/ruby.dll"
 whoreirc_ruby_REQUIRES="whoreirc"
 
 #
 # Package "whoreirc-lua": lua scripting plugin
 #
-whoreirc_lua_SUMMARY="Lua scripting plugin for WeeChat"
-whoreirc_lua_DESCRIPTION="Lua scripting plugin for WeeChat"
+whoreirc_lua_SUMMARY="Lua scripting plugin for WhoreIRC"
+whoreirc_lua_DESCRIPTION="Lua scripting plugin for WhoreIRC"
 whoreirc_lua_CONTENTS="usr/lib/whoreirc/plugins/lua.dll"
 whoreirc_lua_REQUIRES="whoreirc"
 
 #
 # Package "whoreirc-tcl": tcl scripting plugin
 #
-whoreirc_tcl_SUMMARY="Tcl scripting plugin for WeeChat"
-whoreirc_tcl_DESCRIPTION="Tcl scripting plugin for WeeChat"
+whoreirc_tcl_SUMMARY="Tcl scripting plugin for WhoreIRC"
+whoreirc_tcl_DESCRIPTION="Tcl scripting plugin for WhoreIRC"
 whoreirc_tcl_CONTENTS="usr/lib/whoreirc/plugins/tcl.dll"
 whoreirc_tcl_REQUIRES="whoreirc"
 
 #
 # Package "whoreirc-guile": guile scripting plugin
 #
-whoreirc_guile_SUMMARY="Guile scripting plugin for WeeChat"
-whoreirc_guile_DESCRIPTION="Guile scripting plugin for WeeChat"
+whoreirc_guile_SUMMARY="Guile scripting plugin for WhoreIRC"
+whoreirc_guile_DESCRIPTION="Guile scripting plugin for WhoreIRC"
 whoreirc_guile_CONTENTS="usr/lib/whoreirc/plugins/guile.dll"
 whoreirc_guile_REQUIRES="whoreirc"
 
 #
 # Package "whoreirc-php": php scripting plugin
 #
-whoreirc_php_SUMMARY="PHP scripting plugin for WeeChat"
-whoreirc_php_DESCRIPTION="PHP scripting plugin for WeeChat"
+whoreirc_php_SUMMARY="PHP scripting plugin for WhoreIRC"
+whoreirc_php_DESCRIPTION="PHP scripting plugin for WhoreIRC"
 whoreirc_php_CONTENTS="usr/lib/whoreirc/plugins/php.dll"
 whoreirc_php_REQUIRES="whoreirc"
 
@@ -177,12 +177,12 @@ whoreirc_php_REQUIRES="whoreirc"
 # Package "whoreirc-devel": header to build plugins
 #
 whoreirc_devel_CATEGORY="Net Devel"
-whoreirc_devel_SUMMARY="Development files to build WeeChat plugins"
+whoreirc_devel_SUMMARY="Development files to build WhoreIRC plugins"
 whoreirc_devel_CONTENTS="usr/include/ usr/lib/pkgconfig/"
 
 #
 # Package "whoreirc-doc": documentation
 #
 whoreirc_doc_CATEGORY="Net Doc"
-whoreirc_doc_SUMMARY="Documentation for WeeChat"
+whoreirc_doc_SUMMARY="Documentation for WhoreIRC"
 whoreirc_doc_CONTENTS="usr/share/doc/whoreirc/*.html"

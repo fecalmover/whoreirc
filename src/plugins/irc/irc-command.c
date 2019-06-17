@@ -4,20 +4,20 @@
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  * Copyright (C) 2006 Emmanuel Bouthenot <kolter@openics.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -122,8 +122,8 @@ irc_command_mode_nicks (struct t_irc_server *server,
     nicks[0] = '\0';
 
     nicks_sent = weechat_hashtable_new (128,
-                                        WEECHAT_HASHTABLE_STRING,
-                                        WEECHAT_HASHTABLE_STRING,
+                                        WHOREIRC_HASHTABLE_STRING,
+                                        WHOREIRC_HASHTABLE_STRING,
                                         NULL, NULL);
     if (!nicks_sent)
         return;
@@ -378,7 +378,7 @@ IRC_COMMAND_CALLBACK(admin)
                           "ADMIN");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -420,9 +420,9 @@ irc_command_exec_all_channels (struct t_irc_server *server,
 
     channels = (str_channels && str_channels[0]) ?
         weechat_string_split (str_channels, ",", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, &num_channels) : NULL;
 
     /* build a list of buffer names where the command will be executed */
@@ -464,7 +464,7 @@ irc_command_exec_all_channels (struct t_irc_server *server,
                                               weechat_buffer_get_string (
                                                   ptr_channel->buffer,
                                                   "full_name"),
-                                              WEECHAT_LIST_POS_END,
+                                              WHOREIRC_LIST_POS_END,
                                               NULL);
                         }
                     }
@@ -523,7 +523,7 @@ IRC_COMMAND_CALLBACK(allchan)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     current_server = 0;
     ptr_channels = NULL;
@@ -541,7 +541,7 @@ IRC_COMMAND_CALLBACK(allchan)
                                   "irc buffer (server, channel or private)"),
                                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                                 "allchan", "-current");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             current_server = 1;
             ptr_command = argv_eol[i + 1];
@@ -573,7 +573,7 @@ IRC_COMMAND_CALLBACK(allchan)
         weechat_buffer_set (NULL, "hotlist", "+");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -592,7 +592,7 @@ IRC_COMMAND_CALLBACK(allpv)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     current_server = 0;
     ptr_channels = NULL;
@@ -610,7 +610,7 @@ IRC_COMMAND_CALLBACK(allpv)
                                   "irc buffer (server, channel or private)"),
                                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                                 "allpv", "-current");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             current_server = 1;
             ptr_command = argv_eol[i + 1];
@@ -642,7 +642,7 @@ IRC_COMMAND_CALLBACK(allpv)
         weechat_buffer_set (NULL, "hotlist", "+");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -679,9 +679,9 @@ irc_command_exec_all_servers (int inclusive, const char *str_servers, const char
 
     servers = (str_servers && str_servers[0]) ?
         weechat_string_split (str_servers, ",", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, &num_servers) : NULL;
 
     /* build a list of buffer names where the command will be executed */
@@ -714,7 +714,7 @@ irc_command_exec_all_servers (int inclusive, const char *str_servers, const char
                                   weechat_buffer_get_string (
                                       ptr_server->buffer,
                                       "full_name"),
-                                  WEECHAT_LIST_POS_END,
+                                  WHOREIRC_LIST_POS_END,
                                   NULL);
             }
         }
@@ -767,7 +767,7 @@ IRC_COMMAND_CALLBACK(allserv)
     (void) data;
     (void) buffer;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     ptr_servers = NULL;
     inclusive = 0;
@@ -797,7 +797,7 @@ IRC_COMMAND_CALLBACK(allserv)
         weechat_buffer_set (NULL, "hotlist", "+");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1093,7 +1093,7 @@ IRC_COMMAND_CALLBACK(away)
         weechat_buffer_set (NULL, "hotlist", "+");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1109,15 +1109,15 @@ irc_command_run_away (const void *pointer, void *data,
     char **argv, **argv_eol;
 
     argv = weechat_string_split (command, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     argv_eol = weechat_string_split (command, " ", NULL,
-                                     WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                     | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                     | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS
-                                     | WEECHAT_STRING_SPLIT_KEEP_EOL,
+                                     WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                     | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                     | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS
+                                     | WHOREIRC_STRING_SPLIT_KEEP_EOL,
                                      0, NULL);
 
     if (argv && argv_eol)
@@ -1130,7 +1130,7 @@ irc_command_run_away (const void *pointer, void *data,
     if (argv_eol)
         weechat_string_free_split (argv_eol);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1214,7 +1214,7 @@ IRC_COMMAND_CALLBACK(ban)
                     _("%s%s: \"%s\" command can only be executed in a channel "
                       "buffer"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, "ban");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
@@ -1240,13 +1240,13 @@ IRC_COMMAND_CALLBACK(ban)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "ban");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                           "MODE %s +b", ptr_channel->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1273,7 +1273,7 @@ IRC_COMMAND_CALLBACK(cap)
     {
         cap_cmd = strdup (argv[1]);
         if (!cap_cmd)
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
 
         weechat_string_toupper (cap_cmd);
 
@@ -1305,7 +1305,7 @@ IRC_COMMAND_CALLBACK(cap)
                           "CAP LIST");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1409,7 +1409,7 @@ IRC_COMMAND_CALLBACK(connect)
                 }
             }
         }
-        return (connect_ok) ? WEECHAT_RC_OK : WEECHAT_RC_ERROR;
+        return (connect_ok) ? WHOREIRC_RC_OK : WHOREIRC_RC_ERROR;
     }
     else if (all_servers)
     {
@@ -1425,7 +1425,7 @@ IRC_COMMAND_CALLBACK(connect)
                 }
             }
         }
-        return (connect_ok) ? WEECHAT_RC_OK : WEECHAT_RC_ERROR;
+        return (connect_ok) ? WHOREIRC_RC_OK : WHOREIRC_RC_ERROR;
     }
     else if (autoconnect)
     {
@@ -1442,7 +1442,7 @@ IRC_COMMAND_CALLBACK(connect)
                 }
             }
         }
-        return (connect_ok) ? WEECHAT_RC_OK : WEECHAT_RC_ERROR;
+        return (connect_ok) ? WHOREIRC_RC_OK : WHOREIRC_RC_ERROR;
     }
     else
     {
@@ -1549,7 +1549,7 @@ IRC_COMMAND_CALLBACK(connect)
         }
     }
 
-    return (connect_ok) ? WEECHAT_RC_OK : WEECHAT_RC_ERROR;
+    return (connect_ok) ? WHOREIRC_RC_OK : WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -1569,7 +1569,7 @@ IRC_COMMAND_CALLBACK(ctcp)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     arg_target = 1;
     arg_type = 2;
@@ -1587,18 +1587,18 @@ IRC_COMMAND_CALLBACK(ctcp)
     IRC_COMMAND_CHECK_SERVER("ctcp", 1);
 
     targets = weechat_string_split (argv[arg_target], ",", NULL,
-                                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                     0, &num_targets);
     if (!targets)
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
 
     ctcp_type = strdup (argv[arg_type]);
     if (!ctcp_type)
     {
         weechat_string_free_split (targets);
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
     }
 
     weechat_string_toupper (ctcp_type);
@@ -1668,7 +1668,7 @@ IRC_COMMAND_CALLBACK(ctcp)
     free (ctcp_type);
     weechat_string_free_split (targets);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1697,9 +1697,9 @@ IRC_COMMAND_CALLBACK(cycle)
             channel_name = argv[1];
             pos_args = argv_eol[2];
             channels = weechat_string_split (channel_name, ",", NULL,
-                                             WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                             | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                             | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                             WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                             | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                             | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                              0, &num_channels);
             if (channels)
             {
@@ -1723,12 +1723,12 @@ IRC_COMMAND_CALLBACK(cycle)
                     _("%s%s: \"%s\" command can not be executed on a server "
                       "buffer"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, "cycle");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
 
             /* does nothing on private buffer (cycle has no sense!) */
             if (ptr_channel->type != IRC_CHANNEL_TYPE_CHANNEL)
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
 
             channel_name = ptr_channel->name;
             pos_args = argv_eol[1];
@@ -1744,12 +1744,12 @@ IRC_COMMAND_CALLBACK(cycle)
                 _("%s%s: \"%s\" command can not be executed on a server "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "part");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* does nothing on private buffer (cycle has no sense!) */
         if (ptr_channel->type != IRC_CHANNEL_TYPE_CHANNEL)
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
 
         channel_name = ptr_channel->name;
         pos_args = NULL;
@@ -1775,7 +1775,7 @@ IRC_COMMAND_CALLBACK(cycle)
     if (msg)
         free (msg);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1798,7 +1798,7 @@ IRC_COMMAND_CALLBACK(dcc)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     /* use the local interface, from the server socket */
     memset (&addr, 0, sizeof (addr));
@@ -1813,13 +1813,13 @@ IRC_COMMAND_CALLBACK(dcc)
             _("%s%s: unable to resolve local address of server socket: error "
               "%d %s"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, rc, gai_strerror (rc));
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* DCC SEND file */
     if (weechat_strcasecmp (argv[1], "send") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "send");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "send");
         infolist = weechat_infolist_new ();
         if (infolist)
         {
@@ -1836,18 +1836,18 @@ IRC_COMMAND_CALLBACK(dcc)
                 weechat_infolist_new_var_string (item, "local_address", str_address);
                 weechat_infolist_new_var_integer (item, "socket", ptr_server->sock);
                 (void) weechat_hook_signal_send ("xfer_add",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  infolist);
             }
             weechat_infolist_free (infolist);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* DCC CHAT */
     if (weechat_strcasecmp (argv[1], "chat") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "chat");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "chat");
         infolist = weechat_infolist_new ();
         if (infolist)
         {
@@ -1864,15 +1864,15 @@ IRC_COMMAND_CALLBACK(dcc)
                 weechat_infolist_new_var_string (item, "charset_modifier", charset_modifier);
                 weechat_infolist_new_var_string (item, "local_address", str_address);
                 (void) weechat_hook_signal_send ("xfer_add",
-                                                 WEECHAT_HOOK_SIGNAL_POINTER,
+                                                 WHOREIRC_HOOK_SIGNAL_POINTER,
                                                  infolist);
             }
             weechat_infolist_free (infolist);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*
@@ -1896,7 +1896,7 @@ IRC_COMMAND_CALLBACK(dehalfop)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "dehalfop");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc < 2)
@@ -1912,7 +1912,7 @@ IRC_COMMAND_CALLBACK(dehalfop)
                                 "dehalfop", "-", "h", argc, argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1935,7 +1935,7 @@ IRC_COMMAND_CALLBACK(deop)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "deop");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc < 2)
@@ -1951,7 +1951,7 @@ IRC_COMMAND_CALLBACK(deop)
                                 "deop", "-", "o", argc, argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1974,7 +1974,7 @@ IRC_COMMAND_CALLBACK(devoice)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "devoice");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc < 2)
@@ -1990,7 +1990,7 @@ IRC_COMMAND_CALLBACK(devoice)
                                 "devoice", "-", "v", argc, argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2018,7 +2018,7 @@ IRC_COMMAND_CALLBACK(die)
                           "DIE");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2164,7 +2164,7 @@ IRC_COMMAND_CALLBACK(disconnect)
         }
     }
 
-    return (disconnect_ok) ? WEECHAT_RC_OK : WEECHAT_RC_ERROR;
+    return (disconnect_ok) ? WHOREIRC_RC_OK : WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -2188,7 +2188,7 @@ IRC_COMMAND_CALLBACK(halfop)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "halfop");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc < 2)
@@ -2204,7 +2204,7 @@ IRC_COMMAND_CALLBACK(halfop)
                                 "halfop", "+", "h", argc, argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2267,13 +2267,13 @@ IRC_COMMAND_CALLBACK(ignore)
         }
         else
             weechat_printf (NULL, _("%s: no ignore in list"), IRC_PLUGIN_NAME);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add ignore */
     if (weechat_strcasecmp (argv[1], "add") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "add");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "add");
 
         mask = argv[2];
         server = (argc > 3) ? argv[3] : NULL;
@@ -2311,7 +2311,7 @@ IRC_COMMAND_CALLBACK(ignore)
             weechat_printf (NULL,
                             _("%s%s: ignore already exists"),
                             weechat_prefix ("error"), IRC_PLUGIN_NAME);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         ptr_ignore = irc_ignore_new (ptr_regex, server, channel);
@@ -2333,13 +2333,13 @@ IRC_COMMAND_CALLBACK(ignore)
                             weechat_prefix ("error"), IRC_PLUGIN_NAME);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete ignore */
     if (weechat_strcasecmp (argv[1], "del") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "del");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "del");
 
         if (weechat_strcasecmp (argv[2], "-all") == 0)
         {
@@ -2377,7 +2377,7 @@ IRC_COMMAND_CALLBACK(ignore)
                     weechat_printf (NULL,
                                     _("%s%s: ignore not found"),
                                     weechat_prefix ("error"), IRC_PLUGIN_NAME);
-                    return WEECHAT_RC_OK;
+                    return WHOREIRC_RC_OK;
                 }
             }
             else
@@ -2385,14 +2385,14 @@ IRC_COMMAND_CALLBACK(ignore)
                 weechat_printf (NULL,
                                 _("%s%s: wrong ignore number"),
                                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*
@@ -2420,7 +2420,7 @@ IRC_COMMAND_CALLBACK(info)
                           "INFO");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2440,7 +2440,7 @@ IRC_COMMAND_CALLBACK(invite)
     (void) data;
     (void) argv_eol;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (argc > 2)
     {
@@ -2477,14 +2477,14 @@ IRC_COMMAND_CALLBACK(invite)
             goto error;
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 
 error:
     weechat_printf (
         ptr_server->buffer,
         _("%s%s: \"%s\" command can only be executed in a channel buffer"),
         weechat_prefix ("error"), IRC_PLUGIN_NAME, "invite");
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2501,12 +2501,12 @@ IRC_COMMAND_CALLBACK(ison)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "ISON :%s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2549,9 +2549,9 @@ irc_command_join_server (struct t_irc_server *server, const char *arguments,
         }
         if (pos_keys[0])
             keys = weechat_string_split (pos_keys, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &num_keys);
     }
     else
@@ -2560,9 +2560,9 @@ irc_command_join_server (struct t_irc_server *server, const char *arguments,
     if (new_args)
     {
         channels = weechat_string_split (new_args, ",", NULL,
-                                         WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                         | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                         | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                         WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                         | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                         | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                          0, &num_channels);
         free (new_args);
     }
@@ -2681,10 +2681,10 @@ IRC_COMMAND_CALLBACK(join)
         if (weechat_strcasecmp (argv[i], "-server") == 0)
         {
             if (argc <= i + 1)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             ptr_server = irc_server_search (argv[i + 1]);
             if (!ptr_server)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             arg_channels = i + 2;
             i++;
         }
@@ -2741,11 +2741,11 @@ IRC_COMMAND_CALLBACK(join)
                                          1, noswitch);
             }
             else
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2797,11 +2797,11 @@ IRC_COMMAND_CALLBACK(kick)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (irc_channel_is_channel (ptr_server, argv[1]))
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "");
         pos_channel = argv[1];
         pos_nick = argv[2];
         pos_comment = argv_eol[3];
@@ -2815,7 +2815,7 @@ IRC_COMMAND_CALLBACK(kick)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "kick");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         pos_channel = ptr_channel->name;
         pos_nick = argv[1];
@@ -2825,7 +2825,7 @@ IRC_COMMAND_CALLBACK(kick)
     irc_command_kick_channel (ptr_server, pos_channel, pos_nick,
                               pos_comment);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2845,11 +2845,11 @@ IRC_COMMAND_CALLBACK(kickban)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (irc_channel_is_channel (ptr_server, argv[1]))
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "");
         pos_channel = argv[1];
         pos_nick = argv[2];
         pos_comment = argv_eol[3];
@@ -2863,7 +2863,7 @@ IRC_COMMAND_CALLBACK(kickban)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "kickban");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         pos_channel = ptr_channel->name;
         pos_nick = argv[1];
@@ -2873,7 +2873,7 @@ IRC_COMMAND_CALLBACK(kickban)
     /* kick nick from channel */
     nick_only = strdup (pos_nick);
     if (!nick_only)
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
 
     pos = strchr (nick_only, '@');
     if (pos)
@@ -2889,7 +2889,7 @@ IRC_COMMAND_CALLBACK(kickban)
             _("%s%s: mask must begin with nick"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME);
         free (nick_only);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* set ban for nick(+host) on channel */
@@ -2920,7 +2920,7 @@ IRC_COMMAND_CALLBACK(kickban)
 
     free (nick_only);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2936,7 +2936,7 @@ IRC_COMMAND_CALLBACK(kill)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (argc < 3)
     {
@@ -2949,7 +2949,7 @@ IRC_COMMAND_CALLBACK(kill)
                           "KILL %s :%s", argv[1], argv_eol[2]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -2978,7 +2978,7 @@ IRC_COMMAND_CALLBACK(links)
                           "LINKS");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3007,16 +3007,16 @@ IRC_COMMAND_CALLBACK(list)
         if (weechat_strcasecmp (argv[i], "-server") == 0)
         {
             if (argc <= i + 1)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             ptr_server = irc_server_search (argv[i + 1]);
             if (!ptr_server)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             i++;
         }
         else if (weechat_strcasecmp (argv[i], "-re") == 0)
         {
             if (argc <= i + 1)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             ptr_regex = argv_eol[i + 1];
             i++;
         }
@@ -3025,7 +3025,7 @@ IRC_COMMAND_CALLBACK(list)
         else if (!ptr_server_name)
             ptr_server_name = argv[i];
         else
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
     }
 
     IRC_COMMAND_CHECK_SERVER("list", 1);
@@ -3039,7 +3039,7 @@ IRC_COMMAND_CALLBACK(list)
                 ptr_server->buffer,
                 _("%s%s: not enough memory for regular expression"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         ret = weechat_string_regcomp (new_regexp,
                                       ptr_regex,
@@ -3054,7 +3054,7 @@ IRC_COMMAND_CALLBACK(list)
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 ptr_regex, buf);
             free (new_regexp);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (ptr_server->cmd_list_regexp)
         {
@@ -3077,7 +3077,7 @@ IRC_COMMAND_CALLBACK(list)
                       (ptr_server_name) ? " " : "",
                       (ptr_server_name) ? ptr_server_name : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3106,7 +3106,7 @@ IRC_COMMAND_CALLBACK(lusers)
                           "LUSERS");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3134,7 +3134,7 @@ IRC_COMMAND_CALLBACK(map)
                           "MAP");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3157,13 +3157,13 @@ IRC_COMMAND_CALLBACK(me)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can not be executed on a server buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "me");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     irc_command_me_channel (ptr_server, ptr_channel,
                             (argc > 1) ? argv_eol[1] : NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3220,7 +3220,7 @@ IRC_COMMAND_CALLBACK(mode)
                     _("%s%s: you must specify channel for \"%s\" command if "
                       "you're not in a channel"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, "mode");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             irc_command_mode_server (ptr_server, "MODE", ptr_channel,
                                      argv_eol[1],
@@ -3248,7 +3248,7 @@ IRC_COMMAND_CALLBACK(mode)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3276,7 +3276,7 @@ IRC_COMMAND_CALLBACK(motd)
                           "MOTD");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3296,7 +3296,7 @@ IRC_COMMAND_CALLBACK(msg)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     arg_target = 1;
     arg_text = 2;
@@ -3312,12 +3312,12 @@ IRC_COMMAND_CALLBACK(msg)
     IRC_COMMAND_CHECK_SERVER("msg", 1);
 
     targets = weechat_string_split (argv[arg_target], ",", NULL,
-                                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                     0, &num_targets);
     if (!targets)
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
 
     for (i = 0; i < num_targets; i++)
     {
@@ -3490,7 +3490,7 @@ IRC_COMMAND_CALLBACK(msg)
 
     weechat_string_free_split (targets);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3521,13 +3521,13 @@ IRC_COMMAND_CALLBACK(names)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "names");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                           "NAMES %s", ptr_channel->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3563,12 +3563,12 @@ IRC_COMMAND_CALLBACK(nick)
     (void) data;
     (void) argv_eol;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (argc > 2)
     {
         if (weechat_strcasecmp (argv[1], "-all") != 0)
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
         for (ptr_server = irc_servers; ptr_server;
              ptr_server = ptr_server->next_server)
         {
@@ -3578,7 +3578,7 @@ IRC_COMMAND_CALLBACK(nick)
     else
         irc_send_nick_server (ptr_server, argv[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3598,7 +3598,7 @@ IRC_COMMAND_CALLBACK(notice)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     arg_target = 1;
     arg_text = 2;
@@ -3664,7 +3664,7 @@ IRC_COMMAND_CALLBACK(notice)
         weechat_hashtable_free (hashtable);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3688,13 +3688,13 @@ IRC_COMMAND_CALLBACK(notify)
     if (argc == 1)
     {
         irc_notify_display_list (ptr_server);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* add notify */
     if (weechat_strcasecmp (argv[1], "add") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "add");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "add");
 
         check_away = 0;
 
@@ -3707,7 +3707,7 @@ IRC_COMMAND_CALLBACK(notify)
                     NULL,
                     _("%s%s: server \"%s\" not found"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, argv[3]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
@@ -3718,7 +3718,7 @@ IRC_COMMAND_CALLBACK(notify)
                 _("%s%s: server must be specified because you are not on an "
                   "irc server or channel"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (argc > 4)
@@ -3737,7 +3737,7 @@ IRC_COMMAND_CALLBACK(notify)
                 NULL,
                 _("%s%s: notify already exists"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if ((ptr_server->monitor > 0)
@@ -3747,7 +3747,7 @@ IRC_COMMAND_CALLBACK(notify)
                 ptr_server->buffer,
                 _("%sMonitor list is full (%d)"),
                 weechat_prefix ("error"), ptr_server->monitor);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         ptr_notify = irc_notify_new (ptr_server, argv[2], check_away);
@@ -3771,13 +3771,13 @@ IRC_COMMAND_CALLBACK(notify)
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* delete notify */
     if (weechat_strcasecmp (argv[1], "del") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "del");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "del");
 
         if (argc > 3)
         {
@@ -3788,7 +3788,7 @@ IRC_COMMAND_CALLBACK(notify)
                     NULL,
                     _("%s%s: server \"%s\" not found"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, argv[3]);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
@@ -3799,7 +3799,7 @@ IRC_COMMAND_CALLBACK(notify)
                 _("%s%s: server must be specified because you are not on an "
                   "irc server or channel"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (weechat_strcasecmp (argv[2], "-all") == 0)
@@ -3843,14 +3843,14 @@ IRC_COMMAND_CALLBACK(notify)
                     NULL,
                     _("%s%s: notification not found"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME);
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*
@@ -3873,7 +3873,7 @@ IRC_COMMAND_CALLBACK(op)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "op");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc < 2)
@@ -3889,7 +3889,7 @@ IRC_COMMAND_CALLBACK(op)
                                 "op", "+", "o", argc, argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3906,12 +3906,12 @@ IRC_COMMAND_CALLBACK(oper)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "OPER %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -3977,7 +3977,7 @@ IRC_COMMAND_CALLBACK(part)
                     _("%s%s: \"%s\" command can only be executed in a channel "
                       "or private buffer"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, "part");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             channel_name = ptr_channel->name;
             pos_args = argv_eol[1];
@@ -3992,7 +3992,7 @@ IRC_COMMAND_CALLBACK(part)
                 _("%s%s: \"%s\" command can only be executed in a channel or "
                   "private buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "part");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         channel_name = ptr_channel->name;
         pos_args = NULL;
@@ -4005,12 +4005,12 @@ IRC_COMMAND_CALLBACK(part)
         {
             weechat_buffer_close (ptr_channel->buffer);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     irc_command_part_channel (ptr_server, channel_name, pos_args);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4027,12 +4027,12 @@ IRC_COMMAND_CALLBACK(ping)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "PING %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4049,12 +4049,12 @@ IRC_COMMAND_CALLBACK(pong)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "PONG %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4072,7 +4072,7 @@ IRC_COMMAND_CALLBACK(query)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     noswitch = 0;
     arg_nick = 1;
@@ -4083,10 +4083,10 @@ IRC_COMMAND_CALLBACK(query)
         if (weechat_strcasecmp (argv[i], "-server") == 0)
         {
             if (argc <= i + 1)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             ptr_server = irc_server_search (argv[i + 1]);
             if (!ptr_server)
-                WEECHAT_COMMAND_ERROR;
+                WHOREIRC_COMMAND_ERROR;
             arg_nick = i + 2;
             arg_text = i + 3;
             i++;
@@ -4106,17 +4106,17 @@ IRC_COMMAND_CALLBACK(query)
     }
 
     if (arg_nick >= argc)
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
 
     IRC_COMMAND_CHECK_SERVER("query", 1);
 
     nicks = weechat_string_split (argv[arg_nick], ",", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &num_nicks);
     if (!nicks)
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
 
     for (i = 0; i < num_nicks; i++)
     {
@@ -4171,7 +4171,7 @@ IRC_COMMAND_CALLBACK(query)
 
     weechat_string_free_split (nicks);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4216,7 +4216,7 @@ IRC_COMMAND_CALLBACK(quiet)
                     _("%s%s: \"%s\" command can only be executed in a channel "
                       "buffer"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, "quiet");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
         }
 
@@ -4242,13 +4242,13 @@ IRC_COMMAND_CALLBACK(quiet)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "quiet");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                           "MODE %s +q", ptr_channel->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4263,25 +4263,25 @@ IRC_COMMAND_CALLBACK(quote)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if ((argc >= 4) && (weechat_strcasecmp (argv[1], "-server") == 0))
     {
         ptr_server = irc_server_search (argv[2]);
         if (!ptr_server || (ptr_server->sock < 0))
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
         irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                           "%s", argv_eol[3]);
     }
     else
     {
         if (!ptr_server || (ptr_server->sock < 0))
-            WEECHAT_COMMAND_ERROR;
+            WHOREIRC_COMMAND_ERROR;
         irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                           "%s", argv_eol[1]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4412,7 +4412,7 @@ IRC_COMMAND_CALLBACK(reconnect)
         }
     }
 
-    return (reconnect_ok) ? WEECHAT_RC_OK : WEECHAT_RC_ERROR;
+    return (reconnect_ok) ? WHOREIRC_RC_OK : WHOREIRC_RC_ERROR;
 }
 
 /*
@@ -4440,7 +4440,7 @@ IRC_COMMAND_CALLBACK(rehash)
                           "REHASH");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4460,14 +4460,14 @@ IRC_COMMAND_CALLBACK(remove)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     ptr_channel_name = (ptr_channel) ? ptr_channel->name : NULL;
     index_nick = 1;
 
     if (irc_channel_is_channel (ptr_server, argv[1]))
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "");
         ptr_channel_name = argv[1];
         index_nick = 2;
     }
@@ -4478,7 +4478,7 @@ IRC_COMMAND_CALLBACK(remove)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "remove");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc > index_nick + 1)
@@ -4502,7 +4502,7 @@ IRC_COMMAND_CALLBACK(remove)
                           argv[index_nick]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4530,7 +4530,7 @@ IRC_COMMAND_CALLBACK(restart)
                           "RESTART");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4546,12 +4546,12 @@ IRC_COMMAND_CALLBACK(sajoin)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "SAJOIN %s %s", argv[1], argv_eol[2]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4580,7 +4580,7 @@ IRC_COMMAND_CALLBACK(samode)
                     _("%s%s: you must specify channel for \"%s\" command if "
                       "you're not in a channel"),
                     weechat_prefix ("error"), IRC_PLUGIN_NAME, "samode");
-                return WEECHAT_RC_OK;
+                return WHOREIRC_RC_OK;
             }
             irc_command_mode_server (ptr_server, "SAMODE", ptr_channel,
                                      argv_eol[1],
@@ -4607,11 +4607,11 @@ IRC_COMMAND_CALLBACK(samode)
                 _("%s%s: you must specify channel for \"%s\" command if "
                   "you're not in a channel"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "samode");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4627,12 +4627,12 @@ IRC_COMMAND_CALLBACK(sanick)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "SANICK %s %s", argv[1], argv_eol[2]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4648,12 +4648,12 @@ IRC_COMMAND_CALLBACK(sapart)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "SAPART %s %s", argv[1], argv_eol[2]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -4669,12 +4669,12 @@ IRC_COMMAND_CALLBACK(saquit)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(3, "");
+    WHOREIRC_COMMAND_MIN_ARGS(3, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "SAQUIT %s :%s", argv[1], argv_eol[2]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5195,12 +5195,12 @@ IRC_COMMAND_CALLBACK(server)
                                 _("No server found with \"%s\""),
                                 server_name);
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "add") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "add");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "add");
 
         ptr_server2 = irc_server_casesearch (argv[2]);
         if (ptr_server2)
@@ -5209,7 +5209,7 @@ IRC_COMMAND_CALLBACK(server)
                 NULL,
                 _("%s%s: server \"%s\" already exists, can't add it!"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, ptr_server2->name);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         new_server = irc_server_alloc (argv[2]);
@@ -5219,7 +5219,7 @@ IRC_COMMAND_CALLBACK(server)
                 NULL,
                 _("%s%s: unable to add server"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         weechat_config_option_set (
@@ -5243,12 +5243,12 @@ IRC_COMMAND_CALLBACK(server)
             irc_server_connect (new_server);
         */
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "copy") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "copy");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "copy");
 
         /* look for server by name */
         server_found = irc_server_search (argv[2]);
@@ -5259,7 +5259,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" not found for \"%s\" command"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 argv[2], "server copy");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* check if target name already exists */
@@ -5271,7 +5271,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" already exists for \"%s\" command"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 ptr_server2->name, "server copy");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* copy server */
@@ -5288,15 +5288,15 @@ IRC_COMMAND_CALLBACK(server)
                 IRC_COLOR_CHAT_SERVER,
                 argv[3],
                 IRC_COLOR_RESET);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
     }
 
     if (weechat_strcasecmp (argv[1], "rename") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "rename");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "rename");
 
         /* look for server by name */
         server_found = irc_server_search (argv[2]);
@@ -5307,7 +5307,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" not found for \"%s\" command"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 argv[2], "server rename");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* check if target name already exists */
@@ -5319,7 +5319,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" already exists for \"%s\" command"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 ptr_server2->name, "server rename");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* rename server */
@@ -5335,27 +5335,27 @@ IRC_COMMAND_CALLBACK(server)
                 IRC_COLOR_CHAT_SERVER,
                 argv[3],
                 IRC_COLOR_RESET);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
     }
 
     if (weechat_strcasecmp (argv[1], "reorder") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "reorder");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "reorder");
 
         count = irc_server_reorder (((const char **)argv) + 2, argc - 2);
         weechat_printf (NULL,
                         NG_("%d server moved", "%d servers moved", count),
                         count);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "open") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "open");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "open");
 
         if (weechat_strcasecmp (argv[2], "-all") == 0)
         {
@@ -5399,12 +5399,12 @@ IRC_COMMAND_CALLBACK(server)
             }
         }
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "keep") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "keep");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "keep");
 
         /* look for server by name */
         server_found = irc_server_search (argv[2]);
@@ -5415,7 +5415,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" not found for \"%s\" command"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 argv[2], "server keep");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* check that is it temporary server */
@@ -5426,7 +5426,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" is not a temporary server"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 argv[2], "server keep");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         /* remove temporary flag on server */
@@ -5440,12 +5440,12 @@ IRC_COMMAND_CALLBACK(server)
             argv[2],
             IRC_COLOR_RESET);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "del") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "del");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "del");
 
         /* look for server by name */
         server_found = irc_server_search (argv[2]);
@@ -5456,7 +5456,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: server \"%s\" not found for \"%s\" command"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME,
                 argv[2], "server del");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
         if (server_found->is_connected)
         {
@@ -5465,7 +5465,7 @@ IRC_COMMAND_CALLBACK(server)
                 _("%s%s: you can not delete server \"%s\" because you are "
                   "connected to. Try \"/disconnect %s\" before."),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, argv[2], argv[2]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         server_name = strdup (server_found->name);
@@ -5480,7 +5480,7 @@ IRC_COMMAND_CALLBACK(server)
         if (server_name)
             free (server_name);
 
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "deloutq") == 0)
@@ -5496,27 +5496,27 @@ IRC_COMMAND_CALLBACK(server)
         weechat_printf (
             NULL,
             _("%s: messages outqueue DELETED for all servers. Some messages "
-              "from you or WeeChat may have been lost!"),
+              "from you or WhoreIRC may have been lost!"),
             IRC_PLUGIN_NAME);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "raw") == 0)
     {
         irc_raw_open (1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "jump") == 0)
     {
         if (ptr_server && ptr_server->buffer)
             weechat_buffer_set (ptr_server->buffer, "display", "1");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "fakerecv") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "fakerecv");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "fakerecv");
         IRC_COMMAND_CHECK_SERVER("server fakerecv", 1);
         length = strlen (argv_eol[2]);
         if (length > 0)
@@ -5532,10 +5532,10 @@ IRC_COMMAND_CALLBACK(server)
                 free (message);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*
@@ -5552,12 +5552,12 @@ IRC_COMMAND_CALLBACK(service)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "SERVICE %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5586,7 +5586,7 @@ IRC_COMMAND_CALLBACK(servlist)
                           "SERVLIST");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5602,7 +5602,7 @@ IRC_COMMAND_CALLBACK(squery)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (argc > 2)
     {
@@ -5615,7 +5615,7 @@ IRC_COMMAND_CALLBACK(squery)
                           "SQUERY %s", argv_eol[1]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5632,11 +5632,11 @@ IRC_COMMAND_CALLBACK(squit)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, 0, NULL, "SQUIT %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5664,7 +5664,7 @@ IRC_COMMAND_CALLBACK(stats)
                           "STATS");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5682,12 +5682,12 @@ IRC_COMMAND_CALLBACK(summon)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "SUMMON %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5715,7 +5715,7 @@ IRC_COMMAND_CALLBACK(time)
                           "TIME");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5762,7 +5762,7 @@ IRC_COMMAND_CALLBACK(topic)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "topic");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -5792,7 +5792,7 @@ IRC_COMMAND_CALLBACK(topic)
                           "TOPIC %s", channel_name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5820,7 +5820,7 @@ IRC_COMMAND_CALLBACK(trace)
                           "TRACE");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5840,7 +5840,7 @@ IRC_COMMAND_CALLBACK(unban)
     (void) data;
     (void) argv_eol;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (irc_channel_is_channel (ptr_server, argv[1]))
     {
@@ -5865,7 +5865,7 @@ IRC_COMMAND_CALLBACK(unban)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "unban");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -5873,7 +5873,7 @@ IRC_COMMAND_CALLBACK(unban)
                             "unban", "-", "b",
                             argv, pos_args);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5893,7 +5893,7 @@ IRC_COMMAND_CALLBACK(unquiet)
     (void) data;
     (void) argv_eol;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (irc_channel_is_channel (ptr_server, argv[1]))
     {
@@ -5918,7 +5918,7 @@ IRC_COMMAND_CALLBACK(unquiet)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "unquiet");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -5935,7 +5935,7 @@ IRC_COMMAND_CALLBACK(unquiet)
                           pos_channel);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5953,12 +5953,12 @@ IRC_COMMAND_CALLBACK(userhost)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "USERHOST %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -5986,7 +5986,7 @@ IRC_COMMAND_CALLBACK(users)
                           "USERS");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6024,7 +6024,7 @@ IRC_COMMAND_CALLBACK(version)
                           "VERSION");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6047,7 +6047,7 @@ IRC_COMMAND_CALLBACK(voice)
             ptr_server->buffer,
             _("%s%s: \"%s\" command can only be executed in a channel buffer"),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, "voice");
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (argc < 2)
@@ -6063,7 +6063,7 @@ IRC_COMMAND_CALLBACK(voice)
                                 "voice", "+", "v", argc, argv);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6084,7 +6084,7 @@ IRC_COMMAND_CALLBACK(wallchops)
     (void) pointer;
     (void) data;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     if (irc_channel_is_channel (ptr_server, argv[1]))
     {
@@ -6109,7 +6109,7 @@ IRC_COMMAND_CALLBACK(wallchops)
                 _("%s%s: \"%s\" command can only be executed in a channel "
                   "buffer"),
                 weechat_prefix ("error"), IRC_PLUGIN_NAME, "wallchops");
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -6120,7 +6120,7 @@ IRC_COMMAND_CALLBACK(wallchops)
             ptr_server->buffer,
             _("%s%s: you are not on channel \"%s\""),
             weechat_prefix ("error"), IRC_PLUGIN_NAME, pos_channel);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     weechat_printf (
@@ -6173,7 +6173,7 @@ IRC_COMMAND_CALLBACK(wallchops)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6191,12 +6191,12 @@ IRC_COMMAND_CALLBACK(wallops)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "WALLOPS :%s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6225,7 +6225,7 @@ IRC_COMMAND_CALLBACK(who)
                           "WHO");
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6267,7 +6267,7 @@ IRC_COMMAND_CALLBACK(whois)
     }
 
     if (!ptr_nick)
-        WEECHAT_COMMAND_ERROR;
+        WHOREIRC_COMMAND_ERROR;
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "WHOIS %s%s%s",
@@ -6275,7 +6275,7 @@ IRC_COMMAND_CALLBACK(whois)
                       (double_nick) ? " " : "",
                       (double_nick) ? ptr_nick : "");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6293,12 +6293,12 @@ IRC_COMMAND_CALLBACK(whowas)
     (void) data;
     (void) argv;
 
-    WEECHAT_COMMAND_MIN_ARGS(2, "");
+    WHOREIRC_COMMAND_MIN_ARGS(2, "");
 
     irc_server_sendf (ptr_server, IRC_SERVER_SEND_OUTQ_PRIO_HIGH, NULL,
                       "WHOWAS %s", argv_eol[1]);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -6413,7 +6413,7 @@ irc_command_init ()
            "\n"
            "Without argument, \"ls\" and \"list\" are sent.\n"
            "\n"
-           "Capabilities supported by WeeChat are: "
+           "Capabilities supported by WhoreIRC are: "
            "account-notify, away-notify, cap-notify, chghost, extended-join, "
            "invite-notify, multi-prefix, server-time, userhost-in-names.\n"
            "\n"
@@ -6976,7 +6976,7 @@ irc_command_init ()
            "    keep: keep server in config file (for temporary servers only)\n"
            "     del: delete a server\n"
            " deloutq: delete messages out queue for all servers (all messages "
-           "WeeChat is currently sending)\n"
+           "WhoreIRC is currently sending)\n"
            "    jump: jump to server buffer\n"
            "     raw: open buffer with raw IRC data\n"
            "\n"

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -196,17 +196,17 @@ alias_config_cmd_write_default_cb (const void *pointer, void *data,
     (void) data;
 
     if (!weechat_config_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (i = 0; alias_default[i][0]; i++)
     {
         if (!weechat_config_write_line (config_file,
                                         alias_default[i][0],
                                         "\"%s\"", alias_default[i][1]))
-            return WEECHAT_CONFIG_WRITE_ERROR;
+            return WHOREIRC_CONFIG_WRITE_ERROR;
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
@@ -252,11 +252,11 @@ alias_config_cmd_create_option_cb (const void *pointer, void *data,
         alias_free (ptr_alias);
     if (value && value[0])
         rc = (alias_new (option_name, value, NULL)) ?
-            WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE : WEECHAT_CONFIG_OPTION_SET_ERROR;
+            WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE : WHOREIRC_CONFIG_OPTION_SET_ERROR;
     else
-        rc = WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+        rc = WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 
-    if (rc == WEECHAT_CONFIG_OPTION_SET_ERROR)
+    if (rc == WHOREIRC_CONFIG_OPTION_SET_ERROR)
     {
         weechat_printf (NULL,
                         _("%s%s: error creating alias \"%s\" => \"%s\""),
@@ -283,7 +283,7 @@ alias_config_completion_write_default_cb (const void *pointer, void *data,
     (void) data;
 
     if (!weechat_config_write_line (config_file, section_name, NULL))
-        return WEECHAT_CONFIG_WRITE_ERROR;
+        return WHOREIRC_CONFIG_WRITE_ERROR;
 
     for (i = 0; alias_default[i][0]; i++)
     {
@@ -292,11 +292,11 @@ alias_config_completion_write_default_cb (const void *pointer, void *data,
             if (!weechat_config_write_line (config_file,
                                             alias_default[i][0],
                                             "\"%s\"", alias_default[i][2]))
-                return WEECHAT_CONFIG_WRITE_ERROR;
+                return WHOREIRC_CONFIG_WRITE_ERROR;
         }
     }
 
-    return WEECHAT_CONFIG_WRITE_OK;
+    return WHOREIRC_CONFIG_WRITE_OK;
 }
 
 /*
@@ -342,7 +342,7 @@ alias_config_completion_create_option_cb (const void *pointer, void *data,
                           "alias not found"),
                         weechat_prefix ("error"), ALIAS_PLUGIN_NAME,
                         option_name);
-        return WEECHAT_CONFIG_OPTION_SET_ERROR;
+        return WHOREIRC_CONFIG_OPTION_SET_ERROR;
     }
 
     /* create configuration option */
@@ -351,7 +351,7 @@ alias_config_completion_create_option_cb (const void *pointer, void *data,
     /* create/update completion in alias */
     alias_update_completion (ptr_alias, value);
 
-    return WEECHAT_CONFIG_OPTION_SET_OK_SAME_VALUE;
+    return WHOREIRC_CONFIG_OPTION_SET_OK_SAME_VALUE;
 }
 
 /*

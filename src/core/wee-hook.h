@@ -1,24 +1,24 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_HOOK_H
-#define WEECHAT_HOOK_H
+#ifndef WHOREIRC_HOOK_H
+#define WHOREIRC_HOOK_H
 
 #include "hook/wee-hook-command-run.h"
 #include "hook/wee-hook-command.h"
@@ -90,10 +90,10 @@ struct t_hook
 {
     /* data common to all hooks */
     struct t_weechat_plugin *plugin;   /* plugin which created this hook    */
-                                       /* (NULL for hook created by WeeChat)*/
+                                       /* (NULL for hook created by WhoreIRC)*/
     char *subplugin;                   /* subplugin which created this hook */
                                        /* (commonly a script name, NULL for */
-                                       /* hook created by WeeChat or by     */
+                                       /* hook created by WhoreIRC or by     */
                                        /* plugin itself)                    */
     enum t_hook_type type;             /* hook type                         */
     int deleted;                       /* hook marked for deletion ?        */
@@ -141,4 +141,4 @@ extern int hook_add_to_infolist (struct t_infolist *infolist,
                                  const char *arguments);
 extern void hook_print_log ();
 
-#endif /* WEECHAT_HOOK_H */
+#endif /* WHOREIRC_HOOK_H */

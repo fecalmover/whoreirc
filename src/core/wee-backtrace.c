@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -47,7 +47,7 @@
 
 
 /*
- * Displays a backtrace line on standard error output and in WeeChat log.
+ * Displays a backtrace line on standard error output and in WhoreIRC log.
  */
 
 void
@@ -157,8 +157,8 @@ weechat_backtrace ()
     char **symbols;
 #endif /* HAVE_BACKTRACE */
 
-    weechat_backtrace_printf ("======= WeeChat backtrace =======");
-    weechat_backtrace_printf ("(written by WeeChat %s, compiled on %s %s)",
+    weechat_backtrace_printf ("======= WhoreIRC backtrace =======");
+    weechat_backtrace_printf ("(written by WhoreIRC %s, compiled on %s %s)",
                               version_get_version_with_git (),
                               version_get_compilation_date (),
                               version_get_compilation_time ());

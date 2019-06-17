@@ -4,20 +4,20 @@
  * Copyright (C) 2015 Simmo Saan <simmo.saan@gmail.com>
  * Copyright (C) 2018-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -367,12 +367,12 @@ irc_modelist_hdata_item_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_modelist_item, number, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist_item, mask, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist_item, setter, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist_item, datetime, TIME, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist_item, prev_item, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist_item, next_item, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist_item, number, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist_item, mask, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist_item, setter, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist_item, datetime, TIME, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist_item, prev_item, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist_item, next_item, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -394,12 +394,12 @@ irc_modelist_hdata_modelist_cb (const void *pointer, void *data, const char *hda
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_irc_modelist, type, CHAR, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist, state, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist, items, POINTER, 0, NULL, "irc_modelist_item");
-        WEECHAT_HDATA_VAR(struct t_irc_modelist, last_item, POINTER, 0, NULL, "irc_modelist_item");
-        WEECHAT_HDATA_VAR(struct t_irc_modelist, prev_modelist, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_irc_modelist, next_modelist, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist, type, CHAR, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist, state, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist, items, POINTER, 0, NULL, "irc_modelist_item");
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist, last_item, POINTER, 0, NULL, "irc_modelist_item");
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist, prev_modelist, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_irc_modelist, next_modelist, POINTER, 0, NULL, hdata_name);
     }
     return hdata;
 }
@@ -471,7 +471,7 @@ irc_modelist_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints modelist item infos in WeeChat log file (usually for crash dump).
+ * Prints modelist item infos in WhoreIRC log file (usually for crash dump).
  */
 
 void
@@ -488,7 +488,7 @@ irc_modelist_item_print_log (struct t_irc_modelist_item *item)
 }
 
 /*
- * Prints modelist infos in WeeChat log file (usually for crash dump).
+ * Prints modelist infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

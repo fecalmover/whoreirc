@@ -1,41 +1,41 @@
 /*
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_PLUGIN_SCRIPT_H
-#define WEECHAT_PLUGIN_PLUGIN_SCRIPT_H
+#ifndef WHOREIRC_PLUGIN_PLUGIN_SCRIPT_H
+#define WHOREIRC_PLUGIN_PLUGIN_SCRIPT_H
 
 /* constants which defines return types for weechat_<lang>_exec functions */
 
 enum t_weechat_script_exec_type
 {
-    WEECHAT_SCRIPT_EXEC_INT = 0,
-    WEECHAT_SCRIPT_EXEC_STRING,
-    WEECHAT_SCRIPT_EXEC_POINTER,
-    WEECHAT_SCRIPT_EXEC_HASHTABLE,
-    WEECHAT_SCRIPT_EXEC_IGNORE,
+    WHOREIRC_SCRIPT_EXEC_INT = 0,
+    WHOREIRC_SCRIPT_EXEC_STRING,
+    WHOREIRC_SCRIPT_EXEC_POINTER,
+    WHOREIRC_SCRIPT_EXEC_HASHTABLE,
+    WHOREIRC_SCRIPT_EXEC_IGNORE,
 };
 
-#define WEECHAT_SCRIPT_HASHTABLE_DEFAULT_SIZE 16
+#define WHOREIRC_SCRIPT_HASHTABLE_DEFAULT_SIZE 16
 
-#define WEECHAT_SCRIPT_EVAL_NAME "__eval__"
+#define WHOREIRC_SCRIPT_EVAL_NAME "__eval__"
 
-#define WEECHAT_SCRIPT_MSG_NOT_INIT(__current_script,                   \
+#define WHOREIRC_SCRIPT_MSG_NOT_INIT(__current_script,                   \
                                     __function)                         \
     weechat_printf (NULL,                                               \
                     weechat_gettext("%s%s: unable to call function "    \
@@ -44,7 +44,7 @@ enum t_weechat_script_exec_type
                     weechat_prefix ("error"), weechat_plugin->name,     \
                     __function,                                         \
                     (__current_script) ? __current_script : "-");
-#define WEECHAT_SCRIPT_MSG_WRONG_ARGS(__current_script,                 \
+#define WHOREIRC_SCRIPT_MSG_WRONG_ARGS(__current_script,                 \
                                       __function)                       \
     weechat_printf (NULL,                                               \
                     weechat_gettext("%s%s: wrong arguments for "        \
@@ -211,4 +211,4 @@ extern void plugin_script_end (struct t_weechat_plugin *weechat_plugin,
 extern void plugin_script_print_log (struct t_weechat_plugin *weechat_plugin,
                                      struct t_plugin_script *scripts);
 
-#endif /* WEECHAT_PLUGIN_PLUGIN_SCRIPT_H */
+#endif /* WHOREIRC_PLUGIN_PLUGIN_SCRIPT_H */

@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -783,9 +783,9 @@ fset_buffer_display_option_eval (struct t_fset_option *fset_option)
     if (line)
     {
         lines = weechat_string_split (line, "\r\n", NULL,
-                                      WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                      | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                      | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                      WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                      | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                      | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                       0, &num_lines);
         if (lines)
         {
@@ -1145,7 +1145,7 @@ fset_buffer_window_scrolled_cb (const void *pointer, void *data,
 
     /* scrolled another window/buffer? then just ignore */
     if (weechat_window_get_pointer (signal_data, "buffer") != fset_buffer)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     fset_buffer_get_window_info (signal_data, &start_line_y, &chat_height);
 
@@ -1168,7 +1168,7 @@ fset_buffer_window_scrolled_cb (const void *pointer, void *data,
         line = num_options - 1;
     fset_buffer_set_current_line (line);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1210,7 +1210,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
     if (strcmp (input_data, "q") == 0)
     {
         weechat_buffer_close (buffer);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* refresh buffer */
@@ -1218,7 +1218,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
     {
         fset_option_get_options ();
         fset_buffer_refresh (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* unmark all options and refresh buffer */
@@ -1227,21 +1227,21 @@ fset_buffer_input_cb (const void *pointer, void *data,
         fset_option_unmark_all ();
         fset_option_get_options ();
         fset_buffer_refresh (0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* mark options matching filter */
     if (strncmp (input_data, "m:", 2) == 0)
     {
         fset_option_mark_options_matching_filter (input_data + 2, 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* unmark options matching filter */
     if (strncmp (input_data, "u:", 2) == 0)
     {
         fset_option_mark_options_matching_filter (input_data + 2, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* change sort of options */
@@ -1251,7 +1251,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
             weechat_config_option_set (fset_config_look_sort, input_data + 2, 1);
         else
             weechat_config_option_reset (fset_config_look_sort, 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* export options in a file */
@@ -1263,7 +1263,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
                 input_data + 2,
                 weechat_config_boolean (fset_config_look_export_help_default));
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* export options in a file (without help) */
@@ -1271,7 +1271,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
     {
         if (input_data[3])
             fset_option_export (input_data + 3, 0);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* export options in a file (with help) */
@@ -1279,7 +1279,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
     {
         if (input_data[3])
             fset_option_export (input_data + 3, 1);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     /* execute action on an option */
@@ -1288,7 +1288,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
         if (strcmp (input_data, actions[i][0]) == 0)
         {
             weechat_command (buffer, actions[i][1]);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
     }
 
@@ -1301,7 +1301,7 @@ fset_buffer_input_cb (const void *pointer, void *data,
     if (ptr_input[0])
         fset_option_filter_options (ptr_input);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1322,7 +1322,7 @@ fset_buffer_close_cb (const void *pointer, void *data,
     weechat_arraylist_clear (fset_options);
     fset_option_count_marked = 0;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1451,8 +1451,8 @@ fset_buffer_init ()
     /* create hashtables used by the bar item callback */
     fset_buffer_hashtable_pointers = weechat_hashtable_new (
         8,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_POINTER,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_POINTER,
         NULL,
         NULL);
     if (!fset_buffer_hashtable_pointers)
@@ -1460,8 +1460,8 @@ fset_buffer_init ()
 
     fset_buffer_hashtable_extra_vars = weechat_hashtable_new (
         128,
-        WEECHAT_HASHTABLE_STRING,
-        WEECHAT_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
+        WHOREIRC_HASHTABLE_STRING,
         NULL,
         NULL);
     if (!fset_buffer_hashtable_extra_vars)

@@ -36,13 +36,13 @@
 #include "relay-upgrade.h"
 
 
-WEECHAT_PLUGIN_NAME(RELAY_PLUGIN_NAME);
-WEECHAT_PLUGIN_DESCRIPTION(N_("Relay WeeChat data to remote application "
+WHOREIRC_PLUGIN_NAME(RELAY_PLUGIN_NAME);
+WHOREIRC_PLUGIN_DESCRIPTION(N_("Relay WeeChat data to remote application "
                               "(irc/weechat protocols)"));
-WEECHAT_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
-WEECHAT_PLUGIN_VERSION(WEECHAT_VERSION);
-WEECHAT_PLUGIN_LICENSE(WEECHAT_LICENSE);
-WEECHAT_PLUGIN_PRIORITY(5000);
+WHOREIRC_PLUGIN_AUTHOR("Sébastien Helleu <flashcode@flashtux.org>");
+WHOREIRC_PLUGIN_VERSION(WHOREIRC_VERSION);
+WHOREIRC_PLUGIN_LICENSE(WHOREIRC_LICENSE);
+WHOREIRC_PLUGIN_PRIORITY(5000);
 
 struct t_weechat_plugin *weechat_relay_plugin = NULL;
 
@@ -144,7 +144,7 @@ relay_signal_upgrade_cb (const void *pointer, void *data,
                         NG_("client", "clients", ssl_disconnected));
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -177,7 +177,7 @@ relay_debug_dump_cb (const void *pointer, void *data,
                             weechat_plugin->name);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -196,7 +196,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     weechat_plugin = plugin;
 
     if (!relay_config_init ())
-        return WEECHAT_RC_ERROR;
+        return WHOREIRC_RC_ERROR;
 
     relay_config_read ();
 
@@ -228,7 +228,7 @@ weechat_plugin_init (struct t_weechat_plugin *plugin, int argc, char *argv[])
     relay_hook_timer = weechat_hook_timer (1 * 1000, 0, 0,
                                            &relay_client_timer_cb, NULL, NULL);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -266,5 +266,5 @@ weechat_plugin_end (struct t_weechat_plugin *plugin)
 
     relay_config_free ();
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

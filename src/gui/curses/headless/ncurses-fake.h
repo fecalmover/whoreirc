@@ -17,8 +17,8 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_NCURSES_FAKE_H
-#define WEECHAT_NCURSES_FAKE_H
+#ifndef WHOREIRC_NCURSES_FAKE_H
+#define WHOREIRC_NCURSES_FAKE_H
 
 #define ERR (-1)
 #define OK  (0)
@@ -123,4 +123,4 @@ extern int resizeterm ();
 extern int getch ();
 extern int wgetch (WINDOW *win);
 
-#endif /* WEECHAT_NCURSES_FAKE_H */
+#endif /* WHOREIRC_NCURSES_FAKE_H */

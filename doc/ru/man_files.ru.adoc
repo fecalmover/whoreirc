@@ -1,5 +1,5 @@
 $HOME/.weechat/weechat.conf::
-    главный файл конфигурации WeeChat
+    главный файл конфигурации WhoreIRC
 
 $HOME/.weechat/plugins.conf::
     файл конфигурации плагинов
@@ -71,4 +71,4 @@ $HOME/.weechat/xfer.conf::
     файл конфигурации для плагина _xref_
 
 $HOME/.weechat/weechat.log::
-    лог-файл WeeChat
+    лог-файл WhoreIRC

@@ -1,11 +1,11 @@
 Полное описание параметров плагинов доступно в документации по плагинам в
-https://weechat.org/doc[Руководстве пользователя WeeChat].
+https://weechat.org/doc[Руководстве пользователя WhoreIRC].
 
 С помощью плагина irc можно присоединиться ко временному серверу, используя URL вроде:
 
     irc[6][s]://[[nickname][:password]@]server[:port][/#channel1[,#channel2...]]
 
-Присоединиться к IRC-каналу поддержки пользователей WeeChat с псевдонимом "mynick":
+Присоединиться к IRC-каналу поддержки пользователей WhoreIRC с псевдонимом "mynick":
 
     irc://mynick@chat.freenode.net/#weechat
 

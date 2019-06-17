@@ -420,7 +420,7 @@ gui_key_flush (int paste)
             if (!gui_mouse_event_pending || utf8_is_valid (key_str, -1, NULL))
             {
                 (void) hook_signal_send ("key_pressed",
-                                         WEECHAT_HOOK_SIGNAL_STRING, key_str);
+                                         WHOREIRC_HOOK_SIGNAL_STRING, key_str);
             }
 
             if (gui_current_window->buffer->text_search != GUI_TEXT_SEARCH_DISABLED)
@@ -536,13 +536,13 @@ gui_key_read_cb (const void *pointer, void *data, int fd)
         if (!weechat_quit)
         {
             log_printf (_("Terminal lost, exiting WeeChat..."));
-            (void) hook_signal_send ("quit", WEECHAT_HOOK_SIGNAL_STRING, NULL);
+            (void) hook_signal_send ("quit", WHOREIRC_HOOK_SIGNAL_STRING, NULL);
             weechat_quit = 1;
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
     if (ret < 0)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     for (i = 0; i < ret; i++)
     {
@@ -632,5 +632,5 @@ gui_key_read_cb (const void *pointer, void *data, int fd)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }

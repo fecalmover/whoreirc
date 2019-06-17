@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -73,14 +73,14 @@ gui_nicklist_send_signal (const char *signal, struct t_gui_buffer *buffer,
                       (unsigned long)(buffer),
                       (arguments) ? arguments : "");
             (void) hook_signal_send (signal,
-                                     WEECHAT_HOOK_SIGNAL_STRING, str_args);
+                                     WHOREIRC_HOOK_SIGNAL_STRING, str_args);
             free (str_args);
         }
     }
     else
     {
         (void) hook_signal_send (signal,
-                                 WEECHAT_HOOK_SIGNAL_STRING, (char *)arguments);
+                                 WHOREIRC_HOOK_SIGNAL_STRING, (char *)arguments);
     }
 }
 
@@ -96,8 +96,8 @@ gui_nicklist_send_hsignal (const char *signal, struct t_gui_buffer *buffer,
     if (!gui_nicklist_hsignal)
     {
         gui_nicklist_hsignal = hashtable_new (32,
-                                              WEECHAT_HASHTABLE_STRING,
-                                              WEECHAT_HASHTABLE_POINTER,
+                                              WHOREIRC_HASHTABLE_STRING,
+                                              WHOREIRC_HASHTABLE_POINTER,
                                               NULL, NULL);
     }
 
@@ -1237,7 +1237,7 @@ gui_nicklist_add_to_infolist (struct t_infolist *infolist,
 }
 
 /*
- * Prints nicklist infos in WeeChat log file (usually for crash dump).
+ * Prints nicklist infos in WhoreIRC log file (usually for crash dump).
  */
 
 void

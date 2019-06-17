@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2003-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -168,34 +168,34 @@ alias_command_cb (const void *pointer, void *data,
         {
             weechat_printf (NULL, _("No alias defined"));
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "add") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(4, "add");
+        WHOREIRC_COMMAND_MIN_ARGS(4, "add");
         alias_command_add (
             (weechat_string_is_command_char (argv[2])) ?
             (char *)weechat_utf8_next_char (argv[2]) : argv[2],
             argv_eol[3],
             NULL);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "addcompletion") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(5, "addcompletion");
+        WHOREIRC_COMMAND_MIN_ARGS(5, "addcompletion");
         alias_command_add (
             (weechat_string_is_command_char (argv[3])) ?
             (char *)weechat_utf8_next_char (argv[3]) : argv[3],
             argv_eol[4],
             argv[2]);
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
     if (weechat_strcasecmp (argv[1], "del") == 0)
     {
-        WEECHAT_COMMAND_MIN_ARGS(3, "del");
+        WHOREIRC_COMMAND_MIN_ARGS(3, "del");
         for (i = 2; i < argc; i++)
         {
             ptr_alias_name = (weechat_string_is_command_char (argv[i])) ?
@@ -232,10 +232,10 @@ alias_command_cb (const void *pointer, void *data,
                                 ptr_alias_name);
             }
         }
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
     }
 
-    WEECHAT_COMMAND_ERROR;
+    WHOREIRC_COMMAND_ERROR;
 }
 
 /*

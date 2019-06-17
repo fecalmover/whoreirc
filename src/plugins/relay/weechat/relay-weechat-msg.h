@@ -17,28 +17,28 @@
  * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WEECHAT_PLUGIN_RELAY_WEECHAT_MSG_H
-#define WEECHAT_PLUGIN_RELAY_WEECHAT_MSG_H
+#ifndef WHOREIRC_PLUGIN_RELAY_WHOREIRC_MSG_H
+#define WHOREIRC_PLUGIN_RELAY_WHOREIRC_MSG_H
 
 #include <time.h>
 
 struct t_relay_weechat_nicklist;
 
-#define RELAY_WEECHAT_MSG_INITIAL_ALLOC 4096
+#define RELAY_WHOREIRC_MSG_INITIAL_ALLOC 4096
 
 /* object ids in binary messages */
-#define RELAY_WEECHAT_MSG_OBJ_CHAR      "chr"
-#define RELAY_WEECHAT_MSG_OBJ_INT       "int"
-#define RELAY_WEECHAT_MSG_OBJ_LONG      "lon"
-#define RELAY_WEECHAT_MSG_OBJ_STRING    "str"
-#define RELAY_WEECHAT_MSG_OBJ_BUFFER    "buf"
-#define RELAY_WEECHAT_MSG_OBJ_POINTER   "ptr"
-#define RELAY_WEECHAT_MSG_OBJ_TIME      "tim"
-#define RELAY_WEECHAT_MSG_OBJ_HASHTABLE "htb"
-#define RELAY_WEECHAT_MSG_OBJ_HDATA     "hda"
-#define RELAY_WEECHAT_MSG_OBJ_INFO      "inf"
-#define RELAY_WEECHAT_MSG_OBJ_INFOLIST  "inl"
-#define RELAY_WEECHAT_MSG_OBJ_ARRAY     "arr"
+#define RELAY_WHOREIRC_MSG_OBJ_CHAR      "chr"
+#define RELAY_WHOREIRC_MSG_OBJ_INT       "int"
+#define RELAY_WHOREIRC_MSG_OBJ_LONG      "lon"
+#define RELAY_WHOREIRC_MSG_OBJ_STRING    "str"
+#define RELAY_WHOREIRC_MSG_OBJ_BUFFER    "buf"
+#define RELAY_WHOREIRC_MSG_OBJ_POINTER   "ptr"
+#define RELAY_WHOREIRC_MSG_OBJ_TIME      "tim"
+#define RELAY_WHOREIRC_MSG_OBJ_HASHTABLE "htb"
+#define RELAY_WHOREIRC_MSG_OBJ_HDATA     "hda"
+#define RELAY_WHOREIRC_MSG_OBJ_INFO      "inf"
+#define RELAY_WHOREIRC_MSG_OBJ_INFOLIST  "inl"
+#define RELAY_WHOREIRC_MSG_OBJ_ARRAY     "arr"
 
 struct t_relay_weechat_msg
 {
@@ -83,4 +83,4 @@ extern void relay_weechat_msg_send (struct t_relay_client *client,
                                     struct t_relay_weechat_msg *msg);
 extern void relay_weechat_msg_free (struct t_relay_weechat_msg *msg);
 
-#endif /* WEECHAT_PLUGIN_RELAY_WEECHAT_MSG_H */
+#endif /* WHOREIRC_PLUGIN_RELAY_WHOREIRC_MSG_H */

@@ -5,8 +5,8 @@
 :email: flashcode@flashtux.org
 :lang: cs
 // TRANSLATION MISSING
-:man manual: WeeChat Manual
-:man source: WeeChat {revnumber}
+:man manual: WhoreIRC Manual
+:man source: WhoreIRC {revnumber}
 
 == JMÉNO
 
@@ -24,13 +24,13 @@ weechat-headless - the extensible chat client (headless version)
 
 == POPIS
 
-WeeChat (Wee Enhanced Environment for Chat) je svobodný chatovací klient.
+WhoreIRC (Wee Enhanced Environment for Chat) je svobodný chatovací klient.
 Je lehký, plně konfigurovatelný a lehce rozšiřitelný pomocí pluginů a scriptů
 v obvyklých sciptovacích jazycích.
 
 // TRANSLATION MISSING
-The command *weechat-headless* runs WeeChat in a headless mode (no interface).
-It can be used for tests or to daemonize WeeChat with the option "--daemon".
+The command *weechat-headless* runs WhoreIRC in a headless mode (no interface).
+It can be used for tests or to daemonize WhoreIRC with the option "--daemon".
 
 == VOLBY
 

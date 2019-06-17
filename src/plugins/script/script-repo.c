@@ -944,16 +944,16 @@ script_repo_match_filter (struct t_script_repo *script)
         return 1;
 
     words = weechat_string_split (script_repo_filter, " ", NULL,
-                                  WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                  | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                  | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                  WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                  | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                  | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                   0, &num_words);
     tags = weechat_string_split ((script->tags) ? script->tags : "",
                                  ",",
                                  NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0,
                                  &num_tags);
     if (words)
@@ -1169,8 +1169,8 @@ script_repo_file_read (int quiet)
     {
         script_repo_max_length_field = weechat_hashtable_new (
             32,
-            WEECHAT_HASHTABLE_STRING,
-            WEECHAT_HASHTABLE_INTEGER,
+            WHOREIRC_HASHTABLE_STRING,
+            WHOREIRC_HASHTABLE_INTEGER,
             NULL, NULL);
     }
     else
@@ -1229,8 +1229,8 @@ script_repo_file_read (int quiet)
     }
 
     descriptions = weechat_hashtable_new (32,
-                                          WEECHAT_HASHTABLE_STRING,
-                                          WEECHAT_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_STRING,
+                                          WHOREIRC_HASHTABLE_STRING,
                                           NULL, NULL);
 
     /* read plugins.xml.gz */
@@ -1479,7 +1479,7 @@ script_repo_file_update_process_cb (const void *pointer, void *data,
                             weechat_prefix ("error"),
                             SCRIPT_PLUGIN_NAME,
                             err);
-            return WEECHAT_RC_OK;
+            return WHOREIRC_RC_OK;
         }
 
         if (script_repo_file_read (quiet) && scripts_repo)
@@ -1493,7 +1493,7 @@ script_repo_file_update_process_cb (const void *pointer, void *data,
             script_buffer_refresh (1);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1513,8 +1513,8 @@ script_repo_file_update (int quiet)
         return;
 
     options = weechat_hashtable_new (32,
-                                     WEECHAT_HASHTABLE_STRING,
-                                     WEECHAT_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
+                                     WHOREIRC_HASHTABLE_STRING,
                                      NULL, NULL);
     if (options)
     {
@@ -1562,31 +1562,31 @@ script_repo_hdata_script_cb (const void *pointer, void *data,
                                0, 0, NULL, NULL);
     if (hdata)
     {
-        WEECHAT_HDATA_VAR(struct t_script_repo, name, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, name_with_extension, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, language, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, author, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, mail, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, version, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, license, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, description, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, tags, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, requirements, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, min_weechat, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, max_weechat, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, sha512sum, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, url, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, popularity, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, date_added, TIME, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, date_updated, TIME, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, status, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, version_loaded, STRING, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, displayed, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, install_order, INTEGER, 0, NULL, NULL);
-        WEECHAT_HDATA_VAR(struct t_script_repo, prev_script, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_VAR(struct t_script_repo, next_script, POINTER, 0, NULL, hdata_name);
-        WEECHAT_HDATA_LIST(scripts_repo, WEECHAT_HDATA_LIST_CHECK_POINTERS);
-        WEECHAT_HDATA_LIST(last_script_repo, 0);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, name, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, name_with_extension, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, language, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, author, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, mail, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, version, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, license, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, description, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, tags, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, requirements, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, min_weechat, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, max_weechat, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, sha512sum, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, url, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, popularity, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, date_added, TIME, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, date_updated, TIME, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, status, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, version_loaded, STRING, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, displayed, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, install_order, INTEGER, 0, NULL, NULL);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, prev_script, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_VAR(struct t_script_repo, next_script, POINTER, 0, NULL, hdata_name);
+        WHOREIRC_HDATA_LIST(scripts_repo, WHOREIRC_HDATA_LIST_CHECK_POINTERS);
+        WHOREIRC_HDATA_LIST(last_script_repo, 0);
     }
     return hdata;
 }

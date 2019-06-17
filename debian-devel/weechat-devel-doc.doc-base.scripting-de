@@ -1,8 +1,8 @@
 Document: whoreirc-scripting-de
-Title: WeeChat scripting guide (German)
+Title: WhoreIRC scripting guide (German)
 Author: Sébastien Helleu
 Abstract: This document describes the API to create scripts
- for WeeChat (German version).
+ for WhoreIRC (German version).
 Section: Network/Communication
 
 Format: HTML

@@ -45,7 +45,7 @@
 
 #define GUI_COLOR_TIMER_TERM_COLORS 10
 
-struct t_gui_color gui_weechat_colors_bold[GUI_CURSES_NUM_WEECHAT_COLORS + 1] =
+struct t_gui_color gui_weechat_colors_bold[GUI_CURSES_NUM_WHOREIRC_COLORS + 1] =
 { { -1,                -1,                0,      "default"      },
   { COLOR_BLACK,       COLOR_BLACK,       0,      "black"        },
   { COLOR_BLACK,       COLOR_BLACK + 8,   A_BOLD, "darkgray"     },
@@ -65,7 +65,7 @@ struct t_gui_color gui_weechat_colors_bold[GUI_CURSES_NUM_WEECHAT_COLORS + 1] =
   { COLOR_WHITE,       COLOR_WHITE + 8,   A_BOLD, "white"        },
   { 0,                 0,                 0,      NULL           }
 };
-struct t_gui_color gui_weechat_colors_no_bold[GUI_CURSES_NUM_WEECHAT_COLORS + 1] =
+struct t_gui_color gui_weechat_colors_no_bold[GUI_CURSES_NUM_WHOREIRC_COLORS + 1] =
 { { -1,                -1,                0,      "default"      },
   { COLOR_BLACK,       COLOR_BLACK,       0,      "black"        },
   { COLOR_BLACK + 8,   COLOR_BLACK + 8,   0,      "darkgray"     },
@@ -272,7 +272,7 @@ gui_color_assign_by_diff (int *color, const char *color_name, int diff)
 int
 gui_color_get_weechat_colors_number ()
 {
-    return GUI_CURSES_NUM_WEECHAT_COLORS;
+    return GUI_CURSES_NUM_WHOREIRC_COLORS;
 }
 
 /*
@@ -364,7 +364,7 @@ gui_color_timer_warning_pairs_full (const void *pointer, void *data,
                        "\"/color reset\" to remove unused pairs"),
                      gui_color_num_pairs);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -898,7 +898,7 @@ gui_color_buffer_display ()
         gui_chat_printf_y (gui_color_buffer, y++,
                            _("WeeChat basic colors:"));
         str_line[0] = '\0';
-        for (i = 0; i < GUI_CURSES_NUM_WEECHAT_COLORS; i++)
+        for (i = 0; i < GUI_CURSES_NUM_WHOREIRC_COLORS; i++)
         {
             if (gui_color_use_term_colors)
             {
@@ -937,9 +937,9 @@ gui_color_buffer_display ()
         items = string_split (CONFIG_STRING(config_color_chat_nick_colors),
                               ",",
                               NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0,
                               &num_items);
         if (items)
@@ -1064,7 +1064,7 @@ gui_color_timer_cb (const void *pointer, void *data, int remaining_calls)
         }
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1167,7 +1167,7 @@ gui_color_buffer_input_cb (const void *pointer, void *data,
         gui_color_reset_pairs ();
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1185,7 +1185,7 @@ gui_color_buffer_close_cb (const void *pointer, void *data,
 
     gui_color_buffer = NULL;
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -1289,11 +1289,11 @@ gui_color_palette_build_aliases ()
 
     hashtable_remove_all (gui_color_hash_palette_alias);
     weelist_remove_all (gui_color_list_with_alias);
-    for (i = 0; i < GUI_CURSES_NUM_WEECHAT_COLORS; i++)
+    for (i = 0; i < GUI_CURSES_NUM_WHOREIRC_COLORS; i++)
     {
         weelist_add (gui_color_list_with_alias,
                      gui_weechat_colors[i].string,
-                     WEECHAT_LIST_POS_END,
+                     WHOREIRC_LIST_POS_END,
                      NULL);
     }
     for (i = 0; i <= gui_color_term_colors; i++)
@@ -1303,7 +1303,7 @@ gui_color_palette_build_aliases ()
         {
             weelist_add (gui_color_list_with_alias,
                          color_palette->alias,
-                         WEECHAT_LIST_POS_END,
+                         WHOREIRC_LIST_POS_END,
                          NULL);
         }
         else
@@ -1312,7 +1312,7 @@ gui_color_palette_build_aliases ()
                       "%d", i);
             weelist_add (gui_color_list_with_alias,
                          str_number,
-                         WEECHAT_LIST_POS_END,
+                         WHOREIRC_LIST_POS_END,
                          NULL);
         }
     }
@@ -1347,9 +1347,9 @@ gui_color_palette_new (int number, const char *value)
         str_rgb = NULL;
 
         items = string_split (value, ";", NULL,
-                              WEECHAT_STRING_SPLIT_STRIP_LEFT
-                              | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                              | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                              WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                              | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                              | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                               0, &num_items);
         if (items)
         {

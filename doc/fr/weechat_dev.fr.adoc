@@ -1,4 +1,4 @@
-= Guide du développeur WeeChat
+= Guide du développeur WhoreIRC
 :author: Sébastien Helleu
 :email: flashcode@flashtux.org
 :lang: fr
@@ -9,8 +9,8 @@
 :docinfo1:
 
 
-Ce manuel documente le client de messagerie instantanée WeeChat, il fait
-partie de WeeChat.
+Ce manuel documente le client de messagerie instantanée WhoreIRC, il fait
+partie de WhoreIRC.
 
 La dernière version de ce document peut être téléchargée sur cette page :
 https://weechat.org/doc
@@ -19,21 +19,21 @@ https://weechat.org/doc
 [[introduction]]
 == Introduction
 
-WeeChat (Wee Enhanced Environment for Chat) est un client de discussion libre,
+WhoreIRC (Wee Enhanced Environment for Chat) est un client de discussion libre,
 rapide et léger, conçu pour différents systèmes d'exploitation.
 
-Ce manuel documente l'intérieur de WeeChat :
+Ce manuel documente l'intérieur de WhoreIRC :
 
 * dépôts
 * règles de développement
 * le cœur
 * les extensions
-* comment contribuer à WeeChat.
+* comment contribuer à WhoreIRC.
 
 [[repositories]]
 == Dépôts
 
-Les dépôts de WeeChat sont dans l'organisation "weechat" de GitHub :
+Les dépôts de WhoreIRC sont dans l'organisation "weechat" de GitHub :
 https://github.com/weechat
 
 Liste des dépôts :
@@ -45,20 +45,20 @@ scripts::
     les scripts _officiels_ soumis sur weechat.org
 
 weechat.org::
-    le code source du site de WeeChat : https://weechat.org/
+    le code source du site de WhoreIRC : https://weechat.org/
 
 weercd::
     serveur de test IRC
 
 qweechat::
-    interface Qt distante pour WeeChat.
+    interface Qt distante pour WhoreIRC.
 
 Ce manuel documente seulement le dépôt _weechat_.
 
 [[overview]]
 === Vue d'ensemble
 
-Les répertoires principaux de WeeChat sont :
+Les répertoires principaux de WhoreIRC sont :
 
 [width="100%",cols="1m,3",options="header"]
 |===
@@ -75,7 +75,7 @@ Les répertoires principaux de WeeChat sont :
 |       buflist/     | Extension Buflist.
 |       charset/     | Extension Charset.
 |       exec/        | Extension Exec.
-|       fifo/        | Extension Fifo (tube FIFO utilisé pour envoyer des commandes à WeeChat).
+|       fifo/        | Extension Fifo (tube FIFO utilisé pour envoyer des commandes à WhoreIRC).
 |       fset/        | Extension Fset (Fast Set).
 |       guile/       | API script Guile (scheme).
 |       irc/         | Extension IRC (Internet Relay Chat).
@@ -111,7 +111,7 @@ Les répertoires principaux de WeeChat sont :
 [[sources_core]]
 ==== Cœur
 
-Le cœur de WeeChat est situé dans les répertoires suivants :
+Le cœur de WhoreIRC est situé dans les répertoires suivants :
 
 * _src/core/_ : fonctions du cœur (pour manipuler des données)
 * _src/gui/_ : fonctions pour l'interface (tampons, fenêtres, ...)
@@ -122,10 +122,10 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 | core/                           | Fonctions du cœur : point d'entrée, structures internes.
 |    wee-arraylist.c              | Listes avec tableau (« arraylists »).
 |    wee-backtrace.c              | Afficher une trace après un plantage.
-|    wee-command.c                | Commandes du cœur de WeeChat.
+|    wee-command.c                | Commandes du cœur de WhoreIRC.
 |    wee-completion.c             | Complétions par défaut.
 |    wee-config-file.c            | Gestion des fichiers de configuration.
-|    wee-config.c                 | Options de configuration du cœur de WeeChat (fichier weechat.conf).
+|    wee-config.c                 | Options de configuration du cœur de WhoreIRC (fichier weechat.conf).
 |    wee-debug.c                  | Quelques fonctions de debug.
 |    wee-eval.c                   | Évaluation d'expressions avec des références à des variables internes.
 |    wee-hashtable.c              | Tables de hachage.
@@ -134,7 +134,7 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 |    wee-infolist.c               | Infolists (listes avec les données des objets).
 |    wee-input.c                  | Entrée de commandes/texte.
 |    wee-list.c                   | Listes triées.
-|    wee-log.c                    | Écriture dans le fichier de log WeeChat (weechat.log).
+|    wee-log.c                    | Écriture dans le fichier de log WhoreIRC (weechat.log).
 |    wee-network.c                | Fonctions réseau (connexion aux serveurs/proxies).
 |    wee-proxy.c                  | Gestion des proxies.
 |    wee-secure.c                 | Fonctions pour les données sécurisées.
@@ -142,11 +142,11 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 |    wee-secure-config.c          | Options des données sécurisées (fichier sec.conf).
 |    wee-string.c                 | Fonctions sur les chaînes de caractères.
 |    wee-upgrade-file.c           | Système de mise à jour interne.
-|    wee-upgrade.c                | Mise à jour du cœur de WeeChat (tampons, lignes, historique, ...).
+|    wee-upgrade.c                | Mise à jour du cœur de WhoreIRC (tampons, lignes, historique, ...).
 |    wee-url.c                    | Transfert d'URL (en utilisant libcurl).
 |    wee-utf8.c                   | Fonctions UTF-8.
 |    wee-util.c                   | Quelques autres fonctions utilitaires.
-|    wee-version.c                | Fonctions pour la version de WeeChat.
+|    wee-version.c                | Fonctions pour la version de WhoreIRC.
 |    weechat.c                    | Fonctions principales : options de ligne de commande, démarrage.
 |    hook/                        | Hook functions.
 |       wee-hook-command-run.c    | Hook "command_run".
@@ -193,7 +193,7 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 |       gui-curses-chat.c         | Affichage dans la zone de discussion (messages).
 |       gui-curses-color.c        | Fonctions pour les couleurs.
 |       gui-curses-key.c          | Fonctions pour le clavier (touches par défaut, lecture du clavier).
-|       gui-curses-main.c         | Boucle principale de WeeChat (attente des évènements clavier/réseau).
+|       gui-curses-main.c         | Boucle principale de WhoreIRC (attente des évènements clavier/réseau).
 |       gui-curses-mouse.c        | Souris.
 |       gui-curses-term.c         | Fonctions pour le terminal.
 |       gui-curses-window.c       | Fenêtres.
@@ -212,13 +212,13 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 | Chemin/fichier                    | Description
 | plugins/                          | Racine des extensions.
 |    plugin.c                       | Gestion des extensions (chargement/déchargement des bibliothèques C dynamiques).
-|    plugin-api.c                   | Fonctions supplémentaires pour l'API extension (enveloppes autour des fonctions du cœur de WeeChat).
+|    plugin-api.c                   | Fonctions supplémentaires pour l'API extension (enveloppes autour des fonctions du cœur de WhoreIRC).
 |    plugin-api-info.c              | Fonctions supplémentaires info/infolist pour l'API extension.
 |    plugin-config.c                | Options de configuration des extensions (fichier plugins.conf).
 |    plugin-script.c                | Fonctions communes utilisés par les extensions pour les scripts.
 |    plugin-script-api.c            | Fonctions pour l'API script : enveloppes autour de quelques fonctions de l'API extension.
 |    plugin-script-config.c         | Options de configuration des extensions pour les scripts (fichiers python.conf, perl.conf, ...).
-|    weechat-plugin.h               | En-tête destiné à être distribué avec les extensions WeeChat, pour les compiler.
+|    weechat-plugin.h               | En-tête destiné à être distribué avec les extensions WhoreIRC, pour les compiler.
 |    alias/                         | Extension Alias.
 |       alias.c                     | Fonctions principales pour les alias.
 |       alias-command.c             | Commandes Alias.
@@ -290,7 +290,7 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 |       irc-redirect.c              | Redirection de la sortie des commandes IRC.
 |       irc-sasl.c                  | Authentification SASL avec le serveur IRC.
 |       irc-server.c                | Communication avec le serveur IRC.
-|       irc-upgrade.c               | Sauvegarde/restauration des données IRC lors de la mise à jour de WeeChat.
+|       irc-upgrade.c               | Sauvegarde/restauration des données IRC lors de la mise à jour de WhoreIRC.
 |    javascript/                    | Extension JavaScript.
 |       weechat-js.cpp              | Fonctions principales pour JavaScript (chargement/déchargement des scripts, exécution de code JavaScript).
 |       weechat-js-api.cpp          | Fonctions de l'API script JavaScript.
@@ -325,7 +325,7 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 |       relay-network.c             | Fonctions de réseau pour Relay.
 |       relay-raw.c                 | Tampon des données brutes de Relay.
 |       relay-server.c              | Serveur Relay.
-|       relay-upgrade.c             | Sauvegarde/restauration des données Relay lors de la mise à jour de WeeChat.
+|       relay-upgrade.c             | Sauvegarde/restauration des données Relay lors de la mise à jour de WhoreIRC.
 |       relay-websocket.c           | Fonctions pour le serveur WebSocket (RFC 6455).
 |       irc/                        | Proxy IRC.
 |          relay-irc.c              | Fonctions principales pour le proxy IRC.
@@ -368,7 +368,7 @@ Le cœur de WeeChat est situé dans les répertoires suivants :
 |       xfer-file.c                 | Fonctions pour les fichiers dans Xfer.
 |       xfer-info.c                 | Info/infolists/hdata pour Xfer.
 |       xfer-network.c              | Fonctions réseau pour Xfer.
-|       xfer-upgrade.c              | Sauvegarde/restauration des données Xfer lors de la mise à jour de WeeChat.
+|       xfer-upgrade.c              | Sauvegarde/restauration des données Xfer lors de la mise à jour de WhoreIRC.
 |===
 
 [[sources_tests]]
@@ -436,7 +436,7 @@ Fichiers de documentation :
 |          plugin_api/                 | Fichiers automatiquement générés pour l'API extension (ne *JAMAIS* les mettre à jour manuellement !).
 |===
 
-Les traductions pour WeeChat et les extensions sont effectuées avec gettext, les
+Les traductions pour WhoreIRC et les extensions sont effectuées avec gettext, les
 fichiers sont dans le répertoire _po/_ :
 
 [width="100%",cols="1m,3",options="header"]
@@ -467,24 +467,24 @@ Exemple en C :
 [source,C]
 ----
 /*
- * weechat.c - core functions for WeeChat
+ * weechat.c - core functions for WhoreIRC
  *
  * Copyright (C) 2019 Your Name <your@email.com>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 ----
 
@@ -810,9 +810,9 @@ gui_window_new (struct t_gui_window *parent_window, struct t_gui_buffer *buffer,
 [[single_thread]]
 === Thread unique
 
-WeeChat a un seul thread. Cela signifie que chaque partie du code doit
+WhoreIRC a un seul thread. Cela signifie que chaque partie du code doit
 s'exécuter très rapidement, et que les appels aux fonctions comme `sleep` sont
-*strictement interdits* (cela est vrai pour le cœur de WeeChat mais aussi les
+*strictement interdits* (cela est vrai pour le cœur de WhoreIRC mais aussi les
 extensions et les scripts).
 
 Si pour une raison quelconque vous devez attendre un peu, utilisez `hook_timer`
@@ -821,7 +821,7 @@ avec une fonction de rappel.
 [[doubly_linked_lists]]
 === Listes doublement chaînées
 
-La plupart des listes WeeChat sont doublement chaînées : chaque nœud a un
+La plupart des listes WhoreIRC sont doublement chaînées : chaque nœud a un
 pointeur vers le nœud précédent/suivant.
 
 Exemple : liste des tampons (de _src/gui/gui-buffer.h_) :
@@ -850,7 +850,7 @@ struct t_gui_buffer *last_gui_buffer = NULL;       /* last buffer           */
 [[color_codes_in_strings]]
 === Codes couleur dans les chaînes
 
-WeeChat utilise ses propres codes couleur dans les chaînes pour afficher les
+WhoreIRC utilise ses propres codes couleur dans les chaînes pour afficher les
 attributs (gras, souligné, ...) et les couleurs à l'écran.
 
 Tous les attributs/couleurs sont préfixés par un caractère dans la chaîne, qui
@@ -891,19 +891,19 @@ Toutes les combinaisons sont résumées dans ce tableau :
 | Code                                       | Exemple                      | Aires         | Description
 | [hex]#19# + STD                            | [hex]#19# `+01+`             | chat + barres | Définir les attributs et la couleur en utilisant une option, voir le tableau ci-dessous.
 | [hex]#19# + EXT                            | [hex]#19# `+@00001+`         | chat          | Définir une couleur avec la paire ncurses (utilisé seulement sur le tampon `/color`).
-| [hex]#19# + "F" + (A)STD                   | [hex]#19# `+F*05+`           | chat + barres | Définir la couleur de texte (couleur WeeChat).
+| [hex]#19# + "F" + (A)STD                   | [hex]#19# `+F*05+`           | chat + barres | Définir la couleur de texte (couleur WhoreIRC).
 | [hex]#19# + "F" + (A)EXT                   | [hex]#19# `+F@00214+`        | chat + barres | Définir la couleur de texte (couleur étendue).
-| [hex]#19# + "B" + STD                      | [hex]#19# `+B05+`            | chat + barres | Définir la couleur de fond (couleur WeeChat).
+| [hex]#19# + "B" + STD                      | [hex]#19# `+B05+`            | chat + barres | Définir la couleur de fond (couleur WhoreIRC).
 | [hex]#19# + "B" + EXT                      | [hex]#19# `+B@00124+`        | chat + barres | Définir le couleur de fond (couleur étendue).
-| [hex]#19# + "*" + (A)STD                   | [hex]#19# `+*05+`            | chat + barres | Définir la couleur de texte (couleur WeeChat).
+| [hex]#19# + "*" + (A)STD                   | [hex]#19# `+*05+`            | chat + barres | Définir la couleur de texte (couleur WhoreIRC).
 | [hex]#19# + "*" + (A)EXT                   | [hex]#19# `+*@00214+`        | chat + barres | Définir la couleur de texte (couleur étendue).
-| [hex]#19# + "*" + (A)STD + "," + STD ^(1)^ | [hex]#19# `+*08,05+`         | chat + barres | Définir la couleur de texte/fond (couleurs WeeChat).
-| [hex]#19# + "*" + (A)STD + "," + EXT ^(1)^ | [hex]#19# `+*01,@00214+`     | chat + barres | Définir la couleur de texte (couleur WeeChat) et de fond (couleur étendue).
-| [hex]#19# + "*" + (A)EXT + "," + STD ^(1)^ | [hex]#19# `+*@00214,05+`     | chat + barres | Définir la couleur de texte (couleur étendue) et de fond (couleur WeeChat).
+| [hex]#19# + "*" + (A)STD + "," + STD ^(1)^ | [hex]#19# `+*08,05+`         | chat + barres | Définir la couleur de texte/fond (couleurs WhoreIRC).
+| [hex]#19# + "*" + (A)STD + "," + EXT ^(1)^ | [hex]#19# `+*01,@00214+`     | chat + barres | Définir la couleur de texte (couleur WhoreIRC) et de fond (couleur étendue).
+| [hex]#19# + "*" + (A)EXT + "," + STD ^(1)^ | [hex]#19# `+*@00214,05+`     | chat + barres | Définir la couleur de texte (couleur étendue) et de fond (couleur WhoreIRC).
 | [hex]#19# + "*" + (A)EXT + "," + EXT ^(1)^ | [hex]#19# `+*@00214,@00017+` | chat + barres | Définir la couleur de texte/fond (couleurs étendues).
-| [hex]#19# + "*" + (A)STD + "~" + STD       | [hex]#19# `+*08~05+`         | chat + barres | Définir la couleur de texte/fond (couleurs WeeChat).
-| [hex]#19# + "*" + (A)STD + "~" + EXT       | [hex]#19# `+*01~@00214+`     | chat + barres | Définir la couleur de texte (couleur WeeChat) et de fond (couleur étendue).
-| [hex]#19# + "*" + (A)EXT + "~" + STD       | [hex]#19# `+*@00214~05+`     | chat + barres | Définir la couleur de texte (couleur étendue) et de fond (couleur WeeChat).
+| [hex]#19# + "*" + (A)STD + "~" + STD       | [hex]#19# `+*08~05+`         | chat + barres | Définir la couleur de texte/fond (couleurs WhoreIRC).
+| [hex]#19# + "*" + (A)STD + "~" + EXT       | [hex]#19# `+*01~@00214+`     | chat + barres | Définir la couleur de texte (couleur WhoreIRC) et de fond (couleur étendue).
+| [hex]#19# + "*" + (A)EXT + "~" + STD       | [hex]#19# `+*@00214~05+`     | chat + barres | Définir la couleur de texte (couleur étendue) et de fond (couleur WhoreIRC).
 | [hex]#19# + "*" + (A)EXT + "~" + EXT       | [hex]#19# `+*@00214~@00017+` | chat + barres | Définir la couleur de texte/fond (couleurs étendues).
 | [hex]#19# + "b" + "F"                      | [hex]#19# `+bF+`             | barres        | Définir la couleur de texte de la barre.
 | [hex]#19# + "b" + "D"                      | [hex]#19# `+bD+`             | barres        | Définir la couleur du délimiteur de la barre.
@@ -913,7 +913,7 @@ Toutes les combinaisons sont résumées dans ce tableau :
 | [hex]#19# + "b" + "#"                      | [hex]#19# `+b#+`             | barre input   | Caractère de déplacement du curseur (utilisé seulement dans l'objet "input_text").
 | [hex]#19# + "b" + "i"                      | [hex]#19# `+bi+`             | barres        | Début d'objet.
 | [hex]#19# + "b" + "l" (lower L)            | [hex]#19# `+bl+`             | barres        | Ligne de démarrage d'objet.
-| [hex]#19# + "E"                            | [hex]#19# `+E+`              | chat + barres | Texte mis en valeur _(WeeChat ≥ 0.4.2)_.
+| [hex]#19# + "E"                            | [hex]#19# `+E+`              | chat + barres | Texte mis en valeur _(WhoreIRC ≥ 0.4.2)_.
 | [hex]#19# + [hex]#1C#                      | [hex]#19# [hex]#1C#          | chat + barres | Réinitialiser la couleur (garder les attributs).
 | [hex]#1A# + ATTR                           | [hex]#1A# `+*+`              | chat + barres | Activer un attribut.
 | [hex]#1B# + ATTR                           | [hex]#1B# `+*+`              | chat + barres | Supprimer un attribut.
@@ -922,11 +922,11 @@ Toutes les combinaisons sont résumées dans ce tableau :
 
 [NOTE]
 ^(1)^ L'utilisation de virgule comme séparateur était utilisé jusqu'à
-WeeChat 2.5. +
-Avec WeeChat WeeChat ≥ 2.6, un tilde est utilisé pour séparer la
-couleur du texte et du fond. Si vous développez un client WeeChat relay et
-voulez être compatible avec toutes les versions de WeeChat, vous devriez
-supporter les deux séparateurs (par exemple si un utilisateur avec WeeChat ≤ 2.5
+WhoreIRC 2.5. +
+Avec WhoreIRC WhoreIRC ≥ 2.6, un tilde est utilisé pour séparer la
+couleur du texte et du fond. Si vous développez un client WhoreIRC relay et
+voulez être compatible avec toutes les versions de WhoreIRC, vous devriez
+supporter les deux séparateurs (par exemple si un utilisateur avec WhoreIRC ≤ 2.5
 lance `/upgrade` vers une version ≥ 2.6, les deux séparateurs pourront être
 utilisés au même moment dans les tampons).
 
@@ -953,16 +953,16 @@ fichier _src/gui/gui-color.h_) :
 | 14   | weechat.color.chat_nick
 | 15   | weechat.color.chat_nick_self
 | 16   | weechat.color.chat_nick_other
-| 17   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 18   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 19   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 20   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 21   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 22   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 23   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 24   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 25   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
-| 26   | _(n'est plus utilisé depuis WeeChat 0.3.4)_
+| 17   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 18   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 19   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 20   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 21   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 22   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 23   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 24   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 25   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
+| 26   | _(n'est plus utilisé depuis WhoreIRC 0.3.4)_
 | 27   | weechat.color.chat_host
 | 28   | weechat.color.chat_delimiters
 | 29   | weechat.color.chat_highlight
@@ -970,20 +970,20 @@ fichier _src/gui/gui-color.h_) :
 | 31   | weechat.color.chat_text_found
 | 32   | weechat.color.chat_value
 | 33   | weechat.color.chat_prefix_buffer
-| 34   | weechat.color.chat_tags _(WeeChat ≥ 0.3.6)_
-| 35   | weechat.color.chat_inactive_window _(WeeChat ≥ 0.3.6)_
-| 36   | weechat.color.chat_inactive_buffer _(WeeChat ≥ 0.3.6)_
-| 37   | weechat.color.chat_prefix_buffer_inactive_buffer _(WeeChat ≥ 0.3.6)_
-| 38   | weechat.color.chat_nick_offline _(WeeChat ≥ 0.3.9)_
-| 39   | weechat.color.chat_nick_offline_highlight _(WeeChat ≥ 0.3.9)_
-| 40   | weechat.color.chat_nick_prefix _(WeeChat ≥ 0.4.1)_
-| 41   | weechat.color.chat_nick_suffix _(WeeChat ≥ 0.4.1)_
-| 42   | weechat.color.emphasized _(WeeChat ≥ 0.4.2)_
-| 43   | weechat.color.chat_day_change _(WeeChat ≥ 0.4.2)_
-| 44   | weechat.color.chat_value_null _(WeeChat ≥ 1.4)_
+| 34   | weechat.color.chat_tags _(WhoreIRC ≥ 0.3.6)_
+| 35   | weechat.color.chat_inactive_window _(WhoreIRC ≥ 0.3.6)_
+| 36   | weechat.color.chat_inactive_buffer _(WhoreIRC ≥ 0.3.6)_
+| 37   | weechat.color.chat_prefix_buffer_inactive_buffer _(WhoreIRC ≥ 0.3.6)_
+| 38   | weechat.color.chat_nick_offline _(WhoreIRC ≥ 0.3.9)_
+| 39   | weechat.color.chat_nick_offline_highlight _(WhoreIRC ≥ 0.3.9)_
+| 40   | weechat.color.chat_nick_prefix _(WhoreIRC ≥ 0.4.1)_
+| 41   | weechat.color.chat_nick_suffix _(WhoreIRC ≥ 0.4.1)_
+| 42   | weechat.color.emphasized _(WhoreIRC ≥ 0.4.2)_
+| 43   | weechat.color.chat_day_change _(WhoreIRC ≥ 0.4.2)_
+| 44   | weechat.color.chat_value_null _(WhoreIRC ≥ 1.4)_
 |===
 
-Les couleurs WeeChat sont :
+Les couleurs WhoreIRC sont :
 
 [width="70%",cols="^1m,10",options="header"]
 |===
@@ -1030,7 +1030,7 @@ fonctions disponibles dans l'API.
 Une structure appelée _t_weechat_plugin_ est utilisée pour stocker les
 informations sur l'extension (nom de fichier, nom, auteur, description, ...) et
 toutes les fonctions de l'API, sous forme de pointeurs vers les fonctions
-WeeChat.
+WhoreIRC.
 
 Et puis des macros sont utilisées pour appeler ces fonctions.
 
@@ -1070,7 +1070,7 @@ server->hook_timer_sasl = weechat_hook_timer (timeout * 1000,
 ----
 
 [[contribute]]
-== Contribuer à WeeChat
+== Contribuer à WhoreIRC
 
 [[git_repository]]
 === Dépôt Git
@@ -1095,7 +1095,7 @@ component: fix a problem (bug #12345)
 
 Où _component_ est :
 
-* pour le cœur WeeChat : _core_ (les fichiers dans le répertoire racine, _po/_
+* pour le cœur WhoreIRC : _core_ (les fichiers dans le répertoire racine, _po/_
   et _src/_, sauf _src/plugins/_)
 * fichiers de documentation : _doc_ (fichiers dans le répertoire _doc/_)
 * nom d'une extension : _irc_, _python_, _relay_, ... (fichiers dans le
@@ -1138,7 +1138,7 @@ $ cd po
 $ msginit -i weechat.pot -l nl_NL -o nl.po
 ----
 
-La langue de base pour WeeChat est l'anglais, donc vous devez évidemment
+La langue de base pour WhoreIRC est l'anglais, donc vous devez évidemment
 comprendre parfaitement l'anglais pour traduire vers votre langue.
 
 Après des changements dans les sources, vous pouvez regénérer toutes les
@@ -1158,7 +1158,7 @@ _msgcheck.py_ (https://github.com/flashcode/msgcheck) :
 $ msgcheck.py xx.po
 ----
 
-Et vous pouvez alors recompiler WeeChat pour utiliser les nouvelles traductions.
+Et vous pouvez alors recompiler WhoreIRC pour utiliser les nouvelles traductions.
 
 [[build_autogen_files]]
 ===== Construire les fichiers auto-générés
@@ -1168,7 +1168,7 @@ par le script _doc/docgen.py_.
 
 Copiez ce script python dans votre répertoire python (par exemple
 _~/.weechat/python_).
-Vous pouvez alors charger le script dans votre WeeChat, et configurer le chemin
+Vous pouvez alors charger le script dans votre WhoreIRC, et configurer le chemin
 vers votre répertoire _/doc_ :
 
 ----

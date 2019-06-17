@@ -15,7 +15,7 @@
 ** default value: `+sha256+`
 
 * [[option_sec.crypt.passphrase_file]] *sec.crypt.passphrase_file*
-** description: pass:none[path to a file containing the passphrase to encrypt/decrypt secured data; this option is used only when reading file sec.conf; only first line of file is used; this file is used only if the environment variable "WEECHAT_PASSPHRASE" is not set (the environment variable has higher priority); security note: it is recommended to keep this file readable only by you and store it outside WeeChat home (for example in your home); example: "~/.weechat-passphrase"]
+** description: pass:none[path to a file containing the passphrase to encrypt/decrypt secured data; this option is used only when reading file sec.conf; only first line of file is used; this file is used only if the environment variable "WHOREIRC_PASSPHRASE" is not set (the environment variable has higher priority); security note: it is recommended to keep this file readable only by you and store it outside WeeChat home (for example in your home); example: "~/.weechat-passphrase"]
 ** type: string
 ** values: any string
 ** default value: `+""+`

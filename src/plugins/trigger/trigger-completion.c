@@ -3,20 +3,20 @@
  *
  * Copyright (C) 2014-2019 Sébastien Helleu <flashcode@flashtux.org>
  *
- * This file is part of WeeChat, the extensible chat client.
+ * This file is part of WhoreIRC, the extensible chat client.
  *
- * WeeChat is free software; you can redistribute it and/or modify
+ * WhoreIRC is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * WeeChat is distributed in the hope that it will be useful,
+ * WhoreIRC is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WeeChat.  If not, see <https://www.gnu.org/licenses/>.
+ * along with WhoreIRC.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -50,10 +50,10 @@ trigger_completion_triggers_cb (const void *pointer, void *data,
          ptr_trigger = ptr_trigger->next_trigger)
     {
         weechat_hook_completion_list_add (completion, ptr_trigger->name,
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -79,10 +79,10 @@ trigger_completion_triggers_default_cb (const void *pointer, void *data,
     {
         weechat_hook_completion_list_add (completion,
                                           trigger_config_default_list[i][0],
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -107,10 +107,10 @@ trigger_completion_options_cb (const void *pointer, void *data,
     {
         weechat_hook_completion_list_add (completion,
                                           trigger_option_string[i],
-                                          0, WEECHAT_LIST_POS_SORT);
+                                          0, WHOREIRC_LIST_POS_SORT);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -136,15 +136,15 @@ trigger_completion_option_value_cb (const void *pointer, void *data,
 
     args = weechat_hook_completion_get_string (completion, "args");
     if (!args)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     argv = weechat_string_split (args, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     if (!argv)
-        return WEECHAT_RC_OK;
+        return WHOREIRC_RC_OK;
 
     if (argc >= 3)
     {
@@ -156,7 +156,7 @@ trigger_completion_option_value_cb (const void *pointer, void *data,
                 weechat_hook_completion_list_add (completion,
                                                   ptr_trigger->name,
                                                   0,
-                                                  WEECHAT_LIST_POS_BEGINNING);
+                                                  WHOREIRC_LIST_POS_BEGINNING);
             }
             else
             {
@@ -166,7 +166,7 @@ trigger_completion_option_value_cb (const void *pointer, void *data,
                     weechat_hook_completion_list_add (completion,
                                                       weechat_config_string (ptr_trigger->options[index_option]),
                                                       0,
-                                                      WEECHAT_LIST_POS_BEGINNING);
+                                                      WHOREIRC_LIST_POS_BEGINNING);
                 }
             }
         }
@@ -174,7 +174,7 @@ trigger_completion_option_value_cb (const void *pointer, void *data,
 
     weechat_string_free_split (argv);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -199,10 +199,10 @@ trigger_completion_hooks_cb (const void *pointer, void *data,
     {
         weechat_hook_completion_list_add (completion,
                                           trigger_hook_type_string[i],
-                                          0, WEECHAT_LIST_POS_END);
+                                          0, WHOREIRC_LIST_POS_END);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -229,10 +229,10 @@ trigger_completion_hooks_filter_cb (const void *pointer, void *data,
         snprintf (str_hook, sizeof (str_hook),
                   "@%s", trigger_hook_type_string[i]);
         weechat_hook_completion_list_add (completion, str_hook,
-                                          0, WEECHAT_LIST_POS_END);
+                                          0, WHOREIRC_LIST_POS_END);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -253,7 +253,7 @@ trigger_completion_add_quoted_word (struct t_gui_completion *completion,
 
     snprintf (temp, length, "\"%s\"", word);
     weechat_hook_completion_list_add (completion, temp, 0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
 
     free (temp);
 }
@@ -278,9 +278,9 @@ trigger_completion_add_default_for_hook (struct t_gui_completion *completion,
         return;
 
     argv = weechat_string_split (args, " ", NULL,
-                                 WEECHAT_STRING_SPLIT_STRIP_LEFT
-                                 | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                                 | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                                 WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                                 | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                                 | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                                  0, &argc);
     if (!argv)
         return;
@@ -296,9 +296,9 @@ trigger_completion_add_default_for_hook (struct t_gui_completion *completion,
                     default_strings[type],
                     split,
                     NULL,
-                    WEECHAT_STRING_SPLIT_STRIP_LEFT
-                    | WEECHAT_STRING_SPLIT_STRIP_RIGHT
-                    | WEECHAT_STRING_SPLIT_COLLAPSE_SEPS,
+                    WHOREIRC_STRING_SPLIT_STRIP_LEFT
+                    | WHOREIRC_STRING_SPLIT_STRIP_RIGHT
+                    | WHOREIRC_STRING_SPLIT_COLLAPSE_SEPS,
                     0,
                     &num_items);
                 if (items)
@@ -342,9 +342,9 @@ trigger_completion_hook_arguments_cb (const void *pointer, void *data,
                                              trigger_hook_default_arguments,
                                              NULL);
     weechat_hook_completion_list_add (completion, "\"\"", 0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -366,11 +366,11 @@ trigger_completion_hook_conditions_cb (const void *pointer, void *data,
     weechat_hook_completion_list_add (completion,
                                       "\"" TRIGGER_HOOK_DEFAULT_CONDITIONS "\"",
                                       0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
     weechat_hook_completion_list_add (completion, "\"\"", 0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -392,11 +392,11 @@ trigger_completion_hook_regex_cb (const void *pointer, void *data,
     weechat_hook_completion_list_add (completion,
                                       "\"" TRIGGER_HOOK_DEFAULT_REGEX "\"",
                                       0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
     weechat_hook_completion_list_add (completion, "\"\"", 0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -418,11 +418,11 @@ trigger_completion_hook_command_cb (const void *pointer, void *data,
     weechat_hook_completion_list_add (completion,
                                       "\"" TRIGGER_HOOK_DEFAULT_COMMAND "\"",
                                       0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
     weechat_hook_completion_list_add (completion, "\"\"", 0,
-                                      WEECHAT_LIST_POS_END);
+                                      WHOREIRC_LIST_POS_END);
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -445,7 +445,7 @@ trigger_completion_hook_rc_cb (const void *pointer, void *data,
                                              trigger_hook_default_rc,
                                              ",");
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 /*
@@ -472,7 +472,7 @@ trigger_completion_post_action_cb (const void *pointer, void *data,
                                             trigger_post_action_string[i]);
     }
 
-    return WEECHAT_RC_OK;
+    return WHOREIRC_RC_OK;
 }
 
 
