@@ -15,7 +15,7 @@ image:https://img.shields.io/badge/help-donate%20%E2%9D%A4-ff69b4.svg["Donate", 
 image:https://travis-ci.org/whoreirc/whoreirc.svg?branch=master["Build Status", link="https://travis-ci.org/whoreirc/whoreirc"]
 image:https://codecov.io/gh/whoreirc/whoreirc/branch/master/graph/badge.svg["Code coverage", link="https://codecov.io/gh/whoreirc/whoreirc"]
 
-*WhoreIRC* (Wee Enhanced Environment for Chat) is a free chat client, fast and
+*WhoreIRC* (Whore Enhanced Environment for Chat) is a free chat client, fast and
 light, designed for many operating systems.
 It is highly customizable and extensible with scripts.
 
