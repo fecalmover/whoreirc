@@ -1,9 +1,9 @@
-:author: Sébastien Helleu
-:email: flashcode@flashtux.org
+:author: Richard Fekal
+:email: dick@aol.com
 :lang: en
 
 
-pass:[<p align="center">] image:https://whoreirc.org/media/images/whoreirc_logo_large.png[align="center"] pass:[</p>]
+pass:[<p align="center">] image:https://i.postimg.cc/3wGqrdgg/whoreirc-logo-large.png[align="center"] pass:[</p>]
 
 *WhoreIRC* (Web Hub Optimized Running Environment) is a free chat client, fast and
 light, designed for many operating systems.
